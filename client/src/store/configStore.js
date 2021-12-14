@@ -5,9 +5,7 @@ export default function configureAppStore() {
   const store = configureStore({
     reducer: {},
 
-    middleware: (getDefaultMiddleware) => {
-      getDefaultMiddleware().concat([api]);
-    },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([api]),
   });
 
   return store;
