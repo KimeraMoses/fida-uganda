@@ -12,14 +12,14 @@ Fida Frontend Information Management System
 
 # Running
 
-## Development
+### Development
 
 ```bash
 $ cd [repo_name]
 $ docker-compose -f docker-compose.dev.yml up --build
 ```
 
-## Production
+### Production
 
 ```bash
 $ cd [repo_name]
