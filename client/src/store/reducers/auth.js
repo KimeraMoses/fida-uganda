@@ -7,15 +7,15 @@ const slice = createSlice({
   initialState: {
     loading: false,
     error: null,
-    user: { designation: "membership", firstName: "Zues" },
+    user: null,
     success: null,
   },
   reducers: {
     userAuthenticated: (auth, action) => {
       const { user, token } = action.payload;
-      const { email, first_name, last_name, id } = user;
+      const { email, first_name, last_name, id, designation } = user;
       window.localStorage.setItem(`${APP_PREFIX}token`, token);
-      auth.user = { email, first_name, last_name, id };
+      auth.user = { email, first_name, last_name, id, designation };
       auth.error = null;
       auth.loading = false;
     },
@@ -69,6 +69,15 @@ export const resetPassword = (email) =>
 export const dismissAlert = () => ({
   type: errorDismissed.type,
 });
+
+export const getUser = () =>
+  apiCallBegan({
+    url: "/api/v1/users/me",
+    method: "get",
+    onStart: userDataLoading.type,
+    onSuccess: userAuthenticated.type,
+    onError: userAuthFailed.type,
+  });
 
 export const logIn = (email, password) =>
   apiCallBegan({
