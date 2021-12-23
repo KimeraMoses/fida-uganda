@@ -25,6 +25,13 @@ const slice = createSlice({
       auth.error = message;
       auth.loading = false;
     },
+    userLoggedOut: (auth) => {
+      auth.user = null;
+      auth.error = null;
+      auth.success = null;
+      auth.loading = false;
+      window.localStorage.removeItem(`${APP_PREFIX}token`);
+    },
     userDataLoading: (auth) => {
       auth.loading = true;
     },
@@ -50,6 +57,7 @@ const slice = createSlice({
 const {
   userAuthenticated,
   userAuthFailed,
+  userLoggedOut,
   userDataLoading,
   passwordResetSucceeded,
   passwordResetFailed,
@@ -78,6 +86,10 @@ export const getUser = () =>
     onSuccess: userAuthenticated.type,
     onError: userAuthFailed.type,
   });
+
+export const logOut = () => ({
+  type: userLoggedOut.type,
+})
 
 export const logIn = (email, password) =>
   apiCallBegan({
