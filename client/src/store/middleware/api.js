@@ -1,5 +1,6 @@
 import axios from "axios";
 import * as actions from "../api";
+import { APP_PREFIX } from "../../hooks/useLocalStorage";
 
 const api =
   ({ dispatch }) =>
@@ -20,6 +21,9 @@ const api =
       onError,
     } = action.payload;
 
+    const token = localStorage.getItem(`${APP_PREFIX}token`);
+    const Authorization = token ? `Bearer ${token}` : null;
+
     if (onStart) {
       dispatch({ type: onStart });
     }
@@ -34,6 +38,7 @@ const api =
         data,
         headers: {
           "Content-Type": "application/json",
+          Authorization,
           ...headers,
         },
       });

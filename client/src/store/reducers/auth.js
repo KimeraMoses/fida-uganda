@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { apiCallBegan } from "../api";
+import { APP_PREFIX } from "../../hooks/useLocalStorage";
 
 const slice = createSlice({
   name: "auth",
@@ -13,7 +14,7 @@ const slice = createSlice({
     userAuthenticated: (auth, action) => {
       const { user, token } = action.payload;
       const { email, first_name, last_name, id } = user;
-      window.localStorage.setItem("fida-ims-token", token);
+      window.localStorage.setItem(`${APP_PREFIX}token`, token);
       auth.user = { email, first_name, last_name, id };
       auth.error = null;
       auth.loading = false;
