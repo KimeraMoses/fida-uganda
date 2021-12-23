@@ -1,4 +1,10 @@
-import { CheckCircle, Dashboard, Feedback, Storage, Task } from "@mui/icons-material";
+import {
+  CheckCircle,
+  Dashboard,
+  Feedback,
+  Storage,
+  Task,
+} from "@mui/icons-material";
 
 let id = 0;
 
@@ -38,6 +44,7 @@ const usersMenu = {
     menuOptions.members,
     menuOptions.allocations,
   ],
+  "legal officer": [menuOptions.dashboard, menuOptions.tasks],
 };
 
 export default usersMenu;
