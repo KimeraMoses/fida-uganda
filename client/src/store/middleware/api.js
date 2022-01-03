@@ -45,7 +45,6 @@ const api =
 
       dispatch(actions.apiCallSucceeded(response.data));
 
-      console.log(response.data);
       if (onSuccess) {
         dispatch({ type: onSuccess, payload: response.data });
       }
