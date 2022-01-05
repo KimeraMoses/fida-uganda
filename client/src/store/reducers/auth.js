@@ -89,7 +89,7 @@ export const getUser = () =>
 
 export const logOut = () => ({
   type: userLoggedOut.type,
-})
+});
 
 export const logIn = (email, password) =>
   apiCallBegan({
@@ -101,7 +101,7 @@ export const logIn = (email, password) =>
     onError: userAuthFailed.type,
   });
 
-export const signUp = (email, firstName, lastName, role) =>
+export const signUp = (email, firstName, lastName, role, designation) =>
   apiCallBegan({
     url: "/api/v1/users/signup",
     method: "post",
@@ -109,8 +109,8 @@ export const signUp = (email, firstName, lastName, role) =>
       email,
       first_name: firstName,
       last_name: lastName,
-      role: "admin",
-      designation: "legal officer",
+      role,
+      designation,
       password: "password",
     },
     onStart: userDataLoading.type,
