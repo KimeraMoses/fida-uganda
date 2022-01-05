@@ -1,10 +1,18 @@
 import { Box } from "@mui/material";
-import { purple } from "@mui/material/colors";
+import defaultImage from "../../defaultData/images/2.jpeg";
 
-function BackgroundTemplate({ children }) {
+function BackgroundTemplate({ image = defaultImage, children }) {
   return (
     <Box
-      sx={{ backgroundColor: purple[200], minHeight: "100vh", width: "100%" }}
+      sx={{
+        minHeight: "100vh",
+        width: "100%",
+        backgroundImage: `url(${image})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        position: "relative",
+      }}
     >
       <Box sx={{ position: "absolute", top: "2rem", right: "2rem" }}>
         {children}
