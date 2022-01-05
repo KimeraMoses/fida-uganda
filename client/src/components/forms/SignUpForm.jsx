@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import EmailInput from "../common/EmailInput";
 import SelectInput from "../common/SelectInput";
 import useForm from "../../hooks/useForm";
-import { designationOptions } from "../../defaultData/data";
+import { roleOptions, designationOptions } from "../../defaultData/data";
 import { formStyle } from "../../defaultData/styles/loginSignup";
 import { emailIsValid } from "../../defaultData/funcs";
 import SubmitButton from "./SubmitButton";
@@ -15,7 +15,8 @@ import { dismissAlert, signUp } from "../../store/reducers/auth";
 function SignUpForm() {
   const { error, loading } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  const [option, setOption] = useState("");
+  const [role, setRole] = useState("");
+  const [designation, setDesignation] = useState("");
   const [values, handleChange] = useForm({
     email: "",
     firstName: "",
@@ -29,7 +30,7 @@ function SignUpForm() {
     event.preventDefault();
 
     if (emailIsValid(email)) {
-      dispatch(signUp(email, firstName, lastName, option));
+      dispatch(signUp(email, firstName, lastName, role, designation));
     }
   };
 
@@ -63,11 +64,19 @@ function SignUpForm() {
         onChange={handleChange("lastName")}
       />
       <SelectInput
-        labelFor="designation"
-        options={designationOptions}
-        value={option}
-        setValue={setOption}
+        labelFor="role"
+        options={roleOptions}
+        value={role}
+        setValue={setRole}
       />
+      {role && (
+        <SelectInput
+          labelFor="designation"
+          options={designationOptions}
+          value={designation}
+          setValue={setDesignation}
+        />
+      )}
       <SubmitButton loading={loading} isDisabled={isDisabled} />
       <Typography
         variant="body1"

@@ -9,6 +9,8 @@ import { emailIsValid } from "../../defaultData/funcs";
 import { dismissAlert, logIn } from "../../store/reducers/auth";
 import AlertBanner from "../common/AlertBanner";
 import SubmitButton from "./SubmitButton";
+import Logo from "../common/Logo";
+import { purple } from "@mui/material/colors";
 
 function LogInForm() {
   const dispatch = useDispatch();
@@ -35,7 +37,10 @@ function LogInForm() {
 
   return (
     <form onSubmit={handleSubmit} style={formStyle}>
-      <Typography variant="h4">Sign In</Typography>
+      <Logo />
+      <Typography variant="h4" color={purple[500]} style={{ marginBottom: 0 }}>
+        Sign In
+      </Typography>
       {error && (
         <AlertBanner
           type="error"

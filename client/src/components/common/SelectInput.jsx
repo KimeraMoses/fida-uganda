@@ -10,15 +10,17 @@ function SelectInput({ labelText, labelFor, value, setValue, options }) {
         value={value}
         onChange={(e) => setValue(e.target.value)}
       >
-        <MenuItem value="" defaultValue disabled>
-          Select an option
-        </MenuItem>
-
-        {options.map((option) => (
-          <MenuItem key={option.value} value={option.value}>
-            {option.label}
-          </MenuItem>
-        ))}
+        {options.map((option) =>
+          option.value ? (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ) : (
+            <MenuItem value={option.value} defaultValue disabled>
+              {option.label}
+            </MenuItem>
+          )
+        )}
       </TextField>
     </FormControl>
   );

@@ -1,9 +1,10 @@
 import BackgroundTemplate from "../common/BackgroundTemplate";
 import SignUpForm from "../forms/SignUpForm";
+import image from "../../defaultData/images/1.jpeg";
 
 function SignUp() {
   return (
-    <BackgroundTemplate>
+    <BackgroundTemplate image={image}>
       <SignUpForm />
     </BackgroundTemplate>
   );
