@@ -36,15 +36,17 @@ const menuOptions = {
   },
 };
 
+const commonMenuOptions = [menuOptions.dashboard, menuOptions.tasks];
+
 const usersMenu = {
   membership: [
-    menuOptions.dashboard,
-    menuOptions.tasks,
+    ...commonMenuOptions,
     menuOptions.approvals,
     menuOptions.members,
     menuOptions.allocations,
   ],
-  "legal officer": [menuOptions.dashboard, menuOptions.tasks],
+  clv: [...commonMenuOptions],
+  "legal officer": [...commonMenuOptions],
 };
 
 export default usersMenu;
