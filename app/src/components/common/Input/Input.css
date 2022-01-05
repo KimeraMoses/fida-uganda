@@ -1,0 +1,9 @@
+.Input {
+  display: flex;
+  flex-direction: column;
+}
+.Input-label {
+  font-weight: var(--default-font-weight);
+  font-size: 1.6rem;
+  letter-spacing: 0.0125rem;
+}
