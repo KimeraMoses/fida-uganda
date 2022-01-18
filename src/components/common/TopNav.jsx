@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { SettingsIcon } from "@chakra-ui/icons";
-import { Flex, Box, Text, Image, IconButton } from "@chakra-ui/react";
+import { Flex, Box, Text, Avatar, IconButton } from "@chakra-ui/react";
 
 function TopNav() {
   const { last_name, first_name, image } = useSelector(
@@ -22,7 +22,7 @@ function TopNav() {
           variant="ghost"
           borderRadius="full"
         />
-        <Image
+        <Avatar
           borderRadius="full"
           boxSize="3rem"
           src={image}
