@@ -10,6 +10,7 @@ import CaseFiles from "./legalAid/CaseFiles";
 import Reports from "./Reports";
 import FidaDatabases from "./programs/FidaDatabases";
 import FidaProjects from "./programs/FidaProjects";
+import FidaAssets from "./m&e/FidaAssets";
 
 function Home() {
   return (
@@ -27,6 +28,7 @@ function Home() {
             <Route path="case-files" element={<CaseFiles />} />
             <Route path="fida-databases" element={<FidaDatabases />} />
             <Route path="fida-projects" element={<FidaProjects />} />
+            <Route path="fida-assets" element={<FidaAssets />} />
           </Routes>
         </Box>
       </Box>

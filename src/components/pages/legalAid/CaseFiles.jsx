@@ -1,8 +1,7 @@
 import { Box, useDisclosure } from "@chakra-ui/react";
-import DisplayTable from "../../common/DisplayTable";
 import GenericModal from "../../common/GenericModal";
 import SectionHeader from "../../common/SectionHeader";
-import TableSearch from "../../common/TableSearch";
+import Table from "../../common/Table";
 import CaseFilsForm from "../../forms/legalAid/CaseFilesForm";
 
 function CaseFiles() {
@@ -15,8 +14,7 @@ function CaseFiles() {
   return (
     <Box>
       <SectionHeader title="Case Files" />
-      <TableSearch btnLabel="Add Case" btnClick={handleBtnClick} />
-      <DisplayTable />
+      {/* <Table btnLabel="Add Case" btnClick={handleBtnClick} /> */}
       <GenericModal isOpen={isOpen} onClose={onClose}>
         <CaseFilsForm />
       </GenericModal>
