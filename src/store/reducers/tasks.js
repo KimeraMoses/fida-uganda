@@ -9,7 +9,7 @@ const slice = createSlice({
     success: null,
     tasks: [],
     task: null,
-    comments: [],
+    comments: {},
   },
   reducers: {
     tasksRequest: (state) => {
@@ -54,7 +54,9 @@ const slice = createSlice({
       state.success = null;
       state.loading = false;
       state.error = null;
-      state.comments = comments;
+      if (comments) {
+        state.comments[comments[0].task] = comments;
+      }
     },
   },
 });
@@ -117,7 +119,7 @@ export const createComment = (id, comment) =>
 
 export const getComments = (id) =>
   apiCallBegan({
-    url: `/api/v1/comments/${id}`,
+    url: `/api/v1/tasks/${id}/comments/getAll`,
     method: "get",
     onStart: tasksRequest.type,
     onSuccess: commentsLoadSucceeded.type,
