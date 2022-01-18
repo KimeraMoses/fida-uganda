@@ -56,6 +56,12 @@ const menuOptions = {
     icon: MdStorage,
     path: "fida-databases",
   },
+  fidaAssets: {
+    id: ++id,
+    name: "FIDA Assets",
+    icon: MdStorage,
+    path: "fida-assets",
+  },
 };
 
 const commonOptions = [menuOptions.dashboard, menuOptions.tasks];
@@ -66,6 +72,10 @@ const menu = {
     menuOptions.clvDatabase,
     menuOptions.clvComplaints,
     menuOptions.reports,
+    menuOptions.caseFiles,
+    menuOptions.fidaProjects,
+    menuOptions.fidaDatabases,
+    menuOptions.fidaAssets,
   ],
   courtProcessServer: [...commonOptions],
   legalAid: [
@@ -78,12 +88,18 @@ const menu = {
   humanResources: [...commonOptions],
   it: [...commonOptions],
   finance: [...commonOptions],
-  me: [...commonOptions],
-  programs: [
+  me: [
     ...commonOptions,
-    menuOptions.reports,
     menuOptions.fidaProjects,
     menuOptions.fidaDatabases,
+    menuOptions.fidaAssets,
+    menuOptions.reports,
+  ],
+  programs: [
+    ...commonOptions,
+    menuOptions.fidaProjects,
+    menuOptions.fidaDatabases,
+    menuOptions.reports,
   ],
   procurement: [...commonOptions],
   counselor: [...commonOptions],
