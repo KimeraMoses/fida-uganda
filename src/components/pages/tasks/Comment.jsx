@@ -1,6 +1,7 @@
 import { Flex, Avatar, Heading, Text } from "@chakra-ui/react";
 
 function Comment({ comment }) {
+  const { first_name, last_name, image } = comment.createdBy;
   return (
     <Flex
       flexDir="column"
@@ -12,17 +13,17 @@ function Comment({ comment }) {
       mb="2"
     >
       <Flex alignItems="center" mb="2">
-        <Avatar src={comment.image} alt={comment.name} size="sm" />
+        <Avatar src={image} alt={first_name} size="sm" />
         <Flex flexDir="column" ml={4}>
           <Heading color="purple.600" fontSize="md">
-            {comment.name}
+            {`${first_name} ${last_name}`}
           </Heading>
           <Text color="gray.600" fontSize="sm" fontWeight="bold">
             {comment.designation}
           </Text>
         </Flex>
       </Flex>
-      <Text fontSize="sm">{comment.comment}</Text>
+      <Text fontSize="sm">{comment.body}</Text>
     </Flex>
   );
 }

@@ -7,6 +7,7 @@ import Auth from "./components/pages/Auth";
 import { APP_PREFIX } from "./hooks/useLocalStorage";
 import { getUser } from "./store/reducers/auth";
 import LoadingPage from "./components/pages/LoadingPage";
+import { scrollbar } from "./defaultData/theme";
 
 function App() {
   const { user, loading } = useSelector((state) => state.auth);
@@ -22,22 +23,23 @@ function App() {
   if (!user) {
     if (loading) {
       return (
-        <Box maxW="1400px" m="0 auto" minH="100vh">
+        <Box maxW="1400px" m="0 auto" minH="100vh" css={scrollbar}>
           <LoadingPage />
         </Box>
       );
     }
     return (
-      <Box maxW="1400px" m="0 auto" minH="100vh">
+      <Box maxW="1400px" m="0 auto" minH="100vh" css={scrollbar}>
         <Routes>
           <Route path="*" element={<Auth />} />
+          
         </Routes>
       </Box>
     );
   }
 
   return (
-    <Box maxW="1400px" m="0 auto" minH="100vh">
+    <Box maxW="1400px" m="0 auto" minH="100vh" css={scrollbar}>
       <Routes>
         <Route path="*" element={<Home />} />
       </Routes>

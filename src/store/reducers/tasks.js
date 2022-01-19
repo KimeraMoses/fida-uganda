@@ -44,10 +44,14 @@ const slice = createSlice({
     },
     commentCreationSucceeded: (state, action) => {
       const { comment } = action.payload;
-      state.comments.push(comment);
       state.loading = false;
       state.error = null;
       state.success = "Comment created successfully";
+      if (state.comments[comment.task]) {
+        state.comments.push(comment);
+      } else {
+        state.comments[comment.task] = [comment];
+      }
     },
     commentsLoadSucceeded: (state, action) => {
       const { comments } = action.payload;
@@ -68,6 +72,7 @@ const {
   taskCreationSucceeded,
   taskLoadSucceeded,
   tasksLoadSucceeded,
+  commentCreationSucceeded,
   commentsLoadSucceeded,
 } = slice.actions;
 
@@ -112,9 +117,9 @@ export const createComment = (task, comment) =>
   apiCallBegan({
     url: "/api/v1/comments/create",
     method: "post",
-    data: { task, comment },
+    data: { task: task, ...comment },
     onStart: tasksRequest.type,
-    onSuccess: commentsLoadSucceeded.type,
+    onSuccess: commentCreationSucceeded.type,
     onError: tasksRequestFailed.type,
   });
 

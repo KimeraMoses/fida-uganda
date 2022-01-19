@@ -11,7 +11,7 @@ function CommentForm({ id }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({id, ...values});
+    // console.log({id, ...values});
     if (body) {
       dispatch(createComment(id, values));
     }
