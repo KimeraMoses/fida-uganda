@@ -1,6 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import { useState } from "react";
-import HelpMenuItem from "./HelpMenuItem";
+import { scrollbar } from "../../defaultData/theme";
+import Logout from "./Logout";
 import Logo from "./Logo";
 import Menu from "./Menu";
 
@@ -15,17 +16,16 @@ function SideBar() {
       gap="4rem"
       p="1rem"
       h="100vh"
+      overflowY="auto"
       boxShadow="md"
+      css={scrollbar}
     >
       <Logo size={100} />
       <Menu
         selectedOption={selectedOption}
         setSelectedOption={setSelectedOption}
       />
-      <HelpMenuItem
-        selectedOption={selectedOption}
-        setSelectedOption={setSelectedOption}
-      />
+      <Logout />
     </Box>
   );
 }

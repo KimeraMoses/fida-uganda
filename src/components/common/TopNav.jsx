@@ -24,7 +24,7 @@ function TopNav() {
         />
         <Avatar
           borderRadius="full"
-          boxSize="3rem"
+          size="sm"
           src={image}
           alt={`${first_name} ${last_name}`}
         />
