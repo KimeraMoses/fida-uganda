@@ -4,5 +4,5 @@ export const clvComplaintsColumns = [
   { Header: "Body", accessor: "body" },
   { Header: "Status", accessor: "status" },
   { Header: "Due Date", accessor: "dueDate" },
-  { Header: "Created By", accessor: "createdBy" },
+  { Header: "Created By", accessor: "createdBy.first_name" },
 ];

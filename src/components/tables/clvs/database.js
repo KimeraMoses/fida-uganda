@@ -8,6 +8,6 @@ export const clvDatabaseColumns = [
     { Header: "City", accessor: "city" },
     { Header: "Recruitment Date", accessor: "recruitmentDate" },
     { Header: "Expiry Date", accessor: "expiryDate" },
-    { Header: "Registered By", accessor: "registeredBy" },
+    { Header: "Registered By", accessor: "registeredBy.first_name" },
   ];
   
