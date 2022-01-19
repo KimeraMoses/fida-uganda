@@ -1,46 +1,51 @@
+import { useDispatch, useSelector } from "react-redux";
 import { Box, Button, Heading, SimpleGrid, Flex } from "@chakra-ui/react";
 import { MdArrowForward } from "react-icons/md";
 import useForm from "../../../hooks/useForm";
+import { addBio } from "../../../store/reducers/cases";
 import ComplaintRespondentInput from "./ComplaintRespondentInput";
 
-function CaseFilesForm({ onClose, setCurrentForm }) {
+function CaseFilesForm({ setCurrentForm }) {
+  const dispatch = useDispatch();
+  const { bio } = useSelector((state) => state.cases.newCase);
   const { values, handleChange } = useForm({
-    complainantName: "",
-    respondentName: "",
-    complainantSex: "",
-    respondentSex: "",
-    complainantAge: "",
-    respondentAge: "",
-    complainantCountry: "",
-    respondentCountry: "",
-    complainantDistrict: "",
-    respondentDistrict: "",
-    complainantCounty: "",
-    respondentCounty: "",
-    complainantParish: "",
-    respondentParish: "",
-    complainantVillage: "",
-    respondentVillage: "",
-    complainantPhone: "",
-    respondentPhone: "",
-    complainantMaritalStatus: "",
-    respondentMaritalStatus: "",
-    complainantAccompaniedBy: "",
-    respondentAccompaniedBy: "",
-    complainantNumberOfBeneficiaries: "",
-    respondentNumberOfBeneficiaries: "",
-    complainantJob: "",
-    respondentJob: "",
-    complainantPlaceOfWork: "",
-    respondentPlaceOfWork: "",
-    complainantLevelOfEducation: "",
-    respondentLevelOfEducation: "",
-    complainantLanguage: "",
-    respondentLanguage: "",
-    complainantRelation: "",
-    respondentRelation: "",
-    complainantDisability: "",
-    respondentDisability: "",
+    complainantName: bio.complainantName || "",
+    respondentName: bio.respondentName || "",
+    complainantSex: bio.complainantSex || "",
+    respondentSex: bio.respondentSex || "",
+    complainantAge: bio.complainantAge || "",
+    respondentAge: bio.respondentAge || "",
+    complainantCountry: bio.complainantCountry || "",
+    respondentCountry: bio.respondentCountry || "",
+    complainantDistrict: bio.complainantDistrict || "",
+    respondentDistrict: bio.respondentDistrict || "",
+    complainantCounty: bio.complainantCounty || "",
+    respondentCounty: bio.respondentCounty || "",
+    complainantParish: bio.complainantParish || "",
+    respondentParish: bio.respondentParish || "",
+    complainantVillage: bio.complainantVillage || "",
+    respondentVillage: bio.respondentVillage || "",
+    complainantPhone: bio.complainantPhone || "",
+    respondentPhone: bio.respondentPhone || "",
+    complainantMaritalStatus: bio.complainantMaritalStatus || "",
+    respondentMaritalStatus: bio.respondentMaritalStatus || "",
+    complainantAccompaniedBy: bio.complainantAccompaniedBy || "",
+    respondentAccompaniedBy: bio.respondentAccompaniedBy || "",
+    complainantNumberOfBeneficiaries:
+      bio.complainantNumberOfBeneficiaries || "",
+    respondentNumberOfBeneficiaries: bio.respondentNumberOfBeneficiaries || "",
+    complainantJob: bio.complainantJob || "",
+    respondentJob: bio.respondentJob || "",
+    complainantPlaceOfWork: bio.complainantPlaceOfWork || "",
+    respondentPlaceOfWork: bio.respondentPlaceOfWork || "",
+    complainantLevelOfEducation: bio.complainantLevelOfEducation || "",
+    respondentLevelOfEducation: bio.respondentLevelOfEducation || "",
+    complainantLanguage: bio.complainantLanguage || "",
+    respondentLanguage: bio.respondentLanguage || "",
+    complainantRelation: bio.complainantRelation || "",
+    respondentRelation: bio.respondentRelation || "",
+    complainantDisability: bio.complainantDisability || "",
+    respondentDisability: bio.respondentDisability || "",
   });
 
   const {
@@ -251,6 +256,7 @@ function CaseFilesForm({ onClose, setCurrentForm }) {
           variantColor="teal"
           mt="2rem"
           onClick={(e) => {
+            dispatch(addBio(values));
             setCurrentForm(2);
           }}
         >

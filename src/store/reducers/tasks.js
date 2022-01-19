@@ -54,6 +54,7 @@ const slice = createSlice({
       state.success = null;
       state.loading = false;
       state.error = null;
+      console.log(comments);
       if (comments) {
         state.comments[comments[0].task] = comments;
       }

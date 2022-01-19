@@ -8,20 +8,21 @@ import { getComments } from "../../../store/reducers/tasks";
 function Comments({ id }) {
   const dispatch = useDispatch();
   const { comments } = useSelector((state) => state.tasks);
+  const commentsList = comments[id];
 
   useEffect(() => {
     dispatch(getComments(id));
   }, [dispatch, id]);
 
-  if (!comments) {
+  if (!commentsList) {
     return null;
   }
   return (
     <Box width="100%">
       <Heading fontSize="lg" my="2">
-        Comments ({comments.length})
+        Comments ({commentsList.length})
       </Heading>
-      {comments.map((comment) => (
+      {commentsList.map((comment) => (
         <Comment key={comment.id} comment={comment} />
       ))}
       <CommentForm id={id} />
