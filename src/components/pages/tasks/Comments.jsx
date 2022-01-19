@@ -15,7 +15,7 @@ function Comments({ id }) {
   }, [dispatch, id]);
 
   if (!commentsList) {
-    return null;
+    return <CommentForm id={id} />;
   }
   return (
     <Box width="100%">

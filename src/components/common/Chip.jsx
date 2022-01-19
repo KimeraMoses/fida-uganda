@@ -1,6 +1,9 @@
 import { Flex, Icon, Text } from "@chakra-ui/react";
 
 function Chip({ text, bgColor, icon }) {
+  if (!text) {
+    return null;
+  }
   return (
     <Flex
       bgColor={bgColor}

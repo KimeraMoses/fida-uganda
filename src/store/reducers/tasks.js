@@ -108,11 +108,11 @@ export const getAllTasks = () =>
     onError: tasksRequestFailed.type,
   });
 
-export const createComment = (id, comment) =>
+export const createComment = (task, comment) =>
   apiCallBegan({
     url: "/api/v1/comments/create",
     method: "post",
-    data: { id, ...comment },
+    data: { task, comment },
     onStart: tasksRequest.type,
     onSuccess: commentsLoadSucceeded.type,
     onError: tasksRequestFailed.type,
