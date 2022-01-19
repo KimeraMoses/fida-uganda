@@ -22,6 +22,7 @@ function ClvComplaintForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(values);
     dispatch(createComplaint(values));
   };
 

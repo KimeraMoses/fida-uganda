@@ -1,5 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Box, Grid, Heading, Divider, Button } from "@chakra-ui/react";
+import {
+  Box,
+  Grid,
+  Heading,
+  Divider,
+  Button,
+} from "@chakra-ui/react";
 import TextInput from "../../common/TextInput";
 import EmailInput from "../../common/EmailInput";
 import useForm from "../../../hooks/useForm";
@@ -15,7 +21,7 @@ function ClvProfilingForm({ onClose }) {
     lastName: "",
     mobileNumber: "",
     email: "",
-    district: "",
+    city: "",
     subCountry: "",
     village: "",
     profession: "",
@@ -30,7 +36,7 @@ function ClvProfilingForm({ onClose }) {
     lastName,
     mobileNumber,
     email,
-    district,
+    city,
     subCountry,
     village,
     profession,
@@ -39,24 +45,13 @@ function ClvProfilingForm({ onClose }) {
     categoryOfTrainingAttended,
   } = values;
 
-  const isDisabled = !(
-    firstName &&
-    maidenName &&
-    lastName &&
-    mobileNumber &&
-    email &&
-    district &&
-    subCountry &&
-    village &&
-    profession &&
-    yearOfTraining &&
-    projectOfAttachment &&
-    categoryOfTrainingAttended
-  );
+  const isDisabled = !(firstName && email && profession && city);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    values.name = `${firstName} ${maidenName} ${lastName}`;
     dispatch(createClv(values));
+    onClose();
   };
 
   return (
@@ -102,9 +97,9 @@ function ClvProfilingForm({ onClose }) {
           handleChange={handleChange}
         />
         <TextInput
-          placeholder="District"
-          name="district"
-          value={district}
+          placeholder="District/City"
+          name="city"
+          value={city}
           handleChange={handleChange}
         />
         <TextInput
@@ -149,7 +144,6 @@ function ClvProfilingForm({ onClose }) {
       </Grid>
       <Button
         leftIcon={<AddIcon color="white" />}
-        isDisabled={isDisabled}
         isLoading={loading}
         type="submit"
         color="white"
@@ -157,6 +151,7 @@ function ClvProfilingForm({ onClose }) {
         borderRadius="full"
         mt="1.5rem"
         _hover={{ bgColor: "purple.800" }}
+        isDisabled={isDisabled}
       >
         Add
       </Button>

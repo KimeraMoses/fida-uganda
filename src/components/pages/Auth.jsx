@@ -11,8 +11,8 @@ function Auth() {
       <FormBackground>
         <Routes>
           <Route path="/" index element={<LogIn />} />
-          <Route path="forgotpassword" element={<PasswordReset />} />
-          <Route path="signup" element={<SignUp />} />
+          <Route path="/forgotpassword" element={<PasswordReset />} />
+          <Route path="/signup" element={<SignUp />} />
         </Routes>
       </FormBackground>
     </BackgroundImage>

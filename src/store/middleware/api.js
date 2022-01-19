@@ -42,7 +42,6 @@ const api =
           ...headers,
         },
       });
-      console.log(data);
 
       dispatch(actions.apiCallSucceeded(response.data));
 

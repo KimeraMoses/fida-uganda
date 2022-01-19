@@ -106,7 +106,7 @@ export const getClvs = () =>
     onError: clvLoadFailed.type,
   });
 
-export const createComplaint = (values) => {
+export const createComplaint = (values) =>
   apiCallBegan({
     url: "/api/v1/complaints/create",
     method: "post",
@@ -115,7 +115,6 @@ export const createComplaint = (values) => {
     onSuccess: complaintCreationSucceeded.type,
     onError: clvLoadFailed.type,
   });
-};
 
 export const getComplaint = (id) => {
   apiCallBegan({
