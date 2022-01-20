@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Box,
   Heading,
@@ -10,25 +12,34 @@ import {
   Button,
   Checkbox,
 } from "@chakra-ui/react";
-import { useState } from "react";
 import { MdArrowBack } from "react-icons/md";
 import useForm from "../../../hooks/useForm";
 import { declarationOptions } from "./options";
+import { addDeclaration, createCase } from "../../../store/reducers/cases";
 
 function DeclarationForm({ onClose, setCurrentForm }) {
-  const [about, setAbout] = useState("");
-  const [hasAgreed, setHasAgreed] = useState(false);
+  const dispatch = useDispatch();
+  const { bio, disability, issues, declaration } = useSelector(
+    (state) => state.cases.newCase
+  );
+
+  const [about, setAbout] = useState(declaration.about || "");
+  const [hasAgreed, setHasAgreed] = useState(declaration.hasAgreed || false);
   const { values, handleChange } = useForm({
-    natureOfSupport: "",
-    comments: "",
+    natureOfSupport: declaration.natureOfSupport || "",
+    comments: declaration.comments || "",
   });
+
   const { natureOfSupport, comments } = values;
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    values.about = about;
+    values.hasAgreed = hasAgreed;
+    dispatch(addDeclaration(values));
+    dispatch(createCase({ ...declaration, ...bio, ...disability, ...issues }));
     onClose();
   };
-
   return (
     <Box as="form" p="3rem" onSubmit={handleSubmit}>
       <Heading size="lg" mb="2rem">
@@ -72,7 +83,7 @@ function DeclarationForm({ onClose, setCurrentForm }) {
       <Heading fontSize="xl" mt="2rem">
         10. Declaration.
       </Heading>
-      <Flex flexItems="flex-start" gap="1rem" mb="2rem" mt="0.5rem">
+      <Flex alignItems="flex-start" gap="1rem" mb="2rem" mt="0.5rem">
         <Checkbox
           size="lg"
           colorScheme="purple"
@@ -88,10 +99,18 @@ function DeclarationForm({ onClose, setCurrentForm }) {
         </Text>
       </Flex>
       <Flex alignItems="center" justifyContent="space-between">
-        <Button leftIcon={<MdArrowBack />} onClick={(e) => setCurrentForm(3)}>
+        <Button
+          leftIcon={<MdArrowBack />}
+          onClick={(e) => {
+            setCurrentForm(3);
+            values.about = about;
+            values.hasAgreed = hasAgreed;
+            dispatch(addDeclaration(values));
+          }}
+        >
           Back
         </Button>
-        <Button isDisabled={!hasAgreed} type="submit" onClick={onClose}>
+        <Button isDisabled={!hasAgreed} type="submit">
           Save and Exit
         </Button>
       </Flex>

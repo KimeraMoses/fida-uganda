@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Box,
   Heading,
@@ -9,28 +10,29 @@ import {
   Flex,
   Button,
 } from "@chakra-ui/react";
+import { addIssues } from "./../../../store/reducers/cases";
 import Radio from "../../common/Radio";
 import { issuesOptions } from "./options";
 import useForm from "../../../hooks/useForm";
 import TextInput from "../../common/TextInput";
 import { MdArrowBack, MdArrowForward } from "react-icons/md";
 
-function IssueForm({ onClose, setCurrentForm }) {
+function IssueForm({ setCurrentForm }) {
+  const dispatch = useDispatch();
+  const { issues } = useSelector((state) => state.cases.newCase);
   const { values, handleChange } = useForm({
-    details: "",
-    duration: "",
-    action: "",
+    details: issues.details || "",
+    duration: issues.duration || "",
+    action: issues.action || "",
   });
   const { details, duration, action } = values;
-  const [nature, setNature] = useState("");
-  const [wasActionTaken, setWasActionTaken] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+  const [nature, setNature] = useState(issues.nature || "");
+  const [wasActionTaken, setWasActionTaken] = useState(
+    issues.wasActionTaken || ""
+  );
 
   return (
-    <Box as="form" p="3rem" onSubmit={handleSubmit}>
+    <Box p="3rem">
       <Heading size="lg" mb="2rem">
         Case Registration Form
       </Heading>
@@ -93,12 +95,25 @@ function IssueForm({ onClose, setCurrentForm }) {
         </>
       ) : null}
       <Flex alignItems="center" justifyContent="space-between">
-        <Button leftIcon={<MdArrowBack />} onClick={(e) => setCurrentForm(2)}>
+        <Button
+          leftIcon={<MdArrowBack />}
+          onClick={(e) => {
+            setCurrentForm(2);
+            values.nature = nature;
+            values.wasActionTaken = wasActionTaken;
+            dispatch(addIssues(values));
+          }}
+        >
           Back
         </Button>
         <Button
           rightIcon={<MdArrowForward />}
-          onClick={(e) => setCurrentForm(4)}
+          onClick={(e) => {
+            setCurrentForm(4);
+            values.nature = nature;
+            values.wasActionTaken = wasActionTaken;
+            dispatch(addIssues(values));
+          }}
         >
           Next
         </Button>

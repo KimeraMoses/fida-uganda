@@ -1,27 +1,27 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
 import { MdArrowForward, MdArrowBack } from "react-icons/md";
 import { disabilityAssessmentOptions } from "./options";
 import Radio from "../../common/Radio";
+import { addDisability } from "../../../store/reducers/cases";
 
-function DisabilityAssessmentForm({ onClose, setCurrentForm }) {
-  const [sight, setSight] = useState("");
-  const [hearing, setHearingDisability] = useState("");
-  const [movement, setMovement] = useState("");
-  const [remembering, setRemembering] = useState("");
-  const [dressing, setDressing] = useState("");
-  const [speech, setSpeech] = useState("");
-  const [isDisabled, setIsDisabled] = useState("");
+function DisabilityAssessmentForm({ setCurrentForm }) {
+  const { disability } = useSelector((state) => state.cases.newCase);
+  const dispatch = useDispatch();
+  const [sight, setSight] = useState(disability.sight || "");
+  const [hearing, setHearingDisability] = useState(disability.hearing || "");
+  const [movement, setMovement] = useState(disability.movement || "");
+  const [remembering, setRemembering] = useState(disability.remembering || "");
+  const [dressing, setDressing] = useState(disability.dressing || "");
+  const [speech, setSpeech] = useState(disability.speech || "");
+  const [isDisabled, setIsDisabled] = useState(disability.isDisabled || "");
 
   const genericOptions = disabilityAssessmentOptions["generic"];
   const isDisabledOptions = disabilityAssessmentOptions["isDisabled"];
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
   return (
-    <Box as="form" p="3rem" onSubmit={handleSubmit}>
+    <Box p="3rem">
       <Heading size="lg" mb="2rem">
         Case Registration Form
       </Heading>
@@ -98,6 +98,17 @@ function DisabilityAssessmentForm({ onClose, setCurrentForm }) {
           leftIcon={<MdArrowBack />}
           onClick={(e) => {
             setCurrentForm(1);
+            dispatch(
+              addDisability({
+                sight,
+                hearing,
+                movement,
+                remembering,
+                dressing,
+                speech,
+                isDisabled,
+              })
+            );
           }}
         >
           Back
@@ -106,6 +117,17 @@ function DisabilityAssessmentForm({ onClose, setCurrentForm }) {
           rightIcon={<MdArrowForward />}
           onClick={(e) => {
             setCurrentForm(3);
+            dispatch(
+              addDisability({
+                sight,
+                hearing,
+                movement,
+                remembering,
+                dressing,
+                speech,
+                isDisabled,
+              })
+            );
           }}
         >
           Next

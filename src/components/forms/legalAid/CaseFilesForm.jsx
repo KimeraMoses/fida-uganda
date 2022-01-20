@@ -87,13 +87,8 @@ function CaseFilesForm({ setCurrentForm }) {
     respondentDisability,
   } = values;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert(JSON.stringify(values, null, 2));
-  };
-
   return (
-    <Box as="form" p="3rem" onSubmit={handleSubmit}>
+    <Box p="3rem">
       <Heading size="lg" mb="2rem">
         Case Registration Form
       </Heading>
@@ -253,7 +248,6 @@ function CaseFilesForm({ setCurrentForm }) {
         <Button
           rightIcon={<MdArrowForward />}
           type="submit"
-          variantColor="teal"
           mt="2rem"
           onClick={(e) => {
             dispatch(addBio(values));
