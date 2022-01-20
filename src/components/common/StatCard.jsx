@@ -1,7 +1,7 @@
 import { QuestionOutlineIcon } from "@chakra-ui/icons";
 import { Stat, StatLabel, StatNumber, Flex } from "@chakra-ui/react";
 
-function StatCard() {
+function StatCard({ title, value, icon }) {
   return (
     <Stat
       bgGradient="linear(to-br, purple.50, purple.100)"
@@ -14,12 +14,12 @@ function StatCard() {
     >
       <Flex alignItems="center" justifyContent="space-between" mb="2rem">
         <StatLabel fontSize="md" fontWeight="bold" color="purple.600">
-          Collected Fees
+          {title || "Collected Fees"}
         </StatLabel>
-        <QuestionOutlineIcon color="purple.600" />
+        {icon ? icon : <QuestionOutlineIcon color="purple.600" />}
       </Flex>
       <StatNumber align="end" fontSize="5xl" color="purple.600">
-        $0.00
+        {value || "$0.00"}
       </StatNumber>
     </Stat>
   );

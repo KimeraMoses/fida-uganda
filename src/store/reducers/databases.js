@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { apiCallBegan } from "../api";
 
 const slice = createSlice({
   name: "databases",
@@ -27,5 +28,17 @@ const slice = createSlice({
     },
   },
 });
+
+const { databasesRequest, databasesRequestFailed, databasesLoadSucceeded } =
+  slice.actions;
+
+export const getAllDatabases = () =>
+  apiCallBegan({
+    url: "/api/v1/databases/getAll",
+    method: "get",
+    onStart: databasesRequest.type,
+    onSuccess: databasesLoadSucceeded.type,
+    onError: databasesRequestFailed.type,
+  });
 
 export default slice.reducer;
