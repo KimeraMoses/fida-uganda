@@ -1,36 +1,97 @@
-image: node:latest
-
-before_script:
-    - apt-get update -qy
-    - apt-get install -y ruby-dev
-    - gem install dpl
-
 stages:
-    
-    - deploy_to_staging
-    - deploy_to_production
+  - install
+  - build
+  - deploy
+
+install:
+  stage: install
+  image: node:14.9-alpine3.12
+  script:
+    - npm install
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - node_modules/
+
+build:
+  stage: build
+  image: node:14.9-alpine3.12
+  script:
+    - npm run build
+  needs: ["install"]
+  cache:
+    key:
+      files:
+        - package-lock.json
+    policy: pull
+    paths:
+      - node_modules/
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - .firebaserc
+      - build
+      - firebase.json
 
 
 
 
-    
-    
-deploy_to_staging:
-    type: deploy
-    stage: deploy_to_staging
-    image: ruby:latest
-    script:
-        - dpl --provider=heroku --app=$HEROKU_APP_STAGING --api-key=$HEROKU_API_KEY
-    only:
-        - staging
+deploy:review:
+  image: andreysenov/firebase-tools:latest
+  stage: deploy
+  before_script:
+    - firebase use $ENVIRONMENT
+  script:
+    - firebase hosting:channel:deploy $CI_ENVIRONMENT_SLUG
+    - echo "ENVIRONMENT_URL=$(firebase hosting:channel:open $CI_ENVIRONMENT_SLUG --non-interactive | awk '{ print $3 }')" >> deploy.env
+  environment:
+    name: review/$CI_COMMIT_REF_NAME
+    url: $ENVIRONMENT_URL
+  artifacts:
+    reports:
+      dotenv: deploy.env
+  dependencies:
+    - build
+  variables:
+    GIT_STRATEGY: none
+    ENVIRONMENT: staging
+  only:
+    - branches
+  except:
+    - master
 
-deploy_to_production:
-    type: deploy
-    stage: deploy_to_production
-    image: ruby:latest
-    script:
-        - dpl --provider=heroku --app=$HEROKU_APP_PRODUCTION --api-key=$HEROKU_API_KEY
-    only:
-        - main
+deploy:staging:
+  image: andreysenov/firebase-tools:latest
+  stage: deploy
+  before_script:
+    - firebase use $ENVIRONMENT
+  script:
+    - firebase deploy
+        --token $FIREBASE_TOKEN
+        --message "Pipeline $CI_PIPELINE_ID, build $CI_BUILD_ID"
+        --non-interactive
+        --only hosting
+    - echo "ENVIRONMENT_URL=$(firebase hosting:channel:open live --non-interactive | awk '{ print $3 }')" >> deploy.env
+  environment:
+    name: staging
+    url: $ENVIRONMENT_URL
+  artifacts:
+    reports:
+      dotenv: deploy.env
+  dependencies:
+    - build
+  variables:
+    GIT_STRATEGY: none
+    ENVIRONMENT: staging
+  only:
+    - staging
 
-    
+deploy:production:
+  extends: deploy:staging
+  environment:
+    name: production
+  variables:
+    ENVIRONMENT: production
+  when: manual
