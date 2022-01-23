@@ -1,0 +1,41 @@
+image: node:latest
+
+before_script:
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+
+stages:
+    - run_tests
+    - deploy_to_staging
+    - deploy_to_production
+
+
+
+run_tests:
+    stage: run_tests
+    image: node:15
+    script:
+        - npm install
+        - npm run test
+    
+    
+deploy_to_staging:
+    type: deploy
+    stage: deploy_to_staging
+    image: ruby:latest
+    script:
+        - dpl --provider=heroku --app=$HEROKU_APP_STAGING --api-key=$HEROKU_API_KEY
+    only:
+        - staging
+
+deploy_to_production:
+    type: deploy
+    stage: deploy_to_production
+    image: ruby:latest
+    script:
+        - dpl --provider=heroku --app=$HEROKU_APP_PRODUCTION --api-key=$HEROKU_API_KEY
+    only:
+        - main
+
+    needs: ["run_tests"]
