@@ -3,8 +3,8 @@ image: node:latest
 .deploy: &deploy
 - npm install -g firebase-tools
 - firebase use fida-staging --token $FIREBASE_TOKEN
-- yarn
-- yarn build
+- npm install
+- npm run build
 
 cache:
   paths:
@@ -20,7 +20,7 @@ staging:
   only:
     - staging
   script:
-    - firebase deploy -m "Pipe $CI_PIPELINE_ID Build $CI_BUILD_ID" --only hosting:staging --non-interactive --token $FIREBASE_TOKEN
+    - firebase deploy -m "Pipe $CI_PIPELINE_ID Build $CI_BUILD_ID" --only hosting --non-interactive --token $FIREBASE_TOKEN
 
 production:
   stage: deploy
