@@ -153,7 +153,7 @@ function ClvProfilingForm({ onClose }) {
         _hover={{ bgColor: "purple.800" }}
         isDisabled={isDisabled}
       >
-        Add
+        Add CLV
       </Button>
     </Box>
   );

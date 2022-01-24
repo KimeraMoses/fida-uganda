@@ -13,9 +13,11 @@ import useForm from "../../../hooks/useForm";
 import TextInput from "../../common/TextInput";
 import { createTask } from "../../../store/reducers/tasks";
 import Chip from "../../common/Chip";
+import { useSelector } from "react-redux";
 
-function CreateTask({onClose}) {
+function CreateTask({ onClose }) {
   const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.tasks);
   const { values, handleChange } = useForm({
     title: "",
     description: "",
@@ -29,10 +31,16 @@ function CreateTask({onClose}) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    values.tags = tags.split(",");
-    values.outline = outlines.split(",");
+    values.tags = tags ? tags.split(",") : [];
+    values.outline = outlines ? outlines.split(",") : [];
     dispatch(createTask(values));
-    onClose();
+    while (loading) {}
+    if (!error) {
+      onClose();
+    }
+    if (error) {
+      alert(error);
+    }
   };
 
   return (
@@ -120,7 +128,9 @@ function CreateTask({onClose}) {
         </Text>
       </SimpleGrid>
       <Flex my="2rem">
-        <Button type="submit">Add Task</Button>
+        <Button type="submit" isLoading={loading}>
+          Add Task
+        </Button>
       </Flex>
     </Box>
   );

@@ -80,7 +80,7 @@ function ClvComplaintForm() {
         mt="1.5rem"
         _hover={{ bgColor: "purple.800" }}
       >
-        Add Case
+        Add Complaint
       </Button>
     </Box>
   );

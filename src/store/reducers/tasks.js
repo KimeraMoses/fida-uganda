@@ -48,7 +48,7 @@ const slice = createSlice({
       state.error = null;
       state.success = "Comment created successfully";
       if (state.comments[comment.task]) {
-        state.comments.push(comment);
+        state.comments[comment.task].push(comment);
       } else {
         state.comments[comment.task] = [comment];
       }
@@ -58,7 +58,6 @@ const slice = createSlice({
       state.success = null;
       state.loading = false;
       state.error = null;
-      console.log(comments);
       if (comments) {
         state.comments[comments[0].task] = comments;
       }

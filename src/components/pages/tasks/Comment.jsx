@@ -1,7 +1,20 @@
 import { Flex, Avatar, Heading, Text } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
 
 function Comment({ comment }) {
   const { first_name, last_name, image } = comment.createdBy;
+  const { user } = useSelector((state) => state.auth);
+
+  let firstName = first_name;
+  let lastName = last_name;
+  let imageUrl = image;
+
+  if (!first_name) {
+    firstName = user.first_name;
+    lastName = user.last_name;
+    imageUrl = user.image;
+  }
+
   return (
     <Flex
       flexDir="column"
@@ -13,10 +26,10 @@ function Comment({ comment }) {
       mb="2"
     >
       <Flex alignItems="center" mb="2">
-        <Avatar src={image} alt={first_name} size="sm" />
+        <Avatar src={imageUrl} alt={firstName} size="sm" />
         <Flex flexDir="column" ml={4}>
           <Heading color="purple.600" fontSize="md">
-            {`${first_name} ${last_name}`}
+            {`${firstName} ${lastName}`}
           </Heading>
           <Text color="gray.600" fontSize="sm" fontWeight="bold">
             {comment.designation}

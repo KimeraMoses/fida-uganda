@@ -11,6 +11,7 @@ import Table from "../../common/Table";
 function ClvDatabase() {
   const dispatch = useDispatch();
   const { clvs } = useSelector((state) => state.clv);
+  const { user } = useSelector((state) => state.auth);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const data = useMemo(() => clvs, [clvs]);
@@ -32,6 +33,7 @@ function ClvDatabase() {
         columns={columns}
         btnLabel="Add CLV"
         btnClick={handleBtnClick}
+        showBtn={user.designation === "clv"}
       />
       <GenericModal isOpen={isOpen} onClose={onClose}>
         <ClvProfilingForm />

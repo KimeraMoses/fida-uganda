@@ -3,7 +3,13 @@ import { useAsyncDebounce } from "react-table";
 import { Flex, Button, Input } from "@chakra-ui/react";
 import { MdFilterList, MdAdd } from "react-icons/md";
 
-function TableSearch({ btnLabel, btnClick, setGlobalFilter, globalFilter }) {
+function TableSearch({
+  btnLabel,
+  btnClick,
+  setGlobalFilter,
+  globalFilter,
+  showBtn = true,
+}) {
   const [search, setSearch] = useState(globalFilter);
 
   const handleChange = useAsyncDebounce((value) => {
@@ -36,17 +42,19 @@ function TableSearch({ btnLabel, btnClick, setGlobalFilter, globalFilter }) {
           handleChange(e.target.value);
         }}
       />
-      <Button
-        leftIcon={<MdAdd />}
-        borderRadius="full"
-        bgColor="purple.500"
-        color="white"
-        px="2.5rem"
-        _hover={{ bgColor: "purple.700" }}
-        onClick={btnClick}
-      >
-        {btnLabel}
-      </Button>
+      {showBtn && (
+        <Button
+          leftIcon={<MdAdd />}
+          borderRadius="full"
+          bgColor="purple.500"
+          color="white"
+          px="2.5rem"
+          _hover={{ bgColor: "purple.700" }}
+          onClick={btnClick}
+        >
+          {btnLabel}
+        </Button>
+      )}
     </Flex>
   );
 }

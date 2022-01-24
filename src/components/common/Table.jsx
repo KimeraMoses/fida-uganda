@@ -2,7 +2,7 @@ import React from "react";
 import NoDataTable from "./NoDataTable";
 import DisplayTable from "./DisplayTable";
 
-function Table({ data, columns, caption, btnLabel, btnClick }) {
+function Table({ data, columns, caption, btnLabel, btnClick, showBtn }) {
   if (data.length > 0) {
     return (
       <DisplayTable
@@ -11,6 +11,7 @@ function Table({ data, columns, caption, btnLabel, btnClick }) {
         caption={caption}
         btnLabel={btnLabel}
         btnClick={btnClick}
+        showBtn={showBtn}
       />
     );
   }
