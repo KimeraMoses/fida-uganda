@@ -1,7 +1,15 @@
 import { AddIcon } from "@chakra-ui/icons";
-import { Box, Button, Divider, Heading, SimpleGrid } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Divider,
+  Heading,
+  SimpleGrid,
+  Text,
+} from "@chakra-ui/react";
 import useForm from "../../../hooks/useForm";
 import TextInput from "../../common/TextInput";
+import Date from "../../common/Date";
 
 function FidaProjectsForm() {
   const { values, handleChange } = useForm({
@@ -34,7 +42,7 @@ function FidaProjectsForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(values);
+    alert(JSON.stringify(values, null, 2));
   };
 
   return (
@@ -98,18 +106,22 @@ function FidaProjectsForm() {
       </SimpleGrid>
       <Divider />
       <SimpleGrid columns={2} spacing={4} my="4">
-        <TextInput
-          handleChange={handleChange}
-          value={startDate}
-          name="startDate"
-          placeholder="Start Date"
-        />
-        <TextInput
-          handleChange={handleChange}
-          value={endDate}
-          name="endDate"
-          placeholder="End Date"
-        />
+        <SimpleGrid columns={2} spacing={4} my="4">
+          <Text fontSize="lg" fontWeight="bold">
+            Start Date:
+          </Text>
+          <Date
+            name="startDate"
+            value={startDate}
+            onChange={handleChange}
+          />
+        </SimpleGrid>
+        <SimpleGrid columns={2} spacing={4} my="4">
+          <Text fontSize="lg" fontWeight="bold">
+            End Date:
+          </Text>
+          <Date name="endDate" value={endDate} onChange={handleChange} />
+        </SimpleGrid>
         <TextInput
           handleChange={handleChange}
           value={mainObjective}
