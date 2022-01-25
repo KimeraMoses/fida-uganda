@@ -1,4 +1,4 @@
-import { Heading, SimpleGrid, Box, Flex, Text } from "@chakra-ui/react";
+import { Heading, SimpleGrid, Box, Text } from "@chakra-ui/react";
 import TextInput from "../../common/TextInput";
 import Date from "../../common/Date";
 import SubmitButton from "../SubmitButton";
@@ -49,20 +49,20 @@ function TravelForm() {
       <Heading size="lg" mb="1rem">
         FIDA Travel Form
       </Heading>
-      <Flex justifyContent="space-between" alignItems="center" mb="1.5rem">
+      <SimpleGrid columns={3} gap={4} mb="1.5rem">
         <Text fontSize="lg" fontWeight="bold">
           Start Date and Time
         </Text>
         <Date value={startDate} name="startDate" onChange={handleChange} />
         <Time value={startTime} name="startTime" onChange={handleChange} />
-      </Flex>
-      <Flex justifyContent="space-between" alignItems="center" mb="1.5rem">
+      </SimpleGrid>
+      <SimpleGrid columns={3} gap={4} mb="1.5rem">
         <Text fontSize="lg" fontWeight="bold">
           End Date and Time
         </Text>
         <Date value={endDate} name="endDate" onChange={handleChange} />
         <Time value={endTime} name="endTime" onChange={handleChange} />
-      </Flex>
+      </SimpleGrid>
       <SimpleGrid columns={2} gap={4} mb="1rem">
         <TextInput
           placeholder="Pick up location"
