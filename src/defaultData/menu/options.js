@@ -19,3 +19,10 @@ export const designationOptions = [
   { label: "Fleet Manager", value: "fleetManager" },
   { label: "Other", value: "other" },
 ];
+
+export const requisitionOptions = [
+  { label: "Product Requisition", value: "product" },
+  { label: "Service Requisition", value: "service" },
+  { label: "Service Requisition", value: "service" },
+  { label: "Activity Requisition", value: "activity" },
+];
