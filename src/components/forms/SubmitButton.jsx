@@ -2,7 +2,7 @@ import { AddIcon } from "@chakra-ui/icons";
 import { Button } from "@chakra-ui/react";
 import React from "react";
 
-function SubmitButton({ isDisabled, loading }) {
+function SubmitButton({ isDisabled, loading, label = "Submit" }) {
   return (
     <Button
       leftIcon={<AddIcon />}
@@ -15,7 +15,7 @@ function SubmitButton({ isDisabled, loading }) {
       mt="1.5rem"
       _hover={{ bgColor: "purple.800" }}
     >
-      Add Complaint
+      {label}
     </Button>
   );
 }

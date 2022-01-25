@@ -33,3 +33,38 @@ export const dummyDataRequisitions = [
     date: "2020-01-03",
   },
 ];
+
+export const dummyDataTravel = [
+  {
+    id: 1,
+    applicantName: "John Doe",
+    projectName: "DFG",
+    projectActivity: "Activity 1",
+    status: "Pending",
+    dateOfTravel: "2020-01-01",
+  },
+  {
+    id: 2,
+    applicantName: "Jane Doe",
+    projectName: "DFG",
+    projectActivity: "Activity 2",
+    status: "Approved",
+    dateOfTravel: "2020-01-02",
+  },
+  {
+    id: 3,
+    applicantName: "John Doe",
+    projectName: "DFG",
+    projectActivity: "Activity 3",
+    status: "Approved",
+    dateOfTravel: "2020-01-03",
+  },
+  {
+    id: 4,
+    applicantName: "Jane Doe",
+    projectName: "DFG",
+    projectActivity: "Activity 4",
+    status: "Approved",
+    dateOfTravel: "2020-01-04",
+  },
+];
