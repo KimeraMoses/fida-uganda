@@ -1,38 +1,48 @@
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Box, useDisclosure } from "@chakra-ui/react";
+import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, useDisclosure } from "@chakra-ui/react";
 import GenericModal from "../../common/GenericModal";
 import SectionHeader from "../../common/SectionHeader";
 import FidaProjectsForm from "../../forms/programs/FidaProjectsForm";
-import { getComplaints } from "../../../store/reducers/clv";
-import { clvComplaintsColumns } from "../../tables/clvs/complaints";
-import Table from "../../common/Table";
+import { loadProjects } from "../../../store/reducers/projects";
+import ProjectList from "./ProjectList";
+import { ChevronRightIcon } from "@chakra-ui/icons";
+import ProjectsSearch from "./ProjectsSearch";
 
 function FidaProjects() {
   const dispatch = useDispatch();
-  const { complaints } = useSelector((state) => state.clv);
+  const { projects } = useSelector((state) => state.projects);
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const data = useMemo(() => complaints, [complaints]);
-  const columns = useMemo(() => clvComplaintsColumns, []);
 
   const handleClick = () => {
     onOpen();
   };
 
   useEffect(() => {
-    dispatch(getComplaints());
+    dispatch(loadProjects());
   }, [dispatch]);
 
   return (
     <Box>
       <SectionHeader title="FIDA Projects" />
-      <Table
-        btnLabel="Add Project"
-        btnClick={handleClick}
-        data={data}
-        columns={columns}
-      />
+      <Breadcrumb
+        spacing="8px"
+        separator={<ChevronRightIcon color="gray.500" />}
+      >
+        <BreadcrumbItem>
+          <BreadcrumbLink href="#">Home</BreadcrumbLink>
+        </BreadcrumbItem>
+
+        <BreadcrumbItem>
+          <BreadcrumbLink href="#">About</BreadcrumbLink>
+        </BreadcrumbItem>
+
+        <BreadcrumbItem isCurrentPage>
+          <BreadcrumbLink href="#">Contact</BreadcrumbLink>
+        </BreadcrumbItem>
+      </Breadcrumb>
+      <ProjectsSearch />
+      <ProjectList />
       <GenericModal isOpen={isOpen} onClose={onClose}>
         <FidaProjectsForm />
       </GenericModal>
