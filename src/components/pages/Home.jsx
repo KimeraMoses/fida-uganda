@@ -27,7 +27,7 @@ function Home() {
             <Route path="clv-complaints" element={<ClvComplaints />} />
             <Route path="case-files" element={<CaseFiles />} />
             <Route path="fida-databases" element={<FidaDatabases />} />
-            <Route path="fida-projects" element={<FidaProjects />} />
+            <Route path="fida-projects/*" element={<FidaProjects />} />
             <Route path="fida-assets" element={<FidaAssets />} />
           </Routes>
         </Box>

@@ -1,21 +1,16 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Box, useDisclosure } from "@chakra-ui/react";
-import GenericModal from "../../common/GenericModal";
-import FidaProjectsForm from "../../forms/programs/FidaProjectsForm";
+import { Routes, Route } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Box } from "@chakra-ui/react";
 import { loadProjects } from "../../../store/reducers/projects";
-import ProjectList from "./ProjectList";
-import ProjectsSearch from "./ProjectsSearch";
-import BreadCrump from "./BreadCrump";
+import ProjectsList from "./ProjectsList";
+import ProjectDetails from "./ProjectDetails";
+import ProjectDocuments from "./ProjectDocuments";
+import ProjectProgress from "./ProjectProgress";
+import ProjectLogframe from "./ProjectLogframe";
 
 function FidaProjects() {
   const dispatch = useDispatch();
-  const { projects } = useSelector((state) => state.projects);
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const onOpenModal = () => {
-    onOpen();
-  };
 
   useEffect(() => {
     dispatch(loadProjects());
@@ -23,12 +18,13 @@ function FidaProjects() {
 
   return (
     <Box>
-      <BreadCrump home="FIDA Projects" />
-      <ProjectsSearch btnLabel="Add Project" btnClick={onOpenModal}  />
-      <ProjectList />
-      <GenericModal isOpen={isOpen} onClose={onClose}>
-        <FidaProjectsForm />
-      </GenericModal>
+      <Routes>
+        <Route index element={<ProjectsList />} />
+        <Route path="/details" element={<ProjectDetails />} />
+        <Route path="/details/documents" element={<ProjectDocuments />} />
+        <Route path="/details/progress" element={<ProjectProgress />} />
+        <Route path="/details/logframe" element={<ProjectLogframe />} />
+      </Routes>
     </Box>
   );
 }

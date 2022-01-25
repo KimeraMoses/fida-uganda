@@ -1,29 +1,38 @@
+import { MdOutlineFolderOpen } from "react-icons/md";
+import { Link } from "react-router-dom";
 import {
   Box,
   Flex,
   ListIcon,
   ListItem as ChakraListItem,
 } from "@chakra-ui/react";
-import { MdOutlineFolderOpen } from "react-icons/md";
 
-function ListItem({ bgColor = "purple.100" }) {
+function ListItem({
+  to,
+  name,
+  createdBy,
+  lastModified,
+  bgColor = "purple.100",
+}) {
   return (
-    <ChakraListItem p="1rem" bgColor={bgColor} cursor="pointer">
-      <Flex alignItems="center">
-        <ListIcon as={MdOutlineFolderOpen} size="24rem" />
-        <Flex alignItems="center" justifyContent="space-between" flex="auto">
-          <Box as="span" fontSize="lg">
-            Project Name
-          </Box>
-          <Box as="span" fontSize="lg">
-            Created by
-          </Box>
-          <Box as="span" fontSize="lg">
-            Last Modified
-          </Box>
+    <Link to={to}>
+      <ChakraListItem p="1rem" bgColor={bgColor} cursor="pointer">
+        <Flex alignItems="center">
+          <ListIcon as={MdOutlineFolderOpen} size="24rem" />
+          <Flex justifyContent="space-between" flex="auto">
+            <Box as="span" fontSize="lg">
+              {name || "Project Name"}
+            </Box>
+            <Box as="span" fontSize="lg">
+              {createdBy || "Created by"}
+            </Box>
+            <Box as="span" fontSize="lg">
+              {lastModified || "Last Modified"}
+            </Box>
+          </Flex>
         </Flex>
-      </Flex>
-    </ChakraListItem>
+      </ChakraListItem>
+    </Link>
   );
 }
 
