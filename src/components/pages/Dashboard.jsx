@@ -1,16 +1,18 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, SimpleGrid } from "@chakra-ui/react";
 import SectionHeader from "../common/SectionHeader";
 import StatCard from "../common/StatCard";
+import Requisitions from "./requisitions/Requisitions";
 
 function Dashboard() {
   return (
     <Box>
       <SectionHeader title="Dashboard" />
-      <Flex align="center" mt="1.5rem" gap="1rem">
+      <SimpleGrid columns={3} gap="1rem" mt="2rem">
+        <Requisitions />
         <StatCard />
         <StatCard />
         <StatCard />
-      </Flex>
+      </SimpleGrid>
     </Box>
   );
 }
