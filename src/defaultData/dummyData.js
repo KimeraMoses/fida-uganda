@@ -68,3 +68,14 @@ export const dummyDataTravel = [
     dateOfTravel: "2020-01-04",
   },
 ];
+
+export const dummyDataProgressSummary = [
+  {
+    id: 1,
+    projectName: "Project 1",
+    funder: "Funder 1",
+    progress: "10%",
+    moneySpent: 100000,
+    balance: 100000,
+  },
+];

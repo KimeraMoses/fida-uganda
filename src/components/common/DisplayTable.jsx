@@ -13,7 +13,16 @@ import TableSearch from "./TableSearch";
 import fuzzyTextFilter from "../../defaultData/textFilter";
 import { scrollbar } from "../../defaultData/theme";
 
-function DisplayTable({ data, columns, caption, btnLabel, btnClick, showBtn }) {
+function DisplayTable({
+  data,
+  columns,
+  caption,
+  btnLabel,
+  btnClick,
+  showBtn,
+  showSearch = true,
+  showPagination = true,
+}) {
   const filterTypes = useMemo(
     () => ({
       fuzzyText: fuzzyTextFilter,
@@ -57,13 +66,15 @@ function DisplayTable({ data, columns, caption, btnLabel, btnClick, showBtn }) {
 
   return (
     <VStack>
-      <TableSearch
-        globalFilter={globalFilter}
-        setGlobalFilter={setGlobalFilter}
-        btnLabel={btnLabel}
-        btnClick={btnClick}
-        showBtn={showBtn}
-      />
+      {showSearch && (
+        <TableSearch
+          globalFilter={globalFilter}
+          setGlobalFilter={setGlobalFilter}
+          btnLabel={btnLabel}
+          btnClick={btnClick}
+          showBtn={showBtn}
+        />
+      )}
       <Box overflowY="auto" width="100%" css={scrollbar}>
         <Table variant="simple" bgColor="white" {...getTableProps()}>
           {caption && <TableCaption>{caption}</TableCaption>}
@@ -75,18 +86,20 @@ function DisplayTable({ data, columns, caption, btnLabel, btnClick, showBtn }) {
           />
         </Table>
       </Box>
-      <DisplayTableFoot
-        gotoPage={gotoPage}
-        canPreviousPage={canPreviousPage}
-        previousPage={previousPage}
-        canNextPage={canNextPage}
-        nextPage={nextPage}
-        pageCount={pageCount}
-        pageOptions={pageOptions}
-        pageIndex={pageIndex}
-        pageSize={pageSize}
-        setPageSize={setPageSize}
-      />
+      {showPagination && (
+        <DisplayTableFoot
+          gotoPage={gotoPage}
+          canPreviousPage={canPreviousPage}
+          previousPage={previousPage}
+          canNextPage={canNextPage}
+          nextPage={nextPage}
+          pageCount={pageCount}
+          pageOptions={pageOptions}
+          pageIndex={pageIndex}
+          pageSize={pageSize}
+          setPageSize={setPageSize}
+        />
+      )}
     </VStack>
   );
 }
