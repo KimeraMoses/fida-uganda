@@ -1,6 +1,6 @@
 export const caseFilesColumns = [
   { Header: "CASE ID", accessor: "id" },
-  { Header: "SURNAME", accessor: "surname" },
+  { Header: "NAME", accessor: "complainantName" },
   { Header: "FIRST NAME", accessor: "first_name" },
   { Header: "GENDER", accessor: "gender" },
   { Header: "NATIONALITY", accessor: "nationality" },
@@ -10,7 +10,7 @@ export const caseFilesColumns = [
     accessor: (d) => new Date(d.date_opened).toLocaleString(),
   },
   { Header: "CONTACT", accessor: "contact" },
-  { Header: "DISTRICT", accessor: "district" },
+  { Header: "DISTRICT", accessor: "clvDistrict" },
   { Header: "DISABILITY", accessor: "disability" },
   { Header: "AGE", accessor: "age" },
   {

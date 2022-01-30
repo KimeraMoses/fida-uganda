@@ -6,6 +6,7 @@ import tasksReducer from "./reducers/tasks";
 import projectsReducer from "./reducers/projects";
 import databasesReducer from "./reducers/databases";
 import casesReducer from "./reducers/cases";
+import registrationReducer from "./reducers/registration";
 
 export default function configureAppStore() {
   const store = configureStore({
@@ -16,6 +17,7 @@ export default function configureAppStore() {
       projects: projectsReducer,
       databases: databasesReducer,
       cases: casesReducer,
+      registration: registrationReducer,
     },
 
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([api]),
