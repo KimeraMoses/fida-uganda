@@ -7,14 +7,14 @@ const slice = createSlice({
   initialState: {
     cases: [],
     newCase: {
-      bio: { ...JSON.parse(localStorage.getItem(`${APP_PREFIX}-bio`)) } || {},
+      bio: { ...JSON.parse(localStorage.getItem(`${APP_PREFIX}bio`)) } || {},
       disability:
-        { ...JSON.parse(localStorage.getItem(`${APP_PREFIX}-disability`)) } ||
+        { ...JSON.parse(localStorage.getItem(`${APP_PREFIX}disability`)) } ||
         {},
       issues:
-        { ...JSON.parse(localStorage.getItem(`${APP_PREFIX}-issues`)) } || {},
+        { ...JSON.parse(localStorage.getItem(`${APP_PREFIX}issues`)) } || {},
       declaration:
-        { ...JSON.parse(localStorage.getItem(`${APP_PREFIX}-declaration`)) } ||
+        { ...JSON.parse(localStorage.getItem(`${APP_PREFIX}declaration`)) } ||
         {},
     },
     loading: false,
@@ -33,33 +33,33 @@ const slice = createSlice({
     },
     bioAdded: (cases, action) => {
       cases.newCase.bio = action.payload;
-      localStorage.setItem(`${APP_PREFIX}-bio`, JSON.stringify(action.payload));
+      localStorage.setItem(`${APP_PREFIX}bio`, JSON.stringify(action.payload));
     },
     disabilityAdded: (cases, action) => {
       const { values } = action.payload;
       cases.newCase.disability = values;
-      localStorage.setItem(`${APP_PREFIX}-disability`, JSON.stringify(values));
+      localStorage.setItem(`${APP_PREFIX}disability`, JSON.stringify(values));
     },
     issuesAdded: (cases, action) => {
       const { values } = action.payload;
       cases.newCase.issues = values;
-      localStorage.setItem(`${APP_PREFIX}-issues`, JSON.stringify(values));
+      localStorage.setItem(`${APP_PREFIX}issues`, JSON.stringify(values));
     },
     declarationAdded: (cases, action) => {
       cases.newCase.declaration = action.payload.values;
       localStorage.setItem(
-        `${APP_PREFIX}-declaration`,
-        JSON.stringify(action.payload)
+        `${APP_PREFIX}declaration`,
+        JSON.stringify(action.payload.values)
       );
     },
     caseCreationSucceeded: (cases, action) => {
       const { case_file } = action.payload;
       cases.cases.push(case_file);
       cases.newCase = { bio: {}, disability: {}, issues: {}, declaration: {} };
-      localStorage.removeItem(`${APP_PREFIX}-bio`);
-      localStorage.removeItem(`${APP_PREFIX}-disability`);
-      localStorage.removeItem(`${APP_PREFIX}-issues`);
-      localStorage.removeItem(`${APP_PREFIX}-declaration`);
+      localStorage.removeItem(`${APP_PREFIX}bio`);
+      localStorage.removeItem(`${APP_PREFIX}disability`);
+      localStorage.removeItem(`${APP_PREFIX}issues`);
+      localStorage.removeItem(`${APP_PREFIX}declaration`);
       cases.success = "Case created successfully";
     },
     casesLoadSucceeded: (state, action) => {

@@ -1,6 +1,5 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import SectionHeader from "../common/SectionHeader";
-import StatCard from "../common/StatCard";
 import LeaveTracker from "./leaveTracker/LeaveTracker";
 import Requisitions from "./requisitions/Requisitions";
 import TravelOrder from "./travelOrder/TravelOrder";
@@ -13,9 +12,6 @@ function Dashboard() {
         <Requisitions />
         <TravelOrder />
         <LeaveTracker />
-        <StatCard />
-        <StatCard />
-        <StatCard />
       </SimpleGrid>
     </Box>
   );
