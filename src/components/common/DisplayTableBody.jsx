@@ -11,7 +11,7 @@ function DisplayTableBody({ bodyProps, rows, prepareRow }) {
           <Tr {...row.getRowProps()} bgColor={bg}>
             {row.cells.map((cell) => {
               return (
-                <Td {...cell.getCellProps()} color={color}>
+                <Td {...cell.getCellProps()} color={color} whiteSpace="nowrap">
                   {cell.render("Cell")}
                 </Td>
               );
