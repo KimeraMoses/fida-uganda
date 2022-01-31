@@ -32,3 +32,12 @@ export const statusOptions = [
   { label: "Approved", value: "approved" },
   { label: "Rejected", value: "rejected" },
 ];
+
+export const maritalStatusOptions = [
+  { label: "Single", value: "single" },
+  { label: "Married", value: "married" },
+  { label: "Divorced", value: "divorced" },
+  { label: "Widowed", value: "widowed" },
+];
+
+

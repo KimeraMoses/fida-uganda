@@ -27,6 +27,7 @@ const slice = createSlice({
       state.error = null;
       state.success = null;
     },
-    
   },
 });
+
+export default slice.reducer;

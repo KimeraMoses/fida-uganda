@@ -7,6 +7,7 @@ import Table from "../../common/Table";
 import { caseFilesColumns } from "../../tables/legalAid/cases";
 import { getCases } from "../../../store/reducers/cases";
 import CaseForm from "../../forms/legalAid/CaseForm";
+import { getAllDistricts } from '../../../store/reducers/registration';
 
 function CaseFiles() {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ function CaseFiles() {
 
   useEffect(() => {
     dispatch(getCases());
+    dispatch(getAllDistricts());
   }, [dispatch]);
 
   return (
