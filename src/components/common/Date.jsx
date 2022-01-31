@@ -9,6 +9,8 @@ function Date({ value, onChange, name = "date" }) {
         style={{
           border: "2px solid black",
           borderRadius: "5px",
+          width: "100%",
+          padding: "8px",
         }}
       />
     </span>

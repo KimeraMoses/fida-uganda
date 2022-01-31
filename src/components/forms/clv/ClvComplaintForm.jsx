@@ -5,6 +5,9 @@ import { Heading } from "@chakra-ui/react";
 import TextInput from "../../common/TextInput";
 import { AddIcon } from "@chakra-ui/icons";
 import { createComplaint } from "../../../store/reducers/clv";
+import Date from "../../common/Date";
+import SelectInput from '../../common/SelectInput';
+import { statusOptions } from "../../../defaultData/menu/options";
 
 function ClvComplaintForm() {
   const dispatch = useDispatch();
@@ -56,13 +59,14 @@ function ClvComplaintForm() {
             handleChange={handleChange}
           />
         </GridItem>
-        <TextInput
+        <Date
           placeholder="Due Date"
           name="dueDate"
           value={dueDate}
-          handleChange={handleChange}
+          onChange={handleChange}
         />
-        <TextInput
+        <SelectInput
+          options={statusOptions}
           placeholder="Status"
           name="status"
           value={status}
