@@ -72,10 +72,6 @@ const menu = {
     menuOptions.clvDatabase,
     menuOptions.clvComplaints,
     menuOptions.reports,
-    menuOptions.caseFiles,
-    menuOptions.fidaProjects,
-    menuOptions.fidaDatabases,
-    menuOptions.fidaAssets,
   ],
   courtProcessServer: [...commonOptions],
   legalAid: [
