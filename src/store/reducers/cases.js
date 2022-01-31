@@ -6,6 +6,7 @@ const slice = createSlice({
   name: "cases",
   initialState: {
     cases: [],
+    case: null,
     newCase: {
       bio: { ...JSON.parse(localStorage.getItem(`${APP_PREFIX}bio`)) } || {},
       disability:
@@ -68,6 +69,13 @@ const slice = createSlice({
       state.loading = false;
       state.error = null;
       state.success = null;
+    },
+    caseLoadSucceeded: (state, action) => {
+      const { case_file } = action.payload;
+      state.loading = false;
+      state.error = null;
+      state.success = null;
+      state.case = case_file;
     },
   },
 });
