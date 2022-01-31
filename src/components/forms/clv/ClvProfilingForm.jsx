@@ -1,16 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Box,
-  Grid,
-  Heading,
-  Divider,
-  Button,
-} from "@chakra-ui/react";
+import { Box, Grid, Heading, Divider, Button } from "@chakra-ui/react";
 import TextInput from "../../common/TextInput";
 import EmailInput from "../../common/EmailInput";
 import useForm from "../../../hooks/useForm";
 import { AddIcon } from "@chakra-ui/icons";
 import { createClv } from "../../../store/reducers/clv";
+import NumberInput from "../../common/NumberInput";
 
 function ClvProfilingForm({ onClose }) {
   const dispatch = useDispatch();
@@ -84,7 +79,7 @@ function ClvProfilingForm({ onClose }) {
         Personal Address
       </Heading>
       <Grid templateColumns="repeat(2, 1fr)" gap={2}>
-        <TextInput
+        <NumberInput
           placeholder="Mobile Number"
           name="mobileNumber"
           value={mobileNumber}
@@ -123,7 +118,7 @@ function ClvProfilingForm({ onClose }) {
           value={profession}
           handleChange={handleChange}
         />
-        <TextInput
+        <NumberInput
           placeholder="Year of Training"
           name="yearOfTraining"
           value={yearOfTraining}

@@ -17,14 +17,12 @@ function NumberInput({
   name = "number",
 }) {
   return (
-    <ChakraNumberInput>
+    <ChakraNumberInput size="lg" max={max} min={min}>
       <NumberInputField
         placeholder={placeholder}
         value={value}
         name={name}
         onChange={onChange}
-        max={max}
-        min={min}
       />
       <NumberInputStepper>
         <NumberIncrementStepper />
