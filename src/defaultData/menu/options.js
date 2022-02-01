@@ -40,4 +40,15 @@ export const maritalStatusOptions = [
   { label: "Widowed", value: "widowed" },
 ];
 
+export const genderOptions = [
+  { label: "Male", value: "male" },
+  { label: "Female", value: "female" },
+  { label: "Other", value: "other" },
+];
 
+export const educationOptions = [
+  { label: "Primary Level", value: "primaryLevel" },
+  { label: "Lower Secondary Level", value: "lowerSecondaryLevel" },
+  { label: "Upper Secondary Level", value: "upperSecondaryLevel" },
+  { label: "University", value: "university" },
+];

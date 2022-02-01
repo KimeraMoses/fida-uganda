@@ -4,10 +4,27 @@ import { MdArrowForward } from "react-icons/md";
 import useForm from "../../../hooks/useForm";
 import { addBio } from "../../../store/reducers/cases";
 import ComplaintRespondentInput from "./ComplaintRespondentInput";
+import QASelectInput from "./QASelectInput";
+import {
+  educationOptions,
+  genderOptions,
+  maritalStatusOptions,
+} from "../../../defaultData/menu/options";
+import QANumberInput from "./QANumberInput";
 
 function CaseFilesForm({ setCurrentForm }) {
   const dispatch = useDispatch();
+  const { districts, counties } = useSelector((state) => state.registration);
   const { bio } = useSelector((state) => state.cases.newCase);
+  const allDistricts = districts.map((district) => ({
+    label: district.name,
+    value: district.id,
+  }));
+  const allCounties = counties.map((county) => ({
+    label: county.name,
+    value: county.id,
+  }));
+
   const { values, handleChange } = useForm({
     complainantName: bio.complainantName || "",
     respondentName: bio.respondentName || "",
@@ -107,15 +124,16 @@ function CaseFilesForm({ setCurrentForm }) {
           name2="respondentName"
           handleChange={handleChange}
         />
-        <ComplaintRespondentInput
+        <QASelectInput
           name="Sex"
           value1={complainantSex}
           value2={respondentSex}
           name1="complainantSex"
           name2="respondentSex"
           handleChange={handleChange}
+          options={genderOptions}
         />
-        <ComplaintRespondentInput
+        <QANumberInput
           name="Age"
           value1={complainantAge}
           value2={respondentAge}
@@ -131,21 +149,23 @@ function CaseFilesForm({ setCurrentForm }) {
           name2="respondentCountry"
           handleChange={handleChange}
         />
-        <ComplaintRespondentInput
+        <QASelectInput
           name="District"
           value1={complainantDistrict}
           value2={respondentDistrict}
           name1="complainantDistrict"
           name2="respondentDistrict"
           handleChange={handleChange}
+          options={allDistricts}
         />
-        <ComplaintRespondentInput
+        <QASelectInput
           name="County"
           value1={complainantCounty}
           value2={respondentCounty}
           name1="complainantCounty"
           name2="respondentCounty"
           handleChange={handleChange}
+          options={allCounties}
         />
         <ComplaintRespondentInput
           name="Parish"
@@ -163,7 +183,7 @@ function CaseFilesForm({ setCurrentForm }) {
           name2="respondentVillage"
           handleChange={handleChange}
         />
-        <ComplaintRespondentInput
+        <QANumberInput
           name="Phone"
           value1={complainantPhone}
           value2={respondentPhone}
@@ -171,13 +191,14 @@ function CaseFilesForm({ setCurrentForm }) {
           name2="respondentPhone"
           handleChange={handleChange}
         />
-        <ComplaintRespondentInput
+        <QASelectInput
           name="Marital Status"
           value1={complainantMaritalStatus}
           value2={respondentMaritalStatus}
           name1="complainantMaritalStatus"
           name2="respondentMaritalStatus"
           handleChange={handleChange}
+          options={maritalStatusOptions}
         />
         <ComplaintRespondentInput
           name="Accompanied By"
@@ -187,7 +208,7 @@ function CaseFilesForm({ setCurrentForm }) {
           name2="respondentAccompaniedBy"
           handleChange={handleChange}
         />
-        <ComplaintRespondentInput
+        <QANumberInput
           name="Number of Beneficiaries"
           value1={complainantNumberOfBeneficiaries}
           value2={respondentNumberOfBeneficiaries}
@@ -211,13 +232,14 @@ function CaseFilesForm({ setCurrentForm }) {
           name2="respondentPlaceOfWork"
           handleChange={handleChange}
         />
-        <ComplaintRespondentInput
+        <QASelectInput
           name="Level of Education"
           value1={complainantLevelOfEducation}
           value2={respondentLevelOfEducation}
           name1="complainantLevelOfEducation"
           name2="respondentLevelOfEducation"
           handleChange={handleChange}
+          options={educationOptions}
         />
         <ComplaintRespondentInput
           name="Language"
