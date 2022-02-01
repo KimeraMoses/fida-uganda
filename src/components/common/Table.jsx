@@ -1,4 +1,3 @@
-import React from "react";
 import NoDataTable from "./NoDataTable";
 import DisplayTable from "./DisplayTable";
 
@@ -27,7 +26,9 @@ function Table({
     );
   }
 
-  return <NoDataTable />;
+  return (
+    <NoDataTable btnClick={btnClick} btnLabel={btnLabel} showBtn={showBtn} />
+  );
 }
 
 export default Table;
