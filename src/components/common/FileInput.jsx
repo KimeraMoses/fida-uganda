@@ -1,18 +1,17 @@
 import { useRef, useState } from "react";
 import { Button, Text } from "@chakra-ui/react";
-import { MdAdd } from "react-icons/md";
 
-function FileInput(
+function FileInput({
+  onChange,
   onFileSelectSuccess,
   name = "file",
-  accept = "image/png, image/jpeg"
-) {
+  accept = "image/png, image/jpeg",
+}) {
   const fileInput = useRef(null);
   const [error, setError] = useState("");
 
   const handleFileInput = (e) => {
     const file = e.target.files[0];
-    console.log(file.size);
     if (file.size > 10485760) {
       const error = "File size cannot exceed more than 10MB";
       setError(error);

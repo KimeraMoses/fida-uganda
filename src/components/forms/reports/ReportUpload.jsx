@@ -2,20 +2,23 @@ import { useState } from "react";
 import { Box, Button, Center, Text } from "@chakra-ui/react";
 import FileInput from "../../common/FileInput";
 
-function ReportUpload() {
+function ReportUpload({ onClose }) {
   const [file, setFile] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("file", file);
-    alert(formData);
+    alert(JSON.stringify(formData, null, 2));
   };
 
   return (
     <Box as="form" onSubmit={handleSubmit} borderRadius="3xl">
       <Center p="1rem">
-        <FileInput onFileSelectSuccess={setFile} />
+        <FileInput
+          onFileSelectSuccess={(file) => setFile(file)}
+          onChange={setFile}
+        />
       </Center>
       <Box
         h="20rem"
@@ -38,7 +41,20 @@ function ReportUpload() {
           </Center>
         </Box>
       </Box>
-      {file && <Button type="submit">Upload</Button>}
+      {file && (
+        <Center p="1rem">
+          <Button
+            type="submit"
+            borderRadius="full"
+            bgColor="purple.500"
+            color="white"
+            px="2.5rem"
+            _hover={{ bgColor: "purple.700" }}
+          >
+            Submit
+          </Button>
+        </Center>
+      )}
     </Box>
   );
 }
