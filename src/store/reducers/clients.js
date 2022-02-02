@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { apiCallBegan } from "../api";
 
 const slice = createSlice({
   name: "clients",
@@ -59,5 +60,72 @@ const slice = createSlice({
     },
   },
 });
+
+const {
+  clientsRequested,
+  clientsRequestFailed,
+  clientCreated,
+  clientReceived,
+  clientsReceived,
+  clientUpdated,
+  clientDeleted,
+  clientsNumberReceived,
+} = slice.actions;
+
+export const createClient = (client) =>
+  apiCallBegan({
+    url: "/api/v1/clients/create",
+    method: "post",
+    data: { ...client },
+    onStart: clientsRequested.type,
+    onSuccess: clientCreated.type,
+    onError: clientsRequestFailed.type,
+  });
+
+export const getClient = (id) =>
+  apiCallBegan({
+    url: `/api/v1/clients/${id}`,
+    method: "get",
+    onStart: clientsRequested.type,
+    onSuccess: clientReceived.type,
+    onError: clientsRequestFailed.type,
+  });
+
+export const getClients = () =>
+  apiCallBegan({
+    url: "/api/v1/clients/getAll",
+    method: "get",
+    onStart: clientsRequested.type,
+    onSuccess: clientsReceived.type,
+    onError: clientsRequestFailed.type,
+  });
+
+export const getClientsNumber = () =>
+  apiCallBegan({
+    url: "/api/v1/clients/getClientNumber",
+    method: "get",
+    onStart: clientsRequested.type,
+    onSuccess: clientsNumberReceived.type,
+    onError: clientsRequestFailed.type,
+  });
+
+export const updateClient = (client) =>
+  apiCallBegan({
+    url: `/api/v1/clients/edit/${client.id}`,
+    method: "put",
+    data: { ...client },
+    onStart: clientsRequested.type,
+    onSuccess: clientUpdated.type,
+    onError: clientsRequestFailed.type,
+  });
+
+export const deleteClient = (id) =>
+  apiCallBegan({
+    url: `/api/v1/clients/delete/${id}`,
+    method: "delete",
+    onStart: clientsRequested.type,
+    onSuccess: clientDeleted.type,
+    onError: clientsRequestFailed.type,
+  });
 
 export default slice.reducer;
