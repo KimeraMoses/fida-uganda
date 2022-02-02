@@ -62,6 +62,12 @@ const menuOptions = {
     icon: MdStorage,
     path: "fida-assets",
   },
+  clients: {
+    id: ++id,
+    name: "Clients",
+    icon: MdStorage,
+    path: "clients",
+  },
 };
 
 const commonOptions = [menuOptions.dashboard, menuOptions.tasks];
@@ -76,6 +82,7 @@ const menu = {
   courtProcessServer: [...commonOptions],
   legalAid: [
     ...commonOptions,
+    menuOptions.clients,
     menuOptions.caseFiles,
     menuOptions.clvDatabase,
     menuOptions.reports,

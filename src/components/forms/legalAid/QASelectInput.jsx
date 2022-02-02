@@ -1,4 +1,4 @@
-import { Heading } from "@chakra-ui/react";
+import { Heading, Box, Center } from "@chakra-ui/react";
 import SelectInput from "../../common/SelectInput";
 
 function QASelectInput({
@@ -14,26 +14,21 @@ function QASelectInput({
 
   return (
     <>
-      <Heading fontSize="md" alignSelf="center">
+      <Heading fontSize="md" alignSelf="center" textTransform="capitalize">
         {name}
       </Heading>
-      {options && (
-        <>
-          <SelectInput
-            placeholder={placeholder}
-            name={name1}
-            value={value1}
-            handleChange={handleChange}
-            options={options}
-          />
-          <SelectInput
-            placeholder={placeholder}
-            name={name2}
-            value={value2}
-            handleChange={handleChange}
-            options={options}
-          />
-        </>
+      {options ? (
+        <SelectInput
+          placeholder={placeholder}
+          name={name1}
+          value={value1}
+          handleChange={handleChange}
+          options={options}
+        />
+      ) : (
+        <Center>
+          <Box>Loading...</Box>
+        </Center>
       )}
     </>
   );

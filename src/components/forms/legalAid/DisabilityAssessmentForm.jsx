@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
 import { MdArrowForward, MdArrowBack } from "react-icons/md";
@@ -19,6 +19,26 @@ function DisabilityAssessmentForm({ setCurrentForm }) {
 
   const genericOptions = disabilityAssessmentOptions["generic"];
   const isDisabledOptions = disabilityAssessmentOptions["isDisabled"];
+
+  useEffect(() => {
+    const values = [sight, hearing, movement, remembering, dressing, speech];
+
+    for (let value in values) {
+      if (value.length > 0 && value !== "noDifficulty") {
+        setIsDisabled("yes");
+      }
+    }
+    if (
+      sight === "noDifficulty" &&
+      hearing === "noDifficulty" &&
+      movement === "noDifficulty" &&
+      remembering === "noDifficulty" &&
+      dressing === "noDifficulty" &&
+      speech === "noDifficulty"
+    ) {
+      setIsDisabled("no");
+    }
+  }, [sight, hearing, movement, remembering, dressing, speech]);
 
   return (
     <Box p="3rem">

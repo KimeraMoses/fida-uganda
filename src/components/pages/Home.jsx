@@ -11,6 +11,7 @@ import Reports from "./Reports";
 import FidaDatabases from "./programs/FidaDatabases";
 import FidaProjects from "./programs/FidaProjects";
 import FidaAssets from "./m&e/FidaAssets";
+import Clients from "./clients/Clients";
 
 function Home() {
   return (
@@ -23,6 +24,7 @@ function Home() {
             <Route path="/" index element={<Dashboard />} />
             <Route path="tasks" element={<Tasks />} />
             <Route path="reports" element={<Reports />} />
+            <Route path="clients" element={<Clients />} />
             <Route path="clv-database" element={<ClvDatabase />} />
             <Route path="clv-complaints" element={<ClvComplaints />} />
             <Route path="case-files" element={<CaseFiles />} />

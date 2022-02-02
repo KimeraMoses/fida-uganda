@@ -3,7 +3,7 @@ import { Box, Button, Heading, SimpleGrid, Flex } from "@chakra-ui/react";
 import { MdArrowForward } from "react-icons/md";
 import useForm from "../../../hooks/useForm";
 import { addBio } from "../../../store/reducers/cases";
-import ComplaintRespondentInput from "./ComplaintRespondentInput";
+import ComplaintRespondentInput from "./QATextInput";
 import QASelectInput from "./QASelectInput";
 import {
   educationOptions,

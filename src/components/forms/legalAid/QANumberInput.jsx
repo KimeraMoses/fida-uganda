@@ -2,23 +2,21 @@ import { Heading } from "@chakra-ui/react";
 import React from "react";
 import NumberInput from "../../common/NumberInput";
 
-function QANumberInput({ name, handleChange, value1, value2, name1, name2 }) {
-  const placeholder = "Type here";
-
+function QANumberInput({
+  title,
+  handleChange,
+  value,
+  name,
+  placeholder = "Type here",
+}) {
   return (
     <>
       <Heading fontSize="md" alignSelf="center">
-        {name}
+        {title}
       </Heading>
       <NumberInput
-        value={value1}
-        name={name1}
-        placeholder={placeholder}
-        handleChange={handleChange}
-      />
-      <NumberInput
-        value={value2}
-        name={name2}
+        value={value}
+        name={name}
         placeholder={placeholder}
         handleChange={handleChange}
       />
