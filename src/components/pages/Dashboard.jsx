@@ -3,6 +3,7 @@ import SectionHeader from "../common/SectionHeader";
 import LeaveTracker from "./leaveTracker/LeaveTracker";
 import Requisitions from "./requisitions/Requisitions";
 import TravelOrder from "./travelOrder/TravelOrder";
+import Client from "./clients/Client";
 
 function Dashboard() {
   return (
@@ -12,6 +13,7 @@ function Dashboard() {
         <Requisitions />
         <TravelOrder />
         <LeaveTracker />
+        <Client />
       </SimpleGrid>
     </Box>
   );

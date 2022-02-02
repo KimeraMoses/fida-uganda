@@ -1,26 +1,19 @@
-import { useDisclosure } from "@chakra-ui/react";
-import { dummyDataTravel } from "../../../defaultData/dummyData";
-import GenericModal from "../../common/GenericModal";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import StatCard from "../../common/StatCard";
-import Table from "../../common/Table";
-import { travelOrderColumns } from "../../tables/travelOrder/travelOrder";
+import { getClientsNumber } from "../../../store/reducers/clients";
 
 function Client() {
-  const { isOpen, onClose, onOpen } = useDisclosure();
-  const openTable = () => {
-    onOpen();
-  };
+  const dispatch = useDispatch();
+  const { my_clients } = useSelector((state) => state.clients);
+
+  useEffect(() => {
+    dispatch(getClientsNumber());
+  }, [dispatch]);
+
   return (
     <>
-      <StatCard title="Client" value={2} onClick={openTable} />
-      <GenericModal isOpen={isOpen} onClose={onClose}>
-        <Table
-          data={dummyDataTravel}
-          columns={travelOrderColumns}
-          btnLabel={"New Travel Order"}
-        />
-      </GenericModal>
-      s
+      <StatCard title="Clients" value={my_clients} />
     </>
   );
 }

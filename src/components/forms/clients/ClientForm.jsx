@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
-import { Box, Heading, SimpleGrid } from "@chakra-ui/react";
+import { useDispatch } from "react-redux";
+import { Box, Button, Heading, SimpleGrid } from "@chakra-ui/react";
 import {
   educationOptions,
   genderOptions,
@@ -9,9 +10,14 @@ import useForm from "../../../hooks/useForm";
 import QANumberInput from "../legalAid/QANumberInput";
 import QASelectInput from "../legalAid/QASelectInput";
 import QATextInput from "../legalAid/QATextInput";
+import { AddIcon } from "@chakra-ui/icons";
+import { createClient } from "../../../store/reducers/clients";
 
 function ClientForm({ onClose }) {
-  const { districts, counties } = useSelector((state) => state.registration);
+  const dispatch = useDispatch();
+  const { districts, counties, loading } = useSelector(
+    (state) => state.registration
+  );
   const { values, handleChange } = useForm({
     name: "",
     sex: "",
@@ -70,7 +76,7 @@ function ClientForm({ onClose }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onClose();
+    dispatch(createClient(values));
   };
 
   return (
@@ -184,6 +190,18 @@ function ClientForm({ onClose }) {
           handleChange={handleChange}
         />
       </SimpleGrid>
+      <Button
+        leftIcon={<AddIcon color="white" />}
+        isLoading={loading}
+        type="submit"
+        color="white"
+        bgColor="purple.500"
+        borderRadius="full"
+        mt="1.5rem"
+        _hover={{ bgColor: "purple.800" }}
+      >
+        Add Client
+      </Button>
     </Box>
   );
 }

@@ -21,7 +21,7 @@ function StatCard({ title, value, icon, onClick }) {
         {icon ? icon : <QuestionOutlineIcon color="purple.600" />}
       </Flex>
       <StatNumber align="end" fontSize="5xl" color="purple.600">
-        {value || "$0.00"}
+        {value || "0"}
       </StatNumber>
     </Stat>
   );
