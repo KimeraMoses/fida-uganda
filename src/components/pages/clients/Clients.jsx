@@ -3,26 +3,26 @@ import { useSelector, useDispatch } from "react-redux";
 import { Box, useDisclosure } from "@chakra-ui/react";
 import GenericModal from "../../common/GenericModal";
 import SectionHeader from "../../common/SectionHeader";
-import { getComplaints } from "../../../store/reducers/clv";
-import { clvComplaintsColumns } from "../../tables/clvs/complaints";
 import Table from "../../common/Table";
 import { getAllDistricts } from "../../../store/reducers/registration";
 import ClientForm from "../../forms/clients/ClientForm";
+import { clientsColumns } from "../../tables/clients/clients";
+import { getClients } from "../../../store/reducers/clients";
 
 function Clients() {
   const dispatch = useDispatch();
-  const { complaints } = useSelector((state) => state.clv);
+  const { clients } = useSelector((state) => state.clients);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const data = useMemo(() => complaints, [complaints]);
-  const columns = useMemo(() => clvComplaintsColumns, []);
+  const data = useMemo(() => clients, [clients]);
+  const columns = useMemo(() => clientsColumns, []);
 
   const handleBtnClick = () => {
     onOpen();
   };
 
   useEffect(() => {
-    dispatch(getComplaints());
+    dispatch(getClients());
     dispatch(getAllDistricts());
   }, [dispatch]);
 
