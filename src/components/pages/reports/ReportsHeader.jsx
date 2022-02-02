@@ -1,17 +1,12 @@
 import { useState } from "react";
-import { Flex, Box, Input } from "@chakra-ui/react";
-import FileInput from "../../common/FileInput";
+import { Button, Flex, Input, useDisclosure } from "@chakra-ui/react";
+import GenericModal from "../../common/GenericModal";
+import ReportUpload from "../../forms/reports/ReportUpload";
+import { MdAdd } from "react-icons/md";
 
 function ReportsHeader() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [search, setSearch] = useState("");
-  const [file, setFile] = useState(null);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append("file", file);
-    alert(formData);
-  };
 
   return (
     <Flex
@@ -29,12 +24,22 @@ function ReportsHeader() {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-      <Box as="form" onSubmit={handleSubmit}>
-        <FileInput
-          onFileSelectSuccess={(file) => setFile(file)}
-          onFileSelectError={(error) => console.log(error)}
-        />
-      </Box>
+      <Button
+        leftIcon={<MdAdd />}
+        onClick={onOpen}
+        borderRadius="full"
+        bgColor="purple.500"
+        color="white"
+        px="2.5rem"
+        _hover={{ bgColor: "purple.700" }}
+      >
+        New Report
+      </Button>
+      <>
+        <GenericModal isOpen={isOpen} onClose={onClose}>
+          <ReportUpload onClose={onClose} />
+        </GenericModal>
+      </>
     </Flex>
   );
 }
