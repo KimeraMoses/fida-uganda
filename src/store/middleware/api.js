@@ -15,6 +15,7 @@ const api =
       method,
       data,
       withCredentials,
+      contentType,
       headers,
       onStart,
       onSuccess,
@@ -37,7 +38,7 @@ const api =
         method,
         data,
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": contentType ||"application/json",
           Authorization,
           ...headers,
         },
