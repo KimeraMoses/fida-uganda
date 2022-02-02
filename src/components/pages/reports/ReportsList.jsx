@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { List, Center, Heading } from "@chakra-ui/react";
-import ListItem from "../programs/ListItem";
 import ListItemHeader from "../programs/ListItemHeader";
+import ListItemNoLInk from "../programs/ListItemNoLInk";
 
 function ReportsList() {
   const { reports } = useSelector((state) => state.reports);
@@ -18,11 +18,15 @@ function ReportsList() {
   return (
     <List>
       <ListItemHeader />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
+      {reports.map((report, idx) => (
+        <ListItemNoLInk
+          key={report.id}
+          bgColor={idx % 2 === 0 ? "white" : "purple.100"}
+          name={report.id}
+          lastModified={new Date(report.createdAt).toLocaleDateString()}
+          createdBy={report.createdBy?.first_name}
+        />
+      ))}
     </List>
   );
 }
