@@ -1,15 +1,18 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Box, Button, Center, Text } from "@chakra-ui/react";
 import FileInput from "../../common/FileInput";
+import { createReport } from "../../../store/reducers/reports";
 
 function ReportUpload({ onClose }) {
+  const dispatch = useDispatch();
   const [file, setFile] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("file", file);
-    alert(JSON.stringify(formData, null, 2));
+    dispatch(createReport(formData));
   };
 
   return (
