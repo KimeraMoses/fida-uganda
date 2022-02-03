@@ -77,6 +77,10 @@ const slice = createSlice({
       }
       state.loading = false;
     },
+    caseSelected: (state, action) => {
+      const { values } = action.payload;
+      state.case = { ...values };
+    },
   },
 });
 
@@ -92,7 +96,13 @@ export const {
   userCasesLoaded,
   clvCasesLoaded,
   clientsLoaded,
+  caseSelected,
 } = slice.actions;
+
+export const selectCase = (values) => ({
+  type: caseSelected.type,
+  payload: values,
+});
 
 export const getCases = () =>
   apiCallBegan({
