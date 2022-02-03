@@ -36,7 +36,7 @@ function CaseFilesForm({ setCurrentForm }) {
   }));
 
   const { values, handleChange } = useForm({
-    id: "",
+    complainant: "",
     name: "",
     sex: "",
     age: "",
@@ -56,7 +56,7 @@ function CaseFilesForm({ setCurrentForm }) {
   });
 
   const {
-    id,
+    complainant,
     name,
     sex,
     age,
@@ -77,8 +77,26 @@ function CaseFilesForm({ setCurrentForm }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    dispatch(createCase(values));
+    const newValues = {
+      complainant,
+      respondentName: name,
+      respondentSex: sex,
+      respondentAge: age,
+      respondentEmail: email,
+      respondentPhone: phoneNumber,
+      respondentJob: occupation,
+      respondentCountry: country,
+      respondentDistrict: district,
+      respondentCounty: county,
+      respondentVillage: village,
+      respondentPlaceOfWork: place_of_work,
+      respondentMaritalStatus: marital_status,
+      respondentNumberOfBeneficiaries: number_of_beneficiaries,
+      respondentLevelOfEducation: level_of_education,
+      respondentLanguage: preferred_language,
+      respondentDisability: disability,
+    };
+    dispatch(createCase(newValues));
     setCurrentForm(2);
   };
 
@@ -95,8 +113,8 @@ function CaseFilesForm({ setCurrentForm }) {
           Complainant
         </Heading>
         <QASelectInput
-          title={id || "ID"}
-          value={id}
+          title={complainant || "ID"}
+          value={complainant}
           name="id"
           handleChange={handleChange}
           options={clients}
