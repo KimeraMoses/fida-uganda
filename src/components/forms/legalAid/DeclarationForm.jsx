@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   Box,
   Heading,
@@ -15,19 +15,16 @@ import {
 import { MdArrowBack } from "react-icons/md";
 import useForm from "../../../hooks/useForm";
 import { declarationOptions } from "./options";
-import { addDeclaration, createCase } from "../../../store/reducers/cases";
+import { editCase } from "../../../store/reducers/cases";
 
 function DeclarationForm({ onClose, setCurrentForm }) {
   const dispatch = useDispatch();
-  const { bio, disability, issues, declaration } = useSelector(
-    (state) => state.cases.newCase
-  );
 
-  const [about, setAbout] = useState(declaration.about || "");
-  const [hasAgreed, setHasAgreed] = useState(declaration.hasAgreed || false);
+  const [about, setAbout] = useState("");
+  const [hasAgreed, setHasAgreed] = useState(false);
   const { values, handleChange } = useForm({
-    natureOfSupport: declaration.natureOfSupport || "",
-    comments: declaration.comments || "",
+    natureOfSupport: "",
+    comments: "",
   });
 
   const { natureOfSupport, comments } = values;
@@ -36,10 +33,10 @@ function DeclarationForm({ onClose, setCurrentForm }) {
     e.preventDefault();
     values.about = about;
     values.hasAgreed = hasAgreed;
-    dispatch(addDeclaration(values));
-    dispatch(createCase({ ...declaration, ...bio, ...disability, ...issues }));
+    dispatch(editCase(values));
     onClose();
   };
+
   return (
     <Box as="form" p="3rem" onSubmit={handleSubmit}>
       <Heading size="lg" mb="2rem">
@@ -105,10 +102,10 @@ function DeclarationForm({ onClose, setCurrentForm }) {
             setCurrentForm(3);
             values.about = about;
             values.hasAgreed = hasAgreed;
-            dispatch(addDeclaration(values));
+            dispatch(editCase(values));
           }}
         >
-          Back
+          Save and Back
         </Button>
         <Button isDisabled={!hasAgreed} type="submit">
           Save and Exit

@@ -5,17 +5,22 @@ import DeclarationForm from "./DeclarationForm";
 import DisabilityAssessmentForm from "./DisabilityAssessmentForm";
 import IssueForm from "./IssueForm";
 import { getAllDistricts } from "../../../store/reducers/registration";
+import { getClientNames } from "../../../store/reducers/cases";
 
 function CaseForm({ onClose }) {
   const [currentForm, setCurrentForm] = useState(1);
   const { districts } = useSelector((state) => state.registration);
+  const { clients } = useSelector((state) => state.cases);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (!clients) {
+      dispatch(getClientNames());
+    }
     if (!districts) {
       dispatch(getAllDistricts());
     }
-  }, [dispatch, districts]);
+  }, [dispatch, districts, clients]);
 
   return (
     <>

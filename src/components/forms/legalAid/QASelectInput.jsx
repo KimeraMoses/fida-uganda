@@ -4,24 +4,21 @@ import SelectInput from "../../common/SelectInput";
 function QASelectInput({
   name,
   handleChange,
-  value1,
-  value2,
-  name1,
-  name2,
+  value,
+  title,
   options,
+  placeholder = "Type here",
 }) {
-  const placeholder = "Type here";
-
   return (
     <>
       <Heading fontSize="md" alignSelf="center" textTransform="capitalize">
-        {name}
+        {title}
       </Heading>
       {options ? (
         <SelectInput
           placeholder={placeholder}
-          name={name1}
-          value={value1}
+          name={name}
+          value={value}
           handleChange={handleChange}
           options={options}
         />

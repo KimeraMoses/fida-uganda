@@ -1,23 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { apiCallBegan } from "../api";
-import { APP_PREFIX } from "../../hooks/useLocalStorage";
 
 const slice = createSlice({
   name: "cases",
   initialState: {
     cases: [],
     case: null,
-    newCase: {
-      bio: { ...JSON.parse(localStorage.getItem(`${APP_PREFIX}bio`)) } || {},
-      disability:
-        { ...JSON.parse(localStorage.getItem(`${APP_PREFIX}disability`)) } ||
-        {},
-      issues:
-        { ...JSON.parse(localStorage.getItem(`${APP_PREFIX}issues`)) } || {},
-      declaration:
-        { ...JSON.parse(localStorage.getItem(`${APP_PREFIX}declaration`)) } ||
-        {},
-    },
+    cases_number: null,
+    clients: [],
     loading: false,
     error: null,
     success: null,
@@ -25,57 +15,67 @@ const slice = createSlice({
   reducers: {
     casesRequest: (cases) => {
       cases.loading = true;
+      cases.error = null;
+      cases.success = null;
     },
     casesRequestFailed: (cases, action) => {
       const { message } = action.payload;
-      cases.success = null;
       cases.loading = false;
       cases.error = message;
-    },
-    bioAdded: (cases, action) => {
-      cases.newCase.bio = action.payload;
-      localStorage.setItem(`${APP_PREFIX}bio`, JSON.stringify(action.payload));
-    },
-    disabilityAdded: (cases, action) => {
-      const { values } = action.payload;
-      cases.newCase.disability = values;
-      localStorage.setItem(`${APP_PREFIX}disability`, JSON.stringify(values));
-    },
-    issuesAdded: (cases, action) => {
-      const { values } = action.payload;
-      cases.newCase.issues = values;
-      localStorage.setItem(`${APP_PREFIX}issues`, JSON.stringify(values));
-    },
-    declarationAdded: (cases, action) => {
-      cases.newCase.declaration = action.payload.values;
-      localStorage.setItem(
-        `${APP_PREFIX}declaration`,
-        JSON.stringify(action.payload.values)
-      );
     },
     caseCreationSucceeded: (cases, action) => {
       const { case_file } = action.payload;
       cases.cases.push(case_file);
-      cases.newCase = { bio: {}, disability: {}, issues: {}, declaration: {} };
-      localStorage.removeItem(`${APP_PREFIX}bio`);
-      localStorage.removeItem(`${APP_PREFIX}disability`);
-      localStorage.removeItem(`${APP_PREFIX}issues`);
-      localStorage.removeItem(`${APP_PREFIX}declaration`);
+      cases.loading = false;
       cases.success = "Case created successfully";
     },
     casesLoadSucceeded: (state, action) => {
       const { cases } = action.payload;
       state.cases = cases;
       state.loading = false;
-      state.error = null;
-      state.success = null;
     },
     caseLoadSucceeded: (state, action) => {
       const { case_file } = action.payload;
       state.loading = false;
-      state.error = null;
-      state.success = null;
       state.case = case_file;
+    },
+    caseUpdated: (state, action) => {
+      const { updatedCase } = action.payload;
+      const index = state.cases.findIndex((c) => c.id === updatedCase.id);
+      state.cases[index] = updatedCase;
+      state.loading = false;
+      state.success = "Case updated successfully";
+    },
+    caseDeleted: (state, action) => {
+      const { id } = action.payload;
+      const index = state.cases.findIndex((c) => c.id === id);
+      state.cases.splice(index, 1);
+      state.loading = false;
+      state.success = "Case deleted successfully";
+    },
+    caseNumberLoaded: (state, action) => {
+      const { all_cases, my_cases } = action.payload;
+      state.cases_number = { all_cases, my_cases };
+      state.loading = false;
+    },
+    userCasesLoaded: (state, action) => {
+      const { my_cases } = action.payload;
+      state.cases = my_cases;
+      state.loading = false;
+    },
+    clvCasesLoaded: (state, action) => {
+      const { clv_cases } = action.payload;
+      state.cases = clv_cases;
+      state.loading = false;
+    },
+    clientsLoaded: (state, action) => {
+      const { clients } = action.payload;
+      if (clients) {
+        clients.forEach((client) => {
+          state.clients.push({ value: client.id, label: client.name });
+        });
+      }
+      state.loading = false;
     },
   },
 });
@@ -83,33 +83,16 @@ const slice = createSlice({
 export const {
   casesRequest,
   casesRequestFailed,
-  bioAdded,
-  disabilityAdded,
-  issuesAdded,
-  declarationAdded,
   caseCreationSucceeded,
   casesLoadSucceeded,
+  caseLoadSucceeded,
+  caseUpdated,
+  caseDeleted,
+  caseNumberLoaded,
+  userCasesLoaded,
+  clvCasesLoaded,
+  clientsLoaded,
 } = slice.actions;
-
-export const addBio = (values) => ({
-  type: bioAdded.type,
-  payload: values,
-});
-
-export const addDisability = (values) => ({
-  type: disabilityAdded.type,
-  payload: { values },
-});
-
-export const addIssues = (values) => ({
-  type: issuesAdded.type,
-  payload: { values },
-});
-
-export const addDeclaration = (values) => ({
-  type: declarationAdded.type,
-  payload: { values },
-});
 
 export const getCases = () =>
   apiCallBegan({
@@ -124,9 +107,37 @@ export const createCase = (values) =>
   apiCallBegan({
     url: "/api/v1/cases/create",
     method: "post",
-    data: values,
+    data: { ...values },
     onStart: casesRequest.type,
     onSuccess: caseCreationSucceeded.type,
+    onError: casesRequestFailed.type,
+  });
+
+export const editCase = (values) =>
+  apiCallBegan({
+    url: `/api/v1/cases/edit/${values.id}`,
+    method: "put",
+    data: { ...values },
+    onStart: casesRequest.type,
+    onSuccess: caseUpdated.type,
+    onError: casesRequestFailed.type,
+  });
+
+export const deleteCase = (id) =>
+  apiCallBegan({
+    url: `/api/v1/cases/delete/${id}`,
+    method: "delete",
+    onStart: casesRequest.type,
+    onSuccess: caseDeleted.type,
+    onError: casesRequestFailed.type,
+  });
+
+export const getClientNames = () =>
+  apiCallBegan({
+    url: "/api/v1/cases/getAll",
+    method: "get",
+    onStart: casesRequest.type,
+    onSuccess: clientsLoaded.type,
     onError: casesRequestFailed.type,
   });
 

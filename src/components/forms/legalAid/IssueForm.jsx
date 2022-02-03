@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   Box,
   Heading,
@@ -10,7 +10,7 @@ import {
   Flex,
   Button,
 } from "@chakra-ui/react";
-import { addIssues } from "./../../../store/reducers/cases";
+import { editCase } from "./../../../store/reducers/cases";
 import Radio from "../../common/Radio";
 import { issuesOptions } from "./options";
 import useForm from "../../../hooks/useForm";
@@ -19,17 +19,14 @@ import { MdArrowBack, MdArrowForward } from "react-icons/md";
 
 function IssueForm({ setCurrentForm }) {
   const dispatch = useDispatch();
-  const { issues } = useSelector((state) => state.cases.newCase);
   const { values, handleChange } = useForm({
-    details: issues.details || "",
-    duration: issues.duration || "",
-    action: issues.action || "",
+    details: "",
+    duration: "",
+    action: "",
   });
   const { details, duration, action } = values;
-  const [nature, setNature] = useState(issues.nature || "");
-  const [wasActionTaken, setWasActionTaken] = useState(
-    issues.wasActionTaken || ""
-  );
+  const [nature, setNature] = useState("");
+  const [wasActionTaken, setWasActionTaken] = useState("");
 
   return (
     <Box p="3rem">
@@ -98,10 +95,10 @@ function IssueForm({ setCurrentForm }) {
         <Button
           leftIcon={<MdArrowBack />}
           onClick={(e) => {
-            setCurrentForm(2);
             values.nature = nature;
             values.wasActionTaken = wasActionTaken;
-            dispatch(addIssues(values));
+            dispatch(editCase(values));
+            setCurrentForm(2);
           }}
         >
           Back
@@ -109,10 +106,10 @@ function IssueForm({ setCurrentForm }) {
         <Button
           rightIcon={<MdArrowForward />}
           onClick={(e) => {
-            setCurrentForm(4);
             values.nature = nature;
             values.wasActionTaken = wasActionTaken;
-            dispatch(addIssues(values));
+            dispatch(editCase(values));
+            setCurrentForm(4);
           }}
         >
           Next

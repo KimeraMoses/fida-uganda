@@ -1,21 +1,20 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
 import { MdArrowForward, MdArrowBack } from "react-icons/md";
 import { disabilityAssessmentOptions } from "./options";
 import Radio from "../../common/Radio";
-import { addDisability } from "../../../store/reducers/cases";
+import { editCase } from "../../../store/reducers/cases";
 
 function DisabilityAssessmentForm({ setCurrentForm }) {
-  const { disability } = useSelector((state) => state.cases.newCase);
   const dispatch = useDispatch();
-  const [sight, setSight] = useState(disability.sight || "");
-  const [hearing, setHearingDisability] = useState(disability.hearing || "");
-  const [movement, setMovement] = useState(disability.movement || "");
-  const [remembering, setRemembering] = useState(disability.remembering || "");
-  const [dressing, setDressing] = useState(disability.dressing || "");
-  const [speech, setSpeech] = useState(disability.speech || "");
-  const [isDisabled, setIsDisabled] = useState(disability.isDisabled || "");
+  const [sight, setSight] = useState("");
+  const [hearing, setHearingDisability] = useState("");
+  const [movement, setMovement] = useState("");
+  const [remembering, setRemembering] = useState("");
+  const [dressing, setDressing] = useState("");
+  const [speech, setSpeech] = useState("");
+  const [isDisabled, setIsDisabled] = useState("");
 
   const genericOptions = disabilityAssessmentOptions["generic"];
   const isDisabledOptions = disabilityAssessmentOptions["isDisabled"];
@@ -40,8 +39,12 @@ function DisabilityAssessmentForm({ setCurrentForm }) {
     }
   }, [sight, hearing, movement, remembering, dressing, speech]);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
-    <Box p="3rem">
+    <Box p="3rem" as="form" onSubmit={handleSubmit}>
       <Heading size="lg" mb="2rem">
         Case Registration Form
       </Heading>
@@ -119,7 +122,7 @@ function DisabilityAssessmentForm({ setCurrentForm }) {
           onClick={(e) => {
             setCurrentForm(1);
             dispatch(
-              addDisability({
+              editCase({
                 sight,
                 hearing,
                 movement,
@@ -131,14 +134,13 @@ function DisabilityAssessmentForm({ setCurrentForm }) {
             );
           }}
         >
-          Back
+          Save and Back
         </Button>
         <Button
           rightIcon={<MdArrowForward />}
           onClick={(e) => {
-            setCurrentForm(3);
             dispatch(
-              addDisability({
+              editCase({
                 sight,
                 hearing,
                 movement,
@@ -148,9 +150,10 @@ function DisabilityAssessmentForm({ setCurrentForm }) {
                 isDisabled,
               })
             );
+            setCurrentForm(3);
           }}
         >
-          Next
+          Save and Continue
         </Button>
       </Flex>
     </Box>
