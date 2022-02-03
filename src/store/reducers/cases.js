@@ -134,7 +134,7 @@ export const createCase = (values) =>
 
 export const editCase = (id, values) =>
   apiCallBegan({
-    url: `/api/v1/cases/edit/${values}`,
+    url: `/api/v1/cases/edit/${id}`,
     method: "put",
     data: { ...values },
     onStart: casesRequest.type,
@@ -153,7 +153,7 @@ export const deleteCase = (id) =>
 
 export const getClientNames = () =>
   apiCallBegan({
-    url: "/api/v1/cases/getAll",
+    url: "/api/v1/clients/getAll",
     method: "get",
     onStart: casesRequest.type,
     onSuccess: clientsLoaded.type,

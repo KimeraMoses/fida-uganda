@@ -22,7 +22,7 @@ function ReportsList() {
         <ListItemNoLInk
           key={report.id}
           bgColor={idx % 2 === 0 ? "white" : "purple.100"}
-          name={report.id}
+          name={report.name || report.id}
           lastModified={new Date(report.createdAt).toLocaleDateString()}
           createdBy={report.createdBy?.first_name}
         />

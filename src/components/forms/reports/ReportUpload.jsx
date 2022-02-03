@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Box, Button, Center, Text } from "@chakra-ui/react";
 import FileInput from "../../common/FileInput";
 import { createReport } from "../../../store/reducers/reports";
 
 function ReportUpload({ onClose }) {
   const dispatch = useDispatch();
+  const { loading } = useSelector((state) => state.reports);
   const [file, setFile] = useState(null);
 
   const handleSubmit = (e) => {
@@ -53,6 +54,7 @@ function ReportUpload({ onClose }) {
             color="white"
             px="2.5rem"
             _hover={{ bgColor: "purple.700" }}
+            isLoading={loading}
           >
             Submit
           </Button>
