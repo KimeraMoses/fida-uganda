@@ -7,6 +7,7 @@ function Table({
   caption,
   btnLabel,
   btnClick,
+  onRowClick,
   showBtn,
   showSearch,
   showPagination,
@@ -16,6 +17,7 @@ function Table({
       <DisplayTable
         data={data}
         columns={columns}
+        onRowClick={onRowClick}
         caption={caption}
         btnLabel={btnLabel}
         btnClick={btnClick}

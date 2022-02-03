@@ -20,6 +20,7 @@ function DisplayTable({
   btnLabel,
   btnClick,
   showBtn,
+  onRowClick,
   showSearch = true,
   showPagination = true,
 }) {
@@ -83,6 +84,7 @@ function DisplayTable({
             bodyProps={getTableBodyProps}
             rows={page}
             prepareRow={prepareRow}
+            onRowClick={onRowClick}
           />
         </Table>
       </Box>
