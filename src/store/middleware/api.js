@@ -38,7 +38,7 @@ const api =
         method,
         data,
         headers: {
-          "Content-Type": contentType ||"application/json",
+          "Content-Type": contentType || "application/json",
           Authorization,
           ...headers,
         },

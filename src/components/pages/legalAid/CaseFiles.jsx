@@ -5,7 +5,12 @@ import GenericModal from "../../common/GenericModal";
 import SectionHeader from "../../common/SectionHeader";
 import Table from "../../common/Table";
 import { caseFilesColumns } from "../../tables/legalAid/cases";
-import { addCase, getCases, selectCase } from "../../../store/reducers/cases";
+import {
+  addCase,
+  getCases,
+  getClientNames,
+  selectCase,
+} from "../../../store/reducers/cases";
 import CaseForm from "../../forms/legalAid/CaseForm";
 import {
   getAllCounties,
@@ -27,6 +32,7 @@ function CaseFiles() {
 
   const onRowClick = (row) => () => {
     dispatch(selectCase(row.original));
+    dispatch(getClientNames());
     onOpen();
   };
 
@@ -34,6 +40,7 @@ function CaseFiles() {
     dispatch(getCases());
     dispatch(getAllDistricts());
     dispatch(getAllCounties());
+    dispatch(getClientNames());
   }, [dispatch]);
 
   return (

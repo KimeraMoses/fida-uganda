@@ -12,7 +12,7 @@ function ReportUpload({ onClose }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("file", file);
+    formData.append("report", file);
     dispatch(createReport(formData));
   };
 

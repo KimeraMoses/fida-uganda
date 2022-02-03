@@ -64,7 +64,7 @@ export const createReport = (report) =>
   apiCallBegan({
     url: "/api/v1/reports/create",
     method: "POST",
-    data: { ...report },
+    data: report,
     contentType: "multipart/form-data",
     onStart: reportsRequested.type,
     onSuccess: reportCreated.type,
