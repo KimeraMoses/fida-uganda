@@ -5,7 +5,7 @@ import GenericModal from "../../common/GenericModal";
 import SectionHeader from "../../common/SectionHeader";
 import Table from "../../common/Table";
 import { caseFilesColumns } from "../../tables/legalAid/cases";
-import { getCases } from "../../../store/reducers/cases";
+import { getCases, selectCase } from "../../../store/reducers/cases";
 import CaseForm from "../../forms/legalAid/CaseForm";
 import {
   getAllCounties,
@@ -24,6 +24,10 @@ function CaseFiles() {
     onOpen();
   };
 
+  const onRowClick = (row) => () => {
+    dispatch(selectCase(row.original));
+  };
+
   useEffect(() => {
     dispatch(getCases());
     dispatch(getAllDistricts());
@@ -38,6 +42,7 @@ function CaseFiles() {
         btnClick={handleBtnClick}
         data={data}
         columns={columns}
+        onRowClick={onRowClick}
       />
       <GenericModal isOpen={isOpen} onClose={onClose}>
         <CaseForm />

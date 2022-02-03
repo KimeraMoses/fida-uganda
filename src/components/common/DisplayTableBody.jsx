@@ -1,6 +1,11 @@
 import { Tbody, Tr, Td, useColorModeValue } from "@chakra-ui/react";
 
-function DisplayTableBody({ bodyProps, rows, prepareRow, onRowClick }) {
+function DisplayTableBody({
+  bodyProps,
+  rows,
+  prepareRow,
+  onRowClick = () => {},
+}) {
   const color = useColorModeValue("black", "white");
   const bg = useColorModeValue("white", "gray.600");
   return (
@@ -11,7 +16,7 @@ function DisplayTableBody({ bodyProps, rows, prepareRow, onRowClick }) {
           <Tr
             {...row.getRowProps()}
             bgColor={bg}
-            onClick={onRowClick}
+            onClick={onRowClick(row)}
             _hover={{ cursor: "pointer" }}
           >
             {row.cells.map((cell) => {
