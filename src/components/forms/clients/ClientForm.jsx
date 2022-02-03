@@ -76,6 +76,7 @@ function ClientForm({ onClose }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    values.phoneNumber = phoneNumber.toString();
     dispatch(createClient(values));
   };
 

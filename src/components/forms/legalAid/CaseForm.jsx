@@ -6,6 +6,7 @@ import DisabilityAssessmentForm from "./DisabilityAssessmentForm";
 import IssueForm from "./IssueForm";
 import { getAllDistricts } from "../../../store/reducers/registration";
 import { getClientNames } from "../../../store/reducers/cases";
+import StatusForm from "./StatusForm";
 
 function CaseForm({ onClose }) {
   const [currentForm, setCurrentForm] = useState(1);
@@ -38,6 +39,9 @@ function CaseForm({ onClose }) {
       )}
       {currentForm === 4 && (
         <DeclarationForm onClose={onClose} setCurrentForm={setCurrentForm} />
+      )}
+      {currentForm === 5 && (
+        <StatusForm onClose={onClose} setCurrentForm={setCurrentForm} />
       )}
     </>
   );

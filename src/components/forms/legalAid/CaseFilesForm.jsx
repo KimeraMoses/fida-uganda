@@ -10,12 +10,12 @@ import {
 } from "../../../defaultData/menu/options";
 import QANumberInput from "./QANumberInput";
 import QATextInput from "./QATextInput";
-import { createCase } from "../../../store/reducers/cases";
+import { createCase, editCase } from "../../../store/reducers/cases";
 
 function CaseFilesForm({ setCurrentForm }) {
   const dispatch = useDispatch();
   const { districts, counties } = useSelector((state) => state.registration);
-  const { clients } = useSelector((state) => state.cases);
+  const { clients, case: activeCase } = useSelector((state) => state.cases);
   const countries = [
     { label: "Burundi", value: "Burundi" },
     { label: "Rwanda", value: "Rwanda" },
@@ -36,23 +36,23 @@ function CaseFilesForm({ setCurrentForm }) {
   }));
 
   const { values, handleChange } = useForm({
-    complainant: "",
-    name: "",
-    sex: "",
-    age: "",
-    email: "",
-    phoneNumber: "",
-    occupation: "",
-    country: "",
-    district: "",
-    county: "",
-    village: "",
-    place_of_work: "",
-    marital_status: "",
-    number_of_beneficiaries: "",
-    level_of_education: "",
-    preferred_language: "",
-    disability: "",
+    complainant: activeCase?.complainant || "",
+    name: activeCase?.respondentName || "",
+    sex: activeCase?.respondentSex || "",
+    age: activeCase?.respondentAge || "",
+    email: activeCase?.respondentEmail || "",
+    phoneNumber: activeCase?.respondentPhone || "",
+    occupation: activeCase?.respondentJob || "",
+    country: activeCase?.respondentCountry || "",
+    district: activeCase?.respondentDistrict || "",
+    county: activeCase?.respondentCounty || "",
+    village: activeCase?.respondentVillage || "",
+    place_of_work: activeCase?.respondentPlaceOfWork || "",
+    marital_status: activeCase?.respondentMaritalStatus || "",
+    number_of_beneficiaries: activeCase?.respondentNumberOfBeneficiaries || "",
+    level_of_education: activeCase?.respondentLevelOfEducation || "",
+    preferred_language: activeCase?.respondentLanguage || "",
+    disability: activeCase?.respondentDisability || "",
   });
 
   const {
@@ -78,12 +78,11 @@ function CaseFilesForm({ setCurrentForm }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const newValues = {
-      complainant,
       respondentName: name,
       respondentSex: sex,
       respondentAge: age,
       respondentEmail: email,
-      respondentPhone: phoneNumber,
+      respondentPhone: phoneNumber.toString(),
       respondentJob: occupation,
       respondentCountry: country,
       respondentDistrict: district,
@@ -96,7 +95,11 @@ function CaseFilesForm({ setCurrentForm }) {
       respondentLanguage: preferred_language,
       respondentDisability: disability,
     };
-    dispatch(createCase(newValues));
+    if (activeCase) {
+      dispatch(editCase(complainant, newValues));
+    } else {
+      dispatch(createCase(newValues));
+    }
     setCurrentForm(2);
   };
 

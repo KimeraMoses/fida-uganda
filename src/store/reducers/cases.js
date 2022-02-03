@@ -6,6 +6,7 @@ const slice = createSlice({
   initialState: {
     cases: [],
     case: null,
+    currentId: null,
     cases_number: null,
     clients: [],
     loading: false,
@@ -81,6 +82,9 @@ const slice = createSlice({
       const { values } = action.payload;
       state.case = { ...values };
     },
+    newCase: (state) => {
+      state.case = null;
+    },
   },
 });
 
@@ -97,11 +101,16 @@ export const {
   clvCasesLoaded,
   clientsLoaded,
   caseSelected,
+  newCase,
 } = slice.actions;
 
 export const selectCase = (values) => ({
   type: caseSelected.type,
   payload: values,
+});
+
+export const addCase = () => ({
+  type: newCase.type,
 });
 
 export const getCases = () =>
@@ -123,9 +132,9 @@ export const createCase = (values) =>
     onError: casesRequestFailed.type,
   });
 
-export const editCase = (values) =>
+export const editCase = (id, values) =>
   apiCallBegan({
-    url: `/api/v1/cases/edit/${values.id}`,
+    url: `/api/v1/cases/edit/${values}`,
     method: "put",
     data: { ...values },
     onStart: casesRequest.type,

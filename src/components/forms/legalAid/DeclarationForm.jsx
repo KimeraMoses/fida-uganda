@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Box,
   Heading,
@@ -12,29 +12,35 @@ import {
   Button,
   Checkbox,
 } from "@chakra-ui/react";
-import { MdArrowBack } from "react-icons/md";
+import { MdArrowBack, MdArrowForward } from "react-icons/md";
 import useForm from "../../../hooks/useForm";
 import { declarationOptions } from "./options";
 import { editCase } from "../../../store/reducers/cases";
 
 function DeclarationForm({ onClose, setCurrentForm }) {
   const dispatch = useDispatch();
-
-  const [about, setAbout] = useState("");
+  const { case: activeCase, currentId } = useSelector((state) => state.cases);
+  const [about, setAbout] = useState(activeCase?.about || "");
   const [hasAgreed, setHasAgreed] = useState(false);
   const { values, handleChange } = useForm({
-    natureOfSupport: "",
-    comments: "",
+    natureOfSupport: activeCase?.natureOfSupport || "",
+    comments: activeCase?.comments || "",
   });
 
   const { natureOfSupport, comments } = values;
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    let id;
+    if (activeCase) {
+      id = activeCase.complaint;
+    } else {
+      id = currentId;
+    }
     values.about = about;
     values.hasAgreed = hasAgreed;
-    dispatch(editCase(values));
-    onClose();
+    dispatch(editCase(id, values));
+    setCurrentForm(5);
   };
 
   return (
@@ -99,16 +105,27 @@ function DeclarationForm({ onClose, setCurrentForm }) {
         <Button
           leftIcon={<MdArrowBack />}
           onClick={(e) => {
-            setCurrentForm(3);
+            let id;
+            if (activeCase) {
+              id = activeCase.complaint;
+            } else {
+              id = currentId;
+            }
             values.about = about;
             values.hasAgreed = hasAgreed;
-            dispatch(editCase(values));
+            dispatch(editCase(id, values));
+            setCurrentForm(3);
           }}
         >
           Save and Back
         </Button>
-        <Button isDisabled={!hasAgreed} type="submit">
-          Save and Exit
+
+        <Button
+          rightIcon={<MdArrowForward />}
+          isDisabled={!hasAgreed}
+          type="submit"
+        >
+          Save and Continue
         </Button>
       </Flex>
     </Box>

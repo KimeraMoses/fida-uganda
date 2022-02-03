@@ -5,7 +5,7 @@ import GenericModal from "../../common/GenericModal";
 import SectionHeader from "../../common/SectionHeader";
 import Table from "../../common/Table";
 import { caseFilesColumns } from "../../tables/legalAid/cases";
-import { getCases, selectCase } from "../../../store/reducers/cases";
+import { addCase, getCases, selectCase } from "../../../store/reducers/cases";
 import CaseForm from "../../forms/legalAid/CaseForm";
 import {
   getAllCounties,
@@ -21,11 +21,13 @@ function CaseFiles() {
   const columns = useMemo(() => caseFilesColumns, []);
 
   const handleBtnClick = () => {
+    dispatch(addCase());
     onOpen();
   };
 
   const onRowClick = (row) => () => {
     dispatch(selectCase(row.original));
+    onOpen();
   };
 
   useEffect(() => {

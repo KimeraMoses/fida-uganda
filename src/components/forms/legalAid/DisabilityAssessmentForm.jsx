@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
 import { MdArrowForward, MdArrowBack } from "react-icons/md";
 import { disabilityAssessmentOptions } from "./options";
@@ -8,13 +8,14 @@ import { editCase } from "../../../store/reducers/cases";
 
 function DisabilityAssessmentForm({ setCurrentForm }) {
   const dispatch = useDispatch();
-  const [sight, setSight] = useState("");
-  const [hearing, setHearingDisability] = useState("");
-  const [movement, setMovement] = useState("");
-  const [remembering, setRemembering] = useState("");
-  const [dressing, setDressing] = useState("");
-  const [speech, setSpeech] = useState("");
-  const [isDisabled, setIsDisabled] = useState("");
+  const { case: activeCase, currentId } = useSelector((state) => state.cases);
+  const [sight, setSight] = useState(activeCase?.sight || "");
+  const [hearing, setHearingDisability] = useState(activeCase?.hearing || "");
+  const [movement, setMovement] = useState(activeCase?.movement || "");
+  const [remembering, setRemembering] = useState(activeCase?.remembering || "");
+  const [dressing, setDressing] = useState(activeCase?.dressing || "");
+  const [speech, setSpeech] = useState(activeCase?.speech || "");
+  const [isDisabled, setIsDisabled] = useState(activeCase?.isDisabled || "");
 
   const genericOptions = disabilityAssessmentOptions["generic"];
   const isDisabledOptions = disabilityAssessmentOptions["isDisabled"];
@@ -41,6 +42,24 @@ function DisabilityAssessmentForm({ setCurrentForm }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    let id;
+    if (activeCase) {
+      id = activeCase.complaint;
+    } else {
+      id = currentId;
+    }
+    dispatch(
+      editCase(id, {
+        sight,
+        hearing,
+        movement,
+        remembering,
+        dressing,
+        speech,
+        isDisabled,
+      })
+    );
+    setCurrentForm(3);
   };
 
   return (
@@ -120,9 +139,14 @@ function DisabilityAssessmentForm({ setCurrentForm }) {
         <Button
           leftIcon={<MdArrowBack />}
           onClick={(e) => {
-            setCurrentForm(1);
+            let id;
+            if (activeCase) {
+              id = activeCase.complaint;
+            } else {
+              id = currentId;
+            }
             dispatch(
-              editCase({
+              editCase(id, {
                 sight,
                 hearing,
                 movement,
@@ -132,27 +156,12 @@ function DisabilityAssessmentForm({ setCurrentForm }) {
                 isDisabled,
               })
             );
+            setCurrentForm(1);
           }}
         >
           Save and Back
         </Button>
-        <Button
-          rightIcon={<MdArrowForward />}
-          onClick={(e) => {
-            dispatch(
-              editCase({
-                sight,
-                hearing,
-                movement,
-                remembering,
-                dressing,
-                speech,
-                isDisabled,
-              })
-            );
-            setCurrentForm(3);
-          }}
-        >
+        <Button type="submit" rightIcon={<MdArrowForward />}>
           Save and Continue
         </Button>
       </Flex>
