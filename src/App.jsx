@@ -3,12 +3,11 @@ import { Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Box } from "@chakra-ui/react";
 import Home from "./components/pages/Home";
-import Auth from "./components/pages/Auth";
 import { APP_PREFIX } from "./hooks/useLocalStorage";
 import { getUser } from "./store/reducers/auth";
 import LoadingPage from "./components/pages/LoadingPage";
 import { scrollbar } from "./defaultData/theme";
-// import PageNotFound from "./components/common/PageNotFound";
+import Auth from "./components/pages/Auth";
 
 function App() {
   const { user, loading } = useSelector((state) => state.auth);
@@ -30,11 +29,8 @@ function App() {
       );
     }
     return (
-      <Box maxW="1400px" m="0 auto" minH="100vh" css={scrollbar}>
-        <Routes>
-          <Route path="/" element={<Auth />} />
-          {/* <Route path="*" element={<PageNotFound />} /> */}
-        </Routes>
+      <Box m="0 auto" minH="100vh" css={scrollbar}>
+        <Auth />
       </Box>
     );
   }
