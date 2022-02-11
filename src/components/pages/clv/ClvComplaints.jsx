@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Box, useDisclosure } from "@chakra-ui/react";
+import { Box, useDisclosure, useToast } from "@chakra-ui/react";
 import GenericModal from "../../common/GenericModal";
 import SectionHeader from "../../common/SectionHeader";
 import ClvComplaintForm from "../../forms/clv/ClvComplaintForm";
@@ -10,7 +10,8 @@ import Table from "../../common/Table";
 
 function ClvComplaints() {
   const dispatch = useDispatch();
-  const { complaints } = useSelector((state) => state.clv);
+  const toast = useToast();
+  const { complaints, success } = useSelector((state) => state.clv);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const data = useMemo(() => complaints, [complaints]);
@@ -23,6 +24,19 @@ function ClvComplaints() {
   useEffect(() => {
     dispatch(getComplaints());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (success) {
+      onClose();
+      toast({
+        title: "Successful",
+        description: success,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+  }, [success, onClose, toast]);
 
   return (
     <Box>

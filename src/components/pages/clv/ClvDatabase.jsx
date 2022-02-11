@@ -30,7 +30,7 @@ function ClvDatabase() {
     if (success) {
       onClose();
       toast({
-        title: "Success",
+        title: "Successful",
         description: success,
         status: "success",
         duration: 5000,

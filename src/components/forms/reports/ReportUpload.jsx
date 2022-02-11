@@ -1,65 +1,44 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Box, Button, Center, Text } from "@chakra-ui/react";
-import FileInput from "../../common/FileInput";
+import { Box, Button, Center, Image } from "@chakra-ui/react";
 import { createReport } from "../../../store/reducers/reports";
 
-function ReportUpload({ onClose }) {
+function ReportUpload({ onClose, file, doc }) {
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.reports);
-  const [file, setFile] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("report", file);
+    formData.append("report", doc);
     dispatch(createReport(formData));
   };
 
   return (
     <Box as="form" onSubmit={handleSubmit} borderRadius="3xl">
-      <Center p="1rem">
-        <FileInput
-          onFileSelectSuccess={(file) => setFile(file)}
-          onChange={setFile}
-        />
-      </Center>
       <Box
         h="20rem"
         bgColor="purple.100"
         mt="1rem"
         p="2rem"
         borderBottomRadius="3xl"
+        boxSize="sm"
       >
-        <Box
-          border="1px"
-          borderStyle="dashed"
-          height="100%"
-          borderRadius="3xl"
-          borderColor="gray.500"
-        >
-          <Center h="100%">
-            <Text color="gray.500">
-              Click to browse or drag and drop your files
-            </Text>
-          </Center>
-        </Box>
+        <Image src={file} />
       </Box>
-      {file && (
-        <Center p="1rem">
-          <Button
-            type="submit"
-            borderRadius="full"
-            bgColor="purple.500"
-            color="white"
-            px="2.5rem"
-            _hover={{ bgColor: "purple.700" }}
-            isLoading={loading}
-          >
-            Submit
-          </Button>
-        </Center>
-      )}
+
+      <Center p="1rem">
+        <Button
+          type="submit"
+          borderRadius="full"
+          bgColor="purple.500"
+          color="white"
+          px="2.5rem"
+          _hover={{ bgColor: "purple.700" }}
+          isLoading={loading}
+        >
+          Submit
+        </Button>
+      </Center>
     </Box>
   );
 }
