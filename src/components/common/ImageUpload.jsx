@@ -6,6 +6,7 @@ function ImageUpload({
   name = "image",
   accept = "image/png, image/jpeg",
   onFileSelectSuccess,
+  getFile,
 }) {
   const imageInput = useRef(null);
   const [error, setError] = useState("");
@@ -17,6 +18,7 @@ function ImageUpload({
       setError(error);
     } else {
       const url = URL.createObjectURL(file);
+      getFile(file)
       onFileSelectSuccess(url);
     }
   };

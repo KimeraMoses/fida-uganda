@@ -20,7 +20,8 @@ function SignUpForm() {
   const dispatch = useDispatch();
   const { success, error, loading } = useSelector((state) => state.auth);
 
-  const [file, setFile] = useState("");
+  const [image, setImage] = useState("");
+  const [file, setFile] = useState(null);
   const { values, handleChange } = useForm({
     email: "",
     password: "",
@@ -39,7 +40,15 @@ function SignUpForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(signUp(email, password, firstName, lastName, role, designation));
+    const formData = new FormData();
+    formData.append("image", file);
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("first_name", firstName);
+    formData.append("last_name", lastName);
+    formData.append("designation", designation);
+    formData.append("role", role);
+    dispatch(signUp(formData));
   };
 
   return (
@@ -66,9 +75,9 @@ function SignUpForm() {
         />
       )}
       {file ? (
-        <Avatar alignSelf="center" src={file} size="xl" />
+        <Avatar alignSelf="center" src={image} size="xl" />
       ) : (
-        <ImageUpload onFileSelectSuccess={setFile} />
+        <ImageUpload onFileSelectSuccess={setImage} getFile={setFile} />
       )}
       <EmailInput value={email} handleChange={handleChange} />
       <PasswordInput value={password} handleChange={handleChange} />

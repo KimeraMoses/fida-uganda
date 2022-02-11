@@ -103,25 +103,12 @@ export const logIn = (values) =>
     onError: userAuthFailed.type,
   });
 
-export const signUp = (
-  email,
-  password,
-  firstName,
-  lastName,
-  role,
-  designation
-) =>
+export const signUp = (formData) =>
   apiCallBegan({
     url: "/api/v1/users/signup",
     method: "post",
-    data: {
-      email,
-      password,
-      first_name: firstName,
-      last_name: lastName,
-      role,
-      designation,
-    },
+    data: formData,
+    contentType: "multipart/form-data",
     onStart: userDataLoading.type,
     onSuccess: userAuthenticated.type,
     onError: userAuthFailed.type,
