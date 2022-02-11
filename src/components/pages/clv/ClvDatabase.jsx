@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Box, useDisclosure } from "@chakra-ui/react";
+import { Box, useDisclosure, useToast } from "@chakra-ui/react";
 import GenericModal from "../../common/GenericModal";
 import SectionHeader from "../../common/SectionHeader";
 import ClvProfilingForm from "../../forms/clv/ClvProfilingForm";
@@ -10,7 +10,8 @@ import Table from "../../common/Table";
 
 function ClvDatabase() {
   const dispatch = useDispatch();
-  const { clvs } = useSelector((state) => state.clv);
+  const toast = useToast();
+  const { clvs, success } = useSelector((state) => state.clv);
   const { user } = useSelector((state) => state.auth);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -24,6 +25,19 @@ function ClvDatabase() {
   const handleBtnClick = () => {
     onOpen();
   };
+
+  useEffect(() => {
+    if (success) {
+      onClose();
+      toast({
+        title: "Success",
+        description: success,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+  }, [success, onClose, toast]);
 
   return (
     <Box>

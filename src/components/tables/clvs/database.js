@@ -1,6 +1,10 @@
 export const clvDatabaseColumns = [
   { Header: "Name", accessor: "name" },
-  { Header: "Status", accessor: "isActive" },
+  {
+    Header: "Status",
+    id: "isActive",
+    accessor: (d) => (d.isActive ? "Active" : "Inactive"),
+  },
   { Header: "Email", accessor: "email" },
   { Header: "Profession", accessor: "profession" },
   { Header: "Phone Number", accessor: "phoneNumber" },
