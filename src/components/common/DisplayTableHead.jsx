@@ -12,6 +12,7 @@ function DisplayTableHead({ headerGroups }) {
               fontWeight="semibold"
               color={color}
               fontSize="sm"
+              whiteSpace="nowrap"
               {...column.getHeaderProps(column.getSortByToggleProps())}
             >
               {column.render("Header")}
