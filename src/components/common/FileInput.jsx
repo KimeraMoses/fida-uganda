@@ -2,7 +2,6 @@ import { useRef, useState } from "react";
 import { Button, Text } from "@chakra-ui/react";
 
 function FileInput({
-  onChange,
   onFileSelectSuccess,
   name = "file",
   accept = "image/png, image/jpeg",

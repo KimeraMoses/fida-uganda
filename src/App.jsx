@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Box } from "@chakra-ui/react";
 import Home from "./components/pages/Home";
@@ -37,9 +36,7 @@ function App() {
 
   return (
     <Box maxW="1400px" m="0 auto" minH="100vh" css={scrollbar}>
-      <Routes>
-        <Route path="*" element={<Home />} />
-      </Routes>
+      <Home />
     </Box>
   );
 }

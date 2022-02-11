@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Text, Avatar } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import SubmitButton from "./SubmitButton";
 import EmailInput from "../../common/EmailInput";
@@ -13,11 +14,13 @@ import {
 } from "../../../defaultData/menu/options";
 import GenericAlert from "../../common/GenericAlert";
 import { dismissAlert, signUp } from "../../../store/reducers/auth";
+import ImageUpload from "../../common/ImageUpload";
 
 function SignUpForm() {
   const dispatch = useDispatch();
   const { success, error, loading } = useSelector((state) => state.auth);
 
+  const [file, setFile] = useState("");
   const { values, handleChange } = useForm({
     email: "",
     password: "",
@@ -61,6 +64,11 @@ function SignUpForm() {
           message={success}
           handleAlertClose={handleAlertClose}
         />
+      )}
+      {file ? (
+        <Avatar alignSelf="center" src={file} size="xl" />
+      ) : (
+        <ImageUpload onFileSelectSuccess={setFile} />
       )}
       <EmailInput value={email} handleChange={handleChange} />
       <PasswordInput value={password} handleChange={handleChange} />
