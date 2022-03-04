@@ -18,7 +18,7 @@ function ImageUpload({
       setError(error);
     } else {
       const url = URL.createObjectURL(file);
-      getFile(file)
+      getFile(file);
       onFileSelectSuccess(url);
     }
   };
@@ -35,15 +35,19 @@ function ImageUpload({
       />
       <IconButton
         alignSelf="center"
-        h="6rem"
-        w="6rem"
+        h="7rem"
+        w="7rem"
         colorScheme="gray"
         aria-label="profile picture upload"
         borderRadius="full"
         icon={<MdAddAPhoto color="purple" size={40} />}
         onClick={(e) => imageInput.current && imageInput.current.click()}
       />
-      {error && <Text>{error}</Text>}
+      {error && (
+        <Text align="center" fontSize="md" color="red">
+          {error}
+        </Text>
+      )}
     </>
   );
 }

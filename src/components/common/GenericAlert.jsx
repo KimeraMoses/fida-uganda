@@ -1,13 +1,13 @@
 import {
-  Alert,
+  Alert as ChakraAlert,
   AlertDescription,
   AlertIcon,
   CloseButton,
 } from "@chakra-ui/react";
 
-function GenericAlert({ type, message, handleAlertClose }) {
+function Alert({ type, message, handleAlertClose }) {
   return (
-    <Alert status={type}>
+    <ChakraAlert status={type}>
       <AlertIcon />
       <AlertDescription>{message}</AlertDescription>
       <CloseButton
@@ -16,8 +16,8 @@ function GenericAlert({ type, message, handleAlertClose }) {
         top="0.5rem"
         onClick={handleAlertClose}
       />
-    </Alert>
+    </ChakraAlert>
   );
 }
 
-export default GenericAlert;
+export default Alert;
