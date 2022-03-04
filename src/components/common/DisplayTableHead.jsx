@@ -1,7 +1,7 @@
 import { Thead, Tr, Th, Box, useColorModeValue } from "@chakra-ui/react";
 
 function DisplayTableHead({ headerGroups }) {
-  const bg = useColorModeValue("gray.100", "gray.700");
+  const bg = useColorModeValue("purple.50", "purple.700");
   const color = useColorModeValue("black", "white");
   return (
     <Thead borderTopRadius="md" bgColor={bg}>
@@ -9,7 +9,7 @@ function DisplayTableHead({ headerGroups }) {
         <Tr {...headerGroup.getHeaderGroupProps()}>
           {headerGroup.headers.map((column) => (
             <Th
-              fontWeight="semibold"
+              fontWeight="medium"
               color={color}
               fontSize="sm"
               whiteSpace="nowrap"
