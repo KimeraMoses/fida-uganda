@@ -1,7 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import { useState } from "react";
 import { scrollbar } from "../../defaultData/theme";
-import Logout from "./Logout";
 import Logo from "./Logo";
 import Menu from "./Menu";
 
@@ -12,7 +11,6 @@ function SideBar() {
       width="25%"
       display="flex"
       flexDirection="column"
-      justifyContent="space-between"
       gap="4rem"
       p="1rem"
       h="100vh"
@@ -25,7 +23,6 @@ function SideBar() {
         selectedOption={selectedOption}
         setSelectedOption={setSelectedOption}
       />
-      <Logout />
     </Box>
   );
 }

@@ -8,6 +8,7 @@ function Logo({ size = 100 }) {
 
   return (
     <Image
+      alignSelf="center"
       height={`${size}px`}
       width={`${defaultRatio * size}px`}
       src={logo}

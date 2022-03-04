@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { MdLogout, MdSettings, MdNotifications } from "react-icons/md";
 import {
   Flex,
@@ -12,8 +12,11 @@ import {
   MenuItem,
   MenuButton,
 } from "@chakra-ui/react";
+import { logOut } from "../../store/reducers/auth";
 
 function TopNav() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { last_name, first_name, image } = useSelector(
     (state) => state.auth.user
   );
@@ -46,11 +49,19 @@ function TopNav() {
           </MenuButton>
           <MenuList>
             <Link to="settings">
-            <MenuItem icon={<MdSettings size={20} />}>
-              Account settings
-            </MenuItem>
+              <MenuItem icon={<MdSettings size={20} />}>
+                Account settings
+              </MenuItem>
             </Link>
-            <MenuItem icon={<MdLogout size={20} />}>Logout</MenuItem>
+            <MenuItem
+              icon={<MdLogout size={20} />}
+              onClick={(e) => {
+                dispatch(logOut());
+                navigate("/");
+              }}
+            >
+              Logout
+            </MenuItem>
           </MenuList>
         </Menu>
       </Flex>
