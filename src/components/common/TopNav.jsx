@@ -1,11 +1,23 @@
+import { Link } from 'react-router-dom';
 import { useSelector } from "react-redux";
-import { SettingsIcon } from "@chakra-ui/icons";
-import { Flex, Box, Text, Avatar, IconButton } from "@chakra-ui/react";
+import { MdLogout, MdSettings, MdNotifications } from "react-icons/md";
+import {
+  Flex,
+  Box,
+  Text,
+  Avatar,
+  IconButton,
+  Menu,
+  MenuList,
+  MenuItem,
+  MenuButton,
+} from "@chakra-ui/react";
 
 function TopNav() {
   const { last_name, first_name, image } = useSelector(
     (state) => state.auth.user
   );
+
   return (
     <Flex width="100%" align="center" px="2rem" py="4" boxShadow="base">
       <Text fontSize="xl" mr="auto">
@@ -15,19 +27,32 @@ function TopNav() {
         </Box>{" "}
         Welcome back!
       </Text>
-      <Flex gap="1.2rem" align="center">
+      <Flex gap="1rem" align="center">
         <IconButton
-          icon={<SettingsIcon boxSize="1.4rem" color="purple.800" />}
-          aria-label="Settings"
+          color="purple.700"
+          borderRadius="full"
           variant="ghost"
-          borderRadius="full"
+          icon={<MdNotifications size={24} />}
         />
-        <Avatar
-          borderRadius="full"
-          size="sm"
-          src={image}
-          alt={`${first_name} ${last_name}`}
-        />
+        <Menu>
+          <MenuButton
+            color="purple.500"
+            as={IconButton}
+            aria-label="Options"
+            variant="outline"
+            borderRadius="full"
+          >
+            <Avatar src={image} alt={`${first_name} ${last_name}`} size="sm" />
+          </MenuButton>
+          <MenuList>
+            <Link to="settings">
+            <MenuItem icon={<MdSettings size={20} />}>
+              Account settings
+            </MenuItem>
+            </Link>
+            <MenuItem icon={<MdLogout size={20} />}>Logout</MenuItem>
+          </MenuList>
+        </Menu>
       </Flex>
     </Flex>
   );

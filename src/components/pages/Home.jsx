@@ -13,6 +13,7 @@ import FidaDatabases from "./programs/FidaDatabases";
 import FidaProjects from "./programs/FidaProjects";
 import FidaAssets from "./m&e/FidaAssets";
 import Clients from "./clients/Clients";
+import Settings from './Settings';
 import { scrollbar } from "../../defaultData/theme";
 
 function Home() {
@@ -42,6 +43,7 @@ function Home() {
         <Route path="fida-databases" element={<FidaDatabases />} />
         <Route path="fida-projects/*" element={<FidaProjects />} />
         <Route path="fida-assets" element={<FidaAssets />} />
+        <Route path="settings" element={<Settings />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />
     </Routes>
