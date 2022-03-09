@@ -9,6 +9,7 @@ import casesReducer from "./reducers/cases";
 import registrationReducer from "./reducers/registration";
 import reportsReducer from "./reducers/reports";
 import clientsReducer from "./reducers/clients";
+import usersReducer from "./reducers/users";
 
 export default function configureAppStore() {
   const store = configureStore({
@@ -22,6 +23,7 @@ export default function configureAppStore() {
       registration: registrationReducer,
       reports: reportsReducer,
       clients: clientsReducer,
+      users: usersReducer,
     },
 
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([api]),

@@ -13,7 +13,7 @@ import AvatarUpload from "../../common/AvatarUpload";
 import { validateFormInput } from "../auth/validations/singup";
 import SubmitButton from "../auth/SubmitButton";
 
-const SettingsForm = () => {
+const SettingsForm = ({oldValues}) => {
   const [image, setImage] = useState("");
   const [file, setFile] = useState(null);
 

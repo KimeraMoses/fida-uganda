@@ -16,7 +16,7 @@ function DisplayTableBody({
           <Tr
             {...row.getRowProps()}
             bgColor={bg}
-            onClick={onRowClick(row)}
+            onClick={() => onRowClick(row)}
             _hover={{ cursor: "pointer" }}
           >
             {row.cells.map((cell) => {

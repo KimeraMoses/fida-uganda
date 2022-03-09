@@ -68,6 +68,12 @@ const menuOptions = {
     icon: MdStorage,
     path: "clients",
   },
+  fidaIimsApprovals: {
+    id: ++id,
+    name: "FIDA IIMS Approvals",
+    icon: MdStorage,
+    path: "fida-ims-approvals",
+  },
 };
 
 const commonOptions = [menuOptions.dashboard, menuOptions.tasks];
@@ -88,7 +94,7 @@ const menu = {
     menuOptions.reports,
   ],
   membership: [...commonOptions],
-  humanResources: [...commonOptions],
+  humanResources: [...commonOptions, menuOptions.fidaIimsApprovals],
   it: [...commonOptions],
   finance: [...commonOptions],
   me: [
@@ -97,12 +103,14 @@ const menu = {
     menuOptions.fidaDatabases,
     menuOptions.fidaAssets,
     menuOptions.reports,
+    menuOptions.fidaIimsApprovals,
   ],
   programs: [
     ...commonOptions,
     menuOptions.fidaProjects,
     menuOptions.fidaDatabases,
     menuOptions.reports,
+    menuOptions.fidaIimsApprovals,
   ],
   procurement: [...commonOptions],
   counselor: [...commonOptions],
