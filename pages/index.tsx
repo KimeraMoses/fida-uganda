@@ -1,13 +1,9 @@
 import type { NextPage } from "next";
-import AppHeader from "../components/AppHeader";
-import MainMenu from "../components/MainMenu";
+import Layout from "../components/Layout";
 
 const Home: NextPage = () => {
   return (
-    <>
-      <AppHeader />
-      <MainMenu />
-    </>
+    <Layout>{}</Layout>
   );
 };
 
