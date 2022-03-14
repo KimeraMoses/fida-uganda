@@ -5,7 +5,7 @@ const usePosts = () => {
   const { data, error } = useSWR(
     "https://jsonplaceholder.typicode.com/posts",
     fetcher,
-    {suspense: true}
+    { suspense: true }
   );
   return { posts: data, isLoading: !data && !error, error: error };
 };

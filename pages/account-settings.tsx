@@ -2,9 +2,11 @@ import Layout from "../components/Layout";
 import Table from "../components/Table";
 
 const AccountSettings = () => {
-  return <Layout title="Account Settings">
+  return (
+    <Layout title="Account Settings">
       <Table />
-    </Layout>;
+    </Layout>
+  );
 };
 
 export default AccountSettings;
