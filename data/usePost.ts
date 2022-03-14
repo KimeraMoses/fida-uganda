@@ -1,11 +1,8 @@
 import useSWR from "swr";
-import { fetcher } from "./fetcher";
 
 const usePosts = () => {
-  const { data, error } = useSWR(
-    "https://jsonplaceholder.typicode.com/posts",
-    fetcher,
-    { suspense: true }
+  const { data, error, isValidating, mutate } = useSWR(
+    "https://jsonplaceholder.typicode.com/posts"
   );
   return { posts: data, isLoading: !data && !error, error: error };
 };
