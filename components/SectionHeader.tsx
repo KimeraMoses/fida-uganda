@@ -6,7 +6,7 @@ type Props = {
 
 const SectionHeader = ({ title }: Props) => {
   return (
-    <Heading color="purple.800" fontSize="4xl">
+    <Heading color="purple.800" fontSize="4xl" mb={5}>
       {title}
     </Heading>
   );

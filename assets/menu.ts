@@ -1,7 +1,11 @@
-import { MdSettings, MdTask, MdDashboard } from "react-icons/md"
+import { MdStorage, MdTask, MdDashboard } from "react-icons/md";
 
 export const menuItems = [
-    { text: 'Dashboard', url: '/', icon: MdDashboard },
-    { text: 'Tasks', url: '/tasks', icon: MdTask },
-    { text: 'Settings', url: '/settings', icon: MdSettings },
-]
+  { text: "Dashboard", url: "/", icon: MdDashboard },
+  { text: "Tasks", url: "/tasks", icon: MdTask },
+  {
+    text: "FIDA IIMS Approvals",
+    url: "/fida-iims-approvals",
+    icon: MdStorage,
+  },
+];

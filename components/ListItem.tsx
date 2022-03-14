@@ -25,6 +25,8 @@ const ListItem = ({ onClick, selected, item }: Props) => {
         onClick={() => onClick(item.text)}
         borderWidth="1px"
         borderColor={borderColor}
+        width="100%"
+        height="100%"
       >
         <Flex alignItems="center" gap={3}>
           <Icon as={item.icon} w={6} h={6} color={color} />
