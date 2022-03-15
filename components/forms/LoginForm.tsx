@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Formik, Form } from "formik";
-import { Flex, Text, Button, Link as ChakraLink } from "@chakra-ui/react";
+import { Flex, Text, Button } from "@chakra-ui/react";
 import { loginInitialValues, loginSchema } from "./schemas/login";
 import TextField from "../TextField";
 
@@ -21,9 +21,9 @@ const LoginForm = () => {
           autoComplete="off"
           type="password"
         />
-        <Text color="purple.500">
+        <Text as="u" color="purple.500" >
           <Link href="/forgot-password" passHref>
-            <ChakraLink>Forgot password?</ChakraLink>
+            <a>Forgot password?</a>
           </Link>
         </Text>
         <Button
@@ -37,11 +37,11 @@ const LoginForm = () => {
         >
           Sign In
         </Button>
-        <Text alignSelf="center" color="purple.900">
+        <Text as="u" alignSelf="center" color="purple.900">
           <Link href="/signup" passHref>
-            <ChakraLink>
+            <a>
               Don&apos;t have an account? <strong>Sign Up</strong>
-            </ChakraLink>
+            </a>
           </Link>
         </Text>
       </Flex>
