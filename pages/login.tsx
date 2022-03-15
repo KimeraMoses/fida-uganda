@@ -1,11 +1,11 @@
-import { Box } from "@chakra-ui/react";
 import LoginForm from "../components/forms/LoginForm";
+import AuthLayout from "../components/AuthLayout";
 
 const Login = () => {
   return (
-    <Box h="100vh" display="flex" alignItems="center" justifyContent="center">
+    <AuthLayout title="Sign In">
       <LoginForm />
-    </Box>
+    </AuthLayout>
   );
 };
 

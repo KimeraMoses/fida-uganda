@@ -5,7 +5,6 @@ import { loginInitialValues, loginSchema } from "./schemas/login";
 import TextField from "../TextField";
 
 const LoginForm = () => {
-
   return (
     <Formik
       initialValues={loginInitialValues}
@@ -14,7 +13,7 @@ const LoginForm = () => {
         alert(JSON.stringify(values, null, 2));
       }}
     >
-      <Flex as={Form} flexDir="column" gap={5}>
+      <Flex as={Form} flexDir="column" gap={5} py={10}>
         <TextField name="email" placeholder="Email" autoComplete="off" />
         <TextField
           name="password"
@@ -22,13 +21,23 @@ const LoginForm = () => {
           autoComplete="off"
           type="password"
         />
-        <Text>
+        <Text color="purple.500">
           <Link href="/forgot-password" passHref>
             <ChakraLink>Forgot password?</ChakraLink>
           </Link>
         </Text>
-        <Button>Sign In</Button>
-        <Text alignSelf="center">
+        <Button
+          type="submit"
+          borderRadius="full"
+          bgGradient="linear(to-r, purple.400, purple.700)"
+          _hover={{ bgGradient: "linear(to-r, purple.600, purple.900)" }}
+          size="lg"
+          w="100%"
+          color="white"
+        >
+          Sign In
+        </Button>
+        <Text alignSelf="center" color="purple.900">
           <Link href="/signup" passHref>
             <ChakraLink>
               Don&apos;t have an account? <strong>Sign Up</strong>
