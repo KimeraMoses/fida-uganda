@@ -4,7 +4,7 @@ import SignUpForm from "../components/forms/SignUpForm";
 
 const Login: NextPage = () => {
   return (
-    <AuthLayout>
+    <AuthLayout title="Sign Up">
       <SignUpForm />
     </AuthLayout>
   );
