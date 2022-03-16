@@ -1,10 +1,10 @@
 import Layout from "../components/Layout";
-import Table from "../components/Table";
+import AccountForm from "../components/forms/AccountForm";
 
 const AccountSettings = () => {
   return (
     <Layout title="Account Settings">
-      <Table />
+      <AccountForm />
     </Layout>
   );
 };
