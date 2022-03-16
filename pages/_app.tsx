@@ -1,16 +1,16 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import { SWRConfig } from "swr";
 import { ChakraProvider } from "@chakra-ui/react";
-import { SWROptions } from "../data/swrProvider";
+import { Provider } from "react-redux";
+import store from "../store/store";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <SWRConfig value={SWROptions}>
+    <Provider store={store}>
       <ChakraProvider>
         <Component {...pageProps} />
       </ChakraProvider>
-    </SWRConfig>
+    </Provider>
   );
 }
 
