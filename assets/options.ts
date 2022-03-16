@@ -18,3 +18,8 @@ export const projectOptions = [
   { label: "ECHO", value: "ECHO" },
   { label: "DGD", value: "DGD" },
 ];
+
+export const sexOptions = [
+  { label: "male", value: "male" },
+  { label: "female", value: "female" },
+];
