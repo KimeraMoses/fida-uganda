@@ -20,6 +20,6 @@ export const projectOptions = [
 ];
 
 export const sexOptions = [
-  { label: "male", value: "male" },
-  { label: "female", value: "female" },
+  { label: "Male", value: "Male" },
+  { label: "Female", value: "Female" },
 ];

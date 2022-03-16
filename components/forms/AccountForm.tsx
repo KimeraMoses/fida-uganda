@@ -1,5 +1,5 @@
 import { Formik, Form } from "formik";
-import { Flex, SimpleGrid, GridItem } from "@chakra-ui/react";
+import { Flex, SimpleGrid, Button } from "@chakra-ui/react";
 import TextField from "../TextField";
 import SelectField from "../SelectField";
 import { accountInitialValues, accountSchema } from "./schemas/account";
@@ -19,10 +19,21 @@ const AccountForm = () => {
         alert(JSON.stringify(values, null, 2));
       }}
     >
-      <Flex flexDir="column" as={Form} bgColor="white" p={5}>
-        <SimpleGrid columns={2} gap={5}>
+      <Flex
+        flexDir="column"
+        as={Form}
+        bgColor="white"
+        p={"20"}
+        borderRadius="3xl"
+      >
+        <SimpleGrid columns={1} gap={5}>
           <TextField name="name" placeholder="Name" autoComplete="off" />
-          <TextField name="email" placeholder="Email" autoComplete="off" />
+          <TextField
+            name="email"
+            placeholder="Email"
+            type="email"
+            autoComplete="off"
+          />
           <SimpleGrid columns={3} gap={5}>
             <SelectField
               name="sex"
@@ -40,17 +51,30 @@ const AccountForm = () => {
               options={projectOptions}
             />
           </SimpleGrid>
-        </SimpleGrid>
-        <SimpleGrid columns={2} gap={5}>
-          <TextField name="bank" placeholder="Bank Name" />
-          <NumberField name="bankAccount" placeholder="Bank Account Number" />
-        </SimpleGrid>
-        <SimpleGrid columns={2} gap={5}>
-          <TextField name="nextOfKin" placeholder="Next of Kin" />
-          <NumberField
-            name="nextOfKinPhoneNumber"
-            placeholder="Next of Kin Phone Number"
-          />
+          <SimpleGrid columns={2} gap={5}>
+            <NumberField
+              name="taxIdentificationNumber"
+              placeholder="Tax Identification Number (TIN)"
+            />
+            <NumberField name="nssfNumber" placeholder="NSSF Number" />
+          </SimpleGrid>
+          <SimpleGrid columns={2} gap={5}>
+            <TextField name="bank" placeholder="Bank Name" />
+            <NumberField name="bankAccount" placeholder="Bank Account Number" />
+          </SimpleGrid>
+          <SimpleGrid columns={2} gap={5}>
+            <TextField name="nextOfKin" placeholder="Next of Kin" />
+            <NumberField
+              name="nextOfKinPhoneNumber"
+              placeholder="Next of Kin Phone Number"
+            />
+          </SimpleGrid>
+          <Flex justifyContent="space-around" mt={10}>
+            <Button variant="outline" colorScheme="red">
+              Cancel
+            </Button>
+            <Button colorScheme="green">Save</Button>
+          </Flex>
         </SimpleGrid>
       </Flex>
     </Formik>

@@ -3,11 +3,9 @@ import { Heading } from "@chakra-ui/react";
 import Layout from "../components/Layout";
 import Cards from "../components/Cards";
 import Card from "../components/Card";
-// import usePosts from "../data/usePost";
 import { MdSettings } from "react-icons/md";
 
 const Home: NextPage = () => {
-  // const { posts, isLoading } = usePosts();
 
   return (
     <Layout title="Dashboard">
@@ -21,9 +19,14 @@ const Home: NextPage = () => {
         Essentials
       </Heading>
       <Cards>
-        <Card title="User logs" stat={5} icon={MdSettings} />
-        <Card title="User logs" stat={5} icon={MdSettings} />
-        <Card title="User logs" stat={5} icon={MdSettings} />
+        <Card to="" title="User logs" stat={5} icon={MdSettings} />
+        <Card
+          to="requisitions"
+          title="Requisitions"
+          stat={10}
+          icon={MdSettings}
+        />
+        <Card to="" title="User logs" stat={5} icon={MdSettings} />
       </Cards>
       <Heading
         mt={10}
@@ -35,9 +38,9 @@ const Home: NextPage = () => {
         Statistics
       </Heading>
       <Cards>
-        <Card title="User logs" stat={5} icon={MdSettings} />
-        <Card title="User logs" stat={5} icon={MdSettings} />
-        <Card title="User logs" stat={5} icon={MdSettings} />
+        <Card to="" title="User logs" stat={5} icon={MdSettings} />
+        <Card to="" title="User logs" stat={5} icon={MdSettings} />
+        <Card to="" title="User logs" stat={5} icon={MdSettings} />
       </Cards>
     </Layout>
   );

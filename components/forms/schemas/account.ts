@@ -18,6 +18,8 @@ export const accountInitialValues = {
   sex: "",
   designation: "",
   project: "",
+  nssfNumber: "",
+  taxIdentificationNumber: "",
   bank: "",
   bankAccount: "",
   nextOfKin: "",
