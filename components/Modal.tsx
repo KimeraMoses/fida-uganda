@@ -10,7 +10,7 @@ type Props = {
   onClose: () => void;
   title?: string;
   size?: "md" | "lg" | "xl" | "full";
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 const Modal = ({ isOpen, onClose, title, size = "lg", children }: Props) => {

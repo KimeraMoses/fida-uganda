@@ -23,3 +23,10 @@ export const sexOptions = [
   { label: "Male", value: "Male" },
   { label: "Female", value: "Female" },
 ];
+
+export const requisitionTypeOptions = [
+  { label: "Product Requisition", value: "Product" },
+  { label: "Service Requisition", value: "Service" },
+  { label: "Works Requisition", value: "Works" },
+  { label: "Activity Requisition", value: "Activity" },
+];
