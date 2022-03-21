@@ -9,7 +9,7 @@ const PasswordResetForm = () => {
       <SubmitButton label="Recover Password" />
       <Text alignSelf="center" as="u" color="purple.900">
         <Link to="/">
-          Don't have an account? <strong>Sign Up</strong>
+          Back to <strong>Sign In</strong>
         </Link>
       </Text>
     </Flex>
