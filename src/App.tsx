@@ -1,7 +1,7 @@
-import AuthBgImage from "./components/common/AuthBgImage";
+import Auth from "./components/compound/Auth";
 
 function App() {
-  return <AuthBgImage>Hello World</AuthBgImage>;
+  return <Auth />
 }
 
 export default App;

@@ -13,7 +13,7 @@ function AuthFormBg({ children }: Props) {
       right="2rem"
       borderRadius="xl"
       width="32rem"
-      px="2rem"
+      p="2rem"
     >
       {children}
     </Box>

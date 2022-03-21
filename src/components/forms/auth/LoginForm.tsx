@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import { SimpleGrid, Input, Text } from "@chakra-ui/react";
+import { Flex, Input, Text } from "@chakra-ui/react";
 import SubmitButton from "./SubmitButton";
 
 const LoginForm = () => {
   return (
-    <SimpleGrid gap={5}>
+    <Flex flexDir="column" gap={10}>
       <Input name="email" placeholder="Email" autoComplete="off" />
       <Input
         name="password"
@@ -21,7 +21,7 @@ const LoginForm = () => {
           Don't have an account? <strong>Sign Up</strong>
         </Link>
       </Text>
-    </SimpleGrid>
+    </Flex>
   );
 };
 

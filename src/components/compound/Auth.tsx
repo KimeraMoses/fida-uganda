@@ -4,7 +4,7 @@ import AuthFormBg from "../common/AuthFormBg";
 import PageNotFound from "../common/PageNotFound";
 // import PasswordReset from "./auth/PasswordReset";
 // import SignUp from "./auth/SignUp";
-import LogIn from './auth/Login';
+import LogIn from "./auth/Login";
 
 function Auth() {
   return (
