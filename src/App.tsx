@@ -1,7 +1,12 @@
-import Auth from "./components/compound/Auth";
+import Layout from "./components/compound/Layout";
 
 function App() {
-  return <Auth />
+  // return <Auth />
+  return (
+    <Layout>
+      
+    </Layout>
+  );
 }
 
 export default App;
