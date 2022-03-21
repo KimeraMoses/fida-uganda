@@ -1,27 +1,34 @@
 import { Link } from "react-router-dom";
-import { Flex, Input, Text } from "@chakra-ui/react";
+import { Form } from "react-final-form";
+import { Flex, Text } from "@chakra-ui/react";
 import SubmitButton from "./SubmitButton";
+import { ILoginUser } from "../../../interfaces/User";
+import TextField from "../../common/inputs/TextAreaField";
 
-const LoginForm = () => {
+type Props = {
+  onSubmit: (values: ILoginUser) => void;
+};
+
+const LoginForm = ({ onSubmit }: Props) => {
   return (
-    <Flex flexDir="column" gap={10}>
-      <Input name="email" placeholder="Email" autoComplete="off" />
-      <Input
-        name="password"
-        placeholder="Password"
-        autoComplete="off"
-        type="password"
-      />
-      <Text as="u" color="purple.500">
-        <Link to="/forgotpassword">Forgot Password</Link>
-      </Text>
-      <SubmitButton label="Sign In" />
-      <Text alignSelf="center" as="u" color="purple.900">
-        <Link to="/signup">
-          Don't have an account? <strong>Sign Up</strong>
-        </Link>
-      </Text>
-    </Flex>
+    <Form
+      onSubmit={onSubmit}
+      render={({ handleSubmit, values }) => (
+        <Flex flexDir="column" gap={10} onSubmit={handleSubmit}>
+          <TextField name="email" />
+          <TextField name="password" />
+          <Text as="u" color="purple.500">
+            <Link to="/forgotpassword">Forgot Password</Link>
+          </Text>
+          <SubmitButton label="Sign In" />
+          <Text alignSelf="center" as="u" color="purple.900">
+            <Link to="/signup">
+              Don't have an account? <strong>Sign Up</strong>
+            </Link>
+          </Text>
+        </Flex>
+      )}
+    />
   );
 };
 
