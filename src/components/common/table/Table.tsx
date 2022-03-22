@@ -25,18 +25,20 @@ const Table = ({
     useTable({ columns, data });
 
   return (
-    <Box overflowX="auto" boxShadow="lg" p={3} bgColor="white">
+    <>
       <TableSearch btnLabel={btnLabel} btnClick={btnClick} showBtn={showBtn} />
-      <ChakraTable {...getTableProps()}>
-        <TableHead headerGroups={headerGroups} />
-        <TableBody
-          getTableBodyProps={getTableBodyProps}
-          prepareRow={prepareRow}
-          rows={rows}
-          onRowClick={onRowClick}
-        />
-      </ChakraTable>
-    </Box>
+      <Box overflowX="auto" boxShadow="lg" p={3} bgColor="white">
+        <ChakraTable {...getTableProps()}>
+          <TableHead headerGroups={headerGroups} />
+          <TableBody
+            getTableBodyProps={getTableBodyProps}
+            prepareRow={prepareRow}
+            rows={rows}
+            onRowClick={onRowClick}
+          />
+        </ChakraTable>
+      </Box>
+    </>
   );
 };
 

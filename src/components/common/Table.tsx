@@ -12,7 +12,15 @@ type Props = {
   showBtn?: boolean;
 };
 
-const Table = ({ data, columns, onRowClick, isLoading }: Props) => {
+const Table = ({
+  data,
+  columns,
+  onRowClick,
+  isLoading,
+  btnLabel,
+  btnClick,
+  showBtn,
+}: Props) => {
   if (isLoading || data === undefined) {
     return (
       <Center>
@@ -20,7 +28,16 @@ const Table = ({ data, columns, onRowClick, isLoading }: Props) => {
       </Center>
     );
   }
-  return <ShowTable data={data} columns={columns} onRowClick={onRowClick} />;
+  return (
+    <ShowTable
+      data={data}
+      columns={columns}
+      onRowClick={onRowClick}
+      showBtn={showBtn}
+      btnLabel={btnLabel}
+      btnClick={btnClick}
+    />
+  );
 };
 
 export default Table;

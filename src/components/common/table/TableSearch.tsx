@@ -23,7 +23,6 @@ function TableSearch({ btnLabel, btnClick, showBtn = true }: Props) {
     >
       <Button
         leftIcon={<MdFilterList />}
-        variant="ghost"
         color="blackAlpha.800"
         px="2rem"
       >

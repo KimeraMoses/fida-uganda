@@ -27,6 +27,7 @@ const Clients = () => {
         columns={clientsColumns}
         isLoading={isLoading}
         onRowClick={onRowClick}
+        showBtn={false}
       />
     </>
   );

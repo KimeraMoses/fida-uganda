@@ -17,6 +17,7 @@ const CaseFiles = () => {
         columns={caseFilesColumns}
         onRowClick={onRowClick}
         isLoading={isLoading}
+        btnLabel="Case File"
       />
     </>
   );

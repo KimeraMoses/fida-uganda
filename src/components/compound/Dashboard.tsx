@@ -7,7 +7,7 @@ import { MdSettings } from "react-icons/md";
 const Dashboard = () => {
   return (
     <>
-      <SectionHeader title="Case Files" />
+      <SectionHeader title="Dashboard" />
       <Heading
         mt={10}
         mb={5}
