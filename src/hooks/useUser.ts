@@ -8,9 +8,8 @@ export const useLogin = () => {
   const queryClient = useQueryClient();
 
   return useMutation(logIn, {
-    onSuccess: (data) => {
+    onSuccess: (data, ) => {
       localStorage.setItem("token", data.token);
-
       const previousUser = queryClient.getQueryData<IUserIsLogged | undefined>(
         USERS_KEY
       );
