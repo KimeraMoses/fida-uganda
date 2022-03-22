@@ -13,4 +13,12 @@ export const routes = {
   cases: {
     getCaseFiles: `${BASE_URL}/cases/getAll`,
   },
+  requisitions: {
+    getRequisitions: `${BASE_URL}/requisitions/getAll`,
+    addRequisition: `${BASE_URL}/requisitions/create`,
+    editRequisition: `${BASE_URL}/requisitions/edit`,
+    getPendingRequisitions: `${BASE_URL}/requisitions/getAllPendingRequisitions`,
+    getAllApproved: `${BASE_URL}/requisitions/getAllApprovedRequisitions`,
+    base: `${BASE_URL}/requisitions`,
+  },
 };

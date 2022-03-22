@@ -1,27 +1,45 @@
 import { Formik, Form } from "formik";
-import { SimpleGrid, Button } from "@chakra-ui/react";
+import { SimpleGrid, Button, useToast } from "@chakra-ui/react";
 import { requisitionTypeOptions } from "../../../lib/options";
 import TextField from "../../common/TextField";
 import SelectField from "../../common/SelectField";
 import NumberField from "../../common/NumberField";
+import { IRequisitionCreate } from "../../../interfaces/Requisition";
 import {
   requisitionInitialValues,
   requisitionSchema,
 } from "./schemas/requisitions";
+import { useEffect } from "react";
+import { toastError } from "../../../lib/toastDetails";
 
-const RequisitionForm = () => {
+type Props = {
+  onSubmit: (values: IRequisitionCreate) => void;
+  isSubmitting: boolean;
+  isError: boolean;
+  error: unknown;
+};
+
+const RequisitionForm = ({ onSubmit, isSubmitting, isError, error }: Props) => {
+  const toast = useToast();
+
+  useEffect(() => {
+    if (isError) {
+      toast(toastError(error));
+    }
+  }, [isError, error, toast]);
+
   return (
     <Formik
       initialValues={requisitionInitialValues}
       validationSchema={requisitionSchema}
       onSubmit={(values) => {
-        alert(JSON.stringify(values, null, 2));
+        onSubmit(values);
       }}
     >
       <SimpleGrid as={Form} p={5} gap={3}>
         <SimpleGrid columns={2} gap={5}>
-          <TextField name="project" placeholder="Project" />
-          <TextField name="budgetYear" placeholder="Budget Year" />
+          <TextField name="project_name" placeholder="Project" />
+          <TextField name="budget_year" placeholder="Budget Year" />
         </SimpleGrid>
         <SelectField
           name="type"
@@ -29,12 +47,19 @@ const RequisitionForm = () => {
           options={requisitionTypeOptions}
         />
         <SimpleGrid columns={2} gap={5}>
-          <NumberField name="unitPrice" placeholder="Unit Price" />
+          <NumberField name="unit_price" placeholder="Unit Price" />
           <NumberField name="quantity" placeholder="Number of Units Required" />
         </SimpleGrid>
-        <TextField name="subject" placeholder="Subject of Procurement" />
-        <TextField name="deliveryLocation" placeholder="Delivery Location" />
-        <TextField name="dateRequired" placeholder="Date Required" />
+        <TextField
+          name="subject_of_procurement"
+          placeholder="Subject of Procurement"
+        />
+        <TextField name="delivery_location" placeholder="Delivery Location" />
+        <TextField
+          name="date_required"
+          placeholder="Date Required"
+          type="date"
+        />
         <Button
           mt={5}
           type="submit"
@@ -44,6 +69,7 @@ const RequisitionForm = () => {
           size="lg"
           w="100%"
           color="white"
+          isLoading={isSubmitting}
         >
           Add Requisition
         </Button>

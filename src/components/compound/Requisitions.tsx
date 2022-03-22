@@ -1,31 +1,59 @@
+import { useEffect } from "react";
 import { Row } from "react-table";
-import { useDisclosure } from "@chakra-ui/react";
+import { useToast, useDisclosure } from "@chakra-ui/react";
 import SectionHeader from "../common/SectionHeader";
 import Table from "../common/Table";
-import { useClients } from "../../hooks/useClients";
-import { clientsColumns } from "../../assets/tableColumns/clients";
 import Modal from "../common/Modal";
 import RequisitionForm from "../forms/requisition/RequisitionForm";
+import { requisitionColumns } from "../../assets/tableColumns/requisition";
+import { toastSuccess } from "../../lib/toastDetails";
+import {
+  useAddRequisition,
+  useRequisitions,
+} from "../../hooks/useRequisitions";
+import { REQUISITION_CREATED } from "../../lib/constants";
 
 const Requisitions = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data, isLoading } = useClients();
+  const toast = useToast();
+  const { data, isLoading } = useRequisitions();
+  const {
+    mutate,
+    isLoading: isSubmitting,
+    isError,
+    error,
+    isSuccess,
+  } = useAddRequisition();
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast(toastSuccess(REQUISITION_CREATED));
+      onClose();
+    }
+  }, [isSuccess, onClose, toast]);
 
   const onRowClick = (row: Row) => {};
+
+  console.log(data?.requisitions);
 
   return (
     <>
       <SectionHeader title="Requisitions" />
       <Table
-        data={data?.clients}
-        columns={clientsColumns}
+        data={data?.requisitions}
+        columns={requisitionColumns}
         onRowClick={onRowClick}
         isLoading={isLoading}
         btnLabel="Add Requisition"
         btnClick={onOpen}
       />
       <Modal isOpen={isOpen} onClose={onClose} title="Requisition">
-        <RequisitionForm />
+        <RequisitionForm
+          onSubmit={mutate}
+          isSubmitting={isSubmitting}
+          isError={isError}
+          error={error}
+        />
       </Modal>
     </>
   );
