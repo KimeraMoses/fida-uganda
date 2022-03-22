@@ -7,6 +7,9 @@ type Props = {
   columns: any[];
   onRowClick: (row: Row<any>) => void;
   isLoading: boolean;
+  btnLabel?: string;
+  btnClick?: () => void;
+  showBtn?: boolean;
 };
 
 const Table = ({ data, columns, onRowClick, isLoading }: Props) => {
