@@ -22,4 +22,10 @@ export const routes = {
     stats: `${BASE_URL}/requisitions/getStats`,
     base: `${BASE_URL}/requisitions`,
   },
+  travelOrders: {
+    getTravelOrders: `${BASE_URL}/travelOrders/getAll`,
+    addTravelOrder: `${BASE_URL}/travelOrders/create`,
+    stats: `${BASE_URL}/travelOrders/getTravelOrderNumber`,
+    base: `${BASE_URL}/travelOrders`,
+  },
 };

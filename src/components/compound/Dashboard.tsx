@@ -4,12 +4,15 @@ import Card from "../common/Card";
 import Cards from "../common/Cards";
 import { MdSettings } from "react-icons/md";
 import { useRequisitionsStats } from "../../hooks/useRequisitions";
+import { useTravelOrderStats } from "../../hooks/useTravelOrders";
 
 const Dashboard = () => {
-  const { data } = useRequisitionsStats();
+  const { data: requisition } = useRequisitionsStats();
+  const { data: travelOrder } = useTravelOrderStats();
 
-  const requisitionNumber = data ? data?.numApprovedRequisitions : 0;
-  const requisitionPending = data ? data?.numPendingRequisitions : 0;
+  const requisitionNumber = requisition?.numApprovedRequisitions || 0;
+  const requisitionPending = requisition?.numPendingRequisitions || 0;
+  const travelOrders = travelOrder?.all_TravelOrders || 0;
 
   return (
     <>
@@ -24,7 +27,12 @@ const Dashboard = () => {
         Essentials
       </Heading>
       <Cards>
-        <Card to="" title="User logs" stat={5} icon={MdSettings} />
+        <Card
+          to="travel-order"
+          title="Travel Order"
+          stat={travelOrders}
+          icon={MdSettings}
+        />
         <Card
           to="requisitions"
           title="Requisitions"

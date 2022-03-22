@@ -34,8 +34,6 @@ const Requisitions = () => {
 
   const onRowClick = (row: Row) => {};
 
-  console.log(data?.requisitions);
-
   return (
     <>
       <SectionHeader title="Requisitions" />

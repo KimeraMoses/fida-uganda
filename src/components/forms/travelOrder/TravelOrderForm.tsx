@@ -35,15 +35,24 @@ const TravelOrderForm = ({ onSubmit, isSubmitting, isError, error }: Props) => {
     >
       <SimpleGrid as={Form} p={5} gap={3}>
         <SimpleGrid columns={2} gap={5}>
-          <TextField name="date_requested" placeholder="Date Requested" />
+          <TextField
+            name="date_requested"
+            placeholder="Date Requested"
+            type="date"
+          />
           <div></div>
         </SimpleGrid>
         <SimpleGrid columns={2} gap={5}>
           <TextField
             name="journey_start_time"
             placeholder="Journey start time"
+            type="time"
           />
-          <TextField name="journey_end_time" placeholder="Journey end time" />
+          <TextField
+            name="journey_end_time"
+            placeholder="Journey end time"
+            type="time"
+          />
         </SimpleGrid>
         <SimpleGrid columns={2} gap={5}>
           <TextField name="pickup_location" placeholder="Pick up location" />
@@ -51,20 +60,20 @@ const TravelOrderForm = ({ onSubmit, isSubmitting, isError, error }: Props) => {
         </SimpleGrid>
         <TextAreaField name="project_activity" placeholder="Project Activity" />
         <TextAreaField name="purpose" placeholder="Purpose" />
+        <Button
+          mt={5}
+          type="submit"
+          borderRadius="full"
+          bgGradient="linear(to-r, purple.400, purple.700)"
+          _hover={{ bgGradient: "linear(to-r, purple.600, purple.900)" }}
+          size="lg"
+          w="100%"
+          color="white"
+          isLoading={isSubmitting}
+        >
+          Add Travel Order
+        </Button>
       </SimpleGrid>
-      <Button
-        mt={5}
-        type="submit"
-        borderRadius="full"
-        bgGradient="linear(to-r, purple.400, purple.700)"
-        _hover={{ bgGradient: "linear(to-r, purple.600, purple.900)" }}
-        size="lg"
-        w="100%"
-        color="white"
-        isLoading={isSubmitting}
-      >
-        Add Requisition
-      </Button>
     </Formik>
   );
 };

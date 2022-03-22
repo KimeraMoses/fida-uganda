@@ -6,6 +6,11 @@ export interface ITravelOrderGetOne {
   travelOrder: ITravelOrder;
 }
 
+export interface ITravelOrderStat {
+  all_TravelOrders: number;
+  my_TravelOrders: number;
+}
+
 export interface ITravelOrderCreate {
   journey_start_time: string;
   journey_end_time: string;

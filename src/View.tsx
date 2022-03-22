@@ -5,8 +5,9 @@ import Clients from "./components/compound/Clients";
 import CaseFiles from "./components/compound/CaseFiles";
 import Requisitions from "./components/compound/Requisitions";
 import Tasks from "./components/compound/Tasks";
-import ClvDatabase from './components/compound/ClvDatabase';
+import ClvDatabase from "./components/compound/ClvDatabase";
 import Reports from "./components/compound/Reports";
+import TravelOrder from "./components/compound/TravelOrder";
 
 const View = () => {
   return (
@@ -26,6 +27,7 @@ const View = () => {
         <Route path="clv-database" element={<ClvDatabase />} />
         <Route path="requisitions" element={<Requisitions />} />
         <Route path="reports" element={<Reports />} />
+        <Route path="travel-order" element={<TravelOrder />} />
       </Route>
     </Routes>
   );
