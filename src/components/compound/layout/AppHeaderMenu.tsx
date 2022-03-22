@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { MdSettings, MdLogout } from "react-icons/md";
 import {
   Menu,
@@ -8,13 +8,13 @@ import {
   IconButton,
   Avatar,
 } from "@chakra-ui/react";
+import { useLogout } from "../../../hooks/useUser";
 
 const AppHeaderMenu = () => {
-  const navigate = useNavigate();
+  const { refetch } = useLogout();
 
   const logout = () => {
-    localStorage.removeItem("token");
-    navigate("/");
+    refetch();
   };
 
   return (

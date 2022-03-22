@@ -12,7 +12,7 @@ interface Props extends ComponentPropsWithoutRef<"textarea"> {
   label?: string;
 }
 
-const TextField = ({ name, label, ...rest }: Props) => {
+const TextAreaField = ({ name, label, ...rest }: Props) => {
   return (
     <Field name={name}>
       {({ input, meta }) => (
@@ -30,4 +30,4 @@ const TextField = ({ name, label, ...rest }: Props) => {
   );
 };
 
-export default TextField;
+export default TextAreaField;

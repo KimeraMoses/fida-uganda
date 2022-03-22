@@ -6,3 +6,7 @@ export interface IListItem {
   name: string;
   icon: As<any> | undefined;
 }
+
+export interface IMenu {
+  [key: string]: IListItem[];
+}

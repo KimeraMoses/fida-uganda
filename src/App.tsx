@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useGetMe } from "./hooks/useUser";
 import Auth from "./components/compound/Auth";
 import Layout from "./components/compound/Layout";
+import LoadingPage from "./components/common/LoadingPage";
 
 function App() {
   const { refetch, isLoading, data } = useGetMe();
@@ -14,7 +15,7 @@ function App() {
 
   if (!data?.user) {
     if (isLoading) {
-      return <div>Loading...</div>;
+      return <LoadingPage />;
     }
     return <Auth />;
   }
