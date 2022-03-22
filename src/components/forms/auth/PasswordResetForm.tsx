@@ -30,7 +30,7 @@ const PasswordResetForm = () => {
           Recover Password
         </Button>
         <Text as="u" alignSelf="center" color="purple.900">
-          <Link to="/login">Back to Login</Link>
+          <Link to="/">Back to Login</Link>
         </Text>
       </Flex>
     </Formik>

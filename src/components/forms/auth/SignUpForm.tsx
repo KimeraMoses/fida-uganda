@@ -40,7 +40,7 @@ const SignUpForm = () => {
           Sign Up
         </Button>
         <Text as="u" alignSelf="center" color="purple.900">
-          <Link to="/login">
+          <Link to="/">
             Already have an account? <strong>Sign In</strong>
           </Link>
         </Text>

@@ -1,16 +1,34 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Formik, Form } from "formik";
-import { Flex, Text, Button } from "@chakra-ui/react";
+import { Flex, Text, Button, useToast } from "@chakra-ui/react";
 import { loginInitialValues, loginSchema } from "./schemas/login";
 import TextField from "../../common/TextField";
+import { ILoginUser } from "../../../interfaces/User";
+import { toastError } from "../../../lib/toastDetails";
 
-const LoginForm = () => {
+type Props = {
+  onSubmit: (values: ILoginUser) => void;
+  isSubmitting: boolean;
+  isError: boolean;
+  error: unknown;
+};
+
+const LoginForm = ({ onSubmit, isSubmitting, isError, error }: Props) => {
+  const toast = useToast();
+
+  useEffect(() => {
+    if (isError) {
+      toast(toastError(error));
+    }
+  }, [isError, error, toast]);
+
   return (
     <Formik
       initialValues={loginInitialValues}
       validationSchema={loginSchema}
       onSubmit={(values) => {
-        alert(JSON.stringify(values, null, 2));
+        onSubmit(values);
       }}
     >
       <Flex as={Form} flexDir="column" gap={5} py={10}>
@@ -22,7 +40,7 @@ const LoginForm = () => {
           type="password"
         />
         <Text as="u" color="purple.500">
-          <Link to="/forgot-password">Forgot password?</Link>
+          <Link to="/forgotpassword">Forgot password?</Link>
         </Text>
         <Button
           type="submit"
@@ -32,6 +50,7 @@ const LoginForm = () => {
           size="lg"
           w="100%"
           color="white"
+          isLoading={isSubmitting}
         >
           Sign In
         </Button>
