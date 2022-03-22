@@ -4,10 +4,15 @@ import {
   IRequisitionCreate,
   IRequisitionGetAll,
   IRequisitionGetOne,
+  IRequisitionStats,
 } from "../interfaces/Requisition";
 
 export const getAllRequisitions = async (): Promise<IRequisitionGetAll> => {
   return await axiosClient.get(routes.requisitions.getRequisitions);
+};
+
+export const getRequisitionsStats = async (): Promise<IRequisitionStats> => {
+  return await axiosClient.get(routes.requisitions.stats);
 };
 
 export const addRequisition = async (

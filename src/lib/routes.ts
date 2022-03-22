@@ -19,6 +19,7 @@ export const routes = {
     editRequisition: `${BASE_URL}/requisitions/edit`,
     getPendingRequisitions: `${BASE_URL}/requisitions/getAllPendingRequisitions`,
     getAllApproved: `${BASE_URL}/requisitions/getAllApprovedRequisitions`,
+    stats: `${BASE_URL}/requisitions/getStats`,
     base: `${BASE_URL}/requisitions`,
   },
 };

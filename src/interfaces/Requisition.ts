@@ -28,3 +28,8 @@ export interface IRequisitionGetAll {
 export interface IRequisitionGetOne {
   requisition: IRequisition;
 }
+
+export interface IRequisitionStats {
+  numApprovedRequisitions: number;
+  numPendingRequisitions: number;
+}
