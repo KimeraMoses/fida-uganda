@@ -7,7 +7,7 @@ type Props = {
 
 const TableHead = ({ headerGroups }: Props) => {
   return (
-    <Thead>
+    <Thead bgColor="purple.50" color="white">
       {headerGroups.map((headerGroup) => (
         <Tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
           {headerGroup.headers.map((column, index) => (
@@ -16,7 +16,7 @@ const TableHead = ({ headerGroups }: Props) => {
               whiteSpace="nowrap"
               key={index.toString()}
             >
-              {column.render("Header")}
+              {column.render("Headers")}
             </Th>
           ))}
         </Tr>

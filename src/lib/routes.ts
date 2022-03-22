@@ -10,4 +10,7 @@ export const routes = {
   clients: {
     getClients: `${BASE_URL}/clients/getAll`,
   },
+  cases: {
+    getCaseFiles: `${BASE_URL}/cases/getAll`,
+  },
 };

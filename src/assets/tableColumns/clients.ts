@@ -19,11 +19,11 @@ export const clientFilesColumns = [
 
 export const clientsColumns = [
   { Headers: "Name", accessor: "name" },
-  { Headers: "Profession", accessor: "profession" },
+  { Headers: "Profession", accessor: "occupation" },
   { Headers: "Phone Number", accessor: "phoneNumber" },
   { Headers: "Email", accessor: "email" },
   { Headers: "City", accessor: "city" },
   { Headers: "Address", accessor: "address" },
   { Headers: "Case Status", accessor: "caseStatus" },
-  { Headers: "Registration Date", accessor: "registrationDate" },
+  { Headers: "Registration Date", accessor: "createdAt" },
 ];

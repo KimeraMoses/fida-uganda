@@ -1,6 +1,6 @@
 import { Row } from "react-table";
 import ShowTable from "./table/Table";
-import { Heading, Center, Spinner } from "@chakra-ui/react";
+import { Center, Spinner } from "@chakra-ui/react";
 
 type Props = {
   data: any[] | undefined;
@@ -10,15 +10,12 @@ type Props = {
 };
 
 const Table = ({ data, columns, onRowClick, isLoading }: Props) => {
-  if (isLoading) {
+  if (isLoading || data === undefined) {
     return (
       <Center>
         <Spinner />
       </Center>
     );
-  }
-  if (!data) {
-    return <Heading>No data</Heading>;
   }
   return <ShowTable data={data} columns={columns} onRowClick={onRowClick} />;
 };

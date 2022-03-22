@@ -11,7 +11,7 @@ export const caseFilesColumns = [
   { Headers: "Gender", accessor: "gender" },
   { Headers: "Name", accessor: "name" },
   { Headers: "Age", accessor: "age" },
-  { Headers: "No. of beneficiaries", accessor: "noOfBeneficiaries" },
+  { Headers: "No. of beneficiaries", accessor: "num_beneficiaries" },
   { Headers: "Occupation", accessor: "occupation" },
   { Headers: "Nature of problem", accessor: "natureOfProblem" },
   { Headers: "Action taken", accessor: "actionTaken" },
