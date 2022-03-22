@@ -1,3 +1,4 @@
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { MdSettings, MdLogout } from "react-icons/md";
 import {
@@ -8,13 +9,13 @@ import {
   IconButton,
   Avatar,
 } from "@chakra-ui/react";
-import { useLogout } from "../../../hooks/useUser";
+import { logoutUser } from "../../../store/authReducer";
 
 const AppHeaderMenu = () => {
-  const { refetch } = useLogout();
+  const dispatch = useDispatch();
 
   const logout = () => {
-    refetch();
+    dispatch(logoutUser());
   };
 
   return (

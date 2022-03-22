@@ -13,6 +13,7 @@ const slice = createSlice({
     },
     clearUser: (state) => {
       state.user = null;
+      localStorage.removeItem("token");
     },
   },
 });
