@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useGetMe } from "./hooks/useUser";
 import Auth from "./components/compound/Auth";
-import Layout from "./components/compound/Layout";
 import LoadingPage from "./components/common/LoadingPage";
+import View from "./View";
 
 function App() {
   const { refetch, isLoading, data } = useGetMe();
@@ -20,7 +20,7 @@ function App() {
     return <Auth />;
   }
 
-  return <Layout></Layout>;
+  return <View />;
 }
 
 export default App;
