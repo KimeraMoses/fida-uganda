@@ -14,7 +14,7 @@ const Table = ({ columns, data, onRowClick }: Props) => {
     useTable({ columns, data });
 
   return (
-    <Box overflowX="auto" boxShadow="lg" p={3}>
+    <Box overflowX="auto" boxShadow="lg" p={3} bgColor="white">
       <ChakraTable {...getTableProps()}>
         <TableHead headerGroups={headerGroups} />
         <TableBody

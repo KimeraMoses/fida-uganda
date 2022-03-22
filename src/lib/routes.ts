@@ -7,4 +7,7 @@ export const routes = {
     forgotPassword: `${BASE_URL}/users/forgotPassword`,
     getMe: `${BASE_URL}/users/me`,
   },
+  clients: {
+    getClients: `${BASE_URL}/clients/getAll`,
+  },
 };
