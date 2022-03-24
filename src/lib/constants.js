@@ -5,6 +5,8 @@ export const CLIENTS_KEY = "clients";
 export const CASES_KEY = "cases";
 export const REQUISITIONS_KEY = "requisitions";
 export const TRAVEL_ORDER_KEY = "travel_orders";
+export const TASKS_KEY = "tasks";
+export const COMMENTS_KEY = "comments";
 
 export const REQUISITIONS_STATS = "requisitions/stats";
 export const TRAVEL_ORDER_STATS = "travel_orders/stats";
