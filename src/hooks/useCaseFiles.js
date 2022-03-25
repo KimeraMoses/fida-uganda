@@ -7,7 +7,7 @@ import {
 import {
   addCaseFile,
   deleteCaseFile,
-  getAllCaseFiles,
+  getCaseFiles,
   getCaseFile,
   getClvCases,
   getClvStats,
@@ -17,7 +17,7 @@ import {
 import produce from "immer";
 
 export const useCaseFiles = () => {
-  return useQuery(CASES_KEY, getAllCaseFiles);
+  return useQuery(CASES_KEY, getCaseFiles);
 };
 
 export const useCaseFile = (caseId) => {
