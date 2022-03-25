@@ -18,5 +18,5 @@ export const updateEvent = async (event) => {
 };
 
 export const getAllEvents = async () => {
-  return axiosClient.get(routes.events.getEvents);
+  return axiosClient.get(routes.events.getAllEvents);
 };
