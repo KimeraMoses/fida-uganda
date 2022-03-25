@@ -138,7 +138,7 @@ export const routes = {
     getAllProjectProgress: `${BASE_URL}/projectProgress/getAll`,
     getProgressByProject: `${BASE_URL}/projectProgress/getByProject`,
   },
-  fleetManagement: {
+  fleet: {
     addFleet: `${BASE_URL}/fleets/create`,
     base: `${BASE_URL}/fleets`,
     editFleet: `${BASE_URL}/fleets/edit`,
