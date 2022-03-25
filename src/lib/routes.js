@@ -36,7 +36,6 @@ export const routes = {
     editComment: `${BASE_URL}/comments/edit`,
   },
   registration: {
-    base: `${BASE_URL}/registration`,
     getDistricts: `${BASE_URL}/registration/getAllDistricts`,
     getAllCounties: `${BASE_URL}/registration/getAllCounties`,
     getDistrict: `${BASE_URL}/registration/getDistrict`,
