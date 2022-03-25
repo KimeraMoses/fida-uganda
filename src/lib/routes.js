@@ -163,5 +163,5 @@ export const routes = {
     base: `${BASE_URL}/services`,
     editService: `${BASE_URL}/services/edit`,
     getAllServices: `${BASE_URL}/services/getAll`,
-  }
+  },
 };
