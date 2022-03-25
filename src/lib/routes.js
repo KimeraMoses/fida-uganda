@@ -158,4 +158,10 @@ export const routes = {
     getAllEvents: `${BASE_URL}/events/getAll`,
     getNumberOfAttendees: `${BASE_URL}/events/getEventsAttendees`,
   },
+  services: {
+    addService: `${BASE_URL}/services/create`,
+    base: `${BASE_URL}/services`,
+    editService: `${BASE_URL}/services/edit`,
+    getAllServices: `${BASE_URL}/services/getAll`,
+  }
 };
