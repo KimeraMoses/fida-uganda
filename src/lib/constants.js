@@ -21,6 +21,8 @@ export const PROJECT_PROGRESS = "project_progress";
 export const PROJECT_MANAGEMENT = "project_management";
 export const PROJECT_LOG_FRAMES_KEY = "project_log_frames";
 export const PROJECT_FILES_KEY = "project_files";
+export const DISTRICTS_KEY = "districts";
+export const COUNTIES_KEY = "counties";
 
 export const REQUISITIONS_STATS = "requisitions/stats";
 export const TRAVEL_ORDER_STATS = "travel_orders/stats";
