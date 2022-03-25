@@ -21,12 +21,16 @@ export const PROJECT_PROGRESS = "project_progress";
 export const PROJECT_MANAGEMENT = "project_management";
 export const PROJECT_LOG_FRAMES_KEY = "project_log_frames";
 export const PROJECT_FILES_KEY = "project_files";
+export const DISTRICTS_KEY = "districts";
+export const COUNTIES_KEY = "counties";
+export const SERVICES_KEY = "services";
 
 export const REQUISITIONS_STATS = "requisitions/stats";
 export const TRAVEL_ORDER_STATS = "travel_orders/stats";
 export const CLVS_STATS = "clvs/stats";
 export const COMPLAINTS_STATS = "complaints/stats";
 export const EVENTS_STATS = "events/stats";
+export const CLIENT_STATS = "client/stats";
 
 export const IS_REQUIRED = "is required";
 export const REQUISITION_CREATED = "Requisition created successfully";
