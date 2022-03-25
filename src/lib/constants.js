@@ -27,6 +27,7 @@ export const TRAVEL_ORDER_STATS = "travel_orders/stats";
 export const CLVS_STATS = "clvs/stats";
 export const COMPLAINTS_STATS = "complaints/stats";
 export const EVENTS_STATS = "events/stats";
+export const CLIENT_STATS = "client/stats";
 
 export const IS_REQUIRED = "is required";
 export const REQUISITION_CREATED = "Requisition created successfully";
