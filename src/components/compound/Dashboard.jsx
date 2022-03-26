@@ -39,7 +39,18 @@ const Dashboard = () => {
           stat={requisitionNumber + requisitionPending}
           icon={MdSettings}
         />
-        <Card to="" title="User logs" stat={5} icon={MdSettings} />
+        <Card
+          to="leave-advance-tracker"
+          title="Leave and Advance Tracker"
+          stat={5}
+          icon={MdSettings}
+        />
+        <Card
+          to="events-attendance"
+          title="Events Attendance"
+          stat={5}
+          icon={MdSettings}
+        />
       </Cards>
       <Heading
         mt={10}
@@ -51,9 +62,10 @@ const Dashboard = () => {
         Statistics
       </Heading>
       <Cards>
-        <Card to="" title="User logs" stat={5} icon={MdSettings} />
-        <Card to="" title="User logs" stat={5} icon={MdSettings} />
-        <Card to="" title="User logs" stat={5} icon={MdSettings} />
+        <Card to="" title="Cases" stat={5} icon={MdSettings} />
+        <Card to="" title="Clients" stat={5} icon={MdSettings} />
+        <Card to="" title="Complaints" stat={5} icon={MdSettings} />
+        <Card to="" title="Legal Officers" stat={5} icon={MdSettings} />
       </Cards>
     </>
   );

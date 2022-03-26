@@ -1,7 +1,11 @@
-import { HStack } from "@chakra-ui/react";
+import { SimpleGrid } from "@chakra-ui/react";
 
 const Cards = ({ children }) => {
-  return <HStack spacing={10}>{children}</HStack>;
+  return (
+    <SimpleGrid columns={4} gap={10}>
+      {children}
+    </SimpleGrid>
+  );
 };
 
 export default Cards;
