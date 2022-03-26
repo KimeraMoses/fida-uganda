@@ -8,6 +8,11 @@ import Tasks from "./components/compound/Tasks";
 import ClvDatabase from "./components/compound/ClvDatabase";
 import Reports from "./components/compound/Reports";
 import TravelOrder from "./components/compound/TravelOrder";
+import ITProducts from './components/itDepartment/ITProducts'
+import ITServices from "./components/itDepartment/itServices";
+import ITComplaints from './components/itDepartment/ITComplaints'
+import FleetDatabase from "./components/fleetManager/FleetDatabase";
+import Procurements from './components/procurement/Procurements'
 
 const View = () => {
   return (
@@ -28,6 +33,11 @@ const View = () => {
         <Route path="requisitions" element={<Requisitions />} />
         <Route path="reports" element={<Reports />} />
         <Route path="travel-order" element={<TravelOrder />} />
+        <Route path="it-products" element={<ITProducts />} />
+        <Route path="it-services" element={<ITServices />} />
+        <Route path="it-complaints" element={<ITComplaints />} />
+        <Route path="fleet-database" element={<FleetDatabase />} />
+        <Route path="procurements" element={<Procurements />} />
       </Route>
     </Routes>
   );
