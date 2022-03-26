@@ -18,7 +18,6 @@ function App() {
       refetch();
     }
     if (userData) {
-      console.log("dispatching");
       dispatch(loginUser(userData));
     }
   }, [refetch, dispatch, userData]);

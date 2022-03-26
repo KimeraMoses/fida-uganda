@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
-import { getMe, logIn } from "../apis/users";
+import { getMe, logIn, signUp } from "../apis/users";
 import { USERS_KEY } from "../lib/constants";
 
 export const useLogin = () => {
@@ -36,4 +36,8 @@ export const useLogout = () => {
 
 export const useGetMe = () => {
   return useQuery(USERS_KEY, getMe, { enabled: false });
+};
+
+export const useSignUp = () => {
+  return useMutation(signUp);
 };

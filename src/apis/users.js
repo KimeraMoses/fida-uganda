@@ -12,3 +12,7 @@ export const logIn = async (values) => {
 export const forgotPassword = async (email) => {
   return await axiosClient.post(routes.users.forgotPassword, { email });
 };
+
+export const signUp = async (values) => {
+  return await axiosClient.post(routes.users.signUp, values);
+};

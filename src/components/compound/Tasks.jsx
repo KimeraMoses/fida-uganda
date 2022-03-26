@@ -1,3 +1,4 @@
+import { useTasks } from "../../hooks/useTasks";
 import SectionHeader from "../common/SectionHeader";
 import { Heading } from "@chakra-ui/react";
 
@@ -5,6 +6,8 @@ import TasksCard from '../common/TasksCard'
 import Cards from "../common/Cards";
 
 const Tasks = () => {
+  const { data } = useTasks();
+
   return (
     <>
       <SectionHeader title="Tasks" />
@@ -95,6 +98,7 @@ const Tasks = () => {
           cardContent={'The DFG Nakaseke first quater report is two weeks  over due and the evaluators are coming in two weeks. '}
         />
       </Cards>
+      {JSON.stringify(data?.tasks, null, 2)}
     </>
   );
 };
