@@ -69,6 +69,36 @@ const menuOptions = {
     icon: MdStorage,
     path: "clients",
   },
+    itProducts: {
+    id: ++id,
+    name: "IT Products",
+    icon: MdStorage,
+    path: "it-products",
+  },
+  itServices: {
+    id: ++id,
+    name: "IT Services",
+    icon: MdStorage,
+    path: "it-services",
+  },
+  itComplaints: {
+    id: ++id,
+    name: "IT Complaints",
+    icon: MdStorage,
+    path: "it-complaints",
+  },
+  fleetDatabase: {
+    id: ++id,
+    name: "Fleet Database",
+    icon: MdStorage,
+    path: "fleet-database",
+  },
+  procurements: {
+    id: ++id,
+    name: "Procurements",
+    icon: MdStorage,
+    path: "procurements",
+  },
 };
 
 const commonOptions = [menuOptions.dashboard, menuOptions.tasks];
@@ -90,7 +120,11 @@ const menu = {
   ],
   membership: [...commonOptions],
   humanResources: [...commonOptions],
-  it: [...commonOptions],
+  it: [...commonOptions,
+  menuOptions.itProducts,
+  menuOptions.itServices,
+  menuOptions.itComplaints
+  ],
   finance: [...commonOptions],
   me: [
     ...commonOptions,
@@ -105,9 +139,15 @@ const menu = {
     menuOptions.fidaDatabases,
     menuOptions.reports,
   ],
-  procurement: [...commonOptions],
-  counselor: [...commonOptions],
-  fleetManager: [...commonOptions],
+  procurement: [...commonOptions,
+  menuOptions.procurements
+  ],
+  counselor: [...commonOptions,
+  menuOptions.caseFiles
+  ],
+  fleetManager: [...commonOptions,
+  menuOptions.fleetDatabase
+  ],
   other: [...commonOptions],
 };
 
