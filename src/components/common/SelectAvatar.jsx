@@ -1,9 +1,10 @@
 import { Avatar, IconButton } from "@chakra-ui/react";
 import { useState, useRef } from "react";
 import { MdEdit } from "react-icons/md";
+import { toastError } from "../../lib/toastDetails";
 import AvatarSelector from "./AvatarSelector";
 
-const SelectAvatar = ({ avatar, setAvatar, iconObj, ...rest }) => {
+const SelectAvatar = ({ avatar, setAvatar, iconObj, toast, ...rest }) => {
   const [showEditIcon, setShowEditIcon] = useState(false);
   const input = useRef(null);
 
@@ -15,11 +16,24 @@ const SelectAvatar = ({ avatar, setAvatar, iconObj, ...rest }) => {
   };
 
   const handleImageChange = (event) => {
-    setAvatar(event.target.files[0]);
+    const file = event.target.files[0];
+    if (file.size > 2097152) {
+      toast(toastError("Image size should be less than 2MB"));
+    } else {
+      setAvatar(file);
+    }
   };
 
   if (!avatar) {
-    return <AvatarSelector setAvatar={setAvatar} {...rest} iconObj />;
+    return (
+      <AvatarSelector
+        toast={toast}
+        avatar={avatar}
+        setAvatar={setAvatar}
+        {...rest}
+        iconObj
+      />
+    );
   }
 
   const url = URL.createObjectURL(avatar);

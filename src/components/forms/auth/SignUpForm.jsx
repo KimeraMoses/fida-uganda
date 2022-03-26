@@ -41,6 +41,7 @@ const SignUpForm = ({ onSubmit, isSubmitting, isError, error }) => {
         <SelectAvatar
           avatar={avatar}
           setAvatar={setAvatar}
+          toast={toast}
           alignSelf="center"
           borderRadius="full"
           h={20}
