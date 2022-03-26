@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Formik, Form } from "formik";
 import { Flex, Text, useToast } from "@chakra-ui/react";
@@ -6,10 +7,11 @@ import { designationOptions, projectOptions } from "../../../lib/options";
 import SelectField from "../../common/SelectField";
 import TextField from "../../common/TextField";
 import SubmitButton from "./SubmitButton";
-import { useEffect } from "react";
 import { toastError } from "../../../lib/toastDetails";
+import SelectAvatar from "../../common/SelectAvatar";
 
 const SignUpForm = ({ onSubmit, isSubmitting, isError, error }) => {
+  const [avatar, setAvatar] = useState(null);
   const toast = useToast();
 
   useEffect(() => {
@@ -23,10 +25,28 @@ const SignUpForm = ({ onSubmit, isSubmitting, isError, error }) => {
       initialValues={signUpInitialValues}
       validationSchema={signUpSchema}
       onSubmit={(values) => {
+        if (!avatar) {
+          toast(toastError("Please select an avatar"));
+          return;
+        }
+        const formData = new FormData();
+        formData.append("image", avatar);
+        Object.keys(values).forEach((key) => {
+          formData.append(key, values[key]);
+        });
         onSubmit(values);
       }}
     >
       <Flex as={Form} flexDir="column" gap={5} py={10}>
+        <SelectAvatar
+          avatar={avatar}
+          setAvatar={setAvatar}
+          alignSelf="center"
+          borderRadius="full"
+          h={20}
+          w={20}
+          iconObj={{ size: 24 }}
+        />
         <TextField name="name" placeholder="Name" autoComplete="off" />
         <TextField name="email" placeholder="Email" autoComplete="off" />
         <SelectField
