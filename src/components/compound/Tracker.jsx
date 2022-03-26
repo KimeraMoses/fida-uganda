@@ -1,13 +1,17 @@
 import React from "react";
 import SectionHeader from "../common/SectionHeader";
+import LeaveTracker from './LeaveTracker';
+import AdvanceTracker from './AdvanceTracker';
 
-const LeaveAdvance = () => {
+const Tracker = () => {
   return (
     <>
       <SectionHeader title="Leave Tracker" />
+      <LeaveTracker />
       <SectionHeader title="Advance Tracker" />
+      <AdvanceTracker />
     </>
   );
 };
 
-export default LeaveAdvance;
+export default Tracker;

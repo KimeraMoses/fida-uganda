@@ -9,8 +9,11 @@ import {
   projectOptions,
   sexOptions,
 } from "../../../lib/options";
+import { useState } from "react";
+import MultiUpload from "../../common/MultiUpload";
 
 const AccountSettingsForm = () => {
+  const [files, setFiles] = useState([]);
   return (
     <Formik>
       <Flex flexDir="column" bgColor="white" p={20} borderRadius={10}>
@@ -75,6 +78,7 @@ const AccountSettingsForm = () => {
             Essential Documents
           </Heading>
         </SimpleGrid>
+        <MultiUpload files={files} setFiles={setFiles} />
       </Flex>
     </Formik>
   );
