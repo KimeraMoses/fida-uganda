@@ -8,12 +8,12 @@ import AllocationsTable from "./AllocationsTable/AllocationsTable";
 const Allocations = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <div>
+    <>
       <SectionHeader title="Allocations" />
       <TableSearch btnLabel="Send Allocation" btnClick={onOpen} />
       <AllocationsTable />
       {isOpen && <Form onClose={onClose} title="Allocations"/>}
-    </div>
+    </>
   );
 };
 

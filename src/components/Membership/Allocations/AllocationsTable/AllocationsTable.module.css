@@ -43,6 +43,7 @@
   white-space: nowrap;
   user-select: none;
   font-weight: 600;
+  max-width: 110px;
 }
 .allocation_status_wrapper {
   display: flex;
@@ -53,7 +54,6 @@
   height: 8px;
   border-radius: 50%;
   margin-right: 10px;
-
 }
 .allocation_status_wrapper.success {
   background-color: rgba(26, 214, 152, 0.3);
@@ -63,6 +63,21 @@
   background-color: #ffe0e0;
   color: #ff3838;
 }
+.allocation_status_wrapper.paid {
+  background-color: #d7ffed;
+  color: #38cb89;
+}
+.allocation_status_wrapper.balance {
+  background-color: #fff8bc;
+  color: #baa802;
+}
+.allocation_status_wrapper.paid span {
+  background-color: #38cb89;
+}
+.allocation_status_wrapper.balance span {
+  background-color: #baa802;
+}
+
 .allocation_status_wrapper.success span {
   background-color: var(--text_color);
 }
@@ -70,15 +85,14 @@
   background-color: #d30000;
 }
 
-
 /* ======MEMBERS TABLE======== */
-.members_status h6{
+.members_status h6 {
   font-size: 14px;
   font-weight: 400;
 }
-.members_status.sucess h6{
-  color: #05FE00;
+.members_status.sucess h6 {
+  color: #05fe00;
 }
-.members_status.fail h6{
-  color: #FF0000;
+.members_status.fail h6 {
+  color: #ff0000;
 }

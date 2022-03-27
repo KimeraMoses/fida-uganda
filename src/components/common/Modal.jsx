@@ -10,7 +10,9 @@ const Modal = ({ isOpen, onClose, title, size = "lg", children }) => {
     <ChakraModal isOpen={isOpen} onClose={onClose} size={size}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader style={{fontWeight: '700'}}>{title}</ModalHeader>
+        {title && (
+          <ModalHeader style={{ fontWeight: "700" }}>{title}</ModalHeader>
+        )}
         {children}
       </ModalContent>
     </ChakraModal>

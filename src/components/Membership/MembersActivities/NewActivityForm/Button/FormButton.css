@@ -14,6 +14,20 @@
   padding: 4px 10px;
   min-width: 77px;
 }
+.fida__fm_btn.btn__rounded {
+  border-radius: 20px;
+}
+.fida__fm_btn.fida__btn_outlined {
+  border: 1px solid var(--primary_color);
+}
+.fida__fm_btn.fida__btn_outlined.btn_custom_color {
+  border: 1px solid #ebeff2;
+}
+.fida__fm_btn.fida__btn_transparent {
+  background-color: transparent;
+  color: var(--primary_color);
+  padding: 4px 14px;
+}
 .fida__fm_btn.fida__btn_cancel {
   border: 1px solid red;
 }

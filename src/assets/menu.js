@@ -33,12 +33,12 @@ const menuOptions = {
     icon: MdFeedback,
     path: "clv-complaints",
   },
-  reports: {
-    id: ++id,
-    name: "Reports",
-    icon: MdSummarize,
-    path: "reports",
-  },
+  // reports: {
+  //   id: ++id,
+  //   name: "Reports",
+  //   icon: MdSummarize,
+  //   path: "reports",
+  // },
   caseFiles: {
     id: ++id,
     name: "Case Files",
@@ -99,6 +99,42 @@ const menuOptions = {
     icon: MdStorage,
     path: "notifications",
   },
+  humanResource_Approvals: {
+    id: ++id,
+    name: "Approvals",
+    icon: MdStorage,
+    path: "hr-approvals",
+  },
+  payRoll: {
+    id: ++id,
+    name: "PayRoll",
+    icon: MdStorage,
+    path: "payroll",
+  },
+  leaveMgt: {
+    id: ++id,
+    name: "Leave Management",
+    icon: MdStorage,
+    path: "leave-management",
+  },
+  employContract: {
+    id: ++id,
+    name: "Employess & Contracts",
+    icon: MdStorage,
+    path: "employee-contract",
+  },
+  fidaAssets_hr: {
+    id: ++id,
+    name: "Fida Assests",
+    icon: MdStorage,
+    path: "fida-assets",
+  },
+  reports: {
+    id: ++id,
+    name: "Reports",
+    icon: MdStorage,
+    path: "reports",
+  },
 };
 
 const commonOptions = [menuOptions.dashboard, menuOptions.tasks];
@@ -126,7 +162,15 @@ const menu = {
     menuOptions.allocations,
     menuOptions.notifications,
   ],
-  humanResources: [...commonOptions],
+  humanResources: [
+    ...commonOptions,
+    menuOptions.humanResource_Approvals,
+    menuOptions.payRoll,
+    menuOptions.leaveMgt,
+    menuOptions.employContract,
+    menuOptions.fidaAssets_hr,
+    menuOptions.reports,
+  ],
   it: [...commonOptions],
   finance: [...commonOptions],
   me: [
