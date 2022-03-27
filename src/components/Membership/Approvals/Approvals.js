@@ -5,7 +5,6 @@ import SectionHeader from "../../common/SectionHeader";
 import TableSearch from "../../common/table/TableSearch";
 
 const Approvals = () => {
-
   return (
     <div>
       <SectionHeader title="Approvals" />

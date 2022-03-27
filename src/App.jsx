@@ -11,7 +11,6 @@ function App() {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const userData = useMemo(() => data?.user, [data]);
-
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
