@@ -17,7 +17,7 @@ export const getMyCases = async () => {
   return await axiosClient.get(routes.cases.getMyCases);
 };
 
-export const getClvStats = async () => {
+export const getCasesStats = async () => {
   return await axiosClient.get(routes.cases.stats);
 };
 

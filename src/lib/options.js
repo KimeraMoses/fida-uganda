@@ -14,6 +14,15 @@ export const designationOptions = [
   { label: "Other", value: "other" },
 ];
 
+export const maritalStatusOptions = [
+  { label: "Single", value: "single" },
+  { label: "Married", value: "married" },
+  { label: "Divorced", value: "divorced" },
+  { label: "Widowed", value: "widowed" },
+  { label: "Separated", value: "separated" },
+  { label: "Other", value: "other" },
+];
+
 export const projectOptions = [
   { label: "ECHO", value: "ECHO" },
   { label: "DGD", value: "DGD" },
