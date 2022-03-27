@@ -32,7 +32,9 @@ const View = () => {
       >
         <Route index element={<Dashboard />} />
         <Route path="tasks" element={<Tasks />} />
+        <Route path="leave-advance-tracker" element={<Tracker />} />
         <Route path="clients" element={<Clients />} />
+        <Route path="account-settings" element={<AccountSettings />} />
         <Route path="case-files" element={<CaseFiles />} />
         <Route path="clv-database" element={<ClvDatabase />} />
         <Route path="requisitions" element={<Requisitions />} />
