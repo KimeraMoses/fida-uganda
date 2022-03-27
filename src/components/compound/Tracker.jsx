@@ -2,7 +2,7 @@ import React from "react";
 import SectionHeader from "../common/SectionHeader";
 import LeaveTracker from "./LeaveTracker";
 import AdvanceTracker from "./AdvanceTracker";
-import { Button, useDisclosure } from "@chakra-ui/react";
+import { Box, Button, useDisclosure } from "@chakra-ui/react";
 import Modal from "../common/Modal";
 import LeaveTrackerForm from "../forms/tracker/LeaveTrackerForm";
 
@@ -14,10 +14,12 @@ const Tracker = () => {
       <SectionHeader title="Leave Tracker" />
       <LeaveTracker />
       <SectionHeader title="Advance Tracker" />
-      <AdvanceTracker />
-      <Button variant="outline" colorScheme="purple" onClick={onOpen}>
-        Advance Request
-      </Button>
+      <Box bgColor="white" p={5} borderRadius={10}>
+        <AdvanceTracker />
+        <Button variant="outline" colorScheme="purple" onClick={onOpen}>
+          Advance Request
+        </Button>
+      </Box>
       <Modal isOpen={isOpen} onClose={onClose}>
         <LeaveTrackerForm />
       </Modal>

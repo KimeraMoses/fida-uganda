@@ -6,7 +6,7 @@ import { monthsShort } from "../../assets/text";
 const AdvanceTracker = () => {
   return (
     <>
-      <SimpleGrid mb={10} bgColor="white" p={5} gap={5}>
+      <SimpleGrid mb={10} bgColor="white" gap={5}>
         <SimpleGrid columns={13}>
           <Box bgColor="purple.400">
             <Heading sx={advanceTrackerHeaders}>Month</Heading>
