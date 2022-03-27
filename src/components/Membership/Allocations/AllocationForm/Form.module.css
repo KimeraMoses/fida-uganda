@@ -1,0 +1,60 @@
+.fida__email_form_wrapper {
+  width: 449px;
+  background-color: #ffffff;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.fida__form_header{
+    background: #FF00D6;
+    color: #ffffff;
+    padding: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.fida__email_user_subject_wrapper{
+    box-sizing: border-box;
+    border: 1px solid #562B85;
+}
+.fida__email_users{
+    box-sizing: border-box;
+    padding: 10px 10px;
+    border-bottom:1px solid #562B85;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.fida__email_subject{
+    padding: 10px 10px;
+    
+}
+.fida__body_wrapper{
+    padding: 0 20px 10px;
+}
+.email_body_field{
+    user-select: none;
+    width: 100%;
+    min-height: 120px!important;
+}
+.fida__email_footer{
+    padding: 10px 20px;
+}
+.fida_email_send_actions,
+.fida__email_footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.fida_email_send_actions button{
+    margin-right: 10px;
+}
+.fida__email_footer svg{
+    fill: #000000be;
+    cursor: pointer;
+}
