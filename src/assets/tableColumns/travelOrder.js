@@ -15,3 +15,12 @@ export const travelOrderColumns = [
     },
   },
 ];
+
+// export const allocationsColumns = [
+//   { Headers: "Recepient (s)", accessor: "recepient" },
+//   { Headers: "Date", accessor: "date" },
+//   { Headers: "Subject", accessor: "subject" },
+//   { Headers: "Purpose", accessor: "purpose" },
+//   { Headers: "Stage", accessor: "stage" },
+//   { Headers: "Status", accessor: "status" },
+// ];

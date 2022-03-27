@@ -1,0 +1,12 @@
+.subheading_wrapper{
+    padding: 0px 0 24px;
+}
+.last__table{
+    padding-top: 24px;
+}
+.subheading_wrapper h3{
+    color: var(--primary_color);
+    font-size: 20px;
+    font-weight: 600;
+    user-select: none;
+}

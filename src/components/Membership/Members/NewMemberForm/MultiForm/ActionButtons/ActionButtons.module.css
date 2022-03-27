@@ -1,0 +1,10 @@
+.form_action_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+
+.form_action_wrapper.first_step{
+    float: right;
+}

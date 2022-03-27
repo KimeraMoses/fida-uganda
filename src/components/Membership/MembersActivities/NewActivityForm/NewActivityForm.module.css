@@ -1,0 +1,39 @@
+.activity_form_wrapper {
+  padding: 0 20px;
+}
+.input_group_wrapper {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+}
+.input_label {
+  font-size: 15px;
+  font-weight: 700;
+  width: 30%;
+  white-space: nowrap;
+}
+.input_field_wrapper {
+  width: 70%;
+}
+.input_group_wrapper_last {
+  padding: 8px 0;
+  width: 100%;
+}
+.input_group_wrapper_last textarea {
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: 1px solid #000000;
+  user-select: none;
+  color: var(--text_color);
+  outline: none;
+  font-size: 16px;
+  font-weight: 400;
+  width: 100%;
+  margin: 10px 0;
+}
+.form_action_wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+}

@@ -1,0 +1,10 @@
+.leave_mgt_table_wrapper {
+  background-color: #ffffff;
+}
+.table_header {
+  background-color: #f5dbff;
+  font-weight: 600;
+}
+.table_header th {
+  text-transform: capitalize;
+}
