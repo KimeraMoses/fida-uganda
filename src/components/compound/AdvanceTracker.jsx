@@ -1,28 +1,64 @@
 import React from "react";
 import { Box, SimpleGrid, Heading } from "@chakra-ui/react";
 import { advanceTrackerHeaders } from "../../lib/styles";
+import { monthsShort } from "../../assets/text";
 
 const AdvanceTracker = () => {
   return (
-    <Box mb={10} bgColor="white" p={5}>
-      <SimpleGrid columns={13}>
-        <Box bgColor="purple.400">
-          <Heading sx={advanceTrackerHeaders}>Month</Heading>
-        </Box>
-        <Heading sx={advanceTrackerHeaders}>Jan</Heading>
-        <Heading sx={advanceTrackerHeaders}>Feb</Heading>
-        <Heading sx={advanceTrackerHeaders}>Mar</Heading>
-        <Heading sx={advanceTrackerHeaders}>Apr</Heading>
-        <Heading sx={advanceTrackerHeaders}>May</Heading>
-        <Heading sx={advanceTrackerHeaders}>Jun</Heading>
-        <Heading sx={advanceTrackerHeaders}>Jul</Heading>
-        <Heading sx={advanceTrackerHeaders}>Aug</Heading>
-        <Heading sx={advanceTrackerHeaders}>Sep</Heading>
-        <Heading sx={advanceTrackerHeaders}>Oct</Heading>
-        <Heading sx={advanceTrackerHeaders}>Nov</Heading>
-        <Heading sx={advanceTrackerHeaders}>Dec</Heading>
+    <>
+      <SimpleGrid mb={10} bgColor="white" p={5} gap={5}>
+        <SimpleGrid columns={13}>
+          <Box bgColor="purple.400">
+            <Heading sx={advanceTrackerHeaders}>Month</Heading>
+          </Box>
+          {monthsShort.map((month) => (
+            <Heading key={month} sx={advanceTrackerHeaders}>
+              {month}
+            </Heading>
+          ))}
+        </SimpleGrid>
+        <SimpleGrid columns={13}>
+          <Box bgColor="orange.400">
+            <Heading sx={advanceTrackerHeaders}>Gross Salary</Heading>
+          </Box>
+          {monthsShort.map((month) => (
+            <Heading key={month} sx={advanceTrackerHeaders}>
+              {month}
+            </Heading>
+          ))}
+        </SimpleGrid>
+        <SimpleGrid columns={13}>
+          <Box bgColor="lime">
+            <Heading sx={advanceTrackerHeaders}>Net Salary</Heading>
+          </Box>
+          {monthsShort.map((month) => (
+            <Heading key={month} sx={advanceTrackerHeaders}>
+              {month}
+            </Heading>
+          ))}
+        </SimpleGrid>
+        <SimpleGrid columns={13}>
+          <Box bgColor="blue.400">
+            <Heading sx={advanceTrackerHeaders}>Advance</Heading>
+          </Box>
+          {monthsShort.map((month) => (
+            <Heading key={month} sx={advanceTrackerHeaders}>
+              {month}
+            </Heading>
+          ))}
+        </SimpleGrid>
+        <SimpleGrid columns={13}>
+          <Box bgColor="green.400">
+            <Heading sx={advanceTrackerHeaders}>Balance</Heading>
+          </Box>
+          {monthsShort.map((month) => (
+            <Heading key={month} sx={advanceTrackerHeaders}>
+              {month}
+            </Heading>
+          ))}
+        </SimpleGrid>
       </SimpleGrid>
-    </Box>
+    </>
   );
 };
 
