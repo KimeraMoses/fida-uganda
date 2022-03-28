@@ -33,12 +33,12 @@ const menuOptions = {
     icon: MdFeedback,
     path: "clv-complaints",
   },
-  reports: {
-    id: ++id,
-    name: "Reports",
-    icon: MdSummarize,
-    path: "reports",
-  },
+  // reports: {
+  //   id: ++id,
+  //   name: "Reports",
+  //   icon: MdSummarize,
+  //   path: "reports",
+  // },
   caseFiles: {
     id: ++id,
     name: "Case Files",
@@ -69,35 +69,71 @@ const menuOptions = {
     icon: MdStorage,
     path: "clients",
   },
-    itProducts: {
+  approvals: {
     id: ++id,
-    name: "IT Products",
+    name: "Approvals",
     icon: MdStorage,
-    path: "it-products",
+    path: "approvals",
   },
-  itServices: {
+  members: {
     id: ++id,
-    name: "IT Services",
+    name: "Members",
     icon: MdStorage,
-    path: "it-services",
+    path: "members",
   },
-  itComplaints: {
+  membersActivities: {
     id: ++id,
-    name: "IT Complaints",
+    name: "Members Activities",
     icon: MdStorage,
-    path: "it-complaints",
+    path: "members-activities",
   },
-  fleetDatabase: {
+  allocations: {
     id: ++id,
-    name: "Fleet Database",
+    name: "Allocations",
     icon: MdStorage,
-    path: "fleet-database",
+    path: "allocations",
   },
-  procurements: {
+  notifications: {
     id: ++id,
-    name: "Procurements",
+    name: "Notifications",
     icon: MdStorage,
-    path: "procurements",
+    path: "notifications",
+  },
+  humanResource_Approvals: {
+    id: ++id,
+    name: "Approvals",
+    icon: MdStorage,
+    path: "hr-approvals",
+  },
+  payRoll: {
+    id: ++id,
+    name: "PayRoll",
+    icon: MdStorage,
+    path: "payroll",
+  },
+  leaveMgt: {
+    id: ++id,
+    name: "Leave Management",
+    icon: MdStorage,
+    path: "leave-management",
+  },
+  employContract: {
+    id: ++id,
+    name: "Employess & Contracts",
+    icon: MdStorage,
+    path: "employee-contract",
+  },
+  fidaAssets_hr: {
+    id: ++id,
+    name: "Fida Assests",
+    icon: MdStorage,
+    path: "fida-assets",
+  },
+  reports: {
+    id: ++id,
+    name: "Reports",
+    icon: MdStorage,
+    path: "reports",
   },
 };
 
@@ -118,13 +154,24 @@ const menu = {
     menuOptions.clvDatabase,
     menuOptions.reports,
   ],
-  membership: [...commonOptions],
-  humanResources: [...commonOptions],
-  it: [...commonOptions,
-  menuOptions.itProducts,
-  menuOptions.itServices,
-  menuOptions.itComplaints
+  membership: [
+    ...commonOptions,
+    menuOptions.approvals,
+    menuOptions.members,
+    menuOptions.membersActivities,
+    menuOptions.allocations,
+    menuOptions.notifications,
   ],
+  humanResources: [
+    ...commonOptions,
+    menuOptions.humanResource_Approvals,
+    menuOptions.payRoll,
+    menuOptions.leaveMgt,
+    menuOptions.employContract,
+    menuOptions.fidaAssets_hr,
+    menuOptions.reports,
+  ],
+  it: [...commonOptions],
   finance: [...commonOptions],
   me: [
     ...commonOptions,

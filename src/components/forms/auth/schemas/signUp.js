@@ -13,7 +13,7 @@ export const signUpSchema = yup.object().shape({
 
 export const signUpInitialValues = {
   email: "",
-  password: "",
+  name: "",
   designation: "",
   project: "",
 };

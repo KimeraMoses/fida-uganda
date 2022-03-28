@@ -10,7 +10,7 @@ function App() {
   const { refetch, data, isLoading } = useGetMe();
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  const userData = useMemo(() => data?.user, [data]);
+  const userData = useMemo(() => data, [data]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");

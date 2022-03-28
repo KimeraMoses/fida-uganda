@@ -1,0 +1,95 @@
+.new_contracts_actions_wrapper {
+  background-color: rgba(137, 27, 232, 0.04);
+}
+.toggle_btn_wrapper {
+  background-color: #fff;
+  padding: 20px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  display: flex;
+  justify-content: center;
+}
+.btn_container {
+  background-color: #f5dbff;
+  padding: 4px;
+  border-radius: 30px;
+}
+
+/* ========RECENT UPLOADS======= */
+.recent_upload_wrapper {
+  border-top: 1px solid #ebeff2;
+  background-color: #ffffff;
+}
+.upload_card_wrapper {
+  padding: 10px;
+}
+.recent_upload_card_wrapper {
+  border-bottom: 1px solid #ebeff2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+.card_content_left,
+.card_content_right {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+}
+.file_name {
+  color: #242634;
+  opacity: 0.5;
+  display: flex;
+  align-items: center;
+  font-style: italic;
+}
+.time_uploaded {
+  margin-left: 24px;
+}
+.file_name svg {
+  margin-right: 10px;
+}
+.time_uploaded {
+  font-size: 12px;
+  color: #242634;
+}
+.recent_upload_card_wrapper svg {
+  color: var(--primary_color);
+}
+.size_wrapper {
+  padding: 0px 4px;
+  border: 1px solid #ebeff2;
+  font-weight: 600;
+  font-size: 11px;
+  user-select: none;
+}
+.size_wrapper.error {
+  border: 1px solid red;
+}
+.retry_icon {
+  margin-right: 10px;
+  cursor: pointer;
+}
+.file_actions {
+  padding: 5px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.load_all_uploads_btn {
+  text-align: center;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.last_sync_wrapper {
+  background-color: rgba(137, 27, 232, 0.04);
+  padding: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.last_sync_wrapper svg{
+    margin-right: 5px;
+}

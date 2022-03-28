@@ -1,0 +1,32 @@
+.new_note_upload_wrapper {
+  background-color: rgba(137, 27, 232, 0.04);
+}
+.upload_btn_wrapper {
+    background-color: #fff;
+    padding: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    text-align: center;
+}
+.upload_section_wrapper{
+    padding: 40px;
+    min-height: 340px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.upload_area{
+    border-radius: 30px;
+    border: 3px dashed #D9D5EC;
+    min-height: 300px;
+    color: #242634;
+    opacity: 0.5;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    cursor: pointer;
+}

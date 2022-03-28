@@ -1,0 +1,29 @@
+.approvals_table_wrapper {
+  background-color: #ffffff;
+  margin-bottom: 20px;
+}
+.table_header {
+  background-color: var(--table_head_bg_color);
+  font-weight: 600;
+  color: var(--text_color);
+}
+.table_header th {
+  font-size: 15px;
+}
+.table_header.table_text_lower th{
+    text-transform: capitalize;
+}
+
+.approval_table td:last-child {
+  white-space: nowrap;
+}
+.notes_status h6 {
+  font-size: 14px;
+  font-weight: 400;
+}
+.notes_status.read h6 {
+  color: #38CB89;
+}
+.notes_status.unread h6 {
+  color: #FF3838;
+}
