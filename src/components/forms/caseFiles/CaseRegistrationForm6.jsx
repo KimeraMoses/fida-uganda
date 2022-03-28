@@ -10,7 +10,7 @@ import {
 } from "./schemas/fleetDatabase";
 
 
-const CaseFilesForm = ({ onSubmit, isSubmitting, isError, error }) => {
+const CaseFilesForm6 = ({ onSubmit, isSubmitting, isError, error }) => {
     const toast = useToast();
 
     useEffect(() => {
@@ -61,4 +61,4 @@ const CaseFilesForm = ({ onSubmit, isSubmitting, isError, error }) => {
     );
 };
 
-export default CaseFilesForm;
+export default CaseFilesForm6;

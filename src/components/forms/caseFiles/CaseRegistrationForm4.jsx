@@ -12,7 +12,7 @@ import { beneficiariesColumns } from "../../../assets/tableColumns/beneficiaries
 import Table from '../../common/Table'
 
 
-const CaseFilesForm = ({ onSubmit, isSubmitting, isError, error }) => {
+const CaseFilesForm4 = ({ onSubmit, isSubmitting, isError, error }) => {
     const toast = useToast();
 
     useEffect(() => {
@@ -72,6 +72,40 @@ const CaseFilesForm = ({ onSubmit, isSubmitting, isError, error }) => {
                     <Radio >Other</Radio>
                 </SimpleGrid>
 
+                <SimpleGrid columns={3} gap={5}>
+             
+             <Button
+                 type="submit"
+                 borderRadius="full"
+                 bgGradient="linear(to-r, purple.400, purple.700)"
+                 _hover={{ bgGradient: "linear(to-r, purple.600, purple.900)" }}
+                 size="lg"
+                 w="40%"
+                 color="white"
+                 isLoading={isSubmitting}
+             >
+                 Back
+             </Button>
+            <p></p>
+
+         
+             <Button
+                 type="submit"
+                 borderRadius="full"
+                 bgGradient="linear(to-r, purple.400, purple.700)"
+                 _hover={{ bgGradient: "linear(to-r, purple.600, purple.900)" }}
+                 size="lg"
+                 w="40%"
+                 color="white"
+                 isLoading={isSubmitting}
+             >
+                 Next
+             </Button>
+
+  
+
+         </SimpleGrid>
+
 
 
             </SimpleGrid>
@@ -79,4 +113,4 @@ const CaseFilesForm = ({ onSubmit, isSubmitting, isError, error }) => {
     );
 };
 
-export default CaseFilesForm;
+export default CaseFilesForm4;
