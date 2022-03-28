@@ -18,7 +18,7 @@ staging:
   before_script:
     - *deploy
   only:
-    - staging
+    - main
   script:
     - firebase deploy -m "Pipe $CI_PIPELINE_ID Build $CI_BUILD_ID" --only hosting --non-interactive --token $FIREBASE_TOKEN
 
