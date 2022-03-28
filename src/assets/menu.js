@@ -186,9 +186,15 @@ const menu = {
     menuOptions.fidaDatabases,
     menuOptions.reports,
   ],
-  procurement: [...commonOptions],
-  counselor: [...commonOptions],
-  fleetManager: [...commonOptions],
+  procurement: [...commonOptions,
+  menuOptions.procurements
+  ],
+  counselor: [...commonOptions,
+  menuOptions.caseFiles
+  ],
+  fleetManager: [...commonOptions,
+  menuOptions.fleetDatabase
+  ],
   other: [...commonOptions],
 };
 
