@@ -18,6 +18,8 @@ import Leavemanagement from "./components/HumanResource/LeaveManagement/LeaveMan
 import EmployeeContract from "./components/HumanResource/EmployeeContract/EmployeeContract";
 import FidaAssets from "./components/HumanResource/FidaAssets/FidaAssets";
 import Reports from "./components/HumanResource/Reports/Reports";
+import Tracker from "./components/compound/Tracker";
+import AccountSettings from "./components/compound/AccountSettings";
 
 const View = () => {
   return (
