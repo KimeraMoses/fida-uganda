@@ -1,0 +1,27 @@
+.activities_table_wrapper {
+  background-color: #ffffff;
+}
+.table_header {
+  background-color: #fe00b7;
+  font-weight: 600;
+  color: var(--text_color);
+}
+.table_header th {
+  text-transform: capitalize;
+  font-size: 15px;
+}
+
+.activities_table_wrapper Tbody td {
+  border-color: #ff00d6 !important;
+}
+
+.data__primary_text {
+  color: var(--text_color);
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: capitalize;
+  margin-bottom: 4px;
+}
+.data__secondary_text {
+  color: var(--secondary_text_color);
+}

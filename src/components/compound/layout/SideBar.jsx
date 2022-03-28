@@ -1,17 +1,11 @@
+import { useSelector } from "react-redux";
 import { Box } from "@chakra-ui/react";
 import menu from "../../../assets/menu";
 import image from "../../../assets/images/FIDA_Wave.png";
 import List from "./List";
-import { useGetMe } from "../../../hooks/useUser";
 
 const SideBar = () => {
-  const { data } = useGetMe();
-  let currentMenu = menu.other;
-
-  if (data?.user) {
-    const designation = data.user.designation;
-    currentMenu = menu[designation];
-  }
+  const { designation } = useSelector((state) => state.auth.user);
 
   return (
     <Box
@@ -25,7 +19,7 @@ const SideBar = () => {
       backgroundRepeat="no-repeat"
     >
       <Box p={5} bgColor="white" borderRadius="xl" opacity="0.95" h="100%">
-        <List items={currentMenu} />
+        <List items={menu[designation] || menu.other} />
       </Box>
     </Box>
   );

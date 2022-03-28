@@ -1,0 +1,26 @@
+.input_field_wrapper {
+  max-width: 366px;
+  padding: 8px 12px;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  border-radius: 12px;
+  border: 1px solid #e5e5e5;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  color: var(--text_color);
+  outline: none;
+  font-size: 16px;
+  font-weight: 400;
+  margin: 5px 0;
+}
+.input_field_wrapper:focus {
+  border-color: #3182ce;
+}
+.input_field_wrapper.input_field__disabled {
+  background-color: var(--background__color);
+}
+.input_field_wrapper.fullwidth {
+  width: 100%;
+  max-width: 100%;
+}

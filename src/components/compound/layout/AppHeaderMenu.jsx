@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MdSettings, MdLogout } from "react-icons/md";
 import {
   Menu,
@@ -13,9 +13,11 @@ import { logoutUser } from "../../../store/authReducer";
 
 const AppHeaderMenu = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const logout = () => {
     dispatch(logoutUser());
+    navigate("/");
   };
 
   return (
