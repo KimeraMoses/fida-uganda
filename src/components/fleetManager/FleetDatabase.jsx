@@ -20,6 +20,7 @@ const FleetDatabase = () => {
   const toast = useToast();
 
   useEffect(() => {
+    
     if (isError) {
       toast(toastError(error));
     }
