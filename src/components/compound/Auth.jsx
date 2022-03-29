@@ -5,6 +5,7 @@ import PageNotFound from "../common/PageNotFound";
 import PasswordReset from "./auth/PasswordReset";
 import LogIn from "./auth/Login";
 import SignUp from "./auth/Signup";
+import CreatePassword from "./auth/CreatePassword";
 
 function Auth() {
   return (
@@ -22,6 +23,7 @@ function Auth() {
         <Route index element={<LogIn />} />
         <Route path="/forgotpassword" element={<PasswordReset />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/setPassword" element={<CreatePassword />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />
     </Routes>
