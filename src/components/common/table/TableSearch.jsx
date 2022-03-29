@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 import {
   Flex,
   Button,
@@ -16,7 +16,7 @@ import { AiOutlineFilePdf } from "react-icons/ai";
 import { MdFilterList, MdAdd, MdMoreVert } from "react-icons/md";
 
 function TableSearch({ onSearchHandler, searchTerm,btnLabel, btnClick, showBtn = true }) {
-  const [search, setSearch] = useState("");
+  // const [search, setSearch] = useState("");
 
   return (
     <Flex
