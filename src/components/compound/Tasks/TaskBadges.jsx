@@ -1,11 +1,11 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { Stack, Badge } from "@chakra-ui/react";
 import { v4 as uuidv4 } from "uuid";
 
 const TaskBadges = ({ tags }) => {
   const colors = ["red", "green", "yellow", "blue", "purple"];
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const currentColor = colors[currentIndex];
+  // const [currentIndex, setCurrentIndex] = useState(0);
+  const currentColor = colors[0];
 
   return (
     <>
