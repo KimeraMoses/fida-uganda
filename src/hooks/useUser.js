@@ -1,6 +1,12 @@
 import { useMutation, useQuery } from "react-query";
 import { useDispatch } from "react-redux";
-import { getMe, logIn, signUp, forgotPassword } from "../apis/users";
+import {
+  getMe,
+  logIn,
+  signUp,
+  forgotPassword,
+  setPassword,
+} from "../apis/users";
 import { USERS_KEY } from "../lib/constants";
 import { loginUser } from "../store/authReducer";
 
@@ -24,4 +30,8 @@ export const useSignUp = () => {
 
 export const useResetPassword = () => {
   return useMutation(forgotPassword);
+};
+
+export const useSetPassword = () => {
+  return useMutation(setPassword);
 };

@@ -8,7 +8,7 @@ const PieChart = ({ data }) => {
     labels: ["todo", "pending", "completed"],
     datasets: {
       label: "Task Status",
-      data: [...data],
+      data: data,
       backgroundColor: ["purple", "blue", "orange"],
       borderColor: ["purple", "blue", "orange"],
       borderWidth: 1,

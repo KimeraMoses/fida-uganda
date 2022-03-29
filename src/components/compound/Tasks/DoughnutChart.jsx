@@ -8,7 +8,7 @@ const DoughnutChart = ({ data }) => {
     labels: ["concluded", "ongoing"],
     datasets: {
       label: "Court Cases",
-      data: [...data],
+      data: data,
       backgroundColor: ["purple", "white"],
       borderColor: ["purple", "white"],
       borderWidth: 1,
