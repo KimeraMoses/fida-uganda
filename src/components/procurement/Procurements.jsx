@@ -6,19 +6,19 @@ import SectionHeader from "../common/SectionHeader";
 
 
 const Procurements = () => {
-  // const [data, setdata] = useState([])
+  // const [data, setData] = useState([])
 
   // const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const onRowClick = (row) => { };
+  // const onRowClick = (row) => { };
   return (
     <>
       <SectionHeader title="Fleet Database" />
-      // <Table
-      //   data={data}
-      //   columns={procurementsColumns}
-      //   onRowClick={onRowClick}
-      // />
+      {/* <Table
+        data={data}
+        columns={procurementsColumns}
+        onRowClick={onRowClick}
+      /> */}
     </>
   );
 };

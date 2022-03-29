@@ -6,18 +6,18 @@ import SectionHeader from "../common/SectionHeader";
 
 
 const ITComplaints = () => {
-  // const [data, setdata] = useState([])
+  // const [data, setData] = useState([])
 
 
-  const onRowClick = (row) => {};
+  // const onRowClick = (row) => {};
   return (
     <>
       <SectionHeader title="IT Complaints" />
-      // <Table
+      {/* // <Table
       //   data={data}
       //   columns={itComplaintsColumns}
       //   onRowClick={onRowClick}
-      // />
+      // /> */}
     </>
   );
 };
