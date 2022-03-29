@@ -130,7 +130,7 @@ const NewEmployeeForm = (props) => {
             <FormButton
               variant="cancel"
               type="button"
-              onClick={() => onClose()}
+              onClick={onClose}
             >
               cancel
             </FormButton>

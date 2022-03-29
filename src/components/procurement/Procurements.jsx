@@ -7,10 +7,9 @@ import { useDisclosure } from "@chakra-ui/react";
 
 const Procurements = () => {
   const [data, setdata] = useState([])
-
   const { isOpen, onOpen, onClose } = useDisclosure();
-
   const onRowClick = (row) => { };
+
   return (
     <>
       <SectionHeader title="Fleet Database" />

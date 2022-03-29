@@ -53,6 +53,7 @@ export const ApprovalData = [
 
 const FidaApprovedTable = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { data, searchResults } = props;
 
   return (
     <>
@@ -77,7 +78,7 @@ const FidaApprovedTable = (props) => {
             </Tr>
           </Thead>
           <Tbody>
-            {ApprovalData.map((item) => {
+            {(searchResults.length > 0 ? searchResults : data).map((item) => {
               return (
                 <Tr>
                   <Td>{item.name}</Td>

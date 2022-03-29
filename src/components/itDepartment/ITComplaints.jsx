@@ -2,7 +2,7 @@ import { useState } from 'react'
 import SectionHeader from "../common/SectionHeader";
 import Table from "../common/Table";
 import { itComplaintsColumns } from "../../assets/tableColumns/itDepartment";
-import { useDisclosure } from "@chakra-ui/react";
+// import { useDisclosure } from "@chakra-ui/react";
 
 
 const ITComplaints = () => {

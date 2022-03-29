@@ -15,7 +15,7 @@ import { AiOutlineFilePdf } from "react-icons/ai";
 
 import { MdFilterList, MdAdd, MdMoreVert } from "react-icons/md";
 
-function TableSearch({ btnLabel, btnClick, showBtn = true }) {
+function TableSearch({ onSearchHandler, searchTerm,btnLabel, btnClick, showBtn = true }) {
   const [search, setSearch] = useState("");
 
   return (
@@ -33,10 +33,12 @@ function TableSearch({ btnLabel, btnClick, showBtn = true }) {
       </Button>
       <Input
         placeholder="Search"
-        value={search}
-        onChange={(e) => {
-          setSearch(e.target.value);
-        }}
+        // value={search}
+        // onChange={(e) => {
+        //   setSearch(e.target.value);
+        // }}
+        value={searchTerm}
+        onChange={onSearchHandler}
       />
       {showBtn && (
         <Button
