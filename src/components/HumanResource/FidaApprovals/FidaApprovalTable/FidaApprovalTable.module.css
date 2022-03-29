@@ -1,0 +1,10 @@
+.table_header{
+    background-color: #F4F2FF;
+    font-weight: 600;
+    color: var(--text_color);
+    padding: 10px 0!important;
+
+}
+.data__primary_text_email{
+    color: #6E6893;
+}

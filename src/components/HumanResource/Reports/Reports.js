@@ -1,5 +1,6 @@
 import { useDisclosure } from "@chakra-ui/react";
 import React from "react";
+import { useUserReports } from "../../../hooks/useReports";
 import Modal from "../../common/Modal";
 import SectionHeader from "../../common/SectionHeader";
 import TableSearch from "../../common/table/TableSearch";
@@ -8,6 +9,8 @@ import ReportsTable from "./ReportTable/ReportTable";
 
 const Reports = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  // const {data} = useUserReports()
+  // console.log(data)
   return (
     <>
       <SectionHeader title="Reports" />

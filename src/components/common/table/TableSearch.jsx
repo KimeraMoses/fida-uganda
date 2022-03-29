@@ -9,7 +9,11 @@ import {
   MenuItem,
   MenuList,
 } from "@chakra-ui/react";
-import { MdFilterList, MdAdd, MdDownload, MdMoreVert } from "react-icons/md";
+import { SiMicrosoftexcel } from "react-icons/si";
+import { AiOutlineFilePdf } from "react-icons/ai";
+
+
+import { MdFilterList, MdAdd, MdMoreVert } from "react-icons/md";
 
 function TableSearch({ btnLabel, btnClick, showBtn = true }) {
   const [search, setSearch] = useState("");
@@ -55,7 +59,8 @@ function TableSearch({ btnLabel, btnClick, showBtn = true }) {
           icon={<MdMoreVert />}
         />
         <MenuList>
-          <MenuItem icon={<MdDownload size={20} />}>Download</MenuItem>
+          <MenuItem icon={<AiOutlineFilePdf size={20} />}>Export As Pdf</MenuItem>
+          <MenuItem icon={<SiMicrosoftexcel size={20} />}>Export As Excel</MenuItem>
         </MenuList>
       </Menu>
     </Flex>

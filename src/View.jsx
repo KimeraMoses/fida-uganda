@@ -25,6 +25,7 @@ import ITServices from "./components/itDepartment/itServices";
 import ITComplaints from "./components/itDepartment/ITComplaints";
 import FleetDatabase from "./components/fleetManager/FleetDatabase";
 import Procurements from "./components/procurement/Procurements";
+import FidaApprovals from "./components/HumanResource/FidaApprovals/FidaApprovals";
 
 const View = () => {
   return (
@@ -51,6 +52,7 @@ const View = () => {
         <Route path="allocations" element={<Allocations />} />
         <Route path="notifications" element={<Notifications />} />
         <Route path="approvals" element={<Approvals />} />
+        <Route path="fida-iims-approvals" element={<FidaApprovals />} />
         <Route path="hr-approvals" element={<HRApprovals />} />
         <Route path="payroll" element={<PayRoll />} />
         <Route path="leave-management" element={<LeaveManagement />} />
