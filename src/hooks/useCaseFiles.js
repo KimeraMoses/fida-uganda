@@ -10,7 +10,7 @@ import {
   getCaseFiles,
   getCaseFile,
   getClvCases,
-  getClvStats,
+  getCasesStats,
   getMyCases,
   updateCaseFile,
 } from "../apis/cases";
@@ -32,8 +32,8 @@ export const useMyCases = () => {
   return useQuery([CLV_CASES_KEY, "MY"], getMyCases);
 };
 
-export const useClvStats = () => {
-  return useQuery(CLV_CASE_FILE_STATS, getClvStats);
+export const useCasesStats = () => {
+  return useQuery(CLV_CASE_FILE_STATS, getCasesStats);
 };
 
 export const useAddCaseFiles = () => {

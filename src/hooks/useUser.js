@@ -1,36 +1,16 @@
-import { useMutation, useQuery, useQueryClient } from "react-query";
-import { useNavigate } from "react-router-dom";
-import { getMe, logIn, signUp } from "../apis/users";
+import { useMutation, useQuery } from "react-query";
+import { useDispatch } from "react-redux";
+import { getMe, logIn, signUp, forgotPassword } from "../apis/users";
 import { USERS_KEY } from "../lib/constants";
+import { loginUser } from "../store/authReducer";
 
 export const useLogin = () => {
-  const queryClient = useQueryClient();
+  const dispatch = useDispatch();
 
   return useMutation(logIn, {
     onSuccess: (data) => {
-      localStorage.setItem("token", data.token);
-      const previousUser = queryClient.getQueryData(USERS_KEY);
-      if (!previousUser) {
-        queryClient.setQueryData(USERS_KEY, () => {
-          return { user: { ...data.user } };
-        });
-      }
+      dispatch(loginUser(data));
     },
-  });
-};
-
-export const useLogout = () => {
-  const queryClient = useQueryClient();
-  const navigate = useNavigate();
-  return useQuery(USERS_KEY, () => {}, {
-    onSuccess: () => {
-      localStorage.removeItem("token");
-      queryClient.setQueryData(USERS_KEY, () => {
-        return { user: undefined };
-      });
-      navigate("/");
-    },
-    enabled: false,
   });
 };
 
@@ -40,4 +20,8 @@ export const useGetMe = () => {
 
 export const useSignUp = () => {
   return useMutation(signUp);
+};
+
+export const useResetPassword = () => {
+  return useMutation(forgotPassword);
 };

@@ -1,6 +1,15 @@
 import { useState } from "react";
-import { Flex, Button, Input } from "@chakra-ui/react";
-import { MdFilterList, MdAdd } from "react-icons/md";
+import {
+  Flex,
+  Button,
+  Input,
+  Menu,
+  MenuButton,
+  IconButton,
+  MenuItem,
+  MenuList,
+} from "@chakra-ui/react";
+import { MdFilterList, MdAdd, MdDownload, MdMoreVert } from "react-icons/md";
 
 function TableSearch({ btnLabel, btnClick, showBtn = true }) {
   const [search, setSearch] = useState("");
@@ -9,7 +18,7 @@ function TableSearch({ btnLabel, btnClick, showBtn = true }) {
     <Flex
       as="form"
       width="100%"
-      gap="2rem"
+      gap={3}
       my="2rem"
       p="1rem"
       bgColor="white"
@@ -38,6 +47,17 @@ function TableSearch({ btnLabel, btnClick, showBtn = true }) {
           {btnLabel}
         </Button>
       )}
+      <Menu>
+        <MenuButton
+          as={IconButton}
+          aria-label="Table Options"
+          variant="ghost"
+          icon={<MdMoreVert />}
+        />
+        <MenuList>
+          <MenuItem icon={<MdDownload size={20} />}>Download</MenuItem>
+        </MenuList>
+      </Menu>
     </Flex>
   );
 }
