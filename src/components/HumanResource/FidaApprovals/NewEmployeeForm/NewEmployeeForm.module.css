@@ -1,0 +1,39 @@
+.form_wrapper {
+  padding: 20px;
+  color: #000000;
+}
+.user_image_wrapper {
+  display: flex;
+  justify-content: center;
+  user-select: none;
+}
+.user_image {
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  background-color: #6d6c6c;
+  position: relative;
+  cursor: pointer;
+}
+.img_icon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #6d6c6c;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.field_wrapper {
+  margin: 8px 0;
+  user-select: none;
+}
+.form_action_wrapper{
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+}

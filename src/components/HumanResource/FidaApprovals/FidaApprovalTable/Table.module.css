@@ -1,0 +1,8 @@
+.table_header{
+    background-color: #F4F2FF;
+    font-weight: 600;
+    color: var(--text_color);
+}
+.table_header tr th{
+    padding: 10px;
+}
