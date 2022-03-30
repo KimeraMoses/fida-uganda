@@ -16,3 +16,10 @@ export const forgotPassword = async (email) => {
 export const signUp = async (values) => {
   return await axiosClient.post(routes.users.signUp, values);
 };
+
+export const setPassword = async (values) => {
+  return await axiosClient.patch(
+    `${routes.users.setPassword}/${values.token}`,
+    values
+  );
+};

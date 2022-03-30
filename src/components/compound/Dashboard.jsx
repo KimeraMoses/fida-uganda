@@ -1,4 +1,3 @@
-import { Heading } from "@chakra-ui/react";
 import SectionHeader from "../common/SectionHeader";
 import Card from "../common/Card";
 import Cards from "../common/Cards";
@@ -8,6 +7,7 @@ import { useTravelOrderStats } from "../../hooks/useTravelOrders";
 import { useClientStats } from "../../hooks/useClients";
 import { useCasesStats } from "../../hooks/useCaseFiles";
 import { useComplaintsStats } from "../../hooks/useComplaint";
+import SubHeading from "../common/SubHeading";
 
 const Dashboard = () => {
   const { data: requisition } = useRequisitionsStats();
@@ -26,15 +26,7 @@ const Dashboard = () => {
   return (
     <>
       <SectionHeader title="Dashboard" />
-      <Heading
-        mt={10}
-        mb={5}
-        fontSize="2xl"
-        color="purple.800"
-        fontWeight="thin"
-      >
-        Essentials
-      </Heading>
+      <SubHeading title="Essentials" />
       <Cards>
         <Card
           to="travel-order"
@@ -61,25 +53,12 @@ const Dashboard = () => {
           icon={MdSettings}
         />
       </Cards>
-      <Heading
-        mt={10}
-        mb={5}
-        fontSize="2xl"
-        color="purple.800"
-        fontWeight="thin"
-      >
-        Statistics
-      </Heading>
+      <SubHeading title="Statistics" />
       <Cards>
-        <Card to="" title="Cases" stat={cases} icon={MdSettings} />
-        <Card
-          to=""
-          title="Clients"
-          stat={clients}
-          icon={MdSettings}
-        />
-        <Card to="" title="Complaints" stat={complaints} icon={MdSettings} />
-        <Card to="" title="Legal Officers" stat={5} icon={MdSettings} />
+        <Card title="Cases" stat={cases} icon={MdSettings} />
+        <Card title="Clients" stat={clients} icon={MdSettings} />
+        <Card title="Complaints" stat={complaints} icon={MdSettings} />
+        <Card title="Legal Officers" stat={5} icon={MdSettings} />
       </Cards>
     </>
   );

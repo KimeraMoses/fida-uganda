@@ -7,13 +7,12 @@
   font-weight: 600;
   font-style: "Open Sans";
 }
+th{
+  padding: 10px!important;
+}
 .allocations_table_wrapper td {
   vertical-align: top;
 }
-/* .table_header Th{
-    vertical-align: top;
-
-} */
 .title_secondary_text {
   font-size: 14px;
   font-weight: 400;

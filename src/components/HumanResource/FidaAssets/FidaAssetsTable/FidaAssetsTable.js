@@ -36,7 +36,8 @@ export const AssetsData = [
   },
 ];
 
-const FidaAssetsTable = () => {
+const FidaAssetsTable = (props) => {
+  // const { data, searchResults } = props;
   return (
     <>
       <div className={classes.approvals_table_wrapper}>
@@ -55,6 +56,9 @@ const FidaAssetsTable = () => {
           </Thead>
           <Tbody>
             {AssetsData.map((item) => {
+              // const formatedDate = new Date(
+              //   item.createdAt
+              // ).toLocaleDateString();
               return (
                 <Tr>
                   <Td>{item.item}</Td>
