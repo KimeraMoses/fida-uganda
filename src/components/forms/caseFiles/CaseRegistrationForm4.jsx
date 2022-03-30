@@ -1,7 +1,5 @@
 import { useEffect } from "react";
-import { SimpleGrid, Button, useToast, Heading, Flex, Radio } from "@chakra-ui/react";
-import TextField from "../../common/TextField";
-import TextAreaField from '../../common/TextAreaField'
+import { SimpleGrid, Button, useToast, Heading,  Radio } from "@chakra-ui/react";
 import { Formik, Form } from "formik";
 import { toastError } from "../../../lib/toastDetails";
 import {

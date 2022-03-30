@@ -4,7 +4,7 @@ import Dashboard from "./components/compound/Dashboard";
 import Clients from "./components/compound/Clients";
 import CaseFiles from "./components/compound/CaseFiles";
 import Requisitions from "./components/compound/Requisitions";
-import Tasks from "./components/compound/Tasks";
+// import Tasks from "./components/compound/Tasks";
 import ClvDatabase from "./components/compound/ClvDatabase";
 import TravelOrder from "./components/compound/TravelOrder";
 import Members from "./components/Membership/Members/Members";
@@ -26,6 +26,7 @@ import ITComplaints from "./components/itDepartment/ITComplaints";
 import FleetDatabase from "./components/fleetManager/FleetDatabase";
 import Procurements from "./components/procurement/Procurements";
 import FidaApprovals from "./components/HumanResource/FidaApprovals/FidaApprovals";
+import Tasks from "./components/Tasks/Tasks";
 
 const View = () => {
   return (
