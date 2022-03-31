@@ -9,7 +9,9 @@ const slice = createSlice({
     setUser: (state, action) => {
       const { user, token } = action.payload;
       state.user = user;
-      localStorage.setItem("token", token);
+      if (token) {
+        localStorage.setItem("token", token);
+      }
     },
     clearUser: (state) => {
       state.user = null;
