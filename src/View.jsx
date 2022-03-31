@@ -1,8 +1,8 @@
 import { Routes, Route, Outlet } from "react-router-dom";
 import Layout from "./components/compound/Layout";
 import Dashboard from "./components/compound/Dashboard";
-import Clients from "./components/compound/Clients";
-import CaseFiles from "./components/compound/CaseFiles";
+// import Clients from "./components/compound/Clients";
+// import CaseFiles from "./components/compound/CaseFiles";
 import Requisitions from "./components/compound/Requisitions";
 // import Tasks from "./components/compound/Tasks";
 import ClvDatabase from "./components/compound/ClvDatabase";
@@ -27,6 +27,11 @@ import FleetDatabase from "./components/fleetManager/FleetDatabase";
 import Procurements from "./components/procurement/Procurements";
 import FidaApprovals from "./components/HumanResource/FidaApprovals/FidaApprovals";
 import Tasks from "./components/Tasks/Tasks";
+import Clients from "./components/LegalAid/Clients/Clients";
+import CLVs from "./components/LegalAid/CLVs/CLVs";
+import ClvCaseFiles from "./components/LegalAid/ClvCaseFiles/ClvCaseFiles";
+import CaseFiles from "./components/LegalAid/CaseFIles/CaseFiles";
+import ProjectFiles from "./components/LegalAid/ProjectFiles/ProjectFiles";
 
 const View = () => {
   return (
@@ -43,8 +48,11 @@ const View = () => {
         <Route path="tasks" element={<Tasks />} />
         <Route path="leave-advance-tracker" element={<Tracker />} />
         <Route path="clients" element={<Clients />} />
+        <Route path="clvs" element={<CLVs />} />
         <Route path="account-settings" element={<AccountSettings />} />
         <Route path="case-files" element={<CaseFiles />} />
+        <Route path="project-files" element={<ProjectFiles />} />
+        <Route path="clv-case-files" element={<ClvCaseFiles />} />
         <Route path="clv-database" element={<ClvDatabase />} />
         <Route path="requisitions" element={<Requisitions />} />
         <Route path="travel-order" element={<TravelOrder />} />

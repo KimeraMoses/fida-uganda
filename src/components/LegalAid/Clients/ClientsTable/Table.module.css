@@ -1,0 +1,10 @@
+.table_header {
+  background-color: #f4f2ff;
+  font-weight: 600;
+  color: var(--text_color);
+}
+.table_header th {
+  font-size: 15px;
+  vertical-align: top;
+}
+

@@ -1,0 +1,26 @@
+.action_taken_wrapper {
+    padding: 10px;
+}
+.card_wrapper {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+.avater_wrapper {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.content_wrapper h4, h6 {
+  font-weight: 700;
+  font-size: 13px;
+}
+.content_wrapper h6{
+    font-weight: 400;
+    font-size: 13px;
+}
+.add_actions_btn{
+    margin-top: 10px;
+    text-align: right;
+}
