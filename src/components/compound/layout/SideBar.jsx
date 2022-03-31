@@ -18,7 +18,14 @@ const SideBar = () => {
       backgroundPosition="center"
       backgroundRepeat="no-repeat"
     >
-      <Box p={5} bgColor="white" borderRadius="xl" opacity="0.95" h="100%">
+      <Box
+        p={5}
+        bgColor="white"
+        borderRadius="xl"
+        opacity="0.95"
+        h="100%"
+        overflow="auto"
+      >
         <List items={menu[designation] || menu.other} />
       </Box>
     </Box>
