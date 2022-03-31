@@ -15,7 +15,7 @@ export const FileData = [
     type: "Legal",
     caseNo: "0002933",
     gender: "Female",
-    name:"Cynthia Nakimera",
+    name: "Cynthia Nakimera",
     numBeneficiaries: 543,
     occupation: "Dentist",
     nature: "Family",
@@ -29,7 +29,7 @@ export const FileData = [
     number: "08474638382",
     disabilty: "none",
     fida: "friend",
-    age: 23
+    age: 23,
   },
   {
     fileNo: "FU/Kla/M/0001/2022 ",
@@ -41,7 +41,7 @@ export const FileData = [
     type: "Legal",
     caseNo: "0002933",
     gender: "Female",
-    name:"Cynthia Nakimera",
+    name: "Cynthia Nakimera",
     numBeneficiaries: 543,
     occupation: "Dentist",
     nature: "Family",
@@ -55,7 +55,7 @@ export const FileData = [
     number: "08474638382",
     disabilty: "none",
     fida: "friend",
-    age: 76
+    age: 76,
   },
   {
     fileNo: "FU/Kla/M/0001/2022 ",
@@ -67,7 +67,7 @@ export const FileData = [
     type: "Legal",
     caseNo: "0002933",
     gender: "Female",
-    name:"Cynthia Nakimera",
+    name: "Cynthia Nakimera",
     numBeneficiaries: 543,
     occupation: "Dentist",
     nature: "Family",
@@ -81,7 +81,7 @@ export const FileData = [
     number: "08474638382",
     disabilty: "none",
     fida: "friend",
-    age: 76
+    age: 76,
   },
   {
     fileNo: "FU/Kla/M/0001/2022 ",
@@ -93,7 +93,7 @@ export const FileData = [
     type: "Legal",
     caseNo: "0002933",
     gender: "Female",
-    name:"Cynthia Nakimera",
+    name: "Cynthia Nakimera",
     numBeneficiaries: 543,
     occupation: "Dentist",
     nature: "Family",
@@ -107,7 +107,7 @@ export const FileData = [
     number: "08474638382",
     disabilty: "none",
     fida: "friend",
-    age: 76
+    age: 76,
   },
   {
     fileNo: "FU/Kla/M/0001/2022 ",
@@ -119,7 +119,7 @@ export const FileData = [
     type: "Legal",
     caseNo: "0002933",
     gender: "Female",
-    name:"Cynthia Nakimera",
+    name: "Cynthia Nakimera",
     numBeneficiaries: 543,
     occupation: "Dentist",
     nature: "Family",
@@ -133,7 +133,7 @@ export const FileData = [
     number: "08474638382",
     disabilty: "none",
     fida: "friend",
-    age: 76
+    age: 76,
   },
   {
     fileNo: "FU/Kla/M/0001/2022 ",
@@ -145,7 +145,7 @@ export const FileData = [
     type: "Legal",
     caseNo: "0002933",
     gender: "Female",
-    name:"Cynthia Nakimera",
+    name: "Cynthia Nakimera",
     numBeneficiaries: 543,
     occupation: "Dentist",
     nature: "Family",
@@ -159,7 +159,7 @@ export const FileData = [
     number: "08474638382",
     disabilty: "none",
     fida: "friend",
-    age: 76
+    age: 76,
   },
   {
     fileNo: "FU/Kla/M/0001/2022 ",
@@ -171,7 +171,7 @@ export const FileData = [
     type: "Legal",
     caseNo: "0002933",
     gender: "Female",
-    name:"Cynthia Nakimera",
+    name: "Cynthia Nakimera",
     numBeneficiaries: 543,
     occupation: "Dentist",
     nature: "Family",
@@ -185,7 +185,7 @@ export const FileData = [
     number: "08474638382",
     disabilty: "none",
     fida: "friend",
-    age: 76
+    age: 76,
   },
   {
     fileNo: "FU/Kla/M/0001/2022 ",
@@ -197,7 +197,7 @@ export const FileData = [
     type: "Legal",
     caseNo: "0002933",
     gender: "Female",
-    name:"Cynthia Nakimera",
+    name: "Cynthia Nakimera",
     numBeneficiaries: 543,
     occupation: "Dentist",
     nature: "Family",
@@ -211,7 +211,7 @@ export const FileData = [
     number: "08474638382",
     disabilty: "none",
     fida: "friend",
-    age: 76
+    age: 76,
   },
   {
     fileNo: "FU/Kla/M/0001/2022 ",
@@ -223,7 +223,7 @@ export const FileData = [
     type: "Legal",
     caseNo: "0002933",
     gender: "Female",
-    name:"Cynthia Nakimera",
+    name: "Cynthia Nakimera",
     numBeneficiaries: 543,
     occupation: "Dentist",
     nature: "Family",
@@ -237,14 +237,17 @@ export const FileData = [
     number: "08474638382",
     disabilty: "none",
     fida: "friend",
-    age: 76
-  }
+    age: 76,
+  },
 ];
 
-const CaseFilesTable = () => {
+const CaseFilesTable = ({ data }) => {
   return (
     <>
-      <div className={classes.approvals_table_wrapper} style={{overflowX: 'auto'}}>
+      <div
+        className={classes.approvals_table_wrapper}
+        style={{ overflowX: "auto" }}
+      >
         <Table
           variant="striped"
           size="sm"
@@ -261,16 +264,13 @@ const CaseFilesTable = () => {
                   />
                 );
               })}
-              
             </Tr>
           </Thead>
           <Tbody>
             {FileData.map((item) => {
               return (
                 <Tr key={item.age}>
-                  <Td className={classes.primary_text_icon}>
-                    {item.fileNo}
-                  </Td>
+                  <Td className={classes.primary_text_icon}>{item.fileNo}</Td>
                   <Td className={classes.data__purpose_primary_text}>
                     {item.date_Created}
                   </Td>
