@@ -4,41 +4,9 @@ import classes from "../../../HumanResource/FidaAssets/FidaAssetsTable/Table.mod
 import { TableHeadColumn } from "../../../Membership/Allocations/AllocationsTable/AllocationsTable";
 import { FolderIcon } from "../../../../assets/Icons/Icons";
 import styles from "./Table.module.css";
+import { formatDate } from "../../../../lib/data";
 
-export const ProjectData = [
-  {
-    name: "SGBV, Nakaseke District",
-    created_by: "Andrew Tebandeke",
-    date_modified: "Oct 14, 2021",
-  },
-  {
-    name: "SGBV, Nakaseke District",
-    created_by: "Andrew Tebandeke",
-    date_modified: "Oct 14, 2021",
-  },
-  {
-    name: "SGBV, Nakaseke District",
-    created_by: "Andrew Tebandeke",
-    date_modified: "Oct 14, 2021",
-  },
-  {
-    name: "SGBV, Nakaseke District",
-    created_by: "Andrew Tebandeke",
-    date_modified: "Oct 14, 2021",
-  },
-  {
-    name: "SGBV, Nakaseke District",
-    created_by: "Andrew Tebandeke",
-    date_modified: "Oct 14, 2021",
-  },
-  {
-    name: "SGBV, Nakaseke District",
-    created_by: "Andrew Tebandeke",
-    date_modified: "Oct 14, 2021",
-  },
-];
-
-const ProjectTable = () => {
+const ProjectTable = ({ data }) => {
   return (
     <>
       <div className={classes.approvals_table_wrapper}>
@@ -55,7 +23,7 @@ const ProjectTable = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {ProjectData.map((item) => {
+            {data.map((item) => {
               return (
                 <Tr>
                   <Td className={classes.primary_text_icon}>
@@ -65,7 +33,7 @@ const ProjectTable = () => {
                   <Td className={classes.data__purpose_primary_text}>
                     {item.created_by}
                   </Td>
-                  <Td>{item.date_modified}</Td>
+                  <Td>{formatDate(item.updateAt)}</Td>
                 </Tr>
               );
             })}

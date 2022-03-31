@@ -10,11 +10,11 @@ import {
 } from "../apis/projects";
 import { PROJECTS_KEY } from "../lib/constants";
 
-export const useProject = () => {
+export const useProjects = () => {
   return useQuery(PROJECTS_KEY, getProjects);
 };
 
-export const useProjects = (projectId) => {
+export const useProject = (projectId) => {
   return useQuery([PROJECTS_KEY, projectId], getProject);
 };
 

@@ -3,6 +3,7 @@ import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
 import classes from "../../FidaAssets/FidaAssetsTable/Table.module.css";
 import { TableHeadColumn } from "../../../Membership/Allocations/AllocationsTable/AllocationsTable";
 import { FolderIcon } from "../../../../assets/Icons/Icons";
+import { formatDate } from "../../../../lib/data";
 
 export const ReportsData = [
   {
@@ -32,7 +33,7 @@ export const ReportsData = [
   },
 ];
 
-const ReportsTable = () => {
+const ReportsTable = ({ data }) => {
   return (
     <>
       <div className={classes.approvals_table_wrapper}>
@@ -49,17 +50,17 @@ const ReportsTable = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {ReportsData.map((item) => {
+            {data.map((item) => {
               return (
-                <Tr>
+                <Tr key={item.id}>
                   <Td className={classes.primary_text_icon}>
                     <FolderIcon />
                     {item.name}
                   </Td>
                   <Td className={classes.data__purpose_primary_text}>
-                    {item.date_Created}
+                    {formatDate(item.createdAt)}
                   </Td>
-                  <Td>{item.date_modified}</Td>
+                  <Td>{formatDate(item.updateAt)}</Td>
                 </Tr>
               );
             })}
