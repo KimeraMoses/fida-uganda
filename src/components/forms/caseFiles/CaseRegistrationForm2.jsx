@@ -1,6 +1,5 @@
 import { useEffect } from "react";
-import { SimpleGrid, Button, useToast, Heading, Flex } from "@chakra-ui/react";
-import TextField from "../../common/TextField";
+import { SimpleGrid, Button, useToast, Heading } from "@chakra-ui/react";
 import { Formik, Form } from "formik";
 import { toastError } from "../../../lib/toastDetails";
 import {
@@ -9,7 +8,7 @@ import {
 } from "./schemas/fleetDatabase";
 
 
-const CaseFilesForm = ({ onSubmit, isSubmitting, isError, error }) => {
+const CaseFilesForm2 = ({ onSubmit, isSubmitting, isError, error }) => {
     const toast = useToast();
 
     useEffect(() => {
@@ -84,10 +83,45 @@ const CaseFilesForm = ({ onSubmit, isSubmitting, isError, error }) => {
 
                 </SimpleGrid>
 
+                <SimpleGrid columns={3} gap={5}>
+             
+             <Button
+                 type="submit"
+                 borderRadius="full"
+                 bgGradient="linear(to-r, purple.400, purple.700)"
+                 _hover={{ bgGradient: "linear(to-r, purple.600, purple.900)" }}
+                 size="lg"
+                 w="40%"
+                 color="white"
+                 isLoading={isSubmitting}
+             >
+                 Back
+             </Button>
+            <p></p>
+
+         
+             <Button
+                 type="submit"
+                 borderRadius="full"
+                 bgGradient="linear(to-r, purple.400, purple.700)"
+                 _hover={{ bgGradient: "linear(to-r, purple.600, purple.900)" }}
+                 size="lg"
+                 w="40%"
+                 color="white"
+                 isLoading={isSubmitting}
+             >
+                 Next
+             </Button>
+
+  
+
+         </SimpleGrid>
+
+
 
             </SimpleGrid>
         </Formik>
     );
 };
 
-export default CaseFilesForm;
+export default CaseFilesForm2;

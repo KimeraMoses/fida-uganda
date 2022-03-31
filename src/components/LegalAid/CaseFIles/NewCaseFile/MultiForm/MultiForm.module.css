@@ -1,0 +1,16 @@
+.field_row_label {
+  text-transform: uppercase;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+}
+.field_label_inner {
+    padding: 10px 0;
+}
+.field_inner_label {
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+  color: #000000;
+}

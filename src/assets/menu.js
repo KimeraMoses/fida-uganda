@@ -27,6 +27,18 @@ const menuOptions = {
     icon: MdSummarize,
     path: "clv-database",
   },
+  clvCaseFiles: {
+    id: ++id,
+    name: "CLV Case Files",
+    icon: MdSummarize,
+    path: "clv-case-files",
+  },
+  clvs: {
+    id: ++id,
+    name: "CLVs",
+    icon: MdSummarize,
+    path: "clvs",
+  },
   clvComplaints: {
     id: ++id,
     name: "CLV Complaints",
@@ -141,6 +153,12 @@ const menuOptions = {
     icon: MdStorage,
     path: "fida-iims-approvals",
   },
+  project: {
+    id: ++id,
+    name: "Project Files",
+    icon: MdStorage,
+    path: "project-files",
+  },
 };
 
 const commonOptions = [menuOptions.dashboard, menuOptions.tasks];
@@ -148,6 +166,8 @@ const commonOptions = [menuOptions.dashboard, menuOptions.tasks];
 const menu = {
   clv: [
     ...commonOptions,
+    menuOptions.clvs,
+    menuOptions.caseFiles,
     menuOptions.clvDatabase,
     menuOptions.clvComplaints,
     menuOptions.reports,
@@ -156,8 +176,10 @@ const menu = {
   legalAid: [
     ...commonOptions,
     menuOptions.clients,
+    menuOptions.clvs,
     menuOptions.caseFiles,
-    menuOptions.clvDatabase,
+    menuOptions.clvCaseFiles,
+    menuOptions.project,
     menuOptions.reports,
   ],
   membership: [
@@ -189,19 +211,15 @@ const menu = {
   ],
   programs: [
     ...commonOptions,
+    menuOptions.approvals,
     menuOptions.fidaProjects,
     menuOptions.fidaDatabases,
+    menuOptions.fidaAssets,
     menuOptions.reports,
   ],
-  procurement: [...commonOptions,
-  menuOptions.procurements
-  ],
-  counselor: [...commonOptions,
-  menuOptions.caseFiles
-  ],
-  fleetManager: [...commonOptions,
-  menuOptions.fleetDatabase
-  ],
+  procurement: [...commonOptions, menuOptions.procurements],
+  counselor: [...commonOptions, menuOptions.caseFiles],
+  fleetManager: [...commonOptions, menuOptions.fleetDatabase],
   other: [...commonOptions],
 };
 

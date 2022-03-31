@@ -1,0 +1,27 @@
+.new_task_card_wrapper{
+    padding: 20px;
+    cursor: pointer;
+    user-select: none;
+}
+.new_task_card_wrapper_inner {
+  background-color: #f5dbff;
+  box-shadow: 9px 8px 24px rgba(103, 80, 164, 0.2);
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.new_task_card_wrapper h3 {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 33px;
+  color: #000000;
+  padding-left: 20px;
+}
+.new_task_card_wrapper svg{
+    font-size: 32px;
+}

@@ -1,0 +1,8 @@
+.approvals_table_wrapper {
+  border: 1px solid #572b859c;
+}
+
+.table_header th {
+  font-size: 15px;
+  text-transform: capitalize;
+}

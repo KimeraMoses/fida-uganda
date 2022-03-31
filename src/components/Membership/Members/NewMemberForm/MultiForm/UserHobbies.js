@@ -40,7 +40,6 @@ const UserHobbies = ({
 
         <ActionButtons
           step={values.step}
-          Continue={Continue}
           Previous={Previous}
         />
       </form>

@@ -2,7 +2,12 @@ import SectionHeader from "../common/SectionHeader";
 import { useCaseFiles } from "../../hooks/useCaseFiles";
 import Table from "../common/Table";
 import { caseFilesColumns } from "../../assets/tableColumns/cases";
-import CaseFilesForm from "../forms/caseFiles/CaseRegistrationForm6";
+// import CaseFilesForm1 from "../forms/caseFiles/CaseRegistrationForm1";
+// import CaseFilesForm2 from "../forms/caseFiles/CaseRegistrationForm2";
+// import CaseFilesForm3 from "../forms/caseFiles/CaseRegistrationForm3";
+// import CaseFilesForm4 from "../forms/caseFiles/CaseRegistrationForm4";
+// import CaseFilesForm6 from "../forms/caseFiles/CaseRegistrationForm6";
+import CaseFilesForm5 from "../forms/caseFiles/CaseRegistrationForm5";
 import { useDisclosure } from "@chakra-ui/react";
 import ModalLarge from "../common/ModalLarge";
 
@@ -26,7 +31,7 @@ const CaseFiles = () => {
         btnClick={onOpen}
       />
       <ModalLarge isOpen={isOpen} onClose={onClose} title="Case Registration Form">
-        <CaseFilesForm
+        <CaseFilesForm5
         // onSubmit={mutate}
         // isSubmitting={isSubmitting}
         // isError={isError}
