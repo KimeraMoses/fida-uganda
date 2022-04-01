@@ -14,8 +14,13 @@ const ClvCaseFiles = () => {
       <SectionHeader title="CLVs Case Files" />
       <TableSearch btnLabel="New CLV Case File" btnClick={onOpen} />
       <CaseFilesTable />
-      <Modal isOpen={isOpen} onClose={onClose} title="CLV Case File Regitration Form">
-        <NewCaseFile/>
+      <Modal
+        size="md"
+        isOpen={isOpen}
+        onClose={onClose}
+        title="CLV Case File Regitration Form"
+      >
+        <NewCaseFile />
       </Modal>
     </>
   );
