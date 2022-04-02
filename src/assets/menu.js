@@ -204,6 +204,7 @@ const menu = {
   finance: [...commonOptions],
   me: [
     ...commonOptions,
+    menuOptions.approvals,
     menuOptions.fidaProjects,
     menuOptions.fidaDatabases,
     menuOptions.fidaAssets,

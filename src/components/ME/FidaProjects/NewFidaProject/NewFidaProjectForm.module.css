@@ -1,0 +1,14 @@
+.new_project_wrapper {
+  padding: 20px;
+}
+.field_wrapper {
+  padding: 5px 0;
+}
+.field_label {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 19px;
+  color: #4e5d78;
+  margin-bottom: 8px;
+  user-select: none;
+}

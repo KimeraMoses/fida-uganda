@@ -32,6 +32,8 @@ import CLVs from "./components/LegalAid/CLVs/CLVs";
 import ClvCaseFiles from "./components/LegalAid/ClvCaseFiles/ClvCaseFiles";
 import CaseFiles from "./components/LegalAid/CaseFIles/CaseFiles";
 import ProjectFiles from "./components/LegalAid/ProjectFiles/ProjectFiles";
+import FidaProjects from "./components/ME/FidaProjects/FidaProjects";
+import FidaProjectFiles from "./components/ME/FidaProjects/FidaProjectFiles/FidaProjectFiles";
 
 const View = () => {
   return (
@@ -73,6 +75,9 @@ const View = () => {
         <Route path="it-complaints" element={<ITComplaints />} />
         <Route path="fleet-database" element={<FleetDatabase />} />
         <Route path="procurements" element={<Procurements />} />
+        <Route path="fida-databases" element={<Procurements />} />
+        <Route path="fida-projects" element={<FidaProjects />} /> 
+        <Route path="fida-projects/:folderName" element={<FidaProjectFiles />} />
       </Route>
     </Routes>
   );

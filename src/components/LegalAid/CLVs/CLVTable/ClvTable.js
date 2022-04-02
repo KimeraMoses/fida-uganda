@@ -8,10 +8,10 @@ import {
   IconButton,
   useDisclosure,
 } from "@chakra-ui/react";
-import { FcApproval } from "react-icons/fc";
 import classes from "../../../Membership/Allocations/AllocationsTable/AllocationsTable.module.css";
 import styles from "./Table.module.css";
 import { TableHeadColumn } from "../../../Membership/Allocations/AllocationsTable/AllocationsTable";
+import { FcApproval } from "react-icons/fc";
 import { MdEdit } from "react-icons/md";
 import Modal from "../../../common/Modal";
 import NewClvForm from "../CLVForms/NewClvForm";
