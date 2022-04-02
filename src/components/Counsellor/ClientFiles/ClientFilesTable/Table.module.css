@@ -1,0 +1,13 @@
+.files_table_wrapper{
+    background-color: #ffffff;
+    border: 1px solid #562B85;
+}
+.table_header{
+    background-color: #FE00B7;
+}
+.table_header th{
+    text-transform: capitalize;
+}
+.file_table td{
+    font-weight: 600;
+}
