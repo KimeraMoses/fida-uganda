@@ -34,6 +34,8 @@ import CaseFiles from "./components/LegalAid/CaseFIles/CaseFiles";
 import ProjectFiles from "./components/LegalAid/ProjectFiles/ProjectFiles";
 import FidaProjects from "./components/ME/FidaProjects/FidaProjects";
 import FidaProjectFiles from "./components/ME/FidaProjects/FidaProjectFiles/FidaProjectFiles";
+import FidaDatabases from "./components/ME/FidaDatabases/FidaDatabases";
+import DatabaseOpen from "./components/ME/FidaDatabases/DatabaseOpen";
 
 const View = () => {
   return (
@@ -75,7 +77,8 @@ const View = () => {
         <Route path="it-complaints" element={<ITComplaints />} />
         <Route path="fleet-database" element={<FleetDatabase />} />
         <Route path="procurements" element={<Procurements />} />
-        <Route path="fida-databases" element={<Procurements />} />
+        <Route path="fida-databases" element={<FidaDatabases />} />
+        <Route path="fida-databases/:dbName" element={<DatabaseOpen />} />
         <Route path="fida-projects" element={<FidaProjects />} /> 
         <Route path="fida-projects/:folderName" element={<FidaProjectFiles />} />
       </Route>

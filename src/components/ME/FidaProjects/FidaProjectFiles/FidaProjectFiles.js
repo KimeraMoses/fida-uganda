@@ -11,6 +11,7 @@ const FidaProjectFiles = () => {
       <SectionHeader
         title={`Fida Projects > ${folderName.replace(/-/g, " ")}`}
       />
+
       <TableSearch showBtn={false} />
       <FidaProjectTable isDocuments={true} />
     </>
