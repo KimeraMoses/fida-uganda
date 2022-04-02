@@ -1,8 +1,20 @@
-import React from "react";
-import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
+import React, { useState } from "react";
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Td,
+  IconButton,
+  useDisclosure,
+} from "@chakra-ui/react";
+import { FcApproval } from "react-icons/fc";
 import classes from "../../../Membership/Allocations/AllocationsTable/AllocationsTable.module.css";
 import styles from "./Table.module.css";
 import { TableHeadColumn } from "../../../Membership/Allocations/AllocationsTable/AllocationsTable";
+import { MdEdit } from "react-icons/md";
+import Modal from "../../../common/Modal";
+import NewClvForm from "../CLVForms/NewClvForm";
 
 export const CLVData = [
   {
@@ -52,6 +64,17 @@ export const CLVData = [
 ];
 
 const CLVTable = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isEdit, setIsEdit] = useState(false);
+
+  const initiateApproval = () => {
+    setIsEdit(false);
+    onOpen();
+  };
+  const initiateEdit = () => {
+    setIsEdit(true);
+    onOpen();
+  };
   return (
     <>
       <div className={classes.allocations_table_wrapper}>
@@ -70,7 +93,8 @@ const CLVTable = () => {
                 title="FIDA ID NUMBER"
                 secondaryText="Registration Date"
               />
-              <TableHeadColumn title="case Status" secondaryText="" />
+              <TableHeadColumn title="case Status" />
+              <TableHeadColumn title="Actions" />
             </Tr>
           </Thead>
           <Tbody>
@@ -122,11 +146,38 @@ const CLVTable = () => {
                       <h5>{item.open ? "active" : "Closed"}</h5>
                     </div>
                   </Td>
+                  <Td>
+                    <div className={styles.table_actions_wrapperr}>
+                      <div className={styles.table_actions_icon_wrapper}>
+                        <IconButton
+                          size="xs"
+                          aria-label="Edit Item"
+                          icon={<MdEdit />}
+                          onClick={initiateEdit}
+                        />
+                      </div>
+                      <div className={styles.table_actions_icon_wrapper}>
+                        <IconButton
+                          size="xs"
+                          variant="outline"
+                          aria-label="Approve Clv"
+                          icon={<FcApproval />}
+                          onClick={initiateApproval}
+                        />
+                      </div>
+                    </div>
+                  </Td>
                 </Tr>
               );
             })}
           </Tbody>
         </Table>
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <NewClvForm
+            action={`${isEdit ? "editClv" : "approveClv"}`}
+            onClose={onClose}
+          />
+        </Modal>
       </div>
     </>
   );

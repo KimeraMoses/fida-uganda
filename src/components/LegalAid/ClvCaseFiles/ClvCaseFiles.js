@@ -15,7 +15,7 @@ const ClvCaseFiles = () => {
       <TableSearch btnLabel="New CLV Case File" btnClick={onOpen} />
       <CaseFilesTable />
       <Modal
-        size="md"
+        size="2xl"
         isOpen={isOpen}
         onClose={onClose}
         title="CLV Case File Regitration Form"
