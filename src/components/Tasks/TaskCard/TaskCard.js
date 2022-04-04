@@ -22,15 +22,22 @@ const DepartmentButton = ({ title, btnColor, isUrget, Icon, valueCount }) => {
 };
 
 const TaskCard = (props) => {
-  const { cardTitle, description, valueCount, attachments } = props;
+  const { cardTitle, description, valueCount, attachments, tags } = props;
+
   return (
     <div className={classes.task_card_wrapper}>
       <div className={classes.task_card_wrapper_inner}>
-        <div className={classes.task_department_wrapper}>
-          <DepartmentButton title="Court Case" btnColor="primary" />
-          <DepartmentButton title="Legal Aid" btnColor="secondary" />
-          <DepartmentButton title="Legal Aid" btnColor="tertiary" />
-        </div>
+        {tags && (
+          <div className={classes.task_department_wrapper}>
+            {tags[0] && <DepartmentButton title={tags[0]} btnColor="primary" />}
+            {tags[1] && (
+              <DepartmentButton title={tags[1]} btnColor="secondary" />
+            )}
+            {tags[2] && (
+              <DepartmentButton title={tags[2]} btnColor="tertiary" />
+            )}
+          </div>
+        )}
         <div className={classes.task_content_wrapper}>
           <h3>{cardTitle}</h3>
           <p>{description}</p>

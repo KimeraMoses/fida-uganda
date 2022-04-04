@@ -3,7 +3,7 @@ import { SimpleGrid } from "@chakra-ui/react";
 import TaskCard from "../TaskCard/TaskCard";
 import classes from "./InProgressTask.module.css";
 
-const InProgressTask = (props) => {
+const CompletedTask = (props) => {
   return (
     <SimpleGrid
       columns={3}
@@ -11,7 +11,7 @@ const InProgressTask = (props) => {
       className={classes.progress_tasks_wrapper}
     >
       {props.tasks.map(({ id, tags, title, description, status }) =>
-        status === "pending" ? (
+        status === "completed" ? (
           <TaskCard
             key={id}
             tags={tags}
@@ -24,4 +24,4 @@ const InProgressTask = (props) => {
   );
 };
 
-export default InProgressTask;
+export default CompletedTask;

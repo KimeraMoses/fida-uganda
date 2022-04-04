@@ -8,6 +8,7 @@ import NewClvForm from "./CLVForms/NewClvForm";
 
 const CLVs = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { data } = useClvs();
 
   return (
     <>
