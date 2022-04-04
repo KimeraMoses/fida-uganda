@@ -10,6 +10,16 @@ const MultForm1 = ({ nextStep, handleChange, values, Continue }) => {
     <div className={classes.form_wrapper}>
       <form>
         <div className={classes.field_wrapper}>
+          <div className={classes.field_label}>1. CLV Details </div>
+          <SimpleGrid columns={4} spacing={1} style={{ alignItems: "center" }}>
+            <InputField placeholder="CLV Name" />
+            <InputField placeholder="CLV ID number" />
+            <InputField placeholder="Project of Attachement" />
+            <InputField placeholder="District of Operation" />
+          </SimpleGrid>
+        </div>
+
+        <div className={classes.field_wrapper}>
           <div className={classes.field_label}>1. Personal Address</div>
           <div className={classes.field_wrapper}>
             <SimpleGrid columns={3} spacing={2}>

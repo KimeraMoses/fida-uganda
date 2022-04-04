@@ -32,6 +32,11 @@ import CLVs from "./components/LegalAid/CLVs/CLVs";
 import ClvCaseFiles from "./components/LegalAid/ClvCaseFiles/ClvCaseFiles";
 import CaseFiles from "./components/LegalAid/CaseFIles/CaseFiles";
 import ProjectFiles from "./components/LegalAid/ProjectFiles/ProjectFiles";
+import FidaProjects from "./components/ME/FidaProjects/FidaProjects";
+import FidaProjectFiles from "./components/ME/FidaProjects/FidaProjectFiles/FidaProjectFiles";
+import FidaDatabases from "./components/ME/FidaDatabases/FidaDatabases";
+import DatabaseOpen from "./components/ME/FidaDatabases/DatabaseOpen";
+import ClientFiles from "./components/Counsellor/ClientFiles/ClientFiles";
 
 const View = () => {
   return (
@@ -48,6 +53,7 @@ const View = () => {
         <Route path="tasks" element={<Tasks />} />
         <Route path="leave-advance-tracker" element={<Tracker />} />
         <Route path="clients" element={<Clients />} />
+        <Route path="clients-files" element={<ClientFiles />} />
         <Route path="clvs" element={<CLVs />} />
         <Route path="account-settings" element={<AccountSettings />} />
         <Route path="case-files" element={<CaseFiles />} />
@@ -73,6 +79,10 @@ const View = () => {
         <Route path="it-complaints" element={<ITComplaints />} />
         <Route path="fleet-database" element={<FleetDatabase />} />
         <Route path="procurements" element={<Procurements />} />
+        <Route path="fida-databases" element={<FidaDatabases />} />
+        <Route path="fida-databases/:dbName" element={<DatabaseOpen />} />
+        <Route path="fida-projects" element={<FidaProjects />} /> 
+        <Route path="fida-projects/:folderName" element={<FidaProjectFiles />} />
       </Route>
     </Routes>
   );

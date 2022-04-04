@@ -4,7 +4,7 @@ import SectionHeader from "../../common/SectionHeader";
 import { useDisclosure } from "@chakra-ui/react";
 import Modal from "../../common/Modal";
 import CLVTable from "./CLVTable/ClvTable";
-import { useClvs } from "../../../hooks/useClv";
+import NewClvForm from "./CLVForms/NewClvForm";
 
 const CLVs = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -14,9 +14,14 @@ const CLVs = () => {
     <>
       <SectionHeader title="CLVs" />
       <TableSearch btnLabel="Add CLV" btnClick={onOpen} />
-      {data && <CLVTable data={data.clvs} />}
-      <Modal isOpen={isOpen} onClose={onClose}>
-        New CLV file
+      <CLVTable />
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        size="xl"
+        // title="CLV Profiling Form"
+      >
+        <NewClvForm action="newClv" onClose={onClose} />
       </Modal>
     </>
   );

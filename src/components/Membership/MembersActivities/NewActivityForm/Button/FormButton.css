@@ -23,6 +23,12 @@
 .fida__fm_btn.fida__btn_outlined.btn_custom_color {
   border: 1px solid #ebeff2;
 }
+.fida__fm_btn.fida__btn_outlined.btn_color_success {
+  border: 1px solid #38cb89;
+}
+.fida__fm_btn.fida__btn_outlined.btn_color_fail {
+  border: 1px solid #ff3838;
+}
 .fida__fm_btn.fida__btn_transparent {
   background-color: transparent;
   color: var(--primary_color);

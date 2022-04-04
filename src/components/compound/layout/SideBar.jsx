@@ -6,7 +6,6 @@ import List from "./List";
 
 const SideBar = () => {
   const { designation } = useSelector((state) => state.auth.user);
-
   return (
     <Box
       p={5}

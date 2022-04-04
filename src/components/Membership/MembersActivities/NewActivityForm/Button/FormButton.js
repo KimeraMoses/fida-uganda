@@ -2,7 +2,7 @@ import React from "react";
 import "./FormButton.css";
 
 const FormButton = (props) => {
-  const { variant, disabled, type, fullWidth, rounded,color } = props;
+  const { variant, disabled, type, fullWidth, rounded, color, status } = props;
   return (
     <button
       type={type}
@@ -18,7 +18,13 @@ const FormButton = (props) => {
           : "fida__btn_colored"
       } ${fullWidth ? "fida__btn_full" : ""} ${
         disabled ? "btn__disabled" : ""
-      } ${rounded ? "btn__rounded" : ""} ${color? "btn_custom_color": ""}`}
+      } ${rounded ? "btn__rounded" : ""}${color ? "btn_custom_color" : ""}${
+        status === "success"
+          ? "btn_color_success"
+          : status === "fail"
+          ? "btn_color_fail"
+          : ""
+      }`}
       {...props}
     >
       {props.children}

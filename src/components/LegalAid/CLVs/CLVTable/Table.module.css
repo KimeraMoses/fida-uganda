@@ -7,3 +7,11 @@
   font-size: 15px;
   vertical-align: top;
 }
+.table_actions_wrapperr{
+  display: flex;
+  justify-content: center;
+
+}
+.table_actions_icon_wrapper{
+  margin: 0 3px;
+}

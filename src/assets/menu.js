@@ -57,6 +57,12 @@ const menuOptions = {
     icon: MdStorage,
     path: "case-files",
   },
+  clientsFiles: {
+    id: ++id,
+    name: "Clients Files",
+    icon: MdStorage,
+    path: "clients-files",
+  },
   fidaProjects: {
     id: ++id,
     name: "FIDA Projects",
@@ -204,6 +210,7 @@ const menu = {
   finance: [...commonOptions],
   me: [
     ...commonOptions,
+    menuOptions.approvals,
     menuOptions.fidaProjects,
     menuOptions.fidaDatabases,
     menuOptions.fidaAssets,
@@ -218,7 +225,11 @@ const menu = {
     menuOptions.reports,
   ],
   procurement: [...commonOptions, menuOptions.procurements],
-  counselor: [...commonOptions, menuOptions.caseFiles],
+  counsellor: [
+    ...commonOptions,
+    menuOptions.clientsFiles,
+    menuOptions.reports,
+  ],
   fleetManager: [...commonOptions, menuOptions.fleetDatabase],
   other: [...commonOptions],
 };
