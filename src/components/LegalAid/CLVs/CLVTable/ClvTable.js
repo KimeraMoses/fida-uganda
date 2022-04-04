@@ -15,6 +15,7 @@ import { FcApproval } from "react-icons/fc";
 import { MdEdit } from "react-icons/md";
 import Modal from "../../../common/Modal";
 import NewClvForm from "../CLVForms/NewClvForm";
+import { formatDate } from "../../../../lib/data";
 
 export const CLVData = [
   {
@@ -63,7 +64,7 @@ export const CLVData = [
   },
 ];
 
-const CLVTable = () => {
+const CLVTable = ({ data }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isEdit, setIsEdit] = useState(false);
 
