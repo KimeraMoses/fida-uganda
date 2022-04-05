@@ -39,3 +39,18 @@ export const requisitionTypeOptions = [
   { label: "Works Requisition", value: "Works" },
   { label: "Activity Requisition", value: "Activity" },
 ];
+
+export const yesNoOptions = [
+  { label: "Yes", value: "Yes" },
+  { label: "No", value: "No" },
+];
+
+export const clientStaffOptions = [
+  { label: "Staff", value: "Staff" },
+  { label: "Client", value: "Client" },
+];
+
+export const booleanOptions = [
+  { label: "Yes", value: true },
+  { label: "No", value: false },
+];
