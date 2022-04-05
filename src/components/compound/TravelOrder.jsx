@@ -1,10 +1,7 @@
 import { useEffect } from "react";
 import { useDisclosure, useToast } from "@chakra-ui/react";
 import { TRAVEL_ORDER_CREATED } from "../../lib/constants";
-import {
-  useAddTravelOrder,
-  useTravelOrders,
-} from "../../hooks/useTravelOrders";
+import { useAddTravelOrder, useTravelOrders } from "../../hooks/useTravelOrders";
 import { toastSuccess } from "../../lib/toastDetails";
 import SectionHeader from "../common/SectionHeader";
 import Table from "../common/Table";
