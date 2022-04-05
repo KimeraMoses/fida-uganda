@@ -5,6 +5,7 @@ import FormButton from "../../../Membership/MembersActivities/NewActivityForm/Bu
 import { Form, Formik } from "formik";
 import { useToast } from "@chakra-ui/react";
 import { toastError } from "../../../../lib/toastDetails";
+import { initialValues } from "./schema";
 
 const NewReportForm = ({ onClose, error, isError, onSubmit, isSubmitting }) => {
   const [file, setFile] = useState(null);
@@ -23,6 +24,7 @@ const NewReportForm = ({ onClose, error, isError, onSubmit, isSubmitting }) => {
 
   return (
     <Formik
+      initialValues={initialValues}
       onSubmit={(values) => {
         const formData = new FormData();
         formData.append("report", file);
