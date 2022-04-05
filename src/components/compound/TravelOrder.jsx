@@ -28,8 +28,6 @@ const TravelOrder = () => {
     }
   }, [isSuccess, onClose, toast]);
 
-  console.log(data?.travelOrders);
-
   const onRowClick = (row) => {};
 
   return (
