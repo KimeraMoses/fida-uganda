@@ -1,7 +1,10 @@
 import { useEffect } from "react";
 import { useDisclosure, useToast } from "@chakra-ui/react";
 import { TRAVEL_ORDER_CREATED } from "../../lib/constants";
-import { useAddTravelOrder, useTravelOrders } from "../../hooks/useTravelOrders";
+import {
+  useAddTravelOrder,
+  useTravelOrders,
+} from "../../hooks/useTravelOrders";
 import { toastSuccess } from "../../lib/toastDetails";
 import SectionHeader from "../common/SectionHeader";
 import Table from "../common/Table";
@@ -30,6 +33,8 @@ const TravelOrder = () => {
 
   const onRowClick = (row) => {};
 
+  console.log(data?.travelOrders[0]);
+
   return (
     <>
       <SectionHeader title="Travel Order" />
@@ -41,7 +46,7 @@ const TravelOrder = () => {
         btnLabel="Travel Order"
         btnClick={onOpen}
       />
-      <Modal isOpen={isOpen} onClose={onClose} title="Travel Order">
+      <Modal isOpen={isOpen} onClose={onClose} title="Travel Order" size="2xl">
         <TravelOrderForm
           onSubmit={mutate}
           isSubmitting={isSubmitting}
