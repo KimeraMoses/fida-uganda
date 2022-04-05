@@ -45,12 +45,30 @@ const menuOptions = {
     icon: MdFeedback,
     path: "clv-complaints",
   },
-  // reports: {
-  //   id: ++id,
-  //   name: "Reports",
-  //   icon: MdSummarize,
-  //   path: "reports",
-  // },
+  itProducts: {
+    id: ++id,
+    name: "IT Products",
+    icon: MdSummarize,
+    path: "it-products",
+  },
+  itServices: {
+    id: ++id,
+    name: "IT Services",
+    icon: MdSummarize,
+    path: "it-services",
+  },
+  itComplaint: {
+    id: ++id,
+    name: "IT Complaints",
+    icon: MdSummarize,
+    path: "it-complaints",
+  },
+  systemAdmin: {
+    id: ++id,
+    name: "System Admin",
+    icon: MdSummarize,
+    path: "system-admin",
+  },
   caseFiles: {
     id: ++id,
     name: "Case Files",
@@ -178,7 +196,11 @@ const menu = {
     menuOptions.clvComplaints,
     menuOptions.reports,
   ],
-  courtProcessServer: [...commonOptions],
+  courtProcessServer: [
+    ...commonOptions,
+    menuOptions.caseFiles,
+    menuOptions.reports,
+  ],
   legalAid: [
     ...commonOptions,
     menuOptions.clients,
@@ -206,8 +228,22 @@ const menu = {
     menuOptions.reports,
     menuOptions.fidaApprovals,
   ],
-  it: [...commonOptions],
-  finance: [...commonOptions],
+  it: [
+    ...commonOptions,
+    menuOptions.itProducts,
+    menuOptions.itServices,
+    menuOptions.itComplaint,
+    menuOptions.systemAdmin,
+    menuOptions.reports,
+  ],
+  finance: [
+    ...commonOptions,
+    menuOptions.approvals,
+    menuOptions.payRoll,
+    menuOptions.fidaProjects,
+    menuOptions.fidaDatabases,
+    menuOptions.reports,
+  ],
   me: [
     ...commonOptions,
     menuOptions.approvals,
@@ -225,12 +261,12 @@ const menu = {
     menuOptions.reports,
   ],
   procurement: [...commonOptions, menuOptions.procurements],
-  counsellor: [
+  counsellor: [...commonOptions, menuOptions.clientsFiles, menuOptions.reports],
+  fleetManager: [
     ...commonOptions,
-    menuOptions.clientsFiles,
+    menuOptions.fleetDatabase,
     menuOptions.reports,
   ],
-  fleetManager: [...commonOptions, menuOptions.fleetDatabase],
   other: [...commonOptions],
 };
 
