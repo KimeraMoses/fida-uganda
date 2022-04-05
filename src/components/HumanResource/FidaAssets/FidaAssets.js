@@ -5,11 +5,11 @@ import SectionHeader from "../../common/SectionHeader";
 import TableSearch from "../../common/table/TableSearch";
 import FidaAssetsTable from "./FidaAssetsTable/FidaAssetsTable";
 import NewAsset from "./NewAsset/NewAsset";
-// import { useAssets } from "../../../hooks/useAsset";
+import { useAssets } from "../../../hooks/useAsset";
 
 const FidaAssets = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  // const { data } = useAssets();
+  const { data } = useAssets();
   // const [searchTerm, setSearchTerm] = useState("");
   // const [searchResults, setSearchResults] = useState([]);
 
@@ -28,24 +28,26 @@ const FidaAssets = () => {
   //   }
   // };
 
-
   // useEffect(() => {
   //   setSearchResults([]);
   // }, [searchTerm.length]);
+  console.log(data.assets);
 
   return (
     <>
-      <SectionHeader title="Approvals" />
+      <SectionHeader title="Assets" />
       <TableSearch
         btnLabel="Add Notes"
         btnClick={onOpen}
         // searchTerm={searchTerm}
         // onSearchHandler={userSearchHandler}
       />
-      <FidaAssetsTable
-        // data={data.assets}
-        // searchResults={searchResults}
-      />
+      {data && data.assets.length > 0 ? (
+        <FidaAssetsTable
+          data={data.assets}
+          // searchResults={searchResults}
+        />
+      ) : null}
       <Modal isOpen={isOpen} onClose={onClose} title="Asset Entry Form">
         <NewAsset />
       </Modal>

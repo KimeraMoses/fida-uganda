@@ -2,6 +2,7 @@ import React from "react";
 import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
 import classes from "./Table.module.css";
 import { TableHeadColumn } from "../../../Membership/Allocations/AllocationsTable/AllocationsTable";
+import { formatDate } from "../../../../lib/data";
 
 export const AssetsData = [
   {
@@ -36,7 +37,7 @@ export const AssetsData = [
   },
 ];
 
-const FidaAssetsTable = (props) => {
+const FidaAssetsTable = ({ data }) => {
   // const { data, searchResults } = props;
   return (
     <>
@@ -55,7 +56,7 @@ const FidaAssetsTable = (props) => {
             </Tr>
           </Thead>
           <Tbody>
-            {AssetsData.map((item) => {
+            {data.map((item) => {
               // const formatedDate = new Date(
               //   item.createdAt
               // ).toLocaleDateString();
@@ -63,10 +64,10 @@ const FidaAssetsTable = (props) => {
                 <Tr>
                   <Td>{item.item}</Td>
                   <Td className={classes.data__purpose_primary_text}>
-                    {item.person}
+                    {item.people_in_possession[0]}
                   </Td>
                   <Td>{item.location}</Td>
-                  <Td>{item.dateAquired}</Td>
+                  <Td>{formatDate(item.createdAt)}</Td>
                 </Tr>
               );
             })}
