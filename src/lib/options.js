@@ -23,11 +23,6 @@ export const maritalStatusOptions = [
   { label: "Other", value: "other" },
 ];
 
-export const projectOptions = [
-  { label: "ECHO", value: "ECHO" },
-  { label: "DGD", value: "DGD" },
-];
-
 export const sexOptions = [
   { label: "Male", value: "Male" },
   { label: "Female", value: "Female" },
