@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
   addLeaveDays,
   deleteLeaveTracker,
+  getAllUsersLeaveTrackers,
   getLeaveDaysRequest,
   getLeaveTracker,
   getLeaveTrackers,
@@ -30,6 +31,10 @@ export const useRemainingDays = () => {
 
 export const useUserTrackers = () => {
   return useQuery([LEAVE_TRACKER_KEY, "USER"], getUserTrackers);
+};
+
+export const useUsersLeaveTrackers = () => {
+  return useQuery([LEAVE_TRACKER_KEY, "ALL_USERS"], getAllUsersLeaveTrackers);
 };
 
 export const useAddLeaveDays = () => {

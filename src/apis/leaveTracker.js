@@ -35,3 +35,7 @@ export const getRemainingDays = async () => {
 export const getUserTrackers = async () => {
   return await axiosClient.get(routes.leaveTracker.getUserTrackers);
 };
+
+export const getAllUsersLeaveTrackers = async () => {
+  return await axiosClient.get(routes.leaveTracker.getAllUsersTrackers);
+};
