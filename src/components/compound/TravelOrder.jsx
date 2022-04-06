@@ -33,7 +33,7 @@ const TravelOrder = () => {
 
   const onRowClick = (row) => {};
 
-  console.log(data?.travelOrders[0]);
+  console.log(data?.travelOrders[data?.travelOrders.length - 1]);
 
   return (
     <>

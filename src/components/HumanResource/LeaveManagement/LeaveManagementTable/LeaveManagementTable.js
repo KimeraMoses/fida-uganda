@@ -2,69 +2,11 @@ import React from "react";
 import { Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
 import classes from "./LeaveManagentTable.module.css";
 
-export const LeaveData = [
-  {
-    name: "Male Staff",
-    annual_lv_days: 21,
-    maternal_lv_days: 10,
-    jan: 4,
-    feb: 0,
-    mar: 5,
-    apr: 3,
-    may: 6,
-    jun: 9,
-    jul: 0,
-    aug: 0,
-    sept: 5,
-    nov: 5,
-    dec: 0,
-    balance: 77,
-  },
-  {
-    name: "Female Staff",
-    annual_lv_days: 21,
-    maternal_lv_days: 10,
-    jan: 4,
-    feb: 0,
-    mar: 5,
-    apr: 3,
-    may: 6,
-    jun: 9,
-    jul: 0,
-    aug: 0,
-    sept: 5,
-    oct: 0,
-    nov: 5,
-    dec: 0,
-    balance: 77,
-  },
-  {
-    name: "Female Staff",
-    annual_lv_days: 21,
-    maternal_lv_days: 10,
-    jan: 4,
-    feb: 0,
-    mar: 5,
-    apr: 3,
-    may: 6,
-    jun: 9,
-    jul: 0,
-    aug: 0,
-    sept: 5,
-    oct: 0,
-    nov: 5,
-    dec: 0,
-    balance: 77,
-  },
-  
-];
-
-export const TableHeadColumn = (props) => {
-  const { title } = props;
+export const TableHeadColumn = ({ title }) => {
   return <Th>{title}</Th>;
 };
 
-const LeaveManagementTable = () => {
+const LeaveManagementTable = ({ data }) => {
   return (
     <>
       <div className={classes.leave_mgt_table_wrapper}>
@@ -95,12 +37,12 @@ const LeaveManagementTable = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {LeaveData.map((item) => {
+            {data.map((item) => {
               return (
-                <Tr>
-                  <Td>{item.name}</Td>
-                  <Td>{item.annual_lv_days}</Td>
-                  <Td>{item.maternal_lv_days}</Td>
+                <Tr key={item.user?.id}>
+                  <Td>{item.user?.full_name}</Td>
+                  <Td>{item.annualLeaveDays}</Td>
+                  <Td>{item.part_mart_leave_days}</Td>
                   <Td>{item.jan}</Td>
                   <Td>{item.feb}</Td>
                   <Td>{item.mar}</Td>
@@ -109,7 +51,7 @@ const LeaveManagementTable = () => {
                   <Td>{item.jun}</Td>
                   <Td>{item.jul}</Td>
                   <Td>{item.aug}</Td>
-                  <Td>{item.sept}</Td>
+                  <Td>{item.sep}</Td>
                   <Td>{item.oct}</Td>
                   <Td>{item.nov}</Td>
                   <Td>{item.dec}</Td>

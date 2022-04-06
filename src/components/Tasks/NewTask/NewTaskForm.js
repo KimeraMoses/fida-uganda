@@ -4,11 +4,12 @@ import InputField from "../../Membership/Members/NewMemberForm/MultiForm/InputFi
 import FormButton from "../../Membership/MembersActivities/NewActivityForm/Button/FormButton";
 import { AttachmentIcon } from "../../../assets/Icons/Icons";
 import { Form, Formik } from "formik";
-import { Heading, useToast } from "@chakra-ui/react";
+import { Heading, SimpleGrid, useToast } from "@chakra-ui/react";
 import { toastError } from "../../../lib/toastDetails";
+import { taskInitialValues } from "./taskSchema";
 // import MultiUpload from "../../common/MultiUpload";
 
-const NewTaskForm = ({ onSubmit, error, isError }) => {
+const NewTaskForm = ({ onSubmit, error, isError, isSubmitting }) => {
   // const [files, setFiles] = React.useState([]);
   const toast = useToast();
 
@@ -20,8 +21,10 @@ const NewTaskForm = ({ onSubmit, error, isError }) => {
 
   return (
     <Formik
+      initialValues={taskInitialValues}
       onSubmit={(values) => {
-        onSubmit(values);
+        console.log(values);
+        // onSubmit(values);
       }}
     >
       <div className={classes.new_asset_wrapper}>
@@ -32,11 +35,20 @@ const NewTaskForm = ({ onSubmit, error, isError }) => {
             placeholder="Task Description"
             fullwidth
           />
-          <Heading fontSize="md" fontWeight="light" mt={5}>
-            Due Date
-          </Heading>
-          <InputField placeholder="End Date" type="date" />
-
+          <SimpleGrid columns={2}>
+            <div>
+              <Heading fontSize="md" fontWeight="light" mt={5}>
+                Start Date
+              </Heading>
+              <InputField name="startDate" placeholder="End Date" type="date" />
+            </div>
+            <div>
+              <Heading fontSize="md" fontWeight="light" mt={5}>
+                Due Date
+              </Heading>
+              <InputField name="endDate" placeholder="End Date" type="date" />
+            </div>
+          </SimpleGrid>
           <div className={classes.asset_attachement_wrapper}>
             <h6>
               <AttachmentIcon /> Attachment
@@ -44,7 +56,12 @@ const NewTaskForm = ({ onSubmit, error, isError }) => {
             {/* <MultiUpload files={files} setFiles={setFiles} /> */}
           </div>
           <div style={{ float: "right", padding: "20px 0" }}>
-            <FormButton variant="colored" rounded={true}>
+            <FormButton
+              variant="colored"
+              rounded={true}
+              isSubmitting={isSubmitting}
+              type="submit"
+            >
               Add Task
             </FormButton>
           </div>

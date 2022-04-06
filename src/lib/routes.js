@@ -105,6 +105,7 @@ export const routes = {
     getUserTrackers: `${BASE_URL}/leaveDaysTracker/getMyLeaveDays`,
     getRemainingDays: `${BASE_URL}/leaveDaysTracker/getDaysLeft`,
     getLeaveDaysRequest: `${BASE_URL}/leaveDaysTracker/getLeaveNumber`,
+    getAllUsersTrackers: `${BASE_URL}/leaveDaysTracker/getAllUserLeaveTrackers`,
   },
   reports: {
     getReports: `${BASE_URL}/reports/getAll`,
