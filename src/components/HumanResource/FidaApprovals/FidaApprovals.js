@@ -4,9 +4,7 @@ import { useDeactivatedUsers } from "../../../hooks/useUser";
 import Modal from "../../common/Modal";
 import SectionHeader from "../../common/SectionHeader";
 import TableSearch from "../../common/table/TableSearch";
-import FidaApprovedTable, {
-  ApprovalData,
-} from "./FidaApprovalTable/FidaApprovedTable";
+import FidaApprovedTable from "./FidaApprovalTable/FidaApprovedTable";
 import NewEmployeeForm from "./NewEmployeeForm/NewEmployeeForm";
 
 const FidaApprovals = () => {
@@ -44,9 +42,9 @@ const FidaApprovals = () => {
         searchTerm={searchTerm}
         onSearchHandler={userSearchHandler}
       />
-      {data && data?.users.length > 0 ? (
+      {/* {data && data?.users.length > 0 ? (
         <FidaApprovedTable searchResults={searchResults} data={data?.users} />
-      ) : null}
+      ) : null} */}
       <Modal isOpen={isOpen} onClose={onClose}>
         <NewEmployeeForm onClose={onClose} />
       </Modal>
