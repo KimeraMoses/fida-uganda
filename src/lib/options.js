@@ -23,11 +23,6 @@ export const maritalStatusOptions = [
   { label: "Other", value: "other" },
 ];
 
-export const projectOptions = [
-  { label: "ECHO", value: "ECHO" },
-  { label: "DGD", value: "DGD" },
-];
-
 export const sexOptions = [
   { label: "Male", value: "Male" },
   { label: "Female", value: "Female" },
@@ -38,4 +33,19 @@ export const requisitionTypeOptions = [
   { label: "Service Requisition", value: "Service" },
   { label: "Works Requisition", value: "Works" },
   { label: "Activity Requisition", value: "Activity" },
+];
+
+export const yesNoOptions = [
+  { label: "Yes", value: "Yes" },
+  { label: "No", value: "No" },
+];
+
+export const clientStaffOptions = [
+  { label: "Staff", value: "Staff" },
+  { label: "Client", value: "Client" },
+];
+
+export const booleanOptions = [
+  { label: "Yes", value: true },
+  { label: "No", value: false },
 ];

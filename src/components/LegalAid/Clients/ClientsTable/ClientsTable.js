@@ -3,6 +3,7 @@ import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
 import classes from "../../../Membership/Allocations/AllocationsTable/AllocationsTable.module.css";
 import styles from "./Table.module.css";
 import { TableHeadColumn } from "../../../Membership/Allocations/AllocationsTable/AllocationsTable";
+import { formatDate } from "../../../../lib/data";
 
 export const ClientsData = [
   {
@@ -47,7 +48,7 @@ export const ClientsData = [
   },
 ];
 
-const ClientsTable = () => {
+const ClientsTable = ({ data }) => {
   return (
     <>
       <div className={classes.allocations_table_wrapper}>
@@ -66,7 +67,7 @@ const ClientsTable = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {ClientsData.map((item) => {
+            {data.map((item) => {
               return (
                 <Tr>
                   <Td className={classes.data_recepient_field}>
@@ -74,7 +75,7 @@ const ClientsTable = () => {
                       {item.name}
                     </div>
                     <div className={classes.data__secondary_text}>
-                      {item.profession}
+                      {item.occupation}
                     </div>
                   </Td>
                   <Td className={classes.data_recepient_field}>
@@ -90,13 +91,13 @@ const ClientsTable = () => {
                       {item.address}
                     </div>
                     <div className={classes.data__secondary_text}>
-                      {item.city}
+                      {item.village}
                     </div>
                   </Td>
 
                   <Td>
                     <div className={`${classes.data__primary_text}`}>
-                      {item.registrationDate}
+                      {formatDate(item.createdAt)}
                     </div>
                   </Td>
                   <Td>

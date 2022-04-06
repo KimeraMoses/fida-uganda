@@ -3,16 +3,18 @@ import { Link } from "react-router-dom";
 import { Formik, Form } from "formik";
 import { Flex, Text, useToast } from "@chakra-ui/react";
 import { signUpInitialValues, signUpSchema } from "./schemas/signUp";
-import { designationOptions, projectOptions } from "../../../lib/options";
+import { designationOptions } from "../../../lib/options";
 import SelectField from "../../common/SelectField";
 import TextField from "../../common/TextField";
 import SubmitButton from "./SubmitButton";
 import { toastError } from "../../../lib/toastDetails";
 import SelectAvatar from "../../common/SelectAvatar";
+import { useProjectOptions } from "../../../hooks/useProjects";
 
 const SignUpForm = ({ onSubmit, isSubmitting, isError, error }) => {
   const [avatar, setAvatar] = useState(null);
   const toast = useToast();
+  const projectOptions = useProjectOptions();
 
   useEffect(() => {
     if (isError) {

@@ -7,6 +7,7 @@ export const routes = {
     forgotPassword: `${BASE_URL}/users/forgotPassword`,
     getMe: `${BASE_URL}/users/me`,
     setPassword: `${BASE_URL}/users/setPassword`,
+    deactivatedUsers: `${BASE_URL}/users/getAllDeactivatedUsers`,
   },
   tasks: {
     addTask: `${BASE_URL}/tasks/create`,
@@ -104,6 +105,7 @@ export const routes = {
     getUserTrackers: `${BASE_URL}/leaveDaysTracker/getMyLeaveDays`,
     getRemainingDays: `${BASE_URL}/leaveDaysTracker/getDaysLeft`,
     getLeaveDaysRequest: `${BASE_URL}/leaveDaysTracker/getLeaveNumber`,
+    getAllUsersTrackers: `${BASE_URL}/leaveDaysTracker/getAllUserLeaveTrackers`,
   },
   reports: {
     getReports: `${BASE_URL}/reports/getAll`,

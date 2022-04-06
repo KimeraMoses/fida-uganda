@@ -7,53 +7,10 @@ import styles from "./FidaApprovalTable.module.css";
 import { TableHeadColumn } from "../../../Membership/Allocations/AllocationsTable/AllocationsTable";
 import Modal from "../../../common/Modal";
 import NewEmployeeForm from "../NewEmployeeForm/NewEmployeeForm";
+import { formatDate } from "../../../../lib/data";
 
-export const ApprovalData = [
-  {
-    name: "Andrew Tebandeke",
-    email: "nalubega12@gmail.com",
-    designation: "Lawyer",
-    project: "IDILO - Nakaseke",
-    typeOfApproval: "FIDA IIMS APPROVAL",
-    signUpdate: "01/01/2022",
-  },
-  {
-    name: "Andrew Tebandeke",
-    email: "nalubega12@gmail.com",
-    designation: "Lawyer",
-    project: "IDILO - Nakaseke",
-    typeOfApproval: "FIDA IIMS APPROVAL",
-    signUpdate: "01/01/2022",
-  },
-  {
-    name: "Andrew Tebandeke",
-    email: "nalubega12@gmail.com",
-    designation: "Lawyer",
-    project: "IDILO - Nakaseke",
-    typeOfApproval: "FIDA IIMS APPROVAL",
-    signUpdate: "01/01/2022",
-  },
-  {
-    name: "Andrew Tebandeke",
-    email: "nalubega12@gmail.com",
-    designation: "Lawyer",
-    project: "IDILO - Nakaseke",
-    typeOfApproval: "FIDA IIMS APPROVAL",
-    signUpdate: "01/01/2022",
-  },
-  {
-    name: "Andrew Tebandeke",
-    email: "nalubega12@gmail.com",
-    designation: "Lawyer",
-    project: "IDILO - Nakaseke",
-    typeOfApproval: "FIDA IIMS APPROVAL",
-    signUpdate: "01/01/2022",
-  },
-];
-
-const FidaApprovedTable = (props) => {
+const FidaApprovedTable = ({ data }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data, searchResults } = props;
 
   return (
     <>
@@ -78,18 +35,18 @@ const FidaApprovedTable = (props) => {
             </Tr>
           </Thead>
           <Tbody>
-            {(searchResults.length > 0 ? searchResults : data).map((item) => {
+            {data.map((item) => {
               return (
-                <Tr>
-                  <Td>{item.name}</Td>
+                <Tr key={item.id}>
+                  <Td>{item.full_name}</Td>
                   <Td className={styles.data__primary_text_email}>
                     {item.email}
                   </Td>
                   <Td style={{ textTransform: "uppercase" }}>
                     {item.designation}
                   </Td>
-                  <Td>{item.project}</Td>
-                  <Td>{item.signUpdate}</Td>
+                  <Td>{item.project?.name}</Td>
+                  <Td>{formatDate(item.createdAt)}</Td>
                   <Td className={classes.table_actions_wrapper}>
                     <div className={classes.table_actions_icon_wrapper}>
                       <IconButton

@@ -10,11 +10,22 @@ import {
 } from "../apis/projects";
 import { PROJECTS_KEY } from "../lib/constants";
 
-export const useProject = () => {
+export const useProjects = () => {
   return useQuery(PROJECTS_KEY, getProjects);
 };
 
-export const useProjects = (projectId) => {
+export const useProjectOptions = () => {
+  const { data } = useProjects();
+  if (data?.projects) {
+    return data.projects.map((project) => ({
+      label: project.name,
+      value: project.id,
+    }));
+  }
+  return [];
+};
+
+export const useProject = (projectId) => {
   return useQuery([PROJECTS_KEY, projectId], getProject);
 };
 

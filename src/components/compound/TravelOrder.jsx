@@ -1,7 +1,10 @@
 import { useEffect } from "react";
 import { useDisclosure, useToast } from "@chakra-ui/react";
 import { TRAVEL_ORDER_CREATED } from "../../lib/constants";
-import { useAddTravelOrder, useTravelOrder } from "../../hooks/useTravelOrders";
+import {
+  useAddTravelOrder,
+  useTravelOrders,
+} from "../../hooks/useTravelOrders";
 import { toastSuccess } from "../../lib/toastDetails";
 import SectionHeader from "../common/SectionHeader";
 import Table from "../common/Table";
@@ -12,7 +15,7 @@ import { travelOrderColumns } from "../../assets/tableColumns/travelOrder";
 const TravelOrder = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
-  const { data, isLoading } = useTravelOrder();
+  const { data, isLoading } = useTravelOrders();
   const {
     mutate,
     isLoading: isSubmitting,
@@ -28,9 +31,9 @@ const TravelOrder = () => {
     }
   }, [isSuccess, onClose, toast]);
 
-  console.log(data?.travelOrders);
-
   const onRowClick = (row) => {};
+
+  console.log(data?.travelOrders[data?.travelOrders.length - 1]);
 
   return (
     <>
@@ -43,7 +46,7 @@ const TravelOrder = () => {
         btnLabel="Travel Order"
         btnClick={onOpen}
       />
-      <Modal isOpen={isOpen} onClose={onClose} title="Travel Order">
+      <Modal isOpen={isOpen} onClose={onClose} title="Travel Order" size="2xl">
         <TravelOrderForm
           onSubmit={mutate}
           isSubmitting={isSubmitting}

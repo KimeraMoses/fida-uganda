@@ -1,15 +1,27 @@
-import { useDisclosure } from "@chakra-ui/react";
-import React from "react";
+import { useDisclosure, useToast } from "@chakra-ui/react";
+import React, { useEffect } from "react";
 import Modal from "../../common/Modal";
 import SectionHeader from "../../common/SectionHeader";
 import TableSearch from "../../common/table/TableSearch";
 import FidaAssetsTable from "./FidaAssetsTable/FidaAssetsTable";
 import NewAsset from "./NewAsset/NewAsset";
-// import { useAssets } from "../../../hooks/useAsset";
+import { useAddAsset, useAssets } from "../../../hooks/useAsset";
+import { toastSuccess } from "../../../lib/toastDetails";
+import { useProjectOptions } from "../../../hooks/useProjects";
 
 const FidaAssets = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  // const { data } = useAssets();
+  const toast = useToast();
+  const { data } = useAssets();
+  const { mutate, isLoading, isError, isSuccess, error } = useAddAsset();
+  const projectOptions = useProjectOptions();
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast(toastSuccess("Asset added successfully"));
+      onClose();
+    }
+  }, [isSuccess, toast, onClose]);
   // const [searchTerm, setSearchTerm] = useState("");
   // const [searchResults, setSearchResults] = useState([]);
 
@@ -28,26 +40,38 @@ const FidaAssets = () => {
   //   }
   // };
 
-
   // useEffect(() => {
   //   setSearchResults([]);
   // }, [searchTerm.length]);
 
   return (
     <>
-      <SectionHeader title="Approvals" />
+      <SectionHeader title="Assets" />
       <TableSearch
-        btnLabel="Add Notes"
+        btnLabel="Add Assets"
         btnClick={onOpen}
         // searchTerm={searchTerm}
         // onSearchHandler={userSearchHandler}
       />
-      <FidaAssetsTable
-        // data={data.assets}
-        // searchResults={searchResults}
-      />
-      <Modal isOpen={isOpen} onClose={onClose} title="Asset Entry Form">
-        <NewAsset />
+      {data && data.assets.length > 0 ? (
+        <FidaAssetsTable
+          data={data?.assets}
+          // searchResults={searchResults}
+        />
+      ) : null}
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        title="Asset Entry Form"
+        size="3xl"
+      >
+        <NewAsset
+          onSubmit={mutate}
+          isError={isError}
+          error={error}
+          isSubmitting={isLoading}
+          projectOptions={projectOptions}
+        />
       </Modal>
     </>
   );

@@ -12,18 +12,16 @@ const IncomingTask = (props) => {
       className={classes.incoming_tasks_wrapper}
     >
       <NewTaskCard onOpen={props.onOpen} />
-      <TaskCard
-        cardTitle="First Quarter Report"
-        description="The DFG Nakaseke first quater report is two weeks over due and the evaluators are coming in two weeks."
-        valueCount={3}
-        attachments={2}
-      />
-      <TaskCard
-        cardTitle="Mukasa’s Court Case"
-        description="Mukasa’s case is being heard on Tuesday 15/03/2021. We have to prepare and be ready for the hearing"
-        valueCount={2}
-        attachments={5}
-      />
+      {props.tasks.map(({ id, tags, title, description, status }) =>
+        status === "todo" ? (
+          <TaskCard
+            key={id}
+            tags={tags}
+            cardTitle={title}
+            description={description}
+          />
+        ) : null
+      )}
     </SimpleGrid>
   );
 };

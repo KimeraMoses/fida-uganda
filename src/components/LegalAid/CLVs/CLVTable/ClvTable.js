@@ -15,6 +15,7 @@ import { FcApproval } from "react-icons/fc";
 import { MdEdit } from "react-icons/md";
 import Modal from "../../../common/Modal";
 import NewClvForm from "../CLVForms/NewClvForm";
+import { formatDate } from "../../../../lib/data";
 
 export const CLVData = [
   {
@@ -63,7 +64,7 @@ export const CLVData = [
   },
 ];
 
-const CLVTable = () => {
+const CLVTable = ({ data }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isEdit, setIsEdit] = useState(false);
 
@@ -98,7 +99,7 @@ const CLVTable = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {CLVData.map((item) => {
+            {data.map((item) => {
               return (
                 <Tr>
                   <Td className={classes.data_recepient_field}>
@@ -132,7 +133,7 @@ const CLVTable = () => {
                         {item.fida_id}
                       </div>
                       <div className={classes.data__secondary_text}>
-                        {item.registrationDate}
+                        {formatDate(item.createdAt)}
                       </div>
                     </div>
                   </Td>
@@ -143,7 +144,7 @@ const CLVTable = () => {
                       }`}
                     >
                       <span className={classes.status_indicator}></span>
-                      <h5>{item.open ? "active" : "Closed"}</h5>
+                      <h5>{item.isActive ? "active" : "Closed"}</h5>
                     </div>
                   </Td>
                   <Td>
