@@ -20,9 +20,9 @@ import FidaAssets from "./components/HumanResource/FidaAssets/FidaAssets";
 import Reports from "./components/HumanResource/Reports/Reports";
 import Tracker from "./components/compound/Tracker";
 import AccountSettings from "./components/compound/AccountSettings";
-import ITProducts from "./components/itDepartment/ITProducts";
-import ITServices from "./components/itDepartment/itServices";
-import ITComplaints from "./components/itDepartment/ITComplaints";
+// import ITProducts from "./components/itDepartment/ITProducts";
+// import ITServices from "./components/itDepartment/itServices";
+// import ITComplaints from "./components/itDepartment/Complaints/ITComplaints";
 import FleetDatabase from "./components/fleetManager/FleetDatabase";
 import Procurements from "./components/procurement/Procurements";
 import FidaApprovals from "./components/HumanResource/FidaApprovals/FidaApprovals";
@@ -74,9 +74,9 @@ const View = () => {
         <Route path="employee-contract" element={<EmployeeContract />} />
         <Route path="fida-assets" element={<FidaAssets />} />
         <Route path="reports" element={<Reports />} />
-        <Route path="it-products" element={<ITProducts />} />
+        {/* <Route path="it-products" element={<ITProducts />} />
         <Route path="it-services" element={<ITServices />} />
-        <Route path="it-complaints" element={<ITComplaints />} />
+        <Route path="it-complaints" element={<ITComplaints />} /> */}
         <Route path="fleet-database" element={<FleetDatabase />} />
         <Route path="procurements" element={<Procurements />} />
         <Route path="fida-databases" element={<FidaDatabases />} />
