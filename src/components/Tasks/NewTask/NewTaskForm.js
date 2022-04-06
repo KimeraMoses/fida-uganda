@@ -8,7 +8,7 @@ import { Heading, useToast } from "@chakra-ui/react";
 import { toastError } from "../../../lib/toastDetails";
 // import MultiUpload from "../../common/MultiUpload";
 
-const NewTaskForm = ({ onSubmit, error, isError }) => {
+const NewTaskForm = ({ onSubmit, error, isError, isSubmitting }) => {
   // const [files, setFiles] = React.useState([]);
   const toast = useToast();
 
@@ -44,7 +44,11 @@ const NewTaskForm = ({ onSubmit, error, isError }) => {
             {/* <MultiUpload files={files} setFiles={setFiles} /> */}
           </div>
           <div style={{ float: "right", padding: "20px 0" }}>
-            <FormButton variant="colored" rounded={true}>
+            <FormButton
+              variant="colored"
+              rounded={true}
+              isSubmitting={isSubmitting}
+            >
               Add Task
             </FormButton>
           </div>

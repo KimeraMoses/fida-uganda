@@ -12,7 +12,7 @@ import CompletedTask from "./InProgressTasks/CompletedTask";
 
 const Tasks = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { mutate, isError, error, isSuccess } = useAddTask();
+  const { mutate, isError, error, isSuccess, isLoading } = useAddTask();
   const toast = useToast();
   const { data } = useTasks();
 
@@ -26,13 +26,18 @@ const Tasks = () => {
     <>
       <SectionHeader title="Tasks" />
       <SubHeading title="incoming Tasks" />
-      {data && <IncomingTask onOpen={onOpen} tasks={data.tasks} />}
+      {data?.tasks && <IncomingTask onOpen={onOpen} tasks={data?.tasks} />}
       <SubHeading title="In Progress" />
-      {data && <InProgressTask tasks={data.tasks} />}
+      {data?.tasks && <InProgressTask tasks={data?.tasks} />}
       <SubHeading title="Completed" />
-      {data && <CompletedTask tasks={data.tasks} />}
+      {data?.tasks && <CompletedTask tasks={data?.tasks} />}
       <Modal isOpen={isOpen} onClose={onClose} title="Create a Task">
-        <NewTaskForm onSubmit={mutate} error={error} isError={isError} />
+        <NewTaskForm
+          onSubmit={mutate}
+          error={error}
+          isError={isError}
+          isSubmitting={isLoading}
+        />
       </Modal>
     </>
   );
