@@ -26,6 +26,10 @@ const NewReportForm = ({ onClose, error, isError, onSubmit, isSubmitting }) => {
     <Formik
       initialValues={initialValues}
       onSubmit={(values) => {
+        if (!file) {
+          toast(toastError("Please attach file"));
+          return;
+        }
         const formData = new FormData();
         formData.append("report", file);
         Object.keys(values).forEach((key) => {
@@ -42,7 +46,11 @@ const NewReportForm = ({ onClose, error, isError, onSubmit, isSubmitting }) => {
           <div className={classes.input_group_wrapper}>
             <div className={classes.input_label}>Report Title</div>
             <div className={classes.input_field_wrapper}>
-              <InputField placeholder="Type here" fullWidth name="title" />
+              <InputField
+                placeholder="Type here"
+                fullWidth
+                name="report_title"
+              />
             </div>
           </div>
           <div className={classes.input_group_wrapper}>
@@ -58,7 +66,11 @@ const NewReportForm = ({ onClose, error, isError, onSubmit, isSubmitting }) => {
           <div className={classes.input_group_wrapper}>
             <div className={classes.input_label}>Reporting Period</div>
             <div className={classes.input_field_wrapper}>
-              <InputField placeholder="Type here" fullWidth name="period" />
+              <InputField
+                placeholder="Type here"
+                fullWidth
+                name="reporting_period"
+              />
             </div>
           </div>
           <div className={classes.input_group_wrapper}>
@@ -77,7 +89,7 @@ const NewReportForm = ({ onClose, error, isError, onSubmit, isSubmitting }) => {
               <FormButton variant="colored">Upload File</FormButton>
             </div>
             <div className={classes.input_field_wrapper}>
-              <input type="file" onClick={handleFileChange} />
+              <input type="file" onChange={handleFileChange} />
             </div>
           </div>
 

@@ -5,34 +5,6 @@ import { TableHeadColumn } from "../../../Membership/Allocations/AllocationsTabl
 import { FolderIcon } from "../../../../assets/Icons/Icons";
 import { formatDate } from "../../../../lib/data";
 
-export const ReportsData = [
-  {
-    name: "SGBV, Nakaseke District Employees Report ",
-    date_Created: "Mar 14, 2021",
-    date_modified: "Oct 14, 2021",
-  },
-  {
-    name: "SGBV, Nakaseke District Employees Report ",
-    date_Created: "Mar 14, 2021",
-    date_modified: "Oct 14, 2021",
-  },
-  {
-    name: "SGBV, Nakaseke District Employees Report ",
-    date_Created: "Mar 14, 2021",
-    date_modified: "Oct 14, 2021",
-  },
-  {
-    name: "SGBV, Nakaseke District Employees Report ",
-    date_Created: "Mar 14, 2021",
-    date_modified: "Oct 14, 2021",
-  },
-  {
-    name: "SGBV, Nakaseke District Employees Report ",
-    date_Created: "Mar 14, 2021",
-    date_modified: "Oct 14, 2021",
-  },
-];
-
 const ReportsTable = ({ data }) => {
   return (
     <>
@@ -55,7 +27,7 @@ const ReportsTable = ({ data }) => {
                 <Tr key={item.id}>
                   <Td className={classes.primary_text_icon}>
                     <FolderIcon />
-                    {item.name}
+                    {item.report_title}
                   </Td>
                   <Td className={classes.data__purpose_primary_text}>
                     {formatDate(item.createdAt)}

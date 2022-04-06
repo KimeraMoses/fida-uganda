@@ -35,16 +35,15 @@ const FidaApprovals = () => {
   return (
     <>
       <SectionHeader title="FIDA IIMS approvals" />
-      <p>{JSON.stringify(data?.users)}</p>
       <TableSearch
         btnLabel="Add employee"
         btnClick={onOpen}
         searchTerm={searchTerm}
         onSearchHandler={userSearchHandler}
       />
-      {/* {data && data?.users.length > 0 ? (
+      {data?.users ? (
         <FidaApprovedTable searchResults={searchResults} data={data?.users} />
-      ) : null} */}
+      ) : null}
       <Modal isOpen={isOpen} onClose={onClose}>
         <NewEmployeeForm onClose={onClose} />
       </Modal>

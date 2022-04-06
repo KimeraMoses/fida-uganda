@@ -1,6 +1,6 @@
 export const initialValues = {
-  title: "",
+  report_title: "",
   supervisor_name: "",
-  period: "",
+  reporting_period: "",
   date: "",
 };

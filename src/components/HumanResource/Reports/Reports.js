@@ -25,7 +25,7 @@ const Reports = () => {
     <>
       <SectionHeader title="Reports" />
       <TableSearch btnLabel="Add Report" btnClick={onOpen} />
-      {data && <ReportsTable data={data?.reports} />}
+      {data?.reports && <ReportsTable data={data?.reports} />}
       <Modal isOpen={isOpen} onClose={onClose}>
         <NewReportForm
           onClose={onClose}
