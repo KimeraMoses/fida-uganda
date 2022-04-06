@@ -8,49 +8,6 @@ import { TableHeadColumn } from "../../../Membership/Allocations/AllocationsTabl
 import Modal from "../../../common/Modal";
 import NewEmployeeForm from "../NewEmployeeForm/NewEmployeeForm";
 
-export const ApprovalData = [
-  {
-    name: "Andrew Tebandeke",
-    email: "nalubega12@gmail.com",
-    designation: "Lawyer",
-    project: "IDILO - Nakaseke",
-    typeOfApproval: "FIDA IIMS APPROVAL",
-    signUpdate: "01/01/2022",
-  },
-  {
-    name: "Andrew Tebandeke",
-    email: "nalubega12@gmail.com",
-    designation: "Lawyer",
-    project: "IDILO - Nakaseke",
-    typeOfApproval: "FIDA IIMS APPROVAL",
-    signUpdate: "01/01/2022",
-  },
-  {
-    name: "Andrew Tebandeke",
-    email: "nalubega12@gmail.com",
-    designation: "Lawyer",
-    project: "IDILO - Nakaseke",
-    typeOfApproval: "FIDA IIMS APPROVAL",
-    signUpdate: "01/01/2022",
-  },
-  {
-    name: "Andrew Tebandeke",
-    email: "nalubega12@gmail.com",
-    designation: "Lawyer",
-    project: "IDILO - Nakaseke",
-    typeOfApproval: "FIDA IIMS APPROVAL",
-    signUpdate: "01/01/2022",
-  },
-  {
-    name: "Andrew Tebandeke",
-    email: "nalubega12@gmail.com",
-    designation: "Lawyer",
-    project: "IDILO - Nakaseke",
-    typeOfApproval: "FIDA IIMS APPROVAL",
-    signUpdate: "01/01/2022",
-  },
-];
-
 const FidaApprovedTable = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data, searchResults } = props;

@@ -7,6 +7,7 @@ export const routes = {
     forgotPassword: `${BASE_URL}/users/forgotPassword`,
     getMe: `${BASE_URL}/users/me`,
     setPassword: `${BASE_URL}/users/setPassword`,
+    deactivatedUsers: `${BASE_URL}/users/getAllDeactivatedUsers`,
   },
   tasks: {
     addTask: `${BASE_URL}/tasks/create`,
