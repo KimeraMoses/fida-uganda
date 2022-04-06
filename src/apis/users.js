@@ -23,3 +23,7 @@ export const setPassword = async (values) => {
     values
   );
 };
+
+export const getAllDeactivatedUsers = async () => {
+  return await axiosClient.get(routes.users.deactivatedUsers);
+};

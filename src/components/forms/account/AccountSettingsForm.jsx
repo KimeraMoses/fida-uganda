@@ -6,14 +6,16 @@ import SelectField from "../../common/SelectField";
 import {
   designationOptions,
   maritalStatusOptions,
-  projectOptions,
   sexOptions,
 } from "../../../lib/options";
 import { useState } from "react";
 import MultiUpload from "../../common/MultiUpload";
+import { useProjectOptions } from "../../../hooks/useProjects";
 
 const AccountSettingsForm = () => {
   const [files, setFiles] = useState([]);
+  const projectOptions = useProjectOptions();
+
   return (
     <Formik>
       <Flex flexDir="column" bgColor="white" p={20} borderRadius={10}>

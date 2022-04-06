@@ -6,6 +6,7 @@ import {
   signUp,
   forgotPassword,
   setPassword,
+  getAllDeactivatedUsers,
 } from "../apis/users";
 import { USERS_KEY } from "../lib/constants";
 import { loginUser } from "../store/authReducer";
@@ -34,4 +35,8 @@ export const useResetPassword = () => {
 
 export const useSetPassword = () => {
   return useMutation(setPassword);
+};
+
+export const useDeactivatedUsers = () => {
+  return useQuery([USERS_KEY, "DEACTIVATED"], getAllDeactivatedUsers);
 };
