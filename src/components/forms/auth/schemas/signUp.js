@@ -2,7 +2,7 @@ import * as yup from "yup";
 import { IS_REQUIRED } from "../../../../lib/constants";
 
 export const signUpSchema = yup.object().shape({
-  name: yup.string().required(`Name ${IS_REQUIRED}`),
+  full_name: yup.string().required(`Name ${IS_REQUIRED}`),
   email: yup
     .string()
     .required(`Email ${IS_REQUIRED}`)
@@ -13,7 +13,7 @@ export const signUpSchema = yup.object().shape({
 
 export const signUpInitialValues = {
   email: "",
-  name: "",
+  full_name: "",
   designation: "",
   project: "",
 };
