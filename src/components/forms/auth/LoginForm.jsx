@@ -5,6 +5,7 @@ import { Flex, Text, Button, useToast } from "@chakra-ui/react";
 import { loginInitialValues, loginSchema } from "./schemas/login";
 import TextField from "../../common/TextField";
 import { toastError } from "../../../lib/toastDetails";
+import PasswordField from "../../common/PasswordField";
 
 const LoginForm = ({ onSubmit, isSubmitting, isError, error }) => {
   const toast = useToast();
@@ -25,12 +26,7 @@ const LoginForm = ({ onSubmit, isSubmitting, isError, error }) => {
     >
       <Flex as={Form} flexDir="column" gap={5} py={10}>
         <TextField name="email" placeholder="Email" autoComplete="off" />
-        <TextField
-          name="password"
-          placeholder="Password"
-          autoComplete="off"
-          type="password"
-        />
+        <PasswordField name="password" placeholder="Password" />
         <Text as="u" color="purple.500">
           <Link to="/forgotpassword">Forgot password?</Link>
         </Text>

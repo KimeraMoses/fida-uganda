@@ -7,7 +7,7 @@ import {
   createPasswordSchema,
 } from "./schemas/createPassword";
 import { toastError } from "../../../lib/toastDetails";
-import TextField from "../../common/TextField";
+import PasswordField from "../../common/PasswordField";
 
 const CreatePasswordForm = ({ onSubmit, isSubmitting, isError, error }) => {
   const toast = useToast();
@@ -27,16 +27,8 @@ const CreatePasswordForm = ({ onSubmit, isSubmitting, isError, error }) => {
       }}
     >
       <Flex as={Form} flexDir="column" gap={5} py={10}>
-        <TextField
-          name="password"
-          placeholder="Create Password"
-          type="password"
-        />
-        <TextField
-          name="confirm_password"
-          placeholder="Confirm Password"
-          type="password"
-        />
+        <PasswordField name="password" placeholder="Password" />
+        <PasswordField name="confirm_password" placeholder="Confirm Password" />
         <SubmitButton isLoading={isSubmitting} label={"Create Password"} />
       </Flex>
     </Formik>

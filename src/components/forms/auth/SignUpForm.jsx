@@ -28,16 +28,16 @@ const SignUpForm = ({ onSubmit, isSubmitting, isError, error }) => {
       initialValues={signUpInitialValues}
       validationSchema={signUpSchema}
       onSubmit={(values) => {
-        console.log(avatar);
         if (!url) {
           toast(toastError("Please select an avatar"));
           return;
         }
         const formData = new FormData();
+        formData.append("image", avatar);
         Object.keys(values).forEach((key) => {
           formData.append(key, values[key]);
         });
-        onSubmit(values);
+        onSubmit(formData);
       }}
     >
       <Flex as={Form} flexDir="column" gap={5} py={10}>
@@ -52,7 +52,11 @@ const SignUpForm = ({ onSubmit, isSubmitting, isError, error }) => {
           url={url}
           setImageUrl={setImageUrl}
         />
-        <TextField name="full_name" placeholder="Full Name" autoComplete="off" />
+        <TextField
+          name="full_name"
+          placeholder="Full Name"
+          autoComplete="off"
+        />
         <TextField name="email" placeholder="Email" autoComplete="off" />
         <SelectField
           name="designation"
