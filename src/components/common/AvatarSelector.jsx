@@ -3,7 +3,14 @@ import { IconButton } from "@chakra-ui/react";
 import { MdOutlineAddAPhoto } from "react-icons/md";
 import { toastError } from "../../lib/toastDetails";
 
-const AvatarSelector = ({ avatar, toast, setAvatar, iconObj, ...rest }) => {
+const AvatarSelector = ({
+  toast,
+  setAvatar,
+  iconObj,
+  url,
+  setImageUrl,
+  ...rest
+}) => {
   const input = useRef(null);
 
   const handleImageChange = (event) => {
@@ -12,6 +19,7 @@ const AvatarSelector = ({ avatar, toast, setAvatar, iconObj, ...rest }) => {
       toast(toastError("Image size should be less than 2MB"));
     } else {
       setAvatar(file);
+      setImageUrl(URL.createObjectURL(file));
     }
   };
 
