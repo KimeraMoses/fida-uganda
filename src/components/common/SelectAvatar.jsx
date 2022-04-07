@@ -4,7 +4,14 @@ import { MdEdit } from "react-icons/md";
 import { toastError } from "../../lib/toastDetails";
 import AvatarSelector from "./AvatarSelector";
 
-const SelectAvatar = ({ avatar, setAvatar, iconObj, toast, ...rest }) => {
+const SelectAvatar = ({
+  setAvatar,
+  iconObj,
+  toast,
+  url,
+  setImageUrl,
+  ...rest
+}) => {
   const [showEditIcon, setShowEditIcon] = useState(false);
   const input = useRef(null);
 
@@ -21,25 +28,25 @@ const SelectAvatar = ({ avatar, setAvatar, iconObj, toast, ...rest }) => {
       toast(toastError("Image size should be less than 2MB"));
     } else {
       setAvatar(file);
+      setImageUrl(URL.createObjectURL(file));
     }
   };
 
-  if (!avatar) {
+  if (!url) {
     return (
       <AvatarSelector
         toast={toast}
-        avatar={avatar}
         setAvatar={setAvatar}
+        url={url}
+        setImageUrl={setImageUrl}
         {...rest}
-        iconObj
+        {...iconObj}
       />
     );
   }
 
-  const url = URL.createObjectURL(avatar);
   return (
     <Avatar
-      name={avatar.name}
       src={url}
       {...rest}
       onMouseEnter={onMouseEnter}

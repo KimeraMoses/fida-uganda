@@ -13,6 +13,7 @@ import { useProjectOptions } from "../../../hooks/useProjects";
 
 const SignUpForm = ({ onSubmit, isSubmitting, isError, error }) => {
   const [avatar, setAvatar] = useState(null);
+  const [url, setImageUrl] = useState("");
   const toast = useToast();
   const projectOptions = useProjectOptions();
 
@@ -27,12 +28,12 @@ const SignUpForm = ({ onSubmit, isSubmitting, isError, error }) => {
       initialValues={signUpInitialValues}
       validationSchema={signUpSchema}
       onSubmit={(values) => {
-        if (!avatar) {
+        console.log(avatar);
+        if (!url) {
           toast(toastError("Please select an avatar"));
           return;
         }
         const formData = new FormData();
-        formData.append("image", avatar);
         Object.keys(values).forEach((key) => {
           formData.append(key, values[key]);
         });
@@ -41,7 +42,6 @@ const SignUpForm = ({ onSubmit, isSubmitting, isError, error }) => {
     >
       <Flex as={Form} flexDir="column" gap={5} py={10}>
         <SelectAvatar
-          avatar={avatar}
           setAvatar={setAvatar}
           toast={toast}
           alignSelf="center"
@@ -49,6 +49,8 @@ const SignUpForm = ({ onSubmit, isSubmitting, isError, error }) => {
           h={20}
           w={20}
           iconObj={{ size: 24 }}
+          url={url}
+          setImageUrl={setImageUrl}
         />
         <TextField name="name" placeholder="Name" autoComplete="off" />
         <TextField name="email" placeholder="Email" autoComplete="off" />
