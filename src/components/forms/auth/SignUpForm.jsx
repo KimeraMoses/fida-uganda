@@ -28,7 +28,6 @@ const SignUpForm = ({ onSubmit, isSubmitting, isError, error }) => {
       initialValues={signUpInitialValues}
       validationSchema={signUpSchema}
       onSubmit={(values) => {
-        console.log(avatar);
         if (!url) {
           toast(toastError("Please select an avatar"));
           return;
