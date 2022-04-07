@@ -52,7 +52,7 @@ const SignUpForm = ({ onSubmit, isSubmitting, isError, error }) => {
           url={url}
           setImageUrl={setImageUrl}
         />
-        <TextField name="name" placeholder="Name" autoComplete="off" />
+        <TextField name="full_name" placeholder="Full Name" autoComplete="off" />
         <TextField name="email" placeholder="Email" autoComplete="off" />
         <SelectField
           name="designation"
