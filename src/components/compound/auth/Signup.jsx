@@ -3,7 +3,7 @@ import SignUpForm from "../../forms/auth/SignUpForm";
 import { useSignUp } from "../../../hooks/useUser";
 import { useToast } from "@chakra-ui/react";
 import { useEffect } from "react";
-import { toastError } from "../../../lib/toastDetails";
+import { toastSuccess } from "../../../lib/toastDetails";
 
 function SignUp() {
   const { mutate, isLoading, isSuccess, isError, error } = useSignUp();
@@ -12,7 +12,7 @@ function SignUp() {
   useEffect(() => {
     if (isSuccess) {
       toast(
-        toastError(
+        toastSuccess(
           "You have successfully created an account. Contact Human Resources for activation"
         )
       );
