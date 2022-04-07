@@ -34,6 +34,7 @@ const SignUpForm = ({ onSubmit, isSubmitting, isError, error }) => {
           return;
         }
         const formData = new FormData();
+        formData.append("image", avatar);
         Object.keys(values).forEach((key) => {
           formData.append(key, values[key]);
         });
@@ -52,7 +53,11 @@ const SignUpForm = ({ onSubmit, isSubmitting, isError, error }) => {
           url={url}
           setImageUrl={setImageUrl}
         />
-        <TextField name="full_name" placeholder="Full Name" autoComplete="off" />
+        <TextField
+          name="full_name"
+          placeholder="Full Name"
+          autoComplete="off"
+        />
         <TextField name="email" placeholder="Email" autoComplete="off" />
         <SelectField
           name="designation"
