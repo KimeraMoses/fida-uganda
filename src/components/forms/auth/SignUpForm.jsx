@@ -37,7 +37,7 @@ const SignUpForm = ({ onSubmit, isSubmitting, isError, error }) => {
         Object.keys(values).forEach((key) => {
           formData.append(key, values[key]);
         });
-        onSubmit(values);
+        onSubmit(formData);
       }}
     >
       <Flex as={Form} flexDir="column" gap={5} py={10}>
