@@ -11,7 +11,7 @@ export const designationOptions = [
   { label: "Procurement", value: "Procurement" },
   { label: "Counselor", value: "Counselor" },
   { label: "Fleet Manager", value: "Fleet Manager" },
-  { label: "Other", value: "Other" },
+  { label: "Other", value: "Odther" },
 ];
 
 export const maritalStatusOptions = [
@@ -48,4 +48,13 @@ export const clientStaffOptions = [
 export const booleanOptions = [
   { label: "Yes", value: true },
   { label: "No", value: false },
+];
+
+export const reportTypeOptions = [
+  { label: "Activity Report", value: "Activity Report" },
+  { label: "Monthly Report", value: "Monthly Report" },
+  { label: "Quarterly Report", value: "Quarterly Report" },
+  { label: "Bi-annual Report", value: "Bi-annual Report" },
+  { label: "Annual Report", value: "Annual Report" },
+  { label: "Project Report", value: "Project Report" },
 ];
