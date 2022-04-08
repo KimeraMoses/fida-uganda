@@ -7,6 +7,7 @@ import { Form, Formik } from "formik";
 import { assetInitialValues, assetSchema } from "./schema";
 import { toastError } from "../../../../lib/toastDetails";
 import SelectField from "../../../common/SelectField";
+import { assetTypeOptions } from "../../../../lib/options";
 
 const NewAsset = ({
   onSubmit,
@@ -43,7 +44,11 @@ const NewAsset = ({
               placeholder="Select Project"
               options={projectOptions}
             />
-            <InputField placeholder="Asset Type" name="type" />
+            <SelectField
+              placeholder="Select Asset Type"
+              name="type"
+              options={assetTypeOptions}
+            />
           </SimpleGrid>
           <SimpleGrid columns={2} spacing={2}>
             <InputField placeholder="Unit Price" name="unit_price" />

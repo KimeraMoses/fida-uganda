@@ -58,3 +58,13 @@ export const reportTypeOptions = [
   { label: "Annual Report", value: "Annual Report" },
   { label: "Project Report", value: "Project Report" },
 ];
+
+export const assetTypeOptions = [
+  { label: "IT Asset", value: "IT Asset" },
+  { label: "Office Furniture", value: "Office Furniture" },
+  { label: "Auto Mobile (Vehicle/Bike)", value: "Auto Mobile (Vehicle/Bike)" },
+  {
+    label: "Visibility Materials (Shirts/Jackets)",
+    value: "Visibility Materials (Shirts/Jackets)",
+  },
+];
