@@ -26,7 +26,6 @@ const NewReportForm = ({ onClose, error, isError, onSubmit, isSubmitting }) => {
     <Formik
       initialValues={initialValues}
       onSubmit={(values) => {
-        alert(JSON.stringify(values, null, 2));
         if (!file) {
           toast(toastError("Please attach file"));
           return;
@@ -36,7 +35,7 @@ const NewReportForm = ({ onClose, error, isError, onSubmit, isSubmitting }) => {
         Object.keys(values).forEach((key) => {
           formData.append(key, values[key]);
         });
-        // onSubmit(formData);
+        onSubmit(formData);
       }}
     >
       <div
@@ -102,7 +101,11 @@ const NewReportForm = ({ onClose, error, isError, onSubmit, isSubmitting }) => {
             >
               cancel
             </FormButton>
-            <FormButton variant="save" type="submit">
+            <FormButton
+              variant="save"
+              type="submit"
+              isSubmitting={isSubmitting}
+            >
               Save and Exit
             </FormButton>
           </div>
