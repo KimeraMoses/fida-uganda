@@ -101,7 +101,11 @@ const NewReportForm = ({ onClose, error, isError, onSubmit, isSubmitting }) => {
             >
               cancel
             </FormButton>
-            <FormButton variant="save" type="submit">
+            <FormButton
+              variant="save"
+              type="submit"
+              isSubmitting={isSubmitting}
+            >
               Save and Exit
             </FormButton>
           </div>

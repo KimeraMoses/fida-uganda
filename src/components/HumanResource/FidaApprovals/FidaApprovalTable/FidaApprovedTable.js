@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { MdEdit, MdDelete } from "react-icons/md";
+import { MdEdit } from "react-icons/md";
 import { IconButton, useDisclosure, useToast } from "@chakra-ui/react";
 import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
 import classes from "../../Approvals/ApprovalTable/Table.module.css";
@@ -80,14 +80,14 @@ const FidaApprovedTable = ({ data }) => {
                         onClick={() => onEditHandler(item)}
                       />
                     </div>
-                    <div className={classes.table_actions_icon_wrapper}>
+                    {/* <div className={classes.table_actions_icon_wrapper}>
                       <IconButton
                         size="xs"
                         variant="outline"
                         aria-label="Edit Item"
                         icon={<MdDelete />}
                       />
-                    </div>
+                    </div> */}
                   </Td>
                 </Tr>
               );

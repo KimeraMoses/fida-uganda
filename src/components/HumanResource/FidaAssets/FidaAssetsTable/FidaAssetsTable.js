@@ -27,10 +27,10 @@ const FidaAssetsTable = ({ data }) => {
                 <Tr>
                   <Td>{item.name}</Td>
                   <Td className={classes.data__purpose_primary_text}>
-                    {item.people_in_possession[0]}
+                    {item.person_in_possession}
                   </Td>
-                  <Td>{item.office_in_possession}</Td>
-                  <Td>{formatDate(item.createdAt)}</Td>
+                  <Td>{item.location}</Td>
+                  <Td>{formatDate(item.date_delivered)}</Td>
                 </Tr>
               );
             })}

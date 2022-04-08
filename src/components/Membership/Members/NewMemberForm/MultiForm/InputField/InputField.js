@@ -1,19 +1,19 @@
+import { Field, useField } from "formik";
 import React from "react";
 import classes from "./InputField.module.css";
 
-const InputField = (props) => {
-  const { type, value, name, disabled, placeholder, onChange, fullwidth } =
-    props;
+const InputField = ({ type, name, disabled, fullwidth, ...rest }) => {
+  const [field] = useField(name);
+
   return (
-    <input
+    <Field
       className={`${classes.input_field_wrapper} ${
         disabled ? classes.input_field__disabled : ""
       } ${fullwidth ? classes.fullwidth : ""}`}
+      {...field}
+      {...rest}
       type={type}
-      value={value}
-      onChange={onChange}
       name={name}
-      placeholder={placeholder}
       disabled={disabled}
     />
   );
