@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
   createPayroll,
   deletePayroll,
+  editPayroll,
   getAllPayrolls,
   getPayroll,
 } from "../apis/payroll";
@@ -38,7 +39,7 @@ export const useAddPayroll = () => {
 
 export const useUpdatePayroll = () => {
   const queryClient = useQueryClient();
-  return useMutation(createPayroll, {
+  return useMutation(editPayroll, {
     onSuccess: (data) => {
       const previousPayroll = queryClient.getQueryData(PAYROLL_KEY);
       if (previousPayroll) {
