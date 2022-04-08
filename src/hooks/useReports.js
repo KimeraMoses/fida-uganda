@@ -36,8 +36,6 @@ export const useAddReport = () => {
   return useMutation(addReport, {
     onSuccess: (data) => {
       const previousReports = queryClient.getQueryData(REPORTS_KEY);
-      console.log("data", data);
-      console.log(previousReports);
       if (previousReports) {
         queryClient.setQueryData(REPORTS_KEY, (previousReports) => {
           return produce(previousReports, (draft) => {
