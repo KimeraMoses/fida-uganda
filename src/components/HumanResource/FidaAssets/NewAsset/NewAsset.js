@@ -4,7 +4,7 @@ import InputField from "../../../Membership/Members/NewMemberForm/MultiForm/Inpu
 import FormButton from "../../../Membership/MembersActivities/NewActivityForm/Button/FormButton";
 import classes from "./NewAsset.module.css";
 import { Form, Formik } from "formik";
-import { assetInitialValues } from "./schema";
+import { assetInitialValues, assetSchema } from "./schema";
 import { toastError } from "../../../../lib/toastDetails";
 import SelectField from "../../../common/SelectField";
 
@@ -26,6 +26,7 @@ const NewAsset = ({
   return (
     <Formik
       initialValues={assetInitialValues}
+      validationSchema={assetSchema}
       onSubmit={(values) => {
         onSubmit(values);
       }}
