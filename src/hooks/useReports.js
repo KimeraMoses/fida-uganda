@@ -77,13 +77,13 @@ export const useUpdateReport = () => {
 export const useDeleteReport = () => {
   const queryClient = useQueryClient();
   return useMutation(addReport, {
-    onMutate: async (data) => {
+    onMutate: async (reportId) => {
       await queryClient.cancelMutations(REPORTS_KEY);
       const previousReports = queryClient.getQueryData(REPORTS_KEY);
       if (previousReports) {
         queryClient.setQueryData(REPORTS_KEY, (previousReports) => {
           return produce(previousReports, (draft) => {
-            draft.reports.filter((report) => report.id !== data.report.id);
+            draft.reports.filter((report) => report.id !== reportId);
           });
         });
       }

@@ -168,4 +168,10 @@ export const routes = {
     editService: `${BASE_URL}/services/edit`,
     getAllServices: `${BASE_URL}/services/getAll`,
   },
+  payroll: {
+    addPayroll: `${BASE_URL}/payrolls/create`,
+    base: `${BASE_URL}/payrolls/`,
+    getAllPayrolls: `${BASE_URL}/payrolls/getAll`,
+    editPayroll: `${BASE_URL}/payrolls/edit/`,
+  },
 };
