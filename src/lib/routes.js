@@ -174,4 +174,10 @@ export const routes = {
     getAllPayrolls: `${BASE_URL}/payrolls/getAll`,
     editPayroll: `${BASE_URL}/payrolls/edit/`,
   },
+  payrollNotes: {
+    addPayrollNote: `${BASE_URL}/payrollNotes/create`,
+    base: `${BASE_URL}/payrollNotes/`,
+    getAllPayrollNotes: `${BASE_URL}/payrollNotes/getAll`,
+    editPayrollNote: `${BASE_URL}/payrollNotes/edit/`,
+  },
 };
