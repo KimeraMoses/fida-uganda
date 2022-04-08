@@ -5,7 +5,9 @@ import FormButton from "../../../Membership/MembersActivities/NewActivityForm/Bu
 import { Form, Formik } from "formik";
 import { useToast } from "@chakra-ui/react";
 import { toastError } from "../../../../lib/toastDetails";
-import { initialValues } from "./schema";
+import { initialValues, reportSchema } from "./schema";
+import SelectField from "../../../common/SelectField";
+import { reportTypeOptions } from "../../../../lib/options";
 
 const NewReportForm = ({ onClose, error, isError, onSubmit, isSubmitting }) => {
   const [file, setFile] = useState(null);
@@ -25,6 +27,7 @@ const NewReportForm = ({ onClose, error, isError, onSubmit, isSubmitting }) => {
   return (
     <Formik
       initialValues={initialValues}
+      validationSchema={reportSchema}
       onSubmit={(values) => {
         if (!file) {
           toast(toastError("Please attach file"));
@@ -50,6 +53,17 @@ const NewReportForm = ({ onClose, error, isError, onSubmit, isSubmitting }) => {
                 placeholder="Type here"
                 fullWidth
                 name="report_title"
+              />
+            </div>
+          </div>
+          <div className={classes.input_group_wrapper}>
+            <div className={classes.input_label}>Report Title</div>
+            <div className={classes.input_field_wrapper}>
+              <SelectField
+                placeholder="Select Report Type"
+                fullWidth
+                name="type"
+                options={reportTypeOptions}
               />
             </div>
           </div>

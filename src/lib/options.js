@@ -11,7 +11,7 @@ export const designationOptions = [
   { label: "Procurement", value: "Procurement" },
   { label: "Counselor", value: "Counselor" },
   { label: "Fleet Manager", value: "Fleet Manager" },
-  { label: "Other", value: "Other" },
+  { label: "Other", value: "Odther" },
 ];
 
 export const maritalStatusOptions = [
@@ -48,4 +48,23 @@ export const clientStaffOptions = [
 export const booleanOptions = [
   { label: "Yes", value: true },
   { label: "No", value: false },
+];
+
+export const reportTypeOptions = [
+  { label: "Activity Report", value: "Activity Report" },
+  { label: "Monthly Report", value: "Monthly Report" },
+  { label: "Quarterly Report", value: "Quarterly Report" },
+  { label: "Bi-annual Report", value: "Bi-annual Report" },
+  { label: "Annual Report", value: "Annual Report" },
+  { label: "Project Report", value: "Project Report" },
+];
+
+export const assetTypeOptions = [
+  { label: "IT Asset", value: "IT Asset" },
+  { label: "Office Furniture", value: "Office Furniture" },
+  { label: "Auto Mobile (Vehicle/Bike)", value: "Auto Mobile (Vehicle/Bike)" },
+  {
+    label: "Visibility Materials (Shirts/Jackets)",
+    value: "Visibility Materials (Shirts/Jackets)",
+  },
 ];
