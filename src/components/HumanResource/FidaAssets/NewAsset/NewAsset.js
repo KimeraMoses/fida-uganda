@@ -36,18 +36,35 @@ const NewAsset = ({
             <InputField placeholder="Asset Name" name="name" />
             <InputField placeholder="Budget Year" name="budget_year" />
           </SimpleGrid>
-          <SelectField
-            name="project"
-            placeholder="Select Project"
-            options={projectOptions}
-          />
+          <SimpleGrid columns={2} spacing={2}>
+            <SelectField
+              name="project"
+              placeholder="Select Project"
+              options={projectOptions}
+            />
+            <InputField placeholder="Asset Type" name="type" />
+          </SimpleGrid>
           <SimpleGrid columns={2} spacing={2}>
             <InputField placeholder="Unit Price" name="unit_price" />
             <InputField placeholder="Number of Units Required" name="amount" />
           </SimpleGrid>
-          <InputField placeholder="Date Delivered" name="date_delivered" type="date" fullwidth />
-          <InputField placeholder="Office in Possession" name="office_in_possession" fullwidth />
-          <InputField placeholder="Person (s) in Possession" name="people_in_possession" fullwidth />
+          <InputField
+            placeholder="Date Delivered"
+            name="date_delivered"
+            type="date"
+            fullwidth
+          />
+          <InputField
+            placeholder="Office in Possession"
+            name="office_in_possession"
+            fullwidth
+          />
+          <InputField
+            placeholder="Person (s) in Possession"
+            name="person_in_possession"
+            fullwidth
+          />
+          <InputField placeholder="Location" name="location" fullwidth />
           {/* <div className={classes.asset_attachement_wrapper}>
             <h6>
               <AttachmentIcon /> Attachments (2)

@@ -53,12 +53,12 @@ const FidaAssets = () => {
         // searchTerm={searchTerm}
         // onSearchHandler={userSearchHandler}
       />
-      {data && data.assets.length > 0 ? (
+      {data?.assets && (
         <FidaAssetsTable
           data={data?.assets}
           // searchResults={searchResults}
         />
-      ) : null}
+      )}
       <Modal
         isOpen={isOpen}
         onClose={onClose}
