@@ -1,0 +1,15 @@
+.asset_tags_team_wrapper {
+  margin: 10px 0;
+}
+.tags,
+.asset_tags_team_wrapper h6 {
+  display: flex;
+  align-items: center;
+}
+.asset_tags_team_wrapper h6 svg {
+  margin-right: 4px;
+}
+.tags,
+.team {
+  padding: 8px 0;
+}

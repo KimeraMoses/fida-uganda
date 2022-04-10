@@ -11,7 +11,7 @@ const EmployeeCard = ({
   onSubmit,
   isError,
   error,
-  isReadOnly = true,
+  isReadOnly = true
 }) => {
   const toast = useToast();
 
@@ -24,13 +24,13 @@ const EmployeeCard = ({
   return (
     <Formik
       initialValues={{ ...user, project: user.project?.name }}
-      onSubmit={(values) => {
+      onSubmit={values => {
         onSubmit(values);
       }}
     >
       <SimpleGrid p={5} as={Form} gap={5}>
         <Flex justifyContent="center">
-          <Avatar src={user.img} alt={user.full_name} my={3} />
+          <Avatar src={user.image} alt={user.full_name} my={3} />
         </Flex>
         <TextField name="full_name" isReadOnly={isReadOnly} label="Full Name" />
         <TextField name="email" isReadOnly={isReadOnly} label="Email" />

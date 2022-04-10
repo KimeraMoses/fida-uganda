@@ -71,7 +71,8 @@ const View = () => {
         <Route path="hr-approvals" element={<HRApprovals />} />
         <Route path="payroll" element={<PayRoll />} />
         <Route path="leave-management" element={<LeaveManagement />} />
-        <Route path="employee-contract" element={<EmployeeContract />} />
+        <Route path="employees" element={<EmployeeContract />} />
+        <Route path="contracts" element={<EmployeeContract />} />
         <Route path="fida-assets" element={<FidaAssets />} />
         <Route path="reports" element={<Reports />} />
         {/* <Route path="it-products" element={<ITProducts />} />
@@ -81,13 +82,14 @@ const View = () => {
         <Route path="procurements" element={<Procurements />} />
         <Route path="fida-databases" element={<FidaDatabases />} />
         <Route path="fida-databases/:dbName" element={<DatabaseOpen />} />
-        <Route path="fida-projects" element={<FidaProjects />} /> 
-        <Route path="fida-projects/:folderName" element={<FidaProjectFiles />} />
+        <Route path="fida-projects" element={<FidaProjects />} />
+        <Route
+          path="fida-projects/:folderName"
+          element={<FidaProjectFiles />}
+        />
       </Route>
     </Routes>
   );
 };
 
 export default View;
-
-

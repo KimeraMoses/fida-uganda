@@ -16,7 +16,7 @@ const FidaApprovedTable = ({ data }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { mutate, isLoading, isSuccess, isError, error } = useActivateUser();
   const toast = useToast();
-
+  console.log(data)
   const onEditHandler = (user) => {
     setUser(user);
     onOpen();

@@ -3,7 +3,7 @@ import {
   MdTaskAlt,
   MdStorage,
   MdSummarize,
-  MdFeedback,
+  MdFeedback
 } from "react-icons/md";
 
 let id = 0;
@@ -13,176 +13,182 @@ const menuOptions = {
     id: ++id,
     name: "Dashboard",
     icon: MdDashboard,
-    path: "/",
+    path: "/"
   },
   tasks: {
     id: ++id,
     name: "Tasks",
     icon: MdTaskAlt,
-    path: "tasks",
+    path: "tasks"
   },
   clvDatabase: {
     id: ++id,
     name: "CLV Database",
     icon: MdSummarize,
-    path: "clv-database",
+    path: "clv-database"
   },
   clvCaseFiles: {
     id: ++id,
     name: "CLV Case Files",
     icon: MdSummarize,
-    path: "clv-case-files",
+    path: "clv-case-files"
   },
   clvs: {
     id: ++id,
     name: "CLVs",
     icon: MdSummarize,
-    path: "clvs",
+    path: "clvs"
   },
   clvComplaints: {
     id: ++id,
     name: "CLV Complaints",
     icon: MdFeedback,
-    path: "clv-complaints",
+    path: "clv-complaints"
   },
   itProducts: {
     id: ++id,
     name: "IT Products",
     icon: MdSummarize,
-    path: "it-products",
+    path: "it-products"
   },
   itServices: {
     id: ++id,
     name: "IT Services",
     icon: MdSummarize,
-    path: "it-services",
+    path: "it-services"
   },
   itComplaint: {
     id: ++id,
     name: "IT Complaints",
     icon: MdSummarize,
-    path: "it-complaints",
+    path: "it-complaints"
   },
   systemAdmin: {
     id: ++id,
     name: "System Admin",
     icon: MdSummarize,
-    path: "system-admin",
+    path: "system-admin"
   },
   caseFiles: {
     id: ++id,
     name: "Case Files",
     icon: MdStorage,
-    path: "case-files",
+    path: "case-files"
   },
   clientsFiles: {
     id: ++id,
     name: "Clients Files",
     icon: MdStorage,
-    path: "clients-files",
+    path: "clients-files"
   },
   fidaProjects: {
     id: ++id,
     name: "FIDA Projects",
     icon: MdStorage,
-    path: "fida-projects",
+    path: "fida-projects"
   },
   fidaDatabases: {
     id: ++id,
     name: "FIDA Databases",
     icon: MdStorage,
-    path: "fida-databases",
+    path: "fida-databases"
   },
   fidaAssets: {
     id: ++id,
     name: "FIDA Assets",
     icon: MdStorage,
-    path: "fida-assets",
+    path: "fida-assets"
   },
   clients: {
     id: ++id,
     name: "Clients",
     icon: MdStorage,
-    path: "clients",
+    path: "clients"
   },
   approvals: {
     id: ++id,
     name: "Approvals",
     icon: MdStorage,
-    path: "approvals",
+    path: "approvals"
   },
   members: {
     id: ++id,
     name: "Members",
     icon: MdStorage,
-    path: "members",
+    path: "members"
   },
   membersActivities: {
     id: ++id,
     name: "Members Activities",
     icon: MdStorage,
-    path: "members-activities",
+    path: "members-activities"
   },
   allocations: {
     id: ++id,
     name: "Allocations",
     icon: MdStorage,
-    path: "allocations",
+    path: "allocations"
   },
   notifications: {
     id: ++id,
     name: "Notifications",
     icon: MdStorage,
-    path: "notifications",
+    path: "notifications"
   },
   humanResource_Approvals: {
     id: ++id,
     name: "Approvals",
     icon: MdStorage,
-    path: "hr-approvals",
+    path: "hr-approvals"
   },
   payRoll: {
     id: ++id,
     name: "PayRoll",
     icon: MdStorage,
-    path: "payroll",
+    path: "payroll"
   },
   leaveMgt: {
     id: ++id,
     name: "Leave Management",
     icon: MdStorage,
-    path: "leave-management",
+    path: "leave-management"
   },
-  employContract: {
+  Contracts: {
     id: ++id,
-    name: "Employess & Contracts",
+    name: "Contracts",
     icon: MdStorage,
-    path: "employee-contract",
+    path: "contracts"
+  },
+  Employees: {
+    id: ++id,
+    name: "Employesss",
+    icon: MdStorage,
+    path: "employees"
   },
   fidaAssets_hr: {
     id: ++id,
     name: "Fida Assests",
     icon: MdStorage,
-    path: "fida-assets",
+    path: "fida-assets"
   },
   reports: {
     id: ++id,
     name: "Reports",
     icon: MdStorage,
-    path: "reports",
+    path: "reports"
   },
   fidaApprovals: {
     id: ++id,
     name: "FIDA IIMS Approvals",
     icon: MdStorage,
-    path: "fida-iims-approvals",
+    path: "fida-iims-approvals"
   },
   project: {
     id: ++id,
     name: "Project Files",
     icon: MdStorage,
-    path: "project-files",
-  },
+    path: "project-files"
+  }
 };
 
 const commonOptions = [menuOptions.dashboard, menuOptions.tasks];
@@ -194,12 +200,12 @@ const menu = {
     menuOptions.caseFiles,
     menuOptions.clvDatabase,
     menuOptions.clvComplaints,
-    menuOptions.reports,
+    menuOptions.reports
   ],
   courtProcessServer: [
     ...commonOptions,
     menuOptions.caseFiles,
-    menuOptions.reports,
+    menuOptions.reports
   ],
   legalAid: [
     ...commonOptions,
@@ -208,7 +214,7 @@ const menu = {
     menuOptions.caseFiles,
     menuOptions.clvCaseFiles,
     menuOptions.project,
-    menuOptions.reports,
+    menuOptions.reports
   ],
   membership: [
     ...commonOptions,
@@ -216,17 +222,18 @@ const menu = {
     menuOptions.members,
     menuOptions.membersActivities,
     menuOptions.allocations,
-    menuOptions.notifications,
+    menuOptions.notifications
   ],
   humanResources: [
     ...commonOptions,
     menuOptions.humanResource_Approvals,
     menuOptions.payRoll,
     menuOptions.leaveMgt,
-    menuOptions.employContract,
+    menuOptions.Employees,
+    menuOptions.Contracts,
     menuOptions.fidaAssets_hr,
     menuOptions.reports,
-    menuOptions.fidaApprovals,
+    menuOptions.fidaApprovals
   ],
   it: [
     ...commonOptions,
@@ -234,7 +241,7 @@ const menu = {
     menuOptions.itServices,
     menuOptions.itComplaint,
     menuOptions.systemAdmin,
-    menuOptions.reports,
+    menuOptions.reports
   ],
   finance: [
     ...commonOptions,
@@ -242,7 +249,7 @@ const menu = {
     menuOptions.payRoll,
     menuOptions.fidaProjects,
     menuOptions.fidaDatabases,
-    menuOptions.reports,
+    menuOptions.reports
   ],
   me: [
     ...commonOptions,
@@ -250,7 +257,7 @@ const menu = {
     menuOptions.fidaProjects,
     menuOptions.fidaDatabases,
     menuOptions.fidaAssets,
-    menuOptions.reports,
+    menuOptions.reports
   ],
   programs: [
     ...commonOptions,
@@ -258,16 +265,16 @@ const menu = {
     menuOptions.fidaProjects,
     menuOptions.fidaDatabases,
     menuOptions.fidaAssets,
-    menuOptions.reports,
+    menuOptions.reports
   ],
   procurement: [...commonOptions, menuOptions.procurements],
   counsellor: [...commonOptions, menuOptions.clientsFiles, menuOptions.reports],
   fleetManager: [
     ...commonOptions,
     menuOptions.fleetDatabase,
-    menuOptions.reports,
+    menuOptions.reports
   ],
-  other: [...commonOptions],
+  other: [...commonOptions]
 };
 
 export default menu;
