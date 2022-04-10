@@ -2,7 +2,7 @@ import React from "react";
 import classes from "../../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css";
 import { Select, SimpleGrid, Textarea } from "@chakra-ui/react";
 import ActionButtons from "../../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons";
-import FormButton from "../../../../Membership/MembersActivities/NewActivityForm/Button/FormButton";
+import FormButton from "../../../../common/UI/FormButton/FormButton";
 import styles from "./MultForm6.module.css";
 import Logo from "../../../../../assets/images/Avater.png";
 
@@ -14,7 +14,7 @@ const ActionCard = () => {
         style={{
           backgroundImage: `url(${Logo})`,
           backgroundSize: "cover",
-          backgroundPosition: "center top",
+          backgroundPosition: "center top"
         }}
       ></div>
       <div className={styles.content_wrapper}>
@@ -68,10 +68,7 @@ const MultForm6 = ({ nextStep, handleChange, values, Continue, Previous }) => {
           </div>
         </div>
 
-        <ActionButtons
-          step={values.step}
-          Previous={Previous}
-        />
+        <ActionButtons step={values.step} Previous={Previous} />
       </form>
     </div>
   );

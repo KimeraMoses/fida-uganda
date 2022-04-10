@@ -1,21 +1,45 @@
-import React from "react";
-import { MdEdit, MdDelete } from "react-icons/md";
-import { IconButton, useDisclosure } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { MdEdit } from "react-icons/md";
+import { IconButton, useDisclosure, useToast } from "@chakra-ui/react";
 import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
 import classes from "../../Approvals/ApprovalTable/Table.module.css";
 import styles from "./FidaApprovalTable.module.css";
 import { TableHeadColumn } from "../../../Membership/Allocations/AllocationsTable/AllocationsTable";
 import Modal from "../../../common/Modal";
-import NewEmployeeForm from "../NewEmployeeForm/NewEmployeeForm";
 import { formatDate } from "../../../../lib/data";
+import { useActivateUser } from "../../../../hooks/useUser";
+import EmployeeCard from "../NewEmployeeForm/EmployeeCard";
+import { toastSuccess } from "../../../../lib/toastDetails";
 
 const FidaApprovedTable = ({ data }) => {
+  const [user, setUser] = useState({});
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { mutate, isLoading, isSuccess, isError, error } = useActivateUser();
+  const toast = useToast();
+
+  const onEditHandler = (user) => {
+    setUser(user);
+    onOpen();
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast(toastSuccess("User activated successfully"));
+      onClose();
+    }
+  }, [isSuccess, toast, onClose]);
 
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose}>
-        <NewEmployeeForm isApprove={true} />
+        <EmployeeCard
+          isSubmitting={isLoading}
+          onClose={onClose}
+          user={user}
+          onSubmit={mutate}
+          isError={isError}
+          error={error}
+        />
       </Modal>
       <div className={classes.approvals_table_wrapper}>
         <Table
@@ -53,17 +77,17 @@ const FidaApprovedTable = ({ data }) => {
                         size="xs"
                         aria-label="Edit Item"
                         icon={<MdEdit />}
-                        onClick={onOpen}
+                        onClick={() => onEditHandler(item)}
                       />
                     </div>
-                    <div className={classes.table_actions_icon_wrapper}>
+                    {/* <div className={classes.table_actions_icon_wrapper}>
                       <IconButton
                         size="xs"
                         variant="outline"
                         aria-label="Edit Item"
                         icon={<MdDelete />}
                       />
-                    </div>
+                    </div> */}
                   </Td>
                 </Tr>
               );

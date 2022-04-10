@@ -40,6 +40,7 @@ const FidaApprovals = () => {
         btnClick={onOpen}
         searchTerm={searchTerm}
         onSearchHandler={userSearchHandler}
+        showBtn={false}
       />
       {data?.users ? (
         <FidaApprovedTable searchResults={searchResults} data={data?.users} />

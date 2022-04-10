@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import classes from "../../../Membership/MembersActivities/NewActivityForm/NewActivityForm.module.css";
-import InputField from "../../../Membership/MembersActivities/NewActivityForm/InputField";
-import FormButton from "../../../Membership/MembersActivities/NewActivityForm/Button/FormButton";
+import InputField from "../../../common/UI/InputField/InputField";
+import FormButton from "../../../common/UI/FormButton/FormButton";
 import { Form, Formik } from "formik";
 import { useToast } from "@chakra-ui/react";
 import { toastError } from "../../../../lib/toastDetails";
-import { initialValues } from "./schema";
+import { initialValues, reportSchema } from "./schema";
+import SelectField from "../../../common/SelectField";
+import { reportTypeOptions } from "../../../../lib/options";
 
 const NewReportForm = ({ onClose, error, isError, onSubmit, isSubmitting }) => {
   const [file, setFile] = useState(null);
@@ -17,7 +19,7 @@ const NewReportForm = ({ onClose, error, isError, onSubmit, isSubmitting }) => {
     }
   }, [isError, error, toast]);
 
-  const handleFileChange = (e) => {
+  const handleFileChange = e => {
     const file = e.target.files[0];
     setFile(file);
   };
@@ -25,7 +27,8 @@ const NewReportForm = ({ onClose, error, isError, onSubmit, isSubmitting }) => {
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={(values) => {
+      validationSchema={reportSchema}
+      onSubmit={values => {
         //open console to see the form values on submit
         console.log(values);
         if (!file) {
@@ -34,9 +37,9 @@ const NewReportForm = ({ onClose, error, isError, onSubmit, isSubmitting }) => {
         }
         const formData = new FormData();
         formData.append("report", file);
-        formData.append("filename", values.report_title)
+        formData.append("filename", values.report_title);
         //append all the values here depending on what the endpoint expects
-        Object.keys(values).forEach((key) => {
+        Object.keys(values).forEach(key => {
           formData.append(key, values[key]);
         });
         onSubmit(formData);
@@ -46,7 +49,7 @@ const NewReportForm = ({ onClose, error, isError, onSubmit, isSubmitting }) => {
         errors,
         handleSubmit,
         handleChange,
-        isSubmitting,
+        isSubmitting
       }) => (
         <div
           className={classes.activity_form_wrapper}
@@ -58,9 +61,20 @@ const NewReportForm = ({ onClose, error, isError, onSubmit, isSubmitting }) => {
               <div className={classes.input_field_wrapper}>
                 <InputField
                   placeholder="Type here"
-                  fullWidth
+                  fullwidth
                   name="report_title"
                   // onChange={handleChange}
+                />
+              </div>
+            </div>
+            <div className={classes.input_group_wrapper}>
+              <div className={classes.input_label}>Report Title</div>
+              <div className={classes.input_field_wrapper}>
+                <SelectField
+                  placeholder="Select Report Type"
+                  fullWidth
+                  name="type"
+                  options={reportTypeOptions}
                 />
               </div>
             </div>
@@ -69,9 +83,8 @@ const NewReportForm = ({ onClose, error, isError, onSubmit, isSubmitting }) => {
               <div className={classes.input_field_wrapper}>
                 <InputField
                   placeholder="Type here"
-                  fullWidth
+                  fullwidth
                   name="supervisor_name"
-                  onChange={handleChange}
                 />
               </div>
             </div>
@@ -80,7 +93,7 @@ const NewReportForm = ({ onClose, error, isError, onSubmit, isSubmitting }) => {
               <div className={classes.input_field_wrapper}>
                 <InputField
                   placeholder="Type here"
-                  fullWidth
+                  fullwidth
                   name="reporting_period"
                   onChange={handleChange}
                 />
@@ -92,7 +105,7 @@ const NewReportForm = ({ onClose, error, isError, onSubmit, isSubmitting }) => {
                 <InputField
                   type="date"
                   placeholder="Type here"
-                  fullWidth
+                  fullwidth
                   name="date"
                   onChange={handleChange}
                 />
@@ -115,7 +128,7 @@ const NewReportForm = ({ onClose, error, isError, onSubmit, isSubmitting }) => {
               >
                 cancel
               </FormButton>
-              <FormButton variant="save" type="submit">
+              <FormButton variant="save" type="submit" disabled={isSubmitting}>
                 {isSubmitting ? "Saving..." : "Save and Exit"}
               </FormButton>
             </div>

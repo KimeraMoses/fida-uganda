@@ -1,5 +1,5 @@
 import React from "react";
-import FormButton from "../../../Membership/MembersActivities/NewActivityForm/Button/FormButton";
+import FormButton from "../../../common/UI/FormButton/FormButton";
 import classes from "./NewNotes.module.css";
 
 const NewNotes = () => {

@@ -27,3 +27,7 @@ export const setPassword = async (values) => {
 export const getAllDeactivatedUsers = async () => {
   return await axiosClient.get(routes.users.deactivatedUsers);
 };
+
+export const activateUser = async (id) => {
+  return await axiosClient.post(routes.users.activateUser, id);
+};

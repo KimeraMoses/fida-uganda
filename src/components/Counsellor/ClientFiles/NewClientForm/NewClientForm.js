@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { SimpleGrid, useToast } from "@chakra-ui/react";
 import { toastError } from "../../../../lib/toastDetails";
-import FormButton from "../../../Membership/MembersActivities/NewActivityForm/Button/FormButton";
-import InputField from "../../../Membership/UI/InputField/InputField";
+import FormButton from "../../../common/UI/FormButton/FormButton";
+import InputField from "../../../common/UI/InputField/InputField";
 import classes from "./NewClientForm.module.css";
 import { Form, Formik } from "formik";
 import { patientInitialValues, patientSchema } from "./schema";
@@ -10,7 +10,7 @@ import SelectField from "../../../common/SelectField";
 import {
   clientStaffOptions,
   sexOptions,
-  yesNoOptions,
+  yesNoOptions
 } from "../../../../lib/options";
 
 const NewClientForm = ({ isEdit, isSubmitting, onSubmit, error, isError }) => {
@@ -26,7 +26,7 @@ const NewClientForm = ({ isEdit, isSubmitting, onSubmit, error, isError }) => {
     <Formik
       initialValues={patientInitialValues}
       validationSchema={patientSchema}
-      onSubmit={(values) => {
+      onSubmit={values => {
         onSubmit(values);
       }}
     >

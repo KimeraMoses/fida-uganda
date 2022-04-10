@@ -8,6 +8,7 @@ export const routes = {
     getMe: `${BASE_URL}/users/me`,
     setPassword: `${BASE_URL}/users/setPassword`,
     deactivatedUsers: `${BASE_URL}/users/getAllDeactivatedUsers`,
+    activateUser: `${BASE_URL}/users/activateAccount`,
   },
   tasks: {
     addTask: `${BASE_URL}/tasks/create`,
@@ -166,5 +167,17 @@ export const routes = {
     base: `${BASE_URL}/services`,
     editService: `${BASE_URL}/services/edit`,
     getAllServices: `${BASE_URL}/services/getAll`,
+  },
+  payroll: {
+    addPayroll: `${BASE_URL}/payrolls/create`,
+    base: `${BASE_URL}/payrolls/`,
+    getAllPayrolls: `${BASE_URL}/payrolls/getAll`,
+    editPayroll: `${BASE_URL}/payrolls/edit/`,
+  },
+  payrollNotes: {
+    addPayrollNote: `${BASE_URL}/payrollNotes/create`,
+    base: `${BASE_URL}/payrollNotes/`,
+    getAllPayrollNotes: `${BASE_URL}/payrollNotes/getAll`,
+    editPayrollNote: `${BASE_URL}/payrollNotes/edit/`,
   },
 };

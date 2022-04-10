@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import classes from "../../HumanResource/FidaAssets/NewAsset/NewAsset.module.css";
-import InputField from "../../Membership/Members/NewMemberForm/MultiForm/InputField/InputField";
-import FormButton from "../../Membership/MembersActivities/NewActivityForm/Button/FormButton";
+import InputField from "../../common/UI/InputField/InputField";
+import FormButton from "../../common/UI/FormButton/FormButton";
 import { AttachmentIcon } from "../../../assets/Icons/Icons";
 import { Form, Formik } from "formik";
 import { Heading, SimpleGrid, useToast } from "@chakra-ui/react";
@@ -22,7 +22,7 @@ const NewTaskForm = ({ onSubmit, error, isError, isSubmitting }) => {
   return (
     <Formik
       initialValues={taskInitialValues}
-      onSubmit={(values) => {
+      onSubmit={values => {
         console.log(values);
         // onSubmit(values);
       }}

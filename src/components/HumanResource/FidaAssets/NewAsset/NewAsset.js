@@ -1,19 +1,20 @@
 import { SimpleGrid, useToast } from "@chakra-ui/react";
 import React, { useEffect } from "react";
-import InputField from "../../../Membership/Members/NewMemberForm/MultiForm/InputField/InputField";
-import FormButton from "../../../Membership/MembersActivities/NewActivityForm/Button/FormButton";
+import InputField from "../../../common/UI/InputField/InputField";
+import FormButton from "../../../common/UI/FormButton/FormButton";
 import classes from "./NewAsset.module.css";
 import { Form, Formik } from "formik";
-import { assetInitialValues } from "./schema";
+import { assetInitialValues, assetSchema } from "./schema";
 import { toastError } from "../../../../lib/toastDetails";
 import SelectField from "../../../common/SelectField";
+import { assetTypeOptions } from "../../../../lib/options";
 
 const NewAsset = ({
   onSubmit,
   isSubmitting,
   isError,
   error,
-  projectOptions,
+  projectOptions
 }) => {
   const toast = useToast();
 
@@ -26,28 +27,58 @@ const NewAsset = ({
   return (
     <Formik
       initialValues={assetInitialValues}
-      onSubmit={(values) => {
+      validationSchema={assetSchema}
+      onSubmit={values => {
         onSubmit(values);
       }}
     >
       <div className={classes.new_asset_wrapper}>
         <Form>
           <SimpleGrid columns={2} spacing={2}>
-            <InputField placeholder="Asset Name" name="name" />
-            <InputField placeholder="Budget Year" name="budget_year" />
+            <InputField placeholder="Asset Name" name="name" fullwidth />
+            <InputField
+              placeholder="Budget Year"
+              name="budget_year"
+              fullwidth
+            />
           </SimpleGrid>
-          <SelectField
-            name="project"
-            placeholder="Select Project"
-            options={projectOptions}
-          />
           <SimpleGrid columns={2} spacing={2}>
-            <InputField placeholder="Unit Price" name="unit_price" />
-            <InputField placeholder="Number of Units Required" name="amount" />
+            <SelectField
+              name="project"
+              placeholder="Select Project"
+              options={projectOptions}
+            />
+            <SelectField
+              placeholder="Select Asset Type"
+              name="type"
+              options={assetTypeOptions}
+            />
           </SimpleGrid>
-          <InputField placeholder="Date Delivered" name="date_delivered" type="date" fullwidth />
-          <InputField placeholder="Office in Possession" name="office_in_possession" fullwidth />
-          <InputField placeholder="Person (s) in Possession" name="people_in_possession" fullwidth />
+          <SimpleGrid columns={2} spacing={2}>
+            <InputField fullwidth placeholder="Unit Price" name="unit_price" />
+            <InputField
+              fullwidth
+              placeholder="Number of Units Required"
+              name="amount"
+            />
+          </SimpleGrid>
+          <InputField
+            placeholder="Date Delivered"
+            name="date_delivered"
+            type="date"
+            fullwidth
+          />
+          <InputField
+            placeholder="Office in Possession"
+            name="office_in_possession"
+            fullwidth
+          />
+          <InputField
+            placeholder="Person (s) in Possession"
+            name="person_in_possession"
+            fullwidth
+          />
+          <InputField placeholder="Location" name="location" fullwidth />
           {/* <div className={classes.asset_attachement_wrapper}>
             <h6>
               <AttachmentIcon /> Attachments (2)

@@ -1,0 +1,54 @@
+.fida__fm_btn {
+  outline: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1;
+  border: 0;
+  overflow: hidden;
+  text-transform: capitalize;
+  box-sizing: border-box;
+  color: #000000;
+  font-weight: 600;
+  user-select: none;
+  border-radius: 10px;
+  padding: 4px 10px;
+  min-width: 77px;
+}
+.fida__fm_btn.btn__rounded {
+  border-radius: 20px;
+}
+.fida__fm_btn.fida__btn_outlined {
+  border: 1px solid var(--primary_color);
+}
+.fida__fm_btn.fida__btn_outlined.btn_custom_color {
+  border: 1px solid #ebeff2;
+}
+.fida__fm_btn.fida__btn_outlined.btn_color_success {
+  border: 1px solid #38cb89;
+}
+.fida__fm_btn.fida__btn_outlined.btn_color_fail {
+  border: 1px solid #ff3838;
+}
+.fida__fm_btn.fida__btn_transparent {
+  background-color: transparent;
+  color: var(--primary_color);
+  padding: 4px 14px;
+}
+.fida__fm_btn.fida__btn_cancel {
+  border: 1px solid red;
+}
+.fida__fm_btn.fida__btn_save {
+  border: 1px solid var(--primary_color);
+}
+.fida__fm_btn.fida__btn_cancel:hover {
+  background-color: #ff3838;
+  color: #ffffff;
+}
+.fida__fm_btn.fida__btn_save:hover {
+  background-color: var(--primary_color);
+  color: #ffffff;
+}
+.fida__fm_btn.fida__btn_colored {
+  background: linear-gradient(102.46deg, #b28dda 7.45%, #562b85 98.81%);
+  color: #ffffff;
+}

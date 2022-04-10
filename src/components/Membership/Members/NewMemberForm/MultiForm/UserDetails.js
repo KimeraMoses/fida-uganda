@@ -1,16 +1,14 @@
 import React, { useState } from "react";
-import {
-  MdTaskAlt
-} from "react-icons/md";
+import { MdTaskAlt } from "react-icons/md";
+import InputField from "../../../../common/UI/InputField/InputField";
 import classes from "./MultiForm.module.css";
 import ActionButtons from "./ActionButtons/ActionButtons";
-import InputField from "./InputField/InputField";
 import { Select, SimpleGrid } from "@chakra-ui/react";
 
 const UserDetails = ({ nextStep, handleChange, values, Continue }) => {
   const [Logo, setLogo] = useState("");
 
-  const userLogoHandler = async (e) => {
+  const userLogoHandler = async e => {
     const file = e.target.files[0];
     const Logo = await convertbase64Logo(file);
     setLogo(Logo);
@@ -21,7 +19,7 @@ const UserDetails = ({ nextStep, handleChange, values, Continue }) => {
     fileInput.click();
   };
 
-  const convertbase64Logo = (file) => {
+  const convertbase64Logo = file => {
     return new Promise((resolve, reject) => {
       const fileReader = new FileReader();
       fileReader.readAsDataURL(file);
@@ -29,7 +27,7 @@ const UserDetails = ({ nextStep, handleChange, values, Continue }) => {
       fileReader.onload = () => {
         resolve(fileReader.result);
       };
-      fileReader.onerror = (error) => {
+      fileReader.onerror = error => {
         reject(error);
       };
     });
@@ -44,7 +42,7 @@ const UserDetails = ({ nextStep, handleChange, values, Continue }) => {
             style={{
               backgroundImage: `url(${Logo})`,
               backgroundSize: "cover",
-              backgroundPosition: "center top",
+              backgroundPosition: "center top"
             }}
             onClick={ImageIconClick}
           >
@@ -53,7 +51,7 @@ const UserDetails = ({ nextStep, handleChange, values, Continue }) => {
               id="user_img"
               hidden
               accept=".png, .jpg, .jpeg"
-              onChange={(e) => userLogoHandler(e)}
+              onChange={e => userLogoHandler(e)}
             />
             <div className={classes.img_icon}>
               <MdTaskAlt />

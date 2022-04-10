@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { MdTaskAlt, MdClose } from "react-icons/md";
 import classes from "../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css";
 import { Select, SimpleGrid } from "@chakra-ui/react";
-import InputField from "../../../Membership/Members/NewMemberForm/MultiForm/InputField/InputField";
+import InputField from "../../../common/UI/InputField/InputField";
+import FormButton from "../../../common/UI/FormButton/FormButton";
 import styles from "./NewClvForm.module.css";
-import FormButton from "../../../Membership/MembersActivities/NewActivityForm/Button/FormButton";
 
-const NewClvForm = (props) => {
+const NewClvForm = props => {
   const { action, onClose } = props;
   const [Logo, setLogo] = useState("");
-  const userLogoHandler = async (e) => {
+  const userLogoHandler = async e => {
     const file = e.target.files[0];
     const Logo = await convertbase64Logo(file);
     setLogo(Logo);
@@ -20,7 +20,7 @@ const NewClvForm = (props) => {
     fileInput.click();
   };
 
-  const convertbase64Logo = (file) => {
+  const convertbase64Logo = file => {
     return new Promise((resolve, reject) => {
       const fileReader = new FileReader();
       fileReader.readAsDataURL(file);
@@ -28,7 +28,7 @@ const NewClvForm = (props) => {
       fileReader.onload = () => {
         resolve(fileReader.result);
       };
-      fileReader.onerror = (error) => {
+      fileReader.onerror = error => {
         reject(error);
       };
     });
@@ -49,7 +49,7 @@ const NewClvForm = (props) => {
             style={{
               backgroundImage: `url(${Logo})`,
               backgroundSize: "cover",
-              backgroundPosition: "center top",
+              backgroundPosition: "center top"
             }}
             onClick={ImageIconClick}
           >
@@ -58,7 +58,7 @@ const NewClvForm = (props) => {
               id="user_img"
               hidden
               accept=".png, .jpg, .jpeg"
-              onChange={(e) => userLogoHandler(e)}
+              onChange={e => userLogoHandler(e)}
             />
             <div className={classes.img_icon}>
               <MdTaskAlt />

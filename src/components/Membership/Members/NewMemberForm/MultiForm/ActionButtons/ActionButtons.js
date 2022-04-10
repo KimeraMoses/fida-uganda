@@ -1,5 +1,5 @@
 import React from "react";
-import FormButton from "../../../../MembersActivities/NewActivityForm/Button/FormButton";
+import FormButton from "../../../../../common/UI/FormButton/FormButton";
 import classes from "./ActionButtons.module.css";
 
 const ActionButtons = ({ step, Continue, Previous }) => {
