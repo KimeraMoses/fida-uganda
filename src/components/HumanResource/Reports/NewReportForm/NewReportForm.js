@@ -60,7 +60,7 @@ const NewReportForm = ({ onClose, error, isError, onSubmit, isSubmitting }) => {
                   placeholder="Type here"
                   fullWidth
                   name="report_title"
-                  onChange={handleChange}
+                  // onChange={handleChange}
                 />
               </div>
             </div>
