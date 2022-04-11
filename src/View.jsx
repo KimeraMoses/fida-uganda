@@ -20,9 +20,6 @@ import FidaAssets from "./components/HumanResource/FidaAssets/FidaAssets";
 import Reports from "./components/HumanResource/Reports/Reports";
 import Tracker from "./components/compound/Tracker";
 import AccountSettings from "./components/compound/AccountSettings";
-// import ITProducts from "./components/itDepartment/ITProducts";
-// import ITServices from "./components/itDepartment/itServices";
-// import ITComplaints from "./components/itDepartment/Complaints/ITComplaints";
 import FleetDatabase from "./components/fleetManager/FleetDatabase";
 import Procurements from "./components/procurement/Procurements";
 import FidaApprovals from "./components/HumanResource/FidaApprovals/FidaApprovals";
@@ -37,6 +34,9 @@ import FidaProjectFiles from "./components/ME/FidaProjects/FidaProjectFiles/Fida
 import FidaDatabases from "./components/ME/FidaDatabases/FidaDatabases";
 import DatabaseOpen from "./components/ME/FidaDatabases/DatabaseOpen";
 import ClientFiles from "./components/Counsellor/ClientFiles/ClientFiles";
+import ITProducts from "./components/itDepartment/Products/ITProducts";
+import ITServices from "./components/itDepartment/Services/ITServices";
+import ITComplaints from "./components/itDepartment/Complaints/ITComplaints";
 
 const View = () => {
   return (
@@ -75,9 +75,9 @@ const View = () => {
         <Route path="contracts" element={<EmployeeContract />} />
         <Route path="fida-assets" element={<FidaAssets />} />
         <Route path="reports" element={<Reports />} />
-        {/* <Route path="it-products" element={<ITProducts />} />
+        <Route path="it-products" element={<ITProducts />} />
         <Route path="it-services" element={<ITServices />} />
-        <Route path="it-complaints" element={<ITComplaints />} /> */}
+        <Route path="it-complaints" element={<ITComplaints />} />
         <Route path="fleet-database" element={<FleetDatabase />} />
         <Route path="procurements" element={<Procurements />} />
         <Route path="fida-databases" element={<FidaDatabases />} />
