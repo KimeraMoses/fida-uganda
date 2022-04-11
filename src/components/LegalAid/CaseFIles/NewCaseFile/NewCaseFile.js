@@ -22,12 +22,12 @@ const NewCaseFile = ({ caseFile, isClvCaseFile, isNew }) => {
 
   const handleAddCase = (values) => {
     alert(JSON.stringify(values, null, 2));
-    // nextStep();
+    nextStep();
   };
 
   const handleEditForward = (values) => {
     alert(JSON.stringify(values, null, 2));
-    // nextStep();
+    nextStep();
   };
 
   const handleEditBack = (values) => {
