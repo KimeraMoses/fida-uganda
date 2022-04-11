@@ -1,6 +1,9 @@
 import { Field, ErrorMessage } from "formik";
 import { Fragment } from "react";
-import TextError from "./TextError";
+
+export const TextError = ({ children }) => {
+  return <div>{children}</div>;
+};
 
 const RadioSelect = ({ label, name, options, ...rest }) => {
   return (

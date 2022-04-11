@@ -22,7 +22,7 @@ const CaseFiles = () => {
         title="Case Registration Form"
         size="4xl"
       >
-        <NewCaseFile />
+        <NewCaseFile isNew={true} onClose={onClose} />
       </Modal>
     </>
   );

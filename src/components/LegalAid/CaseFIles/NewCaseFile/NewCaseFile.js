@@ -9,7 +9,7 @@ import { useToast } from "@chakra-ui/react";
 import { useAddCaseFiles } from "../../../../hooks/useCaseFiles";
 import { toastSuccess } from "../../../../lib/toastDetails";
 
-const NewCaseFile = ({ caseFile, isClvCaseFile, isNew }) => {
+const NewCaseFile = ({ caseFile, isClvCaseFile, isNew, onClose }) => {
   const [page, setPage] = useState(1);
   const toast = useToast();
   const {
@@ -23,6 +23,11 @@ const NewCaseFile = ({ caseFile, isClvCaseFile, isNew }) => {
   const handleAddCase = (values) => {
     alert(JSON.stringify(values, null, 2));
     nextStep();
+  };
+
+  const handleLastStep = (value) => {
+    alert(JSON.stringify(value, null, 2));
+    onClose();
   };
 
   const handleEditForward = (values) => {
@@ -69,8 +74,6 @@ const NewCaseFile = ({ caseFile, isClvCaseFile, isNew }) => {
     case 2:
       return (
         <MultForm2
-          prevStep={prevStep}
-          nextStep={nextStep}
           caseFile={caseFile}
           page={page}
           handleEditForward={handleEditForward}
@@ -80,8 +83,6 @@ const NewCaseFile = ({ caseFile, isClvCaseFile, isNew }) => {
     case 3:
       return (
         <MultForm3
-          prevStep={prevStep}
-          nextStep={nextStep}
           caseFile={caseFile}
           page={page}
           handleEditForward={handleEditForward}
@@ -91,8 +92,6 @@ const NewCaseFile = ({ caseFile, isClvCaseFile, isNew }) => {
     case 4:
       return (
         <MultForm4
-          prevStep={prevStep}
-          nextStep={nextStep}
           caseFile={caseFile}
           page={page}
           handleEditForward={handleEditForward}
@@ -102,8 +101,6 @@ const NewCaseFile = ({ caseFile, isClvCaseFile, isNew }) => {
     case 5:
       return (
         <MultForm5
-          prevStep={prevStep}
-          nextStep={nextStep}
           caseFile={caseFile}
           page={page}
           handleEditForward={handleEditForward}
@@ -113,16 +110,14 @@ const NewCaseFile = ({ caseFile, isClvCaseFile, isNew }) => {
     case 6:
       return (
         <MultForm6
-          prevStep={prevStep}
-          nextStep={nextStep}
           caseFile={caseFile}
           page={page}
-          handleEditForward={handleEditForward}
+          handleEditForward={handleLastStep}
           handleEditBack={handleEditBack}
         />
       );
     default:
-    // do nothing 
+    // do nothing
   }
 };
 

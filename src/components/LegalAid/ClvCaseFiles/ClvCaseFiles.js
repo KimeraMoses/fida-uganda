@@ -22,7 +22,7 @@ const ClvCaseFiles = () => {
         onClose={onClose}
         title="CLV Case File Registration Form"
       >
-        <NewCaseFile isClvCaseFile={true} isNew={true} />
+        <NewCaseFile isClvCaseFile={true} isNew={true} onClose={onClose} />
       </Modal>
     </>
   );
