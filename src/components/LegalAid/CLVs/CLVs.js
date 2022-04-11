@@ -20,7 +20,6 @@ const CLVs = () => {
         isOpen={isOpen}
         onClose={onClose}
         size="xl"
-        title="CLV Profiling Form"
       >
         <NewClvForm action="newClv" onClose={onClose} />
       </Modal>
