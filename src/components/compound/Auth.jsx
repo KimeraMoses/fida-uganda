@@ -23,7 +23,10 @@ function Auth() {
         <Route index element={<LogIn />} />
         <Route path="/forgotpassword" element={<PasswordReset />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/setPassword" element={<CreatePassword />} />
+        <Route path="/setPassword" element={<Outlet />}>
+          <Route index element={<PageNotFound />} />
+          <Route path=":token" element={<CreatePassword />} />
+        </Route>
       </Route>
       <Route path="*" element={<PageNotFound />} />
     </Routes>

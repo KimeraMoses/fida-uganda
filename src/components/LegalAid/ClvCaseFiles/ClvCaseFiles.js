@@ -17,12 +17,12 @@ const ClvCaseFiles = () => {
       <TableSearch btnLabel="CLV Case File" btnClick={onOpen} />
       {data && <CaseFilesTable data={data.clv_cases} />}
       <Modal
-        size="2xl"
+        size="4xl"
         isOpen={isOpen}
         onClose={onClose}
         title="CLV Case File Registration Form"
       >
-        <NewCaseFile />
+        <NewCaseFile isClvCaseFile={true} isNew={true} onClose={onClose} />
       </Modal>
     </>
   );

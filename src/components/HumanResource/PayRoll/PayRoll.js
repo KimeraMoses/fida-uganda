@@ -7,16 +7,21 @@ import Modal from "../../common/Modal";
 import { useDisclosure } from "@chakra-ui/react";
 import NewNotes from "./NewNotes/NewNotes";
 import { usePayrolls } from "../../../hooks/usePayroll";
+import { usePayrollNotes } from "../../../hooks/usePayrollNotes";
 
 const PayRoll = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data } = usePayrolls();
+  const { data: payrollNotes } = usePayrollNotes();
+  const { data: payroll } = usePayrolls();
+  
   return (
     <>
       <SectionHeader title="Payroll" />
       <TableSearch btnLabel="Add Notes" btnClick={onOpen} />
-      <PayrollNotesTable />
-      {data?.payrolls && <PayrollTable data={data?.payrolls} />}
+      {payrollNotes?.payrollNotes && (
+        <PayrollNotesTable data={payrollNotes?.payrollNotes} />
+      )}
+      {payroll?.payrolls && <PayrollTable data={payroll?.payrolls} />}
       <Modal isOpen={isOpen} onClose={onClose}>
         <NewNotes />
       </Modal>

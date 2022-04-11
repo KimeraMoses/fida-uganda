@@ -7,14 +7,15 @@ import styles from "./FidaApprovalTable.module.css";
 import { TableHeadColumn } from "../../../Membership/Allocations/AllocationsTable/AllocationsTable";
 import Modal from "../../../common/Modal";
 import { formatDate } from "../../../../lib/data";
-import { useActivateUser } from "../../../../hooks/useUser";
+import { useRequestPasswordLink } from "../../../../hooks/useUser";
 import EmployeeCard from "../NewEmployeeForm/EmployeeCard";
 import { toastSuccess } from "../../../../lib/toastDetails";
 
 const FidaApprovedTable = ({ data }) => {
   const [user, setUser] = useState({});
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { mutate, isLoading, isSuccess, isError, error } = useActivateUser();
+  const { mutate, isLoading, isSuccess, isError, error } =
+    useRequestPasswordLink();
   const toast = useToast();
   // console.log(data)
   const onEditHandler = user => {

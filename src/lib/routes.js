@@ -9,6 +9,7 @@ export const routes = {
     setPassword: `${BASE_URL}/users/setPassword`,
     deactivatedUsers: `${BASE_URL}/users/getAllDeactivatedUsers`,
     activateUser: `${BASE_URL}/users/activateAccount`,
+    requestPasswordLink: `${BASE_URL}/users/requestSetPassword`,
   },
   tasks: {
     addTask: `${BASE_URL}/tasks/create`,

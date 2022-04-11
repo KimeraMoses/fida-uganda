@@ -68,3 +68,10 @@ export const assetTypeOptions = [
     value: "Visibility Materials (Shirts/Jackets)",
   },
 ];
+
+export const disabilityOptions = [
+  { label: "No - No difficulty", value: "No" },
+  { label: "Yes - Some difficulty", value: "Kinda" },
+  { label: "Yes - A lot of difficulty", value: "Mostly" },
+  { label: "Cannot do at all", value: "Yes" },
+];

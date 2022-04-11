@@ -4,38 +4,7 @@ import classes from "./Table.module.css";
 import SectionHeader from "./SectionHeader";
 import { TableHeadColumn } from "../../Approvals/ApprovalTable/ApprovedTable";
 
-const NotesData = [
-  {
-    title: "January Payroll Notes",
-    month: "Jan",
-    year: "2022",
-    date_written: "25/01/2022",
-    status: true,
-  },
-  {
-    title: "January Payroll Notes",
-    month: "Jan",
-    year: "2022",
-    date_written: "25/01/2022",
-    status: false,
-  },
-  {
-    title: "January Payroll Notes",
-    month: "Jan",
-    year: "2022",
-    date_written: "25/01/2022",
-    status: false,
-  },
-  {
-    title: "January Payroll Notes",
-    month: "Jan",
-    year: "2022",
-    date_written: "25/01/2022",
-    status: true,
-  },
-];
-
-const PayrollNotesTable = () => {
+const PayrollNotesTable = ({ data }) => {
   return (
     <>
       <SectionHeader title="Payroll Notes" />
@@ -46,7 +15,9 @@ const PayrollNotesTable = () => {
           colorScheme="gray"
           className={classes.notifications_table}
         >
-          <Thead className={`${classes.table_header} ${classes.table_text_lower}`}>
+          <Thead
+            className={`${classes.table_header} ${classes.table_text_lower}`}
+          >
             <Tr>
               <TableHeadColumn title="Title" />
               <TableHeadColumn title="Month" />
@@ -56,7 +27,7 @@ const PayrollNotesTable = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {NotesData.map((item) => {
+            {data.map((item) => {
               return (
                 <Tr>
                   <Td>{item.title}</Td>

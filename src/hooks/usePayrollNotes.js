@@ -9,15 +9,15 @@ import { PAYROLL_NOTES_KEY } from "../lib/constants";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import produce from "immer";
 
-export const usePayrolls = () => {
+export const usePayrollNotes = () => {
   return useQuery(PAYROLL_NOTES_KEY, getAllPayrollNotes);
 };
 
-export const usePayroll = (id) => {
+export const usePayrollNote = (id) => {
   return useQuery([PAYROLL_NOTES_KEY, id], () => getPayrollNote(id));
 };
 
-export const useAddPayroll = () => {
+export const useAddPayrollNote = () => {
   const queryClient = useQueryClient();
   return useMutation(createPayrollNote, {
     onSuccess: (data) => {
@@ -37,7 +37,7 @@ export const useAddPayroll = () => {
   });
 };
 
-export const useUpdatePayroll = () => {
+export const useUpdatePayrollNote = () => {
   const queryClient = useQueryClient();
   return useMutation(editPayrollNote, {
     onSuccess: (data) => {
@@ -60,7 +60,7 @@ export const useUpdatePayroll = () => {
   });
 };
 
-export const useDeleteReport = () => {
+export const useDeletePayrollNote = () => {
   const queryClient = useQueryClient();
   return useMutation(deletePayrollNote, {
     onMutate: async (payrollNoteId) => {
