@@ -15,12 +15,12 @@ const CLVs = () => {
     <>
       <SectionHeader title="CLVs" />
       <TableSearch btnLabel="Add CLV" btnClick={onOpen} />
-      {data && <CLVTable data={data.clvs} />}
+      {data?.clvs && <CLVTable data={data?.clvs} />}
       <Modal
         isOpen={isOpen}
         onClose={onClose}
         size="xl"
-        // title="CLV Profiling Form"
+        title="CLV Profiling Form"
       >
         <NewClvForm action="newClv" onClose={onClose} />
       </Modal>

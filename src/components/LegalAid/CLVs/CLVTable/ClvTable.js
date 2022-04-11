@@ -17,53 +17,6 @@ import Modal from "../../../common/Modal";
 import NewClvForm from "../CLVForms/NewClvForm";
 import { formatDate } from "../../../../lib/data";
 
-export const CLVData = [
-  {
-    name: "Andrew Tebandeke",
-    profession: "Farmer",
-    phoneNumber: "0759130054",
-    fida_id: "FU/LM/IDLO/0001",
-    email: "kimeramoses001@gmail.com",
-    address: "P.O Box 5569",
-    city: "Kampala",
-    open: true,
-    registrationDate: "15/APR/2020",
-  },
-  {
-    name: "Andrew Tebandeke",
-    profession: "Farmer",
-    phoneNumber: "0759130054",
-    fida_id: "FU/LM/IDLO/0001",
-    email: "kimeramoses001@gmail.com",
-    address: "P.O Box 5569",
-    city: "Kampala",
-    open: true,
-    registrationDate: "15/APR/2020",
-  },
-  {
-    name: "Andrew Tebandeke",
-    profession: "Farmer",
-    phoneNumber: "0759130054",
-    fida_id: "FU/LM/IDLO/0001",
-    email: "kimeramoses001@gmail.com",
-    address: "P.O Box 5569",
-    city: "Kampala",
-    open: false,
-    registrationDate: "15/APR/2020",
-  },
-  {
-    name: "Andrew Tebandeke",
-    profession: "Farmer",
-    phoneNumber: "0759130054",
-    fida_id: "FU/LM/IDLO/0001",
-    email: "kimeramoses001@gmail.com",
-    address: "P.O Box 5569",
-    city: "Kampala",
-    open: true,
-    registrationDate: "15/APR/2020",
-  },
-];
-
 const CLVTable = ({ data }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isEdit, setIsEdit] = useState(false);
@@ -76,6 +29,7 @@ const CLVTable = ({ data }) => {
     setIsEdit(true);
     onOpen();
   };
+  
   return (
     <>
       <div className={classes.allocations_table_wrapper}>
@@ -144,7 +98,7 @@ const CLVTable = ({ data }) => {
                       }`}
                     >
                       <span className={classes.status_indicator}></span>
-                      <h5>{item.isActive ? "active" : "Closed"}</h5>
+                      <h5>{item.isActive ? "active" : "closed"}</h5>
                     </div>
                   </Td>
                   <Td>

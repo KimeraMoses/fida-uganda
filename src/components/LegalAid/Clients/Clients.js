@@ -11,7 +11,7 @@ const Clients = () => {
     <>
       <SectionHeader title="Clients" />
       <TableSearch showBtn={false} />
-      {data && <ClientsTable data={data.clients} />}
+      {data?.clients && <ClientsTable data={data?.clients} />}
     </>
   );
 };
