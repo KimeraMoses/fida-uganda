@@ -1,59 +1,69 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import MultForm5 from "./MultiForm/MultForm5";
 import MultForm4 from "./MultiForm/MultForm4";
 import MultForm3 from "./MultiForm/MultForm3";
 import MultForm2 from "./MultiForm/MultForm2";
 import MultForm1 from "./MultiForm/MultForm1";
 import MultForm6 from "./MultiForm/MultForm6";
+import { useToast } from "@chakra-ui/react";
+import { useAddCaseFiles } from "../../../../hooks/useCaseFiles";
+import { toastSuccess } from "../../../../lib/toastDetails";
 
+const NewCaseFile = ({ caseFile, isClvCaseFile, isNew }) => {
+  const [page, setPage] = useState(1);
+  const toast = useToast();
+  const {
+    // mutate: onAddCaseFile,
+    isLoading: isAddingCaseFile,
+    isError: isErrorAddingCaseFile,
+    isSuccess: isAddedCaseFile,
+    error: addCaseFileError,
+  } = useAddCaseFiles();
 
-const NewCaseFile = () => {
-  const [values, setValues] = useState({
-    step: 1,
-    full_name: "",
-    postal_address: "",
-    phone_number: "",
-    email: "",
-    employment_sector: "",
-    study_completion_yr: "",
-    membership_duration: "",
-    language: "",
-    professional_experience: [],
-    area_of_interest: [],
-    hobbies: [],
-  });
-
-  const prevStep = () => {
-    setValues({ ...values, step: values.step - 1 });
-  };
-  const nextStep = () => {
-    setValues({ ...values, step: values.step + 1 });
+  const handleAddCase = (values) => {
+    alert(JSON.stringify(values, null, 2));
+    // nextStep();
   };
 
-  const Continue = (e) => {
-    e.preventDefault();
-    nextStep();
+  const handleEditForward = (values) => {
+    alert(JSON.stringify(values, null, 2));
+    // nextStep();
   };
 
-  const Previous = (e) => {
-    e.preventDefault();
+  const handleEditBack = (values) => {
+    alert(JSON.stringify(values, null, 2));
     prevStep();
   };
 
-  // handle field change
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
+  useEffect(() => {
+    if (isNew) {
+      setPage(1);
+    }
+    if (isAddedCaseFile) {
+      toast(toastSuccess("Case File Added Successfully"));
+    }
+  }, [isNew, isAddedCaseFile, toast]);
+
+  const prevStep = () => {
+    setPage((prePage) => prePage - 1);
+  };
+  const nextStep = () => {
+    setPage((prePage) => prePage + 1);
   };
 
-  switch (values.step) {
+  switch (page) {
     case 1:
       return (
         <MultForm1
-          nextStep={nextStep}
-          Continue={Continue}
-          handleChange={handleChange}
-          values={values}
+          caseFile={caseFile}
+          page={page}
+          isClvCaseFile={isClvCaseFile}
+          isNew={isNew}
+          onAddCaseFile={handleAddCase}
+          isAddingCaseFile={isAddingCaseFile}
+          isErrorAddingCaseFile={isErrorAddingCaseFile}
+          errorAddingCaseFile={addCaseFileError}
+          handleEditForward={handleEditForward}
         />
       );
     case 2:
@@ -61,10 +71,10 @@ const NewCaseFile = () => {
         <MultForm2
           prevStep={prevStep}
           nextStep={nextStep}
-          handleChange={handleChange}
-          values={values}
-          Continue={Continue}
-          Previous={Previous}
+          caseFile={caseFile}
+          page={page}
+          handleEditForward={handleEditForward}
+          handleEditBack={handleEditBack}
         />
       );
     case 3:
@@ -72,10 +82,10 @@ const NewCaseFile = () => {
         <MultForm3
           prevStep={prevStep}
           nextStep={nextStep}
-          handleChange={handleChange}
-          values={values}
-          Continue={Continue}
-          Previous={Previous}
+          caseFile={caseFile}
+          page={page}
+          handleEditForward={handleEditForward}
+          handleEditBack={handleEditBack}
         />
       );
     case 4:
@@ -83,10 +93,10 @@ const NewCaseFile = () => {
         <MultForm4
           prevStep={prevStep}
           nextStep={nextStep}
-          handleChange={handleChange}
-          values={values}
-          Continue={Continue}
-          Previous={Previous}
+          caseFile={caseFile}
+          page={page}
+          handleEditForward={handleEditForward}
+          handleEditBack={handleEditBack}
         />
       );
     case 5:
@@ -94,10 +104,10 @@ const NewCaseFile = () => {
         <MultForm5
           prevStep={prevStep}
           nextStep={nextStep}
-          handleChange={handleChange}
-          values={values}
-          Continue={Continue}
-          Previous={Previous}
+          caseFile={caseFile}
+          page={page}
+          handleEditForward={handleEditForward}
+          handleEditBack={handleEditBack}
         />
       );
     case 6:
@@ -105,14 +115,14 @@ const NewCaseFile = () => {
         <MultForm6
           prevStep={prevStep}
           nextStep={nextStep}
-          handleChange={handleChange}
-          values={values}
-          Continue={Continue}
-          Previous={Previous}
+          caseFile={caseFile}
+          page={page}
+          handleEditForward={handleEditForward}
+          handleEditBack={handleEditBack}
         />
       );
     default:
-    // do nothing
+    // do nothing 
   }
 };
 

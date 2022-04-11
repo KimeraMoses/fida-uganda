@@ -1,11 +1,21 @@
 import React from "react";
-import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
+import { Table, Thead, Tbody, Tr, Td, useDisclosure } from "@chakra-ui/react";
 import classes from "./Table.module.css";
 import { TableHeadColumn } from "../../../Membership/Allocations/AllocationsTable/AllocationsTable";
 import { caseFilesColumns } from "../../../../assets/tableColumns/cases";
 import { formatDate } from "../../../../lib/data";
+import Modal from "../../../common/Modal";
+import NewCaseFile from "../NewCaseFile/NewCaseFile";
 
 const CaseFilesTable = ({ data }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [selectedCase, setSelectedCase] = React.useState(null);
+
+  const onHandleClick = (caseFile) => {
+    setSelectedCase(caseFile);
+    onOpen();
+  };
+
   return (
     <>
       <div
@@ -33,7 +43,7 @@ const CaseFilesTable = ({ data }) => {
           <Tbody>
             {data.map((item) => {
               return (
-                <Tr key={item.id}>
+                <Tr key={item.id} onClick={() => onHandleClick(item)}>
                   <Td className={classes.primary_text_icon}>{item.id}</Td>
                   <Td className={classes.data__purpose_primary_text}>
                     {formatDate(item.createdAt)}
@@ -69,6 +79,11 @@ const CaseFilesTable = ({ data }) => {
           </Tbody>
         </Table>
       </div>
+      <>
+        <Modal isOpen={isOpen} onClose={onClose} title="Case Files" size="4xl">
+          <NewCaseFile caseFile={selectedCase} />
+        </Modal>
+      </>
     </>
   );
 };

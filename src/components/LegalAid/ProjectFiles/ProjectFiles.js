@@ -11,7 +11,7 @@ const ProjectFiles = () => {
     <>
       <SectionHeader title="Project Files" />
       <TableSearch showBtn={false} />
-      {data && <ProjectTable data={data?.ProjectFiles} />}
+      {data?.ProjectFiles && <ProjectTable data={data?.ProjectFiles} />}
     </>
   );
 };

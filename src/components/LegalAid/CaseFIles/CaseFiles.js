@@ -15,7 +15,7 @@ const CaseFiles = () => {
     <>
       <SectionHeader title="Case Files" />
       <TableSearch btnLabel="New Case File" btnClick={onOpen} />
-      {data && <CaseFilesTable data={data.cases} />}
+      {data?.cases && <CaseFilesTable data={data?.cases} />}
       <Modal
         isOpen={isOpen}
         onClose={onClose}

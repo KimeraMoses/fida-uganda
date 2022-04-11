@@ -31,7 +31,7 @@ const ProjectTable = ({ data }) => {
                     {item.project.name}
                   </Td>
                   <Td className={classes.data__purpose_primary_text}>
-                    {item.createdBy.id}
+                    {item.createdBy?.full_name}
                   </Td>
                   <Td>{formatDate(item.updateAt)}</Td>
                 </Tr>
