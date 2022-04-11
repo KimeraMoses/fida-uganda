@@ -5,6 +5,7 @@ import ActionButtons from "../../../../Membership/Members/NewMemberForm/MultiFor
 import { Radio, RadioGroup, Stack } from "@chakra-ui/react";
 import "./RadioLabel.css";
 import { Form, Formik } from "formik";
+import { caseFileTwoSchema } from "./schema";
 
 const MultForm2 = ({
   nextStep,
@@ -19,6 +20,7 @@ const MultForm2 = ({
   return (
     <Formik
       initialValues={{}}
+      validationSchema={caseFileTwoSchema}
       onSubmit={(values) => {
         onSubmit(values);
       }}
@@ -32,7 +34,7 @@ const MultForm2 = ({
               <div className={classes.field_inner_label}>
                 i. Do you have difficulty seeing even if wearing glasses?
               </div>
-              <RadioGroup colorScheme="purple" style={{ marginLeft: 15 }}>
+              <RadioGroup colorScheme="purple" style={{ marginLeft: 15 }} name="sight">
                 <Stack direction="row">
                   <Radio value="1">No - no diffuculty </Radio>
                   <Radio value="2">Yes - some difficulty</Radio>
@@ -45,7 +47,7 @@ const MultForm2 = ({
               <div className={classes.field_inner_label}>
                 ii. Do you have difficulty hearing, even if using a hearing aid?
               </div>
-              <RadioGroup colorScheme="purple" style={{ marginLeft: 15 }}>
+              <RadioGroup colorScheme="purple" style={{ marginLeft: 15 }} name="hearing">
                 <Stack direction="row">
                   <Radio value="1">No - no diffuculty </Radio>
                   <Radio value="2">Yes - some difficulty</Radio>
@@ -58,7 +60,7 @@ const MultForm2 = ({
               <div className={classes.field_inner_label}>
                 iii. Do you have difficulty walking or climbing steps?
               </div>
-              <RadioGroup colorScheme="purple" style={{ marginLeft: 15 }}>
+              <RadioGroup colorScheme="purple" style={{ marginLeft: 15 }} name="movement">
                 <Stack direction="row">
                   <Radio value="1">No - no diffuculty </Radio>
                   <Radio value="2">Yes - some difficulty</Radio>
@@ -71,7 +73,7 @@ const MultForm2 = ({
               <div className={classes.field_inner_label}>
                 iv. Do you have difficulty remembering or concentrating?
               </div>
-              <RadioGroup colorScheme="purple" style={{ marginLeft: 15 }}>
+              <RadioGroup colorScheme="purple" style={{ marginLeft: 15 }} name="remembering">
                 <Stack direction="row">
                   <Radio value="1">No - no diffuculty </Radio>
                   <Radio value="2">Yes - some difficulty</Radio>
@@ -85,7 +87,7 @@ const MultForm2 = ({
                 v. Do you have difficulty (with self-care such as) washing all
                 over or dressing?
               </div>
-              <RadioGroup colorScheme="purple" style={{ marginLeft: 15 }}>
+              <RadioGroup colorScheme="purple" style={{ marginLeft: 15 }} name="dressing">
                 <Stack direction="row">
                   <Radio value="1">No - no diffuculty </Radio>
                   <Radio value="2">Yes - some difficulty</Radio>
@@ -100,7 +102,7 @@ const MultForm2 = ({
                 difficulty communicating, for example understanding or being
                 understood?
               </div>
-              <RadioGroup colorScheme="purple" style={{ marginLeft: 15 }}>
+              <RadioGroup colorScheme="purple" style={{ marginLeft: 15 }} name="speech">
                 <Stack direction="row">
                   <Radio value="1">No - no diffuculty </Radio>
                   <Radio value="2">Yes - some difficulty</Radio>
@@ -113,7 +115,7 @@ const MultForm2 = ({
               <div className={classes.field_inner_label}>
                 vii. From the disability assessment, is the client disabled?
               </div>
-              <RadioGroup colorScheme="purple" style={{ marginLeft: 15 }}>
+              <RadioGroup colorScheme="purple" style={{ marginLeft: 15 }} name="isDisabled">
                 <Stack direction="row">
                   <Radio value="1" className={classes.raadio_label}>
                     Yes
