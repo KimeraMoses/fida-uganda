@@ -9,7 +9,13 @@ import {
 import { toastError } from "../../../lib/toastDetails";
 import PasswordField from "../../common/PasswordField";
 
-const CreatePasswordForm = ({ onSubmit, isSubmitting, isError, error }) => {
+const CreatePasswordForm = ({
+  onSubmit,
+  isSubmitting,
+  isError,
+  error,
+  token,
+}) => {
   const toast = useToast();
 
   useEffect(() => {
@@ -23,7 +29,7 @@ const CreatePasswordForm = ({ onSubmit, isSubmitting, isError, error }) => {
       initialValues={createPasswordInitialValues}
       validationSchema={createPasswordSchema}
       onSubmit={(values) => {
-        onSubmit(values);
+        onSubmit({ ...values, id: token });
       }}
     >
       <Flex as={Form} flexDir="column" gap={5} py={10}>

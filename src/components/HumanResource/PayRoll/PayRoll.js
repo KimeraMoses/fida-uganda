@@ -13,6 +13,7 @@ const PayRoll = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data: payrollNotes } = usePayrollNotes();
   const { data: payroll } = usePayrolls();
+  
   return (
     <>
       <SectionHeader title="Payroll" />
