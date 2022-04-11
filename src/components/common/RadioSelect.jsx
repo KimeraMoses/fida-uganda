@@ -2,7 +2,7 @@ import { Field, ErrorMessage } from "formik";
 import { Fragment } from "react";
 import TextError from "./TextError";
 
-const Radio = ({ label, name, options, ...rest }) => {
+const RadioSelect = ({ label, name, options, ...rest }) => {
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <label>{label}</label>
@@ -29,4 +29,4 @@ const Radio = ({ label, name, options, ...rest }) => {
   );
 };
 
-export default Radio;
+export default RadioSelect;
