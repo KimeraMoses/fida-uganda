@@ -8,22 +8,18 @@ import { Form, Formik } from "formik";
 import { caseFileTwoSchema } from "./schema";
 
 const MultForm2 = ({
-  nextStep,
-  prevStep,
-  handleChange,
-  values,
-  Continue,
-  Previous,
-  onSubmit,
-  isSubmitting,
+  caseFile,
+  page,
+  handleEditForward,
+  handleEditBack,
+  isForwardLoading,
+  isBackwardLoading,
 }) => {
   return (
     <Formik
-      initialValues={{}}
+      initialValues={caseFileTwoSchema}
       validationSchema={caseFileTwoSchema}
-      onSubmit={(values) => {
-        onSubmit(values);
-      }}
+      onSubmit={() => {}}
     >
       <div className={classes.form_wrapper}>
         <Form>
@@ -34,7 +30,11 @@ const MultForm2 = ({
               <div className={classes.field_inner_label}>
                 i. Do you have difficulty seeing even if wearing glasses?
               </div>
-              <RadioGroup colorScheme="purple" style={{ marginLeft: 15 }} name="sight">
+              <RadioGroup
+                colorScheme="purple"
+                style={{ marginLeft: 15 }}
+                name="sight"
+              >
                 <Stack direction="row">
                   <Radio value="1">No - no diffuculty </Radio>
                   <Radio value="2">Yes - some difficulty</Radio>
@@ -47,7 +47,11 @@ const MultForm2 = ({
               <div className={classes.field_inner_label}>
                 ii. Do you have difficulty hearing, even if using a hearing aid?
               </div>
-              <RadioGroup colorScheme="purple" style={{ marginLeft: 15 }} name="hearing">
+              <RadioGroup
+                colorScheme="purple"
+                style={{ marginLeft: 15 }}
+                name="hearing"
+              >
                 <Stack direction="row">
                   <Radio value="1">No - no diffuculty </Radio>
                   <Radio value="2">Yes - some difficulty</Radio>
@@ -60,7 +64,11 @@ const MultForm2 = ({
               <div className={classes.field_inner_label}>
                 iii. Do you have difficulty walking or climbing steps?
               </div>
-              <RadioGroup colorScheme="purple" style={{ marginLeft: 15 }} name="movement">
+              <RadioGroup
+                colorScheme="purple"
+                style={{ marginLeft: 15 }}
+                name="movement"
+              >
                 <Stack direction="row">
                   <Radio value="1">No - no diffuculty </Radio>
                   <Radio value="2">Yes - some difficulty</Radio>
@@ -73,7 +81,11 @@ const MultForm2 = ({
               <div className={classes.field_inner_label}>
                 iv. Do you have difficulty remembering or concentrating?
               </div>
-              <RadioGroup colorScheme="purple" style={{ marginLeft: 15 }} name="remembering">
+              <RadioGroup
+                colorScheme="purple"
+                style={{ marginLeft: 15 }}
+                name="remembering"
+              >
                 <Stack direction="row">
                   <Radio value="1">No - no diffuculty </Radio>
                   <Radio value="2">Yes - some difficulty</Radio>
@@ -87,7 +99,11 @@ const MultForm2 = ({
                 v. Do you have difficulty (with self-care such as) washing all
                 over or dressing?
               </div>
-              <RadioGroup colorScheme="purple" style={{ marginLeft: 15 }} name="dressing">
+              <RadioGroup
+                colorScheme="purple"
+                style={{ marginLeft: 15 }}
+                name="dressing"
+              >
                 <Stack direction="row">
                   <Radio value="1">No - no diffuculty </Radio>
                   <Radio value="2">Yes - some difficulty</Radio>
@@ -102,7 +118,11 @@ const MultForm2 = ({
                 difficulty communicating, for example understanding or being
                 understood?
               </div>
-              <RadioGroup colorScheme="purple" style={{ marginLeft: 15 }} name="speech">
+              <RadioGroup
+                colorScheme="purple"
+                style={{ marginLeft: 15 }}
+                name="speech"
+              >
                 <Stack direction="row">
                   <Radio value="1">No - no diffuculty </Radio>
                   <Radio value="2">Yes - some difficulty</Radio>
@@ -115,7 +135,11 @@ const MultForm2 = ({
               <div className={classes.field_inner_label}>
                 vii. From the disability assessment, is the client disabled?
               </div>
-              <RadioGroup colorScheme="purple" style={{ marginLeft: 15 }} name="isDisabled">
+              <RadioGroup
+                colorScheme="purple"
+                style={{ marginLeft: 15 }}
+                name="isDisabled"
+              >
                 <Stack direction="row">
                   <Radio value="1" className={classes.raadio_label}>
                     Yes
@@ -126,9 +150,12 @@ const MultForm2 = ({
             </div>
           </div>
           <ActionButtons
-            step={values.step}
-            Continue={Continue}
-            Previous={Previous}
+            onBackward={handleEditBack}
+            onForward={handleEditForward}
+            page={page}
+            values={caseFile}
+            isBackwardLoading={isBackwardLoading}
+            isForwardLoading={isForwardLoading}
           />
         </Form>
       </div>
