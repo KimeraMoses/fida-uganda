@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { MdSettings, MdLogout } from "react-icons/md";
 import {
@@ -12,6 +12,7 @@ import {
 import { logoutUser } from "../../../store/authReducer";
 
 const AppHeaderMenu = () => {
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -28,7 +29,7 @@ const AppHeaderMenu = () => {
         variant="ghost"
         borderRadius="full"
       >
-        <Avatar size="sm" />
+        <Avatar size="sm" src={user?.image} name={user?.full_name} />
       </MenuButton>
       <MenuList>
         <Link to="/account-settings">
