@@ -5,11 +5,17 @@ import SectionHeader from "../../common/SectionHeader";
 import TableSearch from "../../common/table/TableSearch";
 import FidaProjectTable from "./FidaProjectTable/FidaProjectTable";
 import NewFidaProjectForm from "./NewFidaProject/NewFidaProjectForm";
-import { useAddProject } from "../../../hooks/useProjects";
+import { useAddProject, useProjects } from "../../../hooks/useProjects";
 
 const FidaProjects = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { isLoading, isError, isSuccess, error } = useAddProject();
+  const {
+    isLoading: isSubmitting,
+    isError,
+    isSuccess,
+    error,
+  } = useAddProject();
+  const { data } = useProjects();
 
   useEffect(() => {
     if (isSuccess) {
@@ -24,11 +30,12 @@ const FidaProjects = () => {
   return (
     <>
       <SectionHeader title="Fida Projects" />
+      <p>{JSON.stringify(data?.projects, null, 2)}</p>
       <TableSearch btnLabel="Add Project" btnClick={onOpen} />
-      <FidaProjectTable />
+      {data?.projects && <FidaProjectTable data={data?.projects} />}
       <Modal isOpen={isOpen} onClose={onClose} title="Project Profiling Form">
         <NewFidaProjectForm
-          isSubmitting={isLoading}
+          isSubmitting={isSubmitting}
           isError={isError}
           error={error}
           onSubmit={handleAddProject}
