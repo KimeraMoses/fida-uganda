@@ -29,7 +29,7 @@ const CreatePasswordForm = ({
       initialValues={createPasswordInitialValues}
       validationSchema={createPasswordSchema}
       onSubmit={(values) => {
-        onSubmit({ ...values, id: token });
+        onSubmit({ ...values, token });
       }}
     >
       <Flex as={Form} flexDir="column" gap={5} py={10}>
