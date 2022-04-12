@@ -65,7 +65,6 @@ export const useDeleteService = () => {
   return useMutation(deleteService, {
     onMutate: async (serviceId) => {
       await queryClient.cancelMutations(SERVICES_KEY);
-
       const previousServices = queryClient.getQueryData(SERVICES_KEY);
       if (previousServices) {
         queryClient.setQueryData(SERVICES_KEY, (previousServices) => {
