@@ -3,6 +3,7 @@ import SectionHeader from "../../common/SectionHeader";
 import classes from "./FidaDatabases.module.css";
 import Img from "../../../assets/images/folder.png";
 import { useNavigate } from "react-router-dom";
+import { useDatabases } from "../../../hooks/useDatabase";
 
 const FolderCard = ({ title, action }) => {
   return (
@@ -20,6 +21,7 @@ const FolderCard = ({ title, action }) => {
 
 const FidaDatabases = () => {
   const navigate = useNavigate();
+  const { data } = useDatabases();
   const handleClick = (name) => {
     navigate(`/fida-databases/${name}`);
   };
@@ -27,12 +29,13 @@ const FidaDatabases = () => {
     <>
       <SectionHeader title="FIDA Database" />
       <div className={classes.fida_database_wrapper}>
-        <FolderCard action={handleClick} title="Employee Database" />
-        <FolderCard action={handleClick} title="clv database" />
-        <FolderCard action={handleClick} title="client database" />
-        <FolderCard action={handleClick} title="reports" />
-        <FolderCard action={handleClick} title="kimera Moxhus" />
-        <FolderCard action={handleClick} title="moxtech developers" />
+        {data?.databases.map((item) => (
+          <FolderCard
+            key={item.databaseName}
+            title={item.databaseName}
+            action={handleClick}
+          />
+        ))}
       </div>
     </>
   );
