@@ -1,4 +1,4 @@
-import { useDisclosure } from "@chakra-ui/react";
+import { useDisclosure, useToast } from "@chakra-ui/react";
 import { useEffect } from "react";
 import Modal from "../../common/Modal";
 import SectionHeader from "../../common/SectionHeader";
@@ -6,10 +6,13 @@ import TableSearch from "../../common/table/TableSearch";
 import FidaProjectTable from "./FidaProjectTable/FidaProjectTable";
 import NewFidaProjectForm from "./NewFidaProject/NewFidaProjectForm";
 import { useAddProject, useProjects } from "../../../hooks/useProjects";
+import { toastSuccess } from "../../../lib/toastDetails";
 
 const FidaProjects = () => {
+  const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
+    mutate,
     isLoading: isSubmitting,
     isError,
     isSuccess,
@@ -19,18 +22,14 @@ const FidaProjects = () => {
 
   useEffect(() => {
     if (isSuccess) {
+      toast(toastSuccess("Project added successfully"));
       onClose();
     }
-  }, [isSuccess, onClose]);
-
-  const handleAddProject = (values) => {
-    alert(JSON.stringify(values, null, 2));
-  };
+  }, [isSuccess, onClose, toast]);
 
   return (
     <>
       <SectionHeader title="Fida Projects" />
-      <p>{JSON.stringify(data?.projects, null, 2)}</p>
       <TableSearch btnLabel="Add Project" btnClick={onOpen} />
       {data?.projects && <FidaProjectTable data={data?.projects} />}
       <Modal isOpen={isOpen} onClose={onClose} title="Project Profiling Form">
@@ -38,7 +37,7 @@ const FidaProjects = () => {
           isSubmitting={isSubmitting}
           isError={isError}
           error={error}
-          onSubmit={handleAddProject}
+          onSubmit={mutate}
         />
       </Modal>
     </>
