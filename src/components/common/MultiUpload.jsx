@@ -5,10 +5,10 @@ import { produce } from "immer";
 
 const MultiUpload = ({ files, setFiles }) => {
   const input = useRef(null);
-  const handleFileSelect = (event) => {
+  const handleFileSelect = event => {
     const file = event.target.files[0];
-    setFiles((preFiles) =>
-      produce(preFiles, (draft) => {
+    setFiles(preFiles =>
+      produce(preFiles, draft => {
         draft.push(file);
       })
     );
@@ -32,10 +32,17 @@ const MultiUpload = ({ files, setFiles }) => {
         accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,
 text/plain, application/pdf, image/*"
       />
-      <List spacing={3}>
+      <List spacing={3} style={{ display: "flex", alignItems: "center" }}>
         {files.map((file, index) => {
           return (
-            <ListItem key={index}>
+            <ListItem
+              key={index}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                margin: "0 0 0 2px"
+              }}
+            >
               <ListIcon as={MdFilePresent} color="purple.700" />
               {file.name}
             </ListItem>
@@ -46,7 +53,7 @@ text/plain, application/pdf, image/*"
         alignSelf="start"
         color="purple.800"
         icon={<MdAttachFile size={20} />}
-        onClick={(e) => input.current && input.current.click()}
+        onClick={e => input.current && input.current.click()}
       />
     </Flex>
   );

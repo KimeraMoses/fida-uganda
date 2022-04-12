@@ -1,7 +1,7 @@
 import { SimpleGrid } from "@chakra-ui/react";
 import React from "react";
-import FormButton from "../../../Membership/MembersActivities/NewActivityForm/Button/FormButton";
-import InputField from "../../../Membership/UI/InputField/InputField";
+import FormButton from "../../../common/UI/FormButton/FormButton";
+import InputField from "../../../common/UI/InputField/InputField";
 import classes from "./NewFidaProjectForm.module.css";
 
 const NewFidaProjectForm = () => {

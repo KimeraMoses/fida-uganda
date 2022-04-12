@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { MdTaskAlt, MdClose } from "react-icons/md";
 import classes from "../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css";
 import { Select, SimpleGrid } from "@chakra-ui/react";
-import InputField from "../../../Membership/Members/NewMemberForm/MultiForm/InputField/InputField";
+import InputField from "../../../common/UI/InputField/InputField";
+import FormButton from "../../../common/UI/FormButton/FormButton";
 import styles from "./NewClvForm.module.css";
-import FormButton from "../../../Membership/MembersActivities/NewActivityForm/Button/FormButton";
 import { Form, Formik } from "formik";
 
 const NewClvForm = (props) => {
@@ -37,7 +37,6 @@ const NewClvForm = (props) => {
 
   return (
     <Formik>
-      
       <div className={styles.form_wrapper}>
         <div className={styles.form_btn_title_wrapper}>
           <h2>CLV Profiling Form</h2>

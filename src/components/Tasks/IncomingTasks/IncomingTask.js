@@ -4,7 +4,7 @@ import TaskCard from "../TaskCard/TaskCard";
 import classes from "./IncomingTasks.module.css";
 import NewTaskCard from "../NewTask/NewTaskCard";
 
-const IncomingTask = (props) => {
+const IncomingTask = props => {
   return (
     <SimpleGrid
       columns={3}

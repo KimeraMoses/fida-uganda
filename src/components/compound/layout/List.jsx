@@ -7,7 +7,7 @@ const List = ({ items }) => {
 
   return (
     <ChakraList>
-      {items.map((item) => (
+      {items.map(item => (
         <ListItem
           key={item.id}
           item={item}

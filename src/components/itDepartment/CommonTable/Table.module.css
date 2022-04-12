@@ -1,17 +1,16 @@
-.allocations_table_wrapper {
+.table_wrapper {
   background-color: #ffffff;
 }
+
 .table_header {
-  background: #f4f2ff;
-  text-transform: uppercase;
-  font-weight: 600;
-  font-style: "Open Sans";
+  background-color: #fe00b7;
 }
-th {
-  padding: 10px !important;
+.table_header.products_table_header {
+  background-color: #fa05ff;
 }
-.allocations_table_wrapper td {
+.table_header th {
   vertical-align: top;
+  white-space: nowrap;
 }
 .title_secondary_text {
   font-size: 14px;
@@ -26,28 +25,15 @@ th {
   text-transform: capitalize;
   margin-bottom: 8px;
 }
-.data_recepient_field {
+.single_line {
   white-space: nowrap;
-}
-.subject__title {
-  text-transform: uppercase;
-}
-.data__secondary_text {
-  color: var(--secondary_text_color);
-}
-
-.allocation_status_wrapper {
-  border-radius: 20px;
-  padding: 3px 20px 3px 10px;
-  white-space: nowrap;
-  user-select: none;
-  font-weight: 600;
-  max-width: 115px;
 }
 
 .allocation_status_wrapper {
   display: flex;
   align-items: center;
+  padding: 4px;
+  border-radius: 20px;
 }
 .status_indicator {
   width: 8px;
@@ -83,16 +69,4 @@ th {
 }
 .allocation_status_wrapper.fail span {
   background-color: #d30000;
-}
-
-/* ======MEMBERS TABLE======== */
-.members_status h6 {
-  font-size: 14px;
-  font-weight: 400;
-}
-.members_status.sucess h6 {
-  color: #05fe00;
-}
-.members_status.fail h6 {
-  color: #ff0000;
 }

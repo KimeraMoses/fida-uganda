@@ -1,0 +1,38 @@
+
+.fida__btn {
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.4s linear;
+  position: relative;
+  z-index: 1;
+  border: 0;
+  overflow: hidden;
+  margin: 14px 0;
+  text-transform: capitalize;
+  box-sizing: border-box;
+  color: #fff;
+  font-weight: 600;
+  user-select: none;
+  border-radius: 100px;
+  padding: 8px 24px;
+  min-width: 120px;
+}
+.fida__btn.fida__btn_primary {
+  background: linear-gradient(102.46deg, #b28dda 7.45%, #562b85 98.81%);
+}
+
+.fida__btn.fida__btn_full {
+  width: 100%;
+}
+.fida__btn.fida__btn_primary {
+  background-color: #4fbf87;
+}
+
+.fida__btn.btn__disabled {
+  pointer-events: none;
+  cursor: default;
+  color: rgba(0, 0, 0, 0.26);
+  box-shadow: none;
+  background-color: #8c8c8c;
+}

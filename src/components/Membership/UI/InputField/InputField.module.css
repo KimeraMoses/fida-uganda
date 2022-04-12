@@ -24,3 +24,6 @@
   width: 100%;
   max-width: 100%;
 }
+.input_field_wrapper.invalid_value {
+  border-color: #e53e3e;
+}

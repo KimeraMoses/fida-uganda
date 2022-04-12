@@ -17,8 +17,8 @@ const FidaApprovedTable = ({ data }) => {
   const { mutate, isLoading, isSuccess, isError, error } =
     useRequestPasswordLink();
   const toast = useToast();
-
-  const onEditHandler = (user) => {
+  // console.log(data)
+  const onEditHandler = user => {
     setUser(user);
     onOpen();
   };
@@ -60,7 +60,7 @@ const FidaApprovedTable = ({ data }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {data.map((item) => {
+            {data.map(item => {
               return (
                 <Tr key={item.id}>
                   <Td>{item.full_name}</Td>

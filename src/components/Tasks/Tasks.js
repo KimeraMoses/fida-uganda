@@ -15,7 +15,6 @@ const Tasks = () => {
   const { mutate, isError, error, isSuccess, isLoading } = useAddTask();
   const toast = useToast();
   const { data } = useTasks();
-
   useEffect(() => {
     if (isSuccess) {
       toast(toastSuccess("Task Added Successfully"));
@@ -31,7 +30,7 @@ const Tasks = () => {
       {data?.tasks && <InProgressTask tasks={data?.tasks} />}
       <SubHeading title="Completed" />
       {data?.tasks && <CompletedTask tasks={data?.tasks} />}
-      <Modal isOpen={isOpen} onClose={onClose} title="Create a Task">
+      <Modal isOpen={isOpen} onClose={onClose} title="Create a Task" size="2xl">
         <NewTaskForm
           onSubmit={mutate}
           error={error}

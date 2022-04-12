@@ -2,7 +2,7 @@ import React from "react";
 import classes from "../../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css";
 import styles from "./MultiForm.module.css";
 import { SimpleGrid } from "@chakra-ui/react";
-import InputField from "../../../../Membership/Members/NewMemberForm/MultiForm/InputField/InputField";
+import InputField from "../../../../common/UI/InputField/InputField";
 import ActionButtons from "../../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons";
 import { Form, Formik } from "formik";
 import { caseFileObject, caseFileSchema } from "./schema";
