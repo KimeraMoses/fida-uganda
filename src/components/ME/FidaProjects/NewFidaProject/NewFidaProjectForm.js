@@ -1,6 +1,6 @@
 import { SimpleGrid, useToast } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
-import React from "react";
+import { useEffect } from "react";
 import FormButton from "../../../common/UI/FormButton/FormButton";
 import InputField from "../../../common/UI/InputField/InputField";
 import classes from "./NewFidaProjectForm.module.css";
