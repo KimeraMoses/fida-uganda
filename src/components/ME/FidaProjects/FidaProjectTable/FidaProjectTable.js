@@ -7,32 +7,9 @@ import styles from "./Table.module.css";
 import { MdOutlineRemoveRedEye, MdOutlineFileDownload } from "react-icons/md";
 import { IoDocumentTextSharp } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import { formatDate } from "../../../../lib/data";
 
-export const ReportsData = [
-  {
-    name: "SGBV, Nakaseke District Employees Report",
-    created_by: "Andrew Tebandeke",
-    date_modified: "Oct 14, 2021",
-  },
-  {
-    name: "SGBV, Nakaseke District Employees Report",
-    created_by: "Andrew Tebandeke",
-    date_modified: "Oct 14, 2021",
-  },
-  {
-    name: "SGBV, Nakaseke District Employees Report",
-    created_by: "Kimera Moses",
-    date_modified: "Oct 14, 2021",
-  },
-  {
-    name: "Kimera Moses Projects",
-    created_by: "Andrew Tebandeke",
-    date_modified: "Oct 14, 2022",
-  },
-];
-
-const FidaProjectTable = (props) => {
-  const { isDocuments } = props;
+const FidaProjectTable = ({ isDocuments, data }) => {
   const navigate = useNavigate();
   const handleOpenFolder = (name) => {
     navigate(`/fida-projects/${name}`);
@@ -50,7 +27,7 @@ const FidaProjectTable = (props) => {
             </Tr>
           </Thead>
           <Tbody>
-            {ReportsData.map((item) => {
+            {data.map((item) => {
               return (
                 <Tr>
                   <Td>
@@ -61,9 +38,9 @@ const FidaProjectTable = (props) => {
                     </div>
                   </Td>
                   <Td className={classes.data__purpose_primary_text}>
-                    {item.created_by}
+                    {formatDate(item.createdAt)}
                   </Td>
-                  <Td>{item.date_modified}</Td>
+                  <Td>{formatDate(item.updateAt)}</Td>
                   <Td style={{ textAlign: "center" }}>
                     <div className={styles.table_actions_wrapperr}>
                       <div className={styles.table_actions_icon_wrapper}>

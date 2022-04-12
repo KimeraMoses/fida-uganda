@@ -12,6 +12,7 @@ export const projectInitialValues = {
   targetGroup: "",
   startDate: "",
   endDate: "",
+  objective: "",
 };
 
 export const projectSchema = Yup.object().shape({
@@ -26,4 +27,5 @@ export const projectSchema = Yup.object().shape({
   targetGroup: Yup.string().required("Target Group is required"),
   startDate: Yup.string().required("Start Date is required"),
   endDate: Yup.string().required("End Date is required"),
+  objective: Yup.string().required("Objective is required"),
 });
