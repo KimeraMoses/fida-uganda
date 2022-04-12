@@ -77,5 +77,11 @@ export const useDeleteAsset = () => {
         });
       }
     },
+    onError: (_error, _assetId, context) => {
+      queryClient.setQueryData(ASSETS_KEY, context.prevAssets);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries(ASSETS_KEY);
+    },
   });
 };
