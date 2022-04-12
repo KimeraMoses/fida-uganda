@@ -11,7 +11,7 @@ const EmployeeCard = ({
   onSubmit,
   isError,
   error,
-  isReadOnly = true,
+  isReadOnly = true
 }) => {
   const toast = useToast();
 
@@ -24,7 +24,7 @@ const EmployeeCard = ({
   return (
     <Formik
       initialValues={{ ...user, project: user.project?.name }}
-      onSubmit={(values) => {
+      onSubmit={values => {
         onSubmit(values);
       }}
     >

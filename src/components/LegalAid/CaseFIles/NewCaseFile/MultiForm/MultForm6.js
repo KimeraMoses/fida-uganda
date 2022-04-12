@@ -2,7 +2,7 @@ import React from "react";
 import classes from "../../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css";
 import { Select, SimpleGrid, Textarea } from "@chakra-ui/react";
 import ActionButtons from "../../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons";
-import FormButton from "../../../../Membership/MembersActivities/NewActivityForm/Button/FormButton";
+import FormButton from "../../../../common/UI/FormButton/FormButton";
 import styles from "./MultForm6.module.css";
 import Logo from "../../../../../assets/images/Avater.png";
 import { Form, Formik } from "formik";

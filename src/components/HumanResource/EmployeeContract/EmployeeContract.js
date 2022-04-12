@@ -10,11 +10,11 @@ const EmployeeContract = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <SectionHeader title="Employee | Contract" />
+      <SectionHeader title="Employees" />
       <TableSearch btnLabel="Add Contract" btnClick={onOpen} />
       <EmployeeContractTable />
       <Modal isOpen={isOpen} onClose={onClose}>
-        <NewContract/>
+        <NewContract />
       </Modal>
     </>
   );

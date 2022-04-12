@@ -1,10 +1,10 @@
 import React from "react";
 import { MdTaskAlt } from "react-icons/md";
 import { FolderIcon, PdfIcon, RetryIcon } from "../../../../assets/Icons/Icons";
-import FormButton from "../../../Membership/MembersActivities/NewActivityForm/Button/FormButton";
+import FormButton from "../../../common/UI/FormButton/FormButton";
 import classes from "./NewContract.module.css";
 
-const RecentUploadCard = (props) => {
+const RecentUploadCard = props => {
   const { name, time, size, error, isFolder } = props;
   return (
     <div className={classes.recent_upload_card_wrapper}>

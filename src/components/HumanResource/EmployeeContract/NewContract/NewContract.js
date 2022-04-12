@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import NewUpload from "./NewUpload";
 import RecentUploads from "./RecentUploads";
 import classes from "./NewContract.module.css";
-import FormButton from "../../../Membership/MembersActivities/NewActivityForm/Button/FormButton";
+import FormButton from "../../../common/UI/FormButton/FormButton";
 
 const NewContract = () => {
   const [isUpload, setIsUpload] = useState(false);

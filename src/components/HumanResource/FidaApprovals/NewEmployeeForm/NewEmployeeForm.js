@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import classes from "./NewEmployeeForm.module.css";
 import { Grid, GridItem, Select, SimpleGrid } from "@chakra-ui/react";
-import InputField from "../../../Membership/Members/NewMemberForm/MultiForm/InputField/InputField";
-import FormButton from "../../../Membership/MembersActivities/NewActivityForm/Button/FormButton";
+import InputField from "../../../common/UI/InputField/InputField";
+import FormButton from "../../../common/UI/FormButton/FormButton";
 import { Form, Formik } from "formik";
 
 const NewEmployeeForm = ({ isApprove, onClose, user }) => {
   const [Logo, setLogo] = useState("");
 
-  const userLogoHandler = async (e) => {
+  const userLogoHandler = async e => {
     const file = e.target.files[0];
     const Logo = await convertbase64Logo(file);
     setLogo(Logo);
@@ -19,7 +19,7 @@ const NewEmployeeForm = ({ isApprove, onClose, user }) => {
     fileInput.click();
   };
 
-  const convertbase64Logo = (file) => {
+  const convertbase64Logo = file => {
     return new Promise((resolve, reject) => {
       const fileReader = new FileReader();
       fileReader.readAsDataURL(file);
@@ -27,7 +27,7 @@ const NewEmployeeForm = ({ isApprove, onClose, user }) => {
       fileReader.onload = () => {
         resolve(fileReader.result);
       };
-      fileReader.onerror = (error) => {
+      fileReader.onerror = error => {
         reject(error);
       };
     });
@@ -44,7 +44,7 @@ const NewEmployeeForm = ({ isApprove, onClose, user }) => {
               style={{
                 backgroundImage: `url(${Logo})`,
                 backgroundSize: "cover",
-                backgroundPosition: "center top",
+                backgroundPosition: "center top"
               }}
               onClick={ImageIconClick}
             >
@@ -53,7 +53,7 @@ const NewEmployeeForm = ({ isApprove, onClose, user }) => {
                 id="user_img"
                 hidden
                 accept=".png, .jpg, .jpeg"
-                onChange={(e) => userLogoHandler(e)}
+                onChange={e => userLogoHandler(e)}
               />
             </div>
           </div>

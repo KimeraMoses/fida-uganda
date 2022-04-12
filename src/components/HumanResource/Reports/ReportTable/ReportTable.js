@@ -25,9 +25,11 @@ const ReportsTable = ({ data }) => {
             {data.map((item) => {
               return (
                 <Tr key={item.id}>
-                  <Td className={classes.primary_text_icon}>
-                    <FolderIcon />
-                    {item.report_title}
+                  <Td>
+                    <div className={classes.primary_text_icon}>
+                      <FolderIcon />
+                      {item.filename}
+                    </div>
                   </Td>
                   <Td className={classes.data__purpose_primary_text}>
                     {formatDate(item.createdAt)}

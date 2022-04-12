@@ -3,7 +3,13 @@ import { Avatar, AvatarGroup } from "@chakra-ui/react";
 import classes from "./TaskCard.module.css";
 import { RiMessage2Line, RiAttachment2 } from "react-icons/ri";
 
-const DepartmentButton = ({ title, btnColor, isUrget, Icon, valueCount }) => {
+export const DepartmentButton = ({
+  title,
+  btnColor,
+  isUrget,
+  Icon,
+  valueCount
+}) => {
   return (
     <div
       className={`${classes.depart_btn_wrapper} ${
@@ -21,7 +27,7 @@ const DepartmentButton = ({ title, btnColor, isUrget, Icon, valueCount }) => {
   );
 };
 
-const TaskCard = (props) => {
+const TaskCard = props => {
   const { cardTitle, description, valueCount, attachments, tags } = props;
 
   return (

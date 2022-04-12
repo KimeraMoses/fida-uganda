@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "../../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css";
 import { Select, SimpleGrid, Textarea } from "@chakra-ui/react";
-import InputField from "../../../../Membership/Members/NewMemberForm/MultiForm/InputField/InputField";
+import InputField from "../../../../common/UI/InputField/InputField";
 import ActionButtons from "../../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons";
 import { Formik } from "formik";
 import { Form } from "formik";

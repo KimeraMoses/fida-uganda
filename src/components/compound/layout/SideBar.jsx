@@ -3,9 +3,10 @@ import { Box } from "@chakra-ui/react";
 import menu from "../../../assets/menu";
 import image from "../../../assets/images/FIDA_Wave.png";
 import List from "./List";
+import HelpButton from "./HelpButton";
 
 const SideBar = () => {
-  const { designation } = useSelector((state) => state.auth.user);
+  const { designation } = useSelector(state => state.auth.user);
   return (
     <Box
       p={5}
@@ -26,6 +27,8 @@ const SideBar = () => {
         overflow="auto"
       >
         <List items={menu[designation] || menu.other} />
+
+        <HelpButton />
       </Box>
     </Box>
   );

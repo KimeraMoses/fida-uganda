@@ -153,11 +153,17 @@ const menuOptions = {
     icon: MdStorage,
     path: "leave-management",
   },
-  employContract: {
+  Contracts: {
     id: ++id,
-    name: "Employess & Contracts",
+    name: "Contracts",
     icon: MdStorage,
-    path: "employee-contract",
+    path: "contracts",
+  },
+  Employees: {
+    id: ++id,
+    name: "Employesss",
+    icon: MdStorage,
+    path: "employees",
   },
   fidaAssets_hr: {
     id: ++id,
@@ -223,7 +229,8 @@ const menu = {
     menuOptions.humanResource_Approvals,
     menuOptions.payRoll,
     menuOptions.leaveMgt,
-    menuOptions.employContract,
+    menuOptions.Employees,
+    menuOptions.Contracts,
     menuOptions.fidaAssets_hr,
     menuOptions.reports,
     menuOptions.fidaApprovals,
@@ -233,7 +240,7 @@ const menu = {
     menuOptions.itProducts,
     menuOptions.itServices,
     menuOptions.itComplaint,
-    menuOptions.systemAdmin,
+    // menuOptions.systemAdmin,
     menuOptions.reports,
   ],
   finance: [

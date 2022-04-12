@@ -1,7 +1,7 @@
 import { SimpleGrid, useToast } from "@chakra-ui/react";
 import React, { useEffect } from "react";
-import InputField from "../../../Membership/Members/NewMemberForm/MultiForm/InputField/InputField";
-import FormButton from "../../../Membership/MembersActivities/NewActivityForm/Button/FormButton";
+import InputField from "../../../common/UI/InputField/InputField";
+import FormButton from "../../../common/UI/FormButton/FormButton";
 import classes from "./NewAsset.module.css";
 import { Form, Formik } from "formik";
 import { assetInitialValues, assetSchema } from "./schema";
@@ -14,7 +14,7 @@ const NewAsset = ({
   isSubmitting,
   isError,
   error,
-  projectOptions,
+  projectOptions
 }) => {
   const toast = useToast();
 
@@ -28,15 +28,19 @@ const NewAsset = ({
     <Formik
       initialValues={assetInitialValues}
       validationSchema={assetSchema}
-      onSubmit={(values) => {
+      onSubmit={values => {
         onSubmit(values);
       }}
     >
       <div className={classes.new_asset_wrapper}>
         <Form>
           <SimpleGrid columns={2} spacing={2}>
-            <InputField placeholder="Asset Name" name="name" />
-            <InputField placeholder="Budget Year" name="budget_year" />
+            <InputField placeholder="Asset Name" name="name" fullwidth />
+            <InputField
+              placeholder="Budget Year"
+              name="budget_year"
+              fullwidth
+            />
           </SimpleGrid>
           <SimpleGrid columns={2} spacing={2}>
             <SelectField
@@ -51,8 +55,12 @@ const NewAsset = ({
             />
           </SimpleGrid>
           <SimpleGrid columns={2} spacing={2}>
-            <InputField placeholder="Unit Price" name="unit_price" />
-            <InputField placeholder="Number of Units Required" name="amount" />
+            <InputField fullwidth placeholder="Unit Price" name="unit_price" />
+            <InputField
+              fullwidth
+              placeholder="Number of Units Required"
+              name="amount"
+            />
           </SimpleGrid>
           <InputField
             placeholder="Date Delivered"

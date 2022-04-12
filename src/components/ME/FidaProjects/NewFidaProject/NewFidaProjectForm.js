@@ -1,8 +1,8 @@
 import { SimpleGrid, useToast } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
-import React, { useEffect } from "react";
-import FormButton from "../../../Membership/MembersActivities/NewActivityForm/Button/FormButton";
-import InputField from "../../../Membership/UI/InputField/InputField";
+import React from "react";
+import FormButton from "../../../common/UI/FormButton/FormButton";
+import InputField from "../../../common/UI/InputField/InputField";
 import classes from "./NewFidaProjectForm.module.css";
 import { projectInitialValues } from "./schema";
 import { toastError } from "../../../../lib/toastDetails";
