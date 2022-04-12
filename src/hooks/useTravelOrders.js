@@ -85,22 +85,25 @@ export const useEditTravelOrder = () => {
 export const useDeleteTravelOrder = () => {
   const queryClient = useQueryClient();
   return useMutation(deleteTravelOrder, {
-    onSuccess: (data) => {
-      const previousTravelOrders = queryClient.getQueryData(TRAVEL_ORDER_KEY);
+    onMutate: async (travelOrderId) => {
+      await queryClient.cancelMutations(TRAVEL_ORDER_KEY);
 
+      const previousTravelOrders = queryClient.getQueryData(TRAVEL_ORDER_KEY);
       if (previousTravelOrders) {
         queryClient.setQueryData(TRAVEL_ORDER_KEY, () => {
           return produce(previousTravelOrders, (draft) => {
             draft.travelOrders.filter(
-              (travelOrder) => travelOrder.id !== data?.travelOrderId
+              (travelOrder) => travelOrder.id !== travelOrderId
             );
           });
         });
-      } else {
-        queryClient.setQueryData(TRAVEL_ORDER_KEY, () => {
-          return { travelOrders: [data?.travelOrder] };
-        });
       }
+    },
+    onError: (_error, _travelOrderId, context) => {
+      queryClient.setQueryData(TRAVEL_ORDER_KEY, context.previousTravelOrders);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries(TRAVEL_ORDER_KEY);
     },
   });
 };
