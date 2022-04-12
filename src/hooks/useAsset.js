@@ -63,7 +63,9 @@ export const useUpdateAsset = () => {
 export const useDeleteAsset = () => {
   const queryClient = useQueryClient();
   return useMutation(deleteAsset, {
-    onSuccess: (data) => {
+    onMutate: async (data) => {
+      await queryClient.cancelMutations(ASSETS_KEY);
+
       const previousAssets = queryClient.getQueryData(ASSETS_KEY);
       if (previousAssets) {
         queryClient.setQueryData(ASSETS_KEY, (previousAssets) => {
@@ -71,11 +73,13 @@ export const useDeleteAsset = () => {
             draft.assets.filter((asset) => asset.id !== data.asset.id);
           });
         });
-      } else {
-        queryClient.setQueryData(ASSETS_KEY, () => {
-          return { assets: [] };
-        });
       }
+    },
+    onError: (_error, _assetId, context) => {
+      queryClient.setQueryData(ASSETS_KEY, context.prevAssets);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries(ASSETS_KEY);
     },
   });
 };
