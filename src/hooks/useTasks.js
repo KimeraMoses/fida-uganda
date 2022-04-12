@@ -75,23 +75,23 @@ export const useEditTask = () => {
 export const useDeleteTask = () => {
   const queryClient = useQueryClient();
   return useMutation(deleteTask, {
-    onSuccess: (data) => {
+    onMutate: async (taskId) => {
+      await queryClient.cancelMutations(TASKS_KEY);
       const previousTasks = queryClient.getQueryData(TASKS_KEY);
 
       if (previousTasks) {
         queryClient.setQueryData(TASKS_KEY, () => {
           return produce(previousTasks, (draft) => {
-            const index = draft.tasks.findIndex(
-              (task) => task.id === data?.taskId
-            );
-            draft.tasks.splice(index, 1);
+            draft.tasks.filter((task) => task.id !== taskId);
           });
         });
-      } else {
-        queryClient.setQueryData(TASKS_KEY, () => {
-          return { tasks: [] };
-        });
       }
+    },
+    onError: (_error, _taskId, context) => {
+      queryClient.setQueryData(TASKS_KEY, context.previousTasks);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries(TASKS_KEY);
     },
   });
 };
