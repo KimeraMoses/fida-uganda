@@ -40,6 +40,11 @@ export const yesNoOptions = [
   { label: "No", value: "No" },
 ];
 
+export const trueFalseOptions = [
+  { label: "True", value: true },
+  { label: "False", value: false },
+];
+
 export const clientStaffOptions = [
   { label: "Staff", value: "Staff" },
   { label: "Client", value: "Client" },

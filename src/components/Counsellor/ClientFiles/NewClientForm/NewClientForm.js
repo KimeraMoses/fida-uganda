@@ -5,15 +5,22 @@ import FormButton from "../../../common/UI/FormButton/FormButton";
 import InputField from "../../../common/UI/InputField/InputField";
 import classes from "./NewClientForm.module.css";
 import { Form, Formik } from "formik";
-import { patientInitialValues, patientSchema } from "./schema";
+import { patientInitialValues } from "./schema";
 import SelectField from "../../../common/SelectField";
 import {
   clientStaffOptions,
   sexOptions,
-  yesNoOptions
+  trueFalseOptions,
 } from "../../../../lib/options";
 
-const NewClientForm = ({ isEdit, isSubmitting, onSubmit, error, isError }) => {
+const NewClientForm = ({
+  isEdit,
+  isSubmitting,
+  onSubmit,
+  error,
+  isError,
+  onClose,
+}) => {
   const toast = useToast();
 
   useEffect(() => {
@@ -25,8 +32,8 @@ const NewClientForm = ({ isEdit, isSubmitting, onSubmit, error, isError }) => {
   return (
     <Formik
       initialValues={patientInitialValues}
-      validationSchema={patientSchema}
-      onSubmit={values => {
+      // validationSchema={patientSchema}
+      onSubmit={(values) => {
         onSubmit(values);
       }}
     >
@@ -59,10 +66,21 @@ const NewClientForm = ({ isEdit, isSubmitting, onSubmit, error, isError }) => {
           <hr />
           <div className={classes.field_wrapper}>
             <SimpleGrid columns={2} spacing={2}>
-              <SelectField placeholder="Pwd/Non-Pwd" options={yesNoOptions} />
-              <InputField placeholder="Date of first Session" type="date" />
+              <SelectField
+                placeholder="Pwd/Non-Pwd"
+                options={trueFalseOptions}
+                name="pwd"
+              />
+              <InputField
+                placeholder="Date of first Session"
+                type="date"
+                name="date_of_first_session"
+              />
             </SimpleGrid>
-            <InputField placeholder="Mode of Communication" />
+            <InputField
+              placeholder="Mode of Communication"
+              name="mode_of_communication"
+            />
           </div>
 
           <div
@@ -72,11 +90,23 @@ const NewClientForm = ({ isEdit, isSubmitting, onSubmit, error, isError }) => {
           >
             {isEdit ? (
               <>
-                <FormButton variant="colored">Cancel</FormButton>
-                <FormButton variant="colored">Save and exit</FormButton>
+                <FormButton variant="colored" onClick={onClose}>
+                  Cancel
+                </FormButton>
+                <FormButton
+                  variant="colored"
+                  isSubmitting={isSubmitting}
+                  type="submit"
+                >
+                  Save and exit
+                </FormButton>
               </>
             ) : (
-              <FormButton variant="colored" type="submit">
+              <FormButton
+                variant="colored"
+                type="submit"
+                isSubmitting={isSubmitting}
+              >
                 Add Client
               </FormButton>
             )}
