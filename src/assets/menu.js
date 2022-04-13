@@ -194,7 +194,7 @@ const menuOptions = {
 const commonOptions = [menuOptions.dashboard, menuOptions.tasks];
 
 const menu = {
-  clv: [
+  CLV: [
     ...commonOptions,
     menuOptions.clvs,
     menuOptions.caseFiles,
@@ -202,12 +202,12 @@ const menu = {
     menuOptions.clvComplaints,
     menuOptions.reports,
   ],
-  courtProcessServer: [
+  "Court Process Server": [
     ...commonOptions,
     menuOptions.caseFiles,
     menuOptions.reports,
   ],
-  legalAid: [
+  "Legal Aid": [
     ...commonOptions,
     menuOptions.clients,
     menuOptions.clvs,
@@ -216,7 +216,7 @@ const menu = {
     menuOptions.project,
     menuOptions.reports,
   ],
-  membership: [
+  Membership: [
     ...commonOptions,
     menuOptions.approvals,
     menuOptions.members,
@@ -224,7 +224,7 @@ const menu = {
     menuOptions.allocations,
     menuOptions.notifications,
   ],
-  humanResources: [
+  "Human Resources": [
     ...commonOptions,
     menuOptions.humanResource_Approvals,
     menuOptions.payRoll,
@@ -235,7 +235,7 @@ const menu = {
     menuOptions.reports,
     menuOptions.fidaApprovals,
   ],
-  it: [
+  IT: [
     ...commonOptions,
     menuOptions.itProducts,
     menuOptions.itServices,
@@ -243,7 +243,7 @@ const menu = {
     // menuOptions.systemAdmin,
     menuOptions.reports,
   ],
-  finance: [
+  Finance: [
     ...commonOptions,
     menuOptions.approvals,
     menuOptions.payRoll,
@@ -251,7 +251,7 @@ const menu = {
     menuOptions.fidaDatabases,
     menuOptions.reports,
   ],
-  me: [
+  "M & E": [
     ...commonOptions,
     menuOptions.approvals,
     menuOptions.fidaProjects,
@@ -259,7 +259,7 @@ const menu = {
     menuOptions.fidaAssets,
     menuOptions.reports,
   ],
-  programs: [
+  Programs: [
     ...commonOptions,
     menuOptions.approvals,
     menuOptions.fidaProjects,
@@ -267,14 +267,14 @@ const menu = {
     menuOptions.fidaAssets,
     menuOptions.reports,
   ],
-  procurement: [...commonOptions, menuOptions.procurements],
-  counsellor: [...commonOptions, menuOptions.clientsFiles, menuOptions.reports],
-  fleetManager: [
+  Procurement: [...commonOptions, menuOptions.procurements],
+  Counsellor: [...commonOptions, menuOptions.clientsFiles, menuOptions.reports],
+  "Fleet Manager": [
     ...commonOptions,
     menuOptions.fleetDatabase,
     menuOptions.reports,
   ],
-  other: [...commonOptions],
+  Other: [...commonOptions],
 };
 
 export default menu;
