@@ -161,7 +161,7 @@ const menuOptions = {
   },
   Employees: {
     id: ++id,
-    name: "Employesss",
+    name: "Employees",
     icon: MdStorage,
     path: "employees",
   },
