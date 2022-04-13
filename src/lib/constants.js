@@ -28,6 +28,7 @@ export const PROJECT_COMMENTS_kEY = "project_comments";
 export const CLV_CASES_KEY = "clv_cases";
 export const PAYROLL_KEY = "payroll";
 export const PAYROLL_NOTES_KEY = "payroll_notes";
+export const EMPLOYEES_KEY = "employees";
 
 export const REQUISITIONS_STATS = "requisitions/stats";
 export const TRAVEL_ORDER_STATS = "travel_orders/stats";

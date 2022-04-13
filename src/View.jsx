@@ -37,6 +37,7 @@ import ClientFiles from "./components/Counsellor/ClientFiles/ClientFiles";
 import ITProducts from "./components/itDepartment/Products/ITProducts";
 import ITServices from "./components/itDepartment/Services/ITServices";
 import ITComplaints from "./components/itDepartment/Complaints/ITComplaints";
+import Employees from "./components/HumanResource/EmployeeContract/Employees";
 
 const View = () => {
   return (
@@ -71,7 +72,7 @@ const View = () => {
         <Route path="hr-approvals" element={<HRApprovals />} />
         <Route path="payroll" element={<PayRoll />} />
         <Route path="leave-management" element={<LeaveManagement />} />
-        <Route path="employees" element={<EmployeeContract />} />
+        <Route path="employees" element={<Employees />} />
         <Route path="contracts" element={<EmployeeContract />} />
         <Route path="fida-assets" element={<FidaAssets />} />
         <Route path="reports" element={<Reports />} />
