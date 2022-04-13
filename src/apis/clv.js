@@ -10,15 +10,15 @@ export const getClv = async (clvId) => {
 };
 
 export const addClv = async (clv) => {
-  return await axiosClient.post(routes.complaints.addClv, clv);
+  return await axiosClient.post(routes.clvs.addClv, clv);
 };
 
 export const editClv = async (clv) => {
-  return await axiosClient.patch(`${routes.complaints.editClv}/${clv.id}`, clv);
+  return await axiosClient.patch(`${routes.clvs.editClv}/${clv.id}`, clv);
 };
 
 export const deleteClv = async (clvId) => {
-  return await axiosClient.delete(`${routes.complaints.base}/${clvId}`);
+  return await axiosClient.delete(`${routes.clvs.base}/${clvId}`);
 };
 
 export const getClvStats = async () => {

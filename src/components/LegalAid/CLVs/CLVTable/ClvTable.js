@@ -58,7 +58,7 @@ const CLVTable = ({ data }) => {
                 <Tr>
                   <Td className={classes.data_recepient_field}>
                     <div className={classes.data__primary_text}>
-                      {item.name}
+                      {item.first_name} {item.last_name}
                     </div>
                     <div className={classes.data__secondary_text}>
                       {item.profession}
