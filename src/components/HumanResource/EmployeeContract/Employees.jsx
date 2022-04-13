@@ -7,13 +7,15 @@ import EmployeeContractTable from "./EmployeeContractTable/EmployeeContractTable
 import NewContract from "./NewContract/NewContract";
 import { useEmployees } from "../../../hooks/useEmployee";
 
-const EmployeeContract = () => {
+const Employees = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data } = useEmployees();
+
   return (
     <>
-      <SectionHeader title="Contracts" />
-      <TableSearch btnLabel="Add Contract" btnClick={onOpen} />
+      <SectionHeader title="Employees" />
+      {data?.employees && <p>{JSON.stringify(data?.employees, null, 2)}</p>}
+      <TableSearch btnLabel="Add Employee" btnClick={onOpen} />
       {data?.employees && <EmployeeContractTable data={data?.employees} />}
       <Modal isOpen={isOpen} onClose={onClose}>
         <NewContract />
@@ -22,4 +24,4 @@ const EmployeeContract = () => {
   );
 };
 
-export default EmployeeContract;
+export default Employees;

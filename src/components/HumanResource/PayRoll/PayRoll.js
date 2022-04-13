@@ -4,26 +4,44 @@ import SectionHeader from "../../common/SectionHeader";
 import PayrollTable from "./PayRollTables/PayrollTable";
 import PayrollNotesTable from "./PayRollTables/PayrollNotes";
 import Modal from "../../common/Modal";
-import { useDisclosure } from "@chakra-ui/react";
+import { useDisclosure, useToast } from "@chakra-ui/react";
 import NewNotes from "./NewNotes/NewNotes";
 import { usePayrolls } from "../../../hooks/usePayroll";
-import { usePayrollNotes } from "../../../hooks/usePayrollNotes";
+import {
+  useAddPayrollNote,
+  usePayrollNotes,
+} from "../../../hooks/usePayrollNotes";
+import { toastSuccess } from "../../../lib/toastDetails";
 
 const PayRoll = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data: payrollNotes } = usePayrollNotes();
   const { data: payroll } = usePayrolls();
-  
+  const { mutate, isSuccess, isLoading, isError, error } = useAddPayrollNote();
+
+  const toast = useToast();
+
+  React.useEffect(() => {
+    if (isSuccess) {
+      toast(toastSuccess("Payroll note added successfully"));
+    }
+  }, [isSuccess, toast]);
+
   return (
     <>
       <SectionHeader title="Payroll" />
       <TableSearch btnLabel="Add Notes" btnClick={onOpen} />
-      {payrollNotes?.payrollNotes && (
-        <PayrollNotesTable data={payrollNotes?.payrollNotes} />
+      {payrollNotes?.PayrollNotes && (
+        <PayrollNotesTable data={payrollNotes?.PayrollNotes} />
       )}
       {payroll?.payrolls && <PayrollTable data={payroll?.payrolls} />}
       <Modal isOpen={isOpen} onClose={onClose}>
-        <NewNotes />
+        <NewNotes
+          onSubmit={mutate}
+          isSubmitting={isLoading}
+          isError={isError}
+          error={error}
+        />
       </Modal>
     </>
   );

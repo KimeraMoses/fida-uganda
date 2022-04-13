@@ -3,6 +3,7 @@ import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
 import classes from "./Table.module.css";
 import SectionHeader from "./SectionHeader";
 import { TableHeadColumn } from "../../Approvals/ApprovalTable/ApprovedTable";
+import { formatDate } from "../../../../lib/data";
 
 const PayrollNotesTable = ({ data }) => {
   return (
@@ -35,14 +36,16 @@ const PayrollNotesTable = ({ data }) => {
                     {item.month}
                   </Td>
                   <Td>{item.year}</Td>
-                  <Td>{item.date_written}</Td>
+                  <Td>{formatDate(item.createdAt)}</Td>
                   <Td>
                     <div
                       className={`${classes.data__secondary_text} ${
                         classes.notes_status
-                      } ${item.status ? classes.read : classes.unread}`}
+                      } ${
+                        item.status === "unread" ? classes.unread : classes.read
+                      }`}
                     >
-                      <h6>{item.status ? "Read" : "Unread"}</h6>
+                      <h6>{item.status === "unread" ? "Unread" : "Read"}</h6>
                     </div>
                   </Td>
                 </Tr>
