@@ -181,4 +181,10 @@ export const routes = {
     getAllPayrollNotes: `${BASE_URL}/payrollNotes/getAll`,
     editPayrollNote: `${BASE_URL}/payrollNotes/edit/`,
   },
+  employee: {
+    addEmployee: `${BASE_URL}/employees/create`,
+    base: `${BASE_URL}/employees/`,
+    editEmployee: `${BASE_URL}/employees/edit/`,
+    getAllEmployees: `${BASE_URL}/employees/getAll`,
+  },
 };
