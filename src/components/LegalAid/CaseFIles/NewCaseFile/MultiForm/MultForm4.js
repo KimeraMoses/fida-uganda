@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classes from "../../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css";
 import ActionButtons from "../../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons";
 
-import { Radio, RadioGroup, SimpleGrid, Stack } from "@chakra-ui/react";
+import {
+  Radio,
+  RadioGroup,
+  SimpleGrid,
+  Stack,
+  useToast,
+} from "@chakra-ui/react";
 import BenTable from "./BeneficiariesTable";
 import { Form, Formik } from "formik";
 import { caseFileObject } from "./schema";
+import { toastError } from "../../../../../lib/toastDetails";
 
 const MultForm4 = ({
   caseFile,
@@ -14,8 +21,17 @@ const MultForm4 = ({
   handleEditBack,
   isBackwardLoading,
   isForwardLoading,
+  isErrorUpdatingCaseFile,
+  errorUpdatingCaseFile,
 }) => {
   const initialValues = caseFileObject(caseFile);
+  const toast = useToast();
+
+  useEffect(() => {
+    if (isErrorUpdatingCaseFile) {
+      toast(toastError(errorUpdatingCaseFile));
+    }
+  }, [isErrorUpdatingCaseFile, errorUpdatingCaseFile, toast]);
 
   return (
     <Formik initialValues={initialValues} onSubmit={() => {}}>

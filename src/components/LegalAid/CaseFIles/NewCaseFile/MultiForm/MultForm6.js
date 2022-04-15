@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classes from "../../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css";
-import { Select, SimpleGrid, Textarea } from "@chakra-ui/react";
+import { Select, SimpleGrid, Textarea, useToast } from "@chakra-ui/react";
 import ActionButtons from "../../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons";
 import FormButton from "../../../../common/UI/FormButton/FormButton";
 import styles from "./MultForm6.module.css";
 import Logo from "../../../../../assets/images/Avater.png";
 import { Form, Formik } from "formik";
 import { caseFileObject } from "./schema";
+import { toastError } from "../../../../../lib/toastDetails";
 
 const ActionCard = () => {
   return (
@@ -34,8 +35,17 @@ const MultForm6 = ({
   handleEditBack,
   isBackwardLoading,
   isForwardLoading,
+  isErrorUpdatingCaseFile,
+  errorUpdatingCaseFile,
 }) => {
   const initialValues = caseFileObject(caseFile);
+  const toast = useToast();
+
+  useEffect(() => {
+    if (isErrorUpdatingCaseFile) {
+      toast(toastError(errorUpdatingCaseFile));
+    }
+  }, [isErrorUpdatingCaseFile, errorUpdatingCaseFile, toast]);
 
   return (
     <Formik initialValues={initialValues} onSubmit={() => {}}>

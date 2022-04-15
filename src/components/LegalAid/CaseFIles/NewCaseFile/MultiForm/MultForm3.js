@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classes from "../../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css";
-import { SimpleGrid } from "@chakra-ui/react";
+import { SimpleGrid, useToast } from "@chakra-ui/react";
 import InputField from "../../../../common/UI/InputField/InputField";
 import ActionButtons from "../../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons";
 import { Formik } from "formik";
@@ -10,6 +10,7 @@ import NumberField from "../../../../common/NumberField";
 import SelectField from "../../../../common/SelectField";
 import { trueFalseOptions } from "../../../../../lib/options";
 import TextAreaField from "../../../../common/TextAreaField";
+import { toastError } from "../../../../../lib/toastDetails";
 
 const MultForm3 = ({
   caseFile,
@@ -18,8 +19,17 @@ const MultForm3 = ({
   handleEditBack,
   isBackwardLoading,
   isForwardLoading,
+  isErrorUpdatingCaseFile,
+  errorUpdatingCaseFile,
 }) => {
   const initialValues = caseFileObject(caseFile);
+  const toast = useToast();
+
+  useEffect(() => {
+    if (isErrorUpdatingCaseFile) {
+      toast(toastError(errorUpdatingCaseFile));
+    }
+  }, [isErrorUpdatingCaseFile, errorUpdatingCaseFile, toast]);
 
   return (
     <Formik initialValues={initialValues} onSubmit={() => {}}>
