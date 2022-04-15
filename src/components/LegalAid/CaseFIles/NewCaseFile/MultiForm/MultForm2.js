@@ -13,8 +13,8 @@ const MultForm2 = ({
   page,
   handleEditForward,
   handleEditBack,
-  isForwardLoading,
   isBackwardLoading,
+  isForwardLoading,
 }) => {
   const initialValues = caseFileObject(caseFile);
 
@@ -102,12 +102,12 @@ const MultForm2 = ({
                 </div>
               </div>
               <ActionButtons
-                onBackward={handleEditBack}
-                onForward={handleEditForward}
                 page={page}
-                values={caseFile}
                 isBackwardLoading={isBackwardLoading}
                 isForwardLoading={isForwardLoading}
+                onBackward={handleEditBack}
+                onForward={handleEditForward}
+                values={values}
               />
             </Form>
           </div>
