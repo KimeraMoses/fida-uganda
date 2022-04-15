@@ -25,6 +25,24 @@ const MultForm2 = ({
       onSubmit={() => {}}
     >
       {({ values }) => {
+        if (
+          values.hearing === "Yes" ||
+          values.sight === "Yes" ||
+          values.movement === "Yes" ||
+          values.remembering === "Yes" ||
+          values.washing === "Yes" ||
+          values.communicating === "Yes" ||
+          values.hearing === "Mostly" ||
+          values.sight === "Mostly" ||
+          values.movement === "Mostly" ||
+          values.remembering === "Mostly" ||
+          values.washing === "Mostly" ||
+          values.communicating === "Mostly"
+        ) {
+          values.isDisabled = "Yes";
+        } else {
+          values.isDisabled = "No";
+        }
         return (
           <div className={classes.form_wrapper}>
             <Form>

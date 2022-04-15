@@ -42,6 +42,16 @@ export const caseFileInitialValues = {
   dressing: "",
   speech: "",
   isDisabled: "",
+  nature: "",
+  action: "",
+  hasTalkedToAnyone: "",
+  wasActionTaken: "",
+  actionsTaken: "",
+  reason_for_referral: "",
+  type: "",
+  organizationTalkedTo: "",
+  details: "",
+  duration: "",
 };
 
 export const caseFileObject = (caseFile) => {

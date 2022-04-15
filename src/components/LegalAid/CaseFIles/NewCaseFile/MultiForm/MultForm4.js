@@ -62,7 +62,7 @@ const MultForm4 = ({
               <ActionButtons
                 page={page}
                 onForward={handleEditForward}
-                onBack={handleEditBack}
+                onBackward={handleEditBack}
                 isBackwardLoading={isBackwardLoading}
                 isForwardLoading={isForwardLoading}
                 values={values}
