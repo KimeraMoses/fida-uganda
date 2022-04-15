@@ -13,8 +13,8 @@ const MultForm2 = ({
   page,
   handleEditForward,
   handleEditBack,
-  isForwardLoading,
   isBackwardLoading,
+  isForwardLoading,
 }) => {
   const initialValues = caseFileObject(caseFile);
 
@@ -25,6 +25,24 @@ const MultForm2 = ({
       onSubmit={() => {}}
     >
       {({ values }) => {
+        if (
+          values.hearing === "Yes" ||
+          values.sight === "Yes" ||
+          values.movement === "Yes" ||
+          values.remembering === "Yes" ||
+          values.washing === "Yes" ||
+          values.communicating === "Yes" ||
+          values.hearing === "Mostly" ||
+          values.sight === "Mostly" ||
+          values.movement === "Mostly" ||
+          values.remembering === "Mostly" ||
+          values.washing === "Mostly" ||
+          values.communicating === "Mostly"
+        ) {
+          values.isDisabled = "Yes";
+        } else {
+          values.isDisabled = "No";
+        }
         return (
           <div className={classes.form_wrapper}>
             <Form>
@@ -84,12 +102,12 @@ const MultForm2 = ({
                 </div>
               </div>
               <ActionButtons
-                onBackward={handleEditBack}
-                onForward={handleEditForward}
                 page={page}
-                values={caseFile}
                 isBackwardLoading={isBackwardLoading}
                 isForwardLoading={isForwardLoading}
+                onBackward={handleEditBack}
+                onForward={handleEditForward}
+                values={values}
               />
             </Form>
           </div>
