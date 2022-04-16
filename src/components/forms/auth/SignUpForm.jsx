@@ -40,41 +40,47 @@ const SignUpForm = ({ onSubmit, isSubmitting, isError, error }) => {
         onSubmit(formData);
       }}
     >
-      <Flex as={Form} flexDir="column" gap={5} py={10}>
-        <SelectAvatar
-          setAvatar={setAvatar}
-          toast={toast}
-          alignSelf="center"
-          borderRadius="full"
-          h={20}
-          w={20}
-          iconObj={{ size: 24 }}
-          url={url}
-          setImageUrl={setImageUrl}
-        />
-        <TextField
-          name="full_name"
-          placeholder="Full Name"
-          autoComplete="off"
-        />
-        <TextField name="email" placeholder="Email" autoComplete="off" />
-        <SelectField
-          name="designation"
-          placeholder="Select Designation"
-          options={designationOptions}
-        />
-        <SelectField
-          name="project"
-          placeholder="Select Project"
-          options={projectOptions}
-        />
-        <SubmitButton isLoading={isSubmitting} label="Sign Up" />
-        <Text as="u" alignSelf="center" color="purple.900">
-          <Link to="/">
-            Already have an account? <strong>Sign In</strong>
-          </Link>
-        </Text>
-      </Flex>
+      {({ values }) => {
+        return (
+          <Flex as={Form} flexDir="column" gap={5} py={10}>
+            <SelectAvatar
+              setAvatar={setAvatar}
+              toast={toast}
+              alignSelf="center"
+              borderRadius="full"
+              h={20}
+              w={20}
+              iconObj={{ size: 24 }}
+              url={url}
+              setImageUrl={setImageUrl}
+            />
+            <TextField
+              name="full_name"
+              placeholder="Full Name"
+              autoComplete="off"
+            />
+            <TextField name="email" placeholder="Email" autoComplete="off" />
+            <SelectField
+              name="designation"
+              placeholder="Select Designation"
+              options={designationOptions}
+              color={values.designation ? "black" : "gray.300"}
+            />
+            <SelectField
+              name="project"
+              placeholder="Select Project"
+              options={projectOptions}
+              color={values.project ? "black" : "gray.300"}
+            />
+            <SubmitButton isLoading={isSubmitting} label="Sign Up" />
+            <Text as="u" alignSelf="center" color="purple.900">
+              <Link to="/">
+                Already have an account? <strong>Sign In</strong>
+              </Link>
+            </Text>
+          </Flex>
+        );
+      }}
     </Formik>
   );
 };

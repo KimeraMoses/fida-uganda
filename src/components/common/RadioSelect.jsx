@@ -1,4 +1,5 @@
-import { Field, ErrorMessage } from "formik";
+import { FormControl, FormErrorMessage, FormLabel } from "@chakra-ui/react";
+import { Field, useField } from "formik";
 import { Fragment } from "react";
 
 export const TextError = ({ children }) => {
@@ -6,18 +7,23 @@ export const TextError = ({ children }) => {
 };
 
 const RadioSelect = ({ label, name, options, ...rest }) => {
+  const [field, meta] = useField(name);
+  const isInvalid = meta.touched && meta.error ? true : false;
+
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      <label>{label}</label>
-      <Field name={name} {...rest}>
+    <FormControl isInvalid={isInvalid}>
+      <FormLabel fontSize="lg" fontWeight="bold">
+        {label}
+      </FormLabel>
+      <Field name={name} {...field} {...rest}>
         {({ field }) => {
           return options.map((option) => {
             return (
               <Fragment key={option.value}>
                 <input
+                  {...field}
                   type="radio"
                   id={option.value}
-                  {...field}
                   value={option.value}
                   checked={field.value === option.value}
                 />
@@ -27,8 +33,8 @@ const RadioSelect = ({ label, name, options, ...rest }) => {
           });
         }}
       </Field>
-      <ErrorMessage component={TextError} name={name} />
-    </div>
+      <FormErrorMessage>{meta.error}</FormErrorMessage>
+    </FormControl>
   );
 };
 

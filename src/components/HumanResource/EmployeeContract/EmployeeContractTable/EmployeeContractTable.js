@@ -4,66 +4,7 @@ import classes from "../../../Membership/Allocations/AllocationsTable/Allocation
 import styles from "./Table.module.css";
 import { TableHeadColumn } from "../../../Membership/Allocations/AllocationsTable/AllocationsTable";
 
-export const EmployeeData = [
-  {
-    name: "Andrew Tebandeke",
-    phone: "0784658626",
-    sex: "Female",
-    district: "Kampala",
-    email: "nalubega12@gmail.com",
-    dob: "21.12.90",
-    nin: "CME90122167DME",
-    recruitmentDate: "02/02/22",
-    terminationDate: "02/02/23",
-    last_login: "14/APR/2020",
-    role: "Lawyer",
-    active: false,
-  },
-  {
-    name: "Andrew Tebandeke",
-    phone: "0784658626",
-    district: "Kampala",
-    sex: "Female",
-    email: "nalubega12@gmail.com",
-    dob: "21.12.90",
-    nin: "CME90122167DME",
-    recruitmentDate: "02/02/22",
-    terminationDate: "02/02/23",
-    last_login: "14/APR/2020",
-    role: "Lawyer",
-    active: true,
-  },
-  {
-    name: "Andrew Tebandeke",
-    phone: "0784658626",
-    district: "Kampala",
-    sex: "Female",
-    email: "nalubega12@gmail.com",
-    dob: "21.12.90",
-    nin: "CME90122167DME",
-    recruitmentDate: "02/02/22",
-    terminationDate: "02/02/23",
-    last_login: "14/APR/2020",
-    role: "Lawyer",
-    active: true,
-  },
-  {
-    name: "Nalubega Christine",
-    phone: "0784658626",
-    district: "Kampala",
-    sex: "Female",
-    email: "nalubega12@gmail.com",
-    dob: "21.12.90",
-    nin: "CME90122167DME",
-    recruitmentDate: "02/02/22",
-    terminationDate: "02/02/23",
-    last_login: "14/APR/2020",
-    role: "Lawyer",
-    active: false,
-  },
-];
-
-const EmployeeContractTable = () => {
+const EmployeeContractTable = ({ data }) => {
   return (
     <>
       <div className={classes.allocations_table_wrapper}>
@@ -90,12 +31,12 @@ const EmployeeContractTable = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {EmployeeData.map((item) => {
+            {data.map((item) => {
               return (
                 <Tr>
                   <Td className={classes.data_recepient_field}>
                     <div className={classes.data__primary_text}>
-                      {item.name}
+                      {item.first_name} {item.last_name}
                     </div>
                     <div className={classes.data__secondary_text}>
                       {item.role}
@@ -103,14 +44,14 @@ const EmployeeContractTable = () => {
                   </Td>
                   <Td>
                     <div className={classes.data__primary_text}>
-                      {item.phone}
+                      {item.phoneNumber}
                     </div>
                     <div className={classes.data__secondary_text}>
                       {item.email}
                     </div>
                   </Td>
                   <Td>
-                    <div className={classes.data__primary_text}>{item.sex}</div>
+                    <div className={classes.data__primary_text}>{item.gender}</div>
                     <div className={classes.data__secondary_text}>
                       {item.district}
                     </div>

@@ -7,9 +7,6 @@ import { useSelector } from "react-redux";
 const AppHeader = () => {
   const { user } = useSelector((state) => state.auth);
 
-  const firstName = user.first_name[0].toUpperCase() + user.first_name.slice(1);
-  const lastName = user.last_name[0].toUpperCase() + user.last_name.slice(1);
-  const fullName = `${firstName} ${lastName}`;
   return (
     <Flex p={3} width="100%" alignItems="center" boxShadow="md">
       <Box width="25%">
@@ -19,7 +16,7 @@ const AppHeader = () => {
         <Heading fontSize="md">
           Hi,{" "}
           <Box as="span" color="blackAlpha.500">
-            {fullName}
+            {user?.full_name}
           </Box>
         </Heading>
         <Flex ml="auto" alignItems="center" gap={3}>

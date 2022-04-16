@@ -21,8 +21,6 @@ const ClientFiles = () => {
     }
   });
 
-  console.log(data?.patients);
-
   return (
     <>
       <SectionHeader title="Client Files" />
@@ -41,6 +39,7 @@ const ClientFiles = () => {
           error={error}
           isSubmitting={isLoading}
           onSubmit={mutate}
+          onClose={onClose}
         />
       </Modal>
     </>

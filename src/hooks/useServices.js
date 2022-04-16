@@ -63,19 +63,22 @@ export const useUpdateService = () => {
 export const useDeleteService = () => {
   const queryClient = useQueryClient();
   return useMutation(deleteService, {
-    onSuccess: (data) => {
+    onMutate: async (serviceId) => {
+      await queryClient.cancelMutations(SERVICES_KEY);
       const previousServices = queryClient.getQueryData(SERVICES_KEY);
       if (previousServices) {
         queryClient.setQueryData(SERVICES_KEY, (previousServices) => {
           return produce(previousServices, (draft) => {
-            draft.services.filter((service) => service.id !== data.service.id);
+            draft.services.filter((service) => service.id !== serviceId);
           });
         });
-      } else {
-        queryClient.setQueryData(SERVICES_KEY, () => {
-          return { services: [] };
-        });
       }
+    },
+    onError: (_error, _serviceId, context) => {
+      queryClient.setQueryData(SERVICES_KEY, context.previousServices);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries(SERVICES_KEY);
     },
   });
 };

@@ -28,7 +28,7 @@ const ProjectTable = ({ data }) => {
                 <Tr>
                   <Td className={classes.primary_text_icon}>
                     <FolderIcon />
-                    {item.project.name}
+                    {item.project?.name}
                   </Td>
                   <Td className={classes.data__purpose_primary_text}>
                     {item.createdBy?.full_name}

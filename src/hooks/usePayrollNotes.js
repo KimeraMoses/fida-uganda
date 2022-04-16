@@ -25,12 +25,12 @@ export const useAddPayrollNote = () => {
       if (previousPayrollNotes) {
         queryClient.setQueryData(PAYROLL_NOTES_KEY, (previousPayrollNotes) => {
           return produce(previousPayrollNotes, (draft) => {
-            draft.reports.push(data.uploaded_PayrollNote);
+            draft.payroll.push(data.uploaded_PayrollNote);
           });
         });
       } else {
         queryClient.setQueryData(PAYROLL_NOTES_KEY, () => {
-          return { reports: [data.uploaded_PayrollNote] };
+          return { payroll: [data.uploaded_PayrollNote] };
         });
       }
     },
@@ -53,7 +53,7 @@ export const useUpdatePayrollNote = () => {
         });
       } else {
         queryClient.setQueryData(PAYROLL_NOTES_KEY, () => {
-          return { reports: [data.uploaded_PayrollNote] };
+          return { payroll: [data.uploaded_PayrollNote] };
         });
       }
     },

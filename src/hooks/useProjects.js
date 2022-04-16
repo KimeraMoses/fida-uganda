@@ -79,19 +79,22 @@ export const useUpdateProject = () => {
 export const useDeleteProject = () => {
   const queryClient = useQueryClient();
   return useMutation(deleteProject, {
-    onSuccess: (data) => {
+    onMutate: async (projectId) => {
+      await queryClient.cancelMutations(PROJECTS_KEY);
       const previousProjects = queryClient.getQueryData(PROJECTS_KEY);
       if (previousProjects) {
         queryClient.setQueryData(PROJECTS_KEY, () => {
           return produce(previousProjects, (draft) => {
-            draft.projects.filter((project) => project.id !== data.projectId);
+            draft.projects.filter((project) => project.id !== projectId);
           });
         });
-      } else {
-        queryClient.setQueryData(PROJECTS_KEY, () => {
-          return { projects: [] };
-        });
       }
+    },
+    onError: (_error, _projectId, context) => {
+      queryClient.setQueryData(PROJECTS_KEY, context.previousProjects);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries(PROJECTS_KEY);
     },
   });
 };

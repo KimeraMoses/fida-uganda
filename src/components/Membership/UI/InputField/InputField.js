@@ -1,7 +1,7 @@
+import { Field, useField } from "formik";
 import React from "react";
 import { FormErrorMessage } from "@chakra-ui/react";
 import classes from "./InputField.module.css";
-import { Field, useField } from "formik";
 
 const InputField = ({ type, name, disabled, fullWidth, ...rest }) => {
   const [field, meta] = useField(name);
