@@ -10,16 +10,62 @@ import {
   SimpleGrid,
   useToast,
   Avatar,
-  AvatarGroup
+  AvatarGroup,
 } from "@chakra-ui/react";
 import { toastError } from "../../../lib/toastDetails";
 import { taskInitialValues, taskSchema } from "./taskSchema";
 import MultiUpload from "../../common/MultiUpload";
 import { DepartmentButton } from "../TaskCard/TaskCard";
+import DropdownInputField from "../../common/UI/DropdownInputField/DropdownInputField";
+
+const Tags = [
+  { name: "Legal Aid", color: "primary" },
+  { name: "Court case", color: "secondary" },
+  { name: "Court processors", color: "tartiary" },
+];
+
+// const Team = [{ name: "Thomas Tumusiime" }, { name: "Kimera Moxhus" }];
+// let team = [];
+let tags = [];
+let outlines = [];
 
 const NewTaskForm = ({ onSubmit, error, isError, isSubmitting }) => {
   const [files, setFiles] = useState([]);
   const toast = useToast();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [show, setShow] = useState(false);
+  const [outline, setOutLine] = useState("");
+
+  const outlineHandler = (e) => {
+    e.preventDefault();
+    outlines.push(outline);
+    setOutLine("");
+  };
+
+  const keyWordHandler = (e) => {
+    setShow(false);
+    const { value } = e.target;
+    setSearchTerm(value);
+
+    if (searchTerm !== "") {
+      const Results = Tags.filter((Result) => {
+        return Object.values(Result)
+          .join(" ")
+          .replace(/-/g, " ")
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase());
+      });
+      setSearchResults(Results);
+    }
+  };
+
+  const selectedItemHandler = (result) => {
+    // console.log(result);
+    tags.push(result);
+    setSearchTerm("");
+    setShow(true);
+  };
 
   useEffect(() => {
     if (isError) {
@@ -31,7 +77,7 @@ const NewTaskForm = ({ onSubmit, error, isError, isSubmitting }) => {
     <Formik
       initialValues={taskInitialValues}
       validationSchema={taskSchema}
-      onSubmit={values => {
+      onSubmit={(values) => {
         console.log(values);
         // onSubmit(values);
       }}
@@ -89,10 +135,20 @@ const NewTaskForm = ({ onSubmit, error, isError, isSubmitting }) => {
                 <AttachmentIcon /> Add Tags
               </h6>
               <div className={styles.tags}>
-                <DepartmentButton title="Court Case" btnColor="primary" />
-                <DepartmentButton title="Court Case" btnColor="primary" />
-                <DepartmentButton title="Legal aid" btnColor="secondary" />
+                {tags.map((tag) => {
+                  return (
+                    <DepartmentButton title={tag.name} btnColor={tag.color} />
+                  );
+                })}
               </div>
+              <DropdownInputField
+                placeholder="Type tag name e.g. Court Case"
+                keyWordHandler={keyWordHandler}
+                searchTerm={searchTerm}
+                searchResults={searchResults}
+                isSelected={show}
+                itemClickHandler={selectedItemHandler}
+              />
             </div>
             <div className={styles.tag_wrapper}>
               <h6>
@@ -117,6 +173,34 @@ const NewTaskForm = ({ onSubmit, error, isError, isSubmitting }) => {
               </div>
             </div>
           </SimpleGrid>
+          <div className={styles.asset_outline_wrapper}>
+            <h6>
+              <AttachmentIcon /> Outlines
+            </h6>
+            <div className={styles.outline_list}>
+              <ul>
+                {outlines.map((outline) => {
+                  return <li key={outline}>{outline}</li>;
+                })}
+              </ul>
+              <InputField
+                placeholder="Type outline and press enter or add button"
+                name="outline"
+                value={outline}
+                fullwidth={true}
+                onChange={(e) => setOutLine(e.target.value)}
+              />
+              <div style={{ float: "right" }}>
+                <FormButton
+                  variant="colored"
+                  rounded={true}
+                  onClick={outlineHandler}
+                >
+                  + Add
+                </FormButton>
+              </div>
+            </div>
+          </div>
           <div className={classes.asset_attachement_wrapper}>
             <h6>
               <AttachmentIcon /> Attachment
