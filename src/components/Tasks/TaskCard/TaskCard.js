@@ -1,14 +1,16 @@
 import React from "react";
-import { Avatar, AvatarGroup } from "@chakra-ui/react";
+import { Avatar, AvatarGroup, useDisclosure } from "@chakra-ui/react";
 import classes from "./TaskCard.module.css";
 import { RiMessage2Line, RiAttachment2 } from "react-icons/ri";
+import Modal from "../../common/Modal";
+import TaskSummary from "../TaskSummary/TaskSummary";
 
 export const DepartmentButton = ({
   title,
   btnColor,
   isUrget,
   Icon,
-  valueCount
+  valueCount,
 }) => {
   return (
     <div
@@ -27,11 +29,11 @@ export const DepartmentButton = ({
   );
 };
 
-const TaskCard = props => {
+const TaskCard = (props) => {
   const { cardTitle, description, valueCount, attachments, tags } = props;
-
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <div className={classes.task_card_wrapper}>
+    <div className={classes.task_card_wrapper} onClick={onOpen}>
       <div className={classes.task_card_wrapper_inner}>
         {tags && (
           <div className={classes.task_department_wrapper}>
@@ -71,6 +73,9 @@ const TaskCard = props => {
           </div>
         </div>
       </div>
+      <Modal isOpen={isOpen} onClose={onClose} size="sm">
+        <TaskSummary />
+      </Modal>
     </div>
   );
 };

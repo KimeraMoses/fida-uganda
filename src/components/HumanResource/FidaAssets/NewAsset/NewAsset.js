@@ -8,13 +8,15 @@ import { assetInitialValues, assetSchema } from "./schema";
 import { toastError } from "../../../../lib/toastDetails";
 import SelectField from "../../../common/SelectField";
 import { assetTypeOptions } from "../../../../lib/options";
+import { AttachmentIcon } from "../../../../assets/Icons/Icons";
+import image1 from "../../../../assets/images/placeholder.png";
 
 const NewAsset = ({
   onSubmit,
   isSubmitting,
   isError,
   error,
-  projectOptions
+  projectOptions,
 }) => {
   const toast = useToast();
 
@@ -28,7 +30,7 @@ const NewAsset = ({
     <Formik
       initialValues={assetInitialValues}
       validationSchema={assetSchema}
-      onSubmit={values => {
+      onSubmit={(values) => {
         onSubmit(values);
       }}
     >
@@ -79,7 +81,7 @@ const NewAsset = ({
             fullwidth
           />
           <InputField placeholder="Location" name="location" fullwidth />
-          {/* <div className={classes.asset_attachement_wrapper}>
+          <div className={classes.asset_attachement_wrapper}>
             <h6>
               <AttachmentIcon /> Attachments (2)
             </h6>
@@ -95,7 +97,7 @@ const NewAsset = ({
 
               <div className={classes.new_attachment}>+</div>
             </div>
-          </div> */}
+          </div>
           <div style={{ float: "right", padding: "20px 0" }}>
             <FormButton
               variant="colored"

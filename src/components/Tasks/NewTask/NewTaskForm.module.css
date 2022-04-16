@@ -5,6 +5,9 @@
 .asset_tags_team_wrapper h6 {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  color: #4e5d78;
+  font-weight: 700;
 }
 .asset_tags_team_wrapper h6 svg {
   margin-right: 4px;
@@ -12,4 +15,46 @@
 .tags,
 .team {
   padding: 8px 0;
+}
+
+.asset_outline_wrapper {
+  width: 100%;
+  margin: 10px 0;
+}
+.asset_outline_wrapper h6 {
+  display: flex;
+  align-items: center;
+  color: #4e5d78;
+  font-weight: 700;
+}
+.asset_outline_wrapper h6 svg {
+  margin-right: 8px;
+}
+.outline_list {
+  background: linear-gradient(100.32deg, #fcf5ff -6.29%, #f5e4ff 88.21%);
+  border: 1px solid rgba(86, 43, 133, 0.1);
+  box-sizing: border-box;
+  border-radius: 12px;
+  padding: 20px;
+  padding-bottom: 40px;
+}
+.outline_list ul {
+  margin-bottom: 10px;
+  list-style-type: none;
+  padding-left: 20px;
+}
+.outline_list ul li {
+  color: var(--primary_color);
+}
+
+.outline_list ul li::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 10px;
+  margin-bottom: 2px;
+  margin-left: -1em;
+  border-radius: 50%;
+  background-color: var(--primary_color);
 }
