@@ -6,6 +6,8 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  color: #4e5d78;
+  font-weight: 700;
 }
 .asset_tags_team_wrapper h6 svg {
   margin-right: 4px;
@@ -22,6 +24,8 @@
 .asset_outline_wrapper h6 {
   display: flex;
   align-items: center;
+  color: #4e5d78;
+  font-weight: 700;
 }
 .asset_outline_wrapper h6 svg {
   margin-right: 8px;
