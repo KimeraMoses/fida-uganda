@@ -43,9 +43,8 @@ const DropdownInputField = (props) => {
                     })}
                 </ul>
               ) : (
-                <div className="overflow-hidden absolute top-0 right-0 left-0 m-0 border-0 bg-background z-2 rounded pt-2 px-4 pb-3 shadow-md">
-                  Ooops, No match for{" "}
-                  <strong className="text-primary">{searchTerm}</strong> found!
+                <div className={classes.no_results_wrapper}>
+                  Ooops, No match for <strong>{searchTerm}</strong> found!
                 </div>
               )}
             </div>
