@@ -52,6 +52,7 @@ export const caseFileInitialValues = {
   organizationTalkedTo: "",
   details: "",
   duration: "",
+  search: "",
 };
 
 export const caseFileObject = (caseFile) => {
@@ -64,6 +65,7 @@ export const caseFileObject = (caseFile) => {
 };
 
 export const caseFileSchema = Yup.object().shape({
+  search: Yup.string().required("Client Name is required"),
   complainantName: Yup.string().required("Name is required"),
   complainantSex: Yup.string().required("Sex is required"),
   complainantAge: Yup.string().required("Age is required"),
