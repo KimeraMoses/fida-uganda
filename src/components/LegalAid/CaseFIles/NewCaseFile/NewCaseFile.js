@@ -9,7 +9,8 @@ import { useToast } from "@chakra-ui/react";
 import { useAddCaseFiles } from "../../../../hooks/useCaseFiles";
 import { toastSuccess } from "../../../../lib/toastDetails";
 
-const NewCaseFile = ({ caseFile, isClvCaseFile, isNew, onClose }) => {
+const NewCaseFile = (props) => {
+  const { caseFile, isClvCaseFile, isNew, onClose } = props;
   const [page, setPage] = useState(1);
   const toast = useToast();
   const {

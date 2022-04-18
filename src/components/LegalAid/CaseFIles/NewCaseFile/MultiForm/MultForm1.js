@@ -6,25 +6,29 @@ import InputField from "../../../../common/UI/InputField/InputField";
 import ActionButtons from "../../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons";
 import { Form, Formik } from "formik";
 import { caseFileObject, caseFileSchema } from "./schema";
+import SelectField from "./../../../../common/SelectField";
 
-const MultForm1 = ({
-  caseFile,
-  page,
-  isClvCaseFile,
-  isNew,
-  onAddCaseFile,
-  isAddingCaseFile,
-  isErrorAddingCaseFile,
-  errorAddingCaseFile,
-  handleEditForward,
-}) => {
+const MultForm1 = (props) => {
+  const {
+    caseFile,
+    page,
+    isClvCaseFile,
+    isNew,
+    onAddCaseFile,
+    isAddingCaseFile,
+    // isErrorAddingCaseFile,
+    // errorAddingCaseFile,
+    handleEditForward,
+  } = props;
   const initialValues = caseFileObject(caseFile);
 
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={caseFileSchema}
-      onSubmit={() => {}}
+      onSubmit={() => {
+        console.log("Some thing");
+      }}
     >
       {({ values }) => {
         return (
@@ -61,6 +65,7 @@ const MultForm1 = ({
                   style={{ alignItems: "center" }}
                 >
                   <div className={styles.field_row_label}>Name</div>
+                  {/* <DropdownInputField /> */}
                   <InputField placeholder="Type Here" name="complainantName" />
                   <InputField placeholder="Type Here" name="respondentName" />
                 </SimpleGrid>
@@ -70,8 +75,20 @@ const MultForm1 = ({
                   style={{ alignItems: "center" }}
                 >
                   <div className={styles.field_row_label}>Sex</div>
-                  <InputField placeholder="Type Here" name="complainantSex" />
-                  <InputField placeholder="Type Here" name="respondentSex" />
+                  <SelectField
+                    name="complainantSex"
+                    options={[
+                      { label: "Male", value: "M" },
+                      { label: "Female", value: "F" },
+                    ]}
+                  />
+                  <SelectField
+                    name="respondentSex"
+                    options={[
+                      { label: "Male", value: "M" },
+                      { label: "Female", value: "F" },
+                    ]}
+                  />
                 </SimpleGrid>
                 <SimpleGrid
                   columns={3}

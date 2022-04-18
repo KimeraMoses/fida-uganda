@@ -1,9 +1,10 @@
 import React from "react";
-import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
+import { Table, Thead, Tbody, Tr, Td, IconButton } from "@chakra-ui/react";
 import classes from "../../FidaAssets/FidaAssetsTable/Table.module.css";
 import { TableHeadColumn } from "../../../Membership/Allocations/AllocationsTable/AllocationsTable";
 import { FolderIcon } from "../../../../assets/Icons/Icons";
 import { formatDate } from "../../../../lib/data";
+import { MdEdit } from "react-icons/md";
 
 const ReportsTable = ({ data }) => {
   return (
@@ -18,7 +19,7 @@ const ReportsTable = ({ data }) => {
             <Tr>
               <TableHeadColumn title="Name" />
               <TableHeadColumn title="Date Created" />
-              <TableHeadColumn title="Date Modified" />
+              <TableHeadColumn title="Actions" />
             </Tr>
           </Thead>
           <Tbody>
@@ -34,7 +35,17 @@ const ReportsTable = ({ data }) => {
                   <Td className={classes.data__purpose_primary_text}>
                     {formatDate(item.createdAt)}
                   </Td>
-                  <Td>{formatDate(item.updateAt)}</Td>
+                  <Td className={classes.table_actions_wrapper}>
+                    <div className={classes.table_actions_icon_wrapper}>
+                      <IconButton
+                        size="xs"
+                        aria-label="Edit Item"
+                        icon={<MdEdit />}
+                        // onClick={() => onEditHandler(item)}
+                      />
+                    </div>
+                    {/* {formatDate(item.updateAt)} */}
+                  </Td>
                 </Tr>
               );
             })}
