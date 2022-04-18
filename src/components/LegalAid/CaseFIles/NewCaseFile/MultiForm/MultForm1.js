@@ -41,8 +41,8 @@ const MultForm1 = (props) => {
     isNew,
     onAddCaseFile,
     isAddingCaseFile,
-    // isErrorAddingCaseFile,
-    // errorAddingCaseFile,
+    isErrorAddingCaseFile,
+    errorAddingCaseFile,
     handleEditForward,
   } = props;
   const initialValues = caseFileObject(caseFile);
@@ -95,10 +95,16 @@ const MultForm1 = (props) => {
                     spacing={2}
                     style={{ alignItems: "center" }}
                   >
-                    <InputField placeholder="CLV Name" name="" />
-                    <InputField placeholder="CLV ID number" />
-                    <InputField placeholder="Project of Attachment" />
-                    <InputField placeholder="District of Operation" />
+                    <InputField placeholder="CLV Name" name="clvName" />
+                    <InputField placeholder="CLV ID number" name="clvId" />
+                    <InputField
+                      placeholder="Project of Attachment"
+                      name="project"
+                    />
+                    <InputField
+                      placeholder="District of Operation"
+                      name="district"
+                    />
                   </SimpleGrid>
                 </div>
               )}
