@@ -32,7 +32,6 @@ const NewCaseFile = ({ caseFile, isClvCaseFile, isNew, onClose }) => {
 
   const handleAddCase = (values) => {
     onAddCaseFile(values);
-    nextStep();
   };
 
   const handleLastStep = (values) => {

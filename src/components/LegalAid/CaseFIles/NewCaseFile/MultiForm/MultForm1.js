@@ -64,7 +64,6 @@ const MultForm1 = ({
                   </SimpleGrid>
                 </div>
               )}
-
               <div className={classes.field_wrapper}>
                 <div className={classes.field_label}>1. Personal Address</div>
                 <div className={classes.field_wrapper}>
@@ -332,13 +331,14 @@ const MultForm1 = ({
               {isNew ? (
                 <ActionButtons
                   page={page}
-                  onForward={handleEditForward}
+                  onForward={onAddCaseFile}
                   values={values}
+                  type="submit"
                 />
               ) : (
                 <ActionButtons
                   page={page}
-                  onForward={onAddCaseFile}
+                  onForward={handleEditForward}
                   isForwardLoading={isAddingCaseFile}
                   values={values}
                 />

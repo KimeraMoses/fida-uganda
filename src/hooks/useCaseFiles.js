@@ -40,16 +40,17 @@ export const useAddCaseFiles = () => {
   const queryClient = useQueryClient();
   return useMutation(addCaseFile, {
     onSuccess: (data) => {
+      console.log("data", data);
       const previousCaseFiles = queryClient.getQueryData(CASES_KEY);
       if (previousCaseFiles) {
         queryClient.setQueryData(CASES_KEY, (previousCaseFiles) => {
           return produce(previousCaseFiles, (draft) => {
-            draft.caseFiles.push(data.caseFile);
+            draft.cases.push(data.caseFile);
           });
         });
       } else {
         queryClient.setQueryData(CASES_KEY, () => {
-          return { caseFiles: [data.caseFile] };
+          return { cases: [data.caseFile] };
         });
       }
     },

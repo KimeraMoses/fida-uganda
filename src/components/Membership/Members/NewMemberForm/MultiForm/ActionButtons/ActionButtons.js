@@ -9,6 +9,7 @@ const ActionButtons = ({
   isForwardLoading,
   isBackwardLoading,
   values,
+  type,
 }) => {
   const firstStep = page === 1 ? true : false;
   return (
@@ -29,7 +30,7 @@ const ActionButtons = ({
       )}
       <FormButton
         variant="colored"
-        type="button"
+        type={type ? type : "button"}
         onClick={() => onForward(values)}
         isSubmitting={isForwardLoading}
       >
