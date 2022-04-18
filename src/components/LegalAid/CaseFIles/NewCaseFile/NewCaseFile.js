@@ -6,37 +6,46 @@ import MultForm2 from "./MultiForm/MultForm2";
 import MultForm1 from "./MultiForm/MultForm1";
 import MultForm6 from "./MultiForm/MultForm6";
 import { useToast } from "@chakra-ui/react";
-import { useAddCaseFiles } from "../../../../hooks/useCaseFiles";
+import {
+  useAddCaseFiles,
+  useUpdateCaseFile,
+} from "../../../../hooks/useCaseFiles";
 import { toastSuccess } from "../../../../lib/toastDetails";
 
 const NewCaseFile = ({ caseFile, isClvCaseFile, isNew, onClose }) => {
   const [page, setPage] = useState(1);
   const toast = useToast();
   const {
-    // mutate: onAddCaseFile,
+    mutate: onAddCaseFile,
     isLoading: isAddingCaseFile,
     isError: isErrorAddingCaseFile,
     isSuccess: isAddedCaseFile,
     error: addCaseFileError,
   } = useAddCaseFiles();
+  const {
+    mutate: onUpdateCaseFile,
+    isLoading: isUpdatingCaseFile,
+    isSuccess: isUpdatedCaseFile,
+    isError: isErrorUpdatingCaseFile,
+    error: updateCaseFileError,
+  } = useUpdateCaseFile();
 
   const handleAddCase = (values) => {
-    alert(JSON.stringify(values, null, 2));
-    nextStep();
+    onAddCaseFile(values);
   };
 
-  const handleLastStep = (value) => {
-    alert(JSON.stringify(value, null, 2));
+  const handleLastStep = (values) => {
+    onUpdateCaseFile(values);
     onClose();
   };
 
   const handleEditForward = (values) => {
-    alert(JSON.stringify(values, null, 2));
+    onUpdateCaseFile(values);
     nextStep();
   };
 
   const handleEditBack = (values) => {
-    alert(JSON.stringify(values, null, 2));
+    onUpdateCaseFile(values);
     prevStep();
   };
 
@@ -47,7 +56,10 @@ const NewCaseFile = ({ caseFile, isClvCaseFile, isNew, onClose }) => {
     if (isAddedCaseFile) {
       toast(toastSuccess("Case File Added Successfully"));
     }
-  }, [isNew, isAddedCaseFile, toast]);
+    if (isUpdatedCaseFile) {
+      toast(toastSuccess("Case File Updated Successfully"));
+    }
+  }, [isNew, isAddedCaseFile, toast, isUpdatedCaseFile]);
 
   const prevStep = () => {
     setPage((prePage) => prePage - 1);
@@ -69,6 +81,8 @@ const NewCaseFile = ({ caseFile, isClvCaseFile, isNew, onClose }) => {
           isErrorAddingCaseFile={isErrorAddingCaseFile}
           errorAddingCaseFile={addCaseFileError}
           handleEditForward={handleEditForward}
+          isErrorUpdatingCaseFile={isErrorUpdatingCaseFile}
+          errorUpdatingCaseFile={updateCaseFileError}
         />
       );
     case 2:
@@ -78,6 +92,10 @@ const NewCaseFile = ({ caseFile, isClvCaseFile, isNew, onClose }) => {
           page={page}
           handleEditForward={handleEditForward}
           handleEditBack={handleEditBack}
+          isBackwardLoading={isUpdatingCaseFile}
+          isForwardLoading={isAddingCaseFile}
+          isErrorUpdatingCaseFile={isErrorUpdatingCaseFile}
+          errorUpdatingCaseFile={updateCaseFileError}
         />
       );
     case 3:
@@ -87,6 +105,10 @@ const NewCaseFile = ({ caseFile, isClvCaseFile, isNew, onClose }) => {
           page={page}
           handleEditForward={handleEditForward}
           handleEditBack={handleEditBack}
+          isBackwardLoading={isUpdatingCaseFile}
+          isForwardLoading={isAddingCaseFile}
+          isErrorUpdatingCaseFile={isErrorUpdatingCaseFile}
+          errorUpdatingCaseFile={updateCaseFileError}
         />
       );
     case 4:
@@ -96,6 +118,10 @@ const NewCaseFile = ({ caseFile, isClvCaseFile, isNew, onClose }) => {
           page={page}
           handleEditForward={handleEditForward}
           handleEditBack={handleEditBack}
+          isBackwardLoading={isUpdatingCaseFile}
+          isForwardLoading={isAddingCaseFile}
+          isErrorUpdatingCaseFile={isErrorUpdatingCaseFile}
+          errorUpdatingCaseFile={updateCaseFileError}
         />
       );
     case 5:
@@ -105,6 +131,10 @@ const NewCaseFile = ({ caseFile, isClvCaseFile, isNew, onClose }) => {
           page={page}
           handleEditForward={handleEditForward}
           handleEditBack={handleEditBack}
+          isBackwardLoading={isUpdatingCaseFile}
+          isForwardLoading={isAddingCaseFile}
+          isErrorUpdatingCaseFile={isErrorUpdatingCaseFile}
+          errorUpdatingCaseFile={updateCaseFileError}
         />
       );
     case 6:
@@ -114,6 +144,10 @@ const NewCaseFile = ({ caseFile, isClvCaseFile, isNew, onClose }) => {
           page={page}
           handleEditForward={handleLastStep}
           handleEditBack={handleEditBack}
+          isBackwardLoading={isUpdatingCaseFile}
+          isForwardLoading={isAddingCaseFile}
+          isErrorUpdatingCaseFile={isErrorUpdatingCaseFile}
+          errorUpdatingCaseFile={updateCaseFileError}
         />
       );
     default:
