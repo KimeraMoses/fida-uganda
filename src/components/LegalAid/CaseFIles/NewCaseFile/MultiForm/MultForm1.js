@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "../../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css";
 import styles from "./MultiForm.module.css";
 import { SimpleGrid } from "@chakra-ui/react";
@@ -7,6 +7,31 @@ import ActionButtons from "../../../../Membership/Members/NewMemberForm/MultiFor
 import { Form, Formik } from "formik";
 import { caseFileObject, caseFileSchema } from "./schema";
 import SelectField from "./../../../../common/SelectField";
+import DropdownInputField from "../../../../common/UI/DropdownInputField/DropdownInputField";
+
+const ClientsData = [
+  {
+    id: 0,
+    name: "Kimera Moses",
+    profession: "Lawyer",
+    sex: "male",
+    nin: "RWTYUEEUIOJAH6789",
+  },
+  {
+    id: 0,
+    name: "Conrad Dev",
+    profession: "Dev",
+    sex: "male",
+    nin: "RWTYUEEUIOJAH6789",
+  },
+  {
+    id: 0,
+    name: "Cynthia Moxhus",
+    profession: "Dentist",
+    sex: "Female",
+    nin: "RWTYUEEUIOJAH6789",
+  },
+];
 
 const MultForm1 = (props) => {
   const {
@@ -21,6 +46,34 @@ const MultForm1 = (props) => {
     handleEditForward,
   } = props;
   const initialValues = caseFileObject(caseFile);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [selectedItem, setSelectedItem] = useState("");
+  const [show, setShow] = useState(false);
+
+  const keyWordHandler = (e) => {
+    setShow(false);
+    const { value } = e.target;
+    setSearchTerm(value);
+
+    if (searchTerm !== "") {
+      const Results = ClientsData.filter((Result) => {
+        return Object.values(Result)
+          .join(" ")
+          .replace(/-/g, " ")
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase());
+      });
+      setSearchResults(Results);
+    }
+  };
+
+  const selectedItemHandler = (result) => {
+    console.log(result);
+    setSelectedItem(result.name);
+    setSearchTerm("");
+    setShow(true);
+  };
 
   return (
     <Formik
@@ -39,7 +92,7 @@ const MultForm1 = (props) => {
                   <div className={classes.field_label}>CLV Details </div>
                   <SimpleGrid
                     columns={4}
-                    spacing={1}
+                    spacing={2}
                     style={{ alignItems: "center" }}
                   >
                     <InputField placeholder="CLV Name" name="" />
@@ -61,17 +114,29 @@ const MultForm1 = (props) => {
                 </div>
                 <SimpleGrid
                   columns={3}
-                  spacing={1}
+                  spacing={2}
                   style={{ alignItems: "center" }}
                 >
                   <div className={styles.field_row_label}>Name</div>
-                  {/* <DropdownInputField /> */}
-                  <InputField placeholder="Type Here" name="complainantName" />
-                  <InputField placeholder="Type Here" name="respondentName" />
+                  <DropdownInputField
+                    placeholder="Type client Name"
+                    keyWordHandler={keyWordHandler}
+                    searchTerm={searchTerm}
+                    searchResults={searchResults}
+                    selectedItem={selectedItem}
+                    isSelected={show}
+                    itemClickHandler={selectedItemHandler}
+                    name="complainantName"
+                  />
+                  <InputField
+                    placeholder="Type Here"
+                    name="respondentName"
+                    fullwidth
+                  />
                 </SimpleGrid>
                 <SimpleGrid
                   columns={3}
-                  spacing={1}
+                  spacing={2}
                   style={{ alignItems: "center" }}
                 >
                   <div className={styles.field_row_label}>Sex</div>
@@ -92,7 +157,7 @@ const MultForm1 = (props) => {
                 </SimpleGrid>
                 <SimpleGrid
                   columns={3}
-                  spacing={1}
+                  spacing={2}
                   style={{ alignItems: "center" }}
                 >
                   <div className={styles.field_row_label}>Age</div>
@@ -109,7 +174,7 @@ const MultForm1 = (props) => {
                 </SimpleGrid>
                 <SimpleGrid
                   columns={3}
-                  spacing={1}
+                  spacing={2}
                   style={{ alignItems: "center" }}
                 >
                   <div className={styles.field_row_label}>Telephone Number</div>
@@ -124,7 +189,7 @@ const MultForm1 = (props) => {
                 </SimpleGrid>
                 <SimpleGrid
                   columns={3}
-                  spacing={1}
+                  spacing={2}
                   style={{ alignItems: "center" }}
                 >
                   <div className={styles.field_row_label}>Country</div>
@@ -141,7 +206,7 @@ const MultForm1 = (props) => {
                 </SimpleGrid>
                 <SimpleGrid
                   columns={3}
-                  spacing={1}
+                  spacing={2}
                   style={{ alignItems: "center" }}
                 >
                   <div className={styles.field_row_label}>
@@ -152,7 +217,7 @@ const MultForm1 = (props) => {
                 </SimpleGrid>
                 <SimpleGrid
                   columns={3}
-                  spacing={1}
+                  spacing={2}
                   style={{ alignItems: "center" }}
                 >
                   <div className={styles.field_row_label}>District</div>
@@ -167,7 +232,7 @@ const MultForm1 = (props) => {
                 </SimpleGrid>
                 <SimpleGrid
                   columns={3}
-                  spacing={1}
+                  spacing={2}
                   style={{ alignItems: "center" }}
                 >
                   <div className={styles.field_row_label}>
@@ -184,7 +249,7 @@ const MultForm1 = (props) => {
                 </SimpleGrid>
                 <SimpleGrid
                   columns={3}
-                  spacing={1}
+                  spacing={2}
                   style={{ alignItems: "center" }}
                 >
                   <div className={styles.field_row_label}>Parish</div>
@@ -196,7 +261,7 @@ const MultForm1 = (props) => {
                 </SimpleGrid>
                 <SimpleGrid
                   columns={3}
-                  spacing={1}
+                  spacing={2}
                   style={{ alignItems: "center" }}
                 >
                   <div className={styles.field_row_label}>Village</div>
@@ -211,7 +276,7 @@ const MultForm1 = (props) => {
                 </SimpleGrid>
                 <SimpleGrid
                   columns={3}
-                  spacing={1}
+                  spacing={2}
                   style={{ alignItems: "center" }}
                 >
                   <div className={styles.field_row_label}>Parish</div>
@@ -223,7 +288,7 @@ const MultForm1 = (props) => {
                 </SimpleGrid>
                 <SimpleGrid
                   columns={3}
-                  spacing={1}
+                  spacing={2}
                   style={{ alignItems: "center" }}
                 >
                   <div className={styles.field_row_label}>Marital Status</div>
@@ -238,7 +303,7 @@ const MultForm1 = (props) => {
                 </SimpleGrid>
                 <SimpleGrid
                   columns={3}
-                  spacing={1}
+                  spacing={2}
                   style={{ alignItems: "center" }}
                 >
                   <div className={styles.field_row_label}>Accompanied By</div>
@@ -253,7 +318,7 @@ const MultForm1 = (props) => {
                 </SimpleGrid>
                 <SimpleGrid
                   columns={3}
-                  spacing={1}
+                  spacing={2}
                   style={{ alignItems: "center" }}
                 >
                   <div className={styles.field_row_label}>Job</div>
@@ -262,7 +327,7 @@ const MultForm1 = (props) => {
                 </SimpleGrid>
                 <SimpleGrid
                   columns={3}
-                  spacing={1}
+                  spacing={2}
                   style={{ alignItems: "center" }}
                 >
                   <div className={styles.field_row_label}>Place of work</div>
@@ -277,7 +342,7 @@ const MultForm1 = (props) => {
                 </SimpleGrid>
                 <SimpleGrid
                   columns={3}
-                  spacing={1}
+                  spacing={2}
                   style={{ alignItems: "center" }}
                 >
                   <div className={styles.field_row_label}>
@@ -294,7 +359,7 @@ const MultForm1 = (props) => {
                 </SimpleGrid>
                 <SimpleGrid
                   columns={3}
-                  spacing={1}
+                  spacing={2}
                   style={{ alignItems: "center" }}
                 >
                   <div className={styles.field_row_label}>
@@ -311,7 +376,7 @@ const MultForm1 = (props) => {
                 </SimpleGrid>
                 <SimpleGrid
                   columns={3}
-                  spacing={1}
+                  spacing={2}
                   style={{ alignItems: "center" }}
                 >
                   <div className={styles.field_row_label}>

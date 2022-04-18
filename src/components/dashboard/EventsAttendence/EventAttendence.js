@@ -5,14 +5,14 @@ import SectionHeader from "../../common/SectionHeader";
 import TableSearch from "../../common/table/TableSearch";
 import AttendenceTable from "./AttendenceTable/AttendenceTable";
 import NewAttendence from "./NewAttendence/NewAttendence";
-
+ 
 const EventAttendence = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure(); 
   return (
     <>
       <SectionHeader title="Events Attendence" />
       <TableSearch btnLabel="Add Attendence" btnClick={onOpen} />
-      <AttendenceTable />
+      <AttendenceTable /> 
       <Modal isOpen={isOpen} size="xl">
         <NewAttendence onClose={onClose} />
       </Modal>
