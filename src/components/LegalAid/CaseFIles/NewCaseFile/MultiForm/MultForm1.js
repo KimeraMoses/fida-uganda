@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classes from "../../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css";
 import styles from "./MultiForm.module.css";
-import { SimpleGrid } from "@chakra-ui/react";
+import { SimpleGrid, useToast } from "@chakra-ui/react";
 import InputField from "../../../../common/UI/InputField/InputField";
 import ActionButtons from "../../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons";
 import { Form, Formik } from "formik";
 import { caseFileObject, caseFileSchema } from "./schema";
 import SelectField from "./../../../../common/SelectField";
 import DropdownInputField from "../../../../common/UI/DropdownInputField/DropdownInputField";
+import { toastError } from "../../../../../lib/toastDetails";
 
 const ClientsData = [
   {
@@ -33,18 +34,20 @@ const ClientsData = [
   },
 ];
 
-const MultForm1 = (props) => {
-  const {
-    caseFile,
-    page,
-    isClvCaseFile,
-    isNew,
-    onAddCaseFile,
-    isAddingCaseFile,
-    // isErrorAddingCaseFile,
-    // errorAddingCaseFile,
-    handleEditForward,
-  } = props;
+const MultForm1 = ({
+  caseFile,
+  page,
+  isClvCaseFile,
+  isNew,
+  onAddCaseFile,
+  isAddingCaseFile,
+  isErrorAddingCaseFile,
+  errorAddingCaseFile,
+  isErrorUpdatingCaseFile,
+  errorUpdatingCaseFile,
+  handleEditForward,
+}) => {
+  const toast = useToast();
   const initialValues = caseFileObject(caseFile);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -74,6 +77,21 @@ const MultForm1 = (props) => {
     setSearchTerm("");
     setShow(true);
   };
+
+  useEffect(() => {
+    if (isErrorAddingCaseFile) {
+      toast(toastError(errorAddingCaseFile));
+    }
+    if (isErrorUpdatingCaseFile) {
+      toast(toastError(errorUpdatingCaseFile));
+    }
+  }, [
+    isErrorAddingCaseFile,
+    isErrorUpdatingCaseFile,
+    toast,
+    errorAddingCaseFile,
+    errorUpdatingCaseFile,
+  ]);
 
   return (
     <Formik
@@ -108,7 +126,6 @@ const MultForm1 = (props) => {
                   </SimpleGrid>
                 </div>
               )}
-
               <div className={classes.field_wrapper}>
                 <div className={classes.field_label}>1. Personal Address</div>
                 <div className={classes.field_wrapper}>
@@ -401,13 +418,14 @@ const MultForm1 = (props) => {
               {isNew ? (
                 <ActionButtons
                   page={page}
-                  onForward={handleEditForward}
+                  onForward={onAddCaseFile}
                   values={values}
+                  type="submit"
                 />
               ) : (
                 <ActionButtons
                   page={page}
-                  onForward={onAddCaseFile}
+                  onForward={handleEditForward}
                   isForwardLoading={isAddingCaseFile}
                   values={values}
                 />
