@@ -1,6 +1,9 @@
 import { BASE_URL } from "./constants";
 
 export const routes = {
+  approvals: {
+    getAllApprovals: `${BASE_URL}/approvals/getAll`,
+  },
   users: {
     login: `${BASE_URL}/users/login`,
     signUp: `${BASE_URL}/users/signup`,
