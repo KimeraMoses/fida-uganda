@@ -12,13 +12,20 @@ import {
 import { useState } from "react";
 import MultiUpload from "../../common/MultiUpload";
 import { useProjectOptions } from "../../../hooks/useProjects";
-import { employeesInitialValues } from "./schema";
+import { createEmployeeObject } from "./schema";
 import { toastError } from "../../../lib/toastDetails";
 
-const AccountSettingsForm = ({ onSubmit, isSubmitting, isError, error }) => {
+const AccountSettingsForm = ({
+  initialValues,
+  onSubmit,
+  isSubmitting,
+  isError,
+  error,
+}) => {
   const toast = useToast();
   const [files, setFiles] = useState([]);
   const projectOptions = useProjectOptions();
+  const employeeObject = createEmployeeObject(initialValues);
 
   useEffect(() => {
     if (isError) {
@@ -28,7 +35,7 @@ const AccountSettingsForm = ({ onSubmit, isSubmitting, isError, error }) => {
 
   return (
     <Formik
-      initialValues={employeesInitialValues}
+      initialValues={employeeObject}
       onSubmit={(values) => {
         onSubmit(values);
       }}

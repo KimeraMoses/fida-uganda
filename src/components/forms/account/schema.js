@@ -17,3 +17,7 @@ export const employeesInitialValues = {
   other_languages: [],
   preferred_language: "",
 };
+
+export const createEmployeeObject = (values) => {
+  return { ...employeesInitialValues, ...values };
+};
