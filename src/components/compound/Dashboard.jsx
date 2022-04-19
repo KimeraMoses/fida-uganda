@@ -9,6 +9,7 @@ import { useCasesStats } from "../../hooks/useCaseFiles";
 import { useComplaintsStats } from "../../hooks/useComplaint";
 import SubHeading from "../common/SubHeading";
 import Charts from "../dashboard/DashboardCharts/Charts";
+import { useGetTaskStats } from "../../hooks/useTasks";
 
 const Dashboard = () => {
   const { data: requisition } = useRequisitionsStats();
@@ -16,6 +17,7 @@ const Dashboard = () => {
   const { data: casesStats } = useCasesStats();
   const { data: clientStats } = useClientStats();
   const { data: complaintsStats } = useComplaintsStats();
+  const { data: taskStats } = useGetTaskStats();
 
   const requisitionNumber = requisition?.numApprovedRequisitions || 0;
   const requisitionPending = requisition?.numPendingRequisitions || 0;
@@ -61,7 +63,13 @@ const Dashboard = () => {
         <Card title="Complaints" stat={complaints} icon={MdSettings} />
         <Card title="Legal Officers" stat={5} icon={MdSettings} />
       </Cards>
-      <Charts casesConcluded={cases} casesOnGoing={casesStats?.my_cases} />
+      <Charts
+        casesConcluded={cases}
+        casesOnGoing={casesStats?.my_cases}
+        todoTasks={taskStats?.todo_tasks}
+        completedTasks={taskStats?.completed_tasks}
+        pendingTasks={taskStats?.pending_tasks}
+      />
     </>
   );
 };

@@ -3,13 +3,16 @@ import React from "react";
 import ReactApexChart from "react-apexcharts";
 import classes from "./Charts.module.css";
 import { BiUserPlus } from "react-icons/bi";
-import { useGetTaskStats } from "../../../hooks/useTasks";
 
-const Charts = ({ casesOnGoing, casesConcluded }) => {
-  const { data } = useGetTaskStats();
-
+const Charts = ({
+  casesOnGoing,
+  casesConcluded,
+  todoTasks,
+  completedTasks,
+  pendingTasks,
+}) => {
   const pieChartValues = {
-    series: [34, 33, 33],
+    series: [todoTasks, completedTasks, pendingTasks],
     options: {
       chart: {
         width: 320,
