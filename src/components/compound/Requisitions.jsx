@@ -36,14 +36,16 @@ const Requisitions = () => {
   return (
     <>
       <SectionHeader title="Requisitions" />
-      <Table
-        data={data?.requisitions}
-        columns={requisitionColumns}
-        onRowClick={onRowClick}
-        isLoading={isLoading}
-        btnLabel="Add Requisition"
-        btnClick={onOpen}
-      />
+      {data?.Requisitions && (
+        <Table
+          data={data?.Requisitions}
+          columns={requisitionColumns}
+          onRowClick={onRowClick}
+          isLoading={isLoading}
+          btnLabel="Add Requisition"
+          btnClick={onOpen}
+        />
+      )}
       <Modal isOpen={isOpen} onClose={onClose} title="Requisition">
         <RequisitionForm
           onSubmit={mutate}
