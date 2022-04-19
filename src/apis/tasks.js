@@ -30,3 +30,7 @@ export const getTaskComments = async (taskId) => {
     `${routes.tasks.base}/${taskId}${routes.tasks.getTaskComments}`
   );
 };
+
+export const addTaskComment = async (values) => {
+  return await axiosClient.post(routes.comments.addComment, values);
+};

@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { COMMENTS_KEY, TASKS_KEY } from "../lib/constants";
 import {
   addTask,
+  addTaskComment,
   deleteTask,
   editTask,
   getAllTasks,
@@ -9,6 +10,7 @@ import {
   getTaskComments,
 } from "../apis/tasks";
 import produce from "immer";
+import { useSelector } from "react-redux";
 
 export const useTasks = () => {
   return useQuery(TASKS_KEY, getAllTasks);
@@ -92,6 +94,29 @@ export const useDeleteTask = () => {
     },
     onSettled: () => {
       queryClient.invalidateQueries(TASKS_KEY);
+    },
+  });
+};
+
+export const useAddTaskComment = () => {
+  const queryClient = useQueryClient();
+  const { user } = useSelector((state) => state.auth);
+  return useMutation(addTaskComment, {
+    onSuccess: (data) => {
+      const key = [TASKS_KEY, data.comment.task, COMMENTS_KEY];
+      const previousTasks = queryClient.getQueryData(key);
+      if (previousTasks) {
+        queryClient.setQueryData(key, () => {
+          return produce(previousTasks, (draft) => {
+            data.comment.createdBy = { ...user };
+            draft.comments.push(data?.comment);
+          });
+        });
+      } else {
+        queryClient.setQueryData(key, () => {
+          return { comments: [data?.comment] };
+        });
+      }
     },
   });
 };

@@ -10,14 +10,9 @@ const InProgressTask = (props) => {
       spacing={4}
       className={classes.progress_tasks_wrapper}
     >
-      {props.tasks.map(({ id, tags, title, description, status }) =>
-        status === "pending" ? (
-          <TaskCard
-            key={id}
-            tags={tags}
-            cardTitle={title}
-            description={description}
-          />
+      {props.tasks.map((task) =>
+        task.status === "pending" ? (
+          <TaskCard key={task.id} task={task} />
         ) : null
       )}
     </SimpleGrid>
