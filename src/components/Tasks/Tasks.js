@@ -30,7 +30,7 @@ const Tasks = () => {
       toast(toastSuccess("Task Added Successfully"));
     }
   }, [isSuccess, toast]);
-  console.log(data);
+
   const keyWordSearchHandler = (e) => {
     const { value } = e.target;
     setSearchTerm(value);
