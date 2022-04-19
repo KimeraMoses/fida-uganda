@@ -41,8 +41,8 @@ const MultForm1 = (props) => {
     isNew,
     onAddCaseFile,
     isAddingCaseFile,
-    isErrorAddingCaseFile,
-    errorAddingCaseFile,
+    // isErrorAddingCaseFile,
+    // errorAddingCaseFile,
     handleEditForward,
   } = props;
   const initialValues = caseFileObject(caseFile);

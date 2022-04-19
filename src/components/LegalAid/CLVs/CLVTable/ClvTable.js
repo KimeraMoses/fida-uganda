@@ -16,11 +16,12 @@ import { MdEdit } from "react-icons/md";
 import Modal from "../../../common/Modal";
 import NewClvForm from "../CLVForms/NewClvForm";
 import { formatDate } from "../../../../lib/data";
+import { useProjectOptions } from "../../../../hooks/useProjects";
 
 const CLVTable = ({ data }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isEdit, setIsEdit] = useState(false);
-
+  const projects = useProjectOptions();
   const initiateApproval = () => {
     setIsEdit(false);
     onOpen();
@@ -29,7 +30,7 @@ const CLVTable = ({ data }) => {
     setIsEdit(true);
     onOpen();
   };
-  
+
   return (
     <>
       <div className={classes.allocations_table_wrapper}>
@@ -131,6 +132,7 @@ const CLVTable = ({ data }) => {
           <NewClvForm
             action={`${isEdit ? "editClv" : "approveClv"}`}
             onClose={onClose}
+            projects={projects}
           />
         </Modal>
       </div>
