@@ -8,6 +8,7 @@ import {
   getAllTasks,
   getTask,
   getTaskComments,
+  getTaskStats,
 } from "../apis/tasks";
 import produce from "immer";
 import { useSelector } from "react-redux";
@@ -28,6 +29,10 @@ export const useTaskComments = (taskId) => {
   return useQuery([TASKS_KEY, taskId, COMMENTS_KEY], () =>
     getTaskComments(taskId)
   );
+};
+
+export const useGetTaskStats = () => {
+  return useQuery("TASKS_STATS", getTaskStats);
 };
 
 export const useAddTask = () => {
