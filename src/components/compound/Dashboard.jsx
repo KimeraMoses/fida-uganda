@@ -61,7 +61,7 @@ const Dashboard = () => {
         <Card title="Complaints" stat={complaints} icon={MdSettings} />
         <Card title="Legal Officers" stat={5} icon={MdSettings} />
       </Cards>
-      <Charts />
+      <Charts casesConcluded={cases} casesOnGoing={casesStats?.my_cases} />
     </>
   );
 };

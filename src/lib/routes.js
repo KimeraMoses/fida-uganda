@@ -18,6 +18,7 @@ export const routes = {
     getUserTasks: `${BASE_URL}/tasks/getUserTasks`,
     editTask: `${BASE_URL}/tasks/edit`,
     getTaskComments: `/comments/getAll`,
+    getTaskStats: `${BASE_URL}/tasks/getTaskStats`,
   },
   clvs: {
     base: `${BASE_URL}/clvs`,

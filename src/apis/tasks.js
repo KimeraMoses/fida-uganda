@@ -34,3 +34,7 @@ export const getTaskComments = async (taskId) => {
 export const addTaskComment = async (values) => {
   return await axiosClient.post(routes.comments.addComment, values);
 };
+
+export const getTaskStats = async () => {
+  return await axiosClient.get(routes.tasks.getTaskStats);
+};
