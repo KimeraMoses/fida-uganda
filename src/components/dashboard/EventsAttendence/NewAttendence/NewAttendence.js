@@ -3,21 +3,35 @@ import {
   InputGroup,
   InputLeftAddon,
   SimpleGrid,
+  useToast,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import classes from "./NewAttendence.module.css";
 import InputField from "../../../common/UI/InputField/InputField";
 import { Form, Formik } from "formik";
 import FormButton from "../../../common/UI/FormButton/FormButton";
+import { attendanceInitialValues, attendanceSchema } from "./schema";
+import { useProjectOptions } from "../../../../hooks/useProjects";
+import SelectField from "../../../common/SelectField";
+import { toastError } from "../../../../lib/toastDetails";
 
-const NewAttendence = (props) => {
-  const { onClose } = props;
+const NewAttendence = ({ onClose, onSubmit, isSubmitting, error, isError }) => {
+  const projectOptions = useProjectOptions();
+  const toast = useToast();
+
+  useEffect(() => {
+    if (isError) {
+      toast(toastError(error));
+    }
+  }, [isError, error, toast]);
+
   return (
     <Formik
-      // initialValues={initialValues}
-      // validationSchema={attendenceSchema}
-      onSubmit={() => {
-        console.log("Some thing");
+      initialValues={attendanceInitialValues}
+      validationSchema={attendanceSchema}
+      onSubmit={(values) => {
+        // alert(JSON.stringify(values, null, 2));
+        onSubmit(values)
       }}
     >
       {({ values }) => {
@@ -29,7 +43,12 @@ const NewAttendence = (props) => {
               className={classes.input_field_wrapperr}
             >
               <div className={classes.field_row_label}>Project Name</div>
-              <InputField placeholder="Type Here" name="name" fullwidth />
+              <SelectField
+                placeholder="Select Project"
+                name="project_name"
+                fullwidth
+                options={projectOptions}
+              />
             </SimpleGrid>
             <SimpleGrid
               columns={2}
@@ -75,15 +94,15 @@ const NewAttendence = (props) => {
               </div>
               <div>
                 <div className={classes.field_row_label}>
-                  No. of Female Participants
+                  No. of Male Participants
                 </div>
-                <InputField placeholder="Type Here" name="Pfemale" />
+                <InputField placeholder="Type Here" name="maleCount" />
               </div>
               <div>
                 <div className={classes.field_row_label}>
                   No. of Female Participants
                 </div>
-                <InputField placeholder="Type Here" name="Pfemale" />
+                <InputField placeholder="Type Here" name="femaleCount" />
               </div>
             </SimpleGrid>
             <div className={classes.field_row_label}>Summary of age groups</div>
@@ -151,7 +170,13 @@ const NewAttendence = (props) => {
               <FormButton variant="cancel" onClick={onClose} type="button">
                 Cancel
               </FormButton>
-              <FormButton variant="save">Save and Exit</FormButton>
+              <FormButton
+                variant="save"
+                type="submit"
+                isSubmitting={isSubmitting}
+              >
+                Save and Exit
+              </FormButton>
             </div>
           </Form>
         );
