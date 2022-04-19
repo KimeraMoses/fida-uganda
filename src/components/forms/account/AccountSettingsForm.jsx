@@ -1,5 +1,6 @@
+import { useEffect } from "react";
 import { Form, Formik } from "formik";
-import { SimpleGrid, Heading, Flex } from "@chakra-ui/react";
+import { SimpleGrid, Heading, Flex, useToast } from "@chakra-ui/react";
 import TextField from "../../common/TextField";
 import NumberField from "../../common/NumberField";
 import SelectField from "../../common/SelectField";
@@ -11,16 +12,34 @@ import {
 import { useState } from "react";
 import MultiUpload from "../../common/MultiUpload";
 import { useProjectOptions } from "../../../hooks/useProjects";
+import { employeesInitialValues } from "./schema";
+import { toastError } from "../../../lib/toastDetails";
 
-const AccountSettingsForm = () => {
+const AccountSettingsForm = ({ onSubmit, isSubmitting, isError, error }) => {
+  const toast = useToast();
   const [files, setFiles] = useState([]);
   const projectOptions = useProjectOptions();
 
+  useEffect(() => {
+    if (isError) {
+      toast(toastError(error));
+    }
+  }, [isError, error, toast]);
+
   return (
-    <Formik>
+    <Formik
+      initialValues={employeesInitialValues}
+      onSubmit={(values) => {
+        onSubmit(values);
+      }}
+    >
       <Flex flexDir="column" bgColor="white" p={20} borderRadius={10}>
         <SimpleGrid as={Form} gap={5}>
-          <TextField name="name" placeholder="Name" />
+          <SimpleGrid columns={3} gap={5}>
+            <TextField name="first_name" placeholder="First Name" />
+            <TextField name="last_name" placeholder="Last Name" />
+            <TextField name="maiden_name" placeholder="Last Name" />
+          </SimpleGrid>
           <SimpleGrid columns={3} gap={5}>
             <TextField name="dateOfBirth" type="date" />
             <SelectField
@@ -60,19 +79,19 @@ const AccountSettingsForm = () => {
           </SimpleGrid>
           <SimpleGrid columns={2} gap={5}>
             <TextField name="bank" placeholder="Banking Institution" />
-            <NumberField name="accountNumber" placeholder="Account Number" />
+            <NumberField name="account_number" placeholder="Account Number" />
           </SimpleGrid>
           <SimpleGrid columns={2} gap={5}>
             <NumberField
-              name="tin"
+              name="tinNumber"
               placeholder="Tax Identification Number (TIN)"
             />
-            <NumberField name="nssf" placeholder="NSSF" />
+            <NumberField name="NSSF__number" placeholder="NSSF" />
           </SimpleGrid>
           <SimpleGrid columns={2} gap={5}>
-            <TextField name="nextOfKin" placeholder="Next of Kin" />
+            <TextField name="next_of_kin_name" placeholder="Next of Kin" />
             <NumberField
-              name="nextOfKinPhoneNumber"
+              name="next_of_kin_number"
               placeholder="Next of Kin Phone Number"
             />
           </SimpleGrid>
