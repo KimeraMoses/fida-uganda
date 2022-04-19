@@ -1,0 +1,58 @@
+.attendence_form_wrapper {
+  padding: 10px 20px;
+}
+
+.input_field_wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.field_row_label {
+  font-weight: 600;
+  color: #000000;
+  white-space: nowrap;
+  margin-right: 10px;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+.input_field_wrapperr {
+  align-items: center;
+}
+
+.input_field {
+  user-select: none;
+  align-items: center;
+}
+.input_field:focus {
+  border-color: #3182ce !important;
+  box-shadow: none;
+}
+.attendence_upload_wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.file_upload_label {
+  margin-right: 8px;
+  background: linear-gradient(102.46deg, #b28dda 7.45%, #562b85 98.81%);
+  color: #ffffff;
+  width: auto;
+  padding: 8px;
+  border-radius: 12px;
+  text-transform: capitalize;
+}
+
+.file_upload_area {
+  border: 1px solid #000000;
+  border-radius: 12px;
+  width: 70%;
+  text-align: center;
+}
+
+.form_actions_wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0 10px;
+}

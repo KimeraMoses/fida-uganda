@@ -15,7 +15,7 @@ const SelectField = ({ label, name, options, ...rest }) => {
       <FormLabel fontSize="lg" fontWeight="bold">
         {label}
       </FormLabel>
-      <Field as={Select} {...field} {...rest} size="lg">
+      <Field as={Select} {...field} {...rest}>
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}

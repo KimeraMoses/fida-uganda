@@ -10,6 +10,7 @@
 .task_department_wrapper {
   display: flex;
   padding: 5px 0;
+  flex-wrap: wrap;
 }
 
 .depart_btn_wrapper {

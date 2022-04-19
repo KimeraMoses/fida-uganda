@@ -15,6 +15,7 @@ const ClvCaseFiles = () => {
     <>
       <SectionHeader title="CLVs Case Files" />
       <TableSearch btnLabel="CLV Case File" btnClick={onOpen} />
+
       {data && <CaseFilesTable data={data.clv_cases} />}
       <Modal
         size="4xl"

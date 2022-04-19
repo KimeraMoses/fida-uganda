@@ -1,0 +1,19 @@
+.new_folder_wrapper {
+  padding: 10px;
+  text-align: center;
+  color: var(--primary_color);
+}
+.new_folder,
+.upload_report {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  user-select: none;
+  cursor: pointer;
+}
+.new_folder_wrapper svg {
+  margin-right: 10px;
+}
+.new_folder_wrapper h4 {
+  font-weight: 700;
+}

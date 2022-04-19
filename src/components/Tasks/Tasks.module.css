@@ -1,0 +1,14 @@
+.tasks_search_wrapper {
+  width: 50%;
+  margin-bottom: 10px;
+}
+.search_input_field {
+  background-color: #f5dbff !important;
+  border-radius: 12px;
+  user-select: none;
+  align-items: center;
+}
+.search_input_field:focus {
+  border-color: var(--primary_color) !important;
+  box-shadow: none;
+}

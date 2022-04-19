@@ -4,7 +4,7 @@ import { FolderIcon, PdfIcon, RetryIcon } from "../../../../assets/Icons/Icons";
 import FormButton from "../../../common/UI/FormButton/FormButton";
 import classes from "./NewContract.module.css";
 
-const RecentUploadCard = props => {
+const RecentUploadCard = (props) => {
   const { name, time, size, error, isFolder } = props;
   return (
     <div className={classes.recent_upload_card_wrapper}>
@@ -14,7 +14,7 @@ const RecentUploadCard = props => {
             {isFolder ? <FolderIcon /> : <PdfIcon />}
             <h6>{name}</h6>
           </div>
-          <div className={classes.time_uploaded}>"{time} ago</div>
+          <div className={classes.time_uploaded}>{time} ago</div>
         </div>
       </div>
       <div className={classes.card_content_right}>

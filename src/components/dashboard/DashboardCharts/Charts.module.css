@@ -1,0 +1,72 @@
+.charts_wrapper {
+  margin: 20px 0;
+}
+.card_wrapper {
+  padding: 10px;
+  background: linear-gradient(100.32deg, #fcf5ff -6.29%, #f5e4ff 88.21%);
+  border: 1px solid rgba(86, 43, 133, 0.1);
+  box-sizing: border-box;
+  box-shadow: 9px 8px 24px rgba(103, 80, 164, 0.2);
+  border-radius: 16px;
+}
+
+.card_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #8b4fcc;
+  font-weight: 700;
+}
+.card_header h4 {
+  font-size: 16px;
+}
+.card_body {
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+}
+.card_footer {
+  float: right;
+}
+.card_footer ul {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card_footer ul li {
+  color: var(--primary_color);
+  font-size: 12px;
+  font-weight: 600;
+  position: relative;
+  margin: 2px 5px;
+}
+.card_footer ul li::before {
+  content: "";
+  height: 12px;
+  width: 12px;
+  left: 0px;
+  top: 0px;
+  border-width: 0px;
+  border-color: rgb(255, 255, 255);
+  border-radius: 12px;
+  display: inline-block;
+  margin-right: 2px;
+}
+.card_footer ul .primary::before {
+  background-color: #ffb200;
+  color: #ffb200;
+}
+.card_footer ul .secondary::before {
+  background-color: #b28dda;
+  color: #b28dda;
+}
+.card_footer ul .tartiary::before {
+  background-color: #377dff;
+  color: #377dff;
+}
+.card_footer ul .white::before {
+  background: #ffffff !important;
+  color: #ffffff;
+}

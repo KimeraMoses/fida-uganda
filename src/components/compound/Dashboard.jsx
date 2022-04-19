@@ -8,6 +8,7 @@ import { useClientStats } from "../../hooks/useClients";
 import { useCasesStats } from "../../hooks/useCaseFiles";
 import { useComplaintsStats } from "../../hooks/useComplaint";
 import SubHeading from "../common/SubHeading";
+import Charts from "../dashboard/DashboardCharts/Charts";
 
 const Dashboard = () => {
   const { data: requisition } = useRequisitionsStats();
@@ -60,6 +61,7 @@ const Dashboard = () => {
         <Card title="Complaints" stat={complaints} icon={MdSettings} />
         <Card title="Legal Officers" stat={5} icon={MdSettings} />
       </Cards>
+      <Charts />
     </>
   );
 };
