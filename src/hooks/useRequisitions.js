@@ -24,12 +24,12 @@ export const useAddRequisition = () => {
       if (previousProjects) {
         queryClient.setQueryData(REQUISITIONS_KEY, () => {
           return produce(previousProjects, (draft) => {
-            draft.requisitions.push(data?.requisition);
+            draft.Requisitions.push(data?.requisition);
           });
         });
       } else {
         queryClient.setQueryData(REQUISITIONS_KEY, () => {
-          return { requisitions: [data?.requisition] };
+          return { Requisitions: [data?.requisition] };
         });
       }
     },

@@ -1,9 +1,11 @@
-import React from "react";
-import { Avatar, AvatarGroup, useDisclosure } from "@chakra-ui/react";
+import React, { useEffect } from "react";
+import { Avatar, AvatarGroup, useDisclosure, useToast } from "@chakra-ui/react";
 import classes from "./TaskCard.module.css";
 import { RiMessage2Line, RiAttachment2 } from "react-icons/ri";
 import Modal from "../../common/Modal";
 import TaskSummary from "../TaskSummary/TaskSummary";
+import { useAddTaskComment } from "../../../hooks/useTasks";
+import { toastSuccess } from "../../../lib/toastDetails";
 
 export const DepartmentButton = ({
   title,
@@ -29,9 +31,18 @@ export const DepartmentButton = ({
   );
 };
 
-const TaskCard = (props) => {
-  const { cardTitle, description, valueCount, attachments, tags } = props;
+const TaskCard = ({ task, btnLabel, onChangeStatus }) => {
+  const { cardTitle, description, valueCount, attachments, tags } = task;
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const toast = useToast();
+  const { mutate, isLoading, isSuccess, isError, error } = useAddTaskComment();
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast(toastSuccess("Comment Added Successfully"));
+    }
+  }, [isSuccess, toast]);
+
   return (
     <div className={classes.task_card_wrapper} onClick={onOpen}>
       <div className={classes.task_card_wrapper_inner}>
@@ -73,8 +84,16 @@ const TaskCard = (props) => {
           </div>
         </div>
       </div>
-      <Modal isOpen={isOpen} onClose={onClose} size="sm">
-        <TaskSummary />
+      <Modal isOpen={isOpen} onClose={onClose} size="md">
+        <TaskSummary
+          task={task}
+          onSubmit={mutate}
+          isSubmitting={isLoading}
+          isError={isError}
+          error={error}
+          btnLabel={btnLabel}
+          onChangeStatus={onChangeStatus}
+        />
       </Modal>
     </div>
   );

@@ -1,45 +1,80 @@
-import React from "react";
-import { Avatar, AvatarGroup, Input } from "@chakra-ui/react";
-import { RiMessage2Line, RiAttachment2 } from "react-icons/ri";
+import React, { useEffect } from "react";
+import {
+  Avatar,
+  AvatarGroup,
+  Flex,
+  Center,
+  Spinner,
+  useToast,
+  Button,
+} from "@chakra-ui/react";
+import { RiMessage2Line } from "react-icons/ri";
 import { AttachmentIcon } from "../../../assets/Icons/Icons";
 import { DepartmentButton } from "../TaskCard/TaskCard";
 import classes from "./TaskSummary.module.css";
 import styles from "../NewTask/NewTaskForm.module.css";
-import placeholderImage from "../../../assets/images/placeholder.png";
 import FormButton from "../../common/UI/FormButton/FormButton";
-
-const outlines = ["The first outline", "The second one as well"];
+import { useTaskComments } from "../../../hooks/useTasks";
+import { Form, Formik } from "formik";
+import TextField from "../../common/TextField";
+import { toastError } from "../../../lib/toastDetails";
 
 const CommentCard = (props) => {
-  const { name, image, comment, proffession } = props;
+  const { createdBy, body } = props;
   return (
     <div className={classes.comment_card_wrapper}>
       <div className={classes.card_header}>
-        <Avatar size="sm" name={name} src={image} />
+        <Avatar size="sm" name={createdBy?.full_name} src={createdBy?.image} />
         <div className={classes.comment_title}>
-          <h3>{name}</h3>
-          <h6>{proffession}</h6>
+          <h3>{createdBy?.full_name}</h3>
         </div>
       </div>
-      <p>{comment}</p>
+      <p>{body}</p>
     </div>
   );
 };
 
-const TaskSummary = () => {
+const TaskSummary = ({
+  task,
+  onSubmit,
+  isSubmitting,
+  isError,
+  error,
+  btnLabel,
+  onChangeStatus,
+}) => {
+  const { data, isLoading } = useTaskComments(task.id);
+  const { title, description, outline, tags } = task;
+  const toast = useToast();
+
+  useEffect(() => {
+    if (isError) {
+      toast(toastError(error));
+    }
+  }, [isError, error, toast]);
+
   return (
     <div className={classes.task__summary_wrapper}>
       <div className={classes.task_tags_wrapper}>
-        <DepartmentButton title="Legal Aid" btnColor="primary" />
-        <DepartmentButton title="Court Processor" btnColor="secondary" />
-        <DepartmentButton title="Court cases" btnColor="tartiary" />
+        <Flex>
+          {tags && (
+            <>
+              {tags[0] && (
+                <DepartmentButton title={tags[0]} btnColor="primary" />
+              )}
+              {tags[1] && (
+                <DepartmentButton title={tags[1]} btnColor="secondary" />
+              )}
+              {tags[2] && (
+                <DepartmentButton title={tags[2]} btnColor="tertiary" />
+              )}
+            </>
+          )}
+        </Flex>
       </div>
       <div className={classes.task_content_wrapper}>
-        <h3>First Quarter Reports</h3>
-        <p>
-          The DFG Nakaseke first quater report is two weeks over due and the
-          evaluators are coming in two weeks
-        </p>
+        <h3>{title}</h3>
+        <p>{description}</p>
       </div>
       <div className={styles.asset_tags_team_wrapper}>
         <h6>
@@ -56,18 +91,18 @@ const TaskSummary = () => {
       </div>
       <div className={styles.asset_outline_wrapper}>
         <h6>
-          <AttachmentIcon /> Outlines({outlines.length})
+          <AttachmentIcon /> Outlines({outline.length})
         </h6>
         <div
           className={`${styles.outline_list} ${classes.outline_list_preview}`}
         >
           <ul>
-            {outlines.map((outline) => {
+            {outline.map((outline) => {
               return <li key={outline}>{outline}</li>;
             })}
           </ul>
         </div>
-        <div className={styles.asset_outline_wrapper}>
+        {/* <div className={styles.asset_outline_wrapper}>
           <h6>
             <RiAttachment2 /> Attachment
           </h6>
@@ -75,46 +110,68 @@ const TaskSummary = () => {
             <img src={placeholderImage} alt="" />
             <img src={placeholderImage} alt="" />
           </div>
-        </div>
+        </div> */}
 
         <div className={styles.asset_outline_wrapper}>
           <h6>
-            <RiMessage2Line /> Comments (2)
+            <RiMessage2Line /> Comments (
+            {data?.comments && data?.comments.length})
           </h6>
           <div className={classes.comments_wrapper}>
-            <CommentCard
-              image="https://bit.ly/ryan-florence"
-              name="Kimera Moses"
-              proffession="Lawyer"
-              comment="Great work Christine, please keep it up in the future, always."
-            />
-            <CommentCard
-              image="https://bit.ly/ryan-florence"
-              name="Missage Clive"
-              proffession="UI/UX designer"
-              comment="Great work Christine, please keep it up in the future, always."
-            />
+            {isLoading && (
+              <Center>
+                <Spinner />
+              </Center>
+            )}
+            {data?.comments &&
+              data?.comments.map((comment) => (
+                <CommentCard key={comment.id} {...comment} />
+              ))}
           </div>
         </div>
-        <div className={styles.asset_outline_wrapper}>
-          <h6>
-            <RiMessage2Line /> Add Comment
-          </h6>
-          <div className={classes.new_comments_wrapper}>
-            <Input
-              variant="outline"
-              placeholder="Type your comment here"
-              name="comment"
-              type="text"
-            />
-          </div>
-        </div>
-        <div style={{ float: "right", padding: "20px 0" }}>
-          <FormButton variant="colored" rounded={true} type="submit">
-            Complete Task
-          </FormButton>
-        </div>
+        <Formik
+          initialValues={{ body: "", task: task.id }}
+          onSubmit={(values, { resetForm }) => {
+            // alert(JSON.stringify(values, null, 2));
+            onSubmit(values);
+            resetForm();
+          }}
+        >
+          <Form>
+            <div className={styles.asset_outline_wrapper}>
+              <h6>
+                <RiMessage2Line /> Add Comment
+              </h6>
+              <div className={classes.new_comments_wrapper}>
+                <TextField
+                  variant="outline"
+                  placeholder="Type your comment here"
+                  name="body"
+                  type="text"
+                />
+              </div>
+            </div>
+            <FormButton
+              variant="colored"
+              rounded={true}
+              type="submit"
+              isSubmitting={isSubmitting}
+            >
+              Add Comment
+            </FormButton>
+          </Form>
+        </Formik>
       </div>
+      {btnLabel && (
+        <Button
+          isFullWidth
+          my={5}
+          colorScheme="purple"
+          onClick={() => onChangeStatus(task.id)}
+        >
+          {btnLabel}
+        </Button>
+      )}
     </div>
   );
 };
