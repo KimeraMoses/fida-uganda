@@ -31,7 +31,7 @@ export const DepartmentButton = ({
   );
 };
 
-const TaskCard = ({ task }) => {
+const TaskCard = ({ task, btnLabel, onChangeStatus }) => {
   const { cardTitle, description, valueCount, attachments, tags } = task;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
@@ -91,8 +91,8 @@ const TaskCard = ({ task }) => {
           isSubmitting={isLoading}
           isError={isError}
           error={error}
-          btnLabel="Mark Task as Done"
-          onChangeStatus={() => {}}
+          btnLabel={btnLabel}
+          onChangeStatus={onChangeStatus}
         />
       </Modal>
     </div>

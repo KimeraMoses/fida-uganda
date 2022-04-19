@@ -131,7 +131,7 @@ const TaskSummary = ({
         </div>
         <Formik
           initialValues={{ body: "", task: task.id }}
-          onSubmit={(values, {resetForm}) => {
+          onSubmit={(values, { resetForm }) => {
             // alert(JSON.stringify(values, null, 2));
             onSubmit(values);
             resetForm();
@@ -162,9 +162,16 @@ const TaskSummary = ({
           </Form>
         </Formik>
       </div>
-      <Button isFullWidth my={5} colorScheme="purple" onClick={() => onChangeStatus(task.id)}>
-        {btnLabel}
-      </Button>
+      {btnLabel && (
+        <Button
+          isFullWidth
+          my={5}
+          colorScheme="purple"
+          onClick={() => onChangeStatus(task.id)}
+        >
+          {btnLabel}
+        </Button>
+      )}
     </div>
   );
 };
