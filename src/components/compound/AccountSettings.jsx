@@ -1,64 +1,34 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import SectionHeader from "../common/SectionHeader";
 import AccountSettingsForm from "../forms/account/AccountSettingsForm";
-import {
-  useAddEmployee,
-  useEmployee,
-  useEditEmployee,
-} from "../../hooks/useEmployee";
-import { Center, Spinner, useToast } from "@chakra-ui/react";
+import { useToast } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
+import { useUpdateProfile } from "../../hooks/useUser";
 import { toastSuccess } from "../../lib/toastDetails";
+import { useNavigate } from "react-router-dom";
 
 const AccountSettings = () => {
-  const { data, isLoading } = useEmployee();
-  const {
-    mutate: onAddEmployee,
-    isLoading: isSubmitting,
-    isSuccess,
-    isError,
-    error,
-  } = useAddEmployee();
-  const {
-    mutate: onEditEmployee,
-    isLoading: isUpdating,
-    isSuccess: isUpdated,
-    isError: isUpdateError,
-    error: updateError,
-  } = useEditEmployee();
-
+  const { user } = useSelector((state) => state.auth);
+  const { mutate, isLoading, isSuccess, isError, error } = useUpdateProfile();
   const toast = useToast();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isSuccess) {
-      toast(toastSuccess("Successfully updated account"));
+      toast(toastSuccess("Profile updated successfully"));
+      navigate("/");
     }
-    if (isUpdated) {
-      toast(toastSuccess("Successfully updated account"));
-    }
-  }, [isSuccess, toast, isUpdated]);
-
-  if (isLoading) {
-    return (
-      <>
-        <SectionHeader title="Account Settings" />
-        {isLoading && (
-          <Center>
-            <Spinner />
-          </Center>
-        )}
-      </>
-    );
-  }
+  }, [isSuccess, toast, navigate]);
 
   return (
     <>
       <SectionHeader title="Account Settings" />
       <AccountSettingsForm
-        initialValues={data && data.employee}
-        onSubmit={data ? onAddEmployee : onEditEmployee}
-        isSubmitting={data ? isSubmitting : isUpdating}
-        isError={data ? isError : isUpdateError}
-        error={data ? error : updateError}
+        initialValues={user}
+        onSubmit={mutate}
+        isSubmitting={isLoading}
+        isError={isError}
+        error={error}
       />
     </>
   );
