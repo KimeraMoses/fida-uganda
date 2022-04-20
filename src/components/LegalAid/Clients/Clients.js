@@ -1,15 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import TableSearch from "../../common/table/TableSearch";
 import SectionHeader from "../../common/SectionHeader";
 import ClientsTable from "./ClientsTable/ClientsTable";
-import { useClients } from "../../../hooks/useClients";
-import { useDisclosure } from "@chakra-ui/react";
+import { useAddClient, useClients } from "../../../hooks/useClients";
+import { useDisclosure, useToast } from "@chakra-ui/react";
 import Modal from "../../common/Modal";
 import NewClientForm from "./NewClientForm/NewClientForm";
+import { toastError, toastSuccess } from "../../../lib/toastDetails";
 
 const Clients = () => {
   const { data } = useClients();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { mutate, isLoading, isSuccess, isError, error } = useAddClient();
+  const toast = useToast();
+
+  useEffect(() => {
+    if (isError) {
+      toast(toastError(error));
+    }
+    if (isSuccess) {
+      toast(toastSuccess("Client added successfully"));
+      onClose();
+    }
+  }, [isSuccess, onClose, toast, isError, error]);
 
   return (
     <>
@@ -22,7 +35,7 @@ const Clients = () => {
         size="2xl"
         title="Client Registration Form"
       >
-        <NewClientForm />
+        <NewClientForm onSubmit={mutate} isSubmitting={isLoading} />
       </Modal>
     </>
   );
