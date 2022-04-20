@@ -192,4 +192,10 @@ export const routes = {
     editEmployee: `${BASE_URL}/employees/edit/`,
     getAllEmployees: `${BASE_URL}/employees/getAll`,
   },
+  advances: {
+    addAdvance: `${BASE_URL}/advances/create`,
+    base: `${BASE_URL}/advances/`,
+    editAdvance: `${BASE_URL}/advances/edit/`,
+    getAllAdvances: `${BASE_URL}/advances/getAll`,
+  }
 };
