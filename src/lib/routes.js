@@ -13,6 +13,7 @@ export const routes = {
     deactivatedUsers: `${BASE_URL}/users/getAllDeactivatedUsers`,
     activateUser: `${BASE_URL}/users/activateAccount`,
     requestPasswordLink: `${BASE_URL}/users/requestSetPassword`,
+    updateProfile: `${BASE_URL}/users/updateMe`,
   },
   tasks: {
     addTask: `${BASE_URL}/tasks/create`,

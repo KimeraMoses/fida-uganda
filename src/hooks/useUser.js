@@ -10,6 +10,7 @@ import {
   getAllDeactivatedUsers,
   activateUser,
   requestPasswordLink,
+  updateProfile,
 } from "../apis/users";
 import { USERS_KEY } from "../lib/constants";
 import { loginUser } from "../store/authReducer";
@@ -18,6 +19,16 @@ export const useLogin = () => {
   const dispatch = useDispatch();
 
   return useMutation(logIn, {
+    onSuccess: (data) => {
+      dispatch(loginUser(data));
+    },
+  });
+};
+
+export const useUpdateProfile = () => {
+  const dispatch = useDispatch();
+  
+  return useMutation(updateProfile, {
     onSuccess: (data) => {
       dispatch(loginUser(data));
     },

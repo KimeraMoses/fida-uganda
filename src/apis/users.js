@@ -35,3 +35,7 @@ export const activateUser = async (id) => {
 export const requestPasswordLink = async (id) => {
   return await axiosClient.post(routes.users.requestPasswordLink, id);
 };
+
+export const updateProfile = async (values) => {
+  return await axiosClient.patch(routes.users.updateProfile, values);
+}
