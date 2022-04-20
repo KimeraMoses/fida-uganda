@@ -12,9 +12,7 @@ const SelectField = ({ label, name, options, ...rest }) => {
 
   return (
     <FormControl isInvalid={isInvalid}>
-      <FormLabel fontSize="lg" fontWeight="bold">
-        {label}
-      </FormLabel>
+      <FormLabel fontSize="md">{label}</FormLabel>
       <Field as={Select} {...field} {...rest}>
         {options.map((option) => (
           <option key={option.value} value={option.value}>

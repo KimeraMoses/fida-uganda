@@ -1,0 +1,20 @@
+.leave_appn_form_wrapper {
+  padding: 20px;
+}
+.form_field_wrapper h4 {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.textarea_field:focus {
+  border-color: #3182ce !important;
+  box-shadow: none;
+}
+.form_field_wrapper {
+  padding: 4px 0;
+}
+.form_actions_wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
