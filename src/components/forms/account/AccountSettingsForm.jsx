@@ -44,7 +44,7 @@ const AccountSettingsForm = ({
         if (avatar) {
           formData.append("image", avatar);
         }
-        onSubmit({ ...values, image: avatar });
+        onSubmit(formData);
       }}
     >
       <Flex flexDir="column" bgColor="white" p={20} borderRadius={10}>
