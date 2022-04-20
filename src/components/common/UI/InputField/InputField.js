@@ -8,11 +8,7 @@ const InputField = ({ type, name, disabled, label, fullwidth, ...rest }) => {
   const isInvalid = meta.touched && meta.error ? true : false;
   return (
     <FormControl isInvalid={isInvalid}>
-      {label && (
-        <FormLabel fontSize="lg" fontWeight="bold">
-          {label}
-        </FormLabel>
-      )}
+      {label && <FormLabel fontSize="md">{label}</FormLabel>}
       <Field
         className={`${classes.input_field_wrapper} ${
           disabled ? classes.input_field__disabled : ""

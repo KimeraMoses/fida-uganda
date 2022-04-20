@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
+import LeaveTrackerTable from "../dashboard/LeaveTracker/LeaveTrackerTable";
 
 const LeaveTracker = () => {
-  return (
-    <div>LeaveTracker</div>
-  )
-}
+  return <LeaveTrackerTable />;
+};
 
-export default LeaveTracker
+export default LeaveTracker;
