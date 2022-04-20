@@ -1,9 +1,6 @@
 .table_container {
   overflow-x: auto;
-  background-color: #ffffff;
-  padding: 10px;
-  border-radius: 12px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .table_header th {
@@ -16,22 +13,36 @@
   border-bottom-width: 2px;
 }
 
+.table_header th:first-of-type {
+  background-color: #b28dda;
+}
+
 .table__wrapper td {
   border: 1px solid #000000;
   white-space: nowrap;
   text-align: center;
 }
-.partnal_days_column {
-  background-color: #00e0ff;
+
+.name_column_net,
+.name_column_advance,
+.name_column_bal,
+.name_column_gross {
   font-weight: 700;
+  text-align: left !important;
 }
-.table_column_approved,
-.table_column_pending_approval {
-  font-weight: 700;
+.name_column_gross {
+  background-color: #ffe55b;
 }
-.table_column_approved {
-  color: #24ff00;
+.name_column_net {
+  background-color: #c7ec8b;
 }
+.name_column_advance {
+  background-color: #a7ccff;
+}
+.name_column_bal {
+  background-color: #38cb89;
+}
+
 .table_column_pending_approval {
   color: #ff3838;
 }
