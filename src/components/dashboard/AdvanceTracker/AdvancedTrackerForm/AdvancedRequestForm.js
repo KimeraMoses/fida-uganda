@@ -1,7 +1,7 @@
 import { Form, Formik } from "formik";
 import React from "react";
 import classes from "../../LeaveTracker/LeaveApplicationForm/LeaveApplicationForm.module.css";
-import InputField from "./../../../common/UI/InputField/InputField";
+import InputField from "../../../common/UI/InputField/InputField";
 import { SimpleGrid, Textarea } from "@chakra-ui/react";
 import FormButton from "../../../common/UI/FormButton/FormButton";
 
@@ -40,13 +40,13 @@ const AdvancedRequestForm = (props) => {
           </SimpleGrid>
           <SimpleGrid columns={2} spacing={4}>
             <InputField name="budgetYear" label="Budget Year" type="number" />
-            <InputField name="month" label="Month:" placeholder="March" />
+            <InputField name="month" label="Month" placeholder="March" />
           </SimpleGrid>
           <div className={classes.form_field_wrapper}>
-            <InputField name="amount" label="Advanced Amount" />
+            <InputField name="amount" label="Advanced Amount(UGX)" />
           </div>
           <SimpleGrid columns={2} spacing={4}>
-            <InputField name="fromDate" label="Date requested:" type="date" />
+            <InputField name="fromDate" label="Date requested" type="date" />
             <InputField name="toDate" label="Date needed" type="date" />
           </SimpleGrid>
           <div className={classes.form_field_wrapper}>

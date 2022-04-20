@@ -40,6 +40,7 @@ import ITComplaints from "./components/itDepartment/Complaints/ITComplaints";
 import Employees from "./components/HumanResource/EmployeeContract/Employees";
 import EventAttendence from "./components/dashboard/EventsAttendence/EventAttendence";
 import ReportFiles from "./components/HumanResource/Reports/ReportFiles/ReportFiles";
+import LeaveApplicationSummary from "./components/dashboard/LeaveTracker/LeaveApplicationSummary/LeaveApplicationSummary";
 
 const View = () => {
   return (
@@ -55,6 +56,10 @@ const View = () => {
         <Route index element={<Dashboard />} />
         <Route path="tasks" element={<Tasks />} />
         <Route path="leave-advance-tracker" element={<Tracker />} />
+        <Route
+          path="application-summary"
+          element={<LeaveApplicationSummary />}
+        />
         <Route path="events-attendance" element={<EventAttendence />} />
         <Route path="clients" element={<Clients />} />
         <Route path="clients-files" element={<ClientFiles />} />
