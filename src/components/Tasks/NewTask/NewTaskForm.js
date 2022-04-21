@@ -24,10 +24,9 @@ const Tags = [
   { name: "Court processors", color: "tartiary" },
 ];
 
-// const Team = [{ name: "Thomas Tumusiime" }, { name: "Kimera Moxhus" }];
-// let team = [];
 let tags = [];
 let outlines = [];
+let team = [];
 
 const NewTaskForm = ({ onSubmit, error, isError, isSubmitting }) => {
   const [files, setFiles] = useState([]);
@@ -61,7 +60,6 @@ const NewTaskForm = ({ onSubmit, error, isError, isSubmitting }) => {
   };
 
   const selectedItemHandler = (result) => {
-    // console.log(result);
     tags.push(result);
     setSearchTerm("");
     setShow(true);
@@ -78,8 +76,9 @@ const NewTaskForm = ({ onSubmit, error, isError, isSubmitting }) => {
       initialValues={taskInitialValues}
       validationSchema={taskSchema}
       onSubmit={(values) => {
-        console.log(values);
-        // onSubmit(values);
+        values.tags = tags.map((tag) => tag.name);
+        values.outlines = outlines;
+        onSubmit(values);
       }}
     >
       <div className={classes.new_asset_wrapper}>

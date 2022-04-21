@@ -7,7 +7,7 @@ export const taskInitialValues = {
   endDate: "",
   tags: [],
   attachments: [],
-  status: "",
+  status: "todo",
   team: [],
   outline: [],
 };

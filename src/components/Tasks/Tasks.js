@@ -31,6 +31,10 @@ const Tasks = () => {
     }
   }, [isSuccess, toast]);
 
+  const onSubmit = (values) => {
+    alert(JSON.stringify(values, null, 2));
+  };
+
   const keyWordSearchHandler = (e) => {
     const { value } = e.target;
     setSearchTerm(value);
@@ -91,7 +95,7 @@ const Tasks = () => {
       )}
       <Modal isOpen={isOpen} onClose={onClose} title="Create a Task" size="2xl">
         <NewTaskForm
-          onSubmit={mutate}
+          onSubmit={onSubmit}
           error={error}
           isError={isError}
           isSubmitting={isLoading}
