@@ -31,7 +31,7 @@ export const DepartmentButton = ({
   );
 };
 
-const TaskCard = ({ task, btnLabel, onChangeStatus }) => {
+const TaskCard = ({ task, btnLabel, onChangeStatus, isChangingStatus }) => {
   const { title, description, valueCount, attachments, tags } = task;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
@@ -93,6 +93,7 @@ const TaskCard = ({ task, btnLabel, onChangeStatus }) => {
           error={error}
           btnLabel={btnLabel}
           onChangeStatus={onChangeStatus}
+          isChangingStatus={isChangingStatus}
         />
       </Modal>
     </div>
