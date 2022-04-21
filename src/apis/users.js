@@ -28,6 +28,10 @@ export const getAllDeactivatedUsers = async () => {
   return await axiosClient.get(routes.users.deactivatedUsers);
 };
 
+export const getAllActivatedUsers = async () => {
+  return await axiosClient.get(routes.users.activatedUsers);
+};
+
 export const activateUser = async (id) => {
   return await axiosClient.post(routes.users.activateUser, id);
 };
@@ -38,4 +42,4 @@ export const requestPasswordLink = async (id) => {
 
 export const updateProfile = async (values) => {
   return await axiosClient.patch(routes.users.updateProfile, values);
-}
+};

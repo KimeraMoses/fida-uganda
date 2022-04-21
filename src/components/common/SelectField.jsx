@@ -15,9 +15,9 @@ const SelectField = ({ label, name, options, ...rest }) => {
       <FormLabel fontSize="md">{label}</FormLabel>
       <Field as={Select} {...field} {...rest}>
         {options.map((option) => (
-          <option key={option.value} value={option.value}>
+          <options key={option.value} value={option.value}>
             {option.label}
-          </option>
+          </options>
         ))}
       </Field>
       <FormErrorMessage>{meta.error}</FormErrorMessage>

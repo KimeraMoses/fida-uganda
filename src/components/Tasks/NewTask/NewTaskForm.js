@@ -5,18 +5,13 @@ import InputField from "../../common/UI/InputField/InputField";
 import FormButton from "../../common/UI/FormButton/FormButton";
 import { AttachmentIcon } from "../../../assets/Icons/Icons";
 import { Form, Formik } from "formik";
-import {
-  Heading,
-  SimpleGrid,
-  useToast,
-  Avatar,
-  AvatarGroup,
-} from "@chakra-ui/react";
+import { Heading, SimpleGrid, useToast } from "@chakra-ui/react";
 import { toastError } from "../../../lib/toastDetails";
 import { taskInitialValues, taskSchema } from "./taskSchema";
 import MultiUpload from "../../common/MultiUpload";
 import { DepartmentButton } from "../TaskCard/TaskCard";
 import DropdownInputField from "../../common/UI/DropdownInputField/DropdownInputField";
+import { useUsers } from "../../../hooks/useUser";
 
 const Tags = [
   { name: "Legal Aid", color: "primary" },
@@ -29,10 +24,13 @@ let outlines = [];
 let team = [];
 
 const NewTaskForm = ({ onSubmit, error, isError, isSubmitting }) => {
+  const users = useUsers();
   const [files, setFiles] = useState([]);
   const toast = useToast();
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [search, setSearch] = useState("");
+  const [results, setResults] = useState([]);
   const [show, setShow] = useState(false);
   const [outline, setOutLine] = useState("");
 
@@ -61,6 +59,29 @@ const NewTaskForm = ({ onSubmit, error, isError, isSubmitting }) => {
 
   const selectedItemHandler = (result) => {
     tags.push(result);
+    setSearchTerm("");
+    setShow(true);
+  };
+
+  const teamHandler = (e) => {
+    setShow(false);
+    const { value } = e.target;
+    setSearch(value);
+
+    if (search !== "") {
+      const results = users.filter((result) => {
+        return Object.values(result)
+          .join(" ")
+          .replace(/-/g, " ")
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase());
+      });
+      setResults(results);
+    }
+  };
+
+  const selectedTeamHandler = (result) => {
+    team.push(result);
     setSearchTerm("");
     setShow(true);
   };
@@ -155,20 +176,14 @@ const NewTaskForm = ({ onSubmit, error, isError, isSubmitting }) => {
                 Team
               </h6>
               <div className={styles.team}>
-                <AvatarGroup size="sm" max={2}>
-                  <Avatar
-                    name="Ryan Florence"
-                    src="https://bit.ly/ryan-florence"
-                  />
-                  <Avatar
-                    name="Segun Adebayo"
-                    src="https://bit.ly/sage-adebayo"
-                  />
-                  <Avatar
-                    name="Christian Nwamba"
-                    src="https://bit.ly/code-beast"
-                  />
-                </AvatarGroup>
+                <DropdownInputField
+                  placeholder="Type team member name"
+                  keyWordHandler={teamHandler}
+                  searchTerm={search}
+                  searchResults={results}
+                  isSelected={show}
+                  itemClickHandler={selectedTeamHandler}
+                />
               </div>
             </div>
           </SimpleGrid>
