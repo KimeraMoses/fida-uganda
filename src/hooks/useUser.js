@@ -11,6 +11,7 @@ import {
   activateUser,
   requestPasswordLink,
   updateProfile,
+  getAllActivatedUsers,
 } from "../apis/users";
 import { USERS_KEY } from "../lib/constants";
 import { loginUser } from "../store/authReducer";
@@ -27,7 +28,7 @@ export const useLogin = () => {
 
 export const useUpdateProfile = () => {
   const dispatch = useDispatch();
-  
+
   return useMutation(updateProfile, {
     onSuccess: (data) => {
       dispatch(loginUser(data));
@@ -53,6 +54,21 @@ export const useSetPassword = () => {
 
 export const useDeactivatedUsers = () => {
   return useQuery([USERS_KEY, "DEACTIVATED"], getAllDeactivatedUsers);
+};
+
+export const useActivatedUsers = () => {
+  return useQuery([USERS_KEY, "ACTIVATED"], getAllActivatedUsers);
+};
+
+export const useUsers = () => {
+  const { data } = useActivatedUsers();
+  if (data?.users) {
+    return data?.users.map((user) => ({
+      value: user.id,
+      name: user.full_name,
+    }));
+  }
+  return [];
 };
 
 export const useActivateUser = () => {

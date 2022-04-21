@@ -31,7 +31,7 @@ const DropdownInputField = (props) => {
               {searchResults.length > 0 ? (
                 <ul className={classes.gpa__custom_text_field_results}>
                   {searchTerm &&
-                    searchResults.map((result: any) => {
+                    searchResults.map((result) => {
                       return (
                         <li
                           onClick={() => itemClickHandler(result)}
@@ -44,7 +44,7 @@ const DropdownInputField = (props) => {
                 </ul>
               ) : (
                 <div className={classes.no_results_wrapper}>
-                  Ooops, No match for <strong>{searchTerm}</strong> found!
+                  Oops, No match for <strong>{searchTerm}</strong> found!
                 </div>
               )}
             </div>

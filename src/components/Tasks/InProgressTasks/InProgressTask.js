@@ -1,15 +1,32 @@
-import React from "react";
-import { SimpleGrid } from "@chakra-ui/react";
+import React, { useEffect } from "react";
+import { SimpleGrid, useToast } from "@chakra-ui/react";
 import TaskCard from "../TaskCard/TaskCard";
 import classes from "./InProgressTask.module.css";
 import { useEditTask } from "../../../hooks/useTasks";
+import { toastError, toastSuccess } from "../../../lib/toastDetails";
 
 const InProgressTask = (props) => {
-  const { mutate } = useEditTask();
+  const toast = useToast();
+  const {
+    mutate,
+    isLoading: isChangingStatus,
+    isSuccess,
+    isError,
+    error,
+  } = useEditTask();
   const btnLabel = "Mark as Completed";
   const onChangeStatus = (task) => {
     mutate({ id: task, status: "completed" });
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast(toastSuccess("Task Updated Successfully"));
+    }
+    if (isError) {
+      toast(toastError(error));
+    }
+  }, [isSuccess, isError, error, toast]);
 
   return (
     <SimpleGrid
@@ -24,6 +41,7 @@ const InProgressTask = (props) => {
             task={task}
             onChangeStatus={onChangeStatus}
             btnLabel={btnLabel}
+            isChangingStatus={isChangingStatus}
           />
         ) : null
       )}

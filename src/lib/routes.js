@@ -14,6 +14,7 @@ export const routes = {
     activateUser: `${BASE_URL}/users/activateAccount`,
     requestPasswordLink: `${BASE_URL}/users/requestSetPassword`,
     updateProfile: `${BASE_URL}/users/updateMe`,
+    activatedUsers: `${BASE_URL}/users/getAllActivatedUsers`,
   },
   tasks: {
     addTask: `${BASE_URL}/tasks/create`,

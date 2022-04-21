@@ -65,14 +65,14 @@ export const useEditTask = () => {
         queryClient.setQueryData(TASKS_KEY, () => {
           return produce(previousTasks, (draft) => {
             const index = draft.tasks.findIndex(
-              (task) => task.id === data?.task.id
+              (task) => task.id === data?.updatedTask.id
             );
             draft.tasks[index] = data?.task;
           });
         });
       } else {
         queryClient.setQueryData(TASKS_KEY, () => {
-          return { tasks: [data?.task] };
+          return { tasks: [data?.updatedTask] };
         });
       }
     },
