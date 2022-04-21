@@ -33,8 +33,6 @@ const TravelOrder = () => {
 
   const onRowClick = (row) => {};
 
-  console.log(data?.travelOrders[data?.travelOrders.length - 1]);
-
   return (
     <>
       <SectionHeader title="Travel Order" />
