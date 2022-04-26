@@ -1,19 +1,13 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Form, Formik } from "formik";
-import { SimpleGrid, Heading, Flex, useToast } from "@chakra-ui/react";
+import { SimpleGrid, Flex, useToast, Button } from "@chakra-ui/react";
 import TextField from "../../common/TextField";
-import NumberField from "../../common/NumberField";
 import SelectField from "../../common/SelectField";
-import {
-  designationOptions,
-  maritalStatusOptions,
-  sexOptions,
-} from "../../../lib/options";
-import { useState } from "react";
-import MultiUpload from "../../common/MultiUpload";
+import { designationOptions } from "../../../lib/options";
 import { useProjectOptions } from "../../../hooks/useProjects";
-import { createEmployeeObject } from "./schema";
+import { createEmployeeObject, employeeSchema } from "./schema";
 import { toastError } from "../../../lib/toastDetails";
+import SelectAvatar from "../../common/SelectAvatar";
 
 const AccountSettingsForm = ({
   initialValues,
@@ -23,7 +17,8 @@ const AccountSettingsForm = ({
   error,
 }) => {
   const toast = useToast();
-  const [files, setFiles] = useState([]);
+  const [avatar, setAvatar] = useState(null);
+  const [url, setImageUrl] = useState(initialValues.image);
   const projectOptions = useProjectOptions();
   const employeeObject = createEmployeeObject(initialValues);
 
@@ -36,77 +31,55 @@ const AccountSettingsForm = ({
   return (
     <Formik
       initialValues={employeeObject}
+      validationSchema={employeeSchema}
       onSubmit={(values) => {
-        onSubmit(values);
+        if (!url) {
+          toast(toastError("Please select an avatar"));
+          return;
+        }
+        const formData = new FormData();
+        Object.keys(values).forEach((key) => {
+          formData.append(key, values[key]);
+        });
+        if (avatar) {
+          formData.append("image", avatar);
+        }
+        onSubmit(formData);
       }}
     >
       <Flex flexDir="column" bgColor="white" p={20} borderRadius={10}>
-        <SimpleGrid as={Form} gap={5}>
-          <SimpleGrid columns={3} gap={5}>
-            <TextField name="first_name" placeholder="First Name" />
-            <TextField name="last_name" placeholder="Last Name" />
-            <TextField name="maiden_name" placeholder="Last Name" />
-          </SimpleGrid>
-          <SimpleGrid columns={3} gap={5}>
-            <TextField name="dateOfBirth" type="date" />
-            <SelectField
-              name="maritalStatus"
-              options={maritalStatusOptions}
-              placeholder="Select Martial Status"
-            />
-            <TextField
-              name="levelOfEducation"
-              placeholder="Level of Education"
-            />
-          </SimpleGrid>
+        <Flex as={Form} gap={5} flexDir="column">
+          <SelectAvatar
+            setAvatar={setAvatar}
+            toast={toast}
+            alignSelf="center"
+            borderRadius="full"
+            h={20}
+            w={20}
+            iconObj={{ size: 24 }}
+            url={url}
+            setImageUrl={setImageUrl}
+          />
+          <TextField name="full_name" placeholder="Full Name" />
           <SimpleGrid columns={2} gap={5}>
-            <SelectField
-              name="gender"
-              options={sexOptions}
-              placeholder="Select Sex"
-            />
             <TextField name="email" type="email" placeholder="Email" />
-          </SimpleGrid>
-          <NumberField name="phoneNumber" placeholder="Phone Number" />
-          <SimpleGrid columns={2}>
             <SelectField
               name="designation"
               placeholder="Select Designation"
               options={designationOptions}
+              size="lg"
             />
           </SimpleGrid>
-          <SimpleGrid columns={3} gap={5}>
-            <SelectField
-              name="project"
-              options={projectOptions}
-              placeholder="Select Project"
-            />
-            <TextField name="contractStart" type="date" />
-            <TextField name="contractEnd" type="date" />
-          </SimpleGrid>
-          <SimpleGrid columns={2} gap={5}>
-            <TextField name="bank" placeholder="Banking Institution" />
-            <NumberField name="account_number" placeholder="Account Number" />
-          </SimpleGrid>
-          <SimpleGrid columns={2} gap={5}>
-            <NumberField
-              name="tinNumber"
-              placeholder="Tax Identification Number (TIN)"
-            />
-            <NumberField name="NSSF__number" placeholder="NSSF" />
-          </SimpleGrid>
-          <SimpleGrid columns={2} gap={5}>
-            <TextField name="next_of_kin_name" placeholder="Next of Kin" />
-            <NumberField
-              name="next_of_kin_number"
-              placeholder="Next of Kin Phone Number"
-            />
-          </SimpleGrid>
-          <Heading fontSize="md" fontWeight="light" mt={5}>
-            Essential Documents
-          </Heading>
-        </SimpleGrid>
-        <MultiUpload files={files} setFiles={setFiles} />
+          <SelectField
+            name="project"
+            options={projectOptions}
+            placeholder="Select Project"
+            size="lg"
+          />
+          <Button type="submit" colorScheme="purple" isLoading={isSubmitting}>
+            Update Profile
+          </Button>
+        </Flex>
       </Flex>
     </Formik>
   );

@@ -14,7 +14,7 @@ export const addTask = async (task) => {
 };
 
 export const editTask = async (task) => {
-  return await axiosClient.put(`${routes.tasks.editTask}/${task.id}`, task);
+  return await axiosClient.patch(`${routes.tasks.editTask}/${task.id}`, task);
 };
 
 export const deleteTask = async (taskId) => {

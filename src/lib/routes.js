@@ -13,6 +13,8 @@ export const routes = {
     deactivatedUsers: `${BASE_URL}/users/getAllDeactivatedUsers`,
     activateUser: `${BASE_URL}/users/activateAccount`,
     requestPasswordLink: `${BASE_URL}/users/requestSetPassword`,
+    updateProfile: `${BASE_URL}/users/updateMe`,
+    activatedUsers: `${BASE_URL}/users/getAllActivatedUsers`,
   },
   tasks: {
     addTask: `${BASE_URL}/tasks/create`,
@@ -191,4 +193,10 @@ export const routes = {
     editEmployee: `${BASE_URL}/employees/edit/`,
     getAllEmployees: `${BASE_URL}/employees/getAll`,
   },
+  advances: {
+    addAdvance: `${BASE_URL}/advances/create`,
+    base: `${BASE_URL}/advances/`,
+    editAdvance: `${BASE_URL}/advances/edit/`,
+    getAllAdvances: `${BASE_URL}/advances/getAll`,
+  }
 };

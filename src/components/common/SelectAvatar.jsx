@@ -59,7 +59,8 @@ const SelectAvatar = ({
             type="file"
             ref={input}
             style={{ display: "none" }}
-            onClick={handleImageChange}
+            onChange={handleImageChange}
+            accept="image/png, image/jpeg"
           />
           <IconButton
             position="absolute"

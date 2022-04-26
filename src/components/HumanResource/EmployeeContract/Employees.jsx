@@ -14,7 +14,6 @@ const Employees = () => {
   return (
     <>
       <SectionHeader title="Employees" />
-      {data?.employees && <p>{JSON.stringify(data?.employees, null, 2)}</p>}
       <TableSearch btnLabel="Add Employee" btnClick={onOpen} />
       {data?.employees && <EmployeeContractTable data={data?.employees} />}
       <Modal isOpen={isOpen} onClose={onClose}>

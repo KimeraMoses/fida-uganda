@@ -31,8 +31,8 @@ export const DepartmentButton = ({
   );
 };
 
-const TaskCard = ({ task, btnLabel, onChangeStatus }) => {
-  const { cardTitle, description, valueCount, attachments, tags } = task;
+const TaskCard = ({ task, btnLabel, onChangeStatus, isChangingStatus }) => {
+  const { title, description, valueCount, attachments, tags } = task;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   const { mutate, isLoading, isSuccess, isError, error } = useAddTaskComment();
@@ -58,7 +58,7 @@ const TaskCard = ({ task, btnLabel, onChangeStatus }) => {
           </div>
         )}
         <div className={classes.task_content_wrapper}>
-          <h3>{cardTitle}</h3>
+          <h3>{title}</h3>
           <p>{description}</p>
         </div>
         <div className={classes.task_actions_wrapper}>
@@ -93,6 +93,7 @@ const TaskCard = ({ task, btnLabel, onChangeStatus }) => {
           error={error}
           btnLabel={btnLabel}
           onChangeStatus={onChangeStatus}
+          isChangingStatus={isChangingStatus}
         />
       </Modal>
     </div>
