@@ -46,14 +46,6 @@ const AdvancedRequestForm = (props) => {
         <Form>
           <SimpleGrid columns={2} spacing={2}>
             <InputField
-              name="designation"
-              label="Designation"
-              placeholder="Legal Officer"
-            />
-            <InputField
-              name="department"
-              label="Department"
-              placeholder="Legal Aid"
               name="date_needed"
               type="date"
               label="Date needed"
@@ -95,7 +87,7 @@ const AdvancedRequestForm = (props) => {
             <FormButton variant="cancel" onClick={onClose}>
               Cancel
             </FormButton>
-            <FormButton type="submit" variant="outlined">
+            <FormButton type="submit" variant="outlined" disabled={loading}>
               {!loading ? "Send" : "Sending"}
             </FormButton>
           </div>
