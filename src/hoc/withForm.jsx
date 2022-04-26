@@ -1,5 +1,7 @@
 import { Formik, Form } from "formik";
 import React from "react";
+import { useToast } from "@chakra-ui/react";
+import { toastError, toastSuccess } from "../lib/toastDetails";
 
 const withForm = (FormComponent) => {
   return function WithNewForm({
@@ -7,6 +9,7 @@ const withForm = (FormComponent) => {
     error,
     isSuccess,
     success,
+    onSuccess,
     onSubmit,
     isSubmitting,
     initialValues,
@@ -17,14 +20,17 @@ const withForm = (FormComponent) => {
     fileName,
     ...rest
   }) {
+    const toast = useToast();
+
     React.useEffect(() => {
       if (isError) {
-        alert(error);
+        toast(toastError(error));
       }
       if (isSuccess) {
-        alert(success);
+        toast(toastSuccess(success));
+        onSuccess();
       }
-    }, [isError, error, isSuccess, success]);
+    }, [toast, isError, error, isSuccess, onSuccess, success]);
 
     return (
       <Formik
