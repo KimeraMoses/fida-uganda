@@ -12,7 +12,7 @@ const Charts = ({
   pendingTasks,
 }) => {
   const pieChartValues = {
-    series: [todoTasks, completedTasks, pendingTasks],
+    series: [23, 45, 10],
     options: {
       chart: {
         width: 320,
@@ -30,7 +30,7 @@ const Charts = ({
     },
   };
   const caseStatusValues = {
-    series: [casesConcluded, casesOnGoing],
+    series: [10, 50],
     options: {
       chart: {
         width: 320,

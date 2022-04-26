@@ -102,9 +102,9 @@ const NewAsset = ({
             <FormButton
               variant="colored"
               rounded={true}
-              isSubmitting={isSubmitting}
+              disabled={isSubmitting}
             >
-              Add Asset
+              {isSubmitting ? "Adding..." : "Add Asset"}
             </FormButton>
           </div>
         </Form>

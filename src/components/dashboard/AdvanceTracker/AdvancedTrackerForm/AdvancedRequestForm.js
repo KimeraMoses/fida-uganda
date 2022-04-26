@@ -28,12 +28,12 @@ const AdvancedRequestForm = (props) => {
           <SimpleGrid columns={3} spacing={2}>
             <InputField name="name" label="Name" placeholder="Username" />
             <InputField
-              name="name"
+              name="designation"
               label="Designation"
               placeholder="Legal Officer"
             />
             <InputField
-              name="depart"
+              name="department"
               label="Department"
               placeholder="Legal Aid"
             />
@@ -62,7 +62,9 @@ const AdvancedRequestForm = (props) => {
             <FormButton variant="cancel" onClick={onClose}>
               Cancel
             </FormButton>
-            <FormButton variant="outlined">Send</FormButton>
+            <FormButton variant="outlined" type="submit">
+              Send
+            </FormButton>
           </div>
         </Form>
       </Formik>

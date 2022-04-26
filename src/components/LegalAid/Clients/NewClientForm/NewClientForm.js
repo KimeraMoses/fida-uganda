@@ -12,7 +12,7 @@ const NewClientForm = (props) => {
     <Formik
       //   initialValues={initialValues}
       //   validationSchema={caseFileSchema}
-      onSubmit={() => {
+      onSubmit={(values) => {
         console.log("Some thing");
       }}
     >
@@ -256,9 +256,9 @@ const NewClientForm = (props) => {
                 <FormButton
                   variant="colored"
                   rounded={true}
-                  isSubmitting={isSubmitting}
+                  disabled={isSubmitting}
                 >
-                  Add Client
+                  {isSubmitting ? "Adding..." : "Add Client"}
                 </FormButton>
               </div>
             </Form>
