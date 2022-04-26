@@ -11,10 +11,15 @@ import {
 import { SiMicrosoftexcel } from "react-icons/si";
 import { AiOutlineFilePdf } from "react-icons/ai";
 
-
 import { MdFilterList, MdAdd, MdMoreVert } from "react-icons/md";
 
-function TableSearch({ onSearchHandler, searchTerm,btnLabel, btnClick, showBtn = true }) {
+function TableSearch({
+  onSearchHandler,
+  searchTerm,
+  btnLabel,
+  btnClick,
+  showBtn = true,
+}) {
   // const [search, setSearch] = useState("");
 
   return (
@@ -32,10 +37,7 @@ function TableSearch({ onSearchHandler, searchTerm,btnLabel, btnClick, showBtn =
       </Button>
       <Input
         placeholder="Search"
-        // value={search}
-        // onChange={(e) => {
-        //   setSearch(e.target.value);
-        // }}
+        type="search"
         value={searchTerm}
         onChange={onSearchHandler}
       />
@@ -60,8 +62,12 @@ function TableSearch({ onSearchHandler, searchTerm,btnLabel, btnClick, showBtn =
           icon={<MdMoreVert />}
         />
         <MenuList>
-          <MenuItem icon={<AiOutlineFilePdf size={20} />}>Export As Pdf</MenuItem>
-          <MenuItem icon={<SiMicrosoftexcel size={20} />}>Export As Excel</MenuItem>
+          <MenuItem icon={<AiOutlineFilePdf size={20} />}>
+            Export As Pdf
+          </MenuItem>
+          <MenuItem icon={<SiMicrosoftexcel size={20} />}>
+            Export As Excel
+          </MenuItem>
         </MenuList>
       </Menu>
     </Flex>

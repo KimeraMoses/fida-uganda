@@ -1,32 +1,32 @@
-.new_asset_wrapper{
-    padding: 0 20px;
+.new_asset_wrapper {
+  padding: 0 20px;
 }
-.asset_attachement_wrapper h6{
-    display: flex;
-    align-items: center;
+.asset_attachement_wrapper h6 {
+  display: flex;
+  align-items: center;
 }
-.asset_attachement_wrapper h6 svg{
-    margin-right: 5px;
+.asset_attachement_wrapper h6 svg {
+  margin-right: 5px;
 }
-.attachement_display_wrapper{
-    background: linear-gradient(100.32deg, #FCF5FF -6.29%, #F5E4FF 88.21%);
-    padding: 20px;
-    border-radius: 10px;
-    display: flex;
-    flex-wrap: wrap;
+.attachement_display_wrapper {
+  background: linear-gradient(100.32deg, #fcf5ff -6.29%, #f5e4ff 88.21%);
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
 }
 .uploaded_files,
-.new_attachment{
-    width: 60px;
-    height: 60px;
-    border-radius: 10px;
-    background-color: #E2DFDF;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    margin: 2px;
+.new_attachment {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  background-color: #e2dfdf;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  margin: 2px;
 }
-.new_attachment{
-    cursor: pointer;
+.new_attachment {
+  cursor: pointer;
 }

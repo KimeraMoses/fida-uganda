@@ -87,7 +87,7 @@ const AdvancedRequestForm = (props) => {
             <FormButton variant="cancel" onClick={onClose}>
               Cancel
             </FormButton>
-            <FormButton type="submit" variant="outlined">
+            <FormButton type="submit" variant="outlined" disabled={loading}>
               {!loading ? "Send" : "Sending"}
             </FormButton>
           </div>
