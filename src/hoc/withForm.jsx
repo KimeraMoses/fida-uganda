@@ -5,13 +5,8 @@ import { toastError, toastSuccess } from "../lib/toastDetails";
 
 const withForm = (FormComponent) => {
   return function WithNewForm({
-    // isError,
-    // error,
-    // isSuccess,
     success,
     onSuccess,
-    // onSubmit,
-    // isSubmitting,
     initialValues,
     validationSchema,
     isEditing,
