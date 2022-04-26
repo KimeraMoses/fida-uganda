@@ -15,12 +15,14 @@ export const fleetDatabaseOrderSchema = yup.object().shape({
 });
 
 export const fleetDatabaseInitialValues = {
-    journey_start_time: "",
-    journey_end_time: "",
-    purpose: "",
-    date_requested: "",
-    destination: "",
-    project: "",
-    project_activity: "",
-    pickup_location: "",
-  };
+  vehicle_make: "",
+  vehicle_number: "",
+  vehicle_model: "",
+  driver_first_name: "",
+  driver_surname: "",
+  driver_email: "",
+  driver_phone: "",
+  driver_address: "",
+  region_of_operation: "",
+  project: "",
+};

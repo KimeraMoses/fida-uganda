@@ -1,27 +1,21 @@
 import SectionHeader from "../common/SectionHeader";
-import { useToast } from "@chakra-ui/react";
-import { useEffect } from "react";
-import { toastError } from "../../lib/toastDetails";
 import Table from "../common/Table";
 import Modal from "../common/Modal";
 import { fleetDatabaseColumns } from "../../assets/tableColumns/fleetDatabase";
 import FleetDatabaseForm from "../forms/fleetDatabase/FleetDatabaseForm";
 import { useDisclosure } from "@chakra-ui/react";
-import { useFleets } from "../../hooks/useFleet";
+import { useAddFleet, useFleets } from "../../hooks/useFleet";
+import {
+  fleetDatabaseInitialValues,
+  fleetDatabaseOrderSchema,
+} from "../forms/fleetDatabase/schemas/fleetDatabase";
 
 const FleetDatabase = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const { data, isLoading, isError, error } = useFleets();
-  const toast = useToast();
-
-  useEffect(() => {
-    if (isError) {
-      toast(toastError(error));
-    }
-  }, [isError, error, toast]);
+  const { data, isLoading } = useFleets();
 
   const onRowClick = (row) => {};
+
   return (
     <>
       <SectionHeader title="Fleet Database" />
@@ -33,12 +27,18 @@ const FleetDatabase = () => {
         btnLabel="Add Vehicle"
         btnClick={onOpen}
       />
-      <Modal isOpen={isOpen} onClose={onClose} title="Vehicle Profiling Form">
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        title="Vehicle Profiling Form"
+        size="2xl"
+      >
         <FleetDatabaseForm
-        // onSubmit={mutate}
-        // isSubmitting={isSubmitting}
-        // isError={isError}
-        // error={error}
+          initialValues={fleetDatabaseInitialValues}
+          validationSchema={fleetDatabaseOrderSchema}
+          onSuccess={onClose}
+          success={`Vehicle added successfully`}
+          useMutate={useAddFleet}
         />
       </Modal>
     </>

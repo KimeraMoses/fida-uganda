@@ -5,21 +5,24 @@ import { toastError, toastSuccess } from "../lib/toastDetails";
 
 const withForm = (FormComponent) => {
   return function WithNewForm({
-    isError,
-    error,
-    isSuccess,
+    // isError,
+    // error,
+    // isSuccess,
     success,
     onSuccess,
-    onSubmit,
-    isSubmitting,
+    // onSubmit,
+    // isSubmitting,
     initialValues,
     validationSchema,
     isEditing,
     isFormData,
     file,
     fileName,
+    useMutate,
+    id,
     ...rest
   }) {
+    const { mutate, isError, error, isSuccess, isLoading } = useMutate(id);
     const toast = useToast();
 
     React.useEffect(() => {
@@ -43,15 +46,20 @@ const withForm = (FormComponent) => {
             Object.keys(values).forEach((key) => {
               formData.append(key, values[key]);
             });
-            onSubmit(formData);
+            mutate(formData);
             return;
           }
-          onSubmit(values);
+          mutate(values);
         }}
       >
         {({ values }) => (
           <Form>
-            <FormComponent values={values} isEditing={isEditing} {...rest} />
+            <FormComponent
+              values={values}
+              isSubmitting={isLoading}
+              isEditing={isEditing}
+              {...rest}
+            />
           </Form>
         )}
       </Formik>
