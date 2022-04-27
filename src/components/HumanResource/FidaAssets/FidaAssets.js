@@ -9,7 +9,6 @@ import { useAddAsset, useAssets } from "../../../hooks/useAsset";
 import { toastSuccess } from "../../../lib/toastDetails";
 import { useProjectOptions } from "../../../hooks/useProjects";
 import { assetInitialValues, assetSchema } from "./NewAsset/schema";
-import {useAddAsset} from "../../../hooks/useAsset";
 
 const FidaAssets = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
