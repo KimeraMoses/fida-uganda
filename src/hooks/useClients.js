@@ -20,6 +20,14 @@ export const useClientStats = () => {
   return useQuery([CLIENTS_KEY, CLIENT_STATS], getClientStats);
 };
 
+export const useClientOptions = () => {
+  const { data } = useClients();
+  return data?.clients.map((client) => ({
+    value: client.id,
+    label: client.name,
+  }));
+};
+
 export const useAddClient = () => {
   const queryClient = useQueryClient();
   return useMutation(addClient, {
