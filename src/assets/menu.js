@@ -189,6 +189,12 @@ const menuOptions = {
     icon: MdStorage,
     path: "project-files",
   },
+  fleetDatabase: {
+    id: ++id,
+    name: "Fleet Database",
+    icon: MdStorage,
+    path: "fleet-database",
+  },
 };
 
 const commonOptions = [menuOptions.dashboard, menuOptions.tasks];

@@ -1,66 +1,65 @@
-import { useEffect } from "react";
-import { SimpleGrid, Button, useToast } from "@chakra-ui/react";
+import { SimpleGrid, Button, Flex } from "@chakra-ui/react";
 import TextField from "../../common/TextField";
-// import TextAreaField from "../../common/TextAreaField";
-import { Formik, Form } from "formik";
-import { toastError } from "../../../lib/toastDetails";
-import {
-    fleetDatabaseInitialValues,
-    fleetDatabaseOrderSchema,
-} from "./schemas/fleetDatabase";
+import withForm from "../../../hoc/withForm";
+import { MdAdd } from "react-icons/md";
+import SelectField from "../../common/SelectField";
+import { useProjectOptions } from "../../../hooks/useProjects";
+import { useMemo } from "react";
 
-const FleetDatabaseForm = ({ onSubmit, isSubmitting, isError, error }) => {
-  const toast = useToast();
+const FleetDatabaseForm = ({ isSubmitting }) => {
+  const projects = useProjectOptions();
+  const projectOptions = useMemo(() => projects, [projects]);
 
-  useEffect(() => {
-    if (isError) {
-      toast(toastError(error));
-    }
-  }, [isError, error, toast]);
   return (
-    <Formik
-      initialValues={fleetDatabaseInitialValues}
-      validationSchema={fleetDatabaseOrderSchema}
-      onSubmit={(values) => {
-        onSubmit(values);
-      }}
-    >
-      <SimpleGrid as={Form} p={5} gap={3}>
- 
-        <SimpleGrid columns={2} gap={5}>
-          <TextField name="vehicle_make" placeholder="Vehicle make" />
-          <TextField name="vehicle_number" placeholder="Vehicle Number" />
-          <TextField name="vehicle_model" placeholder="Vehicle model" />
-        </SimpleGrid>
-        <p>Driver details</p>
-        <SimpleGrid columns={2} gap={5}>
-          <TextField name="first_name" placeholder="First name" />
-          <TextField name="surname" placeholder="Surname" />
-          <TextField name="phone_number" placeholder="Phone number" />
-          <TextField name="email_address" placeholder="Email Address" />
-          <TextField name="physical_address" placeholder="Physical Address" />
-        </SimpleGrid>
-        <hr/>
-        <SimpleGrid columns={2} gap={5}>
-          <TextField name="project" placeholder="Project" />
-          <TextField name="region_of_operation" placeholder="Region of Operation" />
-        </SimpleGrid>
+    <SimpleGrid p={5} gap={3}>
+      <SimpleGrid columns={2} gap={5}>
+        <TextField name="vehicle_make" placeholder="Vehicle make" />
+        <TextField name="vehicle_number" placeholder="Vehicle Number" />
+        <TextField name="vehicle_model" placeholder="Vehicle model" />
+      </SimpleGrid>
+      <p>Driver details</p>
+      <SimpleGrid columns={2} gap={5}>
+        <TextField name="driver_first_name" placeholder="First name" />
+        <TextField name="driver_surname" placeholder="Surname" />
+        <TextField name="driver_phone" placeholder="Phone number" />
+        <TextField
+          name="driver_email"
+          type="email"
+          placeholder="Email Address"
+        />
+        <TextField name="driver_address" placeholder="Physical Address" />
+      </SimpleGrid>
+      <hr />
+      <SimpleGrid columns={2} gap={5}>
+        <SelectField
+          name="project"
+          placeholder="Select Project"
+          options={projectOptions}
+          size="lg"
+        />
+        <TextField
+          name="region_of_operation"
+          placeholder="Region of Operation"
+        />
+      </SimpleGrid>
+      <Flex flexDir="row-reverse">
         <Button
+          alignSelf="right"
           mt={5}
           type="submit"
           borderRadius="full"
           bgGradient="linear(to-r, purple.400, purple.700)"
           _hover={{ bgGradient: "linear(to-r, purple.600, purple.900)" }}
           size="lg"
-          w="100%"
           color="white"
-          isLoading={isSubmitting}
+          disabled={isSubmitting}
+          leftIcon={<MdAdd />}
         >
-          Add
+          {isSubmitting ? "Saving" : "Add"}
         </Button>
-      </SimpleGrid>
-    </Formik>
+      </Flex>
+    </SimpleGrid>
   );
 };
 
-export default FleetDatabaseForm;
+export default withForm(FleetDatabaseForm);

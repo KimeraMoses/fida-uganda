@@ -6,7 +6,8 @@ import List from "./List";
 import HelpButton from "./HelpButton";
 
 const SideBar = () => {
-  const { designation } = useSelector(state => state.auth.user);
+  const { designation } = useSelector((state) => state.auth.user);
+
   return (
     <Box
       p={5}

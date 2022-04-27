@@ -2,26 +2,39 @@ import {
   FormControl,
   FormLabel,
   FormErrorMessage,
-  Select,
+  Select as SelectBase,
 } from "@chakra-ui/react";
-import { Field, useField } from "formik";
+import { Field } from "formik";
 
 const SelectField = ({ label, name, options, ...rest }) => {
-  const [field, meta] = useField(name);
-  const isInvalid = meta.touched && meta.error ? true : false;
-
   return (
-    <FormControl isInvalid={isInvalid}>
-      <FormLabel fontSize="md">{label}</FormLabel>
-      <Field as={Select} {...field} {...rest}>
-        {options.map((option) => (
-          <options key={option.value} value={option.value}>
-            {option.label}
-          </options>
-        ))}
-      </Field>
-      <FormErrorMessage>{meta.error}</FormErrorMessage>
-    </FormControl>
+    <Field name={name}>
+      {({ field, form }) => (
+        <FormControl>
+          <FormLabel htmlFor="country">{label}</FormLabel>
+          <SelectBase id="country" {...field} {...rest}>
+            <Field>
+              {({ field }) =>
+                options.map((option) => (
+                  <option
+                    key={option.value}
+                    id={option.value}
+                    {...field}
+                    value={option.value}
+                    checked={field.value === option.value}
+                  >
+                    {option.label}
+                  </option>
+                ))
+              }
+            </Field>
+          </SelectBase>
+          {form.errors[name] && (
+            <FormErrorMessage>{form.errors[name]}</FormErrorMessage>
+          )}
+        </FormControl>
+      )}
+    </Field>
   );
 };
 
