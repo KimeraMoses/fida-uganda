@@ -46,14 +46,14 @@ export const useUpdatePatient = () => {
         queryClient.setQueryData(PATIENTS_KEY, (previousPatients) => {
           return produce(previousPatients, (draft) => {
             const index = draft.patients.findIndex(
-              (patient) => patient.id === data.patient.id
+              (patient) => patient.id === data.updatedPatient.id
             );
-            draft.patients[index] = data.patient;
+            draft.patients[index] = data.updatedPatient;
           });
         });
       } else {
         queryClient.setQueryData(PATIENTS_KEY, () => {
-          return { patients: [data.patient] };
+          return { patients: [data.updatedPatient] };
         });
       }
     },
@@ -63,19 +63,23 @@ export const useUpdatePatient = () => {
 export const useDeletePatient = () => {
   const queryClient = useQueryClient();
   return useMutation(deletePatient, {
-    onSuccess: (data) => {
+    onMutate: async (id) => {
+      await queryClient.cancelMutations(PATIENTS_KEY);
+
       const previousPatients = queryClient.getQueryData(PATIENTS_KEY);
       if (previousPatients) {
         queryClient.setQueryData(PATIENTS_KEY, (previousPatients) => {
           return produce(previousPatients, (draft) => {
-            draft.patients.filter((patient) => patient.id !== data.patient.id);
+            draft.patients.filter((patient) => patient.id !== id);
           });
         });
-      } else {
-        queryClient.setQueryData(PATIENTS_KEY, () => {
-          return { patients: [] };
-        });
       }
+    },
+    onError: (_error, _patientId, context) => {
+      queryClient.setQueryData(PATIENTS_KEY, context.previousPatients);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries(PATIENTS_KEY);
     },
   });
 };

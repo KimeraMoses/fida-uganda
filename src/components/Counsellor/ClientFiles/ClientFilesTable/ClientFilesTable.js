@@ -13,62 +13,18 @@ import classes from "./Table.module.css";
 import { TableHeadColumn } from "../../../Membership/Allocations/AllocationsTable/AllocationsTable";
 import Modal from "../../../common/Modal";
 import NewClientForm from "../NewClientForm/NewClientForm";
+import { upperCaseFirstLetter } from "../../../../lib/data";
+// import { useUpdatePatient } from "../../../../hooks/usePatients";
+import { onSubmitAlert } from "../../../../lib/deleteInProd";
 
-export const ReportsData = [
-  {
-    sn: "S/N",
-    session_date: "20/03/2012",
-    month: "march",
-    staff_client: "Client",
-    mode: "Physical",
-    name: "Kimera Moses",
-    sex: "M",
-    age: "23",
-  },
-  {
-    sn: "S/N",
-    session_date: "04/04/2022",
-    month: "march",
-    staff_client: "Client",
-    mode: "Physical",
-    name: "Kimera Moses",
-    sex: "M",
-    age: "23",
-  },
-  {
-    sn: "S/N",
-    session_date: "12/05/2018",
-    month: "march",
-    staff_client: "Client",
-    mode: "Physical",
-    name: "Kimera Moses",
-    sex: "M",
-    age: "23",
-  },
-  {
-    sn: "S/N",
-    session_date: "14/12/2019",
-    month: "march",
-    staff_client: "Client",
-    mode: "Physical",
-    name: "Kimera Moses",
-    sex: "M",
-    age: "23",
-  },
-  {
-    sn: "S/N",
-    session_date: "12/12/2020",
-    month: "march",
-    staff_client: "Client",
-    mode: "Physical",
-    name: "Kimera Moses",
-    sex: "M",
-    age: "23",
-  },
-];
-
-const ClientFilesTable = () => {
+const ClientFilesTable = ({ data }) => {
+  const [selectedRow, setSelectedRow] = React.useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const handleRowClick = (data) => {
+    setSelectedRow(data);
+    onOpen();
+  };
   return (
     <>
       <div className={classes.files_table_wrapper}>
@@ -84,7 +40,7 @@ const ClientFilesTable = () => {
               <TableHeadColumn title="Date of Session" />
               <TableHeadColumn title="Month" />
               <TableHeadColumn title="Staff/Client" />
-              <TableHeadColumn title="Physical/Online" />
+              <TableHeadColumn title="Mode of communication" />
               <TableHeadColumn title="Patient's Name" />
               <TableHeadColumn title="Sex" />
               <TableHeadColumn title="Age" />
@@ -92,17 +48,17 @@ const ClientFilesTable = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {ReportsData.map((item) => {
+            {data.map((item) => {
               return (
-                <Tr>
+                <Tr key={item?.id}>
                   <Td className={classes.primary_text_icon}>{item.sn}</Td>
                   <Td className={classes.data__purpose_primary_text}>
                     {item.session_date}
                   </Td>
                   <Td>{item.month}</Td>
-                  <Td>{item.staff_client}</Td>
-                  <Td>{item.mode}</Td>
-                  <Td>{item.name}</Td>
+                  <Td>{upperCaseFirstLetter(item.patient_role)}</Td>
+                  <Td>{item.mode_of_communication}</Td>
+                  <Td>{`${item.first_name} ${item.last_name}`}</Td>
                   <Td>{item.sex}</Td>
                   <Td>{item.age}</Td>
                   <Td style={{ textAlign: "center" }}>
@@ -112,7 +68,7 @@ const ClientFilesTable = () => {
                         size="xs"
                         aria-label="Edit Item"
                         icon={<MdEdit />}
-                        onClick={onOpen}
+                        onClick={() => handleRowClick(item)}
                       />
                     </div>
                   </Td>
@@ -122,7 +78,15 @@ const ClientFilesTable = () => {
           </Tbody>
         </Table>
         <Modal isOpen={isOpen} onClose={onClose}>
-          <NewClientForm isEdit={true} />
+          <NewClientForm
+            initialValues={selectedRow}
+            isEdit={true}
+            onSuccess={onClose}
+            success={"Updated client successfully"}
+            useMutate={onSubmitAlert}
+            onClose={onClose}
+            id={selectedRow?.id}
+          />
         </Modal>
       </div>
     </>
