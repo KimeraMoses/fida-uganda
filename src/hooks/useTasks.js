@@ -67,7 +67,7 @@ export const useEditTask = () => {
             const index = draft.tasks.findIndex(
               (task) => task.id === data?.updatedTask.id
             );
-            draft.tasks[index] = data?.task;
+            draft.tasks[index] = data?.updatedTask;
           });
         });
       } else {

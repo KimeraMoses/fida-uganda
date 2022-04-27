@@ -11,7 +11,7 @@ export const patientInitialValues = {
   sex: "",
   mode_of_communication: "",
   date_of_first_session: "",
-  pwd: "",
+  pwd: false,
 };
 
 export const patientSchema = yup.object().shape({

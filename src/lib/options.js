@@ -46,8 +46,8 @@ export const trueFalseOptions = [
 ];
 
 export const clientStaffOptions = [
-  { label: "Staff", value: "Staff" },
-  { label: "Client", value: "Client" },
+  { label: "Staff", value: "staff" },
+  { label: "Client", value: "client" },
 ];
 
 export const booleanOptions = [
