@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { MdTaskAlt } from "react-icons/md";
+import withForm from "../../../../../hoc/withForm";
 import InputField from "../../../../common/UI/InputField/InputField";
 import classes from "./MultiForm.module.css";
 import ActionButtons from "./ActionButtons/ActionButtons";
@@ -35,7 +36,6 @@ const UserDetails = ({ nextStep, handleChange, values, Continue }) => {
 
   return (
     <div className={classes.form_wrapper}>
-      <form>
         <div className={classes.user_image_wrapper}>
           <div
             className={classes.user_image}
@@ -93,9 +93,8 @@ const UserDetails = ({ nextStep, handleChange, values, Continue }) => {
         </div>
 
         <ActionButtons step={values.step} Continue={Continue} />
-      </form>
     </div>
   );
 };
 
-export default UserDetails;
+export default withForm(UserDetails);

@@ -5,9 +5,11 @@ import SectionHeader from "../../common/SectionHeader";
 import TableSearch from "../../common/table/TableSearch";
 import MemberActivitiesTable from "./MemberActivitiesTable/MemberActivitiesTable";
 import NewActivityForm from "./NewActivityForm/NewActivityForm";
+import { newMembershipActivitySchema } from "./NewActivityForm/schema";
 
 const MembersActivities = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const newActivityInitialValues = {};
   return (
     <>
       <SectionHeader title="Members Activities" />
@@ -20,7 +22,11 @@ const MembersActivities = () => {
       >
         <NewActivityForm
           onClose={onClose}
-
+          initialValues={newActivityInitialValues}
+          validationSchema={newMembershipActivitySchema}
+          onSuccess={onClose}
+          success={`Membership Activity added successfully`}
+          useMutate={() => {}}
         />
       </Modal>
     </>

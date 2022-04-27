@@ -32,19 +32,20 @@ const withForm = (FormComponent) => {
 
     return (
       <Formik
-        validationSchema={validationSchema}
+        // validationSchema={validationSchema}
         initialValues={initialValues}
         onSubmit={(values) => {
-          if (isFormData) {
-            const formData = new FormData();
-            formData.append(fileName, file);
-            Object.keys(values).forEach((key) => {
-              formData.append(key, values[key]);
-            });
-            mutate(formData);
-            return;
-          }
-          mutate(values);
+          // if (isFormData) {
+          //   const formData = new FormData();
+          //   formData.append(fileName, file);
+          //   Object.keys(values).forEach((key) => {
+          //     formData.append(key, values[key]);
+          //   });
+          //   mutate(formData);
+          //   return;
+          // }
+          console.log(values, 'values')
+          // mutate(values);
         }}
       >
         {({ values }) => (
