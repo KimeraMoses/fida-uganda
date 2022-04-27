@@ -16,18 +16,21 @@ import { MdEdit } from "react-icons/md";
 import Modal from "../../../common/Modal";
 import NewClvForm from "../CLVForms/NewClvForm";
 import { formatDate } from "../../../../lib/data";
-import { useProjectOptions } from "../../../../hooks/useProjects";
+import { onSubmitAlert } from "../../../../lib/deleteInProd";
 
 const CLVTable = ({ data }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [selectedRow, setSelectedRow] = useState(null);
   const [isEdit, setIsEdit] = useState(false);
-  const projects = useProjectOptions();
-  const initiateApproval = () => {
+
+  const initiateApproval = (row) => {
     setIsEdit(false);
+    setSelectedRow(row);
     onOpen();
   };
-  const initiateEdit = () => {
+  const initiateEdit = (row) => {
     setIsEdit(true);
+    setSelectedRow(row);
     onOpen();
   };
 
@@ -109,7 +112,7 @@ const CLVTable = ({ data }) => {
                           size="xs"
                           aria-label="Edit Item"
                           icon={<MdEdit />}
-                          onClick={initiateEdit}
+                          onClick={() => initiateEdit(item)}
                         />
                       </div>
                       <div className={styles.table_actions_icon_wrapper}>
@@ -118,7 +121,7 @@ const CLVTable = ({ data }) => {
                           variant="outline"
                           aria-label="Approve Clv"
                           icon={<FcApproval />}
-                          onClick={initiateApproval}
+                          onClick={() => initiateApproval(item)}
                         />
                       </div>
                     </div>
@@ -132,7 +135,8 @@ const CLVTable = ({ data }) => {
           <NewClvForm
             action={`${isEdit ? "editClv" : "approveClv"}`}
             onClose={onClose}
-            projects={projects}
+            useMutate={onSubmitAlert}
+            initialValues={selectedRow}
           />
         </Modal>
       </div>
