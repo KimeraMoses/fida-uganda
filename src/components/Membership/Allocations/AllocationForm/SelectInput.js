@@ -8,13 +8,13 @@ const options = [
 ];
 
 const SelectInput = () => {
-  const [selectedOption, setSelectedOption] = useState(null);
+  // const [selectedOption, setSelectedOption] = useState(null);
 
   return (
     <Select
-      defaultValue={selectedOption}
+      // defaultValue={selectedOption}
       placeholder="Recipients"
-      onChange={setSelectedOption}
+      // onChange={setSelectedOption}
       options={options}
       isMulti={true}
       isSearchable={true}

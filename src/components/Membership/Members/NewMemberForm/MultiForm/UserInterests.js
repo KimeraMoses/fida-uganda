@@ -1,4 +1,5 @@
 import React from "react";
+import withForm from "../../../../../hoc/withForm";
 import classes from "./MultiForm.module.css";
 import ActionButtons from "./ActionButtons/ActionButtons";
 import { Radio, RadioGroup, Stack } from "@chakra-ui/react";
@@ -13,7 +14,6 @@ const UserInterests = ({
 }) => {
   return (
     <div className={classes.form_wrapper}>
-      <form>
         <div className={classes.field_wrapper}>
           <div className={classes.field_label}>Area of Interest</div>
           <RadioGroup colorScheme="purple" style={{ marginLeft: 15 }}>
@@ -42,9 +42,8 @@ const UserInterests = ({
           Continue={Continue}
           Previous={Previous}
         />
-      </form>
     </div>
   );
 };
 
-export default UserInterests;
+export default withForm(UserInterests);

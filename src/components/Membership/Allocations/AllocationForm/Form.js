@@ -1,5 +1,6 @@
 import { IconButton, Input, Textarea } from "@chakra-ui/react";
 import React, { useState } from "react";
+import withForm from "../../../../hoc/withForm";
 import SelectInput from "./SelectInput";
 
 import { MdClose } from "react-icons/md";
@@ -34,30 +35,29 @@ const Form = (props) => {
         />
       </div>
       <div className={classes.fida__form_wrapper}>
-        <form>
           <div className={classes.fida__email_user_subject_wrapper}>
             <div className={classes.fida__email_users}>
               {/* To: */}
-              <SelectInput />
+              <SelectInput name="allocated_to" />
             </div>
             <div className={classes.fida__email_subject}>
-              <Input placeholder="Subject" />
+              <Input placeholder="Subject" name="subject" />
             </div>
           </div>
           <div className={classes.fida__body_wrapper}>
             <Textarea
               className={classes.email_body_field}
-              value={values.body}
+              // value={values.body}
               placeholder="Type a message here"
-              name="body"
-              onChange={onChangeHandler}
+              name="message"
+              // onChange={onChangeHandler}
               variant="unstyled"
             />
           </div>
 
           <div className={classes.fida__email_footer}>
             <div className={classes.fida_email_send_actions}>
-              <Button >Send</Button>
+              <Button type="submit">Send</Button>
               <svg
                 width="23"
                 height="23"
@@ -85,10 +85,9 @@ const Form = (props) => {
               </svg>
             </div>
           </div>
-        </form>
       </div>
     </div>
   );
 };
 
-export default Form;
+export default withForm(Form);

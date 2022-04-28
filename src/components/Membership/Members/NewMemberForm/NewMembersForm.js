@@ -27,11 +27,10 @@ const NewMembersForm = () => {
     setValues({ ...values, step: values.step + 1 });
   };
 
-
-  const Continue = e => {
+  const Continue = (e) => {
     e.preventDefault();
     nextStep();
-  }
+  };
 
   const Previous = (e) => {
     e.preventDefault();
@@ -52,6 +51,11 @@ const NewMembersForm = () => {
           Continue={Continue}
           handleChange={handleChange}
           values={values}
+          initialValues={""}
+          validationSchema={""}
+          onSuccess={""}
+          success={""}
+          useMutate={() => {}}
         />
       );
     case 2:
@@ -63,6 +67,11 @@ const NewMembersForm = () => {
           values={values}
           Continue={Continue}
           Previous={Previous}
+          initialValues={""}
+          validationSchema={""}
+          onSuccess={""}
+          success={""}
+          useMutate={() => {}}
         />
       );
     case 3:
@@ -74,6 +83,11 @@ const NewMembersForm = () => {
           values={values}
           Continue={Continue}
           Previous={Previous}
+          initialValues={""}
+          validationSchema={""}
+          onSuccess={""}
+          success={""}
+          useMutate={() => {}}
         />
       );
     case 4:
@@ -85,6 +99,11 @@ const NewMembersForm = () => {
           values={values}
           Continue={Continue}
           Previous={Previous}
+          initialValues={""}
+          validationSchema={""}
+          onSuccess={""}
+          success={""}
+          useMutate={() => {}}
         />
       );
     default:

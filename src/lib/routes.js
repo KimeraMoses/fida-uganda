@@ -1,6 +1,11 @@
 import { BASE_URL } from "./constants";
 
 export const routes = {
+  allocations: {
+    getAllocations: `${BASE_URL}/allocations/getAll`,
+    createAllocation: `${BASE_URL}/allocations/create`,
+    base: `${BASE_URL}/allocations/`,
+  },
   approvals: {
     getAllApprovals: `${BASE_URL}/approvals/getAll`,
   },
@@ -198,5 +203,5 @@ export const routes = {
     base: `${BASE_URL}/advances/`,
     editAdvance: `${BASE_URL}/advances/edit/`,
     getAllAdvances: `${BASE_URL}/advances/getAll`,
-  }
+  },
 };
