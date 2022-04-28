@@ -14,7 +14,7 @@ export const addAllocation = async (data) => {
 };
 
 export const editAllocation = async (data) => {
-  return await axiosClient.put(routes.allocations.base + data.id, data);
+  return await axiosClient.put(`${routes.allocations.base}edit/${data.id}`, data);
 };
 
 export const deleteAllocation = async (id) => {

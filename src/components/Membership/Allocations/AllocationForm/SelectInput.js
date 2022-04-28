@@ -8,13 +8,13 @@ const options = [
 ];
 
 const SelectInput = () => {
-  // const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState(null);
 
   return (
     <Select
-      // defaultValue={selectedOption}
+      defaultValue={selectedOption}
       placeholder="Recipients"
-      // onChange={setSelectedOption}
+      onChange={setSelectedOption}
       options={options}
       isMulti={true}
       isSearchable={true}
@@ -25,7 +25,7 @@ const SelectInput = () => {
           width: "100%",
           // border: `1px solid #000`,
           // backgroundColor: colourOptions[2].color,
-        //   padding: 5,
+          //   padding: 5,
         }),
       }}
     />
