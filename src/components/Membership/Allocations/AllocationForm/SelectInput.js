@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Select from "react-select";
 
 const options = [
@@ -7,25 +7,20 @@ const options = [
   { value: "zeus", label: "Missaga Zeus" },
 ];
 
-const SelectInput = () => {
-  const [selectedOption, setSelectedOption] = useState(null);
+const SelectInput = ({recipients, onChange, name, placeholder}) => {
 
   return (
     <Select
-      defaultValue={selectedOption}
-      placeholder="Recipients"
-      onChange={setSelectedOption}
-      options={options}
+      placeholder={placeholder}
+      onChange={onChange}
+      options={recipients || options}
       isMulti={true}
       isSearchable={true}
-      // components={{ SelectContainer }}
+      name={name}
       styles={{
         container: (base) => ({
           ...base,
           width: "100%",
-          // border: `1px solid #000`,
-          // backgroundColor: colourOptions[2].color,
-          //   padding: 5,
         }),
       }}
     />
