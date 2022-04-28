@@ -14,7 +14,7 @@ export const assetInitialValues = {
   location: "",
 };
 
-export const assetSchema = {
+export const assetSchema = yup.object().shape({
   project: yup.string().required("Project is required"),
   budget_year: yup.string().required("Budget year is required"),
   type: yup.string().required("Type is required"),
@@ -26,4 +26,4 @@ export const assetSchema = {
   person_in_possession: yup
     .string()
     .required("Person in possession is required"),
-};
+});
