@@ -1,6 +1,9 @@
 import { BASE_URL } from "./constants";
 
 export const routes = {
+  itProducts: {
+    createItProducts: `${BASE_URL}/it_products/create`
+  },
   members: {
     getAllMembers: `${BASE_URL}/members/getAll`,
   },

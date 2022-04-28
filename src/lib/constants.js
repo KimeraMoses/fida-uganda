@@ -31,6 +31,7 @@ export const PAYROLL_KEY = "payroll";
 export const PAYROLL_NOTES_KEY = "payroll_notes";
 export const EMPLOYEES_KEY = "employees";
 export const ADVANCES_KEY = "advances";
+export const IT_PRODUCTS_KEY = "it_products";
 
 export const REQUISITIONS_STATS = "requisitions/stats";
 export const TRAVEL_ORDER_STATS = "travel_orders/stats";
