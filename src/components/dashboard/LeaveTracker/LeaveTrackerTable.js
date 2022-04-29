@@ -14,6 +14,7 @@ import { monthsLong } from "../../../assets/text";
 import Modal from "./../../common/Modal";
 import { MdAdd } from "react-icons/md";
 import LeaveApplicationForm from "./LeaveApplicationForm/LeaveApplicationForm";
+import { useAddLeaveDays } from "../../../hooks/useLeaveTracker";
 
 export const LTData = [
   {
@@ -53,6 +54,12 @@ const LeaveTrackerTable = () => {
         onClick={onOpen}
       />
     );
+  };
+
+  const leaveApplicationInitialValues = {
+    reason: "",
+    address_on_leave: "",
+    tel_on_leave: "",
   };
   return (
     <>
@@ -106,7 +113,14 @@ const LeaveTrackerTable = () => {
           onClose={onClose}
           title="FIDA Leave Application Form"
         >
-          <LeaveApplicationForm onClose={onClose} />
+          <LeaveApplicationForm
+            onClose={onClose}
+            initialValues={leaveApplicationInitialValues}
+            // validationSchema={}
+            onSuccess={onClose}
+            success={`Leave request added successfully`}
+            useMutate={useAddLeaveDays}
+          />
         </Modal>
       </div>
     </>

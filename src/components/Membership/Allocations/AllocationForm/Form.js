@@ -35,7 +35,6 @@ const Form = (props) => {
             {/* To: */}
             <SelectInput
               name="allocated_to"
-              // isMulti={true}
               onChange={(value) => setFieldValue("allocated_to", value)}
               options={
                 members || [
