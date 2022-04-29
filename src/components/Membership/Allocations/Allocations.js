@@ -5,14 +5,14 @@ import TableSearch from "../../common/table/TableSearch";
 import Form from "../Allocations/AllocationForm/Form";
 import AllocationsTable from "./AllocationsTable/AllocationsTable";
 // import { allocationFormSchema } from "./AllocationForm/schema";
-import {useAddAllocation} from "../../../hooks/useAllocations"
-import {useMembers} from "../../../hooks/useMember";
+import { useAddAllocation } from "../../../hooks/useAllocations";
+import { useMembers } from "../../../hooks/useMember";
 
 const Allocations = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialValues = { subject: "", message: "", allocated_to: [] };
 
-  const {isLoading, data} = useMembers()
+  const { data } = useMembers();
 
   return (
     <>

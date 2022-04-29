@@ -1,8 +1,6 @@
 import produce from "immer";
-import { useMutation, useQuery, useQueryClient } from "react-query";
-import {
-    addItProduct
-} from "../apis/itProducts";
+import { useMutation, useQueryClient } from "react-query";
+import { addItProduct } from "../apis/itProducts";
 import { IT_PRODUCTS_KEY } from "../lib/constants";
 
 export const useAddItProduct = () => {
@@ -24,4 +22,3 @@ export const useAddItProduct = () => {
     },
   });
 };
-

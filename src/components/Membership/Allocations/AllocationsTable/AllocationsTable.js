@@ -1,14 +1,6 @@
 import React from "react";
-import {
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-} from "@chakra-ui/react";
+import { Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
 import classes from "./AllocationsTable.module.css";
-
 
 const AllocationsData = [
   {
@@ -49,20 +41,19 @@ const AllocationsData = [
   },
 ];
 
-export  const TableHeadColumn = (props) => {
-    const { title, secondaryText } = props;
-    return (
-      <Th>
-        {title}
-        {secondaryText && (
-          <div className={classes.title_secondary_text}>{secondaryText}</div>
-        )}
-      </Th>
-    );
-  };
+export const TableHeadColumn = (props) => {
+  const { title, secondaryText } = props;
+  return (
+    <Th>
+      {title}
+      {secondaryText && (
+        <div className={classes.title_secondary_text}>{secondaryText}</div>
+      )}
+    </Th>
+  );
+};
 
 const AllocationsTable = () => {
-
   return (
     <div className={classes.allocations_table_wrapper}>
       <Table variant="simple">
