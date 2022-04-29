@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import withForm from "../../../../hoc/withForm";
-import { IconButton, Input, Textarea } from "@chakra-ui/react";
+import { IconButton } from "@chakra-ui/react";
 import InputField from "../../../common/UI/InputField/InputField";
 // import SelectField from "../../../common/SelectField";
 import TextAreaField from "../../../common/TextAreaField";
@@ -12,9 +12,9 @@ import classes from "./Form.module.css";
 import Button from "../../UI/Button/Button";
 
 const Form = (props) => {
-  const { onClose, title, setFieldValue, members, isLoading, isSubmitting } = props;
- 
-  
+  const { onClose, title, setFieldValue, members, isLoading, isSubmitting } =
+    props;
+
   return (
     <div
       className={classes.fida__email_form_wrapper}
@@ -62,7 +62,9 @@ const Form = (props) => {
 
         <div className={classes.fida__email_footer}>
           <div className={classes.fida_email_send_actions}>
-            <Button type="submit" disabled={isSubmitting}>Send</Button>
+            <Button type="submit" disabled={isSubmitting}>
+              Send
+            </Button>
             <svg
               width="23"
               height="23"
