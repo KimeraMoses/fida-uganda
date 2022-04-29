@@ -17,6 +17,7 @@ export const REPORTS_KEY = "reports";
 export const EVENTS_KEY = "events";
 export const PATIENTS_KEY = "patients";
 export const FLEET_MANAGEMENT_KEY = "fleet_management";
+export const ALLOCATIONS_KEY = "allocations key";
 export const PROJECT_PROGRESS = "project_progress";
 export const PROJECT_MANAGEMENT = "project_management";
 export const PROJECT_LOG_FRAMES_KEY = "project_log_frames";
@@ -30,6 +31,7 @@ export const PAYROLL_KEY = "payroll";
 export const PAYROLL_NOTES_KEY = "payroll_notes";
 export const EMPLOYEES_KEY = "employees";
 export const ADVANCES_KEY = "advances";
+export const IT_PRODUCTS_KEY = "it_products";
 
 export const REQUISITIONS_STATS = "requisitions/stats";
 export const TRAVEL_ORDER_STATS = "travel_orders/stats";

@@ -15,12 +15,12 @@ export const itProductOrderSchema = yup.object().shape({
 });
 
 export const itProductInitialValues = {
-  journey_start_time: "",
-  journey_end_time: "",
-  purpose: "",
-  date_requested: "",
-  destination: "",
-  project: "",
-  project_activity: "",
-  pickup_location: "",
+  project_name: "",
+  type: "",
+  budget_year: "",
+  unit_price: "",
+  subject_of_procurement: "",
+  date_required: "",
+  delivery_location: "",
+  num_units: "",
 };

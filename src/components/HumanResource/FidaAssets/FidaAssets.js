@@ -1,29 +1,17 @@
-import { useDisclosure, useToast } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import { useDisclosure } from "@chakra-ui/react";
 import Modal from "../../common/Modal";
 import SectionHeader from "../../common/SectionHeader";
 import TableSearch from "../../common/table/TableSearch";
 import FidaAssetsTable from "./FidaAssetsTable/FidaAssetsTable";
 import NewAsset from "./NewAsset/NewAsset";
 import { useAddAsset, useAssets } from "../../../hooks/useAsset";
-import { toastSuccess } from "../../../lib/toastDetails";
 import { useProjectOptions } from "../../../hooks/useProjects";
+import { assetInitialValues } from "./NewAsset/schema";
 
 const FidaAssets = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const toast = useToast();
-  const { data } = useAssets();
-  const { mutate, isLoading, isError, isSuccess, error } = useAddAsset();
+  const { data, isLoading } = useAssets();
   const projectOptions = useProjectOptions();
-
-  useEffect(() => {
-    if (isSuccess) {
-      toast(toastSuccess("Asset added successfully"));
-      onClose();
-    }
-  }, [isSuccess, toast, onClose]);
-  // const [searchTerm, setSearchTerm] = useState("");
-  // const [searchResults, setSearchResults] = useState([]);
 
   // const userSearchHandler = (e) => {
   //   const { value } = e.target;
@@ -56,6 +44,7 @@ const FidaAssets = () => {
       {data?.assets && (
         <FidaAssetsTable
           data={data?.assets}
+          isLoading={isLoading}
           // searchResults={searchResults}
         />
       )}
@@ -66,11 +55,12 @@ const FidaAssets = () => {
         size="3xl"
       >
         <NewAsset
-          onSubmit={mutate}
-          isError={isError}
-          error={error}
-          isSubmitting={isLoading}
           projectOptions={projectOptions}
+          initialValues={assetInitialValues}
+          // validationSchema={assetSchema}
+          onSuccess={onClose}
+          success={`Asset added successfully`}
+          useMutate={useAddAsset}
         />
       </Modal>
     </>

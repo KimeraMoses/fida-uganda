@@ -1,4 +1,5 @@
 import React from "react";
+import withForm from "../../../../hoc/withForm";
 import classes from "./NewActivityForm.module.css";
 import { Textarea } from "@chakra-ui/react";
 import InputField from "../../../common/UI/InputField/InputField";
@@ -8,7 +9,6 @@ const NewActivityForm = props => {
   const { onClose } = props;
   return (
     <div className={classes.activity_form_wrapper}>
-      <form>
         <div className={classes.input_group_wrapper}>
           <div className={classes.input_label}>Member Name</div>
           <div className={classes.input_field_wrapper}>
@@ -60,9 +60,8 @@ const NewActivityForm = props => {
             Save
           </FormButton>
         </div>
-      </form>
     </div>
   );
 };
 
-export default NewActivityForm;
+export default withForm(NewActivityForm);

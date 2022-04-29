@@ -2,9 +2,14 @@ import React from "react";
 import { useDisclosure } from "@chakra-ui/react";
 import SectionHeader from "../../common/SectionHeader";
 import TableSearch from "../../common/table/TableSearch";
-import FleetDatabaseForm from "../../forms/it/AddITProductForm";
+import ITProductForm from "../../forms/it/AddITProductForm";
+import {
+  itProductInitialValues,
+  itProductOrderSchema,
+} from "../../forms/it/schemas/it";
 import Modal from "../../common/Modal";
 import CommonTable from "../CommonTable/CommonTable";
+import { useAddItProduct } from "../../../hooks/useItProduct";
 
 const Productdata = [
   {
@@ -34,11 +39,7 @@ const Productdata = [
 ];
 
 const ITProducts = () => {
-  // const [data, setData] = useState([])
-
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  // const onRowClick = (row) => { };
   return (
     <>
       <SectionHeader title="IT Products" />
@@ -50,11 +51,14 @@ const ITProducts = () => {
         onClose={onClose}
         title="IT Product Requisition Form"
       >
-        <FleetDatabaseForm
-        // onSubmit={mutate}
-        // isSubmitting={isSubmitting}
-        // isError={isError}
-        // error={error}
+        <ITProductForm
+          title="Allocations"
+          initialValues={itProductInitialValues}
+          // validationSchema={itProductOrderSchema}
+          onSuccess={onClose}
+          success={`IT Product added successfully`}
+          useMutate={useAddItProduct}
+          
         />
       </Modal>
     </>

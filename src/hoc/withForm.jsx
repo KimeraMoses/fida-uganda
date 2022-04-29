@@ -47,13 +47,14 @@ const withForm = (FormComponent) => {
           mutate(values);
         }}
       >
-        {({ values }) => (
+        {({ values, setFieldValue }) => (
           <Form>
             <FormComponent
               values={values}
               isSubmitting={isLoading}
               isEditing={isEditing}
               {...rest}
+              setFieldValue={setFieldValue}
             />
           </Form>
         )}
