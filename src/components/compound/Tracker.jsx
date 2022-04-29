@@ -2,10 +2,13 @@ import React from "react";
 import SectionHeader from "../common/SectionHeader";
 import LeaveTracker from "./LeaveTracker";
 import { Box, Button, useDisclosure } from "@chakra-ui/react";
+import {addAdvance} from "../../apis/advances";
 import Modal from "../common/Modal";
 import AdvanceTrackerTable from "../dashboard/AdvanceTracker/AdvanceTrackerTable";
 import AdvancedRequestForm from "../dashboard/AdvanceTracker/AdvancedTrackerForm/AdvancedRequestForm";
+import {initialValues, advanceRequestFormSchema} from "../dashboard/AdvanceTracker/AdvancedTrackerForm/schema";
 import { useNavigate } from "react-router-dom";
+import { useAddAdvance } from "../../hooks/useAdvances";
 
 const Tracker = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -33,7 +36,14 @@ const Tracker = () => {
         </div>
       </Box>
       <Modal isOpen={isOpen} onClose={onClose} title="Advance Request Form">
-        <AdvancedRequestForm onClose={onClose} />
+        <AdvancedRequestForm
+          onClose={onClose}
+          initialValues={initialValues}
+          // validationSchema={advanceRequestFormSchema}
+          onSuccess={onClose}
+          success={`Advance request added successfully`}
+          useMutate={useAddAdvance}
+        />
       </Modal>
     </>
   );
