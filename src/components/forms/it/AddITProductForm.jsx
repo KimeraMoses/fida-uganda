@@ -4,7 +4,7 @@ import withForm from "../../../hoc/withForm";
 // import { itProductInitialValues, itProductOrderSchema } from "./schemas/it";
 import InputField from "../../common/UI/InputField/InputField";
 
-const ITProductForm = () => {
+const ITProductForm = ({isSubmitting}) => {
   return (
     <SimpleGrid p={5} gap={3}>
       <SimpleGrid columns={2} gap={5}>
@@ -42,6 +42,7 @@ const ITProductForm = () => {
         size="lg"
         w="100%"
         color="white"
+        disabled={isSubmitting}
       >
         Add Requisition
       </Button>

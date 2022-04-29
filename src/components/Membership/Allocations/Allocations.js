@@ -29,7 +29,6 @@ const Allocations = () => {
           success={`Allocation added successfully`}
           useMutate={useAddAllocation}
           members={data && data.memebers}
-          isLoading={isLoading}
         />
       )}
     </>

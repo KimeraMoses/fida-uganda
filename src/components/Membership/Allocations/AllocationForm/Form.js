@@ -12,17 +12,9 @@ import classes from "./Form.module.css";
 import Button from "../../UI/Button/Button";
 
 const Form = (props) => {
-  const { onClose, title, setFieldValue, members, isLoading } = props;
-  const [values, setValues] = useState({
-    recipients: [],
-    subject: "",
-    body: "",
-  });
-  const onChangeHandler = (e) => {
-    const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
-  };
-  console.log(onClose);
+  const { onClose, title, setFieldValue, members, isLoading, isSubmitting } = props;
+ 
+  
   return (
     <div
       className={classes.fida__email_form_wrapper}
@@ -70,7 +62,7 @@ const Form = (props) => {
 
         <div className={classes.fida__email_footer}>
           <div className={classes.fida_email_send_actions}>
-            <Button type="submit">Send</Button>
+            <Button type="submit" disabled={isSubmitting}>Send</Button>
             <svg
               width="23"
               height="23"
