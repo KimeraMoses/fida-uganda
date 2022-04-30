@@ -4,7 +4,6 @@ import TableSearch from "../../common/table/TableSearch";
 import HRApprovedTable from "./ApprovalTable/ApprovedTable";
 
 const HRApprovals = () => {
-
   return (
     <div>
       <SectionHeader title="Approvals" />

@@ -37,6 +37,7 @@ const DropdownInputField = (props) => {
                           onClick={() => itemClickHandler(result)}
                           key={result.id}
                         >
+                          {/* {result.render ? result.render : result.value} */}
                           {result.name}
                         </li>
                       );

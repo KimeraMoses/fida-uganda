@@ -10,8 +10,8 @@ import { toastError } from "../../../lib/toastDetails";
 import { taskInitialValues, taskSchema } from "./taskSchema";
 import MultiUpload from "../../common/MultiUpload";
 import { DepartmentButton } from "../TaskCard/TaskCard";
-import DropdownInputField from "../../common/UI/DropdownInputField/DropdownInputField";
 import { useUsers } from "../../../hooks/useUser";
+import MultSelect from "./MultSelect";
 
 const Tags = [
   { name: "Legal Aid", color: "primary" },
@@ -19,71 +19,45 @@ const Tags = [
   { name: "Court processors", color: "tartiary" },
 ];
 
-let tags = [];
 let outlines = [];
-let team = [];
 
 const NewTaskForm = ({ onSubmit, error, isError, isSubmitting }) => {
   const users = useUsers();
   const [files, setFiles] = useState([]);
   const toast = useToast();
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-  const [search, setSearch] = useState("");
-  const [results, setResults] = useState([]);
-  const [show, setShow] = useState(false);
+  // const [searchTerm, setSearchTerm] = useState("");
+  // const [searchResults, setSearchResults] = useState([]);
+  // const [search, setSearch] = useState("");
+  // const [results, setResults] = useState([]);
+  // const [show, setShow] = useState(false);
   const [outline, setOutLine] = useState("");
 
+  console.log(users);
   const outlineHandler = (e) => {
     e.preventDefault();
     outlines.push(outline);
     setOutLine("");
   };
 
-  const keyWordHandler = (e) => {
-    setShow(false);
-    const { value } = e.target;
-    setSearchTerm(value);
-
-    if (searchTerm !== "") {
-      const Results = Tags.filter((Result) => {
-        return Object.values(Result)
-          .join(" ")
-          .replace(/-/g, " ")
-          .toLowerCase()
-          .includes(searchTerm.toLowerCase());
-      });
-      setSearchResults(Results);
-    }
-  };
-
+  let tags = [];
   const selectedItemHandler = (result) => {
+    console.log(result);
     tags.push(result);
-    setSearchTerm("");
-    setShow(true);
-  };
-
-  const teamHandler = (e) => {
-    setShow(false);
-    const { value } = e.target;
-    setSearch(value);
-
-    if (search !== "") {
-      const results = users.filter((result) => {
-        return Object.values(result)
-          .join(" ")
-          .replace(/-/g, " ")
-          .toLowerCase()
-          .includes(searchTerm.toLowerCase());
-      });
-      setResults(results);
+    const index = tags.findIndex((object) => object.name === result.name);
+    if (index === -1) {
+      tags.push(result);
     }
+    console.log(tags);
   };
 
+  let team = [];
   const selectedTeamHandler = (result) => {
-    team.push(result);
-    setSearchTerm("");
-    setShow(true);
+    console.log(result);
+    const index = team.findIndex((object) => object.value === result.value);
+    if (index === -1) {
+      team.push(result);
+    }
+    console.log(team);
   };
 
   useEffect(() => {
@@ -91,6 +65,8 @@ const NewTaskForm = ({ onSubmit, error, isError, isSubmitting }) => {
       toast(toastError(error));
     }
   }, [isError, error, toast]);
+
+  // useEffect(() => {}, [tags, team]);
 
   return (
     <Formik
@@ -161,13 +137,10 @@ const NewTaskForm = ({ onSubmit, error, isError, isSubmitting }) => {
                   );
                 })}
               </div>
-              <DropdownInputField
+              <MultSelect
+                data={Tags}
+                selectedItemHandler={selectedItemHandler}
                 placeholder="Type tag name e.g. Court Case"
-                keyWordHandler={keyWordHandler}
-                searchTerm={searchTerm}
-                searchResults={searchResults}
-                isSelected={show}
-                itemClickHandler={selectedItemHandler}
               />
             </div>
             <div className={styles.tag_wrapper}>
@@ -175,16 +148,11 @@ const NewTaskForm = ({ onSubmit, error, isError, isSubmitting }) => {
                 <AttachmentIcon />
                 Team
               </h6>
-              <div className={styles.team}>
-                <DropdownInputField
-                  placeholder="Type team member name"
-                  keyWordHandler={teamHandler}
-                  searchTerm={search}
-                  searchResults={results}
-                  isSelected={show}
-                  itemClickHandler={selectedTeamHandler}
-                />
-              </div>
+              <MultSelect
+                data={users}
+                selectedItemHandler={selectedTeamHandler}
+                placeholder="Type team member name"
+              />
             </div>
           </SimpleGrid>
           <div className={styles.asset_outline_wrapper}>

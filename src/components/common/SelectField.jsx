@@ -8,7 +8,7 @@ import { Field } from "formik";
 
 const SelectField = ({ label, name, options, ...rest }) => {
   return (
-    <Field name={name}>
+    <Field name={name} style={{ width: "100%" }}>
       {({ field, form }) => (
         <FormControl>
           <FormLabel htmlFor="country">{label}</FormLabel>
@@ -22,6 +22,7 @@ const SelectField = ({ label, name, options, ...rest }) => {
                     {...field}
                     value={option.value}
                     checked={field.value === option.value}
+                    style={{ textOverflow: "ellipsis", maxWidth: "100%" }}
                   >
                     {option.label}
                   </option>
