@@ -58,3 +58,6 @@
   border-radius: 50%;
   background-color: var(--primary_color);
 }
+.tag_wrapper {
+  width: 100%;
+}

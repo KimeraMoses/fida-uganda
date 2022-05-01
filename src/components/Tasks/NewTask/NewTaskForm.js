@@ -9,14 +9,13 @@ import { Heading, SimpleGrid, useToast } from "@chakra-ui/react";
 import { toastError } from "../../../lib/toastDetails";
 import { taskInitialValues, taskSchema } from "./taskSchema";
 import MultiUpload from "../../common/MultiUpload";
-import { DepartmentButton } from "../TaskCard/TaskCard";
 import { useUsers } from "../../../hooks/useUser";
-import MultSelect from "./MultSelect";
+import SelectInput from "./../../Membership/Allocations/AllocationForm/SelectInput";
 
 const Tags = [
-  { name: "Legal Aid", color: "primary" },
-  { name: "Court case", color: "secondary" },
-  { name: "Court processors", color: "tartiary" },
+  { label: "Legal Aid", value: "legal aid" },
+  { label: "Court case", value: "court case" },
+  { label: "Court processors", value: "court processors" },
 ];
 
 let outlines = [];
@@ -25,40 +24,23 @@ const NewTaskForm = ({ onSubmit, error, isError, isSubmitting }) => {
   const users = useUsers();
   const [files, setFiles] = useState([]);
   const toast = useToast();
-  // const [searchTerm, setSearchTerm] = useState("");
-  // const [searchResults, setSearchResults] = useState([]);
-  // const [search, setSearch] = useState("");
-  // const [results, setResults] = useState([]);
-  // const [show, setShow] = useState(false);
   const [outline, setOutLine] = useState("");
 
-  console.log(users);
   const outlineHandler = (e) => {
     e.preventDefault();
     outlines.push(outline);
     setOutLine("");
   };
-
-  let tags = [];
-  const selectedItemHandler = (result) => {
-    console.log(result);
-    tags.push(result);
-    const index = tags.findIndex((object) => object.name === result.name);
-    if (index === -1) {
-      tags.push(result);
-    }
-    console.log(tags);
-  };
-
-  let team = [];
-  const selectedTeamHandler = (result) => {
-    console.log(result);
-    const index = team.findIndex((object) => object.value === result.value);
-    if (index === -1) {
-      team.push(result);
-    }
-    console.log(team);
-  };
+  let userArray = [];
+  users &&
+    users.forEach((user) => {
+      if (user.name) {
+        userArray.push({
+          label: user.name,
+          value: user.value,
+        });
+      }
+    });
 
   useEffect(() => {
     if (isError) {
@@ -66,14 +48,11 @@ const NewTaskForm = ({ onSubmit, error, isError, isSubmitting }) => {
     }
   }, [isError, error, toast]);
 
-  // useEffect(() => {}, [tags, team]);
-
   return (
     <Formik
       initialValues={taskInitialValues}
       validationSchema={taskSchema}
       onSubmit={(values) => {
-        values.tags = tags.map((tag) => tag.name);
         values.outlines = outlines;
         onSubmit(values);
       }}
@@ -130,29 +109,28 @@ const NewTaskForm = ({ onSubmit, error, isError, isSubmitting }) => {
               <h6>
                 <AttachmentIcon /> Add Tags
               </h6>
-              <div className={styles.tags}>
-                {tags.map((tag) => {
-                  return (
-                    <DepartmentButton title={tag.name} btnColor={tag.color} />
-                  );
-                })}
+              <div style={{ marginRight: 10 }}>
+                <SelectInput
+                  name="tags"
+                  onChange={(value) => console.log("tags", value)}
+                  options={Tags}
+                  placeholder="Select tags"
+                />
               </div>
-              <MultSelect
-                data={Tags}
-                selectedItemHandler={selectedItemHandler}
-                placeholder="Type tag name e.g. Court Case"
-              />
             </div>
             <div className={styles.tag_wrapper}>
               <h6>
                 <AttachmentIcon />
                 Team
               </h6>
-              <MultSelect
-                data={users}
-                selectedItemHandler={selectedTeamHandler}
-                placeholder="Type team member name"
-              />
+              <div style={{ marginLeft: 10 }}>
+                <SelectInput
+                  name="teams"
+                  onChange={(value) => console.log("teams", value)}
+                  options={userArray}
+                  placeholder="Select teams"
+                />
+              </div>
             </div>
           </SimpleGrid>
           <div className={styles.asset_outline_wrapper}>
@@ -193,10 +171,10 @@ const NewTaskForm = ({ onSubmit, error, isError, isSubmitting }) => {
             <FormButton
               variant="colored"
               rounded={true}
-              isSubmitting={isSubmitting}
+              disabled={isSubmitting}
               type="submit"
             >
-              Add Task
+              {isSubmitting ? "Adding..." : "Add Task"}
             </FormButton>
           </div>
         </Form>

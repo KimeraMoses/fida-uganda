@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css";
 import styles from "../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css";
 import { SimpleGrid } from "@chakra-ui/react";
@@ -6,16 +6,59 @@ import SelectField from "../../../common/SelectField";
 import InputField from "../../../common/UI/InputField/InputField";
 import FormButton from "../../../common/UI/FormButton/FormButton";
 import withForm from "../../../../hoc/withForm";
+import DropdownInputField from "./../../../common/UI/DropdownInputField/DropdownInputField";
+import { ClientsData } from "./../ClientsTable/ClientsTable";
 
 const NewClientForm = ({ isSubmitting }) => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [selectedItem, setSelectedItem] = useState("");
+  const [show, setShow] = useState(false);
+
+  const keyWordHandler = (e) => {
+    setShow(false);
+    const { value } = e.target;
+    setSearchTerm(value);
+
+    if (searchTerm !== "") {
+      const Results = ClientsData.filter((Result) => {
+        return Object.values(Result)
+          .join(" ")
+          .replace(/-/g, " ")
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase());
+      });
+      setSearchResults(Results);
+    }
+  };
+
+  const selectedItemHandler = (result) => {
+    setSelectedItem(result.name);
+    setSearchTerm("");
+    setShow(true);
+  };
+
   return (
     <div className={classes.form_wrapper}>
       <div className={classes.field_wrapper}>
         <SimpleGrid columns={2} spacing={1} style={{ alignItems: "center" }}>
           <div className={styles.field_row_label}>Name</div>
-          <InputField placeholder="Type Here" name="name" fullwidth />
+          <DropdownInputField
+            placeholder="Type client Name"
+            keyWordHandler={keyWordHandler}
+            searchTerm={searchTerm}
+            searchResults={searchResults}
+            selectedItem={selectedItem}
+            isSelected={show}
+            itemClickHandler={selectedItemHandler}
+            name="name"
+          />
         </SimpleGrid>
-        <SimpleGrid columns={2} spacing={1} style={{ alignItems: "center" }}>
+        <SimpleGrid
+          columns={2}
+          spacing={1}
+          style={{ alignItems: "center", marginBottom: 10 }}
+        >
           <div className={styles.field_row_label}>Sex</div>
           <SelectField
             name="sex"
