@@ -10,6 +10,7 @@ const DropdownInputField = (props) => {
     searchResults,
     itemClickHandler,
     placeholder,
+    name,
   } = props;
 
   return (
@@ -18,7 +19,7 @@ const DropdownInputField = (props) => {
         <InputField
           placeholder={placeholder}
           type="search"
-          name="search"
+          name={name}
           fullwidth={true}
           disabled={false}
           value={isSelected ? selectedItem : searchTerm}
@@ -37,7 +38,6 @@ const DropdownInputField = (props) => {
                           onClick={() => itemClickHandler(result)}
                           key={result.id}
                         >
-                          {/* {result.render ? result.render : result.value} */}
                           {result.name}
                         </li>
                       );

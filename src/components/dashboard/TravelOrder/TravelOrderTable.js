@@ -1,11 +1,17 @@
 import React from "react";
-import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
+import { Table, Thead, Tbody, Tr, Td, IconButton } from "@chakra-ui/react";
 import classes from "./Table.module.css";
 import { TableHeadColumn } from "../../HumanResource/Approvals/ApprovalTable/ApprovedTable";
 import { formatDate } from "../../../lib/data";
+import { useNavigate } from "react-router-dom";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
 
 const TravelOrderTable = ({ data }) => {
   // console.log(data);
+  const navigate = useNavigate();
+  const handleViewSummary = (name) => {
+    navigate(`/travel-order/${name}`);
+  };
   return (
     <>
       <div className={classes.table_wrapper}>
@@ -23,6 +29,7 @@ const TravelOrderTable = ({ data }) => {
               <TableHeadColumn title="Stage" />
               <TableHeadColumn title="Status" />
               <TableHeadColumn title="Date of Application" />
+              <TableHeadColumn title="Actions" />
             </Tr>
           </Thead>
           <Tbody>
@@ -36,6 +43,16 @@ const TravelOrderTable = ({ data }) => {
                     <Td>{item.DOPApprovalStatus}</Td>
                     <Td>{item.DOPApprovalStatus}</Td>
                     <Td>{formatDate(item.updateAt)}</Td>
+                    <Td>
+                      <div className={classes.table_actions_icon_wrapper}>
+                        <IconButton
+                          size="xs"
+                          aria-label="View Item"
+                          icon={<MdOutlineRemoveRedEye />}
+                          onClick={() => handleViewSummary(item.id)}
+                        />
+                      </div>
+                    </Td>
                   </Tr>
                 );
               })}

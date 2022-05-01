@@ -9,6 +9,8 @@
 }
 .table_header th {
   font-size: 15px;
+  font-weight: 700;
+  color: #000000;
 }
 
 .approval_table td:last-child {

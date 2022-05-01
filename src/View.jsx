@@ -40,7 +40,7 @@ import ITComplaints from "./components/itDepartment/Complaints/ITComplaints";
 import Employees from "./components/HumanResource/EmployeeContract/Employees";
 import EventAttendence from "./components/dashboard/EventsAttendence/EventAttendence";
 import ReportFiles from "./components/HumanResource/Reports/ReportFiles/ReportFiles";
-import LeaveApplicationSummary from "./components/dashboard/LeaveTracker/LeaveApplicationSummary/LeaveApplicationSummary";
+import SummaryDetails from "./components/dashboard/SummaryDetails/SummaryDetails";
 
 const View = () => {
   return (
@@ -56,10 +56,7 @@ const View = () => {
         <Route index element={<Dashboard />} />
         <Route path="tasks" element={<Tasks />} />
         <Route path="leave-advance-tracker" element={<Tracker />} />
-        <Route
-          path="application-summary"
-          element={<LeaveApplicationSummary />}
-        />
+        <Route path="application-summary" element={<SummaryDetails />} />
         <Route path="events-attendance" element={<EventAttendence />} />
         <Route path="clients" element={<Clients />} />
         <Route path="clients-files" element={<ClientFiles />} />
@@ -70,7 +67,15 @@ const View = () => {
         <Route path="clv-case-files" element={<ClvCaseFiles />} />
         <Route path="clv-database" element={<ClvDatabase />} />
         <Route path="requisitions" element={<Requisitions />} />
+        <Route
+          path="requisitions/:reqName"
+          element={<SummaryDetails type="requisition" />}
+        />
         <Route path="travel-order" element={<TravelOrder />} />
+        <Route
+          path="travel-order/:travelName"
+          element={<SummaryDetails type="travel" />}
+        />
         <Route path="members" element={<Members />} />
         <Route path="members-activities" element={<MembersActivities />} />
         <Route path="allocations" element={<Allocations />} />

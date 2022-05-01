@@ -7,8 +7,8 @@ import ActionButtons from "../../../../Membership/Members/NewMemberForm/MultiFor
 import { Form, Formik } from "formik";
 import { caseFileObject, caseFileSchema } from "./schema";
 import SelectField from "./../../../../common/SelectField";
-import DropdownInputField from "../../../../common/UI/DropdownInputField/DropdownInputField";
 import { toastError } from "../../../../../lib/toastDetails";
+import SearchableField from "./../../../../common/UI/SearchableField/SearchableField";
 
 const ClientsData = [
   {
@@ -49,34 +49,8 @@ const MultForm1 = ({
 }) => {
   const toast = useToast();
   const initialValues = caseFileObject(caseFile);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-  const [selectedItem, setSelectedItem] = useState("");
-  const [show, setShow] = useState(false);
-
-  const keyWordHandler = (e) => {
-    setShow(false);
-    const { value } = e.target;
-    setSearchTerm(value);
-
-    if (searchTerm !== "") {
-      const Results = ClientsData.filter((Result) => {
-        return Object.values(Result)
-          .join(" ")
-          .replace(/-/g, " ")
-          .toLowerCase()
-          .includes(searchTerm.toLowerCase());
-      });
-      setSearchResults(Results);
-    }
-  };
-
-  const selectedItemHandler = (result) => {
-    console.log(result);
-    setSelectedItem(result.name);
-    setSearchTerm("");
-    setShow(true);
-  };
+  const [selectedClvName, setSelectedClvName] = useState("");
+  const [selectedClient, setSelectedClient] = useState("");
 
   useEffect(() => {
     if (isErrorAddingCaseFile) {
@@ -113,7 +87,14 @@ const MultForm1 = ({
                     spacing={2}
                     style={{ alignItems: "center" }}
                   >
-                    <InputField placeholder="CLV Name" name="clvName" />
+                    <SearchableField
+                      placeholder="CLV Name"
+                      data={ClientsData}
+                      setSelectedItem={setSelectedClvName}
+                      selectedItem={selectedClvName.name}
+                      name="clvName"
+                    />
+
                     <InputField placeholder="CLV ID number" name="clvId" />
                     <InputField
                       placeholder="Project of Attachment"
@@ -141,16 +122,14 @@ const MultForm1 = ({
                   style={{ alignItems: "center" }}
                 >
                   <div className={styles.field_row_label}>Name</div>
-                  <DropdownInputField
+                  <SearchableField
                     placeholder="Type client Name"
-                    keyWordHandler={keyWordHandler}
-                    searchTerm={searchTerm}
-                    searchResults={searchResults}
-                    selectedItem={selectedItem}
-                    isSelected={show}
-                    itemClickHandler={selectedItemHandler}
-                    name="complainantName"
+                    data={ClientsData}
+                    setSelectedItem={setSelectedClient}
+                    selectedItem={selectedClient.name}
+                    name="complainantNamee"
                   />
+
                   <InputField
                     placeholder="Type Here"
                     name="respondentName"
@@ -160,7 +139,7 @@ const MultForm1 = ({
                 <SimpleGrid
                   columns={3}
                   spacing={2}
-                  style={{ alignItems: "center" }}
+                  style={{ alignItems: "center", marginBottom: 10 }}
                 >
                   <div className={styles.field_row_label}>Sex</div>
                   <SelectField

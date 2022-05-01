@@ -6,51 +6,22 @@ import SelectField from "../../../common/SelectField";
 import InputField from "../../../common/UI/InputField/InputField";
 import FormButton from "../../../common/UI/FormButton/FormButton";
 import withForm from "../../../../hoc/withForm";
-import DropdownInputField from "./../../../common/UI/DropdownInputField/DropdownInputField";
 import { ClientsData } from "./../ClientsTable/ClientsTable";
+import SearchableField from "./../../../common/UI/SearchableField/SearchableField";
 
 const NewClientForm = ({ isSubmitting }) => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
   const [selectedItem, setSelectedItem] = useState("");
-  const [show, setShow] = useState(false);
-
-  const keyWordHandler = (e) => {
-    setShow(false);
-    const { value } = e.target;
-    setSearchTerm(value);
-
-    if (searchTerm !== "") {
-      const Results = ClientsData.filter((Result) => {
-        return Object.values(Result)
-          .join(" ")
-          .replace(/-/g, " ")
-          .toLowerCase()
-          .includes(searchTerm.toLowerCase());
-      });
-      setSearchResults(Results);
-    }
-  };
-
-  const selectedItemHandler = (result) => {
-    setSelectedItem(result.name);
-    setSearchTerm("");
-    setShow(true);
-  };
 
   return (
     <div className={classes.form_wrapper}>
       <div className={classes.field_wrapper}>
         <SimpleGrid columns={2} spacing={1} style={{ alignItems: "center" }}>
           <div className={styles.field_row_label}>Name</div>
-          <DropdownInputField
-            placeholder="Type client Name"
-            keyWordHandler={keyWordHandler}
-            searchTerm={searchTerm}
-            searchResults={searchResults}
-            selectedItem={selectedItem}
-            isSelected={show}
-            itemClickHandler={selectedItemHandler}
+          <SearchableField
+            placeholder="Client Name"
+            data={ClientsData}
+            setSelectedItem={setSelectedItem}
+            selectedItem={selectedItem.name}
             name="name"
           />
         </SimpleGrid>
