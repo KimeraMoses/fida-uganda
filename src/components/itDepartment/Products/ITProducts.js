@@ -3,10 +3,7 @@ import { useDisclosure } from "@chakra-ui/react";
 import SectionHeader from "../../common/SectionHeader";
 import TableSearch from "../../common/table/TableSearch";
 import ITProductForm from "../../forms/it/AddITProductForm";
-import {
-  itProductInitialValues,
-  itProductOrderSchema,
-} from "../../forms/it/schemas/it";
+import { itProductInitialValues } from "../../forms/it/schemas/it";
 import Modal from "../../common/Modal";
 import ITProductsTable from "./ITProductsTable";
 import { useAddItProduct, useItProducts} from "../../../hooks/useItProduct";
@@ -62,7 +59,6 @@ const ITProducts = () => {
           onSuccess={onClose}
           success={`IT Product added successfully`}
           useMutate={useAddItProduct}
-          
         />
       </Modal>
     </>

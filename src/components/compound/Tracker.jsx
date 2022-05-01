@@ -2,11 +2,11 @@ import React from "react";
 import SectionHeader from "../common/SectionHeader";
 import LeaveTracker from "./LeaveTracker";
 import { Box, Button, useDisclosure } from "@chakra-ui/react";
-import {addAdvance} from "../../apis/advances";
+// import {addAdvance} from "../../apis/advances";
 import Modal from "../common/Modal";
 import AdvanceTrackerTable from "../dashboard/AdvanceTracker/AdvanceTrackerTable";
 import AdvancedRequestForm from "../dashboard/AdvanceTracker/AdvancedTrackerForm/AdvancedRequestForm";
-import {initialValues, advanceRequestFormSchema} from "../dashboard/AdvanceTracker/AdvancedTrackerForm/schema";
+import { initialValues } from "../dashboard/AdvanceTracker/AdvancedTrackerForm/schema";
 import { useNavigate } from "react-router-dom";
 import { useAddAdvance } from "../../hooks/useAdvances";
 
