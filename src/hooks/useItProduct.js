@@ -1,9 +1,14 @@
 import produce from "immer";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
-    addItProduct
+    addItProduct,
+    getAllItProducts
 } from "../apis/itProducts";
 import { IT_PRODUCTS_KEY } from "../lib/constants";
+
+export const useItProducts = () => {
+  return useQuery(IT_PRODUCTS_KEY, getAllItProducts);
+};
 
 export const useAddItProduct = () => {
   const queryClient = useQueryClient();
