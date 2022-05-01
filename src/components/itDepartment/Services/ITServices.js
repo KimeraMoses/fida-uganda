@@ -2,9 +2,13 @@ import React from "react";
 import { useDisclosure } from "@chakra-ui/react";
 import SectionHeader from "../../common/SectionHeader";
 import TableSearch from "../../common/table/TableSearch";
-import FleetDatabaseForm from "../../forms/it/AddITProductForm";
+import AddITServiceForm from "../../forms/it/AddITServiceForm";
 import Modal from "../../common/Modal";
-import CommonTable from "../CommonTable/CommonTable";
+import ITServicesTable from "./ITServicesTable";
+import {useItServices, useAddItService} from "../../../hooks/useItServices";
+import {
+  itServicesInitialValues,
+} from "../../forms/it/schemas/it";
 
 const Servicesdata = [
   {
@@ -37,23 +41,26 @@ const ITServices = () => {
   // const [data, setData] = useState([])
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { data, isLoading } = useItServices();
 
   return (
     <>
       <SectionHeader title="IT Services" />
       <TableSearch btnLabel="Add Service" btnClick={onOpen} />
-      <CommonTable data={Servicesdata} />
+      <ITServicesTable data={data?.services} />
 
       <Modal
         isOpen={isOpen}
         onClose={onClose}
-        title="IT Product Requisition Form"
+        title="Service Requisition Form"
       >
-        <FleetDatabaseForm
-        // onSubmit={mutate}
-        // isSubmitting={isSubmitting}
-        // isError={isError}
-        // error={error}
+        <AddITServiceForm
+              title="Allocations"
+              initialValues={itServicesInitialValues}
+              // validationSchema={itProductOrderSchema}
+              onSuccess={onClose}
+              success={`IT Service added successfully`}
+              useMutate={useAddItService}
         />
       </Modal>
     </>
