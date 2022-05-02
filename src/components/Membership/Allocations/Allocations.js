@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDisclosure } from "@chakra-ui/react";
 import SectionHeader from "../../common/SectionHeader";
 import TableSearch from "../../common/table/TableSearch";
 import Form from "../Allocations/AllocationForm/Form";
 import AllocationsTable from "./AllocationsTable/AllocationsTable";
 // import { allocationFormSchema } from "./AllocationForm/schema";
-import { useAddAllocation } from "../../../hooks/useAllocations";
+import { useAddAllocation, useAllocations } from "../../../hooks/useAllocations";
 import { useMembers } from "../../../hooks/useMember";
 
 const Allocations = () => {
@@ -14,11 +14,13 @@ const Allocations = () => {
 
   const { data } = useMembers();
 
+ const {data:  allocations, isLoading, error} = useAllocations();
+ console.log(allocations, 'allcoations')
   return (
     <>
       <SectionHeader title="Allocations" />
       <TableSearch btnLabel="Send Allocation" btnClick={onOpen} />
-      <AllocationsTable />
+      <AllocationsTable allocations={allocations} isLoading={isLoading} />
       {isOpen && (
         <Form
           onClose={onClose}
