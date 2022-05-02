@@ -5,7 +5,10 @@ import TableSearch from "../../common/table/TableSearch";
 import Form from "../Allocations/AllocationForm/Form";
 import AllocationsTable from "./AllocationsTable/AllocationsTable";
 // import { allocationFormSchema } from "./AllocationForm/schema";
-import { useAddAllocation, useAllocations } from "../../../hooks/useAllocations";
+import {
+  useAddAllocation,
+  useAllocations,
+} from "../../../hooks/useAllocations";
 import { useMembers } from "../../../hooks/useMember";
 
 const Allocations = () => {
@@ -14,8 +17,8 @@ const Allocations = () => {
 
   const { data } = useMembers();
 
- const {data:  allocations, isLoading, error} = useAllocations();
- console.log(allocations, 'allcoations')
+  const { data: allocations, isLoading } = useAllocations();
+
   return (
     <>
       <SectionHeader title="Allocations" />

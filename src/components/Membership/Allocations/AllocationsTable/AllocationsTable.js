@@ -65,7 +65,7 @@ const AllocationsTable = ({ allocations, isLoading }) => {
             />
             <TableHeadColumn title="Date" secondaryText="time" />
             <TableHeadColumn title="Subject" secondaryText="body" />
-            <TableHeadColumn title="Status" />
+            {/* <TableHeadColumn title="Status" /> */}
           </Tr>
         </Thead>
         <Tbody>
@@ -103,7 +103,7 @@ const AllocationsTable = ({ allocations, isLoading }) => {
                       <p>{item.body}</p>
                     </div>
                   </Td>
-                  <Td>
+                  {/* <Td>
                     <div
                       className={`${classes.allocation_status_wrapper} ${
                         item.status ? classes.success : classes.fail
@@ -112,7 +112,7 @@ const AllocationsTable = ({ allocations, isLoading }) => {
                       <span className={classes.status_indicator}></span>
                       <h5>{item.status ? "Sent" : "Not Sent"}</h5>
                     </div>
-                  </Td>
+                  </Td> */}
                 </Tr>
               );
             })}

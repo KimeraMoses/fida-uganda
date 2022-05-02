@@ -40,7 +40,6 @@ export const useAddCaseFiles = () => {
   const queryClient = useQueryClient();
   return useMutation(addCaseFile, {
     onSuccess: (data) => {
-      console.log("data", data);
       const previousCaseFiles = queryClient.getQueryData(CASES_KEY);
       if (previousCaseFiles) {
         queryClient.setQueryData(CASES_KEY, (previousCaseFiles) => {
