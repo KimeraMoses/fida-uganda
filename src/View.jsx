@@ -41,6 +41,7 @@ import Employees from "./components/HumanResource/EmployeeContract/Employees";
 import EventAttendence from "./components/dashboard/EventsAttendence/EventAttendence";
 import ReportFiles from "./components/HumanResource/Reports/ReportFiles/ReportFiles";
 import SummaryDetails from "./components/dashboard/SummaryDetails/SummaryDetails";
+import LegalOfficer from "./components/CourtProcessServer/LegalOfficer/LegalOfficer";
 
 const View = () => {
   return (
@@ -63,6 +64,7 @@ const View = () => {
         <Route path="clvs" element={<CLVs />} />
         <Route path="account-settings" element={<AccountSettings />} />
         <Route path="case-files" element={<CaseFiles />} />
+        <Route path="legal-officer" element={<LegalOfficer />} />
         <Route path="project-files" element={<ProjectFiles />} />
         <Route path="clv-case-files" element={<ClvCaseFiles />} />
         <Route path="clv-database" element={<ClvDatabase />} />

@@ -1,6 +1,7 @@
 .approvals_table_wrapper {
   background-color: #ffffff;
   padding-right: 10px;
+  border-radius: 10px;
 }
 .table_header {
   background-color: #ffffff;
@@ -10,6 +11,7 @@
 .table_header th {
   font-size: 15px;
   white-space: nowrap;
+  font-weight: 700;
 }
 .approvals_table_wrapper td {
   font-weight: 600;
