@@ -20,6 +20,7 @@ const SelectInput = ({ options, onChange, name, placeholder }) => {
       isMulti={true}
       isSearchable={true}
       name={name}
+      isClearable={true}
     />
   );
 };

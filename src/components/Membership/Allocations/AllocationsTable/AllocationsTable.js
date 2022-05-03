@@ -1,45 +1,7 @@
 import React from "react";
 import { Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
 import classes from "./AllocationsTable.module.css";
-
-const allocations = [
-  {
-    recepient: "All Paid Up Members",
-    alloc_number: "1234",
-    date: "26/04/2020",
-    time: "12: 42 AM",
-    subject: "LEGAL OFFICERS FOR THE IDLO PROJECT ZOMBO",
-    body: " Lorem ipsum dolor sit amet, consectetur adipiscing elit, seddo eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim enim ad minim adj",
-    status: true,
-  },
-  {
-    recepient: "All Paid Up Members",
-    alloc_number: "1234",
-    date: "26/04/2020",
-    time: "12: 42 AM",
-    subject: "LEGAL OFFICERS FOR THE IDLO PROJECT ZOMBO",
-    body: " Lorem ipsum dolor sit amet, consectetur adipiscing elit, seddo eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim enim ad minim adj",
-    status: false,
-  },
-  {
-    recepient: "All Paid Up Members",
-    alloc_number: "1234",
-    date: "26/04/2020",
-    time: "12: 42 AM",
-    subject: "LEGAL OFFICERS FOR THE IDLO PROJECT ZOMBO",
-    body: " Lorem ipsum dolor sit amet, consectetur adipiscing elit, seddo eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim enim ad minim adj",
-    status: true,
-  },
-  {
-    recepient: "All Paid Up Members",
-    alloc_number: "1234",
-    date: "26/04/2020",
-    time: "12: 42 AM",
-    subject: "LEGAL OFFICERS FOR THE IDLO PROJECT ZOMBO",
-    body: " Lorem ipsum dolor sit amet, consectetur adipiscing elit, seddo eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim enim ad minim adj",
-    status: true,
-  },
-];
+import sortByDate from "../../../../lib/sortByDate";
 
 export const TableHeadColumn = (props) => {
   const { title, secondaryText } = props;
@@ -65,21 +27,25 @@ const AllocationsTable = ({ allocations, isLoading }) => {
             />
             <TableHeadColumn title="Date" secondaryText="time" />
             <TableHeadColumn title="Subject" secondaryText="body" />
-            {/* <TableHeadColumn title="Status" /> */}
+            <TableHeadColumn title="Status" />
           </Tr>
         </Thead>
         <Tbody>
           {!isLoading &&
             allocations &&
             allocations.Allocations &&
-            allocations.Allocations.map((item) => {
+            sortByDate(allocations.Allocations).map((item) => {
               return (
                 <Tr>
                   <Td className={classes.data_recepient_field}>
                     <div className={classes.data__primary_text}>
-                      {item.allocated_to
-                        .map((person) => person.label)
-                        .filter((name) => name)}
+                      {item.allocated_to.map((person, index) => {
+                        if (index + 1 === item.allocated_to.length) {
+                          return person.label;
+                        } else {
+                          return person.label + ", ";
+                        }
+                      })}
                     </div>
                     {/* <div className={classes.data__secondary_text}>
                       {item.alloc_number}
@@ -103,7 +69,7 @@ const AllocationsTable = ({ allocations, isLoading }) => {
                       <p>{item.body}</p>
                     </div>
                   </Td>
-                  {/* <Td>
+                  <Td>
                     <div
                       className={`${classes.allocation_status_wrapper} ${
                         item.status ? classes.success : classes.fail
@@ -112,7 +78,7 @@ const AllocationsTable = ({ allocations, isLoading }) => {
                       <span className={classes.status_indicator}></span>
                       <h5>{item.status ? "Sent" : "Not Sent"}</h5>
                     </div>
-                  </Td> */}
+                  </Td>
                 </Tr>
               );
             })}
