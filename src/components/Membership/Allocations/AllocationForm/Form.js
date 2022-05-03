@@ -12,9 +12,9 @@ import classes from "./Form.module.css";
 import Button from "../../UI/Button/Button";
 
 const Form = (props) => {
-  const { onClose, title, setFieldValue, members, isLoading, isSubmitting } =
+  const { onClose, title, setFieldValue, users, isLoading, isSubmitting } =
     props;
-
+  const formatUserOptions = users.map(user => ({label: user.name, value: user.email}));
   return (
     <div
       className={classes.fida__email_form_wrapper}
@@ -35,15 +35,8 @@ const Form = (props) => {
             {/* To: */}
             <SelectInput
               name="allocated_to"
-              // isMulti={true}
               onChange={(value) => setFieldValue("allocated_to", value)}
-              options={
-                members || [
-                  { value: "moses", label: "Kimera Moxhus" },
-                  { value: "isaac", label: "Mubiru Isaac" },
-                  { value: "zeus", label: "Missaga Zeus" },
-                ]
-              }
+              options={formatUserOptions}
               placeholder={isLoading ? "Loading data" : "Recipients"}
             />
           </div>

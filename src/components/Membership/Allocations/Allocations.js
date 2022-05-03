@@ -1,24 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDisclosure } from "@chakra-ui/react";
 import SectionHeader from "../../common/SectionHeader";
 import TableSearch from "../../common/table/TableSearch";
 import Form from "../Allocations/AllocationForm/Form";
 import AllocationsTable from "./AllocationsTable/AllocationsTable";
 // import { allocationFormSchema } from "./AllocationForm/schema";
-import { useAddAllocation } from "../../../hooks/useAllocations";
-import { useMembers } from "../../../hooks/useMember";
+import {
+  useAddAllocation,
+  useAllocations,
+} from "../../../hooks/useAllocations";
+import { useUsers } from "../../../hooks/useUser";
 
 const Allocations = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialValues = { subject: "", message: "", allocated_to: [] };
 
-  const { data } = useMembers();
+  const users = useUsers();
+
+  const { data: allocations, isLoading } = useAllocations();
 
   return (
     <>
       <SectionHeader title="Allocations" />
       <TableSearch btnLabel="Send Allocation" btnClick={onOpen} />
-      <AllocationsTable />
+      <AllocationsTable allocations={allocations} isLoading={isLoading} />
       {isOpen && (
         <Form
           onClose={onClose}
@@ -28,7 +33,7 @@ const Allocations = () => {
           onSuccess={onClose}
           success={`Allocation added successfully`}
           useMutate={useAddAllocation}
-          members={data && data.memebers}
+          users={users}
         />
       )}
     </>
