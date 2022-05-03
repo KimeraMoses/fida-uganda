@@ -47,7 +47,7 @@ const withForm = (FormComponent) => {
           mutate(values);
         }}
       >
-        {({ values, setFieldValue }) => (
+        {({ values, setFieldValue, resetForm }) => (
           <Form>
             <FormComponent
               values={values}
@@ -55,6 +55,7 @@ const withForm = (FormComponent) => {
               isEditing={isEditing}
               {...rest}
               setFieldValue={setFieldValue}
+              resetForm={resetForm}
             />
           </Form>
         )}
