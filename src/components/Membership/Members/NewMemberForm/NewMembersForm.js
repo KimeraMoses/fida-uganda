@@ -1,109 +1,95 @@
 import React, { useState } from "react";
+import { useAddMember, useUpdateMember } from "../../../../hooks/useMember";
 import UserDetails from "./MultiForm/UserDetails";
 import UserExperience from "./MultiForm/UserExperience";
 import UserHobbies from "./MultiForm/UserHobbies";
 import UserInterests from "./MultiForm/UserInterests";
 
-const NewMembersForm = () => {
-  const [values, setValues] = useState({
-    step: 1,
-    full_name: "",
+const NewMembersForm = ({ onClose }) => {
+  const limit = 4;
+  const MEMBER_ADDED = "Member added successfully";
+  const MEMBER_UPDATED = "Member updated successfully";
+  const [page, setPage] = useState(1);
+
+  const initialValuesOne = {
+    first_name: "",
+    median_name: "",
+    last_name: "",
     postal_address: "",
     phone_number: "",
     email: "",
-    employment_sector: "",
-    study_completion_yr: "",
+    employment_status: "",
+    year_of_undergraduate_completion: "",
+    professional_experience: "",
     membership_duration: "",
-    language: "",
-    professional_experience: [],
+  };
+
+  const initialValuesTwo = {
+    languages: [],
+    professional_experience: "",
+  };
+
+  const initialValuesThree = {
     area_of_interest: [],
+  };
+
+  const initialValuesFour = {
     hobbies: [],
-  });
+  };
 
   const prevStep = () => {
-    setValues({ ...values, step: values.step - 1 });
+    setPage(page - 1);
   };
   const nextStep = () => {
-    setValues({ ...values, step: values.step + 1 });
+    setPage(page + 1);
   };
 
-  const Continue = (e) => {
-    e.preventDefault();
-    nextStep();
-  };
-
-  const Previous = (e) => {
-    e.preventDefault();
-    prevStep();
-  };
-
-  // handle field change
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
-  };
-
-  switch (values.step) {
+  switch (page) {
     case 1:
       return (
         <UserDetails
-          nextStep={nextStep}
-          Continue={Continue}
-          handleChange={handleChange}
-          values={values}
-          initialValues={""}
-          validationSchema={""}
-          onSuccess={""}
-          success={""}
-          useMutate={() => {}}
+          useMutate={useAddMember}
+          onSuccess={nextStep}
+          success={MEMBER_ADDED}
+          initialValues={initialValuesOne}
+          page={page}
+          limit={limit}
         />
       );
     case 2:
       return (
         <UserExperience
-          prevStep={prevStep}
-          nextStep={nextStep}
-          handleChange={handleChange}
-          values={values}
-          Continue={Continue}
-          Previous={Previous}
-          initialValues={""}
-          validationSchema={""}
-          onSuccess={""}
-          success={""}
-          useMutate={() => {}}
+          useMutate={useUpdateMember}
+          onSuccess={nextStep}
+          success={MEMBER_UPDATED}
+          initialValues={initialValuesTwo}
+          page={page}
+          limit={limit}
+          onBack={prevStep}
         />
       );
     case 3:
       return (
         <UserInterests
-          prevStep={prevStep}
-          nextStep={nextStep}
-          handleChange={handleChange}
-          values={values}
-          Continue={Continue}
-          Previous={Previous}
-          initialValues={""}
-          validationSchema={""}
-          onSuccess={""}
-          success={""}
-          useMutate={() => {}}
+          useMutate={useUpdateMember}
+          onSuccess={nextStep}
+          success={MEMBER_UPDATED}
+          initialValues={initialValuesThree}
+          page={page}
+          limit={limit}
+          onBack={prevStep}
         />
       );
     case 4:
       return (
         <UserHobbies
-          prevStep={prevStep}
-          nextStep={nextStep}
-          handleChange={handleChange}
-          values={values}
-          Continue={Continue}
-          Previous={Previous}
-          initialValues={""}
-          validationSchema={""}
-          onSuccess={""}
-          success={""}
-          useMutate={() => {}}
+          useMutate={useUpdateMember}
+          onSuccess={onClose}
+          success={MEMBER_UPDATED}
+          initialValues={initialValuesFour}
+          page={page}
+          limit={limit}
+          onBack={prevStep}
         />
       );
     default:

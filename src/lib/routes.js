@@ -14,7 +14,10 @@ export const routes = {
     getItServices: `${BASE_URL}/services/getAll`,
   },
   members: {
+    addMember: `${BASE_URL}/members/create`,
     getAllMembers: `${BASE_URL}/members/getAll`,
+    base: `${BASE_URL}/members`,
+    editMember: `${BASE_URL}/members/edit`,
   },
   allocations: {
     getAllocations: `${BASE_URL}/allocations/getAll`,
