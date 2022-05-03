@@ -9,15 +9,14 @@ const options = [
   { value: "zeus", label: "Missaga Zeus" },
 ];
 
-
-const SelectInput = ({ options, onChange, name, placeholder }) => {
+const SelectInput = ({ options, onChange, name, placeholder, isMulti }) => {
   return (
     <Select
       placeholder={placeholder}
       onChange={onChange}
       components={animatedComponents}
       options={options}
-      isMulti={true}
+      isMulti={isMulti || true}
       isSearchable={true}
       name={name}
       isClearable={true}

@@ -5,20 +5,29 @@ import withForm from "../../../hoc/withForm";
 import InputField from "../../common/UI/InputField/InputField";
 import SelectInputField from "../../common/UI/SelectInputField/SelectInputField";
 import { useProjectOptions } from "../../../hooks/useProjects";
+import SelectField from "../../Membership/Allocations/AllocationForm/SelectInput";
 
-const ITProductForm = ({ isSubmitting }) => {
+const ITProductForm = ({ isSubmitting, setFieldValue }) => {
   const [selected, setSelected] = useState();
   const projects = useProjectOptions();
   const projectOptions = useMemo(() => projects, [projects]);
+  console.log(projectOptions, "project options");
   return (
     <SimpleGrid p={5} gap={3}>
       <SimpleGrid columns={2} gap={5} style={{ alignItems: "center" }}>
-        <SelectInputField
+        {/* <SelectInputField
           data={projectOptions}
           placeholder="Project name"
           selected={selected}
           setSelected={setSelected}
           name="project_name"
+        /> */}
+        <SelectField
+          options={projectOptions}
+          placeholder="Project name"
+          name="project_name"
+          onChange={(value) => setFieldValue("project_name", value.label)}
+          isMulti={false}
         />
         <InputField name="budget_year" placeholder="Budget Year" />
       </SimpleGrid>
