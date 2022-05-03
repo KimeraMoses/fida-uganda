@@ -48,6 +48,7 @@ const Form = (props) => {
               onChange={(value) => setFieldValue("allocated_to", value)}
               options={formatUserOptions}
               placeholder={isLoading ? "Loading data" : "Recipients"}
+              isMulti
             />
           </div>
           <div className={classes.fida__email_subject}>

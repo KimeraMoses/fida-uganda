@@ -48,6 +48,7 @@ const Form = (props) => {
               onChange={(value) => setFieldValue("user", value.value)}
               options={formatUserOptions}
               placeholder={isLoading ? "Loading data" : "Users"}
+              isMulti
             />
           </div>
           <div className={classes.fida__email_subject}>

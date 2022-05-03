@@ -1,9 +1,6 @@
 import produce from "immer";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import {
-    addItProduct,
-    getAllItProducts
-} from "../apis/itProducts";
+import { addItProduct, getAllItProducts } from "../apis/itProducts";
 import { IT_PRODUCTS_KEY } from "../lib/constants";
 
 export const useItProducts = () => {
@@ -18,12 +15,12 @@ export const useAddItProduct = () => {
       if (previousItProducts) {
         queryClient.setQueryData(IT_PRODUCTS_KEY, (previousItProducts) => {
           return produce(previousItProducts, (draft) => {
-            draft.assets.push(data.asset);
+            draft.ITProducts.push(data.iTProduct);
           });
         });
       } else {
         queryClient.setQueryData(IT_PRODUCTS_KEY, () => {
-          return { assets: [data.itProduct] };
+          return { ITProducts: [data.itProduct] };
         });
       }
     },

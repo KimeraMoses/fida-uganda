@@ -14,6 +14,7 @@ const AdvancedRequestForm = ({ isSubmitting, onClose }) => {
           type="date"
           label="Date needed"
           placeholder="Date needed"
+          min={new Date()}
         />
         <InputField
           name="address_on_leave"

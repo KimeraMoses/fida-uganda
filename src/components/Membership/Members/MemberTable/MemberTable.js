@@ -47,7 +47,6 @@ const MembersData = [
 ];
 
 const MemberTable = ({ data, isLoading }) => {
-  console.log(data);
   return (
     <div className={classes.allocations_table_wrapper}>
       <Table variant="simple">
@@ -67,16 +66,12 @@ const MemberTable = ({ data, isLoading }) => {
         </Thead>
         <Tbody>
           {!isLoading &&
-            data &&
-            data.Members &&
-            data.Members.length &&
-            data.Members.map((item) => {
+            data.length &&
+            data.map((item) => {
               return (
                 <Tr>
                   <Td className={classes.data_recepient_field}>
-                    <div className={classes.data__primary_text}>
-                      {item.name}
-                    </div>
+                    <div className={classes.data__primary_text}>{item.id}</div>
                     <div className={classes.data__secondary_text}>
                       {item.id}
                     </div>
@@ -98,7 +93,7 @@ const MemberTable = ({ data, isLoading }) => {
                         classes.members_status
                       } ${item.status ? classes.sucess : classes.fail}`}
                     >
-                      <h6>{item.status ? "Paid" : "Pending"}</h6>
+                      <h6>{item.hasPaid ? "Paid" : "Pending"}</h6>
                     </div>
                   </Td>
                   <Td>
