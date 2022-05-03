@@ -4,14 +4,7 @@ import classes from "./MultiForm.module.css";
 import ActionButtons from "./ActionButtons/ActionButtons";
 import { Radio, RadioGroup, Stack } from "@chakra-ui/react";
 
-const UserHobbies = ({
-  nextStep,
-  prevStep,
-  handleChange,
-  values,
-  Continue,
-  Previous,
-}) => {
+const UserHobbies = ({ page, limit, isSubmitting, onBack }) => {
   return (
     <div className={classes.form_wrapper}>
       <div className={classes.field_wrapper}>
@@ -37,7 +30,12 @@ const UserHobbies = ({
         </p>
       </div>
 
-      <ActionButtons step={values.step} Previous={Previous} />
+      <ActionButtons
+        page={page}
+        limit={limit}
+        disabled={isSubmitting}
+        onBack={onBack}
+      />
     </div>
   );
 };

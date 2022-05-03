@@ -1,11 +1,10 @@
-import { useDisclosure } from "@chakra-ui/react";
 import React from "react";
+import { useDisclosure } from "@chakra-ui/react";
 import Modal from "../../common/Modal";
 import SectionHeader from "../../common/SectionHeader";
 import TableSearch from "../../common/table/TableSearch";
 import MemberTable from "./MemberTable/MemberTable";
 import NewMembersForm from "./NewMemberForm/NewMembersForm";
-
 const Members = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
@@ -13,7 +12,12 @@ const Members = () => {
       <SectionHeader title="Members" />
       <TableSearch btnLabel="Add Member" btnClick={onOpen} />
       <MemberTable />
-      <Modal isOpen={isOpen} onClose={onClose} title="Membership Form">
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        title="Membership Form"
+        size="3xl"
+      >
         <NewMembersForm onClose={onClose} />
       </Modal>
     </>

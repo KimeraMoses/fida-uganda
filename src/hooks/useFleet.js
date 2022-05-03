@@ -10,7 +10,7 @@ import {
 import { FLEET_MANAGEMENT_KEY } from "../lib/constants";
 
 export const useFleet = (fleetId) => {
-  return useQuery([FLEET_MANAGEMENT_KEY, fleetId], getFleet);
+  return useQuery([FLEET_MANAGEMENT_KEY, fleetId], () => getFleet(fleetId));
 };
 
 export const useFleets = () => {
