@@ -43,6 +43,7 @@ const ITServices = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data, isLoading } = useItServices();
 
+  console.log('data is', data)
   return (
     <>
       <SectionHeader title="IT Services" />

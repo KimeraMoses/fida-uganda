@@ -2,6 +2,7 @@ import React from "react";
 import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
 import classes from "./Table.module.css";
 import { TableHeadColumn } from "../../Membership/Allocations/AllocationsTable/AllocationsTable";
+import { formatDate } from "../../../lib/data";
 
 const ITServicesTable = ({ data, isProducts }) => {
   return (
@@ -85,7 +86,7 @@ const ITServicesTable = ({ data, isProducts }) => {
                         </div>
                       </div>
                       <div className={classes.data__secondary_text}>
-                        {item.expiry_date}
+                        {formatDate(item.expiry_date)}
                       </div>
                     </Td>
                     <Td className={classes.data_field}>
