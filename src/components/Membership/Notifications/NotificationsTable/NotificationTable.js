@@ -69,7 +69,7 @@ const NotificationsTable = ({ data, isLoading }) => {
       },
       "id": "623e3bec9e0ca815ecbe1aab"
    */
-  console.log(data, '<<<<<<<<<<<<<<<<<Alright>>>')
+
   return (
     <div className={classes.allocations_table_wrapper}>
       <Table variant="simple" className={styles.notifications_table}>
@@ -85,6 +85,7 @@ const NotificationsTable = ({ data, isLoading }) => {
           {!!isLoading &&
             data &&
             data.Notifications &&
+            data.Notifications.length &&
             data.Notifications.map((item) => {
               return (
                 <Tr>

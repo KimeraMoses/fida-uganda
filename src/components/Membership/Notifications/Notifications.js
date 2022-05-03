@@ -13,7 +13,7 @@ import {
 const Notifications = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const users = useUsers();
-  const { data, isLoading} = useNotifications();
+  const { data, isLoading } = useNotifications();
 
   const initialValues = {
     user: [],
@@ -25,7 +25,7 @@ const Notifications = () => {
       <SectionHeader title="Notifications" />
       <TableSearch btnLabel="Compose" btnClick={onOpen} />
       <NotificationsTable
-        notifications={data ? data.Notifications  : [] }
+        notifications={data ? data.Notifications : null}
         isLoading={isLoading}
       />
       {isOpen && (
