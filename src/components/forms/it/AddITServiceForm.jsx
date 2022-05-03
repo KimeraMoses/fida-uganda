@@ -1,0 +1,38 @@
+import React from "react";
+import { SimpleGrid, Button } from "@chakra-ui/react";
+import withForm from "../../../hoc/withForm";
+// import { itProductInitialValues, itProductOrderSchema } from "./schemas/it";
+import InputField from "../../common/UI/InputField/InputField";
+
+const AddITServiceForm = ({isSubmitting}) => {
+  return (
+    <SimpleGrid p={5} gap={3}>
+      <SimpleGrid columns={2} gap={5}>
+        <InputField name="name" placeholder="Service name" />
+        <InputField name="service_provider" placeholder="Service Provider" />
+      </SimpleGrid>
+      <SimpleGrid>
+        <InputField name="description" placeholder="Description" />
+      </SimpleGrid>
+      <SimpleGrid columns={2} gap={5}>
+        <InputField name="state" placeholder="State" />
+        <InputField name="expiry_date" placeholder="Expiry Date" />
+      </SimpleGrid>
+      <Button
+        mt={5}
+        type="submit"
+        borderRadius="full"
+        bgGradient="linear(to-r, purple.400, purple.700)"
+        _hover={{ bgGradient: "linear(to-r, purple.600, purple.900)" }}
+        size="lg"
+        w="100%"
+        color="white"
+        disabled={isSubmitting}
+      >
+        Add Service
+      </Button>
+    </SimpleGrid>
+  );
+};
+
+export default withForm(AddITServiceForm);

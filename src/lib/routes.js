@@ -2,7 +2,12 @@ import { BASE_URL } from "./constants";
 
 export const routes = {
   itProducts: {
-    createItProducts: `${BASE_URL}/it_products/create`
+    createItProducts: `${BASE_URL}/it_products/create`,
+    getItProducts: `${BASE_URL}/it_products/getAll`
+  },
+  itServices: {
+    createItService: `${BASE_URL}/services/create`,
+    getItServices: `${BASE_URL}/services/getAll`
   },
   members: {
     getAllMembers: `${BASE_URL}/members/getAll`,

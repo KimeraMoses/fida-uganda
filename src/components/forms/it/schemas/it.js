@@ -24,3 +24,11 @@ export const itProductInitialValues = {
   delivery_location: "",
   num_units: "",
 };
+
+export const itServicesInitialValues = {
+  name: "",
+  description: "",
+  expiry_date: "",
+  service_provider: "",
+  state: ""
+};

@@ -1,0 +1,72 @@
+.table_wrapper {
+  background-color: #ffffff;
+}
+
+.table_header {
+  background-color: #fe00b7;
+}
+.table_header.products_table_header {
+  background-color: #fa05ff;
+}
+.table_header th {
+  vertical-align: top;
+  white-space: nowrap;
+}
+.title_secondary_text {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--secondary_text_color);
+  margin-top: 8px;
+}
+.data__primary_text {
+  color: var(--text_color);
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: capitalize;
+  margin-bottom: 8px;
+}
+.single_line {
+  white-space: nowrap;
+}
+
+.allocation_status_wrapper {
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  border-radius: 20px;
+}
+.status_indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.allocation_status_wrapper.success {
+  background-color: rgba(26, 214, 152, 0.3);
+  color: var(--text_color);
+}
+.allocation_status_wrapper.fail {
+  background-color: #ffe0e0;
+  color: #ff3838;
+}
+.allocation_status_wrapper.paid {
+  background-color: #d7ffed;
+  color: #38cb89;
+}
+.allocation_status_wrapper.balance {
+  background-color: #fff8bc;
+  color: #baa802;
+}
+.allocation_status_wrapper.paid span {
+  background-color: #38cb89;
+}
+.allocation_status_wrapper.balance span {
+  background-color: #baa802;
+}
+
+.allocation_status_wrapper.success span {
+  background-color: var(--text_color);
+}
+.allocation_status_wrapper.fail span {
+  background-color: #d30000;
+}

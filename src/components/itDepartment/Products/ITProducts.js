@@ -5,8 +5,8 @@ import TableSearch from "../../common/table/TableSearch";
 import ITProductForm from "../../forms/it/AddITProductForm";
 import { itProductInitialValues } from "../../forms/it/schemas/it";
 import Modal from "../../common/Modal";
-import CommonTable from "../CommonTable/CommonTable";
-import { useAddItProduct } from "../../../hooks/useItProduct";
+import ITProductsTable from "./ITProductsTable";
+import { useAddItProduct, useItProducts} from "../../../hooks/useItProduct";
 
 const Productdata = [
   {
@@ -37,11 +37,15 @@ const Productdata = [
 
 const ITProducts = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { data, isLoading } = useItProducts();
+
+
+  //console.log('data is', data.ITProducts[0])
   return (
     <>
       <SectionHeader title="IT Products" />
       <TableSearch btnLabel="Add Product" btnClick={onOpen} />
-      <CommonTable data={Productdata} isProducts={true} />
+      <ITProductsTable data={data?.ITProducts} isProducts={true} />
 
       <Modal
         isOpen={isOpen}
