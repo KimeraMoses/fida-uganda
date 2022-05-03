@@ -5,6 +5,7 @@ import SectionHeader from "../../common/SectionHeader";
 import TableSearch from "../../common/table/TableSearch";
 import MemberTable from "./MemberTable/MemberTable";
 import NewMembersForm from "./NewMemberForm/NewMembersForm";
+
 const Members = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
