@@ -2,13 +2,14 @@ import { SimpleGrid, Button, Flex } from "@chakra-ui/react";
 import TextField from "../../common/TextField";
 import withForm from "../../../hoc/withForm";
 import { MdAdd } from "react-icons/md";
-import SelectField from "../../common/SelectField";
 import { useProjectOptions } from "../../../hooks/useProjects";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
+import SelectInputField from "./../../common/UI/SelectInputField/SelectInputField";
 
 const FleetDatabaseForm = ({ isSubmitting }) => {
   const projects = useProjectOptions();
   const projectOptions = useMemo(() => projects, [projects]);
+  const [selected, setSelected] = useState();
 
   return (
     <SimpleGrid p={5} gap={3}>
@@ -30,12 +31,12 @@ const FleetDatabaseForm = ({ isSubmitting }) => {
         <TextField name="driver_address" placeholder="Physical Address" />
       </SimpleGrid>
       <hr />
-      <SimpleGrid columns={2} gap={5}>
-        <SelectField
-          name="project"
+      <SimpleGrid columns={2} gap={5} style={{ alignItems: "center" }}>
+        <SelectInputField
+          data={projectOptions}
           placeholder="Select Project"
-          options={projectOptions}
-          size="lg"
+          selected={selected}
+          setSelected={setSelected}
         />
         <TextField
           name="region_of_operation"

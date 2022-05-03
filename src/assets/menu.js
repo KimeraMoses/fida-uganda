@@ -75,6 +75,12 @@ const menuOptions = {
     icon: MdStorage,
     path: "case-files",
   },
+  legalOfficer: {
+    id: ++id,
+    name: "Legal Officer",
+    icon: MdStorage,
+    path: "legal-officer",
+  },
   clientsFiles: {
     id: ++id,
     name: "Clients Files",
@@ -211,6 +217,7 @@ const menu = {
   courtProcessServer: [
     ...commonOptions,
     menuOptions.caseFiles,
+    menuOptions.legalOfficer,
     menuOptions.reports,
   ],
   legalAid: [

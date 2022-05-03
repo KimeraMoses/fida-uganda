@@ -24,7 +24,7 @@ export const useAddAllocation = () => {
       if (previousAllocations) {
         queryClient.setQueryData(ALLOCATIONS_KEY, () => {
           return produce(previousAllocations, (draft) => {
-            draft.allocations.push(data?.allocation);
+            draft.Allocations.push(data?.allocation);
           });
         });
       } else {

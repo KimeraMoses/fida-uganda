@@ -9,29 +9,21 @@ import { Heading, SimpleGrid, useToast } from "@chakra-ui/react";
 import { toastError } from "../../../lib/toastDetails";
 import { taskInitialValues, taskSchema } from "./taskSchema";
 import MultiUpload from "../../common/MultiUpload";
-import { DepartmentButton } from "../TaskCard/TaskCard";
-import DropdownInputField from "../../common/UI/DropdownInputField/DropdownInputField";
 import { useUsers } from "../../../hooks/useUser";
+import SelectInput from "./../../Membership/Allocations/AllocationForm/SelectInput";
 
 const Tags = [
-  { name: "Legal Aid", color: "primary" },
-  { name: "Court case", color: "secondary" },
-  { name: "Court processors", color: "tartiary" },
+  { label: "Legal Aid", value: "legal aid" },
+  { label: "Court case", value: "court case" },
+  { label: "Court processors", value: "court processors" },
 ];
 
-let tags = [];
 let outlines = [];
-let team = [];
 
 const NewTaskForm = ({ onSubmit, error, isError, isSubmitting }) => {
   const users = useUsers();
   const [files, setFiles] = useState([]);
   const toast = useToast();
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-  const [search, setSearch] = useState("");
-  const [results, setResults] = useState([]);
-  const [show, setShow] = useState(false);
   const [outline, setOutLine] = useState("");
 
   const outlineHandler = (e) => {
@@ -39,52 +31,16 @@ const NewTaskForm = ({ onSubmit, error, isError, isSubmitting }) => {
     outlines.push(outline);
     setOutLine("");
   };
-
-  const keyWordHandler = (e) => {
-    setShow(false);
-    const { value } = e.target;
-    setSearchTerm(value);
-
-    if (searchTerm !== "") {
-      const Results = Tags.filter((Result) => {
-        return Object.values(Result)
-          .join(" ")
-          .replace(/-/g, " ")
-          .toLowerCase()
-          .includes(searchTerm.toLowerCase());
-      });
-      setSearchResults(Results);
-    }
-  };
-
-  const selectedItemHandler = (result) => {
-    tags.push(result);
-    setSearchTerm("");
-    setShow(true);
-  };
-
-  const teamHandler = (e) => {
-    setShow(false);
-    const { value } = e.target;
-    setSearch(value);
-
-    if (search !== "") {
-      const results = users.filter((result) => {
-        return Object.values(result)
-          .join(" ")
-          .replace(/-/g, " ")
-          .toLowerCase()
-          .includes(searchTerm.toLowerCase());
-      });
-      setResults(results);
-    }
-  };
-
-  const selectedTeamHandler = (result) => {
-    team.push(result);
-    setSearchTerm("");
-    setShow(true);
-  };
+  let userArray = [];
+  users &&
+    users.forEach((user) => {
+      if (user.name) {
+        userArray.push({
+          label: user.name,
+          value: user.value,
+        });
+      }
+    });
 
   useEffect(() => {
     if (isError) {
@@ -97,7 +53,6 @@ const NewTaskForm = ({ onSubmit, error, isError, isSubmitting }) => {
       initialValues={taskInitialValues}
       validationSchema={taskSchema}
       onSubmit={(values) => {
-        values.tags = tags.map((tag) => tag.name);
         values.outlines = outlines;
         onSubmit(values);
       }}
@@ -154,35 +109,26 @@ const NewTaskForm = ({ onSubmit, error, isError, isSubmitting }) => {
               <h6>
                 <AttachmentIcon /> Add Tags
               </h6>
-              <div className={styles.tags}>
-                {tags.map((tag) => {
-                  return (
-                    <DepartmentButton title={tag.name} btnColor={tag.color} />
-                  );
-                })}
+              <div style={{ marginRight: 10 }}>
+                <SelectInput
+                  name="tags"
+                  onChange={(value) => console.log("tags", value)}
+                  options={Tags}
+                  placeholder="Select tags"
+                />
               </div>
-              <DropdownInputField
-                placeholder="Type tag name e.g. Court Case"
-                keyWordHandler={keyWordHandler}
-                searchTerm={searchTerm}
-                searchResults={searchResults}
-                isSelected={show}
-                itemClickHandler={selectedItemHandler}
-              />
             </div>
             <div className={styles.tag_wrapper}>
               <h6>
                 <AttachmentIcon />
                 Team
               </h6>
-              <div className={styles.team}>
-                <DropdownInputField
-                  placeholder="Type team member name"
-                  keyWordHandler={teamHandler}
-                  searchTerm={search}
-                  searchResults={results}
-                  isSelected={show}
-                  itemClickHandler={selectedTeamHandler}
+              <div style={{ marginLeft: 10 }}>
+                <SelectInput
+                  name="teams"
+                  onChange={(value) => console.log("teams", value)}
+                  options={userArray}
+                  placeholder="Select teams"
                 />
               </div>
             </div>
@@ -225,10 +171,10 @@ const NewTaskForm = ({ onSubmit, error, isError, isSubmitting }) => {
             <FormButton
               variant="colored"
               rounded={true}
-              isSubmitting={isSubmitting}
+              disabled={isSubmitting}
               type="submit"
             >
-              Add Task
+              {isSubmitting ? "Adding..." : "Add Task"}
             </FormButton>
           </div>
         </Form>

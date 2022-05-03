@@ -6,6 +6,7 @@ import SectionHeader from "../../common/SectionHeader";
 import TableSearch from "../../common/table/TableSearch";
 import FidaApprovedTable from "./FidaApprovalTable/FidaApprovedTable";
 import NewEmployeeForm from "./NewEmployeeForm/NewEmployeeForm";
+import SubHeading from "./../../Tasks/SubHeading/SubHeading";
 
 const FidaApprovals = () => {
   const { data } = useDeactivatedUsers();
@@ -40,8 +41,13 @@ const FidaApprovals = () => {
         btnClick={onOpen}
         searchTerm={searchTerm}
         onSearchHandler={userSearchHandler}
-        showBtn={false}
       />
+      <SubHeading title="Approved Users" />
+      {data?.users ? (
+        <FidaApprovedTable searchResults={searchResults} data={data?.users} />
+      ) : null}
+
+      <SubHeading title="Pending Approval" />
       {data?.users ? (
         <FidaApprovedTable searchResults={searchResults} data={data?.users} />
       ) : null}

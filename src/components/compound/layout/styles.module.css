@@ -1,0 +1,17 @@
+.link_item {
+  display: flex;
+  align-items: center;
+  padding: 16px 24px;
+}
+.link_item svg {
+  margin-right: 5px;
+}
+
+.link_item.active__link {
+  background-color: #f5dbff;
+  border: 1px solid #562b85;
+  box-sizing: border-box;
+  border-radius: 16px;
+  color: #562b85;
+  font-weight: 700;
+}

@@ -1,18 +1,33 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { SimpleGrid, Button } from "@chakra-ui/react";
 import withForm from "../../../hoc/withForm";
 // import { itProductInitialValues, itProductOrderSchema } from "./schemas/it";
 import InputField from "../../common/UI/InputField/InputField";
+import { useProjectOptions } from "../../../hooks/useProjects";
+import SelectField from "../../Membership/Allocations/AllocationForm/SelectInput";
 
-const ITProductForm = ({isSubmitting}) => {
+const ITProductForm = ({ isSubmitting, setFieldValue }) => {
+  const projects = useProjectOptions();
+  const projectOptions = useMemo(() => projects, [projects]);
+  console.log(projectOptions, "project options");
   return (
     <SimpleGrid p={5} gap={3}>
-      <SimpleGrid columns={2} gap={5}>
-        <InputField name="project_name" placeholder="Project name" />
+      <SimpleGrid columns={2} gap={5} style={{ alignItems: "center" }}>
+        <SelectField
+          options={projectOptions}
+          placeholder="Project name"
+          name="project_name"
+          onChange={(value) => setFieldValue("project_name", value.label)}
+          isMulti={false}
+        />
         <InputField name="budget_year" placeholder="Budget Year" />
       </SimpleGrid>
       <SimpleGrid columns={2} gap={5}>
-        <InputField name="unit_price" placeholder="Unit Price (UGX)" type="number" />
+        <InputField
+          name="unit_price"
+          placeholder="Unit Price (UGX)"
+          type="number"
+        />
         <InputField
           name="number_of_units_required"
           placeholder="Number of Units Required"

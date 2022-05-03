@@ -15,7 +15,7 @@ const NewAsset = ({ isSubmitting, projectOptions }) => {
         <InputField placeholder="Asset Name" name="name" fullwidth />
         <InputField placeholder="Budget Year" name="budget_year" fullwidth />
       </SimpleGrid>
-      <SimpleGrid columns={2} spacing={2}>
+      <SimpleGrid columns={2} spacing={2} style={{ marginBottom: 10 }}>
         <SelectField
           name="project"
           placeholder="Select Project"

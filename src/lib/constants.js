@@ -12,6 +12,7 @@ export const DATABASE_KEY = "database";
 export const COMPLAINTS_KEY = "complaints";
 export const PROJECTS_KEY = "projects";
 export const ASSETS_KEY = "assets";
+export const NOTIFICATION_KEY = "notifications"
 export const LEAVE_TRACKER_KEY = "leave_tracker";
 export const REPORTS_KEY = "reports";
 export const EVENTS_KEY = "events";

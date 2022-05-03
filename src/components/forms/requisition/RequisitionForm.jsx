@@ -8,12 +8,15 @@ import {
   requisitionInitialValues,
   requisitionSchema,
 } from "./schemas/requisitions";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toastError } from "../../../lib/toastDetails";
+import SelectInputField from "../../common/UI/SelectInputField/SelectInputField";
+import { useProjectOptions } from "../../../hooks/useProjects";
 
 const RequisitionForm = ({ onSubmit, isSubmitting, isError, error }) => {
   const toast = useToast();
-
+  const projectOptions = useProjectOptions();
+  const [selected, setSelected] = useState("");
   useEffect(() => {
     if (isError) {
       toast(toastError(error));
@@ -29,15 +32,21 @@ const RequisitionForm = ({ onSubmit, isSubmitting, isError, error }) => {
       }}
     >
       <SimpleGrid as={Form} p={5} gap={3}>
+        <SelectInputField
+          data={projectOptions}
+          selected={selected}
+          setSelected={setSelected}
+          placeholder="Select Project"
+          name="project_name"
+        />
         <SimpleGrid columns={2} gap={5}>
-          <TextField name="project_name" placeholder="Project" />
+          <SelectField
+            name="type"
+            placeholder="Select Type"
+            options={requisitionTypeOptions}
+          />
           <TextField name="budget_year" placeholder="Budget Year" />
         </SimpleGrid>
-        <SelectField
-          name="type"
-          placeholder="Select Type"
-          options={requisitionTypeOptions}
-        />
         <SimpleGrid columns={2} gap={5}>
           <NumberField name="unit_price" placeholder="Unit Price" />
           <NumberField name="quantity" placeholder="Number of Units Required" />

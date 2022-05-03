@@ -1,25 +1,25 @@
-.approvals_table_wrapper{
-    background-color: #ffffff;
+.approvals_table_wrapper {
+  background-color: #ffffff;
+  border-radius: 8px;
 }
-.table_header{
-    background-color: var(--table_head_bg_color);
-    font-weight: 600;
-    color: var(--text_color);
+.table_header {
+  background-color: var(--table_head_bg_color);
+  font-weight: 600;
+  color: var(--text_color);
+}
+.table_header th {
+  font-size: 15px;
+  font-weight: 700;
+  color: #000000;
+}
 
+.approval_table td:last-child {
+  white-space: nowrap;
 }
-.table_header th{
-    font-size: 15px;
+.table_actions_wrapper {
+  display: flex;
+  justify-content: center;
 }
-
-.approval_table td:last-child{
-    white-space: nowrap;
-    
-}
-.table_actions_wrapper{
-    display: flex;
-    justify-content: center;
-
-}
-.table_actions_icon_wrapper{
-    margin: 0 3px;
+.table_actions_icon_wrapper {
+  margin: 0 3px;
 }

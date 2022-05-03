@@ -12,9 +12,19 @@ import classes from "./Form.module.css";
 import Button from "../../UI/Button/Button";
 
 const Form = (props) => {
-  const { onClose, title, setFieldValue, members, isLoading, isSubmitting } =
-    props;
-
+  const {
+    onClose,
+    title,
+    setFieldValue,
+    users,
+    isLoading,
+    isSubmitting,
+    resetForm,
+  } = props;
+  const formatUserOptions = users.map((user) => ({
+    label: user.name,
+    value: user.email,
+  }));
   return (
     <div
       className={classes.fida__email_form_wrapper}
@@ -35,16 +45,10 @@ const Form = (props) => {
             {/* To: */}
             <SelectInput
               name="allocated_to"
-              // isMulti={true}
               onChange={(value) => setFieldValue("allocated_to", value)}
-              options={
-                members || [
-                  { value: "moses", label: "Kimera Moxhus" },
-                  { value: "isaac", label: "Mubiru Isaac" },
-                  { value: "zeus", label: "Missaga Zeus" },
-                ]
-              }
+              options={formatUserOptions}
               placeholder={isLoading ? "Loading data" : "Recipients"}
+              isMulti
             />
           </div>
           <div className={classes.fida__email_subject}>
@@ -82,6 +86,10 @@ const Form = (props) => {
               viewBox="0 0 21 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
+              onClick={() => {
+                setFieldValue("allocated_to", null);
+                resetForm();
+              }}
             >
               <path d="M16.125 23.25H4.875C3.63236 23.25 2.625 22.2426 2.625 21V6.375H0.375V4.125H4.875V3C4.875 1.75736 5.88236 0.75 7.125 0.75H13.875C15.1176 0.75 16.125 1.75736 16.125 3V4.125H20.625V6.375H18.375V21C18.375 22.2426 17.3676 23.25 16.125 23.25ZM4.875 6.375V21H16.125V6.375H4.875ZM7.125 3V4.125H13.875V3H7.125ZM13.875 18.75H11.625V8.625H13.875V18.75ZM9.375 18.75H7.125V8.625H9.375V18.75Z" />
             </svg>

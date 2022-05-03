@@ -1,16 +1,23 @@
 import { BASE_URL } from "./constants";
 
 export const routes = {
+  notifications: {
+    addNotification: `${BASE_URL}/notifications/create`,
+    getNotifications: `${BASE_URL}/notifications/getAll`,
+  },
   itProducts: {
     createItProducts: `${BASE_URL}/it_products/create`,
-    getItProducts: `${BASE_URL}/it_products/getAll`
+    getItProducts: `${BASE_URL}/it_products/getAll`,
   },
   itServices: {
     createItService: `${BASE_URL}/services/create`,
-    getItServices: `${BASE_URL}/services/getAll`
+    getItServices: `${BASE_URL}/services/getAll`,
   },
   members: {
+    addMember: `${BASE_URL}/members/create`,
     getAllMembers: `${BASE_URL}/members/getAll`,
+    base: `${BASE_URL}/members`,
+    editMember: `${BASE_URL}/members/edit`,
   },
   allocations: {
     getAllocations: `${BASE_URL}/allocations/getAll`,

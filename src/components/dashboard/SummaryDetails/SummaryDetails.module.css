@@ -36,10 +36,18 @@
   font-weight: 400;
 }
 .table_wrapper {
-  margin-bottom: 50px;
+  margin-bottom: 10px;
 }
 .table_wrapper h6 {
   font-size: 16px;
   font-weight: 700;
   margin: 10px 0 5px;
+}
+.remarks_wrapper {
+  padding: 20px;
+}
+.form_action_wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
 }

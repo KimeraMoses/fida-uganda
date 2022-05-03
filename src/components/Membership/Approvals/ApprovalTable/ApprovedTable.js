@@ -1,14 +1,6 @@
 import React from "react";
-import {
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-} from "@chakra-ui/react";
+import { Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
 import classes from "./Table.module.css";
-import SectionHeader from "./SectionHeader";
 
 export const ApprovalData = [
   {
@@ -61,14 +53,8 @@ export const TableHeadColumn = (props) => {
 const ApprovedTable = () => {
   return (
     <>
-      <SectionHeader title="Approved" />
       <div className={classes.approvals_table_wrapper}>
-        <Table
-          size="sm"
-          variant="striped"
-          colorScheme="gray"
-          className={classes.approval_table}
-        >
+        <Table size="sm" variant="striped" className={classes.approval_table}>
           <Thead className={classes.table_header}>
             <Tr>
               <TableHeadColumn title="Applicants Name" />

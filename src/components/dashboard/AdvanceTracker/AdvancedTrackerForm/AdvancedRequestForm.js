@@ -5,7 +5,7 @@ import InputField from "../../../common/UI/InputField/InputField";
 import { SimpleGrid } from "@chakra-ui/react";
 import FormButton from "../../../common/UI/FormButton/FormButton";
 
-const AdvancedRequestForm = ({isSubmitting, onClose}) => {
+const AdvancedRequestForm = ({ isSubmitting, onClose }) => {
   return (
     <div className={classes.leave_appn_form_wrapper}>
       <SimpleGrid columns={2} spacing={2}>
@@ -14,6 +14,7 @@ const AdvancedRequestForm = ({isSubmitting, onClose}) => {
           type="date"
           label="Date needed"
           placeholder="Date needed"
+          min={new Date()}
         />
         <InputField
           name="address_on_leave"
@@ -43,7 +44,8 @@ const AdvancedRequestForm = ({isSubmitting, onClose}) => {
         <InputField
           name="tel_on_leave"
           label="Telephone on leave"
-          type="text"
+          type="number"
+          maxlength="12"
         />
       </SimpleGrid>
 
@@ -52,7 +54,7 @@ const AdvancedRequestForm = ({isSubmitting, onClose}) => {
           Cancel
         </FormButton>
         <FormButton type="submit" variant="outlined" disabled={isSubmitting}>
-          {!isSubmitting ? "Send" : "Sending"}
+          {!isSubmitting ? "Send" : "Sending..."}
         </FormButton>
       </div>
     </div>

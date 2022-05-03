@@ -2,15 +2,7 @@ import React from "react";
 import FormButton from "../../../../../common/UI/FormButton/FormButton";
 import classes from "./ActionButtons.module.css";
 
-const ActionButtons = ({
-  page,
-  onForward,
-  onBackward,
-  isForwardLoading,
-  isBackwardLoading,
-  values,
-  type,
-}) => {
+const ActionButtons = ({ page, onBack, disabled, limit }) => {
   const firstStep = page === 1 ? true : false;
   return (
     <div
@@ -19,22 +11,16 @@ const ActionButtons = ({
       }`}
     >
       {page !== 1 && (
-        <FormButton
-          variant="colored"
-          type="button"
-          onClick={() => onBackward(values)}
-          isSubmitting={isBackwardLoading}
-        >
+        <FormButton variant="colored" type="button" onClick={onBack}>
           Back and Continue
         </FormButton>
       )}
-      <FormButton
-        variant="colored"
-        type={type ? type : "button"}
-        onClick={() => onForward(values)}
-        isSubmitting={isForwardLoading}
-      >
-        {page !== 6 ? "Save and Continue" : "Submit"}
+      <FormButton variant="colored" type="submit" disabled={disabled}>
+        {disabled
+          ? "Saving..."
+          : page !== limit
+          ? "Save and Continue"
+          : "Submit"}
       </FormButton>
     </div>
   );

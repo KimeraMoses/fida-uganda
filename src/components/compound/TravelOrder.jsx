@@ -7,15 +7,16 @@ import {
 } from "../../hooks/useTravelOrders";
 import { toastSuccess } from "../../lib/toastDetails";
 import SectionHeader from "../common/SectionHeader";
-import Table from "../common/Table";
 import Modal from "../common/Modal";
 import TravelOrderForm from "../forms/travelOrder/TravelOrderForm";
-import { travelOrderColumns } from "../../assets/tableColumns/travelOrder";
+import TravelOrderTable from "../dashboard/TravelOrder/TravelOrderTable";
+import SubHeading from "./../Tasks/SubHeading/SubHeading";
+import TableSearch from "../common/table/TableSearch";
 
 const TravelOrder = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
-  const { data, isLoading } = useTravelOrders();
+  const { data } = useTravelOrders();
   const {
     mutate,
     isLoading: isSubmitting,
@@ -31,19 +32,14 @@ const TravelOrder = () => {
     }
   }, [isSuccess, onClose, toast]);
 
-  const onRowClick = (row) => {};
-
   return (
     <>
       <SectionHeader title="Travel Order" />
-      <Table
-        data={data?.travelOrders}
-        columns={travelOrderColumns}
-        onRowClick={onRowClick}
-        isLoading={isLoading}
-        btnLabel="Travel Order"
-        btnClick={onOpen}
-      />
+      <TableSearch btnLabel="Travel Order" btnClick={onOpen} />
+      <SubHeading title="New Requests" />
+      <TravelOrderTable data={data?.travelOrders} />
+      <SubHeading title="Replied Requisitions" />
+      <TravelOrderTable data={data?.travelOrders} />
       <Modal isOpen={isOpen} onClose={onClose} title="Travel Order" size="2xl">
         <TravelOrderForm
           onSubmit={mutate}

@@ -65,7 +65,8 @@ export const useUsers = () => {
   if (data?.users) {
     return data?.users.map((user) => ({
       value: user.id,
-      name: user.full_name,
+      name: user.full_name || user.first_name + " " + user.last_name,
+      email: user.email
     }));
   }
   return [];

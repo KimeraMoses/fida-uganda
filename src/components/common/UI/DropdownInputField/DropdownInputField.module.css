@@ -25,6 +25,7 @@
   text-transform: capitalize;
   border-top: 1px solid #e2e8f0;
 }
+
 .gpa__custom_text_field_results li:hover {
   background-color: #ed64a6;
   color: #fff;

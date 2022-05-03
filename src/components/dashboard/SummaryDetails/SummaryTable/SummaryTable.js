@@ -1,7 +1,7 @@
 import React from "react";
 import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
 import classes from "./Table.module.css";
-import { TableHeadColumn } from "../../../../Membership/Approvals/ApprovalTable/ApprovedTable";
+import { TableHeadColumn } from "../../../HumanResource/Approvals/ApprovalTable/ApprovedTable";
 
 const Data = [
   {
