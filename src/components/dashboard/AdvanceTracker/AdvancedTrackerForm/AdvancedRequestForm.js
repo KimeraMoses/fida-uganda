@@ -5,7 +5,7 @@ import InputField from "../../../common/UI/InputField/InputField";
 import { SimpleGrid } from "@chakra-ui/react";
 import FormButton from "../../../common/UI/FormButton/FormButton";
 
-const AdvancedRequestForm = ({isSubmitting, onClose}) => {
+const AdvancedRequestForm = ({ isSubmitting, onClose }) => {
   return (
     <div className={classes.leave_appn_form_wrapper}>
       <SimpleGrid columns={2} spacing={2}>
@@ -52,7 +52,7 @@ const AdvancedRequestForm = ({isSubmitting, onClose}) => {
           Cancel
         </FormButton>
         <FormButton type="submit" variant="outlined" disabled={isSubmitting}>
-          {!isSubmitting ? "Send" : "Sending"}
+          {!isSubmitting ? "Send" : "Sending..."}
         </FormButton>
       </div>
     </div>

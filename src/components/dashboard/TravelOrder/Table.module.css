@@ -1,0 +1,20 @@
+.table_wrapper {
+  background-color: #ffffff;
+  margin: 10px 0;
+  border-radius: 16px;
+  padding: 16px 0;
+}
+
+.table_header {
+  padding: 10px 0 !important;
+}
+.table {
+  border-radius: 16px;
+}
+.table_header th {
+  font-size: 15px;
+  text-transform: capitalize;
+  font-weight: 600;
+  color: #000000;
+  white-space: nowrap;
+}

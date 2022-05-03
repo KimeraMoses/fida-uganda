@@ -29,7 +29,10 @@ export const sexOptions = [
 ];
 
 export const requisitionTypeOptions = [
-  { label: "Product Requisition", value: "Product" },
+  {
+    label: "Product Requisition Product Requisition Product Requisition",
+    value: "Product",
+  },
   { label: "Service Requisition", value: "Service" },
   { label: "Works Requisition", value: "Works" },
   { label: "Activity Requisition", value: "Activity" },

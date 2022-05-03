@@ -31,7 +31,7 @@ const NewAttendence = ({ onClose, onSubmit, isSubmitting, error, isError }) => {
       validationSchema={attendanceSchema}
       onSubmit={(values) => {
         // alert(JSON.stringify(values, null, 2));
-        onSubmit(values)
+        onSubmit(values);
       }}
     >
       {({ values }) => {
@@ -40,7 +40,8 @@ const NewAttendence = ({ onClose, onSubmit, isSubmitting, error, isError }) => {
             <SimpleGrid
               columns={2}
               spacing={1}
-              className={classes.input_field_wrapperr}
+              className={classes.input_field_wrapper}
+              style={{ marginBottom: 10 }}
             >
               <div className={classes.field_row_label}>Project Name</div>
               <SelectField

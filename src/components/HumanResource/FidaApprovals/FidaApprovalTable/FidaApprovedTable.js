@@ -18,7 +18,7 @@ const FidaApprovedTable = ({ data }) => {
     useRequestPasswordLink();
   const toast = useToast();
   // console.log(data)
-  const onEditHandler = user => {
+  const onEditHandler = (user) => {
     setUser(user);
     onOpen();
   };
@@ -42,7 +42,9 @@ const FidaApprovedTable = ({ data }) => {
           error={error}
         />
       </Modal>
-      <div className={classes.approvals_table_wrapper}>
+      <div
+        className={`${classes.approvals_table_wrapper} ${styles.table__wrapper}`}
+      >
         <Table
           size="sm"
           variant="simple"
@@ -60,7 +62,7 @@ const FidaApprovedTable = ({ data }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {data.map(item => {
+            {data.map((item) => {
               return (
                 <Tr key={item.id}>
                   <Td>{item.full_name}</Td>

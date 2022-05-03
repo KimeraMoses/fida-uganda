@@ -1,18 +1,21 @@
-.approvals_table_wrapper{
-    background-color: #ffffff;
+.approvals_table_wrapper {
+  background-color: #ffffff;
+  margin: 10px 0;
+  padding-bottom: 10px;
 }
-.table_header{
-    background-color: var(--table_head_bg_color);
-    font-weight: 600;
-    color: var(--text_color);
+.table_header {
+  background-color: var(--table_head_bg_color);
+  font-weight: 600;
+  color: var(--text_color);
+}
+.table_header th {
+  text-transform: capitalize;
+  font-size: 15px;
+}
 
+.approval_table td:last-child {
+  white-space: nowrap;
 }
-.table_header th{
-    text-transform: capitalize;
-    font-size: 15px;
-}
-
-.approval_table td:last-child{
-    white-space: nowrap;
-    
+.table_actions_icon_wrapper {
+  text-align: center;
 }

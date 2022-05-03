@@ -28,8 +28,9 @@ const SideBar = () => {
         overflow="auto"
       >
         <List items={menu[designation] || menu.other} />
-
-        <HelpButton />
+        <div style={{ marginTop: 40 }}>
+          <HelpButton />
+        </div>
       </Box>
     </Box>
   );

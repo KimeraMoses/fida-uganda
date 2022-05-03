@@ -1,28 +1,19 @@
 import React from "react";
 import Select from "react-select";
+import makeAnimated from "react-select/animated";
 
-const options = [
-  { value: "moses", label: "Kimera Moxhus" },
-  { value: "isaac", label: "Mubiru Isaac" },
-  { value: "zeus", label: "Missaga Zeus" },
-];
+const animatedComponents = makeAnimated();
 
-const SelectInput = ({recipients, onChange, name, placeholder}) => {
-
+const SelectInput = ({ options, onChange, name, placeholder }) => {
   return (
     <Select
       placeholder={placeholder}
       onChange={onChange}
-      options={recipients || options}
+      components={animatedComponents}
+      options={options}
       isMulti={true}
       isSearchable={true}
       name={name}
-      styles={{
-        container: (base) => ({
-          ...base,
-          width: "100%",
-        }),
-      }}
     />
   );
 };
