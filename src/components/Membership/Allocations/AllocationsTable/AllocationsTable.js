@@ -56,7 +56,7 @@ const AllocationsTable = ({ allocations, isLoading }) => {
                       {new Date(item.createdAt).toLocaleDateString()}
                     </div>
                     <div className={classes.data__secondary_text}>
-                      {item.time}
+                      {new Date(item.createdAt).toLocaleTimeString()}
                     </div>
                   </Td>
                   <Td>
@@ -66,7 +66,7 @@ const AllocationsTable = ({ allocations, isLoading }) => {
                       {item.subject}
                     </div>
                     <div className={classes.data__secondary_text}>
-                      <p>{item.body}</p>
+                      <p>{item.message}</p>
                     </div>
                   </Td>
                   <Td>

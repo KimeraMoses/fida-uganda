@@ -5,8 +5,10 @@ import SectionHeader from "../../common/SectionHeader";
 import TableSearch from "../../common/table/TableSearch";
 import MemberTable from "./MemberTable/MemberTable";
 import NewMembersForm from "./NewMemberForm/NewMembersForm";
+import {useMembers} from "../../../hooks/useMember";
 
 const Members = () => {
+  const {data} = useMembers();
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>

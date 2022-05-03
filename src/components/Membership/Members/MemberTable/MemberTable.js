@@ -1,14 +1,7 @@
 import React from "react";
-import {
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Td,
-} from "@chakra-ui/react";
+import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
 import classes from "../../Allocations/AllocationsTable/AllocationsTable.module.css";
 import { TableHeadColumn } from "../../Allocations/AllocationsTable/AllocationsTable";
-
 
 const MembersData = [
   {
@@ -53,7 +46,8 @@ const MembersData = [
   },
 ];
 
-const MemberTable = () => {
+const MemberTable = ({ data, isLoading }) => {
+  console.log(data);
   return (
     <div className={classes.allocations_table_wrapper}>
       <Table variant="simple">
@@ -72,48 +66,52 @@ const MemberTable = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {MembersData.map((item) => {
-            return (
-              <Tr>
-                <Td className={classes.data_recepient_field}>
-                  <div className={classes.data__primary_text}>{item.name}</div>
-                  <div className={classes.data__secondary_text}>
-                    {item.memberNo}
-                  </div>
-                </Td>
-                <Td>
-                  <div className={classes.data__primary_text}>
-                    {item.phoneNumber}
-                  </div>
-                  <div className={classes.data__secondary_text}>
-                    {item.email}
-                  </div>
-                </Td>
-                <Td>
-                  <div
-                    className={`${classes.data__primary_text}`}
-                  >
-                    {item.address}
-                  </div>
-                  <div
-                    className={`${classes.data__secondary_text} ${
-                      classes.members_status
-                    } ${item.status ? classes.sucess : classes.fail}`}
-                  >
-                    <h6>{item.status ? "Paid" : "Pending"}</h6>
-                  </div>
-                </Td>
-                <Td>
-                  <div className={classes.data__primary_text}>
-                    {item.officeNo}
-                  </div>
-                  <div className={classes.data__secondary_text}>
-                    {item.officeEmail}
-                  </div>
-                </Td>
-              </Tr>
-            );
-          })}
+          {!isLoading &&
+            data &&
+            data.Members &&
+            data.Members.length &&
+            data.Members.map((item) => {
+              return (
+                <Tr>
+                  <Td className={classes.data_recepient_field}>
+                    <div className={classes.data__primary_text}>
+                      {item.name}
+                    </div>
+                    <div className={classes.data__secondary_text}>
+                      {item.id}
+                    </div>
+                  </Td>
+                  <Td>
+                    <div className={classes.data__primary_text}>
+                      {item.phoneNumber}
+                    </div>
+                    <div className={classes.data__secondary_text}>
+                      {item.email}
+                    </div>
+                  </Td>
+                  <Td>
+                    <div className={`${classes.data__primary_text}`}>
+                      {item.address}
+                    </div>
+                    <div
+                      className={`${classes.data__secondary_text} ${
+                        classes.members_status
+                      } ${item.status ? classes.sucess : classes.fail}`}
+                    >
+                      <h6>{item.status ? "Paid" : "Pending"}</h6>
+                    </div>
+                  </Td>
+                  <Td>
+                    <div className={classes.data__primary_text}>
+                      {item.officeNo}
+                    </div>
+                    <div className={classes.data__secondary_text}>
+                      {item.officeEmail}
+                    </div>
+                  </Td>
+                </Tr>
+              );
+            })}
         </Tbody>
       </Table>
     </div>
