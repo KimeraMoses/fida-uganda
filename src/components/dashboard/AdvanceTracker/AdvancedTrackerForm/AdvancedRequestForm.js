@@ -43,7 +43,8 @@ const AdvancedRequestForm = ({ isSubmitting, onClose }) => {
         <InputField
           name="tel_on_leave"
           label="Telephone on leave"
-          type="text"
+          type="number"
+          maxlength="12"
         />
       </SimpleGrid>
 
