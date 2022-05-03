@@ -1,27 +1,18 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { SimpleGrid, Button } from "@chakra-ui/react";
 import withForm from "../../../hoc/withForm";
 // import { itProductInitialValues, itProductOrderSchema } from "./schemas/it";
 import InputField from "../../common/UI/InputField/InputField";
-import SelectInputField from "../../common/UI/SelectInputField/SelectInputField";
 import { useProjectOptions } from "../../../hooks/useProjects";
 import SelectField from "../../Membership/Allocations/AllocationForm/SelectInput";
 
 const ITProductForm = ({ isSubmitting, setFieldValue }) => {
-  const [selected, setSelected] = useState();
   const projects = useProjectOptions();
   const projectOptions = useMemo(() => projects, [projects]);
   console.log(projectOptions, "project options");
   return (
     <SimpleGrid p={5} gap={3}>
       <SimpleGrid columns={2} gap={5} style={{ alignItems: "center" }}>
-        {/* <SelectInputField
-          data={projectOptions}
-          placeholder="Project name"
-          selected={selected}
-          setSelected={setSelected}
-          name="project_name"
-        /> */}
         <SelectField
           options={projectOptions}
           placeholder="Project name"
