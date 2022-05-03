@@ -9,13 +9,13 @@ import {
   useAddAllocation,
   useAllocations,
 } from "../../../hooks/useAllocations";
-import { useMembers } from "../../../hooks/useMember";
+import { useUsers } from "../../../hooks/useUser";
 
 const Allocations = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialValues = { subject: "", message: "", allocated_to: [] };
 
-  const { data } = useMembers();
+  const users = useUsers();
 
   const { data: allocations, isLoading } = useAllocations();
 
@@ -33,7 +33,7 @@ const Allocations = () => {
           onSuccess={onClose}
           success={`Allocation added successfully`}
           useMutate={useAddAllocation}
-          members={data && data.memebers}
+          users={users}
         />
       )}
     </>
