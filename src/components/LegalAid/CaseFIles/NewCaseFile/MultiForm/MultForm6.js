@@ -1,13 +1,14 @@
-import React, { useEffect } from "react";
 import classes from "../../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css";
-import { Select, SimpleGrid, Textarea, useToast } from "@chakra-ui/react";
+import { SimpleGrid } from "@chakra-ui/react";
 import ActionButtons from "../../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons";
 import FormButton from "../../../../common/UI/FormButton/FormButton";
 import styles from "./MultForm6.module.css";
 import Logo from "../../../../../assets/images/Avater.png";
-import { Form, Formik } from "formik";
-import { caseFileObject } from "./schema";
-import { toastError } from "../../../../../lib/toastDetails";
+import withForm from "../../../../../hoc/withForm";
+import TextAreaField from "../../../../common/TextAreaField";
+import SelectField from "../../../../common/SelectField";
+import { caseFileStatusOptions } from "../../../../../lib/options";
+import SearchableField from "../../../../common/UI/SearchableField/SearchableField";
 
 const ActionCard = () => {
   return (
@@ -29,97 +30,61 @@ const ActionCard = () => {
 };
 
 const MultForm6 = ({
-  caseFile,
   page,
-  handleEditForward,
-  handleEditBack,
-  isBackwardLoading,
-  isForwardLoading,
-  isErrorUpdatingCaseFile,
-  errorUpdatingCaseFile,
+  limit,
+  onBack,
+  isSubmitting,
+  setReferredTo,
+  referredTo,
 }) => {
-  const initialValues = caseFileObject(caseFile);
-  const toast = useToast();
-
-  useEffect(() => {
-    if (isErrorUpdatingCaseFile) {
-      toast(toastError(errorUpdatingCaseFile));
-    }
-  }, [isErrorUpdatingCaseFile, errorUpdatingCaseFile, toast]);
-
   return (
-    <Formik initialValues={initialValues} onSubmit={() => {}}>
-      {({ values }) => {
-        return (
-          <div className={classes.form_wrapper}>
-            <Form>
-              <div className={classes.field_wrapper}>
-                <SimpleGrid
-                  columns={2}
-                  spacing={2}
-                  style={{ alignItems: "center" }}
-                >
-                  <div className={classes.field_label}>12. Status</div>
-                  <Select placeholder="Select option">
-                    <option value="option1">
-                      Concluded through ADR/elders
-                    </option>
-                    <option value="option2">
-                      Resolved by Legal Aid/Counselling
-                    </option>
-                    <option value="option2">Concluded through Mediation</option>
-                    <option value="option2">Pending Mediation</option>
-                    <option value="option2">Pending in Court</option>
-                  </Select>
-                </SimpleGrid>
-              </div>
-              <div className={classes.field_wrapper}>
-                <SimpleGrid
-                  columns={2}
-                  spacing={2}
-                  style={{ alignItems: "center" }}
-                >
-                  <div className={classes.field_label}>13. Refer Case</div>
-                  <Select placeholder="Select option">
-                    <option value="option1">Kimera Moxhus</option>
-                    <option value="option2">Ivan Kabanda</option>
-                  </Select>
-                </SimpleGrid>
-              </div>
+    <div className={classes.form_wrapper}>
+      <div className={classes.field_wrapper}>
+        <SimpleGrid columns={2} spacing={2} style={{ alignItems: "center" }}>
+          <div className={classes.field_label}>12. Status</div>
+          <SelectField
+            name="status"
+            placeholder="Select option"
+            options={caseFileStatusOptions}
+          />
+        </SimpleGrid>
+      </div>
+      <div className={classes.field_wrapper}>
+        <SimpleGrid columns={2} spacing={2} style={{ alignItems: "center" }}>
+          <div className={classes.field_label}>13. Refer Case</div>
+          <SearchableField
+            placeholder="Search person"
+            selectedItem={referredTo.full_name}
+            setSelectedItem={setReferredTo}
+          />
+        </SimpleGrid>
+      </div>
 
-              <div className={classes.field_wrapper}>
-                <div className={classes.field_label}>
-                  14. Reason for referal.
-                </div>
-                <Textarea placeholder="Type here" />
-              </div>
-              <div className={classes.field_wrapper}>
-                <div className={classes.field_label}>15. Action Taken. </div>
-                <div className={styles.action_taken_wrapper}>
-                  <ActionCard />
-                  <ActionCard />
-                  <ActionCard />
-                  <Textarea placeholder="Type here" />
-                  <div className={styles.add_actions_btn}>
-                    <FormButton variant="outlined">Add Action</FormButton>
-                  </div>
-                </div>
-              </div>
-
-              <ActionButtons
-                page={page}
-                onForward={handleEditForward}
-                onBackward={handleEditBack}
-                isBackwardLoading={isBackwardLoading}
-                isForwardLoading={isForwardLoading}
-                values={values}
-              />
-            </Form>
+      <div className={classes.field_wrapper}>
+        <div className={classes.field_label}>14. Reason for referal.</div>
+        <TextAreaField name="reason_for_referral" placeholder="Type here" />
+      </div>
+      <div className={classes.field_wrapper}>
+        <div className={classes.field_label}>15. Action Taken. </div>
+        <div className={styles.action_taken_wrapper}>
+          <ActionCard />
+          <ActionCard />
+          <ActionCard />
+          <TextAreaField name="comment" placeholder="Type here" />
+          <div className={styles.add_actions_btn}>
+            <FormButton variant="outlined">Add Action</FormButton>
           </div>
-        );
-      }}
-    </Formik>
+        </div>
+      </div>
+
+      <ActionButtons
+        page={page}
+        onBack={onBack}
+        disabled={isSubmitting}
+        limit={limit}
+      />
+    </div>
   );
 };
 
-export default MultForm6;
+export default withForm(MultForm6);
