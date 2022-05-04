@@ -7,13 +7,14 @@ import MemberActivitiesTable from "./MemberActivitiesTable/MemberActivitiesTable
 import NewActivityForm from "./NewActivityForm/NewActivityForm";
 // import { newMembershipActivitySchema } from "./NewActivityForm/schema";
 import { useUsers } from "../../../hooks/useUser";
-import { useAddActivity } from "../../../hooks/useMembershipActivity";
+import { useAddActivity, useActivities } from "../../../hooks/useMembershipActivity";
 import { useProjectOptions } from "../../../hooks/useProjects";
 
 const MembersActivities = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const users = useUsers();
   const projectOptions = useProjectOptions();
+  const {isLoading, data} = useActivities()
   const newActivityInitialValues = {
     member: "",
     project: "",
@@ -25,7 +26,7 @@ const MembersActivities = () => {
     <>
       <SectionHeader title="Members Activities" />
       <TableSearch btnLabel="Add Activity" btnClick={onOpen} />
-      <MemberActivitiesTable />
+      <MemberActivitiesTable data={data ? data.MembershipActivities : null} isLoading={isLoading} />
       <Modal
         isOpen={isOpen}
         onClose={onClose}
