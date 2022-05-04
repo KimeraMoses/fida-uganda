@@ -24,7 +24,7 @@ const AllocationsTable = ({ allocations, isLoading }) => {
           <Tr>
             <TableHeadColumn
               title="Recepient (s)"
-              secondaryText="Recepients(s)"
+              secondaryText="Allocations No."
             />
             <TableHeadColumn title="Date" secondaryText="time" />
             <TableHeadColumn title="Subject" secondaryText="body" />
@@ -35,7 +35,7 @@ const AllocationsTable = ({ allocations, isLoading }) => {
           {!isLoading &&
             allocations &&
             allocations.Allocations &&
-            sortByDate(allocations.Allocations).map((item) => {
+            sortByDate(allocations.Allocations).map((item, index) => {
               return (
                 <Tr key={item.id}>
                   <Td className={classes.data_recepient_field}>
@@ -48,9 +48,9 @@ const AllocationsTable = ({ allocations, isLoading }) => {
                         }
                       })}
                     </div>
-                    {/* <div className={classes.data__secondary_text}>
-                      {item.alloc_number}
-                    </div> */}
+                    <div className={classes.data__secondary_text}>
+                      000{index + 1}
+                    </div>
                   </Td>
                   <Td>
                     <div className={classes.data__primary_text}>
