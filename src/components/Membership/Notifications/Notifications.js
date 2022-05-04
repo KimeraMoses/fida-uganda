@@ -25,7 +25,7 @@ const Notifications = () => {
       <SectionHeader title="Notifications" />
       <TableSearch btnLabel="Compose" btnClick={onOpen} />
       <NotificationsTable
-        notifications={data ? data.Notifications : null}
+        data={data ? data.Notifications : null}
         isLoading={isLoading}
       />
       {isOpen && (

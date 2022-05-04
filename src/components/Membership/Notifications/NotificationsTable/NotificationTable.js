@@ -3,7 +3,7 @@ import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
 import classes from "../../Allocations/AllocationsTable/AllocationsTable.module.css";
 import styles from "./NotificationsTable.module.css";
 import { TableHeadColumn } from "../../Allocations/AllocationsTable/AllocationsTable";
-
+import sortByDate from "../../../../lib/sortByDate";
 const NotificationsTable = ({ data, isLoading }) => {
   return (
     <div className={classes.allocations_table_wrapper}>
@@ -17,19 +17,26 @@ const NotificationsTable = ({ data, isLoading }) => {
           </Tr>
         </Thead>
         <Tbody>
-          {!!isLoading &&
+          {!isLoading &&
             data &&
-            data.Notifications &&
-            data.Notifications.length &&
-            data.Notifications.map((item) => {
+            data.length &&
+            sortByDate(data).map((item) => {
               return (
                 <Tr>
                   <Td>{item.subject}</Td>
                   <Td className={styles.data__purpose_primary_text}>
-                    {item.purpose}
+                    {item.message}
                   </Td>
                   <Td>{new Date(item.createdAt).toLocaleDateString()}</Td>
-                  <Td>{item.members}</Td>
+                  <Td>
+                    {item.user.map((person, index) => {
+                      if (index + 1 === item.user.length) {
+                        return person.id;
+                      } else {
+                        return person.id + ", ";
+                      }
+                    })}
+                  </Td>
                 </Tr>
               );
             })}
