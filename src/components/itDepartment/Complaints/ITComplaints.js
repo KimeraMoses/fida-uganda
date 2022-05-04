@@ -8,7 +8,7 @@ import {useComplaints} from '../../../hooks/useComplaint'
 
 const ITComplaints = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data, isLoading } = useComplaints();
+  const { data } = useComplaints();
   return (
     <>
       <SectionHeader title="IT Complaints" />

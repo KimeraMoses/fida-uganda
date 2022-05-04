@@ -3,49 +3,6 @@ import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
 import classes from "../../Allocations/AllocationsTable/AllocationsTable.module.css";
 import { TableHeadColumn } from "../../Allocations/AllocationsTable/AllocationsTable";
 
-const MembersData = [
-  {
-    name: "Nalubega Alexis Christine",
-    memberNo: "FU/LE/20/064",
-    phoneNumber: "0784658626",
-    email: "nalubega12@gmail.com",
-    address: "Kampala",
-    officeNo: "0314 658 626",
-    officeEmail: "nalubega12@gmail.com",
-    status: true,
-  },
-  {
-    name: "Nalubega Alexis Christine",
-    memberNo: "FU/LE/20/064",
-    phoneNumber: "0784658626",
-    email: "nalubega12@gmail.com",
-    address: "Kampala",
-    officeNo: "0314 658 626",
-    officeEmail: "nalubega12@gmail.com",
-    status: true,
-  },
-  {
-    name: "Nalubega Alexis Christine",
-    memberNo: "FU/LE/20/064",
-    phoneNumber: "0784658626",
-    email: "nalubega12@gmail.com",
-    address: "Kampala",
-    officeNo: "0314 658 626",
-    officeEmail: "nalubega12@gmail.com",
-    status: false,
-  },
-  {
-    name: "Nalubega Alexis Christine",
-    memberNo: "FU/LE/20/064",
-    phoneNumber: "0784658626",
-    email: "nalubega12@gmail.com",
-    address: "Kampala",
-    officeNo: "0314 658 626",
-    officeEmail: "nalubega12@gmail.com",
-    status: true,
-  },
-];
-
 const MemberTable = ({ data, isLoading }) => {
   return (
     <div className={classes.allocations_table_wrapper}>

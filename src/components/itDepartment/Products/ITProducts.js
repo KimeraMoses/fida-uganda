@@ -10,10 +10,8 @@ import { useAddItProduct, useItProducts} from "../../../hooks/useItProduct";
 
 const ITProducts = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data, isLoading } = useItProducts();
+  const { data } = useItProducts();
 
-
-  //console.log('data is', data.ITProducts[0])
   return (
     <>
       <SectionHeader title="IT Products" />
