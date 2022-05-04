@@ -1,6 +1,10 @@
 import { BASE_URL } from "./constants";
 
 export const routes = {
+  membershipActivities: {
+    getMembershipActivities: `${BASE_URL}/membershipActivities/getAll`,
+    addMembershipActivity: `${BASE_URL}/membershipActivities/create`
+  },
   notifications: {
     addNotification: `${BASE_URL}/notifications/create`,
     getNotifications: `${BASE_URL}/notifications/getAll`,
