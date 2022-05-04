@@ -73,14 +73,14 @@ export const useUpdateCaseFile = () => {
         queryClient.setQueryData(CASES_KEY, (previousCaseFiles) => {
           return produce(previousCaseFiles, (draft) => {
             const index = draft.caseFiles.findIndex(
-              (caseFile) => caseFile.id === data.case_file.id
+              (caseFile) => caseFile.id === data.updatedCase.id
             );
-            draft.caseFiles[index] = data.case_file;
+            draft.caseFiles[index] = data.updatedCase;
           });
         });
       } else {
         queryClient.setQueryData(CASES_KEY, () => {
-          return { caseFiles: [data.case_file] };
+          return { caseFiles: [data.updatedCase] };
         });
       }
     },

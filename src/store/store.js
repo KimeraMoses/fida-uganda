@@ -1,7 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./authReducer";
 import caseFileReducer from "./caseFileReducer";
+import memberReducer from "./memberReducer";
 
 export const store = configureStore({
-  reducer: { auth: authReducer, caseFile: caseFileReducer },
+  reducer: {
+    auth: authReducer,
+    caseFile: caseFileReducer,
+    member: memberReducer,
+  },
 });
