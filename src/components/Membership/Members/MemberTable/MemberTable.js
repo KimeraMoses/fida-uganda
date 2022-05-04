@@ -24,7 +24,7 @@ const MemberTable = ({ data, isLoading }) => {
         <Tbody>
           {!isLoading &&
             data.length &&
-            data.map((item) => {
+            data.map((item, index) => {
               return (
                 <Tr>
                   <Td className={classes.data_recepient_field}>
@@ -32,7 +32,7 @@ const MemberTable = ({ data, isLoading }) => {
                       {item.first_name + " " + item.last_name}
                     </div>
                     <div className={classes.data__secondary_text}>
-                      {item.id}
+                      00{index + 1}
                     </div>
                   </Td>
                   <Td>
