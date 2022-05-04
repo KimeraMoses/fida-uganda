@@ -2,6 +2,7 @@ import React from "react";
 import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
 import classes from "../../Allocations/AllocationsTable/AllocationsTable.module.css";
 import { TableHeadColumn } from "../../Allocations/AllocationsTable/AllocationsTable";
+import withTable from "../../../../hoc/withTable";
 
 const MemberTable = ({ data, isLoading }) => {
   return (
@@ -73,4 +74,4 @@ const MemberTable = ({ data, isLoading }) => {
   );
 };
 
-export default MemberTable;
+export default withTable(MemberTable);

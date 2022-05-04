@@ -1,7 +1,6 @@
 import { useDisclosure } from "@chakra-ui/react";
 import React from "react";
 import SectionHeader from "../../common/SectionHeader";
-import TableSearch from "../../common/table/TableSearch";
 import Form from "./NotificationForm";
 import NotificationsTable from "./NotificationsTable/NotificationTable";
 import { useUsers } from "../../../hooks/useUser";
@@ -23,10 +22,12 @@ const Notifications = () => {
   return (
     <div>
       <SectionHeader title="Notifications" />
-      <TableSearch btnLabel="Compose" btnClick={onOpen} />
+      {/* <TableSearch btnLabel="Compose" btnClick={onOpen} /> */}
       <NotificationsTable
         data={data ? data.Notifications : null}
         isLoading={isLoading}
+        btnLabel="Compose"
+        btnClick={onOpen}
       />
       {isOpen && (
         <Form

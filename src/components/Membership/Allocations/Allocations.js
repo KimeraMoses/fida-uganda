@@ -1,7 +1,6 @@
 import React from "react";
 import { useDisclosure } from "@chakra-ui/react";
 import SectionHeader from "../../common/SectionHeader";
-import TableSearch from "../../common/table/TableSearch";
 import Form from "../Allocations/AllocationForm/Form";
 import AllocationsTable from "./AllocationsTable/AllocationsTable";
 // import { allocationFormSchema } from "./AllocationForm/schema";
@@ -17,13 +16,16 @@ const Allocations = () => {
 
   const users = useUsers();
 
-  const { data: allocations, isLoading } = useAllocations();
-
+  const { data, isLoading } = useAllocations();
   return (
     <>
       <SectionHeader title="Allocations" />
-      <TableSearch btnLabel="Send Allocation" btnClick={onOpen} />
-      <AllocationsTable allocations={allocations} isLoading={isLoading} />
+      <AllocationsTable
+        data={data?.Allocations}
+        isLoading={isLoading}
+        btnLabel="Send Allocation"
+        btnClick={onOpen}
+      />
       {isOpen && (
         <Form
           onClose={onClose}

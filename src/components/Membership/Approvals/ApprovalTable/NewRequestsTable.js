@@ -4,6 +4,7 @@ import classes from "./Table.module.css";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { TableHeadColumn } from "./ApprovedTable";
 import { formatDate } from "../../../../lib/data";
+import withTable from "../../../../hoc/withTable";
 
 const NewRequestsTable = ({ data }) => {
   return (
@@ -54,4 +55,4 @@ const NewRequestsTable = ({ data }) => {
   );
 };
 
-export default NewRequestsTable;
+export default withTable(NewRequestsTable);

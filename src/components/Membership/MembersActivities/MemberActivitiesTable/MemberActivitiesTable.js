@@ -2,8 +2,9 @@ import React from "react";
 import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
 import classes from "./MemberActivitiesTable.module.css";
 import { TableHeadColumn } from "../../Allocations/AllocationsTable/AllocationsTable";
+import withTable from "./../../../../hoc/withTable";
 
-const MembersData = [
+export const MembersData = [
   {
     sn: "001",
     name: "Mutumba Joshep",
@@ -56,7 +57,7 @@ const MembersData = [
   },
   {
     sn: "006",
-    name: "Mutumba Joshep",
+    name: "Kimera Moses",
     memberNo: "FU/LE/20/064",
     project: "SGBV, Kamuli IDLO",
     projecctActivity: "Training in Management of SGBV cases ",
@@ -66,7 +67,7 @@ const MembersData = [
   },
 ];
 
-const MemberActivitiesTable = () => {
+const MemberActivitiesTable = ({ data }) => {
   return (
     <div className={classes.activities_table_wrapper}>
       <Table variant="simple" size="sm">
@@ -82,16 +83,14 @@ const MemberActivitiesTable = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {MembersData.map((item) => {
+          {data.map((item) => {
             return (
               <Tr>
                 <Td className={classes.data_recepient_field}>
                   <div className={classes.data__primary_text}>{item.sn}</div>
                 </Td>
                 <Td>
-                  <div className={classes.data__primary_text}>
-                    {item.name}
-                  </div>
+                  <div className={classes.data__primary_text}>{item.name}</div>
                   <div className={classes.data__secondary_text}>
                     {item.memberNo}
                   </div>
@@ -105,9 +104,7 @@ const MemberActivitiesTable = () => {
                   </div>
                 </Td>
                 <Td>
-                  <div className={classes.data__primary_text}>
-                    {item.date}
-                  </div>
+                  <div className={classes.data__primary_text}>{item.date}</div>
                   <div className={classes.data__secondary_text}>
                     {item.activitySummary}
                   </div>
@@ -121,4 +118,4 @@ const MemberActivitiesTable = () => {
   );
 };
 
-export default MemberActivitiesTable;
+export default withTable(MemberActivitiesTable);
