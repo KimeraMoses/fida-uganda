@@ -12,6 +12,7 @@ th {
 }
 .allocations_table_wrapper td {
   vertical-align: top;
+  padding-left: 10px;
 }
 .title_secondary_text {
   font-size: 14px;

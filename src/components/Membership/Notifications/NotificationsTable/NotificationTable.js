@@ -4,6 +4,7 @@ import classes from "../../Allocations/AllocationsTable/AllocationsTable.module.
 import styles from "./NotificationsTable.module.css";
 import { TableHeadColumn } from "../../Allocations/AllocationsTable/AllocationsTable";
 import sortByDate from "../../../../lib/sortByDate";
+
 const NotificationsTable = ({ data, isLoading }) => {
   return (
     <div className={classes.allocations_table_wrapper}>
@@ -24,9 +25,7 @@ const NotificationsTable = ({ data, isLoading }) => {
               return (
                 <Tr>
                   <Td>{item.subject}</Td>
-                  <Td className={styles.data__purpose_primary_text}>
-                    {item.message}
-                  </Td>
+                  <Td className={styles.body_wrapper}>{item.message}</Td>
                   <Td>{new Date(item.createdAt).toLocaleDateString()}</Td>
                   <Td>
                     {item.user.map((person, index) => {

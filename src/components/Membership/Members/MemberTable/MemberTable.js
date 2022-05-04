@@ -12,7 +12,7 @@ const MemberTable = ({ data, isLoading }) => {
             <TableHeadColumn title="Name" secondaryText="Membership No." />
             <TableHeadColumn title="Phone Number" secondaryText="Email" />
             <TableHeadColumn
-              title="Address"
+              title="Membershp Duration"
               secondaryText="Membership fee status"
             />
             <TableHeadColumn
@@ -28,7 +28,9 @@ const MemberTable = ({ data, isLoading }) => {
               return (
                 <Tr>
                   <Td className={classes.data_recepient_field}>
-                    <div className={classes.data__primary_text}>{item.id}</div>
+                    <div className={classes.data__primary_text}>
+                      {item.first_name + " " + item.last_name}
+                    </div>
                     <div className={classes.data__secondary_text}>
                       {item.id}
                     </div>
@@ -43,14 +45,15 @@ const MemberTable = ({ data, isLoading }) => {
                   </Td>
                   <Td>
                     <div className={`${classes.data__primary_text}`}>
-                      {item.address}
+                      {item.membership_duration}
                     </div>
                     <div
-                      className={`${classes.data__secondary_text} ${
-                        classes.members_status
-                      } ${item.status ? classes.sucess : classes.fail}`}
+                      className={`${classes.allocation_status_wrapper} ${
+                        item.hasPaid ? classes.success : classes.fail
+                      } ${classes.members_status}`}
                     >
-                      <h6>{item.hasPaid ? "Paid" : "Pending"}</h6>
+                      <span className={classes.status_indicator}></span>
+                      <h5>{item.hasPaid ? "Paid" : "Pending"}</h5>
                     </div>
                   </Td>
                   <Td>
