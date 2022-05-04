@@ -42,9 +42,9 @@ const AllocationsTable = ({ allocations, isLoading }) => {
                     <div className={classes.data__primary_text}>
                       {item.allocated_to.map((person, index) => {
                         if (index + 1 === item.allocated_to.length) {
-                          return person.label;
+                          return person.label || person;
                         } else {
-                          return person.label + ", ";
+                          return person.label || person + ", ";
                         }
                       })}
                     </div>
