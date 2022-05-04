@@ -28,7 +28,7 @@ th {
   margin-bottom: 8px;
 }
 .data_recepient_field {
-  white-space: nowrap;
+  width: 200px;
 }
 .subject__title {
   text-transform: uppercase;
