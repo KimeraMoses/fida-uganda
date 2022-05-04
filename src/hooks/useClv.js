@@ -11,6 +11,13 @@ export const useClvs = () => {
   return useQuery(CLVS_KEY, getClvs);
 };
 
+export const useClvsDetails = () => {
+  const { data } = useClvs();
+  return data?.clvs.map((clv) => {
+    return { ...clv, id: clv.id, name: clv.name };
+  });
+};
+
 export const useClvsStats = () => {
   return useQuery(CLVS_STATS, getClvs);
 };
