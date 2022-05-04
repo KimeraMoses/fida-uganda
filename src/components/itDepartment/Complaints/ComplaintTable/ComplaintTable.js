@@ -2,39 +2,8 @@ import React from "react";
 import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
 import classes from "../../CommonTable/Table.module.css";
 import { TableHeadColumn } from "../../../Membership/Allocations/AllocationsTable/AllocationsTable";
-import { useComplaints } from '../../../../hooks/useComplaint'
-
-
-
-
-const Complaints = [
-  {
-    name: "Nalubega Christine",
-    id: "#C01234",
-    date: "26/04/2020",
-    time: "12:42 AM",
-    subject: "AC in the Board room.",
-    body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim enim ad minim adj ....",
-    status: true,
-    date_recieved: "15/APR/2020",
-  },
-  {
-    name: "Kimera Moxhus",
-    id: "#C01236",
-    date: "26/04/2020",
-    time: "12:43 AM",
-    subject: "AC in the Board room !!",
-    body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim enim ad minim adj ....",
-    status: false,
-    date_recieved: "15/APR/2020",
-  },
-];
 
 const ComplaintsTable = ({ data }) => {
-
-  const complaints = useComplaints()
-  console.log('useComplaints is', complaints.data)
-
   return (
     <>
       <div className={classes.table_wrapper}>
@@ -88,8 +57,9 @@ const ComplaintsTable = ({ data }) => {
                     <Td className={classes.data_field}>
                       <div className={classes.data__primary_text}>
                         <div
-                          className={`${classes.allocation_status_wrapper} ${item.status ? classes.paid : classes.fail
-                            }`}
+                          className={`${classes.allocation_status_wrapper} ${
+                            item.status ? classes.paid : classes.fail
+                          }`}
                         >
                           <span className={classes.status_indicator}></span>
                           <h5>{item.status ? "Read" : "Unread"}</h5>

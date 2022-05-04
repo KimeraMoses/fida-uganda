@@ -16,6 +16,7 @@ export const TableHeadColumn = (props) => {
 };
 
 const AllocationsTable = ({ allocations, isLoading }) => {
+  console.log(allocations);
   return (
     <div className={classes.allocations_table_wrapper}>
       <Table variant="simple">
@@ -36,14 +37,14 @@ const AllocationsTable = ({ allocations, isLoading }) => {
             allocations.Allocations &&
             sortByDate(allocations.Allocations).map((item) => {
               return (
-                <Tr>
+                <Tr key={item.id}>
                   <Td className={classes.data_recepient_field}>
                     <div className={classes.data__primary_text}>
                       {item.allocated_to.map((person, index) => {
                         if (index + 1 === item.allocated_to.length) {
-                          return person.label;
+                          return person.label || person;
                         } else {
-                          return person.label + ", ";
+                          return person.label || person + ", ";
                         }
                       })}
                     </div>

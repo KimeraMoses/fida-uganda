@@ -12,6 +12,14 @@ export const useClients = () => {
   return useQuery(CLIENTS_KEY, getAllClients);
 };
 
+export const useClientsDetails = () => {
+  const { data } = useClients();
+
+  return data?.clients.map((client) => {
+    return { id: client.id, name: client.name };
+  });
+};
+
 export const useClient = (clientId) => {
   return useQuery([CLIENTS_KEY, clientId], () => getAllClients(clientId));
 };
@@ -23,8 +31,9 @@ export const useClientStats = () => {
 export const useClientOptions = () => {
   const { data } = useClients();
   return data?.clients.map((client) => ({
-    value: client.id,
-    label: client.name,
+    ...client,
+    id: client.id,
+    name: client.name,
   }));
 };
 
