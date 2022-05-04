@@ -45,7 +45,12 @@ const Form = (props) => {
             {/* To: */}
             <SelectInput
               name="allocated_to"
-              onChange={(value) => setFieldValue("allocated_to", value)}
+              onChange={(option) =>
+                setFieldValue(
+                  "allocated_to",
+                  option.map((item) => item.value)
+                )
+              }
               options={formatUserOptions}
               placeholder={isLoading ? "Loading data" : "Recipients"}
               isMulti

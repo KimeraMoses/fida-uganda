@@ -2,7 +2,7 @@ import React from "react";
 import withForm from "../../../hoc/withForm";
 import { IconButton } from "@chakra-ui/react";
 import InputField from "../../common/UI/InputField/InputField";
-// import SelectField from "../../../common/SelectField";
+// import SelectField from "../../common/SelectField";
 import TextAreaField from "../../common/TextAreaField";
 import SelectInput from "../Allocations/AllocationForm/SelectInput";
 
@@ -25,6 +25,7 @@ const Form = (props) => {
     label: user.name,
     value: user.value,
   }));
+
   return (
     <div
       className={classes.fida__email_form_wrapper}
@@ -45,7 +46,12 @@ const Form = (props) => {
             {/* To: */}
             <SelectInput
               name="user"
-              onChange={(value) => setFieldValue("user", value.value)}
+              onChange={(option) =>
+                setFieldValue(
+                  "user",
+                  option.map((item) => item.value)
+                )
+              }
               options={formatUserOptions}
               placeholder={isLoading ? "Loading data" : "Users"}
               isMulti

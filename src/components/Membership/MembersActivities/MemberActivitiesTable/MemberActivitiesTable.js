@@ -57,7 +57,7 @@ export const MembersData = [
   },
   {
     sn: "006",
-    name: "Kimera Moses",
+    name: "Mutumba Joshep",
     memberNo: "FU/LE/20/064",
     project: "SGBV, Kamuli IDLO",
     projecctActivity: "Training in Management of SGBV cases ",

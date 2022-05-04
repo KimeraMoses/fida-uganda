@@ -15,7 +15,7 @@ const Notifications = () => {
   const { data, isLoading } = useNotifications();
 
   const initialValues = {
-    user: [],
+    user: "",
     message: "",
     subject: "",
   };
