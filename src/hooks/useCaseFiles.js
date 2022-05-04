@@ -15,6 +15,12 @@ import {
   updateCaseFile,
 } from "../apis/cases";
 import produce from "immer";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCaseFile } from "../store/caseFileReducer";
+
+export const useCaseFileId = () => {
+  return useSelector((state) => state.caseFile.selectedId);
+};
 
 export const useCaseFiles = () => {
   return useQuery(CASES_KEY, getCaseFiles);
@@ -38,18 +44,20 @@ export const useCasesStats = () => {
 
 export const useAddCaseFiles = () => {
   const queryClient = useQueryClient();
+  const dispatch = useDispatch();
   return useMutation(addCaseFile, {
     onSuccess: (data) => {
+      dispatch(selectCaseFile(data.case_file.id));
       const previousCaseFiles = queryClient.getQueryData(CASES_KEY);
       if (previousCaseFiles) {
         queryClient.setQueryData(CASES_KEY, (previousCaseFiles) => {
           return produce(previousCaseFiles, (draft) => {
-            draft.cases.push(data.caseFile);
+            draft.cases.push(data.case_file);
           });
         });
       } else {
         queryClient.setQueryData(CASES_KEY, () => {
-          return { cases: [data.caseFile] };
+          return { cases: [data.case_file] };
         });
       }
     },
@@ -65,14 +73,14 @@ export const useUpdateCaseFile = () => {
         queryClient.setQueryData(CASES_KEY, (previousCaseFiles) => {
           return produce(previousCaseFiles, (draft) => {
             const index = draft.caseFiles.findIndex(
-              (caseFile) => caseFile.id === data.caseFile.id
+              (caseFile) => caseFile.id === data.case_file.id
             );
-            draft.caseFiles[index] = data.caseFile;
+            draft.caseFiles[index] = data.case_file;
           });
         });
       } else {
         queryClient.setQueryData(CASES_KEY, () => {
-          return { caseFiles: [data.caseFile] };
+          return { caseFiles: [data.case_file] };
         });
       }
     },

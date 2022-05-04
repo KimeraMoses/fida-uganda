@@ -9,6 +9,7 @@ import TextAreaField from "../../../../common/TextAreaField";
 import SelectField from "../../../../common/SelectField";
 import { caseFileStatusOptions } from "../../../../../lib/options";
 import SearchableField from "../../../../common/UI/SearchableField/SearchableField";
+import { useUsers } from "../../../../../hooks/useUser";
 
 const ActionCard = () => {
   return (
@@ -37,6 +38,8 @@ const MultForm6 = ({
   setReferredTo,
   referredTo,
 }) => {
+  const users = useUsers();
+
   return (
     <div className={classes.form_wrapper}>
       <div className={classes.field_wrapper}>
@@ -54,8 +57,10 @@ const MultForm6 = ({
           <div className={classes.field_label}>13. Refer Case</div>
           <SearchableField
             placeholder="Search person"
-            selectedItem={referredTo.full_name}
+            data={users}
             setSelectedItem={setReferredTo}
+            selectedItem={referredTo.full_name}
+            name="referredTo"
           />
         </SimpleGrid>
       </div>
