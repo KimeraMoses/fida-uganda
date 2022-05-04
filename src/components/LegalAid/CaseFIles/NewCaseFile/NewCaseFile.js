@@ -6,7 +6,8 @@ import MultForm2 from "./MultiForm/MultForm2";
 import MultForm1 from "./MultiForm/MultForm1";
 import MultForm6 from "./MultiForm/MultForm6";
 import {
-  // useAddCaseFiles,
+  useCaseFileId,
+  useAddCaseFiles,
   useUpdateCaseFile,
 } from "../../../../hooks/useCaseFiles";
 import {
@@ -17,13 +18,13 @@ import {
   caseFileThreeInitialValues,
   caseFileTwoInitialValues,
 } from "./MultiForm/schema";
-import { onSubmitAlert } from "../../../../lib/deleteInProd";
 
 const NewCaseFile = ({ caseFile, isClvCaseFile, isNew, onClose }) => {
+  const caseFileId = useCaseFileId();
   const limit = 6;
   const CASE_FILE_ADDED = "Case File Added Successfully";
   const CASE_FILE_UPDATED = "Case File Updated Successfully";
-  const [page, setPage] = useState(6);
+  const [page, setPage] = useState(1);
   const [selectedClient, setSelectedClient] = useState({});
   const [referredTo, setReferredTo] = useState({});
 
@@ -31,8 +32,28 @@ const NewCaseFile = ({ caseFile, isClvCaseFile, isNew, onClose }) => {
     return { ...values, complainant: selectedClient.id };
   };
 
+  const mutateForm1Update = (values) => {
+    return { ...values, complainant: selectedClient.id, id: caseFileId };
+  };
+
+  const mutateForm2 = (values) => {
+    return { ...values, id: caseFileId };
+  };
+
+  const mutateForm3 = (values) => {
+    return { ...values, id: caseFileId };
+  };
+
+  const mutateForm4 = (values) => {
+    return { ...values, id: caseFileId };
+  };
+
+  const mutateForm5 = (values) => {
+    return { ...values, id: caseFileId };
+  };
+
   const mutateForm6 = (values) => {
-    return { ...values, referred_to: referredTo.id };
+    return { ...values, referred_to: referredTo.id, id: caseFileId };
   };
 
   const prevStep = () => {
@@ -50,7 +71,7 @@ const NewCaseFile = ({ caseFile, isClvCaseFile, isNew, onClose }) => {
           initialValues={isNew ? caseFileInitialValues : caseFile}
           isClvCaseFile={isClvCaseFile}
           isNew={isNew}
-          useMutate={isNew ? onSubmitAlert : useUpdateCaseFile}
+          useMutate={isNew ? useAddCaseFiles : useUpdateCaseFile}
           success={isNew ? CASE_FILE_ADDED : CASE_FILE_UPDATED}
           onSuccess={nextStep}
           selectedClient={selectedClient}
@@ -58,71 +79,79 @@ const NewCaseFile = ({ caseFile, isClvCaseFile, isNew, onClose }) => {
           page={page}
           limit={limit}
           isMutable={true}
-          mutateData={mutateForm1}
+          mutateData={isNew ? mutateForm1 : mutateForm1Update}
         />
       );
     case 2:
       return (
         <MultForm2
           initialValues={caseFileTwoInitialValues}
-          useMutate={onSubmitAlert}
-          onSuccess={nextStep}
-          success={CASE_FILE_UPDATED}
-          onBack={prevStep}
-          page={page}
-          limit={limit}
-        />
-      );
-    case 3:
-      return (
-        <MultForm3
-          initialValues={caseFileThreeInitialValues}
-          useMutate={onSubmitAlert}
-          onSuccess={nextStep}
-          success={CASE_FILE_UPDATED}
-          onBack={prevStep}
-          page={page}
-          limit={limit}
-        />
-      );
-    case 4:
-      return (
-        <MultForm4
-          initialValues={caseFileFourInitialValues}
-          useMutate={onSubmitAlert}
-          onSuccess={nextStep}
-          success={CASE_FILE_UPDATED}
-          onBack={prevStep}
-          page={page}
-          limit={limit}
-        />
-      );
-    case 5:
-      return (
-        <MultForm5
-          initialValues={caseFileFiveInitialValues}
-          useMutate={onSubmitAlert}
+          useMutate={useUpdateCaseFile}
           onSuccess={nextStep}
           success={CASE_FILE_UPDATED}
           onBack={prevStep}
           page={page}
           limit={limit}
           isMutable={true}
-          mutateData={mutateForm6}
+          mutateData={mutateForm2}
+        />
+      );
+    case 3:
+      return (
+        <MultForm3
+          initialValues={caseFileThreeInitialValues}
+          useMutate={useUpdateCaseFile}
+          onSuccess={nextStep}
+          success={CASE_FILE_UPDATED}
+          onBack={prevStep}
+          page={page}
+          limit={limit}
+          isMutable={true}
+          mutateData={mutateForm3}
+        />
+      );
+    case 4:
+      return (
+        <MultForm4
+          initialValues={caseFileFourInitialValues}
+          useMutate={useUpdateCaseFile}
+          onSuccess={nextStep}
+          success={CASE_FILE_UPDATED}
+          onBack={prevStep}
+          page={page}
+          limit={limit}
+          isMutable={true}
+          mutateData={mutateForm4}
+        />
+      );
+    case 5:
+      return (
+        <MultForm5
+          initialValues={caseFileFiveInitialValues}
+          useMutate={useUpdateCaseFile}
+          onSuccess={nextStep}
+          success={CASE_FILE_UPDATED}
+          onBack={prevStep}
+          page={page}
+          limit={limit}
+          isMutable={true}
+          mutateData={mutateForm5}
         />
       );
     case 6:
       return (
         <MultForm6
           initialValues={caseFileSixInitialValues}
-          useMutate={onSubmitAlert}
+          useMutate={useUpdateCaseFile}
           onSuccess={onClose}
           success={CASE_FILE_UPDATED}
           onBack={prevStep}
           page={page}
           limit={limit}
+          isMutable={true}
           setReferredTo={setReferredTo}
           referredTo={referredTo}
+          mutateData={mutateForm6}
         />
       );
     default:
