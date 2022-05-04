@@ -61,7 +61,7 @@ const MemberTable = ({ data, isLoading }) => {
                       {item.officeNo}
                     </div>
                     <div className={classes.data__secondary_text}>
-                      {item.officeEmail}
+                      {item.email}
                     </div>
                   </Td>
                 </Tr>
