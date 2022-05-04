@@ -1,15 +1,15 @@
 import React from "react";
-import withForm from "../../../../hoc/withForm";
+import withForm from "../../../hoc/withForm";
 import { IconButton } from "@chakra-ui/react";
-import InputField from "../../../common/UI/InputField/InputField";
-// import SelectField from "../../../common/SelectField";
-import TextAreaField from "../../../common/TextAreaField";
-import SelectInput from "./SelectInput";
+import InputField from "../../common/UI/InputField/InputField";
+// import SelectField from "../../common/SelectField";
+import TextAreaField from "../../common/TextAreaField";
+import SelectInput from "../Allocations/AllocationForm/SelectInput";
 
 import { MdClose } from "react-icons/md";
 
-import classes from "./Form.module.css";
-import Button from "../../UI/Button/Button";
+import classes from "../Allocations/AllocationForm/Form.module.css";
+import Button from "../UI/Button/Button";
 
 const Form = (props) => {
   const {
@@ -23,8 +23,9 @@ const Form = (props) => {
   } = props;
   const formatUserOptions = users.map((user) => ({
     label: user.name,
-    value: user.email,
+    value: user.value,
   }));
+
   return (
     <div
       className={classes.fida__email_form_wrapper}
@@ -44,15 +45,15 @@ const Form = (props) => {
           <div className={classes.fida__email_users}>
             {/* To: */}
             <SelectInput
-              name="allocated_to"
+              name="user"
               onChange={(option) =>
                 setFieldValue(
-                  "allocated_to",
+                  "user",
                   option.map((item) => item.value)
                 )
               }
               options={formatUserOptions}
-              placeholder={isLoading ? "Loading data" : "Recipients"}
+              placeholder={isLoading ? "Loading data" : "Users"}
               isMulti
             />
           </div>
@@ -72,7 +73,7 @@ const Form = (props) => {
         <div className={classes.fida__email_footer}>
           <div className={classes.fida_email_send_actions}>
             <Button type="submit" disabled={isSubmitting}>
-              Send
+              {isSubmitting ? "Sending..." : "Send"}
             </Button>
             <svg
               width="23"
@@ -92,7 +93,7 @@ const Form = (props) => {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
               onClick={() => {
-                setFieldValue("allocated_to", null);
+                setFieldValue("user", null);
                 resetForm();
               }}
             >

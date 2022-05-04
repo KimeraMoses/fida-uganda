@@ -1,6 +1,12 @@
-.data__purpose_primary_text{
-    white-space: nowrap;
+.data__purpose_primary_text {
+  white-space: nowrap;
 }
-.notifications_table td{
-    text-align: center!important;
+.notifications_table td {
+  padding-left: 10px !important;
+}
+.body_wrapper {
+  width: 400px;
+}
+.subject_wrapper {
+  width: 240px;
 }

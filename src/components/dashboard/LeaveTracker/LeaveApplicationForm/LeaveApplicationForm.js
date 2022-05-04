@@ -18,7 +18,12 @@ const LeaveApplicationForm = (props) => {
         />
       </SimpleGrid>
       <SimpleGrid columns={1}>
-        <InputField name="tel_on_leave" label="Telephone on leave" />
+        <InputField
+          name="tel_on_leave"
+          label="Telephone on leave"
+          type="number"
+          maxlength="12"
+        />
       </SimpleGrid>
       <div className={classes.form_actions_wrapper}>
         <FormButton variant="cancel" onClick={onClose}>

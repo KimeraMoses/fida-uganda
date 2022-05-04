@@ -12,6 +12,7 @@ th {
 }
 .allocations_table_wrapper td {
   vertical-align: top;
+  padding-left: 10px;
 }
 .title_secondary_text {
   font-size: 14px;
@@ -27,7 +28,7 @@ th {
   margin-bottom: 8px;
 }
 .data_recepient_field {
-  white-space: nowrap;
+  width: 200px;
 }
 .subject__title {
   text-transform: uppercase;

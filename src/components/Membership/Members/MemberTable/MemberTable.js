@@ -1,59 +1,9 @@
 import React from "react";
-import {
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Td,
-} from "@chakra-ui/react";
+import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
 import classes from "../../Allocations/AllocationsTable/AllocationsTable.module.css";
 import { TableHeadColumn } from "../../Allocations/AllocationsTable/AllocationsTable";
 
-
-const MembersData = [
-  {
-    name: "Nalubega Alexis Christine",
-    memberNo: "FU/LE/20/064",
-    phoneNumber: "0784658626",
-    email: "nalubega12@gmail.com",
-    address: "Kampala",
-    officeNo: "0314 658 626",
-    officeEmail: "nalubega12@gmail.com",
-    status: true,
-  },
-  {
-    name: "Nalubega Alexis Christine",
-    memberNo: "FU/LE/20/064",
-    phoneNumber: "0784658626",
-    email: "nalubega12@gmail.com",
-    address: "Kampala",
-    officeNo: "0314 658 626",
-    officeEmail: "nalubega12@gmail.com",
-    status: true,
-  },
-  {
-    name: "Nalubega Alexis Christine",
-    memberNo: "FU/LE/20/064",
-    phoneNumber: "0784658626",
-    email: "nalubega12@gmail.com",
-    address: "Kampala",
-    officeNo: "0314 658 626",
-    officeEmail: "nalubega12@gmail.com",
-    status: false,
-  },
-  {
-    name: "Nalubega Alexis Christine",
-    memberNo: "FU/LE/20/064",
-    phoneNumber: "0784658626",
-    email: "nalubega12@gmail.com",
-    address: "Kampala",
-    officeNo: "0314 658 626",
-    officeEmail: "nalubega12@gmail.com",
-    status: true,
-  },
-];
-
-const MemberTable = () => {
+const MemberTable = ({ data, isLoading }) => {
   return (
     <div className={classes.allocations_table_wrapper}>
       <Table variant="simple">
@@ -62,7 +12,7 @@ const MemberTable = () => {
             <TableHeadColumn title="Name" secondaryText="Membership No." />
             <TableHeadColumn title="Phone Number" secondaryText="Email" />
             <TableHeadColumn
-              title="Address"
+              title="Membershp Duration"
               secondaryText="Membership fee status"
             />
             <TableHeadColumn
@@ -72,48 +22,51 @@ const MemberTable = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {MembersData.map((item) => {
-            return (
-              <Tr>
-                <Td className={classes.data_recepient_field}>
-                  <div className={classes.data__primary_text}>{item.name}</div>
-                  <div className={classes.data__secondary_text}>
-                    {item.memberNo}
-                  </div>
-                </Td>
-                <Td>
-                  <div className={classes.data__primary_text}>
-                    {item.phoneNumber}
-                  </div>
-                  <div className={classes.data__secondary_text}>
-                    {item.email}
-                  </div>
-                </Td>
-                <Td>
-                  <div
-                    className={`${classes.data__primary_text}`}
-                  >
-                    {item.address}
-                  </div>
-                  <div
-                    className={`${classes.data__secondary_text} ${
-                      classes.members_status
-                    } ${item.status ? classes.sucess : classes.fail}`}
-                  >
-                    <h6>{item.status ? "Paid" : "Pending"}</h6>
-                  </div>
-                </Td>
-                <Td>
-                  <div className={classes.data__primary_text}>
-                    {item.officeNo}
-                  </div>
-                  <div className={classes.data__secondary_text}>
-                    {item.officeEmail}
-                  </div>
-                </Td>
-              </Tr>
-            );
-          })}
+          {!isLoading &&
+            data.length &&
+            data.map((item, index) => {
+              return (
+                <Tr>
+                  <Td className={classes.data_recepient_field}>
+                    <div className={classes.data__primary_text}>
+                      {item.first_name + " " + item.last_name}
+                    </div>
+                    <div className={classes.data__secondary_text}>
+                      00{index + 1}
+                    </div>
+                  </Td>
+                  <Td>
+                    <div className={classes.data__primary_text}>
+                      {item.phoneNumber}
+                    </div>
+                    <div className={classes.data__secondary_text}>
+                      {item.email}
+                    </div>
+                  </Td>
+                  <Td>
+                    <div className={`${classes.data__primary_text}`}>
+                      {item.membership_duration}
+                    </div>
+                    <div
+                      className={`${classes.allocation_status_wrapper} ${
+                        item.hasPaid ? classes.success : classes.fail
+                      } ${classes.members_status}`}
+                    >
+                      <span className={classes.status_indicator}></span>
+                      <h5>{item.hasPaid ? "Paid" : "Pending"}</h5>
+                    </div>
+                  </Td>
+                  <Td>
+                    <div className={classes.data__primary_text}>
+                      {item.officeNo}
+                    </div>
+                    <div className={classes.data__secondary_text}>
+                      {item.email}
+                    </div>
+                  </Td>
+                </Tr>
+              );
+            })}
         </Tbody>
       </Table>
     </div>

@@ -23,7 +23,7 @@ const AllocationsTable = ({ allocations, isLoading }) => {
           <Tr>
             <TableHeadColumn
               title="Recepient (s)"
-              secondaryText="Recepients(s)"
+              secondaryText="Allocations No."
             />
             <TableHeadColumn title="Date" secondaryText="time" />
             <TableHeadColumn title="Subject" secondaryText="body" />
@@ -34,29 +34,29 @@ const AllocationsTable = ({ allocations, isLoading }) => {
           {!isLoading &&
             allocations &&
             allocations.Allocations &&
-            sortByDate(allocations.Allocations).map((item) => {
+            sortByDate(allocations.Allocations).map((item, index) => {
               return (
-                <Tr>
+                <Tr key={item.id}>
                   <Td className={classes.data_recepient_field}>
                     <div className={classes.data__primary_text}>
                       {item.allocated_to.map((person, index) => {
                         if (index + 1 === item.allocated_to.length) {
-                          return person.label;
+                          return person.label || person;
                         } else {
-                          return person.label + ", ";
+                          return person.label || person + ", ";
                         }
                       })}
                     </div>
-                    {/* <div className={classes.data__secondary_text}>
-                      {item.alloc_number}
-                    </div> */}
+                    <div className={classes.data__secondary_text}>
+                      000{index + 1}
+                    </div>
                   </Td>
                   <Td>
                     <div className={classes.data__primary_text}>
                       {new Date(item.createdAt).toLocaleDateString()}
                     </div>
                     <div className={classes.data__secondary_text}>
-                      {item.time}
+                      {new Date(item.createdAt).toLocaleTimeString()}
                     </div>
                   </Td>
                   <Td>
@@ -66,7 +66,7 @@ const AllocationsTable = ({ allocations, isLoading }) => {
                       {item.subject}
                     </div>
                     <div className={classes.data__secondary_text}>
-                      <p>{item.body}</p>
+                      <p>{item.message}</p>
                     </div>
                   </Td>
                   <Td>
