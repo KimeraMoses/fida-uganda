@@ -16,7 +16,6 @@ export const TableHeadColumn = (props) => {
 };
 
 const AllocationsTable = ({ allocations, isLoading }) => {
-  console.log(allocations);
   return (
     <div className={classes.allocations_table_wrapper}>
       <Table variant="simple">

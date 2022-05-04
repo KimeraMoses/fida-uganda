@@ -73,7 +73,7 @@ const Form = (props) => {
         <div className={classes.fida__email_footer}>
           <div className={classes.fida_email_send_actions}>
             <Button type="submit" disabled={isSubmitting}>
-              Send
+              {isSubmitting ? "Sending..." : "Send"}
             </Button>
             <svg
               width="23"

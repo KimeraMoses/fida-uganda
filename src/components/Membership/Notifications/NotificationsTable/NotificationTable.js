@@ -24,15 +24,15 @@ const NotificationsTable = ({ data, isLoading }) => {
             sortByDate(data).map((item) => {
               return (
                 <Tr>
-                  <Td>{item.subject}</Td>
+                  <Td className={styles.subject_wrapper}>{item.subject}</Td>
                   <Td className={styles.body_wrapper}>{item.message}</Td>
                   <Td>{new Date(item.createdAt).toLocaleDateString()}</Td>
                   <Td>
                     {item.user.map((person, index) => {
                       if (index + 1 === item.user.length) {
-                        return person.id;
+                        return person.full_name;
                       } else {
-                        return person.id + ", ";
+                        return person.full_name + ", ";
                       }
                     })}
                   </Td>
