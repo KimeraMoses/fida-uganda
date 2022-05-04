@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import classes from "../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css";
 import styles from "../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css";
 import { SimpleGrid } from "@chakra-ui/react";
@@ -6,23 +6,18 @@ import SelectField from "../../../common/SelectField";
 import InputField from "../../../common/UI/InputField/InputField";
 import FormButton from "../../../common/UI/FormButton/FormButton";
 import withForm from "../../../../hoc/withForm";
-import { ClientsData } from "./../ClientsTable/ClientsTable";
-import SearchableField from "./../../../common/UI/SearchableField/SearchableField";
 
 const NewClientForm = ({ isSubmitting }) => {
-  const [selectedItem, setSelectedItem] = useState("");
-
   return (
     <div className={classes.form_wrapper}>
       <div className={classes.field_wrapper}>
         <SimpleGrid columns={2} spacing={1} style={{ alignItems: "center" }}>
           <div className={styles.field_row_label}>Name</div>
-          <SearchableField
+          <InputField
             placeholder="Client Name"
-            data={ClientsData}
-            setSelectedItem={setSelectedItem}
-            selectedItem={selectedItem.name}
             name="name"
+            fullwidth
+            type="text"
           />
         </SimpleGrid>
         <SimpleGrid
