@@ -98,3 +98,20 @@ export const monthsOptions = [
   { label: "November", value: "November" },
   { label: "December", value: "December" },
 ];
+
+export const caseFileStatusOptions = [
+  {
+    value: "Concluded through ADR/elders",
+    label: "Concluded through ADR/elders",
+  },
+  {
+    label: "Resolved by Legal Aid/Counselling",
+    value: "Resolved by Legal Aid/Counselling",
+  },
+  {
+    label: "Concluded through Mediation",
+    value: "Concluded through Mediation",
+  },
+  { label: "Pending Mediation", value: "Pending Mediation" },
+  { label: "Pending in Court", value: "Pending in Court" },
+];
