@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { useAddMember, useUpdateMember } from "../../../../hooks/useMember";
+import {
+  useAddMember,
+  useMemberId,
+  useUpdateMember,
+} from "../../../../hooks/useMember";
 import UserDetails from "./MultiForm/UserDetails";
 import UserExperience from "./MultiForm/UserExperience";
 import UserHobbies from "./MultiForm/UserHobbies";
@@ -12,10 +16,18 @@ import {
 } from "./schema";
 
 const NewMembersForm = ({ onClose }) => {
+  const memberId = useMemberId();
   const limit = 4;
   const MEMBER_ADDED = "Member added successfully";
   const MEMBER_UPDATED = "Member updated successfully";
   const [page, setPage] = useState(1);
+
+  const mutateData = (values) => {
+    return {
+      ...values,
+      id: memberId,
+    };
+  };
 
   const prevStep = () => {
     setPage(page - 1);
@@ -46,6 +58,8 @@ const NewMembersForm = ({ onClose }) => {
           page={page}
           limit={limit}
           onBack={prevStep}
+          isMutable={true}
+          mutateData={mutateData}
         />
       );
     case 3:
@@ -58,6 +72,8 @@ const NewMembersForm = ({ onClose }) => {
           page={page}
           limit={limit}
           onBack={prevStep}
+          isMutable={true}
+          mutateData={mutateData}
         />
       );
     case 4:
@@ -70,6 +86,8 @@ const NewMembersForm = ({ onClose }) => {
           page={page}
           limit={limit}
           onBack={prevStep}
+          isMutable={true}
+          mutateData={mutateData}
         />
       );
     default:
