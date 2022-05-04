@@ -1,5 +1,6 @@
 import produce from "immer";
 import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addMember,
   deleteMember,
@@ -8,6 +9,16 @@ import {
   updateMember,
 } from "../apis/members";
 import { MEMBERSHIP_KEY } from "../lib/constants";
+import { selectMemberId } from "../store/memberReducer";
+
+export const useSelectMemberId = (id) => {
+  const dispatch = useDispatch();
+  dispatch(selectMemberId(id));
+};
+
+export const useMemberId = () => {
+  return useSelector((state) => state.member.selectedId);
+};
 
 export const useMembers = () => {
   return useQuery(MEMBERSHIP_KEY, getMembers);
@@ -18,9 +29,11 @@ export const useMember = (id) => {
 };
 
 export const useAddMember = () => {
+  const dispatch = useDispatch();
   const queryClient = useQueryClient();
   return useMutation(addMember, {
     onSuccess: (data) => {
+      dispatch(selectMemberId(data.member.id));
       const previousMembers = queryClient.getQueryData(MEMBERSHIP_KEY);
       if (previousMembers) {
         queryClient.setQueryData(MEMBERSHIP_KEY, () => {
