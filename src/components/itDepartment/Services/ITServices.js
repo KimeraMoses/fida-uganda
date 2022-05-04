@@ -10,32 +10,6 @@ import {
   itServicesInitialValues,
 } from "../../forms/it/schemas/it";
 
-const Servicesdata = [
-  {
-    name: "Airtel Internet",
-    brand: "Zombo",
-    category: "Service",
-    class: "Data",
-    desc: "10 Mbs internet fibre for the Zombo feild office.",
-    status: true,
-    payStatus: false,
-    date: "15/APR/2020",
-    amount: "200,000",
-    currency: "UGX",
-  },
-  {
-    name: "Airtel Internet",
-    brand: "Zombo",
-    category: "Laptop",
-    class: "Data",
-    desc: "10 Mbs internet fibre for the Zombo feild office.",
-    status: false,
-    payStatus: true,
-    date: "15/APR/2020",
-    amount: "20,000",
-    currency: "UGX",
-  },
-];
 
 const ITServices = () => {
   // const [data, setData] = useState([])
@@ -47,7 +21,7 @@ const ITServices = () => {
     <>
       <SectionHeader title="IT Services" />
       <TableSearch btnLabel="Add Service" btnClick={onOpen} />
-      <ITServicesTable data={data?.services} />
+      <ITServicesTable data={data?.services} isLoading={isLoading} />
 
       <Modal
         isOpen={isOpen}
