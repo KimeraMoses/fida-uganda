@@ -22,7 +22,7 @@ const NewCaseFile = ({ caseFile, isClvCaseFile, isNew, onClose }) => {
   const limit = 5;
   const CASE_FILE_ADDED = "Case File Added Successfully";
   const CASE_FILE_UPDATED = "Case File Updated Successfully";
-  const [page, setPage] = useState(5);
+  const [page, setPage] = useState(1);
   const [selectedClient, setSelectedClient] = useState({});
   const [referredTo, setReferredTo] = useState({});
 
@@ -31,23 +31,15 @@ const NewCaseFile = ({ caseFile, isClvCaseFile, isNew, onClose }) => {
   };
 
   const mutateForm1Update = (values) => {
-    return { ...values, complainant: selectedClient.id, id: caseFileId };
+    return { ...values, complainant: selectedClient.id, case_id: caseFileId };
   };
 
-  const mutateForm3 = (values) => {
-    return { ...values, id: caseFileId };
-  };
-
-  const mutateForm4 = (values) => {
-    return { ...values, id: caseFileId };
-  };
-
-  const mutateForm5 = (values) => {
-    return { ...values, id: caseFileId };
+  const addCaseFileId = (values) => {
+    return { ...values, case_id: caseFileId };
   };
 
   const mutateForm6 = (values) => {
-    return { ...values, referred_to: referredTo.id, id: caseFileId };
+    return { ...values, referred_to: referredTo.id, case_id: caseFileId };
   };
 
   const prevStep = () => {
@@ -87,7 +79,7 @@ const NewCaseFile = ({ caseFile, isClvCaseFile, isNew, onClose }) => {
           page={page}
           limit={limit}
           isMutable={true}
-          mutateData={mutateForm3}
+          mutateData={addCaseFileId}
         />
       );
     case 3:
@@ -101,7 +93,7 @@ const NewCaseFile = ({ caseFile, isClvCaseFile, isNew, onClose }) => {
           page={page}
           limit={limit}
           isMutable={true}
-          mutateData={mutateForm4}
+          mutateData={addCaseFileId}
         />
       );
     case 4:
@@ -115,7 +107,7 @@ const NewCaseFile = ({ caseFile, isClvCaseFile, isNew, onClose }) => {
           page={page}
           limit={limit}
           isMutable={true}
-          mutateData={mutateForm5}
+          mutateData={addCaseFileId}
         />
       );
     case 5:
