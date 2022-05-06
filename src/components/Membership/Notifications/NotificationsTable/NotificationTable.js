@@ -30,9 +30,9 @@ const NotificationsTable = ({ data, isLoading }) => {
                   <Td>
                     {item.user.map((person, index) => {
                       if (index + 1 === item.user.length) {
-                        return person.full_name;
+                        return person?.id;
                       } else {
-                        return person.full_name + ", ";
+                        return person?.id + ", ";
                       }
                     })}
                   </Td>

@@ -26,10 +26,10 @@ const MemberActivitiesTable = ({ data, isLoading }) => {
                 <Tr>
                   <Td>
                     <div className={classes.data__primary_text}>
-                      {item.name}
+                      {item.member?.first_name + " " + item.member?.last_name}
                     </div>
                     <div className={classes.data__secondary_text}>
-                      {item.member}
+                      {item.member?.id}
                     </div>
                   </Td>
                   <Td>
@@ -42,7 +42,7 @@ const MemberActivitiesTable = ({ data, isLoading }) => {
                   </Td>
                   <Td>
                     <div className={classes.data__primary_text}>
-                      {item.date_of_activity}
+                      {new Date(item.date_of_activity).toLocaleDateString()}
                     </div>
                     <div className={classes.data__secondary_text}>
                       {item.activityDescription}

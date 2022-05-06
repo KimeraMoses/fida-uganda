@@ -7,11 +7,16 @@ import FormButton from "../../../common/UI/FormButton/FormButton";
 import SelectInput from "../../Allocations/AllocationForm/SelectInput";
 
 const NewActivityForm = (props) => {
-  const { onClose, users, projectOptions, setFieldValue, isSubmitting } = props;
-  const formattedMembers = users.map((user) => ({
-    label: user.name,
-    value: user.value,
+  const { onClose, membersData, projectOptions, setFieldValue, isSubmitting } = props;
+
+  const formattedMembers =
+  membersData &&
+  membersData.map((user) => ({
+    label: `${user.first_name} ${user.last_name}`,
+    value: user.id,
   }));
+
+  console.log(projectOptions, 'project optins')
 
   return (
     <div className={classes.activity_form_wrapper}>
@@ -24,6 +29,7 @@ const NewActivityForm = (props) => {
             options={formattedMembers}
             name="member"
             onChange={(option) => setFieldValue("member", option.value)}
+            disabled={!membersData && !formattedMembers.length}
           />
         </div>
       </div>
