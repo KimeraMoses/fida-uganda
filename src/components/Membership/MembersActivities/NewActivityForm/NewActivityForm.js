@@ -1,65 +1,87 @@
 import React from "react";
 import withForm from "../../../../hoc/withForm";
 import classes from "./NewActivityForm.module.css";
-import { Textarea } from "@chakra-ui/react";
+import Textarea from "../../../common/TextAreaField";
 import InputField from "../../../common/UI/InputField/InputField";
 import FormButton from "../../../common/UI/FormButton/FormButton";
+import SelectInput from "../../Allocations/AllocationForm/SelectInput";
 
-const NewActivityForm = props => {
-  const { onClose } = props;
+const NewActivityForm = (props) => {
+  const { onClose, membersData, projectOptions, setFieldValue, isSubmitting } = props;
+
+  const formattedMembers =
+  membersData &&
+  membersData.map((user) => ({
+    label: `${user.first_name} ${user.last_name}`,
+    value: user.id,
+  }));
+
+  console.log(projectOptions, 'project optins')
+
   return (
     <div className={classes.activity_form_wrapper}>
-        <div className={classes.input_group_wrapper}>
-          <div className={classes.input_label}>Member Name</div>
-          <div className={classes.input_field_wrapper}>
-            <InputField placeholder="Type here" fullWidth name="member_name" />
-          </div>
+      <div className={classes.input_group_wrapper}>
+        <div className={classes.input_label}>Member Name</div>
+        <div className={classes.input_field_wrapper}>
+          <SelectInput
+            fullWidth
+            isMulti={false}
+            options={formattedMembers}
+            name="member"
+            onChange={(option) => setFieldValue("member", option.value)}
+            disabled={!membersData && !formattedMembers.length}
+          />
         </div>
-        <div className={classes.input_group_wrapper}>
-          <div className={classes.input_label}>Membership ID</div>
-          <div className={classes.input_field_wrapper}>
-            <InputField placeholder="Type here" fullWidth name="member_name" />
-          </div>
+      </div>
+      <div className={classes.input_group_wrapper}>
+        <div className={classes.input_label}>Project</div>
+        <div className={classes.input_field_wrapper}>
+          <SelectInput
+            fullWidth
+            isMulti={false}
+            options={projectOptions}
+            name="project"
+            onChange={(option) => setFieldValue("project", option.value)}
+          />
         </div>
-        <div className={classes.input_group_wrapper}>
-          <div className={classes.input_label}>Project</div>
-          <div className={classes.input_field_wrapper}>
-            <InputField placeholder="Type here" fullWidth name="member_name" />
-          </div>
+      </div>
+      <div className={classes.input_group_wrapper}>
+        <div className={classes.input_label}>Project Activity</div>
+        <div className={classes.input_field_wrapper}>
+          <InputField
+            placeholder="Type project activity here"
+            fullWidth
+            name="projectActivity"
+          />
         </div>
-        <div className={classes.input_group_wrapper}>
-          <div className={classes.input_label}>Project Activity</div>
-          <div className={classes.input_field_wrapper}>
-            <InputField placeholder="Type here" fullWidth name="member_name" />
-          </div>
+      </div>
+      <div className={classes.input_group_wrapper}>
+        <div className={classes.input_label}>Date of Activity</div>
+        <div className={classes.input_field_wrapper}>
+          <InputField
+            placeholder="Select date"
+            fullWidth
+            name="date_of_activity"
+            type="date"
+          />
         </div>
-        <div className={classes.input_group_wrapper}>
-          <div className={classes.input_label}>Date of Activity</div>
-          <div className={classes.input_field_wrapper}>
-            <InputField
-              placeholder="Type here"
-              fullWidth
-              name="member_name"
-              type="date"
-            />
-          </div>
-        </div>
-        <div className={classes.input_group_wrapper_last}>
-          <div className={classes.input_label}>
-            Activity Description Summary
-          </div>
-          <div className={classes.input_field_wrapper_last}>
-            <Textarea placeholder="Type here" rows={5} />
-          </div>
-        </div>
-        <div className={classes.form_action_wrapper}>
-          <FormButton variant="cancel" type="button" onClick={() => onClose()}>
-            cancel
-          </FormButton>
-          <FormButton variant="save" type="submit">
-            Save
-          </FormButton>
-        </div>
+      </div>
+      <div className={classes.input_group_wrapper_last}>
+        <div className={classes.input_label}>Activity Description Summary</div>
+        <Textarea
+          rows={5}
+          name="activityDescription"
+          placeholder="descript activity"
+        />
+      </div>
+      <div className={classes.form_action_wrapper}>
+        <FormButton variant="cancel" type="button" onClick={() => onClose()}>
+          cancel
+        </FormButton>
+        <FormButton variant="save" type="submit" disabled={isSubmitting}>
+          Save
+        </FormButton>
+      </div>
     </div>
   );
 };

@@ -15,6 +15,8 @@ const withForm = (FormComponent) => {
     fileName,
     useMutate,
     id,
+    isMutable,
+    mutateData,
     ...rest
   }) {
     const { mutate, isError, error, isSuccess, isLoading } = useMutate(id);
@@ -42,6 +44,10 @@ const withForm = (FormComponent) => {
               formData.append(key, values[key]);
             });
             mutate(formData);
+            return;
+          }
+          if (isMutable) {
+            mutate(mutateData(values));
             return;
           }
           mutate(values);

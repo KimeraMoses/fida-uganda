@@ -2,7 +2,6 @@ import React from "react";
 import withForm from "../../../hoc/withForm";
 import { IconButton } from "@chakra-ui/react";
 import InputField from "../../common/UI/InputField/InputField";
-// import SelectField from "../../common/SelectField";
 import TextAreaField from "../../common/TextAreaField";
 import SelectInput from "../Allocations/AllocationForm/SelectInput";
 
@@ -16,15 +15,17 @@ const Form = (props) => {
     onClose,
     title,
     setFieldValue,
-    users,
+    membersData,
     isLoading,
     isSubmitting,
     resetForm,
   } = props;
-  const formatUserOptions = users.map((user) => ({
-    label: user.name,
-    value: user.value,
-  }));
+  const formatUserOptions =
+    membersData &&
+    membersData.map((user) => ({
+      label: `${user.first_name} ${user.last_name}`,
+      value: user.id,
+    }));
 
   return (
     <div
@@ -55,6 +56,7 @@ const Form = (props) => {
               options={formatUserOptions}
               placeholder={isLoading ? "Loading data" : "Users"}
               isMulti
+              disabled={!membersData && !formatUserOptions.length}
             />
           </div>
           <div className={classes.fida__email_subject}>
@@ -73,7 +75,7 @@ const Form = (props) => {
         <div className={classes.fida__email_footer}>
           <div className={classes.fida_email_send_actions}>
             <Button type="submit" disabled={isSubmitting}>
-              Send
+              {isSubmitting ? "Sending..." : "Send"}
             </Button>
             <svg
               width="23"

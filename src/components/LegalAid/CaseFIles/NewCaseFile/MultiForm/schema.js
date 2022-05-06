@@ -20,7 +20,7 @@ export const caseFileInitialValues = {
   respondentRelationshipWithComplainant: "",
 };
 
-export const caseFileTwo = {
+export const caseFileTwoInitialValues = {
   sight: "",
   hearing: "",
   movement: "",
@@ -28,17 +28,31 @@ export const caseFileTwo = {
   dressing: "",
   speech: "",
   isDisabled: "",
+};
+
+export const caseFileThreeInitialValues = {
   nature: "",
-  action: "",
-  hasTalkedToAnyone: "",
-  wasActionTaken: "",
-  actionsTaken: "",
-  reason_for_referral: "",
   type: "",
-  organizationTalkedTo: "",
-  details: "",
   duration: "",
-  search: "",
+  details: "",
+  actionsTaken: "",
+  hasTalkedToAnyone: "",
+};
+
+export const caseFileFourInitialValues = {
+  about: "",
+};
+
+export const caseFileFiveInitialValues = {
+  natureOfSupport: "",
+  comments: "",
+};
+
+export const caseFileSixInitialValues = {
+  status: "",
+  referred_to: "",
+  reason_for_referral: "",
+  actionsTaken: [],
 };
 
 export const caseFileOneObject = (caseFile) => {

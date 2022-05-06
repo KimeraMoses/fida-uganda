@@ -15,6 +15,12 @@ import {
   updateCaseFile,
 } from "../apis/cases";
 import produce from "immer";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCaseFile } from "../store/caseFileReducer";
+
+export const useCaseFileId = () => {
+  return useSelector((state) => state.caseFile.selectedId);
+};
 
 export const useCaseFiles = () => {
   return useQuery(CASES_KEY, getCaseFiles);
@@ -38,18 +44,20 @@ export const useCasesStats = () => {
 
 export const useAddCaseFiles = () => {
   const queryClient = useQueryClient();
+  const dispatch = useDispatch();
   return useMutation(addCaseFile, {
     onSuccess: (data) => {
+      dispatch(selectCaseFile(data.case_file.id));
       const previousCaseFiles = queryClient.getQueryData(CASES_KEY);
       if (previousCaseFiles) {
         queryClient.setQueryData(CASES_KEY, (previousCaseFiles) => {
           return produce(previousCaseFiles, (draft) => {
-            draft.cases.push(data.caseFile);
+            draft.cases.push(data.case_file);
           });
         });
       } else {
         queryClient.setQueryData(CASES_KEY, () => {
-          return { cases: [data.caseFile] };
+          return { cases: [data.case_file] };
         });
       }
     },
@@ -64,15 +72,15 @@ export const useUpdateCaseFile = () => {
       if (previousCaseFiles) {
         queryClient.setQueryData(CASES_KEY, (previousCaseFiles) => {
           return produce(previousCaseFiles, (draft) => {
-            const index = draft.caseFiles.findIndex(
-              (caseFile) => caseFile.id === data.caseFile.id
+            const index = draft.cases.findIndex(
+              (caseFile) => caseFile.id === data.updatedCase.id
             );
-            draft.caseFiles[index] = data.caseFile;
+            draft.cases[index] = data.updatedCase;
           });
         });
       } else {
         queryClient.setQueryData(CASES_KEY, () => {
-          return { caseFiles: [data.caseFile] };
+          return { cases: [data.updatedCase] };
         });
       }
     },
@@ -87,12 +95,12 @@ export const useDeleteCaseFile = () => {
       if (previousCaseFiles) {
         queryClient.setQueryData(CASES_KEY, (previousCaseFiles) => {
           return produce(previousCaseFiles, (draft) => {
-            draft.caseFiles.filter((caseFile) => caseFile.id !== data.caseId);
+            draft.cases.filter((caseFile) => caseFile.id !== data.caseId);
           });
         });
       } else {
         queryClient.setQueryData(CASES_KEY, () => {
-          return { caseFiles: [] };
+          return { cases: [] };
         });
       }
     },

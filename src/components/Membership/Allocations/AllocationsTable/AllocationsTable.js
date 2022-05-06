@@ -16,7 +16,6 @@ export const TableHeadColumn = (props) => {
 };
 
 const AllocationsTable = ({ allocations, isLoading }) => {
-  console.log(allocations);
   return (
     <div className={classes.allocations_table_wrapper}>
       <Table variant="simple">
@@ -24,7 +23,7 @@ const AllocationsTable = ({ allocations, isLoading }) => {
           <Tr>
             <TableHeadColumn
               title="Recepient (s)"
-              secondaryText="Recepients(s)"
+              secondaryText="Allocations No."
             />
             <TableHeadColumn title="Date" secondaryText="time" />
             <TableHeadColumn title="Subject" secondaryText="body" />
@@ -35,7 +34,7 @@ const AllocationsTable = ({ allocations, isLoading }) => {
           {!isLoading &&
             allocations &&
             allocations.Allocations &&
-            sortByDate(allocations.Allocations).map((item) => {
+            sortByDate(allocations.Allocations).map((item, index) => {
               return (
                 <Tr key={item.id}>
                   <Td className={classes.data_recepient_field}>
@@ -48,16 +47,20 @@ const AllocationsTable = ({ allocations, isLoading }) => {
                         }
                       })}
                     </div>
-                    {/* <div className={classes.data__secondary_text}>
-                      {item.alloc_number}
-                    </div> */}
+                    <div className={classes.data__secondary_text}>
+                    {item.id}
+                    </div>
                   </Td>
                   <Td>
                     <div className={classes.data__primary_text}>
                       {new Date(item.createdAt).toLocaleDateString()}
                     </div>
                     <div className={classes.data__secondary_text}>
-                      {new Date(item.createdAt).toLocaleTimeString()}
+                      {new Date(item.createdAt).toLocaleTimeString(undefined, {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        second: "2-digit",
+                      })}
                     </div>
                   </Td>
                   <Td>
