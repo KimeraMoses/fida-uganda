@@ -5,49 +5,6 @@ import styles from "./Table.module.css";
 import { TableHeadColumn } from "../../../Membership/Allocations/AllocationsTable/AllocationsTable";
 import { formatDate } from "../../../../lib/data";
 
-export const ClientsData = [
-  {
-    name: "Andrew Tebandeke",
-    profession: "Farmer",
-    phoneNumber: "0759130054",
-    email: "kimeramoses001@gmail.com",
-    address: "P.O Box 5569",
-    city: "Kampala",
-    open: true,
-    registrationDate: "15/APR/2020",
-  },
-  {
-    name: "Andrew Tebandeke",
-    profession: "Farmer",
-    phoneNumber: "0759130054",
-    email: "kimeramoses001@gmail.com",
-    address: "P.O Box 5569",
-    city: "Kampala",
-    open: true,
-    registrationDate: "15/APR/2020",
-  },
-  {
-    name: "Andrew Tebandeke",
-    profession: "Farmer",
-    phoneNumber: "0759130054",
-    email: "kimeramoses001@gmail.com",
-    address: "P.O Box 5569",
-    city: "Kampala",
-    open: false,
-    registrationDate: "15/APR/2020",
-  },
-  {
-    name: "Andrew Tebandeke",
-    profession: "Farmer",
-    phoneNumber: "0759130054",
-    email: "kimeramoses001@gmail.com",
-    address: "P.O Box 5569",
-    city: "Kampala",
-    open: true,
-    registrationDate: "15/APR/2020",
-  },
-];
-
 const ClientsTable = ({ data }) => {
   return (
     <>
