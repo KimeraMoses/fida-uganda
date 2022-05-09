@@ -20,6 +20,7 @@ const ClientsTable = ({ data }) => {
               <TableHeadColumn title="Phone Number" secondaryText="Email" />
               <TableHeadColumn title="Address" secondaryText="City" />
               <TableHeadColumn title="Registration Date" secondaryText="" />
+              <TableHeadColumn title="Actions" secondaryText="" />
             </Tr>
           </Thead>
           <Tbody>
