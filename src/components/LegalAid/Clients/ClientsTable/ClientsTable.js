@@ -20,7 +20,6 @@ const ClientsTable = ({ data }) => {
               <TableHeadColumn title="Phone Number" secondaryText="Email" />
               <TableHeadColumn title="Address" secondaryText="City" />
               <TableHeadColumn title="Registration Date" secondaryText="" />
-              <TableHeadColumn title="case Status" secondaryText="" />
             </Tr>
           </Thead>
           <Tbody>
@@ -55,16 +54,6 @@ const ClientsTable = ({ data }) => {
                   <Td>
                     <div className={`${classes.data__primary_text}`}>
                       {formatDate(item.createdAt)}
-                    </div>
-                  </Td>
-                  <Td>
-                    <div
-                      className={`${classes.allocation_status_wrapper} ${
-                        item.open ? classes.paid : classes.fail
-                      }`}
-                    >
-                      <span className={classes.status_indicator}></span>
-                      <h5>{item.open ? "On going" : "Closed"}</h5>
                     </div>
                   </Td>
                 </Tr>
