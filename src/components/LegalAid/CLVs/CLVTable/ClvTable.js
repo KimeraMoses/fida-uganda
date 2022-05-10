@@ -52,7 +52,6 @@ const CLVTable = ({ data }) => {
                 title="FIDA ID NUMBER"
                 secondaryText="Registration Date"
               />
-              <TableHeadColumn title="case Status" />
               <TableHeadColumn title="Actions" />
             </Tr>
           </Thead>
@@ -93,16 +92,6 @@ const CLVTable = ({ data }) => {
                       <div className={classes.data__secondary_text}>
                         {formatDate(item.createdAt)}
                       </div>
-                    </div>
-                  </Td>
-                  <Td>
-                    <div
-                      className={`${classes.allocation_status_wrapper} ${
-                        item.open ? classes.paid : classes.fail
-                      }`}
-                    >
-                      <span className={classes.status_indicator}></span>
-                      <h5>{item.isActive ? "active" : "closed"}</h5>
                     </div>
                   </Td>
                   <Td>

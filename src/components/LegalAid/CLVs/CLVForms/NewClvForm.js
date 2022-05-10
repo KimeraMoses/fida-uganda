@@ -28,7 +28,7 @@ const NewClvForm = ({ isSubmitting, ...rest }) => {
         <div className={styles.field_label}>Personal Information</div>
         <SimpleGrid columns={2} spacing={2}>
           <InputField placeholder="First Name" name="first_name" />
-          <InputField placeholder="First Name" name="last_name" />
+          <InputField placeholder="Last Name" name="last_name" />
         </SimpleGrid>
       </div>
       <div className={classes.field_wrapper}>
@@ -42,7 +42,7 @@ const NewClvForm = ({ isSubmitting, ...rest }) => {
       <div className={classes.field_wrapper}>
         <SimpleGrid columns={2} spacing={2}>
           <InputField placeholder="Nationality" name="nationality" />
-          <InputField placeholder="NIN" name="NIN" />
+          <InputField placeholder="NIN" name="NIN" maxLength="14" />
         </SimpleGrid>
       </div>
 
