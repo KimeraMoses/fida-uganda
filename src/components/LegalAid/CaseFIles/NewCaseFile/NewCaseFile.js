@@ -28,6 +28,13 @@ const NewCaseFile = ({ caseFile, isClvCaseFile, isNew, onClose }) => {
   const [referredTo, setReferredTo] = useState({});
 
   const mutateForm1 = (values) => {
+    if (isClvCaseFile)
+      return {
+        ...values,
+        complainant: selectedClient.id,
+        clv: selectedClvName.id,
+        isByClv: true,
+      };
     return { ...values, complainant: selectedClient.id };
   };
 
