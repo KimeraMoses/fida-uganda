@@ -14,7 +14,7 @@ export const useClvs = () => {
 export const useClvsDetails = () => {
   const { data } = useClvs();
   return data?.clvs.map((clv) => {
-    return { ...clv, id: clv.id, name: clv.name };
+    return { ...clv, id: clv.id, name: `${clv.first_name} ${clv.last_name}` };
   });
 };
 

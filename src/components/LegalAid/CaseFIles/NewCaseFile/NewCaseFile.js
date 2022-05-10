@@ -24,6 +24,7 @@ const NewCaseFile = ({ caseFile, isClvCaseFile, isNew, onClose }) => {
   const CASE_FILE_UPDATED = "Case File Updated Successfully";
   const [page, setPage] = useState(1);
   const [selectedClient, setSelectedClient] = useState({});
+  const [selectedClvName, setSelectedClvName] = useState({});
   const [referredTo, setReferredTo] = useState({});
 
   const mutateForm1 = (values) => {
@@ -66,6 +67,8 @@ const NewCaseFile = ({ caseFile, isClvCaseFile, isNew, onClose }) => {
           limit={limit}
           isMutable={true}
           mutateData={isNew ? mutateForm1 : mutateForm1Update}
+          selectedClvName={selectedClvName}
+          setSelectedClvName={setSelectedClvName}
         />
       );
     case 2:

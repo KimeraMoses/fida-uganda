@@ -11,7 +11,7 @@ import MultForm2 from "../../CaseFIles/NewCaseFile/MultiForm/MultForm2";
 
 const NewClientForm = ({ onClose }) => {
   const clientId = useClientId();
-  const limit = 1;
+  const limit = 2;
   const CLIENT_ADDED = "Added Client Successfully";
   const CLIENT_UPDATED = "Updated Client Successfully";
   const [page, setPage] = useState(1);

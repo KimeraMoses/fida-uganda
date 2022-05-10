@@ -3,10 +3,10 @@ import styles from "../../../Membership/Members/NewMemberForm/MultiForm/MultiFor
 import { SimpleGrid } from "@chakra-ui/react";
 import SelectField from "../../../common/SelectField";
 import InputField from "../../../common/UI/InputField/InputField";
-import FormButton from "../../../common/UI/FormButton/FormButton";
 import withForm from "../../../../hoc/withForm";
+import ActionButtons from "../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons";
 
-const ClientFormOne = ({ values, page, limit, onBack, isSubmitting }) => {
+const ClientFormOne = ({ page, limit, onBack, isSubmitting }) => {
   return (
     <div className={classes.form_wrapper}>
       <div className={classes.field_wrapper}>
@@ -139,9 +139,12 @@ const ClientFormOne = ({ values, page, limit, onBack, isSubmitting }) => {
         </SimpleGrid>
       </div>
       <div style={{ float: "right", padding: "20px 0" }}>
-        <FormButton variant="colored" rounded={true} disabled={isSubmitting}>
-          {isSubmitting ? "Adding..." : "Add Client"}
-        </FormButton>
+        <ActionButtons
+          page={page}
+          onBack={onBack}
+          disabled={isSubmitting}
+          limit={limit}
+        />
       </div>
     </div>
   );
