@@ -5,49 +5,6 @@ import styles from "./Table.module.css";
 import { TableHeadColumn } from "../../../Membership/Allocations/AllocationsTable/AllocationsTable";
 import { formatDate } from "../../../../lib/data";
 
-export const ClientsData = [
-  {
-    name: "Andrew Tebandeke",
-    profession: "Farmer",
-    phoneNumber: "0759130054",
-    email: "kimeramoses001@gmail.com",
-    address: "P.O Box 5569",
-    city: "Kampala",
-    open: true,
-    registrationDate: "15/APR/2020",
-  },
-  {
-    name: "Andrew Tebandeke",
-    profession: "Farmer",
-    phoneNumber: "0759130054",
-    email: "kimeramoses001@gmail.com",
-    address: "P.O Box 5569",
-    city: "Kampala",
-    open: true,
-    registrationDate: "15/APR/2020",
-  },
-  {
-    name: "Andrew Tebandeke",
-    profession: "Farmer",
-    phoneNumber: "0759130054",
-    email: "kimeramoses001@gmail.com",
-    address: "P.O Box 5569",
-    city: "Kampala",
-    open: false,
-    registrationDate: "15/APR/2020",
-  },
-  {
-    name: "Andrew Tebandeke",
-    profession: "Farmer",
-    phoneNumber: "0759130054",
-    email: "kimeramoses001@gmail.com",
-    address: "P.O Box 5569",
-    city: "Kampala",
-    open: true,
-    registrationDate: "15/APR/2020",
-  },
-];
-
 const ClientsTable = ({ data }) => {
   return (
     <>
@@ -63,7 +20,7 @@ const ClientsTable = ({ data }) => {
               <TableHeadColumn title="Phone Number" secondaryText="Email" />
               <TableHeadColumn title="Address" secondaryText="City" />
               <TableHeadColumn title="Registration Date" secondaryText="" />
-              <TableHeadColumn title="case Status" secondaryText="" />
+              <TableHeadColumn title="Actions" secondaryText="" />
             </Tr>
           </Thead>
           <Tbody>
@@ -98,16 +55,6 @@ const ClientsTable = ({ data }) => {
                   <Td>
                     <div className={`${classes.data__primary_text}`}>
                       {formatDate(item.createdAt)}
-                    </div>
-                  </Td>
-                  <Td>
-                    <div
-                      className={`${classes.allocation_status_wrapper} ${
-                        item.open ? classes.paid : classes.fail
-                      }`}
-                    >
-                      <span className={classes.status_indicator}></span>
-                      <h5>{item.open ? "On going" : "Closed"}</h5>
                     </div>
                   </Td>
                 </Tr>
