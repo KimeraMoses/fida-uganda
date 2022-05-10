@@ -1,6 +1,7 @@
 import { Avatar, IconButton } from "@chakra-ui/react";
 import { useState, useRef } from "react";
 import { MdEdit } from "react-icons/md";
+import { TEN_MBS_IN_BYTES } from "../../lib/constants";
 import { toastError } from "../../lib/toastDetails";
 import AvatarSelector from "./AvatarSelector";
 
@@ -24,8 +25,8 @@ const SelectAvatar = ({
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
-    if (file.size > 2097152) {
-      toast(toastError("Image size should be less than 2MB"));
+    if (file.size > TEN_MBS_IN_BYTES) {
+      toast(toastError("Image size should be less than 10MB"));
     } else {
       setAvatar(file);
       setImageUrl(URL.createObjectURL(file));
