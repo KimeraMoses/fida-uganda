@@ -3,6 +3,7 @@ import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
 import classes from "../../../Membership/Allocations/AllocationsTable/AllocationsTable.module.css";
 import styles from "./Table.module.css";
 import { TableHeadColumn } from "../../../Membership/Allocations/AllocationsTable/AllocationsTable";
+import sortByDate from "../../../../lib/sortByDate";
 
 const LegalOfficerTable = ({ data }) => {
   return (
@@ -27,7 +28,7 @@ const LegalOfficerTable = ({ data }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {data.map((item) => {
+            {sortByDate(data).map((item) => {
               return (
                 <Tr>
                   <Td className={classes.data_recepient_field}>
