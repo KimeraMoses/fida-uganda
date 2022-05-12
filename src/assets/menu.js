@@ -201,6 +201,12 @@ const menuOptions = {
     icon: MdStorage,
     path: "fleet-database",
   },
+  procurements: {
+    id: ++id,
+    name: "Procurements",
+    icon: MdStorage,
+    path: "procurements",
+  },
 };
 
 const commonOptions = [menuOptions.dashboard, menuOptions.tasks];
@@ -280,7 +286,13 @@ const menu = {
     menuOptions.fidaAssets,
     menuOptions.reports,
   ],
-  procurement: [...commonOptions, menuOptions.procurements],
+  procurement: [
+    ...commonOptions,
+    menuOptions.approvals,
+    menuOptions.procurements,
+    menuOptions.fidaAssets,
+    menuOptions.reports,
+  ],
   counsellor: [...commonOptions, menuOptions.clientsFiles, menuOptions.reports],
   fleetManager: [
     ...commonOptions,
