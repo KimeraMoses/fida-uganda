@@ -5,12 +5,15 @@ import Auth from "./components/compound/Auth";
 import LoadingPage from "./components/common/LoadingPage";
 import View from "./View";
 import { loginUser } from "./store/authReducer";
+import useOnlineStatus from "./hooks/useOnlineStatus";
+import { toast } from "react-toastify";
 
 function App() {
   const { refetch, data, isLoading } = useGetMe();
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const userData = useMemo(() => data, [data]);
+  const isOnline = useOnlineStatus();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -20,7 +23,11 @@ function App() {
     if (userData) {
       dispatch(loginUser(userData));
     }
-  }, [refetch, dispatch, userData]);
+    if (!isOnline) {
+      // raise a toast to tell the user that they're offline
+      toast.warn("You're offline. Check your internet connection");
+    }
+  }, [refetch, dispatch, userData, isOnline]);
 
   if (!user) {
     if (isLoading) {
