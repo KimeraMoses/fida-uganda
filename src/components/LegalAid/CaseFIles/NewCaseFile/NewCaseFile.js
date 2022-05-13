@@ -23,7 +23,9 @@ const NewCaseFile = ({ caseFile, isClvCaseFile, isNew, onClose }) => {
   const CASE_FILE_ADDED = "Case File Added Successfully";
   const CASE_FILE_UPDATED = "Case File Updated Successfully";
   const [page, setPage] = useState(1);
-  const [selectedClient, setSelectedClient] = useState({});
+  const [selectedClient, setSelectedClient] = useState(
+    caseFile?.complainant || {}
+  );
   const [selectedClvName, setSelectedClvName] = useState({});
   const [referredTo, setReferredTo] = useState({});
 
