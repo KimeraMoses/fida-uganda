@@ -13,7 +13,6 @@ const CaseFiles = () => {
 
   return (
     <>
-      <p>{JSON.stringify(data?.cases[0], null, 2)}</p>
       <SectionHeader title="Case Files" />
       <TableSearch btnLabel="New Case File" btnClick={onOpen} />
       {data?.cases && <CaseFilesTable data={data?.cases} />}
