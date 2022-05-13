@@ -80,7 +80,7 @@ const AllocationsTable = ({ allocations, isLoading }) => {
                       }`}
                     >
                       <span className={classes.status_indicator}></span>
-                      <h5>{item.status ? "Sent" : "Not Sent"}</h5>
+                      <h5>{item.status}</h5>
                     </div>
                   </Td>
                 </Tr>
