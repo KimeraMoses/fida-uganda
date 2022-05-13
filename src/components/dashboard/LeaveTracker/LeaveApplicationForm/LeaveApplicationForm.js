@@ -21,7 +21,6 @@ const LeaveApplicationForm = (props) => {
         <InputField
           name="tel_on_leave"
           label="Telephone on leave"
-          type="number"
           maxlength="12"
         />
       </SimpleGrid>

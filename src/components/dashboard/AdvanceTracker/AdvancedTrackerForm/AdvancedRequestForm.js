@@ -4,6 +4,7 @@ import classes from "../../LeaveTracker/LeaveApplicationForm/LeaveApplicationFor
 import InputField from "../../../common/UI/InputField/InputField";
 import { SimpleGrid } from "@chakra-ui/react";
 import FormButton from "../../../common/UI/FormButton/FormButton";
+import formatDate from "../../../../lib/formatDate"
 
 const AdvancedRequestForm = ({ isSubmitting, onClose }) => {
   return (
@@ -14,7 +15,7 @@ const AdvancedRequestForm = ({ isSubmitting, onClose }) => {
           type="date"
           label="Date needed"
           placeholder="Date needed"
-          min={new Date()}
+          min={formatDate(new Date())}
         />
         <InputField
           name="address_on_leave"
