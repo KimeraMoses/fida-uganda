@@ -29,11 +29,15 @@ const NotificationsTable = ({ data, isLoading }) => {
                   <Td>{new Date(item.createdAt).toLocaleDateString()}</Td>
                   <Td>
                     {item.user.map((person, index) => {
-                      if (index + 1 === item.user.length) {
-                        return person?.id;
-                      } else {
-                        return person?.id + ", ";
+                      if (person?.full_name) {
+                        if (index + 1 === item.user.length) {
+                          return person?.full_name;
+                        } else {
+                          return person?.full_name + ", ";
+                        }
                       }
+                      // eslint-disable-next-line array-callback-return
+                      return;
                     })}
                   </Td>
                 </Tr>
