@@ -1,7 +1,12 @@
 import React from "react";
-import { Table, Thead, Tbody, Tr, Td, TableHeadColumn } from "@chakra-ui/react";
+import { Table, Thead, Tbody, Th, Tr, Td } from "@chakra-ui/react";
 import classes from "./Table.module.css";
 import sortByDate from "../../../../lib/sortByDate";
+
+export const TableHeadColumn = (props) => {
+  const { title } = props;
+  return <Th>{title}</Th>;
+};
 
 const NewRequestsTable = ({ data, isLoading }) => {
   const approvedRecords = data
