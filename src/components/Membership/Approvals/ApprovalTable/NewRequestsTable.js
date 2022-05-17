@@ -1,9 +1,7 @@
 import React from "react";
-import { Table, Thead, Tbody, Tr, Td, IconButton } from "@chakra-ui/react";
+import { Table, Thead, Tbody, Tr, Td, TableHeadColumn } from "@chakra-ui/react";
 import classes from "./Table.module.css";
-import { MdOutlineRemoveRedEye } from "react-icons/md";
-import { TableHeadColumn } from "./ApprovedTable";
-import { formatDate } from "../../../../lib/data";
+import sortByDate from "../../../../lib/sortByDate";
 
 const NewRequestsTable = ({ data, isLoading }) => {
   const approvedRecords = data
@@ -29,7 +27,7 @@ const NewRequestsTable = ({ data, isLoading }) => {
             {!isLoading &&
               approvedRecords &&
               approvedRecords.length > 0 &&
-              approvedRecords.map((item) => {
+              sortByDate(approvedRecords).map((item) => {
                 return (
                   <Tr>
                     <Td>{item.user?.full_name}</Td>
