@@ -31,7 +31,10 @@ const ITProductForm = ({ isSubmitting, setFieldValue }) => {
         <InputField name="class" placeholder="Class" />
       </SimpleGrid>
       <SimpleGrid columns={2} gap={5}>
-        <InputField name="unit_price"  placeholder="Unit Price (UGX)"  type="number"
+        <InputField
+          name="unit_price"
+          placeholder="Unit Price (UGX)"
+          type="number"
         />
         <InputField
           name="number_of_units_required"
@@ -49,18 +52,26 @@ const ITProductForm = ({ isSubmitting, setFieldValue }) => {
       </SimpleGrid>
       <SimpleGrid columns={2} gap={5}>
         <InputField name="delivery_location" placeholder="Delivery Location" />
-        <InputField name="num_units" placeholder="Number of Units" type="number"/>
+        <InputField
+          name="num_units"
+          placeholder="Number of Units"
+          type="number"
+        />
       </SimpleGrid>
       <SimpleGrid columns={2} gap={5}>
         <InputField name="type" placeholder="Type" />
-        <InputField name="subject_of_procurement" placeholder="Subject of Procurement" />
+        <InputField
+          name="subject_of_procurement"
+          placeholder="Subject of Procurement"
+        />
       </SimpleGrid>
       <SimpleGrid columns={2} gap={5}>
-        <InputField name="date_required" label="Date Required" type="date"/>
+        <InputField name="date_required" label="Date Required" type="date" />
         <InputField name="purchase_date" label="Purchase Date" type="date" />
       </SimpleGrid>
-  
-     
+      <SimpleGrid>
+        <InputField name="description" placeholder="description" />
+      </SimpleGrid>
 
       <Button
         mt={5}
