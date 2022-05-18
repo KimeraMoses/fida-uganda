@@ -19,12 +19,12 @@ const AttendenceTable = ({ data }) => {
           </Tr>
         </Thead>
         <Tbody>
-          {data.map((item) => {
+          {data.map((item, index) => {
             return (
-              <Tr key={item.number}>
+              <Tr key={item.index}>
                 <Td className={classes.data_field}>
                   <div className={classes.data__primary_text}>
-                    {item.number}
+                    {index + 1}
                   </div>
                 </Td>
                 <Td className={classes.data_field}>
