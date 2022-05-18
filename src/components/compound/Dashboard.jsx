@@ -22,7 +22,7 @@ const Dashboard = () => {
   const requisitionNumber = requisition?.numApprovedRequisitions || 0;
   const requisitionPending = requisition?.numPendingRequisitions || 0;
   const travelOrders = travelOrder?.all_TravelOrders || 0;
-  const cases = casesStats?.all_cases || 0;
+  const cases = casesStats?.all_cases;
   const clients = clientStats?.all_clinets || 0;
   const complaints = complaintsStats?.all_Complaints || 0;
 
