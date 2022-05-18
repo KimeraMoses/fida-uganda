@@ -24,6 +24,7 @@ const EventAttendence = () => {
           onSuccess={onClose}
           success={`Event added successfully`}
           useMutate={useAddEvent}
+          onClose={onClose}
         />
       </Modal>
     </>

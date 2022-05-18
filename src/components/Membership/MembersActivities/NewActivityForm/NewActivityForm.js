@@ -16,8 +16,6 @@ const NewActivityForm = (props) => {
     value: user.id,
   }));
 
-  console.log(projectOptions, 'project optins')
-
   return (
     <div className={classes.activity_form_wrapper}>
       <div className={classes.input_group_wrapper}>
