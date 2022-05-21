@@ -26,7 +26,7 @@ const NewCaseFile = ({ caseFile, isClvCaseFile, isNew, onClose }) => {
   const [selectedClient, setSelectedClient] = useState(
     caseFile?.complainant || {}
   );
-  const [selectedClvName, setSelectedClvName] = useState({});
+  const [selectedClvName, setSelectedClvName] = useState(caseFile?.clv || {});
   const [referredTo, setReferredTo] = useState({});
 
   const mutateForm1 = (values) => {
