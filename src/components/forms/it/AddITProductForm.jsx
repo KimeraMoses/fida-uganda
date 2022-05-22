@@ -1,7 +1,6 @@
 import React, { useMemo } from "react";
 import { SimpleGrid, Button } from "@chakra-ui/react";
 import withForm from "../../../hoc/withForm";
-// import { itProductInitialValues, itProductOrderSchema } from "./schemas/it";
 import InputField from "../../common/UI/InputField/InputField";
 import { useProjectOptions } from "../../../hooks/useProjects";
 import SelectField from "../../Membership/Allocations/AllocationForm/SelectInput";

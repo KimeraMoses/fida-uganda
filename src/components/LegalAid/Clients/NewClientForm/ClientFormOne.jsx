@@ -22,7 +22,7 @@ const ClientFormOne = ({ page, limit, onBack, isSubmitting }) => {
         <SimpleGrid
           columns={2}
           spacing={1}
-          style={{ alignItems: "center", marginBottom: 10 }}
+          style={{ alignItems: "center", marginBottom: "5px" }}
         >
           <div className={styles.field_row_label}>Sex</div>
           <SelectField
@@ -96,9 +96,21 @@ const ClientFormOne = ({ page, limit, onBack, isSubmitting }) => {
           <div className={styles.field_row_label}>Village</div>
           <InputField placeholder="Type Here" name="village" fullwidth />
         </SimpleGrid>
-        <SimpleGrid columns={2} spacing={1} style={{ alignItems: "center" }}>
+        <SimpleGrid
+          columns={2}
+          spacing={1}
+          style={{ alignItems: "center", marginBottom: "5px" }}
+        >
           <div className={styles.field_row_label}>Marital Status</div>
-          <InputField placeholder="Type Here" name="marital_status" fullwidth />
+          <SelectField
+            name="marital_status"
+            placeholder="Select Status"
+            options={[
+              { label: "Single", value: "single" },
+              { label: "Married", value: "married" },
+              { label: "Divorced", value: "divorced" },
+            ]}
+          />
         </SimpleGrid>
         <SimpleGrid columns={2} spacing={1} style={{ alignItems: "center" }}>
           <div className={styles.field_row_label}>Accompanied By</div>
@@ -112,12 +124,21 @@ const ClientFormOne = ({ page, limit, onBack, isSubmitting }) => {
           <div className={styles.field_row_label}>Place of work</div>
           <InputField placeholder="Type Here" name="place_of_work" fullwidth />
         </SimpleGrid>
-        <SimpleGrid columns={2} spacing={1} style={{ alignItems: "center" }}>
+        <SimpleGrid
+          columns={2}
+          spacing={1}
+          style={{ alignItems: "center", marginBottom: "5px" }}
+        >
           <div className={styles.field_row_label}>Level of Education</div>
-          <InputField
-            placeholder="Type Here"
+          <SelectField
             name="level_of_education"
-            fullwidth
+            placeholder="Select Level"
+            options={[
+              { label: "Degree", value: "degree" },
+              { label: "Diploma", value: "diploma" },
+              { label: "Certificate", value: "certificate" },
+              { label: "Lower", value: "lower" },
+            ]}
           />
         </SimpleGrid>
         <SimpleGrid columns={2} spacing={1} style={{ alignItems: "center" }}>
