@@ -23,6 +23,7 @@ export const itProductInitialValues = {
   date_required: "",
   delivery_location: "",
   num_units: "",
+  description: "",
 };
 
 export const itServicesInitialValues = {
