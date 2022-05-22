@@ -28,7 +28,7 @@ const NewCaseFile = ({
   const limit = 5;
   const CASE_FILE_ADDED = "Case File Added Successfully";
   const CASE_FILE_UPDATED = "Case File Updated Successfully";
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(5);
   const [selectedClient, setSelectedClient] = useState(
     caseFile?.complainant || {}
   );
