@@ -52,3 +52,8 @@
   background: linear-gradient(102.46deg, #b28dda 7.45%, #562b85 98.81%);
   color: #ffffff;
 }
+.fida__fm_btn.fida__btn_filled {
+  background-color: #562b85;
+  color: #ffffff;
+  padding: 8px 20px;
+}

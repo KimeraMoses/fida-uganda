@@ -3,7 +3,7 @@ import classes from "./SummaryDetails.module.css";
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
 import { SimpleGrid, Textarea } from "@chakra-ui/react";
 import SummaryTable from "./SummaryTable/SummaryTable";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import FormButton from "../../common/UI/FormButton/FormButton";
 
 const userDetails = [
@@ -25,6 +25,14 @@ const userDetails = [
 const SummaryDetails = (props) => {
   const { type, isSubmitting } = props;
   const navigate = useNavigate();
+
+  //====GET THE SELECTED DOCUMENT CATEGORY====//
+  function useQuery() {
+    return new URLSearchParams(useLocation().search);
+  }
+  let query = useQuery();
+  const selectedType = query.get("application-type");
+
   return (
     <div className={classes.summary_wrapper}>
       <div className={classes.summary_header}>
@@ -46,7 +54,9 @@ const SummaryDetails = (props) => {
             ? "Requisition Summary"
             : type === "travel"
             ? "Travel Order Summary"
-            : "March Leave Application"}
+            : `March ${
+                selectedType === "leave" ? "Leave" : "Advance"
+              } Application`}
         </h1>
       </div>
       <div className={classes.summary_details_wrapper}>
@@ -56,7 +66,9 @@ const SummaryDetails = (props) => {
               ? "Requisition Summary"
               : type === "travel"
               ? "Travel Order Summary"
-              : "Leave Application Form Summary"}
+              : `${
+                  selectedType === "leave" ? "Leave" : "Advance"
+                } Aplication Form Summary`}
           </h2>
 
           <div className={classes.user_details}>

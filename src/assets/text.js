@@ -14,16 +14,16 @@ export const monthsShort = [
 ];
 
 export const monthsLong = [
-  { name: "January", value: "jan" },
-  { name: "Febuary", value: "feb" },
-  { name: "March", value: "mar" },
-  { name: "April", value: "apr" },
-  { name: "May", value: "may" },
-  { name: "June", value: "jun" },
-  { name: "July", value: "jul" },
-  { name: "August", value: "aug" },
-  { name: "September", value: "sep" },
-  { name: "October", value: "oct" },
-  { name: "November", value: "nov" },
-  { name: "December", value: "dec" },
+  { label: "January", value: "jan" },
+  { label: "Febuary", value: "feb" },
+  { label: "March", value: "mar" },
+  { label: "April", value: "apr" },
+  { label: "May", value: "may" },
+  { label: "June", value: "jun" },
+  { label: "July", value: "jul" },
+  { label: "August", value: "aug" },
+  { label: "September", value: "sep" },
+  { label: "October", value: "oct" },
+  { label: "November", value: "nov" },
+  { label: "December", value: "dec" },
 ];

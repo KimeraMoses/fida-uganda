@@ -15,6 +15,8 @@ const FormButton = (props) => {
           ? "fida__btn_transparent"
           : variant === "outlined"
           ? "fida__btn_outlined"
+          : variant === "filled"
+          ? "fida__btn_filled"
           : "fida__btn_colored"
       } ${fullWidth ? "fida__btn_full" : ""} ${
         disabled ? "btn__disabled" : ""
