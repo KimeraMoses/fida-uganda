@@ -20,7 +20,6 @@
 }
 .data__primary_text {
   color: var(--text_color);
-  font-size: 16px;
   font-weight: 600;
   text-transform: capitalize;
   margin-bottom: 8px;

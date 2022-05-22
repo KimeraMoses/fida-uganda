@@ -3,8 +3,10 @@ import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
 import classes from "../../../Membership/Allocations/AllocationsTable/AllocationsTable.module.css";
 import styles from "./Table.module.css";
 import { TableHeadColumn } from "../../../Membership/Allocations/AllocationsTable/AllocationsTable";
+import withTable from "./../../../../hoc/withTable";
 
 const EmployeeContractTable = ({ data }) => {
+  console.log(data);
   return (
     <>
       <div className={classes.allocations_table_wrapper}>
@@ -51,7 +53,9 @@ const EmployeeContractTable = ({ data }) => {
                     </div>
                   </Td>
                   <Td>
-                    <div className={classes.data__primary_text}>{item.gender}</div>
+                    <div className={classes.data__primary_text}>
+                      {item.gender}
+                    </div>
                     <div className={classes.data__secondary_text}>
                       {item.district}
                     </div>
@@ -97,9 +101,12 @@ const EmployeeContractTable = ({ data }) => {
             })}
           </Tbody>
         </Table>
+        {data && data.length < 1 && (
+          <div className={classes.no_records_wrapper}>No Records found!</div>
+        )}
       </div>
     </>
   );
 };
 
-export default EmployeeContractTable;
+export default withTable(EmployeeContractTable);

@@ -103,3 +103,16 @@ th {
 .members_status.fail h6 {
   color: #ff0000;
 }
+
+/* NO RECORDS WRAPPER */
+.no_records_wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+  font-size: 35px;
+  font-weight: 700;
+  color: #00000085;
+}
