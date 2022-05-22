@@ -1,5 +1,4 @@
 import React from "react";
-import TableSearch from "../../common/table/TableSearch";
 import SectionHeader from "../../common/SectionHeader";
 import Modal from "../../common/Modal";
 import { useDisclosure } from "@chakra-ui/react";
@@ -14,8 +13,13 @@ const Employees = () => {
   return (
     <>
       <SectionHeader title="Employees" />
-      <TableSearch btnLabel="Add Employee" btnClick={onOpen} />
-      {data?.employees && <EmployeeContractTable data={data?.employees} />}
+      {data?.employees && (
+        <EmployeeContractTable
+          data={data?.employees}
+          btnLabel="Add Employee"
+          btnClick={onOpen}
+        />
+      )}
       <Modal isOpen={isOpen} onClose={onClose}>
         <NewContract />
       </Modal>
