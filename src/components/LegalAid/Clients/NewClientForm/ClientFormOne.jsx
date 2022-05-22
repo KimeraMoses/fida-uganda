@@ -6,10 +6,9 @@ import InputField from "../../../common/UI/InputField/InputField";
 import withForm from "../../../../hoc/withForm";
 import ActionButtons from "../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons";
 
-const ClientFormOne = ({ page, limit, onBack, isSubmitting, values }) => {
+const ClientFormOne = ({ page, limit, onBack, isSubmitting }) => {
   return (
     <div className={classes.form_wrapper}>
-      <p>{JSON.stringify(values, null, 2)}</p>
       <div className={classes.field_wrapper}>
         <SimpleGrid columns={2} spacing={1} style={{ alignItems: "center" }}>
           <div className={styles.field_row_label}>Name</div>
