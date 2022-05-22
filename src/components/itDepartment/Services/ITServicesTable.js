@@ -3,6 +3,7 @@ import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
 import classes from "./Table.module.css";
 import { TableHeadColumn } from "../../Membership/Allocations/AllocationsTable/AllocationsTable";
 import { formatDate } from "../../../lib/data";
+import withTable from "./../../../hoc/withTable";
 
 const ITServicesTable = ({ data, isProducts }) => {
   return (
@@ -100,4 +101,4 @@ const ITServicesTable = ({ data, isProducts }) => {
   );
 };
 
-export default ITServicesTable;
+export default withTable(ITServicesTable);
