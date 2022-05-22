@@ -3,13 +3,12 @@ import TextField from "../../common/TextField";
 import withForm from "../../../hoc/withForm";
 import { MdAdd } from "react-icons/md";
 import { useProjectOptions } from "../../../hooks/useProjects";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import SelectField from "../../Membership/Allocations/AllocationForm/SelectInput";
 
 const FleetDatabaseForm = ({ isSubmitting, setFieldValue }) => {
   const projects = useProjectOptions();
   const projectOptions = useMemo(() => projects, [projects]);
-  const [selected, setSelected] = useState();
 
   return (
     <SimpleGrid p={5} gap={3}>
