@@ -10,6 +10,7 @@ import { useClvCases } from "../../../hooks/useCaseFiles";
 const ClvCaseFiles = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data } = useClvCases();
+  const [selectedCase, setSelectedCase] = React.useState(null);
 
   return (
     <>
@@ -23,7 +24,13 @@ const ClvCaseFiles = () => {
         onClose={onClose}
         title="CLV Case File Registration Form"
       >
-        <NewCaseFile isClvCaseFile={true} isNew={true} onClose={onClose} />
+        <NewCaseFile
+          isClvCaseFile={true}
+          isNew={true}
+          onClose={onClose}
+          caseFile={selectedCase}
+          setCaseFile={setSelectedCase}
+        />
       </Modal>
     </>
   );

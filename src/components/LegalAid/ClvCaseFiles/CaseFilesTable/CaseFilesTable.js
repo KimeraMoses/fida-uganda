@@ -90,6 +90,7 @@ const CaseFilesTable = ({ data }) => {
           isClvCaseFile={true}
           isNew={false}
           onClose={onClose}
+          setCaseFile={setSelectedCase}
         />
       </Modal>
     </>

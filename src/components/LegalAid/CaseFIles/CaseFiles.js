@@ -10,6 +10,7 @@ import { useCaseFiles } from "../../../hooks/useCaseFiles";
 const CaseFiles = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data } = useCaseFiles();
+  const [selectedCase, setSelectedCase] = React.useState(null);
 
   return (
     <>
@@ -22,7 +23,12 @@ const CaseFiles = () => {
         title="Case Registration Form"
         size="4xl"
       >
-        <NewCaseFile isNew={true} onClose={onClose} />
+        <NewCaseFile
+          isNew={true}
+          onClose={onClose}
+          caseFile={selectedCase}
+          setCaseFile={setSelectedCase}
+        />
       </Modal>
     </>
   );

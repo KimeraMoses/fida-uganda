@@ -1,15 +1,16 @@
+import { useState } from "react";
 import TableSearch from "../../common/table/TableSearch";
 import SectionHeader from "../../common/SectionHeader";
 import ClientsTable from "./ClientsTable/ClientsTable";
-import { useAddClient, useClients } from "../../../hooks/useClients";
+import { useClients } from "../../../hooks/useClients";
 import { useDisclosure } from "@chakra-ui/react";
 import Modal from "../../common/Modal";
 import NewClientForm from "./NewClientForm/NewClientForm";
-import { complainantInitialValues } from "../../../form_schemas/complainant";
 
 const Clients = () => {
   const { data, isLoading } = useClients();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [client, setClient] = useState(null);
 
   return (
     <>
@@ -25,10 +26,10 @@ const Clients = () => {
         title="Client Registration Form"
       >
         <NewClientForm
-          useMutate={useAddClient}
-          onSuccess={onClose}
-          success={"Added Client Successfully"}
-          initialValues={complainantInitialValues}
+          onClose={onClose}
+          client={client}
+          setClient={setClient}
+          isNewClient={true}
         />
       </Modal>
     </>
