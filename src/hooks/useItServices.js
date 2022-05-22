@@ -1,9 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import produce from "immer";
-import {
-    getAllItServices,
-    addItService
-} from "../apis/itServices";
+import { getAllItServices, addItService } from "../apis/itServices";
 import { IT_SERVICES_KEY } from "../lib/constants";
 
 export const useAddItService = () => {
@@ -14,12 +11,12 @@ export const useAddItService = () => {
       if (previousItService) {
         queryClient.setQueryData(IT_SERVICES_KEY, (previousItService) => {
           return produce(previousItService, (draft) => {
-            draft.assets.push(data.asset);
+            draft.services.push(data.service);
           });
         });
       } else {
         queryClient.setQueryData(IT_SERVICES_KEY, () => {
-          return { assets: [data.itService] };
+          return { services: [data.service] };
         });
       }
     },
