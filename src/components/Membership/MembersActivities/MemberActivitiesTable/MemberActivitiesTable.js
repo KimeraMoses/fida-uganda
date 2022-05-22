@@ -2,6 +2,7 @@ import React from "react";
 import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
 import classes from "./MemberActivitiesTable.module.css";
 import { TableHeadColumn } from "../../Allocations/AllocationsTable/AllocationsTable";
+import withTable from "./../../../../hoc/withTable";
 
 const MemberActivitiesTable = ({ data, isLoading }) => {
   return (
@@ -9,6 +10,7 @@ const MemberActivitiesTable = ({ data, isLoading }) => {
       <Table variant="simple" size="sm">
         <Thead className={classes.table_header}>
           <Tr>
+            <TableHeadColumn title="S/N" />
             <TableHeadColumn title="Name" secondaryText="Membership No." />
             <TableHeadColumn title="Project" secondaryText="Project Activity" />
             <TableHeadColumn
@@ -21,9 +23,10 @@ const MemberActivitiesTable = ({ data, isLoading }) => {
           {!isLoading &&
             data &&
             data.length &&
-            data.map((item) => {
+            data.map((item, index) => {
               return (
                 <Tr>
+                  <Td>000{index + 1}</Td>
                   <Td>
                     <div className={classes.data__primary_text}>
                       {item.member?.first_name + " " + item.member?.last_name}
@@ -57,4 +60,4 @@ const MemberActivitiesTable = ({ data, isLoading }) => {
   );
 };
 
-export default MemberActivitiesTable;
+export default withTable(MemberActivitiesTable);

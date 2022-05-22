@@ -1,4 +1,3 @@
-import TableSearch from "../../common/table/TableSearch";
 import SectionHeader from "../../common/SectionHeader";
 import ClientsTable from "./ClientsTable/ClientsTable";
 import { useAddClient, useClients } from "../../../hooks/useClients";
@@ -14,9 +13,13 @@ const Clients = () => {
   return (
     <>
       <SectionHeader title="Clients" />
-      <TableSearch btnLabel="Add Client" btnClick={onOpen} />
       {data?.clients && (
-        <ClientsTable data={data?.clients} isLoading={isLoading} />
+        <ClientsTable
+          isLoading={isLoading}
+          data={data ? data.clients : null}
+          btnLabel="Add Client"
+          btnClick={onOpen}
+        />
       )}
       <Modal
         isOpen={isOpen}

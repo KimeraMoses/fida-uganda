@@ -1,4 +1,3 @@
-import TableSearch from "../../common/table/TableSearch";
 import SectionHeader from "../../common/SectionHeader";
 import { useDisclosure } from "@chakra-ui/react";
 import Modal from "../../common/Modal";
@@ -14,8 +13,14 @@ const CLVs = () => {
   return (
     <>
       <SectionHeader title="CLVs" />
-      <TableSearch btnLabel="Add CLV" btnClick={onOpen} />
-      {data?.clvs && <CLVTable data={data?.clvs} isLoading={isLoading} />}
+      {data?.clvs && (
+        <CLVTable
+          isLoading={isLoading}
+          data={data ? data.clvs : null}
+          btnLabel="Add CLV"
+          btnClick={onOpen}
+        />
+      )}
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <NewClvForm
           action="newClv"
