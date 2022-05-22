@@ -3,18 +3,17 @@ import { useDisclosure } from "@chakra-ui/react";
 import SectionHeader from "../../common/SectionHeader";
 import Form from "../Allocations/AllocationForm/Form";
 import AllocationsTable from "./AllocationsTable/AllocationsTable";
-// import { allocationFormSchema } from "./AllocationForm/schema";
 import {
   useAddAllocation,
   useAllocations,
 } from "../../../hooks/useAllocations";
-import { useUsers } from "../../../hooks/useUser";
+import { useMembers } from "../../../hooks/useMember";
 
 const Allocations = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialValues = { subject: "", message: "", allocated_to: [] };
 
-  const users = useUsers();
+  const { data: membersData } = useMembers();
 
   const { data, isLoading } = useAllocations();
   return (
@@ -35,7 +34,7 @@ const Allocations = () => {
           onSuccess={onClose}
           success={`Allocation added successfully`}
           useMutate={useAddAllocation}
-          users={users}
+          membersData={membersData ? membersData.Members : null}
         />
       )}
     </>

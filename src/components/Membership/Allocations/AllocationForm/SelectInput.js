@@ -4,7 +4,14 @@ import makeAnimated from "react-select/animated";
 
 const animatedComponents = makeAnimated();
 
-const SelectInput = ({ options, onChange, name, placeholder, isMulti }) => {
+const SelectInput = ({
+  options,
+  onChange,
+  name,
+  placeholder,
+  isMulti,
+  disabled,
+}) => {
   return (
     <Select
       placeholder={placeholder}
@@ -15,6 +22,7 @@ const SelectInput = ({ options, onChange, name, placeholder, isMulti }) => {
       isSearchable={true}
       name={name}
       isClearable={true}
+      isDisabled={disabled}
     />
   );
 };

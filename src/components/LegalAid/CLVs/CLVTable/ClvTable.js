@@ -17,6 +17,7 @@ import Modal from "../../../common/Modal";
 import NewClvForm from "../CLVForms/NewClvForm";
 import { formatDate } from "../../../../lib/data";
 import { onSubmitAlert } from "../../../../lib/deleteInProd";
+import withTable from "./../../../../hoc/withTable";
 
 const CLVTable = ({ data }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -52,7 +53,6 @@ const CLVTable = ({ data }) => {
                 title="FIDA ID NUMBER"
                 secondaryText="Registration Date"
               />
-              <TableHeadColumn title="case Status" />
               <TableHeadColumn title="Actions" />
             </Tr>
           </Thead>
@@ -96,16 +96,6 @@ const CLVTable = ({ data }) => {
                     </div>
                   </Td>
                   <Td>
-                    <div
-                      className={`${classes.allocation_status_wrapper} ${
-                        item.open ? classes.paid : classes.fail
-                      }`}
-                    >
-                      <span className={classes.status_indicator}></span>
-                      <h5>{item.isActive ? "active" : "closed"}</h5>
-                    </div>
-                  </Td>
-                  <Td>
                     <div className={styles.table_actions_wrapperr}>
                       <div className={styles.table_actions_icon_wrapper}>
                         <IconButton
@@ -144,4 +134,4 @@ const CLVTable = ({ data }) => {
   );
 };
 
-export default CLVTable;
+export default withTable(CLVTable);

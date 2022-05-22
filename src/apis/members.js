@@ -14,7 +14,10 @@ export const addMember = async (member) => {
 };
 
 export const updateMember = async (member) => {
-  return await axiosClient.patch(routes.members.editMember + member.id, member);
+  return await axiosClient.patch(
+    `${routes.members.editMember}/${member.id}`,
+    member
+  );
 };
 
 export const deleteMember = async (id) => {

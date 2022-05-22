@@ -1,5 +1,4 @@
 import React from "react";
-import TableSearch from "../../common/table/TableSearch";
 import SectionHeader from "../../common/SectionHeader";
 import { useDisclosure } from "@chakra-ui/react";
 import CaseFilesTable from "./CaseFilesTable/CaseFilesTable";
@@ -9,14 +8,20 @@ import { useClvCases } from "../../../hooks/useCaseFiles";
 
 const ClvCaseFiles = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data } = useClvCases();
+  const { data, isLoading } = useClvCases();
 
   return (
     <>
       <SectionHeader title="CLVs Case Files" />
-      <TableSearch btnLabel="CLV Case File" btnClick={onOpen} />
 
-      {data && <CaseFilesTable data={data.clv_cases} />}
+      {data && (
+        <CaseFilesTable
+          data={data ? data.clv_cases : null}
+          isLoading={isLoading}
+          btnLabel="CLV Case File"
+          btnClick={onOpen}
+        />
+      )}
       <Modal
         size="4xl"
         isOpen={isOpen}

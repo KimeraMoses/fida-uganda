@@ -1,17 +1,16 @@
 .table_header {
-  background-color: #f4f2ff;
-  font-weight: 600;
-  color: var(--text_color);
+  background-color: var(--table_head_bg_color);
+  font-weight: 700;
+  color: #000000;
 }
 .table_header th {
   font-size: 15px;
   vertical-align: top;
 }
-.table_actions_wrapperr{
+.table_actions_wrapperr {
   display: flex;
   justify-content: center;
-
 }
-.table_actions_icon_wrapper{
+.table_actions_icon_wrapper {
   margin: 0 3px;
 }

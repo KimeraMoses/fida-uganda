@@ -4,70 +4,7 @@ import classes from "./MemberActivitiesTable.module.css";
 import { TableHeadColumn } from "../../Allocations/AllocationsTable/AllocationsTable";
 import withTable from "./../../../../hoc/withTable";
 
-export const MembersData = [
-  {
-    sn: "001",
-    name: "Mutumba Joshep",
-    memberNo: "FU/LE/20/064",
-    project: "SGBV, Kamuli IDLO",
-    projecctActivity: "Training in Management of SGBV cases ",
-    date: "02/02/2022",
-    activitySummary:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim enim ad minim adj ....",
-  },
-  {
-    sn: "002",
-    name: "Mutumba Joshep",
-    memberNo: "FU/LE/20/064",
-    project: "SGBV, Kamuli IDLO",
-    projecctActivity: "Training in Management of SGBV cases ",
-    date: "02/02/2022",
-    activitySummary:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim enim ad minim adj ....",
-  },
-  {
-    sn: "003",
-    name: "Mutumba Joshep",
-    memberNo: "FU/LE/20/064",
-    project: "SGBV, Kamuli IDLO",
-    projecctActivity: "Training in Management of SGBV cases ",
-    date: "02/02/2022",
-    activitySummary:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim enim ad minim adj ....",
-  },
-  {
-    sn: "004",
-    name: "Mutumba Joshep",
-    memberNo: "FU/LE/20/064",
-    project: "SGBV, Kamuli IDLO",
-    projecctActivity: "Training in Management of SGBV cases ",
-    date: "02/02/2022",
-    activitySummary:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim enim ad minim adj ....",
-  },
-  {
-    sn: "005",
-    name: "Mutumba Joshep",
-    memberNo: "FU/LE/20/064",
-    project: "SGBV, Kamuli IDLO",
-    projecctActivity: "Training in Management of SGBV cases ",
-    date: "02/02/2022",
-    activitySummary:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim enim ad minim adj ....",
-  },
-  {
-    sn: "006",
-    name: "Mutumba Joshep",
-    memberNo: "FU/LE/20/064",
-    project: "SGBV, Kamuli IDLO",
-    projecctActivity: "Training in Management of SGBV cases ",
-    date: "02/02/2022",
-    activitySummary:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim enim ad minim adj ....",
-  },
-];
-
-const MemberActivitiesTable = ({ data }) => {
+const MemberActivitiesTable = ({ data, isLoading }) => {
   return (
     <div className={classes.activities_table_wrapper}>
       <Table variant="simple" size="sm">
@@ -83,35 +20,40 @@ const MemberActivitiesTable = ({ data }) => {
           </Tr>
         </Thead>
         <Tbody>
-          {data.map((item) => {
-            return (
-              <Tr>
-                <Td className={classes.data_recepient_field}>
-                  <div className={classes.data__primary_text}>{item.sn}</div>
-                </Td>
-                <Td>
-                  <div className={classes.data__primary_text}>{item.name}</div>
-                  <div className={classes.data__secondary_text}>
-                    {item.memberNo}
-                  </div>
-                </Td>
-                <Td>
-                  <div className={`${classes.data__primary_text}`}>
-                    {item.project}
-                  </div>
-                  <div className={classes.data__secondary_text}>
-                    {item.projecctActivity}
-                  </div>
-                </Td>
-                <Td>
-                  <div className={classes.data__primary_text}>{item.date}</div>
-                  <div className={classes.data__secondary_text}>
-                    {item.activitySummary}
-                  </div>
-                </Td>
-              </Tr>
-            );
-          })}
+          {!isLoading &&
+            data &&
+            data.length &&
+            data.map((item, index) => {
+              return (
+                <Tr>
+                  <Td>000{index + 1}</Td>
+                  <Td>
+                    <div className={classes.data__primary_text}>
+                      {item.member?.first_name + " " + item.member?.last_name}
+                    </div>
+                    <div className={classes.data__secondary_text}>
+                      {item.member?.id}
+                    </div>
+                  </Td>
+                  <Td>
+                    <div className={`${classes.data__primary_text}`}>
+                      {item.project.name}
+                    </div>
+                    <div className={classes.data__secondary_text}>
+                      {item.projectActivity}
+                    </div>
+                  </Td>
+                  <Td>
+                    <div className={classes.data__primary_text}>
+                      {new Date(item.date_of_activity).toLocaleDateString()}
+                    </div>
+                    <div className={classes.data__secondary_text}>
+                      {item.activityDescription}
+                    </div>
+                  </Td>
+                </Tr>
+              );
+            })}
         </Tbody>
       </Table>
     </div>

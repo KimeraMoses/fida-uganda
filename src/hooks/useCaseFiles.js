@@ -72,15 +72,15 @@ export const useUpdateCaseFile = () => {
       if (previousCaseFiles) {
         queryClient.setQueryData(CASES_KEY, (previousCaseFiles) => {
           return produce(previousCaseFiles, (draft) => {
-            const index = draft.caseFiles.findIndex(
-              (caseFile) => caseFile.id === data.case_file.id
+            const index = draft.cases.findIndex(
+              (caseFile) => caseFile.id === data.updatedCase.id
             );
-            draft.caseFiles[index] = data.case_file;
+            draft.cases[index] = data.updatedCase;
           });
         });
       } else {
         queryClient.setQueryData(CASES_KEY, () => {
-          return { caseFiles: [data.case_file] };
+          return { cases: [data.updatedCase] };
         });
       }
     },
@@ -95,12 +95,12 @@ export const useDeleteCaseFile = () => {
       if (previousCaseFiles) {
         queryClient.setQueryData(CASES_KEY, (previousCaseFiles) => {
           return produce(previousCaseFiles, (draft) => {
-            draft.caseFiles.filter((caseFile) => caseFile.id !== data.caseId);
+            draft.cases.filter((caseFile) => caseFile.id !== data.caseId);
           });
         });
       } else {
         queryClient.setQueryData(CASES_KEY, () => {
-          return { caseFiles: [] };
+          return { cases: [] };
         });
       }
     },

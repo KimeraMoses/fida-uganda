@@ -2,7 +2,6 @@ import { useState } from "react";
 import MultForm5 from "./MultiForm/MultForm5";
 import MultForm4 from "./MultiForm/MultForm4";
 import MultForm3 from "./MultiForm/MultForm3";
-import MultForm2 from "./MultiForm/MultForm2";
 import MultForm1 from "./MultiForm/MultForm1";
 import MultForm6 from "./MultiForm/MultForm6";
 import {
@@ -16,44 +15,41 @@ import {
   caseFileInitialValues,
   caseFileSixInitialValues,
   caseFileThreeInitialValues,
-  caseFileTwoInitialValues,
 } from "./MultiForm/schema";
 
 const NewCaseFile = ({ caseFile, isClvCaseFile, isNew, onClose }) => {
   const caseFileId = useCaseFileId();
-  const limit = 6;
+  const limit = 5;
   const CASE_FILE_ADDED = "Case File Added Successfully";
   const CASE_FILE_UPDATED = "Case File Updated Successfully";
   const [page, setPage] = useState(1);
-  const [selectedClient, setSelectedClient] = useState({});
+  const [selectedClient, setSelectedClient] = useState(
+    caseFile?.complainant || {}
+  );
+  const [selectedClvName, setSelectedClvName] = useState({});
   const [referredTo, setReferredTo] = useState({});
 
   const mutateForm1 = (values) => {
+    if (isClvCaseFile)
+      return {
+        ...values,
+        complainant: selectedClient.id,
+        clv: selectedClvName.id,
+        isByClv: true,
+      };
     return { ...values, complainant: selectedClient.id };
   };
 
   const mutateForm1Update = (values) => {
-    return { ...values, complainant: selectedClient.id, id: caseFileId };
+    return { ...values, complainant: selectedClient.id, case_id: caseFileId };
   };
 
-  const mutateForm2 = (values) => {
-    return { ...values, id: caseFileId };
-  };
-
-  const mutateForm3 = (values) => {
-    return { ...values, id: caseFileId };
-  };
-
-  const mutateForm4 = (values) => {
-    return { ...values, id: caseFileId };
-  };
-
-  const mutateForm5 = (values) => {
-    return { ...values, id: caseFileId };
+  const addCaseFileId = (values) => {
+    return { ...values, case_id: caseFileId };
   };
 
   const mutateForm6 = (values) => {
-    return { ...values, referred_to: referredTo.id, id: caseFileId };
+    return { ...values, referred_to: referredTo.id, case_id: caseFileId };
   };
 
   const prevStep = () => {
@@ -80,23 +76,11 @@ const NewCaseFile = ({ caseFile, isClvCaseFile, isNew, onClose }) => {
           limit={limit}
           isMutable={true}
           mutateData={isNew ? mutateForm1 : mutateForm1Update}
+          selectedClvName={selectedClvName}
+          setSelectedClvName={setSelectedClvName}
         />
       );
     case 2:
-      return (
-        <MultForm2
-          initialValues={caseFileTwoInitialValues}
-          useMutate={useUpdateCaseFile}
-          onSuccess={nextStep}
-          success={CASE_FILE_UPDATED}
-          onBack={prevStep}
-          page={page}
-          limit={limit}
-          isMutable={true}
-          mutateData={mutateForm2}
-        />
-      );
-    case 3:
       return (
         <MultForm3
           initialValues={caseFileThreeInitialValues}
@@ -107,10 +91,10 @@ const NewCaseFile = ({ caseFile, isClvCaseFile, isNew, onClose }) => {
           page={page}
           limit={limit}
           isMutable={true}
-          mutateData={mutateForm3}
+          mutateData={addCaseFileId}
         />
       );
-    case 4:
+    case 3:
       return (
         <MultForm4
           initialValues={caseFileFourInitialValues}
@@ -121,10 +105,10 @@ const NewCaseFile = ({ caseFile, isClvCaseFile, isNew, onClose }) => {
           page={page}
           limit={limit}
           isMutable={true}
-          mutateData={mutateForm4}
+          mutateData={addCaseFileId}
         />
       );
-    case 5:
+    case 4:
       return (
         <MultForm5
           initialValues={caseFileFiveInitialValues}
@@ -135,10 +119,10 @@ const NewCaseFile = ({ caseFile, isClvCaseFile, isNew, onClose }) => {
           page={page}
           limit={limit}
           isMutable={true}
-          mutateData={mutateForm5}
+          mutateData={addCaseFileId}
         />
       );
-    case 6:
+    case 5:
       return (
         <MultForm6
           initialValues={caseFileSixInitialValues}

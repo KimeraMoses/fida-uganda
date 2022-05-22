@@ -26,4 +26,5 @@ export const caseFilesColumns = [
   { Headers: "Respondent Name", accessor: "respondentName" },
   { Headers: "Respondent Phone Number", accessor: "respondentPhoneNumber" },
   { Headers: "How did you find fida", accessor: "howDidYouFindFida" },
+  { Headers: "Actions", accessor: "actions" },
 ];

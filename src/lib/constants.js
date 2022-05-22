@@ -1,4 +1,5 @@
 export const BASE_URL = "https://fida-ims-staging-v2.herokuapp.com/api/v1";
+export const TEN_MBS_IN_BYTES = 10485760;
 
 export const USERS_KEY = "users";
 export const CLIENTS_KEY = "clients";

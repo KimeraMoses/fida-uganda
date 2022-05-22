@@ -1,21 +1,20 @@
 .approvals_table_wrapper {
   background-color: #ffffff;
-  padding-right: 10px;
   border-radius: 10px;
 }
 .table_header {
-  background-color: #ffffff;
-  font-weight: 600;
-  color: var(--text_color);
+  background-color: #fe00b7;
+  font-weight: 700;
+  color: #000000;
 }
 .table_header th {
   font-size: 15px;
   white-space: nowrap;
   font-weight: 700;
+  padding: 20px 10px !important;
 }
 .approvals_table_wrapper td {
   font-weight: 600;
-  white-space: nowrap;
 }
 
 .primary_text_icon {

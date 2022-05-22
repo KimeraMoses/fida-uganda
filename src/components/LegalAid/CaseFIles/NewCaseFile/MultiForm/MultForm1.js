@@ -37,10 +37,9 @@ const MultForm1 = ({
               selectedItem={selectedClvName.name}
               name="clvName"
             />
-
-            <InputField placeholder="CLV ID number" name="clvId" />
-            <InputField placeholder="Project of Attachment" name="project" />
-            <InputField placeholder="District of Operation" name="district" />
+            <div>{selectedClvName.id}</div>
+            <div>{selectedClvName.project?.name}</div>
+            <div>{selectedClvName.district}</div>
           </SimpleGrid>
         </div>
       )}
@@ -182,21 +181,12 @@ const MultForm1 = ({
           />
         </SimpleGrid>
       </div>
-      {isNew ? (
-        <ActionButtons
-          page={page}
-          onBack={onBack}
-          disabled={isSubmitting}
-          limit={limit}
-        />
-      ) : (
-        <ActionButtons
-          page={page}
-          onBack={onBack}
-          disabled={isSubmitting}
-          limit={limit}
-        />
-      )}
+      <ActionButtons
+        page={page}
+        onBack={onBack}
+        disabled={isSubmitting}
+        limit={limit}
+      />
     </div>
   );
 };

@@ -3,7 +3,7 @@ import React from "react";
 import SectionHeader from "../../common/SectionHeader";
 import Form from "./NotificationForm";
 import NotificationsTable from "./NotificationsTable/NotificationTable";
-import { useUsers } from "../../../hooks/useUser";
+import { useMembers } from "../../../hooks/useMember";
 import {
   useAddNotification,
   useNotifications,
@@ -11,7 +11,7 @@ import {
 
 const Notifications = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const users = useUsers();
+  const { data: membersData } = useMembers();
   const { data, isLoading } = useNotifications();
 
   const initialValues = {
@@ -38,7 +38,7 @@ const Notifications = () => {
           onSuccess={onClose}
           success={`Notification added successfully`}
           useMutate={useAddNotification}
-          users={users}
+          membersData={membersData ? membersData.Members : null}
         />
       )}
     </div>

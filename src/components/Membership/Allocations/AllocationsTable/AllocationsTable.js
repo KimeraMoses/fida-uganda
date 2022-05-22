@@ -8,7 +8,7 @@ export const TableHeadColumn = (props) => {
   const { title, secondaryText } = props;
   return (
     <Th>
-      {title}
+      <div className={classes.title_primary_text}>{title}</div>
       {secondaryText && (
         <div className={classes.title_secondary_text}>{secondaryText}</div>
       )}
@@ -48,7 +48,7 @@ const AllocationsTable = ({ data, isLoading }) => {
                       })}
                     </div>
                     <div className={classes.data__secondary_text}>
-                      000{index + 1}
+                    {item.id}
                     </div>
                   </Td>
                   <Td>
@@ -56,7 +56,11 @@ const AllocationsTable = ({ data, isLoading }) => {
                       {new Date(item.createdAt).toLocaleDateString()}
                     </div>
                     <div className={classes.data__secondary_text}>
-                      {new Date(item.createdAt).toLocaleTimeString()}
+                      {new Date(item.createdAt).toLocaleTimeString(undefined, {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        second: "2-digit",
+                      })}
                     </div>
                   </Td>
                   <Td>

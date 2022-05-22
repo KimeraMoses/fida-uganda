@@ -1,40 +1,32 @@
 import React, { useState } from "react";
-import { useAddMember, useUpdateMember } from "../../../../hooks/useMember";
+import {
+  useAddMember,
+  useMemberId,
+  useUpdateMember,
+} from "../../../../hooks/useMember";
 import UserDetails from "./MultiForm/UserDetails";
 import UserExperience from "./MultiForm/UserExperience";
 import UserHobbies from "./MultiForm/UserHobbies";
 import UserInterests from "./MultiForm/UserInterests";
+import {
+  initialValuesFour,
+  initialValuesOne,
+  initialValuesThree,
+  initialValuesTwo,
+} from "./schema";
 
 const NewMembersForm = ({ onClose }) => {
+  const memberId = useMemberId();
   const limit = 4;
   const MEMBER_ADDED = "Member added successfully";
   const MEMBER_UPDATED = "Member updated successfully";
   const [page, setPage] = useState(1);
 
-  const initialValuesOne = {
-    first_name: "",
-    median_name: "",
-    last_name: "",
-    postal_address: "",
-    phone_number: "",
-    email: "",
-    employment_status: "",
-    year_of_undergraduate_completion: "",
-    professional_experience: "",
-    membership_duration: "",
-  };
-
-  const initialValuesTwo = {
-    languages: [],
-    professional_experience: "",
-  };
-
-  const initialValuesThree = {
-    area_of_interest: [],
-  };
-
-  const initialValuesFour = {
-    hobbies: [],
+  const mutateData = (values) => {
+    return {
+      ...values,
+      id: memberId,
+    };
   };
 
   const prevStep = () => {
@@ -66,6 +58,8 @@ const NewMembersForm = ({ onClose }) => {
           page={page}
           limit={limit}
           onBack={prevStep}
+          isMutable={true}
+          mutateData={mutateData}
         />
       );
     case 3:
@@ -78,6 +72,8 @@ const NewMembersForm = ({ onClose }) => {
           page={page}
           limit={limit}
           onBack={prevStep}
+          isMutable={true}
+          mutateData={mutateData}
         />
       );
     case 4:
@@ -90,6 +86,8 @@ const NewMembersForm = ({ onClose }) => {
           page={page}
           limit={limit}
           onBack={prevStep}
+          isMutable={true}
+          mutateData={mutateData}
         />
       );
     default:

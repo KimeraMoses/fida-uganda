@@ -4,7 +4,8 @@ import Modal from "../../common/Modal";
 import SectionHeader from "../../common/SectionHeader";
 import MemberActivitiesTable from "./MemberActivitiesTable/MemberActivitiesTable";
 import NewActivityForm from "./NewActivityForm/NewActivityForm";
-import { useUsers } from "../../../hooks/useUser";
+// import { newMembershipActivitySchema } from "./NewActivityForm/schema";
+import { useMembers } from "../../../hooks/useMember";
 import {
   useAddActivity,
   useActivities,
@@ -76,7 +77,7 @@ export const MembersData = [
 
 const MembersActivities = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const users = useUsers();
+  const { data: membersData } = useMembers();
   const projectOptions = useProjectOptions();
   const { isLoading, data } = useActivities();
   const newActivityInitialValues = {
@@ -92,7 +93,7 @@ const MembersActivities = () => {
       <MemberActivitiesTable
         btnLabel="Add Activity"
         btnClick={onOpen}
-        data={MembersData}
+        data={data ? data.MembershipActivities : null}
         isLoading={isLoading}
       />
 
@@ -108,7 +109,7 @@ const MembersActivities = () => {
           onSuccess={onClose}
           success={`Membership Activity added successfully`}
           useMutate={useAddActivity}
-          users={users}
+          membersData={membersData ? membersData.Members : null}
           projectOptions={projectOptions}
         />
       </Modal>
