@@ -7,7 +7,7 @@ import {
 
 const Modal = ({ isOpen, onClose, title, size = "lg", children }) => {
   return (
-    <ChakraModal isOpen={isOpen} onClose={onClose} size={size}>
+    <ChakraModal isOpen={isOpen} onClose={onClose} size={size} isCentered>
       <ModalOverlay />
       <ModalContent>
         {title && (

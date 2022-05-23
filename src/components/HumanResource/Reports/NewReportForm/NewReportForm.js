@@ -19,7 +19,7 @@ const NewReportForm = ({ onClose, error, isError, onSubmit, isSubmitting }) => {
     }
   }, [isError, error, toast]);
 
-  const handleFileChange = e => {
+  const handleFileChange = (e) => {
     const file = e.target.files[0];
     setFile(file);
   };
@@ -28,7 +28,7 @@ const NewReportForm = ({ onClose, error, isError, onSubmit, isSubmitting }) => {
     <Formik
       initialValues={initialValues}
       validationSchema={reportSchema}
-      onSubmit={values => {
+      onSubmit={(values) => {
         //open console to see the form values on submit
         console.log(values);
         if (!file) {
@@ -39,7 +39,7 @@ const NewReportForm = ({ onClose, error, isError, onSubmit, isSubmitting }) => {
         formData.append("report", file);
         formData.append("filename", values.report_title);
         //append all the values here depending on what the endpoint expects
-        Object.keys(values).forEach(key => {
+        Object.keys(values).forEach((key) => {
           formData.append(key, values[key]);
         });
         onSubmit(formData);
@@ -49,7 +49,7 @@ const NewReportForm = ({ onClose, error, isError, onSubmit, isSubmitting }) => {
         errors,
         handleSubmit,
         handleChange,
-        isSubmitting
+        isSubmitting,
       }) => (
         <div
           className={classes.activity_form_wrapper}
@@ -121,11 +121,7 @@ const NewReportForm = ({ onClose, error, isError, onSubmit, isSubmitting }) => {
             </div>
 
             <div className={classes.form_action_wrapper}>
-              <FormButton
-                variant="cancel"
-                type="button"
-                onClick={() => onClose()}
-              >
+              <FormButton variant="cancel" type="button" onClick={onClose}>
                 cancel
               </FormButton>
               <FormButton variant="save" type="submit" disabled={isSubmitting}>

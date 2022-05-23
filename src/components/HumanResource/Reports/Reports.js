@@ -1,7 +1,6 @@
 import { useDisclosure } from "@chakra-ui/react";
 import Modal from "../../common/Modal";
 import SectionHeader from "../../common/SectionHeader";
-import TableSearch from "../../common/table/TableSearch";
 import ReportsTable from "./ReportTable/ReportTable";
 import { useReports } from "../../../hooks/useReports";
 import AddNewFolder from "./AddNewFolder/AddNewFolder";
@@ -13,8 +12,13 @@ const Reports = () => {
   return (
     <>
       <SectionHeader title="Reports" />
-      <TableSearch btnLabel="Add Report" btnClick={onOpen} />
-      {data?.reports && <ReportsTable data={data?.reports} />}
+      {data?.reports && (
+        <ReportsTable
+          data={data?.reports}
+          btnLabel="Add Report"
+          btnClick={onOpen}
+        />
+      )}
       <Modal isOpen={isOpen} onClose={onClose} size="xs">
         <AddNewFolder />
       </Modal>
