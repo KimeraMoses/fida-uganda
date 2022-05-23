@@ -1,6 +1,6 @@
 import produce from "immer";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   getMe,
   logIn,
@@ -15,6 +15,10 @@ import {
 } from "../apis/users";
 import { USERS_KEY } from "../lib/constants";
 import { loginUser } from "../store/authReducer";
+
+export const useUser = () => {
+  return useSelector((state) => state.auth.user);
+};
 
 export const useLogin = () => {
   const dispatch = useDispatch();
