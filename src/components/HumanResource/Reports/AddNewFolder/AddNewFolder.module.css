@@ -17,3 +17,27 @@
 .new_folder_wrapper h4 {
   font-weight: 700;
 }
+
+.folder_wrapper {
+  padding: 20px;
+}
+
+.folder_wrapper h4 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--primary_color);
+  user-select: none;
+}
+
+.label {
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  color: rgba(0, 0, 0, 0.48);
+}
+.form_action_wrapper {
+  padding: 15px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
