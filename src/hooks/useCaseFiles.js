@@ -67,12 +67,12 @@ export const useAddCaseFiles = () => {
         if (previousClvCaseFiles) {
           queryClient.setQueryData(CASES_KEY, (previousClvCaseFiles) => {
             return produce(previousClvCaseFiles, (draft) => {
-              draft.cases.push(data.case_file);
+              draft.clv_cases.push(data.case_file);
             });
           });
         } else {
           queryClient.setQueryData(CASES_KEY, () => {
-            return { cases: [data.case_file] };
+            return { clv_cases: [data.case_file] };
           });
         }
       }

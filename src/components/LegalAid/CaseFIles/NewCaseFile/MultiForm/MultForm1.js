@@ -20,7 +20,6 @@ const MultForm1 = ({
   setSelectedClient,
   setSelectedClvName,
   selectedClvName,
-  values,
 }) => {
   const clvs = useClvsDetails();
   const clients = useClientOptions();
@@ -29,7 +28,6 @@ const MultForm1 = ({
     <div className={classes.form_wrapper}>
       {isClvCaseFile && (
         <div className={classes.field_wrapper}>
-          <p>{JSON.stringify(values, null, 2)}</p>
           <div className={classes.field_label}>CLV Details</div>
           <SimpleGrid columns={4} spacing={2} style={{ alignItems: "center" }}>
             <SearchableField

@@ -6,13 +6,15 @@ import { caseFilesColumns } from "../../../../assets/tableColumns/cases";
 import { formatDate } from "../../../../lib/data";
 import Modal from "../../../common/Modal";
 import NewCaseFile from "../../CaseFIles/NewCaseFile/NewCaseFile";
+import { useDispatch } from "react-redux";
+import { selectCaseFile } from "../../../../store/caseFileReducer";
 
 const CaseFilesTable = ({ data }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [selectedCase, setSelectedCase] = React.useState(null);
+  const dispatch = useDispatch();
 
   const onHandleClick = (caseFile) => {
-    setSelectedCase(caseFile);
+    dispatch(selectCaseFile(caseFile));
     onOpen();
   };
 
@@ -54,7 +56,7 @@ const CaseFilesTable = ({ data }) => {
                   <Td>{item.complainant?.nin}</Td>
                   <Td>{item.type}</Td>
                   <Td>{formatDate(item.createdAt)}</Td>
-                  <Td>{item.id}</Td>
+                  <Td>{item.case_id}</Td>
                   <Td>{item.complainant?.sex}</Td>
                   <Td>{item.complainant?.name}</Td>
                   <Td>{item.complainant?.age}</Td>
@@ -85,13 +87,7 @@ const CaseFilesTable = ({ data }) => {
         title="CLV Case Files"
         size="4xl"
       >
-        <NewCaseFile
-          caseFile={selectedCase}
-          isClvCaseFile={true}
-          isNew={false}
-          onClose={onClose}
-          setCaseFile={setSelectedCase}
-        />
+        <NewCaseFile isClvCaseFile={true} onClose={onClose} />
       </Modal>
     </>
   );
