@@ -6,12 +6,16 @@ import {
 import { complainantInitialValues } from "../../../../form_schemas/complainant";
 import { useState } from "react";
 import ClientFormOne from "./ClientFormOne";
-import { caseFileTwoInitialValues } from "../../CaseFIles/NewCaseFile/MultiForm/schema";
+import {
+  caseFileFourInitialValues,
+  caseFileTwoInitialValues,
+} from "../../CaseFIles/NewCaseFile/MultiForm/schema";
 import MultForm2 from "../../CaseFIles/NewCaseFile/MultiForm/MultForm2";
+import MultForm4 from "../../CaseFIles/NewCaseFile/MultiForm/MultForm4";
 
 const NewClientForm = ({ client, setClient, onClose, isNewClient }) => {
   const clientId = useClientId();
-  const limit = 2;
+  const limit = 3;
   const CLIENT_ADDED = "Added Client Successfully";
   const CLIENT_UPDATED = "Updated Client Successfully";
   const [page, setPage] = useState(1);
@@ -53,6 +57,20 @@ const NewClientForm = ({ client, setClient, onClose, isNewClient }) => {
           initialValues={client ? client : caseFileTwoInitialValues}
           useMutate={useUpdateClient}
           onSuccess={onClose}
+          success={CLIENT_UPDATED}
+          onBack={prevStep}
+          page={page}
+          limit={limit}
+          isMutable={true}
+          mutateData={addClientId}
+        />
+      );
+    case 3:
+      return (
+        <MultForm4
+          initialValues={caseFileFourInitialValues}
+          useMutate={useUpdateClient}
+          onSuccess={nextStep}
           success={CLIENT_UPDATED}
           onBack={prevStep}
           page={page}

@@ -38,7 +38,6 @@ const MultForm1 = ({
               setSelectedItem={setSelectedClvName}
               selectedItem={selectedClvName.name}
               name="clvName"
-              disabled={!isNew}
             />
             <div>{selectedClvName.id}</div>
             <div>{selectedClvName.project?.name}</div>
@@ -63,7 +62,6 @@ const MultForm1 = ({
             setSelectedItem={setSelectedClient}
             selectedItem={selectedClient.name}
             name="searchClient"
-            disabled={!isNew}
           />
 
           <InputField placeholder="Type Here" name="respondentName" fullwidth />

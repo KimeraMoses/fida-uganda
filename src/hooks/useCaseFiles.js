@@ -18,8 +18,8 @@ import produce from "immer";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCaseFile } from "../store/caseFileReducer";
 
-export const useCaseFileId = () => {
-  return useSelector((state) => state.caseFile.selectedId);
+export const useCaseFileTemp = () => {
+  return useSelector((state) => state.caseFile.caseFile);
 };
 
 export const useCaseFiles = () => {
@@ -47,7 +47,7 @@ export const useAddCaseFiles = () => {
   const dispatch = useDispatch();
   return useMutation(addCaseFile, {
     onSuccess: (data) => {
-      dispatch(selectCaseFile(data.case_file.id));
+      dispatch(selectCaseFile(data.case_file));
       const previousCaseFiles = queryClient.getQueryData(CASES_KEY);
       const previousClvCaseFiles = queryClient.getQueryData(CLV_CASES_KEY);
 

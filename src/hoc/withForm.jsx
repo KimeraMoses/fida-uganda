@@ -8,6 +8,7 @@ const withForm = (FormComponent) => {
     success,
     onSuccess,
     initialValues,
+    mutateInitialValues,
     validationSchema,
     isEditing,
     isFormData,
@@ -32,10 +33,15 @@ const withForm = (FormComponent) => {
       }
     }, [toast, isError, error, isSuccess, onSuccess, success]);
 
+    let data = initialValues;
+    if (mutateInitialValues) {
+      data = mutateInitialValues(initialValues);
+    }
+
     return (
       <Formik
         validationSchema={validationSchema}
-        initialValues={initialValues}
+        initialValues={data}
         onSubmit={(values) => {
           if (isFormData) {
             const formData = new FormData();
