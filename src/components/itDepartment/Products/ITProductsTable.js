@@ -1,18 +1,31 @@
-import React from "react";
+import React, {useState} from "react";
 import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
 import classes from "./Table.module.css";
 import { TableHeadColumn } from "../../Membership/Allocations/AllocationsTable/AllocationsTable";
 import { formatDate } from "../../../lib/data";
+import {downloadFile, arrayToCsv} from "../../downloadExcel"
 
 const ITProductsTable = ({ data, isProducts }) => {
+
+  const [downloadMetaData, setDownloadMetaData] = useState({href: "", name: ""})
+
+  const handleDownload = () => {
+    const theData = downloadFile(arrayToCsv(data, ['project_name', 'brand', 'id']),)
+    setDownloadMetaData(theData)
+  }
+
+  
+
   return (
     <>
       <div className={classes.table_wrapper}>
+        <a onClick={handleDownload} href={downloadMetaData.href} download={downloadMetaData.name}>Convert to excel</a>
         <Table
           variant="striped"
           colorScheme="gray"
           size="sm"
           className={classes.data_table}
+
         >
           <Thead
             className={`${classes.table_header} ${
@@ -21,6 +34,7 @@ const ITProductsTable = ({ data, isProducts }) => {
           >
             <Tr>
               <TableHeadColumn
+              
                 title="Name"
                 secondaryText={isProducts ? "Brand" : "Location"}
               />
