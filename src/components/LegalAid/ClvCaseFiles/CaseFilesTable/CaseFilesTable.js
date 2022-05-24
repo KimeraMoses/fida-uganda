@@ -44,7 +44,7 @@ const CaseFilesTable = ({ data }) => {
             {data.map((item) => {
               return (
                 <Tr key={item.id} onClick={() => onHandleClick(item)}>
-                  <Td className={classes.primary_text_icon}>{item.id}</Td>
+                  <Td className={classes.primary_text_icon}>{item.case_id}</Td>
                   <Td className={classes.data__purpose_primary_text}>
                     {formatDate(item.createdAt)}
                   </Td>

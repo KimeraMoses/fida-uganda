@@ -24,10 +24,11 @@ const CaseFiles = () => {
         size="4xl"
       >
         <NewCaseFile
-          isNew={true}
-          onClose={onClose}
           caseFile={selectedCase}
           setCaseFile={setSelectedCase}
+          isClvCaseFile={false}
+          onClose={onClose}
+          isNewCaseFile={true}
         />
       </Modal>
     </>

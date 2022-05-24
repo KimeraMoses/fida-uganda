@@ -6,7 +6,7 @@ import InputField from "../../../common/UI/InputField/InputField";
 import withForm from "../../../../hoc/withForm";
 import ActionButtons from "../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons";
 
-const ClientFormOne = ({ page, limit, onBack, isSubmitting }) => {
+const ClientFormOne = ({ page, limit, onBack, isSubmitting, values }) => {
   return (
     <div className={classes.form_wrapper}>
       <div className={classes.field_wrapper}>

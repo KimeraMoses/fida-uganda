@@ -21,13 +21,14 @@ const NewCaseFile = ({
   caseFile,
   setCaseFile,
   isClvCaseFile,
-  isNew,
   onClose,
+  isNewCaseFile = false,
 }) => {
   const caseFileId = useCaseFileId();
   const limit = 5;
   const CASE_FILE_ADDED = "Case File Added Successfully";
   const CASE_FILE_UPDATED = "Case File Updated Successfully";
+  const [isNew, setIsNew] = useState(isNewCaseFile);
   const [page, setPage] = useState(1);
   const [selectedClient, setSelectedClient] = useState(
     caseFile?.complainant || {}
@@ -36,22 +37,25 @@ const NewCaseFile = ({
   const [referredTo, setReferredTo] = useState({});
 
   const mutateForm1 = (values) => {
+    const data = {
+      ...values,
+      complainant: selectedClient.id,
+    };
+
     if (isClvCaseFile) {
-      setCaseFile({
-        ...values,
-        complainant: selectedClient.id,
-        clv: selectedClvName.id,
-        isByClv: true,
-      });
-      return {
-        ...values,
-        complainant: selectedClient.id,
-        clv: selectedClvName.id,
-        isByClv: true,
-      };
+      data.isByClv = true;
+      data.clv = selectedClvName.id;
+      setCaseFile(data);
+      return data;
     }
-    setCaseFile({ ...values, complainant: selectedClient.id });
-    return { ...values, complainant: selectedClient.id };
+
+    setCaseFile(data);
+    return data;
+  };
+
+  const onSuccessfulAdd = () => {
+    setIsNew(false);
+    nextStep();
   };
 
   const mutateForm1Update = (values) => {
@@ -90,7 +94,7 @@ const NewCaseFile = ({
           isNew={isNew}
           useMutate={isNew ? useAddCaseFiles : useUpdateCaseFile}
           success={isNew ? CASE_FILE_ADDED : CASE_FILE_UPDATED}
-          onSuccess={nextStep}
+          onSuccess={isNew ? onSuccessfulAdd : nextStep}
           selectedClient={selectedClient}
           setSelectedClient={setSelectedClient}
           page={page}
