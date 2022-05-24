@@ -49,16 +49,32 @@ export const useAddCaseFiles = () => {
     onSuccess: (data) => {
       dispatch(selectCaseFile(data.case_file.id));
       const previousCaseFiles = queryClient.getQueryData(CASES_KEY);
-      if (previousCaseFiles) {
-        queryClient.setQueryData(CASES_KEY, (previousCaseFiles) => {
-          return produce(previousCaseFiles, (draft) => {
-            draft.cases.push(data.case_file);
+      const previousClvCaseFiles = queryClient.getQueryData(CLV_CASES_KEY);
+
+      if (!data.case_file.isByClv) {
+        if (previousCaseFiles) {
+          queryClient.setQueryData(CASES_KEY, (previousCaseFiles) => {
+            return produce(previousCaseFiles, (draft) => {
+              draft.cases.push(data.case_file);
+            });
           });
-        });
+        } else {
+          queryClient.setQueryData(CASES_KEY, () => {
+            return { cases: [data.case_file] };
+          });
+        }
       } else {
-        queryClient.setQueryData(CASES_KEY, () => {
-          return { cases: [data.case_file] };
-        });
+        if (previousClvCaseFiles) {
+          queryClient.setQueryData(CASES_KEY, (previousClvCaseFiles) => {
+            return produce(previousClvCaseFiles, (draft) => {
+              draft.cases.push(data.case_file);
+            });
+          });
+        } else {
+          queryClient.setQueryData(CASES_KEY, () => {
+            return { cases: [data.case_file] };
+          });
+        }
       }
     },
   });

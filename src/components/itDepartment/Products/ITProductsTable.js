@@ -4,6 +4,7 @@ import classes from "./Table.module.css";
 import { TableHeadColumn } from "../../Membership/Allocations/AllocationsTable/AllocationsTable";
 import { formatDate } from "../../../lib/data";
 import {downloadFile, arrayToCsv} from "../../downloadExcel"
+import withTable from "./../../../hoc/withTable";
 
 const ITProductsTable = ({ data, isProducts }) => {
 
@@ -108,7 +109,8 @@ const ITProductsTable = ({ data, isProducts }) => {
                         {item.unit_price}
                       </div>
                       <div className={classes.data__secondary_text}>
-                        {/* {item.currency} */}<p>UGX</p>
+                        {/* {item.currency} */}
+                        <p>UGX</p>
                       </div>
                     </Td>
                   </Tr>
@@ -121,4 +123,4 @@ const ITProductsTable = ({ data, isProducts }) => {
   );
 };
 
-export default ITProductsTable;
+export default withTable(ITProductsTable);

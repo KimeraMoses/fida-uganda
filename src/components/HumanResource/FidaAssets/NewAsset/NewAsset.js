@@ -7,8 +7,9 @@ import SelectField from "../../../common/SelectField";
 import { assetTypeOptions } from "../../../../lib/options";
 import { AttachmentIcon } from "../../../../assets/Icons/Icons";
 import image1 from "../../../../assets/images/placeholder.png";
+import SelectInput from "./../../../Membership/Allocations/AllocationForm/SelectInput";
 
-const NewAsset = ({ isSubmitting, projectOptions }) => {
+const NewAsset = ({ isSubmitting, projectOptions, setFieldValue }) => {
   return (
     <div className={classes.new_asset_wrapper}>
       <SimpleGrid columns={2} spacing={2}>
@@ -16,10 +17,12 @@ const NewAsset = ({ isSubmitting, projectOptions }) => {
         <InputField placeholder="Budget Year" name="budget_year" fullwidth />
       </SimpleGrid>
       <SimpleGrid columns={2} spacing={2} style={{ marginBottom: 10 }}>
-        <SelectField
-          name="project"
-          placeholder="Select Project"
+        <SelectInput
           options={projectOptions}
+          placeholder="Project name"
+          name="project"
+          onChange={(value) => setFieldValue("project", value.label)}
+          isMulti={false}
         />
         <SelectField
           placeholder="Select Asset Type"

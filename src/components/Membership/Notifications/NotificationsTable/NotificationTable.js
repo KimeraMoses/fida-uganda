@@ -4,6 +4,7 @@ import classes from "../../Allocations/AllocationsTable/AllocationsTable.module.
 import styles from "./NotificationsTable.module.css";
 import { TableHeadColumn } from "../../Allocations/AllocationsTable/AllocationsTable";
 import sortByDate from "../../../../lib/sortByDate";
+import withTable from "./../../../../hoc/withTable";
 
 const NotificationsTable = ({ data, isLoading }) => {
   return (
@@ -45,4 +46,4 @@ const NotificationsTable = ({ data, isLoading }) => {
   );
 };
 
-export default NotificationsTable;
+export default withTable(NotificationsTable);

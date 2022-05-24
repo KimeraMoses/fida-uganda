@@ -1,6 +1,7 @@
 import React from "react";
 import { Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
 import classes from "./Table.module.css";
+import withTable from "./../../../../hoc/withTable";
 
 export const ApprovalData = [
   {
@@ -92,4 +93,4 @@ const HRApprovedTable = () => {
   );
 };
 
-export default HRApprovedTable;
+export default withTable(HRApprovedTable);

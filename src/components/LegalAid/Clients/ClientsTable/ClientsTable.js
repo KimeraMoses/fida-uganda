@@ -1,11 +1,29 @@
-import React from "react";
-import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
+import React, { useState } from "react";
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Td,
+  IconButton,
+  useDisclosure,
+} from "@chakra-ui/react";
 import classes from "../../../Membership/Allocations/AllocationsTable/AllocationsTable.module.css";
 import styles from "./Table.module.css";
 import { TableHeadColumn } from "../../../Membership/Allocations/AllocationsTable/AllocationsTable";
 import { formatDate } from "../../../../lib/data";
+import withTable from "./../../../../hoc/withTable";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
+import Modal from "./../../../common/Modal";
+import NewClientForm from "./../NewClientForm/NewClientForm";
 
 const ClientsTable = ({ data }) => {
+  const [id, setId] = useState("");
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const userEditHandler = (userId) => {
+    setId(userId);
+    onOpen();
+  };
   return (
     <>
       <div className={classes.allocations_table_wrapper}>
@@ -57,14 +75,37 @@ const ClientsTable = ({ data }) => {
                       {formatDate(item.createdAt)}
                     </div>
                   </Td>
+                  <Td style={{ textAlign: "center" }}>
+                    <div className={classes.table_actions_icon_wrapper}>
+                      <IconButton
+                        size="sm"
+                        variant="outline"
+                        aria-label="Open Item"
+                        icon={<MdOutlineRemoveRedEye />}
+                        onClick={() => userEditHandler(item.id)}
+                      />
+                    </div>
+                  </Td>
                 </Tr>
               );
             })}
           </Tbody>
         </Table>
+        <Modal
+          isOpen={isOpen}
+          onClose={onClose}
+          size="2xl"
+          title="Client Registration Form"
+        >
+          {id}
+          <NewClientForm
+            onSuccess={onClose}
+            success={"Added Client Successfully"}
+          />
+        </Modal>
       </div>
     </>
   );
 };
 
-export default ClientsTable;
+export default withTable(ClientsTable);

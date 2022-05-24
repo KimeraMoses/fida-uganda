@@ -3,6 +3,7 @@ import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
 import classes from "./Table.module.css";
 import { TableHeadColumn } from "../../../Membership/Allocations/AllocationsTable/AllocationsTable";
 import { formatDate } from "../../../../lib/data";
+import withTable from "./../../../../hoc/withTable";
 
 const FidaAssetsTable = ({ data }) => {
   return (
@@ -26,9 +27,7 @@ const FidaAssetsTable = ({ data }) => {
               return (
                 <Tr>
                   <Td>{item.name}</Td>
-                  <Td className={classes.data__purpose_primary_text}>
-                    {item.person_in_possession}
-                  </Td>
+                  <Td>{item.person_in_possession}</Td>
                   <Td>{item.location}</Td>
                   <Td>{formatDate(item.date_delivered)}</Td>
                 </Tr>
@@ -41,4 +40,4 @@ const FidaAssetsTable = ({ data }) => {
   );
 };
 
-export default FidaAssetsTable;
+export default withTable(FidaAssetsTable);

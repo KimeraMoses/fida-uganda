@@ -2,13 +2,15 @@
   background-color: #ffffff;
 }
 .table_header {
-  background-color: #fe00b7;
-  font-weight: 600;
+  background-color: var(--table_head_bg_color);
+  font-weight: 700;
   color: var(--text_color);
 }
 .table_header th {
   text-transform: capitalize;
-  font-size: 15px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #000000;
 }
 
 .activities_table_wrapper Tbody td {

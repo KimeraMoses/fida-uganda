@@ -17,6 +17,7 @@ import Modal from "../../../common/Modal";
 import NewClvForm from "../CLVForms/NewClvForm";
 import { formatDate } from "../../../../lib/data";
 import { onSubmitAlert } from "../../../../lib/deleteInProd";
+import withTable from "./../../../../hoc/withTable";
 
 const CLVTable = ({ data }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -133,4 +134,4 @@ const CLVTable = ({ data }) => {
   );
 };
 
-export default CLVTable;
+export default withTable(CLVTable);

@@ -32,7 +32,11 @@ const PayRoll = () => {
       <SectionHeader title="Payroll" />
       <TableSearch btnLabel="Add Notes" btnClick={onOpen} />
       {payrollNotes?.PayrollNotes && (
-        <PayrollNotesTable data={payrollNotes?.PayrollNotes} />
+        <PayrollNotesTable
+          data={payrollNotes?.PayrollNotes}
+          btnLabel="Add Notes"
+          btnClick={onOpen}
+        />
       )}
       {payroll?.payrolls && <PayrollTable data={payroll?.payrolls} />}
       <Modal isOpen={isOpen} onClose={onClose}>

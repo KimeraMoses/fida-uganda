@@ -2,7 +2,7 @@
   --primary_color: #562b85;
   --secondary_text_color: #6e6893;
   --text_color: #25213b;
-  --table_head_bg_color: #fa05ff;
+  --table_head_bg_color: rgba(250, 5, 255, 0.7);
 }
 
 .css-b62m3t-container {
