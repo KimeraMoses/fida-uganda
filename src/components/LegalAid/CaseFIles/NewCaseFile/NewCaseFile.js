@@ -58,6 +58,11 @@ const NewCaseFile = ({
     nextStep();
   };
 
+  const onSubmit = () => {
+    setCaseFile(null);
+    onClose();
+  };
+
   const mutateForm1Update = (values) => {
     setCaseFile({
       ...values,
@@ -152,7 +157,7 @@ const NewCaseFile = ({
         <MultForm6
           initialValues={caseFileSixInitialValues}
           useMutate={useUpdateCaseFile}
-          onSuccess={onClose}
+          onSuccess={onSubmit}
           success={CASE_FILE_UPDATED}
           onBack={prevStep}
           page={page}
