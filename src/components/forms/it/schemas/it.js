@@ -1,17 +1,25 @@
 import * as yup from "yup";
-// import { IS_REQUIRED } from "../../../../lib/constants";
+//import { IS_REQUIRED } from "../../../../lib/constants";
 
 export const itProductOrderSchema = yup.object().shape({
-  // journey_start_time: yup
-  //   .string()
-  //   .required(`Journey Start Time ${IS_REQUIRED}`),
-  // journey_end_time: yup.string().required(`Journey End Time ${IS_REQUIRED}`),
-  // purpose: yup.string().required(`Purpose ${IS_REQUIRED}`),
-  // date_requested: yup.string().required(`Date Requested ${IS_REQUIRED}`),
-  // destination: yup.string().required(`Destination ${IS_REQUIRED}`),
-  // project: yup.string().required(`Project ${IS_REQUIRED}`),
-  // project_activity: yup.string().required(`Project Activity ${IS_REQUIRED}`),
-  // pickup_location: yup.string().required(`Pickup Location ${IS_REQUIRED}`),
+  project_name: yup.string().required("Project name is required"),
+  type: yup.string().required("Type is required"),
+  budget_year: yup.string().required("Budget year is required"),
+  unit_price: yup.string().required("Unit price is required"),
+  subject_of_procurement: yup.string().required("Field is required"),
+  date_required: yup.string().required("Date is required"),
+  delivery_location: yup.string().required("Delivery location is required"),
+  num_units: yup.string().required("Number of units is required"),
+  name: yup.string().required("Name is required"),
+  status: yup.string().required("Status is required"),
+  description: yup.string().required("Description is required"),
+  class: yup.string().required("Class is required"),
+  brand: yup.string().required("Brand is required"),
+  category: yup.string().required("Category is required"),
+  amount: yup.string().required("Amount is required"),
+  currency: yup.string().required("Currency is required"),
+  payment_status: yup.string().required("Payment status is required"),
+  purchase_date: yup.string().required("Purchase date is required"),
 });
 
 export const itProductInitialValues = {
@@ -23,7 +31,16 @@ export const itProductInitialValues = {
   date_required: "",
   delivery_location: "",
   num_units: "",
+  name: "",
+  status: "",
   description: "",
+  class: "",
+  brand: "",
+  category: "",
+  amount: "",
+  currency: "",
+  payment_status: "",
+  purchase_date: ""
 };
 
 export const itServicesInitialValues = {
