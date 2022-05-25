@@ -75,8 +75,8 @@ const MultForm1 = ({
             name="respondentSex"
             placeholder="Select Sex"
             options={[
-              { label: "Male", value: "M" },
-              { label: "Female", value: "F" },
+              { label: "Male", value: "Male" },
+              { label: "Female", value: "Female" },
             ]}
           />
         </SimpleGrid>
@@ -85,7 +85,7 @@ const MultForm1 = ({
           <div>{selectedClient.age}</div>
           <InputField
             placeholder="Type Here"
-            maxLength="2"
+            maxLength="3"
             name="respondentAge"
           />
         </SimpleGrid>

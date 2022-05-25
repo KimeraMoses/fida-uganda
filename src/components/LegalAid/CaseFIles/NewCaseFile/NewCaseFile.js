@@ -11,6 +11,7 @@ import {
 import {
   caseFileFiveInitialValues,
   caseFileInitialValues,
+  caseFileSchema,
   caseFileSixInitialValues,
   caseFileThreeInitialValues,
 } from "./MultiForm/schema";
@@ -88,6 +89,7 @@ const NewCaseFile = ({ isClvCaseFile, onClose, isNewCaseFile = false }) => {
       return (
         <MultForm1
           initialValues={isNew ? caseFileInitialValues : caseFile}
+          validationSchema={caseFileSchema}
           isClvCaseFile={isClvCaseFile}
           isNew={isNew}
           useMutate={isNew ? useAddCaseFiles : useUpdateCaseFile}
