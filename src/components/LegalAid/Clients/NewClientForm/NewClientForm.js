@@ -3,7 +3,7 @@ import {
   useUpdateClient,
   useClientId,
 } from "../../../../hooks/useClients";
-import { complainantInitialValues } from "../../../../form_schemas/complainant";
+import { complainantInitialValues, complainantSchema } from "../../../../form_schemas/complainant";
 import { useState } from "react";
 import ClientFormOne from "./ClientFormOne";
 import {
@@ -44,6 +44,7 @@ const NewClientForm = ({ client, setClient, onClose, isNewClient }) => {
       return (
         <ClientFormOne
           initialValues={isNew ? complainantInitialValues : client}
+          validationSchema={complainantSchema}
           useMutate={isNew ? useAddClient : useAddClient}
           onSuccess={isNew ? handleSuccessfulAdd : nextStep}
           success={isNew ? CLIENT_ADDED : CLIENT_UPDATED}
