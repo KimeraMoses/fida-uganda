@@ -37,20 +37,21 @@ const withForm = (FormComponent) => {
         validationSchema={validationSchema}
         initialValues={initialValues}
         onSubmit={(values) => {
-          if (isFormData) {
-            const formData = new FormData();
-            formData.append(fileName, file);
-            Object.keys(values).forEach((key) => {
-              formData.append(key, values[key]);
-            });
-            mutate(formData);
-            return;
-          }
-          if (isMutable) {
-            mutate(mutateData(values));
-            return;
-          }
-          mutate(values);
+          // if (isFormData) {
+          //   const formData = new FormData();
+          //   formData.append(fileName, file);
+          //   Object.keys(values).forEach((key) => {
+          //     formData.append(key, values[key]);
+          //   });
+          //   mutate(formData);
+          //   return;
+          // }
+          // if (isMutable) {
+          //   mutate(mutateData(values));
+          //   return;
+          // }
+          // mutate(values);
+          console.log(values)
         }}
       >
         {({ values, setFieldValue, resetForm }) => (
