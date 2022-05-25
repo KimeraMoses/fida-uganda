@@ -1,5 +1,5 @@
 .table_header {
-  background-color: #f4f2ff;
+  background-color: var(--table_head_bg_color);
   font-weight: 600;
   color: var(--text_color);
   margin-top: 10px;

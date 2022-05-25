@@ -4,7 +4,7 @@ import withForm from "../../../hoc/withForm";
 // import { itProductInitialValues, itProductOrderSchema } from "./schemas/it";
 import InputField from "../../common/UI/InputField/InputField";
 
-const AddITServiceForm = ({isSubmitting}) => {
+const AddITServiceForm = ({ isSubmitting }) => {
   return (
     <SimpleGrid p={5} gap={3}>
       <SimpleGrid columns={2} gap={5}>
@@ -16,8 +16,24 @@ const AddITServiceForm = ({isSubmitting}) => {
       </SimpleGrid>
       <SimpleGrid columns={2} gap={5}>
         <InputField name="state" placeholder="State" />
-        <InputField name="expiry_date" placeholder="Expiry Date" />
+        <InputField name="class" placeholder="Class" />
       </SimpleGrid>
+      <SimpleGrid columns={2} gap={5}>
+        <InputField name="category" placeholder="Category" />
+        <InputField name="amount" placeholder="Amount" />
+        <InputField name="payment_status" placeholder="Payment Status" />
+        <InputField name="currency" placeholder="Currency" />
+      </SimpleGrid>
+      <SimpleGrid columns={2} gap={5}>
+        <InputField
+          label="Purchase Date"
+          type="date"
+          name="purchase_date"
+        />
+        <InputField name="expiry_date" label="Expiry Date" type="date" />
+
+      </SimpleGrid>
+
       <Button
         mt={5}
         type="submit"

@@ -1,5 +1,4 @@
 import React from "react";
-import TableSearch from "../../common/table/TableSearch";
 import SectionHeader from "../../common/SectionHeader";
 import { useDisclosure } from "@chakra-ui/react";
 import CaseFilesTable from "./CaseFilesTable/CaseFilesTable";
@@ -22,8 +21,14 @@ const CaseFiles = () => {
   return (
     <>
       <SectionHeader title="Case Files" />
-      <TableSearch btnLabel="New Case File" btnClick={onOpenModal} />
-      {data?.cases && <CaseFilesTable data={data?.cases} />}
+      {data?.cases && (
+        <CaseFilesTable
+          data={data ? data.cases : null}
+          isLoading={isLoading}
+          btnLabel="New Case File"
+          btnClick={onOpen}
+        />
+      )}
       <Modal
         isOpen={isOpen}
         onClose={onClose}

@@ -2,6 +2,7 @@ import React from "react";
 import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
 import classes from "../../CommonTable/Table.module.css";
 import { TableHeadColumn } from "../../../Membership/Allocations/AllocationsTable/AllocationsTable";
+import withTable from "./../../../../hoc/withTable";
 
 const ComplaintsTable = ({ data }) => {
   return (
@@ -79,4 +80,4 @@ const ComplaintsTable = ({ data }) => {
   );
 };
 
-export default ComplaintsTable;
+export default withTable(ComplaintsTable);

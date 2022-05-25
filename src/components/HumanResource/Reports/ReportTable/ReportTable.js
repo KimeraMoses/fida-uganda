@@ -7,6 +7,7 @@ import { IoDocumentTextSharp } from "react-icons/io5";
 import { formatDate } from "../../../../lib/data";
 import { MdOutlineRemoveRedEye, MdOutlineFileDownload } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import withTable from "./../../../../hoc/withTable";
 
 const ReportsTable = (props) => {
   const { data, isDocument } = props;
@@ -77,4 +78,4 @@ const ReportsTable = (props) => {
   );
 };
 
-export default ReportsTable;
+export default withTable(ReportsTable);

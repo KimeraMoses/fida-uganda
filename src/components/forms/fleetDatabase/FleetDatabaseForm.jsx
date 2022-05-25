@@ -3,13 +3,12 @@ import TextField from "../../common/TextField";
 import withForm from "../../../hoc/withForm";
 import { MdAdd } from "react-icons/md";
 import { useProjectOptions } from "../../../hooks/useProjects";
-import { useMemo, useState } from "react";
-import SelectInputField from "./../../common/UI/SelectInputField/SelectInputField";
+import { useMemo } from "react";
+import SelectField from "../../Membership/Allocations/AllocationForm/SelectInput";
 
-const FleetDatabaseForm = ({ isSubmitting }) => {
+const FleetDatabaseForm = ({ isSubmitting, setFieldValue }) => {
   const projects = useProjectOptions();
   const projectOptions = useMemo(() => projects, [projects]);
-  const [selected, setSelected] = useState();
 
   return (
     <SimpleGrid p={5} gap={3}>
@@ -32,11 +31,12 @@ const FleetDatabaseForm = ({ isSubmitting }) => {
       </SimpleGrid>
       <hr />
       <SimpleGrid columns={2} gap={5} style={{ alignItems: "center" }}>
-        <SelectInputField
-          data={projectOptions}
-          placeholder="Select Project"
-          selected={selected}
-          setSelected={setSelected}
+        <SelectField
+          options={projectOptions}
+          placeholder="Project name"
+          name="project"
+          onChange={(value) => setFieldValue("project", value.value)}
+          isMulti={false}
         />
         <TextField
           name="region_of_operation"

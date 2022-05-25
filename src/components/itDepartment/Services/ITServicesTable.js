@@ -2,6 +2,8 @@ import React from "react";
 import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
 import classes from "./Table.module.css";
 import { TableHeadColumn } from "../../Membership/Allocations/AllocationsTable/AllocationsTable";
+import { formatDate } from "../../../lib/data";
+import withTable from "./../../../hoc/withTable";
 
 const ITServicesTable = ({ data, isProducts }) => {
   return (
@@ -52,7 +54,7 @@ const ITServicesTable = ({ data, isProducts }) => {
                       <div
                         className={`${classes.data__primary_text} ${classes.single_line}`}
                       >
-                        {item.description}
+                        {item.category}
                       </div>
                       <div className={classes.data__secondary_text}>
                         {item.class}
@@ -60,7 +62,7 @@ const ITServicesTable = ({ data, isProducts }) => {
                     </Td>
                     <Td className={classes.data_field}>
                       <div className={classes.data__primary_text}>
-                        {item.type}
+                        {item.description}
                       </div>
                     </Td>
                     <Td className={classes.data_field}>
@@ -70,30 +72,23 @@ const ITServicesTable = ({ data, isProducts }) => {
                         }`}
                       >
                         <span className={classes.status_indicator}></span>
-                        <h5>{item.status ? "New" : "Old"}</h5>
+                        <h5>{item.status}</h5>
                       </div>
                     </Td>
                     <Td className={classes.data_field}>
                       <div className={classes.data__primary_text}>
-                        <div
-                          className={`${classes.allocation_status_wrapper} ${
-                            item.payStatus ? classes.paid : classes.fail
-                          }`}
-                        >
-                          <span className={classes.status_indicator}></span>
-                          <h5>{item.payStatus ? "Paid" : "Overdue"}</h5>
-                        </div>
+                        {item.payment_status}
                       </div>
                       <div className={classes.data__secondary_text}>
-                        {item.expiry_date}
+                        {formatDate(item.purchase_date)}
                       </div>
                     </Td>
                     <Td className={classes.data_field}>
                       <div className={classes.data__primary_text}>
-                        {item.unit_price}
+                        {item.amount}
                       </div>
                       <div className={classes.data__secondary_text}>
-                        {/* {item.currency} */}<p>UGX</p>
+                        {item.currency}
                       </div>
                     </Td>
                   </Tr>
@@ -106,4 +101,4 @@ const ITServicesTable = ({ data, isProducts }) => {
   );
 };
 
-export default ITServicesTable;
+export default withTable(ITServicesTable);

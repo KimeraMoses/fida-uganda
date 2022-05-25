@@ -3,7 +3,7 @@
 }
 
 .table_header {
-  background-color: #fe00b7;
+  background-color: var(--table_head_bg_color);
 }
 .table_header.products_table_header {
   background-color: #fa05ff;
@@ -20,7 +20,6 @@
 }
 .data__primary_text {
   color: var(--text_color);
-  font-size: 16px;
   font-weight: 600;
   text-transform: capitalize;
   margin-bottom: 8px;

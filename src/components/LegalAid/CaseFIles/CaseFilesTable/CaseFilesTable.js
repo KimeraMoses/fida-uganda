@@ -1,5 +1,13 @@
 import React from "react";
-import { Table, Thead, Tbody, Tr, Td, useDisclosure } from "@chakra-ui/react";
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Td,
+  useDisclosure,
+  IconButton,
+} from "@chakra-ui/react";
 import classes from "./Table.module.css";
 import { TableHeadColumn } from "../../../Membership/Allocations/AllocationsTable/AllocationsTable";
 import { caseFilesColumns } from "../../../../assets/tableColumns/cases";
@@ -75,6 +83,17 @@ const CaseFilesTable = ({ data }) => {
                   <Td>{item.respondentName}</Td>
                   <Td>{item.respondentPhone}</Td>
                   <Td>{item.fida}</Td>
+                  <Td style={{ textAlign: "center" }}>
+                    <div className={classes.table_actions_icon_wrapper}>
+                      <IconButton
+                        size="sm"
+                        variant="outline"
+                        aria-label="Open Item"
+                        icon={<MdOutlineRemoveRedEye />}
+                        onClick={() => onHandleClick(item)}
+                      />
+                    </div>
+                  </Td>
                 </Tr>
               );
             })}
@@ -90,4 +109,4 @@ const CaseFilesTable = ({ data }) => {
   );
 };
 
-export default CaseFilesTable;
+export default withTable(CaseFilesTable);

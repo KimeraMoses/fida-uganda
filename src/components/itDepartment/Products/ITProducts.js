@@ -1,22 +1,26 @@
 import React from "react";
 import { useDisclosure } from "@chakra-ui/react";
 import SectionHeader from "../../common/SectionHeader";
-import TableSearch from "../../common/table/TableSearch";
 import ITProductForm from "../../forms/it/AddITProductForm";
 import { itProductInitialValues } from "../../forms/it/schemas/it";
 import Modal from "../../common/Modal";
 import ITProductsTable from "./ITProductsTable";
-import { useAddItProduct, useItProducts} from "../../../hooks/useItProduct";
+import { useAddItProduct, useItProducts } from "../../../hooks/useItProduct";
 
 const ITProducts = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data } = useItProducts();
+  const { data, isLoading } = useItProducts();
 
   return (
     <>
       <SectionHeader title="IT Products" />
-      <TableSearch btnLabel="Add Product" btnClick={onOpen} />
-      <ITProductsTable data={data?.ITProducts} isProducts={true} />
+      <ITProductsTable
+        data={data?.ITProducts}
+        isProducts={true}
+        isLoading={isLoading}
+        btnLabel="Add Product"
+        btnClick={onOpen}
+      />
 
       <Modal
         isOpen={isOpen}
