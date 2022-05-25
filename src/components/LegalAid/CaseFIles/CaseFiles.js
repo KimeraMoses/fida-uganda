@@ -24,9 +24,8 @@ const CaseFiles = () => {
       {data?.cases && (
         <CaseFilesTable
           data={data ? data.cases : null}
-          isLoading={isLoading}
           btnLabel="New Case File"
-          btnClick={onOpen}
+          btnClick={onOpenModal}
         />
       )}
       <Modal

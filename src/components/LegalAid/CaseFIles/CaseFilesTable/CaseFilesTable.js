@@ -16,6 +16,8 @@ import Modal from "../../../common/Modal";
 import NewCaseFile from "../NewCaseFile/NewCaseFile";
 import { useDispatch } from "react-redux";
 import { selectCaseFile } from "../../../../store/caseFileReducer";
+import withTable from "../../../../hoc/withTable";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
 
 const CaseFilesTable = ({ data }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
