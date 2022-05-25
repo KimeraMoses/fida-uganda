@@ -21,14 +21,12 @@ const ClvCaseFiles = () => {
   return (
     <>
       <SectionHeader title="CLVs Case Files" />
-      <TableSearch btnLabel="CLV Case File" btnClick={onOpenModal} />
 
       {data && (
         <CaseFilesTable
           data={data ? data.clv_cases : null}
-          isLoading={isLoading}
           btnLabel="CLV Case File"
-          btnClick={onOpen}
+          btnClick={onOpenModal}
         />
       )}
       <Modal
