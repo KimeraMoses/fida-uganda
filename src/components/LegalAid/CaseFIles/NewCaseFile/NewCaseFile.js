@@ -17,36 +17,59 @@ import {
   caseFileThreeInitialValues,
 } from "./MultiForm/schema";
 
-const NewCaseFile = ({ caseFile, isClvCaseFile, isNew, onClose }) => {
+const NewCaseFile = ({
+  caseFile,
+  setCaseFile,
+  isClvCaseFile,
+  isNew,
+  onClose,
+}) => {
   const caseFileId = useCaseFileId();
   const limit = 5;
   const CASE_FILE_ADDED = "Case File Added Successfully";
   const CASE_FILE_UPDATED = "Case File Updated Successfully";
   const [page, setPage] = useState(1);
-  const [selectedClient, setSelectedClient] = useState({});
-  const [selectedClvName, setSelectedClvName] = useState({});
+  const [selectedClient, setSelectedClient] = useState(
+    caseFile?.complainant || {}
+  );
+  const [selectedClvName, setSelectedClvName] = useState(caseFile?.clv || {});
   const [referredTo, setReferredTo] = useState({});
 
   const mutateForm1 = (values) => {
-    if (isClvCaseFile)
+    if (isClvCaseFile) {
+      setCaseFile({
+        ...values,
+        complainant: selectedClient.id,
+        clv: selectedClvName.id,
+        isByClv: true,
+      });
       return {
         ...values,
         complainant: selectedClient.id,
         clv: selectedClvName.id,
         isByClv: true,
       };
+    }
+    setCaseFile({ ...values, complainant: selectedClient.id });
     return { ...values, complainant: selectedClient.id };
   };
 
   const mutateForm1Update = (values) => {
+    setCaseFile({
+      ...values,
+      complainant: selectedClient.id,
+      case_id: caseFileId,
+    });
     return { ...values, complainant: selectedClient.id, case_id: caseFileId };
   };
 
   const addCaseFileId = (values) => {
+    setCaseFile({ ...values, case_id: caseFileId });
     return { ...values, case_id: caseFileId };
   };
 
   const mutateForm6 = (values) => {
+    setCaseFile({ ...values, referred_to: referredTo.id, case_id: caseFileId });
     return { ...values, referred_to: referredTo.id, case_id: caseFileId };
   };
 

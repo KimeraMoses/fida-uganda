@@ -1,7 +1,6 @@
 import React, { useMemo } from "react";
 import { SimpleGrid, Button } from "@chakra-ui/react";
 import withForm from "../../../hoc/withForm";
-// import { itProductInitialValues, itProductOrderSchema } from "./schemas/it";
 import InputField from "../../common/UI/InputField/InputField";
 import { useProjectOptions } from "../../../hooks/useProjects";
 import SelectField from "../../Membership/Allocations/AllocationForm/SelectInput";
@@ -23,6 +22,17 @@ const ITProductForm = ({ isSubmitting, setFieldValue }) => {
         <InputField name="budget_year" placeholder="Budget Year" />
       </SimpleGrid>
       <SimpleGrid columns={2} gap={5}>
+        <InputField name="name" placeholder="Name" />
+        <InputField name="status" placeholder="Status" />
+      </SimpleGrid>
+      <SimpleGrid columns={2} gap={5}>
+        <InputField name="brand" placeholder="Brand" />
+        <InputField name="class" placeholder="Class" />
+      </SimpleGrid>
+      <SimpleGrid>
+        <InputField name="description" placeholder="description" />
+      </SimpleGrid>
+      <SimpleGrid columns={2} gap={5}>
         <InputField
           name="unit_price"
           placeholder="Unit Price (UGX)"
@@ -34,19 +44,33 @@ const ITProductForm = ({ isSubmitting, setFieldValue }) => {
           type="number"
         />
       </SimpleGrid>
-      <SimpleGrid>
-        <InputField name="type" placeholder="Type of product" />
+      <SimpleGrid columns={2} gap={5}>
+        <InputField name="amount" placeholder="Amount" type="number" />
+        <InputField name="currency" placeholder="Currency" />
       </SimpleGrid>
-      <InputField
-        name="subject_of_procurement"
-        placeholder="Subject of Procurement"
-      />
-      <InputField
-        type="date"
-        name="date_required"
-        placeholder="Date Required"
-      />
-      <InputField name="delivery_location" placeholder="Delivery Location" />
+      <SimpleGrid columns={2} gap={5}>
+        <InputField name="category" placeholder="Category" />
+        <InputField name="payment_status" placeholder="Payment Status" />
+      </SimpleGrid>
+      <SimpleGrid columns={2} gap={5}>
+        <InputField name="delivery_location" placeholder="Delivery Location" />
+        <InputField
+          name="num_units"
+          placeholder="Number of Units"
+          type="number"
+        />
+      </SimpleGrid>
+      <SimpleGrid columns={2} gap={5}>
+        <InputField name="type" placeholder="Type" />
+        <InputField
+          name="subject_of_procurement"
+          placeholder="Subject of Procurement"
+        />
+      </SimpleGrid>
+      <SimpleGrid columns={2} gap={5}>
+        <InputField name="date_required" label="Date Required" type="date" />
+        <InputField name="purchase_date" label="Purchase Date" type="date" />
+      </SimpleGrid>
 
       <Button
         mt={5}

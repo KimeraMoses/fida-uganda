@@ -1,9 +1,27 @@
-import React from "react";
-import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
+import React, { useState } from "react";
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Td,
+  IconButton,
+  useDisclosure,
+} from "@chakra-ui/react";
 import classes from "../../Allocations/AllocationsTable/AllocationsTable.module.css";
 import { TableHeadColumn } from "../../Allocations/AllocationsTable/AllocationsTable";
+import withTable from "../../../../hoc/withTable";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
+import NewMembersForm from "./../NewMemberForm/NewMembersForm";
+import Modal from "../../../common/Modal";
 
 const MemberTable = ({ data, isLoading }) => {
+  const [id, setId] = useState("");
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const userEditHandler = (userId) => {
+    setId(userId);
+    onOpen();
+  };
   return (
     <div className={classes.allocations_table_wrapper}>
       <Table variant="simple">
@@ -15,10 +33,7 @@ const MemberTable = ({ data, isLoading }) => {
               title="Membershp Duration"
               secondaryText="Membership fee status"
             />
-            <TableHeadColumn
-              title="office Number"
-              secondaryText="office email"
-            />
+            <TableHeadColumn title="Actions" />
           </Tr>
         </Thead>
         <Tbody>
@@ -56,12 +71,15 @@ const MemberTable = ({ data, isLoading }) => {
                       <h5>{item.hasPaid ? "Paid" : "Pending"}</h5>
                     </div>
                   </Td>
-                  <Td>
-                    <div className={classes.data__primary_text}>
-                      {item.officeNo}
-                    </div>
-                    <div className={classes.data__secondary_text}>
-                      {item.email}
+                  <Td style={{ textAlign: "center" }}>
+                    <div className={classes.table_actions_icon_wrapper}>
+                      <IconButton
+                        size="sm"
+                        variant="outline"
+                        aria-label="Open Item"
+                        icon={<MdOutlineRemoveRedEye />}
+                        onClick={() => userEditHandler(item.id)}
+                      />
                     </div>
                   </Td>
                 </Tr>
@@ -69,8 +87,17 @@ const MemberTable = ({ data, isLoading }) => {
             })}
         </Tbody>
       </Table>
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        title="Membership Form"
+        size="3xl"
+      >
+        {id}
+        <NewMembersForm onClose={onClose} />
+      </Modal>
     </div>
   );
 };
 
-export default MemberTable;
+export default withTable(MemberTable);

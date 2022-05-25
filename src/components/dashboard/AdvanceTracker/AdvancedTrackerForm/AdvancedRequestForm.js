@@ -4,7 +4,7 @@ import classes from "../../LeaveTracker/LeaveApplicationForm/LeaveApplicationFor
 import InputField from "../../../common/UI/InputField/InputField";
 import { SimpleGrid } from "@chakra-ui/react";
 import FormButton from "../../../common/UI/FormButton/FormButton";
-import formatDate from "../../../../lib/formatDate"
+import formatDate from "../../../../lib/formatDate";
 
 const AdvancedRequestForm = ({ isSubmitting, onClose }) => {
   return (

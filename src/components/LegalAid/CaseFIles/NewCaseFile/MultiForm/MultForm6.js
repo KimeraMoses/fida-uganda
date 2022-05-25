@@ -1,7 +1,6 @@
 import classes from "../../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css";
-import { SimpleGrid } from "@chakra-ui/react";
+import { SimpleGrid, Textarea } from "@chakra-ui/react";
 import ActionButtons from "../../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons";
-import FormButton from "../../../../common/UI/FormButton/FormButton";
 import styles from "./MultForm6.module.css";
 import Logo from "../../../../../assets/images/Avater.png";
 import withForm from "../../../../../hoc/withForm";
@@ -9,9 +8,42 @@ import TextAreaField from "../../../../common/TextAreaField";
 import SelectField from "../../../../common/SelectField";
 import { caseFileStatusOptions } from "../../../../../lib/options";
 import SearchableField from "../../../../common/UI/SearchableField/SearchableField";
-import { useUsers } from "../../../../../hooks/useUser";
+import { useUser, useUsers } from "../../../../../hooks/useUser";
+import { useState } from "react";
 
-const ActionCard = () => {
+const ActionForm = ({ userId, values }) => {
+  const [value, setValue] = useState("");
+
+  const addAction = () => {
+    values.actionsTaken.push({ userId, message: value });
+    setValue("");
+  };
+
+  return (
+    <form onSubmit={addAction}>
+      {values?.actionsTaken.map((action, index) => (
+        <ActionCard action={action} key={index} />
+      ))}
+      <Textarea
+        name="comment"
+        placeholder="Type here"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
+      <div className={styles.add_actions_btn}>
+        <button
+          className="fida__fm_btn fida__btn_outlined"
+          disabled={value ? false : true}
+          onClick={addAction}
+        >
+          Add Action
+        </button>
+      </div>
+    </form>
+  );
+};
+
+const ActionCard = ({ action }) => {
   return (
     <div className={styles.card_wrapper}>
       <div
@@ -24,7 +56,7 @@ const ActionCard = () => {
       ></div>
       <div className={styles.content_wrapper}>
         <h4>Andrew Tebandeke</h4>
-        <h6>Case registration and referral to Criminal Cases Expert</h6>
+        <h6>{action?.message}</h6>
       </div>
     </div>
   );
@@ -37,7 +69,9 @@ const MultForm6 = ({
   isSubmitting,
   setReferredTo,
   referredTo,
+  values,
 }) => {
+  const { id } = useUser();
   const users = useUsers();
 
   return (
@@ -72,13 +106,7 @@ const MultForm6 = ({
       <div className={classes.field_wrapper}>
         <div className={classes.field_label}>15. Action Taken. </div>
         <div className={styles.action_taken_wrapper}>
-          <ActionCard />
-          <ActionCard />
-          <ActionCard />
-          <TextAreaField name="comment" placeholder="Type here" />
-          <div className={styles.add_actions_btn}>
-            <FormButton variant="outlined">Add Action</FormButton>
-          </div>
+          <ActionForm userId={id} values={values} />
         </div>
       </div>
 

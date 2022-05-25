@@ -2,11 +2,8 @@ import React from "react";
 import { Table, Thead, Tbody, Th, Tr, Td } from "@chakra-ui/react";
 import classes from "./Table.module.css";
 import sortByDate from "../../../../lib/sortByDate";
-
-export const TableHeadColumn = (props) => {
-  const { title } = props;
-  return <Th>{title}</Th>;
-};
+import { TableHeadColumn } from "./ApprovedTable";
+import withTable from "../../../../hoc/withTable";
 
 const NewRequestsTable = ({ data, isLoading }) => {
   const approvedRecords = data
@@ -70,4 +67,4 @@ const NewRequestsTable = ({ data, isLoading }) => {
   );
 };
 
-export default NewRequestsTable;
+export default withTable(NewRequestsTable);

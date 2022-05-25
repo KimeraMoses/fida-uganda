@@ -9,15 +9,22 @@ import ClientFormOne from "./ClientFormOne";
 import { caseFileTwoInitialValues } from "../../CaseFIles/NewCaseFile/MultiForm/schema";
 import MultForm2 from "../../CaseFIles/NewCaseFile/MultiForm/MultForm2";
 
-const NewClientForm = ({ onClose }) => {
+const NewClientForm = ({ client, setClient, onClose, isNewClient }) => {
   const clientId = useClientId();
   const limit = 2;
   const CLIENT_ADDED = "Added Client Successfully";
   const CLIENT_UPDATED = "Updated Client Successfully";
   const [page, setPage] = useState(1);
+  const [isNew, setIsNew] = useState(isNewClient || false);
 
   const addClientId = (values) => {
+    setClient({ ...values, id: clientId });
     return { ...values, id: clientId };
+  };
+
+  const handleSuccessfulAdd = () => {
+    setIsNew(false);
+    nextStep();
   };
 
   const prevStep = () => {
@@ -32,10 +39,10 @@ const NewClientForm = ({ onClose }) => {
     case 1:
       return (
         <ClientFormOne
-          initialValues={complainantInitialValues}
-          useMutate={useAddClient}
-          onSuccess={nextStep}
-          success={CLIENT_ADDED}
+          initialValues={isNew ? complainantInitialValues : client}
+          useMutate={isNew ? useAddClient : useAddClient}
+          onSuccess={isNew ? handleSuccessfulAdd : nextStep}
+          success={isNew ? CLIENT_ADDED : CLIENT_UPDATED}
           limit={limit}
           page={page}
         />
@@ -43,7 +50,7 @@ const NewClientForm = ({ onClose }) => {
     case 2:
       return (
         <MultForm2
-          initialValues={caseFileTwoInitialValues}
+          initialValues={client ? client : caseFileTwoInitialValues}
           useMutate={useUpdateClient}
           onSuccess={onClose}
           success={CLIENT_UPDATED}

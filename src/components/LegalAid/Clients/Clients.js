@@ -1,22 +1,26 @@
-import TableSearch from "../../common/table/TableSearch";
+import { useState } from "react";
 import SectionHeader from "../../common/SectionHeader";
 import ClientsTable from "./ClientsTable/ClientsTable";
-import { useAddClient, useClients } from "../../../hooks/useClients";
+import { useClients } from "../../../hooks/useClients";
 import { useDisclosure } from "@chakra-ui/react";
 import Modal from "../../common/Modal";
 import NewClientForm from "./NewClientForm/NewClientForm";
-import { complainantInitialValues } from "../../../form_schemas/complainant";
 
 const Clients = () => {
   const { data, isLoading } = useClients();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [client, setClient] = useState(null);
 
   return (
     <>
       <SectionHeader title="Clients" />
-      <TableSearch btnLabel="Add Client" btnClick={onOpen} />
       {data?.clients && (
-        <ClientsTable data={data?.clients} isLoading={isLoading} />
+        <ClientsTable
+          isLoading={isLoading}
+          data={data ? data.clients : null}
+          btnLabel="Add Client"
+          btnClick={onOpen}
+        />
       )}
       <Modal
         isOpen={isOpen}
@@ -25,10 +29,10 @@ const Clients = () => {
         title="Client Registration Form"
       >
         <NewClientForm
-          useMutate={useAddClient}
-          onSuccess={onClose}
-          success={"Added Client Successfully"}
-          initialValues={complainantInitialValues}
+          onClose={onClose}
+          client={client}
+          setClient={setClient}
+          isNewClient={true}
         />
       </Modal>
     </>

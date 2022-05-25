@@ -2,6 +2,8 @@ import React from "react";
 import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
 import classes from "./Table.module.css";
 import { TableHeadColumn } from "../../Membership/Allocations/AllocationsTable/AllocationsTable";
+import { formatDate } from "../../lib/data";
+import withTable from "./../../../hoc/withTable";
 
 const CommonTable = ({ data, isProducts }) => {
   return (
@@ -85,7 +87,7 @@ const CommonTable = ({ data, isProducts }) => {
                         </div>
                       </div>
                       <div className={classes.data__secondary_text}>
-                        {item.date}
+                        {formatDate(item.date)}
                       </div>
                     </Td>
                     <Td className={classes.data_field}>
@@ -106,4 +108,4 @@ const CommonTable = ({ data, isProducts }) => {
   );
 };
 
-export default CommonTable;
+export default withTable(CommonTable);

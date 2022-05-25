@@ -2,12 +2,13 @@ import React from "react";
 import { Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
 import classes from "./AllocationsTable.module.css";
 import sortByDate from "../../../../lib/sortByDate";
+import withTable from "./../../../../hoc/withTable";
 
 export const TableHeadColumn = (props) => {
   const { title, secondaryText } = props;
   return (
     <Th>
-      {title}
+      <div className={classes.title_primary_text}>{title}</div>
       {secondaryText && (
         <div className={classes.title_secondary_text}>{secondaryText}</div>
       )}
@@ -15,7 +16,7 @@ export const TableHeadColumn = (props) => {
   );
 };
 
-const AllocationsTable = ({ allocations, isLoading }) => {
+const AllocationsTable = ({ data, isLoading }) => {
   return (
     <div className={classes.allocations_table_wrapper}>
       <Table variant="simple">
@@ -32,9 +33,8 @@ const AllocationsTable = ({ allocations, isLoading }) => {
         </Thead>
         <Tbody>
           {!isLoading &&
-            allocations &&
-            allocations.Allocations &&
-            sortByDate(allocations.Allocations).map((item, index) => {
+            data &&
+            sortByDate(data).map((item, index) => {
               return (
                 <Tr key={item.id}>
                   <Td className={classes.data_recepient_field}>
@@ -92,4 +92,4 @@ const AllocationsTable = ({ allocations, isLoading }) => {
   );
 };
 
-export default AllocationsTable;
+export default withTable(AllocationsTable);

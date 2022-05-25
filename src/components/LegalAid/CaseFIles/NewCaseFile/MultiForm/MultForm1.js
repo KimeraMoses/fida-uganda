@@ -181,21 +181,12 @@ const MultForm1 = ({
           />
         </SimpleGrid>
       </div>
-      {isNew ? (
-        <ActionButtons
-          page={page}
-          onBack={onBack}
-          disabled={isSubmitting}
-          limit={limit}
-        />
-      ) : (
-        <ActionButtons
-          page={page}
-          onBack={onBack}
-          disabled={isSubmitting}
-          limit={limit}
-        />
-      )}
+      <ActionButtons
+        page={page}
+        onBack={onBack}
+        disabled={isSubmitting}
+        limit={limit}
+      />
     </div>
   );
 };
