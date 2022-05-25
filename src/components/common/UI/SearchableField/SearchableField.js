@@ -7,6 +7,7 @@ const SearchableField = ({
   placeholder,
   name,
   selectedItem,
+  disabled,
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -46,6 +47,7 @@ const SearchableField = ({
       itemClickHandler={selectedItemHandler}
       name={name}
       isSelected={isSearched}
+      disabled={disabled}
     />
   );
 };

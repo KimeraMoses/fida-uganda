@@ -11,6 +11,7 @@ const DropdownInputField = (props) => {
     itemClickHandler,
     placeholder,
     name,
+    disabled,
   } = props;
 
   return (
@@ -21,7 +22,7 @@ const DropdownInputField = (props) => {
           type="search"
           name={name}
           fullwidth={true}
-          disabled={false}
+          disabled={disabled || false}
           value={isSelected ? selectedItem : searchTerm}
           onChange={keyWordHandler}
         />

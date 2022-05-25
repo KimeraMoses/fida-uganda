@@ -11,16 +11,16 @@ import SearchableField from "../../../../common/UI/SearchableField/SearchableFie
 import { useUser, useUsers } from "../../../../../hooks/useUser";
 import { useState } from "react";
 
-const ActionForm = ({ userId, values }) => {
+const ActionForm = ({ user, values }) => {
   const [value, setValue] = useState("");
 
   const addAction = () => {
-    values.actionsTaken.push({ userId, message: value });
+    values.actionsTaken.push({ ...user, message: value });
     setValue("");
   };
 
   return (
-    <form onSubmit={addAction}>
+    <div>
       {values?.actionsTaken.map((action, index) => (
         <ActionCard action={action} key={index} />
       ))}
@@ -32,6 +32,7 @@ const ActionForm = ({ userId, values }) => {
       />
       <div className={styles.add_actions_btn}>
         <button
+          type="button"
           className="fida__fm_btn fida__btn_outlined"
           disabled={value ? false : true}
           onClick={addAction}
@@ -39,7 +40,7 @@ const ActionForm = ({ userId, values }) => {
           Add Action
         </button>
       </div>
-    </form>
+    </div>
   );
 };
 
@@ -55,7 +56,7 @@ const ActionCard = ({ action }) => {
         }}
       ></div>
       <div className={styles.content_wrapper}>
-        <h4>Andrew Tebandeke</h4>
+        <h4>{action?.full_name}</h4>
         <h6>{action?.message}</h6>
       </div>
     </div>
@@ -71,7 +72,7 @@ const MultForm6 = ({
   referredTo,
   values,
 }) => {
-  const { id } = useUser();
+  const user = useUser();
   const users = useUsers();
 
   return (
@@ -106,7 +107,7 @@ const MultForm6 = ({
       <div className={classes.field_wrapper}>
         <div className={classes.field_label}>15. Action Taken. </div>
         <div className={styles.action_taken_wrapper}>
-          <ActionForm userId={id} values={values} />
+          <ActionForm user={user} values={values} />
         </div>
       </div>
 

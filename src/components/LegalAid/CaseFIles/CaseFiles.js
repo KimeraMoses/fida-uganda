@@ -5,11 +5,18 @@ import CaseFilesTable from "./CaseFilesTable/CaseFilesTable";
 import Modal from "../../common/Modal";
 import NewCaseFile from "./NewCaseFile/NewCaseFile";
 import { useCaseFiles } from "../../../hooks/useCaseFiles";
+import { useDispatch } from "react-redux";
+import { resetCaseFile } from "../../../store/caseFileReducer";
 
 const CaseFiles = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data, isLoading } = useCaseFiles();
-  const [selectedCase, setSelectedCase] = React.useState(null);
+  const { data } = useCaseFiles();
+  const dispatch = useDispatch();
+
+  const onOpenModal = () => {
+    onOpen();
+    dispatch(resetCaseFile());
+  };
 
   return (
     <>
@@ -29,10 +36,9 @@ const CaseFiles = () => {
         size="4xl"
       >
         <NewCaseFile
-          isNew={true}
+          isClvCaseFile={false}
           onClose={onClose}
-          caseFile={selectedCase}
-          setCaseFile={setSelectedCase}
+          isNewCaseFile={true}
         />
       </Modal>
     </>
