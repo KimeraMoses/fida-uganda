@@ -13,7 +13,7 @@ const SelectInput = ({
   disabled,
 }) => {
   const optionsWrapper = isMulti
-    ? [{ label: "&#9745; Select All", value: "all" }, ...options]
+    ? [{ label: "Select All", value: "all" }, ...options]
     : options;
   return (
     <Select

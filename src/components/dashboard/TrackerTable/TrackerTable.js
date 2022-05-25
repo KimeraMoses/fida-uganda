@@ -9,7 +9,7 @@ const TableHeadColumn = (props) => {
 };
 
 const TrackerTable = (props) => {
-  const { type, action, data } = props;
+  const { type, action, data, isLoading } = props;
 
   return (
     <>
@@ -28,36 +28,38 @@ const TrackerTable = (props) => {
             </Tr>
           </Thead>
           <Tbody>
-            {data.map((item) => {
-              return (
-                <Tr>
-                  <Td className={classes.name_column}>{item.details}</Td>
-                  <Td className={classes.data__purpose_primary_text}>
-                    {item.date}
-                  </Td>
-                  <Td
-                    className={`${
-                      item.status === "Pending"
-                        ? classes.pending_approval
-                        : item.status === "approved"
-                        ? classes.approved
-                        : classes.canceled
-                    }`}
-                  >
-                    {item.status}
-                  </Td>
+            {!isLoading &&
+              data &&
+              data.map((item) => {
+                return (
+                  <Tr>
+                    <Td className={classes.name_column}>{item.amount}</Td>
+                    <Td className={classes.data__purpose_primary_text}>
+                      {new Date(item.createdAt).toLocaleString()}
+                    </Td>
+                    <Td
+                      className={`${
+                        item.status === "Pending"
+                          ? classes.pending_approval
+                          : item.status === "approved"
+                          ? classes.approved
+                          : classes.canceled
+                      }`}
+                    >
+                      {item.status}
+                    </Td>
 
-                  <Td>
-                    <IconButton
-                      size="xs"
-                      aria-label="Add Item"
-                      icon={<MdOutlineRemoveRedEye />}
-                      onClick={() => action(item, type)}
-                    />
-                  </Td>
-                </Tr>
-              );
-            })}
+                    <Td>
+                      <IconButton
+                        size="xs"
+                        aria-label="Add Item"
+                        icon={<MdOutlineRemoveRedEye />}
+                        onClick={() => action(item, type, item.id)}
+                      />
+                    </Td>
+                  </Tr>
+                );
+              })}
           </Tbody>
         </Table>
       </div>

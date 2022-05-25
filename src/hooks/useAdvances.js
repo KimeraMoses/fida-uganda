@@ -4,6 +4,7 @@ import {
   deleteAdvance,
   editAdvance,
   getAllAdvances,
+  getAdvance,
 } from "../apis/advances";
 import { ADVANCES_KEY } from "../lib/constants";
 
@@ -12,7 +13,7 @@ export const useAdvances = () => {
 };
 
 export const useAdvance = (id) => {
-  return useQuery([ADVANCES_KEY, id], getAllAdvances(id));
+  return useQuery([ADVANCES_KEY, id], () => getAdvance(id));
 };
 
 export const useAddAdvance = () => {

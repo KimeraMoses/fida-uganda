@@ -5,6 +5,7 @@ import { SimpleGrid, Textarea } from "@chakra-ui/react";
 import SummaryTable from "./SummaryTable/SummaryTable";
 import { useNavigate, useLocation } from "react-router-dom";
 import FormButton from "../../common/UI/FormButton/FormButton";
+import { useAdvance } from "../../../hooks/useAdvances";
 
 const userDetails = [
   { field: "Date of application", value: "10/03/2022" },
@@ -32,6 +33,9 @@ const SummaryDetails = (props) => {
   }
   let query = useQuery();
   const selectedType = query.get("application-type");
+  const id = query.get("id");
+
+  const { data, isLoading } = useAdvance(id);
 
   return (
     <div className={classes.summary_wrapper}>
@@ -72,14 +76,22 @@ const SummaryDetails = (props) => {
           </h2>
 
           <div className={classes.user_details}>
-            {userDetails.map((item) => {
-              return (
-                <SimpleGrid columns={2} spacing={1}>
-                  <h6>{item.field}:</h6>
-                  <h6>{item.value}</h6>
-                </SimpleGrid>
-              );
-            })}
+            {!isLoading && data && (
+              <SimpleGrid columns={2} spacing={1}>
+                <h6>Date of Application:</h6>
+                <h6>{new Date(data?.advance?.createdAt).toLocaleString()}</h6>
+                <h6>Name:</h6>
+                <h6>{data?.advance?.user?.full_name}</h6>
+                <h6>Designation:</h6>
+                <h6>{data?.advance?.project}</h6>
+                <h6>I wish to apply for:</h6>
+                <h6>{selectedType}</h6>
+                <h6>Amount:</h6>
+                <h6>{data?.advance?.amount}</h6>
+                <h6>Net Pay:</h6>
+                <h6>{data?.advance?.net_pay}</h6>
+              </SimpleGrid>
+            )}
           </div>
         </div>
         <div className={classes.table_wrapper}>
