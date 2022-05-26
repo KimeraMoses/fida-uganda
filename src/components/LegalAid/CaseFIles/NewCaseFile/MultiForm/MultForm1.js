@@ -8,6 +8,7 @@ import SearchableField from "./../../../../common/UI/SearchableField/SearchableF
 import { useClientOptions } from "../../../../../hooks/useClients";
 import { useClvsDetails } from "../../../../../hooks/useClv";
 import withForm from "../../../../../hoc/withForm";
+import { sexOptions } from "../../../../../lib/options";
 
 const MultForm1 = ({
   page,
@@ -74,10 +75,7 @@ const MultForm1 = ({
           <SelectField
             name="respondentSex"
             placeholder="Select Sex"
-            options={[
-              { label: "Male", value: "Male" },
-              { label: "Female", value: "Female" },
-            ]}
+            options={sexOptions}
           />
         </SimpleGrid>
         <SimpleGrid columns={3} spacing={2} style={{ alignItems: "center" }}>
