@@ -37,7 +37,7 @@ const AttendenceTable = ({ data }) => {
                   </Td>
                   <Td className={classes.data_field}>
                     <div className={classes.data__primary_text}>
-                      {item?.project?.name}
+                      {item?.project_name}
                     </div>
                   </Td>
                   <Td className={classes.data_field}>
