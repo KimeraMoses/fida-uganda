@@ -29,7 +29,15 @@ const MemberActivitiesTable = ({ data, isLoading }) => {
                   <Td>000{index + 1}</Td>
                   <Td>
                     <div className={classes.data__primary_text}>
-                      {item.member?.first_name + " " + item.member?.last_name}
+                      {item.member &&
+                        Array.isArray(item.member) &&
+                        item.member.map((memberData) => {
+                          if (index + 1 === item.member.length) {
+                            return `${memberData?.first_name} ${memberData?.last_name}`;
+                          } else {
+                            return `${memberData?.first_name} ${memberData?.last_name}, `;
+                          }
+                        })}
                     </div>
                     <div className={classes.data__secondary_text}>
                       {item.member?.id}
