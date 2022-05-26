@@ -3,7 +3,10 @@ import {
   useUpdateClient,
   useClientId,
 } from "../../../../hooks/useClients";
-import { complainantInitialValues, complainantSchema } from "../../../../form_schemas/complainant";
+import {
+  complainantInitialValues,
+  complainantSchema,
+} from "../../../../form_schemas/complainant";
 import { useState } from "react";
 import ClientFormOne from "./ClientFormOne";
 import {
@@ -12,18 +15,21 @@ import {
 } from "../../CaseFIles/NewCaseFile/MultiForm/schema";
 import MultForm2 from "../../CaseFIles/NewCaseFile/MultiForm/MultForm2";
 import MultForm4 from "../../CaseFIles/NewCaseFile/MultiForm/MultForm4";
+import { useDispatch } from "react-redux";
+import { resetClient, selectClient } from "../../../../store/clientReducer";
 
-const NewClientForm = ({ client, setClient, onClose, isNewClient }) => {
-  const clientId = useClientId();
+const NewClientForm = ({ onClose, isNewClient }) => {
+  const client = useClientId();
   const limit = 3;
   const CLIENT_ADDED = "Added Client Successfully";
   const CLIENT_UPDATED = "Updated Client Successfully";
   const [page, setPage] = useState(1);
   const [isNew, setIsNew] = useState(isNewClient || false);
+  const dispatch = useDispatch();
 
   const addClientId = (values) => {
-    setClient({ ...values, id: clientId });
-    return { ...values, id: clientId };
+    dispatch(selectClient(values));
+    return { ...values, id: client?.id };
   };
 
   const handleSuccessfulAdd = () => {
@@ -37,6 +43,15 @@ const NewClientForm = ({ client, setClient, onClose, isNewClient }) => {
 
   const nextStep = () => {
     setPage(page + 1);
+  };
+
+  const mutateInitialValues = (initialValues) => {
+    return { ...initialValues, ...client };
+  };
+
+  const onSubmit = () => {
+    dispatch(resetClient());
+    onClose();
   };
 
   switch (page) {
@@ -55,7 +70,7 @@ const NewClientForm = ({ client, setClient, onClose, isNewClient }) => {
     case 2:
       return (
         <MultForm2
-          initialValues={client ? client : caseFileTwoInitialValues}
+          initialValues={caseFileTwoInitialValues}
           useMutate={useUpdateClient}
           onSuccess={onClose}
           success={CLIENT_UPDATED}
@@ -64,6 +79,7 @@ const NewClientForm = ({ client, setClient, onClose, isNewClient }) => {
           limit={limit}
           isMutable={true}
           mutateData={addClientId}
+          mutateInitialValues={mutateInitialValues}
         />
       );
     case 3:
@@ -71,13 +87,14 @@ const NewClientForm = ({ client, setClient, onClose, isNewClient }) => {
         <MultForm4
           initialValues={caseFileFourInitialValues}
           useMutate={useUpdateClient}
-          onSuccess={nextStep}
+          onSuccess={onSubmit}
           success={CLIENT_UPDATED}
           onBack={prevStep}
           page={page}
           limit={limit}
           isMutable={true}
           mutateData={addClientId}
+          mutateInitialValues={mutateInitialValues}
         />
       );
     default:
