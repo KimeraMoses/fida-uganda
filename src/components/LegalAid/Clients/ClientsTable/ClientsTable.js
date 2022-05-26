@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   Table,
   Thead,
@@ -16,14 +15,18 @@ import withTable from "./../../../../hoc/withTable";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import Modal from "./../../../common/Modal";
 import NewClientForm from "./../NewClientForm/NewClientForm";
+import { useDispatch } from "react-redux";
+import { selectClient } from "../../../../store/clientReducer";
 
 const ClientsTable = ({ data }) => {
-  const [id, setId] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const userEditHandler = (userId) => {
-    setId(userId);
+  const dispatch = useDispatch();
+
+  const onEditHandler = (client) => {
+    dispatch(selectClient(client));
     onOpen();
   };
+
   return (
     <>
       <div className={classes.allocations_table_wrapper}>
@@ -82,7 +85,7 @@ const ClientsTable = ({ data }) => {
                         variant="outline"
                         aria-label="Open Item"
                         icon={<MdOutlineRemoveRedEye />}
-                        onClick={() => userEditHandler(item.id)}
+                        onClick={() => onEditHandler(item)}
                       />
                     </div>
                   </Td>
@@ -97,11 +100,7 @@ const ClientsTable = ({ data }) => {
           size="2xl"
           title="Client Registration Form"
         >
-          {id}
-          <NewClientForm
-            onSuccess={onClose}
-            success={"Added Client Successfully"}
-          />
+          <NewClientForm onSuccess={onClose} />
         </Modal>
       </div>
     </>

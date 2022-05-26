@@ -8,15 +8,10 @@ import {
   getClientStats,
 } from "../apis/clients";
 import { CLIENTS_KEY, CLIENT_STATS } from "../lib/constants";
-import { selectClientId } from "../store/clientReducer";
+import { selectClient } from "../store/clientReducer";
 
 export const useClientId = () => {
-  return useSelector((state) => state.client.clientId);
-};
-
-export const useSelectClientId = (id) => {
-  const dispatch = useDispatch();
-  dispatch(selectClientId(id));
+  return useSelector((state) => state.client.client);
 };
 
 export const useClients = () => {
@@ -53,7 +48,7 @@ export const useAddClient = () => {
   const dispatch = useDispatch();
   return useMutation(addClient, {
     onSuccess: (data) => {
-      dispatch(selectClientId(data.client.id));
+      dispatch(selectClient(data.client.id));
       const previousClients = queryClient.getQueryData(CLIENTS_KEY);
       if (previousClients) {
         queryClient.setQueryData(CLIENTS_KEY, (previousClients) => {
