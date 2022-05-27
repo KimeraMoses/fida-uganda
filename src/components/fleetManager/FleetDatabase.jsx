@@ -1,5 +1,4 @@
 import SectionHeader from "../common/SectionHeader";
-import Table from "../common/Table";
 import Modal from "../common/Modal";
 import { fleetDatabaseColumns } from "../../assets/tableColumns/fleetDatabase";
 import FleetDatabaseForm from "../forms/fleetDatabase/FleetDatabaseForm";
@@ -9,6 +8,7 @@ import {
   fleetDatabaseInitialValues,
   fleetDatabaseOrderSchema,
 } from "../forms/fleetDatabase/schemas/fleetDatabase";
+import FleetDatabaseTable from "./FleetDatabaseTable/FleetDatabaseTable";
 
 const FleetDatabase = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -19,7 +19,7 @@ const FleetDatabase = () => {
   return (
     <>
       <SectionHeader title="Fleet Database" />
-      <Table
+      <FleetDatabaseTable
         data={data?.fleets}
         columns={fleetDatabaseColumns}
         onRowClick={onRowClick}

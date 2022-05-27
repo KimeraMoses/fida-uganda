@@ -14,15 +14,17 @@ import { caseFilesColumns } from "../../../../assets/tableColumns/cases";
 import { formatDate } from "../../../../lib/data";
 import Modal from "../../../common/Modal";
 import NewCaseFile from "../NewCaseFile/NewCaseFile";
-import withTable from "./../../../../hoc/withTable";
+import { useDispatch } from "react-redux";
+import { selectCaseFile } from "../../../../store/caseFileReducer";
+import withTable from "../../../../hoc/withTable";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 
 const CaseFilesTable = ({ data }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [selectedCase, setSelectedCase] = React.useState(null);
+  const dispatch = useDispatch();
 
   const onHandleClick = (caseFile) => {
-    setSelectedCase(caseFile);
+    dispatch(selectCaseFile(caseFile));
     onOpen();
   };
 
@@ -54,15 +56,17 @@ const CaseFilesTable = ({ data }) => {
             {data.map((item) => {
               return (
                 <Tr key={item.id} onClick={() => onHandleClick(item)}>
-                  <Td>{item.id}</Td>
-                  <Td>{formatDate(item.createdAt)}</Td>
+                  <Td className={classes.primary_text_icon}>{item.case_id}</Td>
+                  <Td className={classes.data__purpose_primary_text}>
+                    {formatDate(item.createdAt)}
+                  </Td>
                   <Td>{item.complainant?.village}</Td>
                   <Td>{item.district}</Td>
                   <Td>{item.complainant?.country}</Td>
                   <Td>{item.complainant?.nin}</Td>
                   <Td>{item.type}</Td>
                   <Td>{formatDate(item.createdAt)}</Td>
-                  <Td>{item.id}</Td>
+                  <Td>{item.case_id}</Td>
                   <Td>{item.complainant?.sex}</Td>
                   <Td>{item.complainant?.name}</Td>
                   <Td>{item.complainant?.age}</Td>
@@ -100,7 +104,7 @@ const CaseFilesTable = ({ data }) => {
       </div>
       <>
         <Modal isOpen={isOpen} onClose={onClose} title="Case Files" size="4xl">
-          <NewCaseFile caseFile={selectedCase} />
+          <NewCaseFile isClvCaseFile={false} onClose={onClose} />
         </Modal>
       </>
     </>

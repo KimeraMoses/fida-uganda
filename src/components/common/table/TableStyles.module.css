@@ -1,0 +1,16 @@
+.table_wrapper {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding-bottom: 10px;
+}
+.table_header {
+  background-color: var(--table_head_bg_color);
+  font-weight: 600;
+  color: #000000;
+}
+.table_header th {
+  font-size: 15px;
+}
+.table_wrapper td {
+  font-weight: 600;
+}
