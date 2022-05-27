@@ -8,19 +8,13 @@ import withTable from "./../../../hoc/withTable";
 
 const ITProductsTable = ({ data, isProducts }) => {
 
-  const [downloadMetaData, setDownloadMetaData] = useState({href: "", name: ""})
 
-  const handleDownload = () => {
-    const theData = downloadFile(arrayToCsv(data, ['project_name', 'brand', 'id']),)
-    setDownloadMetaData(theData)
-  }
 
   
 
   return (
     <>
       <div className={classes.table_wrapper}>
-        <a onClick={handleDownload} href={downloadMetaData.href} download={downloadMetaData.name}>Convert to excel</a>
         <Table
           variant="striped"
           colorScheme="gray"

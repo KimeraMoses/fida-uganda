@@ -21,6 +21,7 @@ const ITServices = () => {
         isLoading={isLoading}
         btnLabel="Add Service"
         btnClick={onOpen}
+        keys={['project_name', 'brand', 'id']}
       />
 
       <Modal isOpen={isOpen} onClose={onClose} title="Service Requisition Form">

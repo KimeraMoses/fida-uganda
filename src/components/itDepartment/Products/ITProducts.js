@@ -20,6 +20,7 @@ const ITProducts = () => {
         isLoading={isLoading}
         btnLabel="Add Product"
         btnClick={onOpen}
+        keys={['project_name', 'brand', 'id']}
       />
 
       <Modal

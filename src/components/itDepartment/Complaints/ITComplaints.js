@@ -24,7 +24,7 @@ const ITComplaints = () => {
           title="It Products"
           initialValues={complaintInitialValues}
           onSuccess={onClose}
-          success={`IT Product added successfully`}
+          success={`IT Complaint added successfully`}
           useMutate={useAddComplaint}
         />
       </Modal>

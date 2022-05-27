@@ -22,6 +22,14 @@ export const itProductOrderSchema = yup.object().shape({
   purchase_date: yup.string().required("Purchase date is required"),
 });
 
+export const itComplaintOrderSchema = yup.object().shape({
+  submittedBy: yup.string().required("This field is required"),
+  body: yup.string().required("This field is required"),
+  dueDate: yup.string().required("This field is required"),
+  status: yup.string().required("This field is required"),
+  remarks: yup.string().required("This field is required"),
+})
+
 export const itProductInitialValues = {
   project_name: "",
   type: "",
@@ -49,4 +57,12 @@ export const itServicesInitialValues = {
   expiry_date: "",
   service_provider: "",
   state: ""
+};
+
+export const itComplaintInitialValues = {
+  submittedBy: "",
+  body: "",
+  dueDate: "",
+  status: "",
+  remarks: ""
 };
