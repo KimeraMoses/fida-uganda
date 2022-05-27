@@ -5,6 +5,7 @@ import SelectField from "../../../common/SelectField";
 import InputField from "../../../common/UI/InputField/InputField";
 import withForm from "../../../../hoc/withForm";
 import ActionButtons from "../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons";
+import { sexOptions } from "../../../../lib/options";
 
 const ClientFormOne = ({ page, limit, onBack, isSubmitting, values }) => {
   return (
@@ -28,10 +29,7 @@ const ClientFormOne = ({ page, limit, onBack, isSubmitting, values }) => {
           <SelectField
             name="sex"
             placeholder="Select Gender"
-            options={[
-              { label: "Male", value: "Male" },
-              { label: "Female", value: "Female" },
-            ]}
+            options={sexOptions}
           />
         </SimpleGrid>
         <SimpleGrid columns={2} spacing={1} style={{ alignItems: "center" }}>

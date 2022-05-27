@@ -35,7 +35,7 @@ export const complainantSchema = Yup.object().shape({
   address: Yup.string().required("Address is required"),
   country: Yup.string()
     .required("Country is required")
-    .matches("^[A-Za-z]*$", "Only use letters"),
+    .matches("^[A-Za-z\\s]*$", "Only use letters"),
   NIN: Yup.string()
     .required("National ID is required")
     .matches(
@@ -43,16 +43,16 @@ export const complainantSchema = Yup.object().shape({
       "National ID can only contain numbers and capital letters"
     ),
   district: Yup.string()
-    .matches("^[A-Za-z]*$", "Only use letters")
+    .matches("^[A-Za-z\\s]*$", "Only use letters")
     .required("District is required"),
-  subcounty: Yup.string().matches("^[A-Za-z]*$", "Only use letters"),
-  parish: Yup.string().matches("^[A-Za-z]*$", "Only use letters"),
-  village: Yup.string().matches("^[A-Za-z]*$", "Only use letters"),
-  marital_status: Yup.string().matches("^[A-Za-z]*$", "Only use letters"),
-  accompaniedBy: Yup.string().matches("^[A-Za-z]*$", "Only use letters"),
-  occupation: Yup.string().matches("^[A-Za-z]*$", "Only use letters"),
-  place_of_work: Yup.string().matches("^[A-Za-z]*$", "Only use letters"),
-  level_of_education: Yup.string().matches("^[A-Za-z]*$", "Only use letters"),
-  preferred_language: Yup.string().matches("^[A-Za-z]*$", "Only use letters"),
+  subcounty: Yup.string().matches("^[A-Za-z\\s]*$", "Only use letters"),
+  parish: Yup.string().matches("^[A-Za-z\\s]*$", "Only use letters"),
+  village: Yup.string().matches("^[A-Za-z\\s]*$", "Only use letters"),
+  marital_status: Yup.string().matches("^[A-Za-z\\s]*$", "Only use letters"),
+  accompaniedBy: Yup.string().matches("^[A-Za-z\\s]*$", "Only use letters"),
+  occupation: Yup.string().matches("^[A-Za-z\\s]*$", "Only use letters"),
+  place_of_work: Yup.string().matches("^[A-Za-z\\s]*$", "Only use letters"),
+  level_of_education: Yup.string().matches("^[A-Za-z\\s]*$", "Only use letters"),
+  preferred_language: Yup.string().matches("^[A-Za-z\\s]*$", "Only use letters"),
   num_beneficiaries: Yup.number().max(10, "Cannot be more than 10"),
 });

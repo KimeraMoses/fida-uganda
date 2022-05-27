@@ -49,32 +49,17 @@ export const useAddCaseFiles = () => {
     onSuccess: (data) => {
       dispatch(selectCaseFile(data.case_file));
       const previousCaseFiles = queryClient.getQueryData(CASES_KEY);
-      const previousClvCaseFiles = queryClient.getQueryData(CLV_CASES_KEY);
 
-      if (!data.case_file.isByClv) {
-        if (previousCaseFiles) {
-          queryClient.setQueryData(CASES_KEY, (previousCaseFiles) => {
-            return produce(previousCaseFiles, (draft) => {
-              draft.cases.push(data.case_file);
-            });
+      if (previousCaseFiles) {
+        queryClient.setQueryData(CASES_KEY, (previousCaseFiles) => {
+          return produce(previousCaseFiles, (draft) => {
+            draft.cases.push(data.case_file);
           });
-        } else {
-          queryClient.setQueryData(CASES_KEY, () => {
-            return { cases: [data.case_file] };
-          });
-        }
+        });
       } else {
-        if (previousClvCaseFiles) {
-          queryClient.setQueryData(CASES_KEY, (previousClvCaseFiles) => {
-            return produce(previousClvCaseFiles, (draft) => {
-              draft.clv_cases.push(data.case_file);
-            });
-          });
-        } else {
-          queryClient.setQueryData(CASES_KEY, () => {
-            return { clv_cases: [data.case_file] };
-          });
-        }
+        queryClient.setQueryData(CASES_KEY, () => {
+          return { cases: [data.case_file] };
+        });
       }
     },
   });
@@ -85,6 +70,7 @@ export const useUpdateCaseFile = () => {
   return useMutation(updateCaseFile, {
     onSuccess: (data) => {
       const previousCaseFiles = queryClient.getQueryData(CASES_KEY);
+
       if (previousCaseFiles) {
         queryClient.setQueryData(CASES_KEY, (previousCaseFiles) => {
           return produce(previousCaseFiles, (draft) => {
@@ -106,19 +92,94 @@ export const useUpdateCaseFile = () => {
 export const useDeleteCaseFile = () => {
   const queryClient = useQueryClient();
   return useMutation(deleteCaseFile, {
-    onSuccess: (data) => {
+    onMutate: async (id) => {
+      await queryClient.cancelMutations(CASES_KEY);
+
       const previousCaseFiles = queryClient.getQueryData(CASES_KEY);
       if (previousCaseFiles) {
         queryClient.setQueryData(CASES_KEY, (previousCaseFiles) => {
           return produce(previousCaseFiles, (draft) => {
-            draft.cases.filter((caseFile) => caseFile.id !== data.caseId);
+            draft.cases.filter((client) => client.id !== id);
+          });
+        });
+      }
+    },
+    onError: (_error, _clientId, context) => {
+      queryClient.setQueryData(CASES_KEY, context.previousCaseFiles);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries(CASES_KEY);
+    },
+  });
+};
+
+export const useAddClvCaseFile = () => {
+  const queryClient = useQueryClient();
+  const dispatch = useDispatch();
+  return useMutation(addCaseFile, {
+    onSuccess: (data) => {
+      dispatch(selectCaseFile(data.case_file));
+      const previousClvCaseFiles = queryClient.getQueryData(CLV_CASES_KEY);
+
+      if (previousClvCaseFiles) {
+        queryClient.setQueryData(CLV_CASES_KEY, (previousClvCaseFiles) => {
+          return produce(previousClvCaseFiles, (draft) => {
+            draft.clv_cases.push(data.case_file);
           });
         });
       } else {
-        queryClient.setQueryData(CASES_KEY, () => {
-          return { cases: [] };
+        queryClient.setQueryData(CLV_CASES_KEY, () => {
+          return { clv_cases: [data.case_file] };
         });
       }
+    },
+  });
+};
+
+export const useUpdateClvCaseFile = () => {
+  const queryClient = useQueryClient();
+  return useMutation(updateCaseFile, {
+    onSuccess: (data) => {
+      const previousClvCaseFiles = queryClient.getQueryData(CLV_CASES_KEY);
+
+      if (previousClvCaseFiles) {
+        queryClient.setQueryData(CLV_CASES_KEY, (previousClvCaseFiles) => {
+          return produce(previousClvCaseFiles, (draft) => {
+            const index = draft.clv_cases.findIndex(
+              (caseFile) => caseFile.id === data.updatedCase.id
+            );
+            draft.clv_cases[index] = data.updatedCase;
+          });
+        });
+      } else {
+        queryClient.setQueryData(CLV_CASES_KEY, () => {
+          return { clv_cases: [data.updatedCase] };
+        });
+      }
+    },
+  });
+};
+
+export const useDeleteClvCaseFile = () => {
+  const queryClient = useQueryClient();
+  return useMutation(deleteCaseFile, {
+    onMutate: async (id) => {
+      await queryClient.cancelMutations(CLV_CASES_KEY);
+
+      const previousClvCaseFiles = queryClient.getQueryData(CLV_CASES_KEY);
+      if (previousClvCaseFiles) {
+        queryClient.setQueryData(CLV_CASES_KEY, (previousClvCaseFiles) => {
+          return produce(previousClvCaseFiles, (draft) => {
+            draft.clv_cases.filter((client) => client.id !== id);
+          });
+        });
+      }
+    },
+    onError: (_error, _clientId, context) => {
+      queryClient.setQueryData(CLV_CASES_KEY, context.previousClvCaseFiles);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries(CLV_CASES_KEY);
     },
   });
 };

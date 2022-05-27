@@ -7,6 +7,8 @@ import {
   useAddCaseFiles,
   useUpdateCaseFile,
   useCaseFileTemp,
+  useUpdateClvCaseFile,
+  useAddClvCaseFile,
 } from "../../../../hooks/useCaseFiles";
 import {
   caseFileFiveInitialValues,
@@ -14,6 +16,7 @@ import {
   caseFileSchema,
   caseFileSixInitialValues,
   caseFileThreeInitialValues,
+  clvCaseFileSchema,
 } from "./MultiForm/schema";
 import { useDispatch } from "react-redux";
 import {
@@ -89,10 +92,18 @@ const NewCaseFile = ({ isClvCaseFile, onClose, isNewCaseFile = false }) => {
       return (
         <MultForm1
           initialValues={isNew ? caseFileInitialValues : caseFile}
-          validationSchema={caseFileSchema}
+          validationSchema={isClvCaseFile ? clvCaseFileSchema : caseFileSchema}
           isClvCaseFile={isClvCaseFile}
           isNew={isNew}
-          useMutate={isNew ? useAddCaseFiles : useUpdateCaseFile}
+          useMutate={
+            isNew
+              ? isClvCaseFile
+                ? useAddClvCaseFile
+                : useAddCaseFiles
+              : isClvCaseFile
+              ? useUpdateClvCaseFile
+              : useUpdateCaseFile
+          }
           success={isNew ? CASE_FILE_ADDED : CASE_FILE_UPDATED}
           onSuccess={isNew ? onSuccessfulAdd : nextStep}
           selectedClient={selectedClient}
@@ -109,7 +120,7 @@ const NewCaseFile = ({ isClvCaseFile, onClose, isNewCaseFile = false }) => {
       return (
         <MultForm3
           initialValues={caseFileThreeInitialValues}
-          useMutate={useUpdateCaseFile}
+          useMutate={isClvCaseFile ? useUpdateCaseFile : useUpdateClvCaseFile}
           onSuccess={nextStep}
           success={CASE_FILE_UPDATED}
           onBack={prevStep}
@@ -124,7 +135,7 @@ const NewCaseFile = ({ isClvCaseFile, onClose, isNewCaseFile = false }) => {
       return (
         <MultForm5
           initialValues={caseFileFiveInitialValues}
-          useMutate={useUpdateCaseFile}
+          useMutate={isClvCaseFile ? useUpdateCaseFile : useUpdateClvCaseFile}
           onSuccess={nextStep}
           success={CASE_FILE_UPDATED}
           onBack={prevStep}
@@ -139,7 +150,7 @@ const NewCaseFile = ({ isClvCaseFile, onClose, isNewCaseFile = false }) => {
       return (
         <MultForm6
           initialValues={caseFileSixInitialValues}
-          useMutate={useUpdateCaseFile}
+          useMutate={isClvCaseFile ? useUpdateCaseFile : useUpdateClvCaseFile}
           onSuccess={onSubmit}
           success={CASE_FILE_UPDATED}
           onBack={prevStep}
