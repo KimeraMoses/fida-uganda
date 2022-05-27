@@ -2,6 +2,7 @@ import React from "react";
 import { useDisclosure } from "@chakra-ui/react";
 import SectionHeader from "../../common/SectionHeader";
 import Form from "../Allocations/AllocationForm/Form";
+import { allocationFormSchema } from "../Allocations/AllocationForm/schema";
 import AllocationsTable from "./AllocationsTable/AllocationsTable";
 import {
   useAddAllocation,
@@ -30,7 +31,7 @@ const Allocations = () => {
           onClose={onClose}
           title="Allocations"
           initialValues={initialValues}
-          // validationSchema={allocationFormSchema}
+          validationSchema={allocationFormSchema}
           onSuccess={onClose}
           success={`Allocation added successfully`}
           useMutate={useAddAllocation}

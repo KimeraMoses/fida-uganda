@@ -6,27 +6,29 @@ import { useAddLeaveDays } from "../../../hooks/useLeaveTracker";
 import TrackerTable from "../TrackerTable/TrackerTable";
 import { useDisclosure } from "@chakra-ui/react";
 import FormButton from "../../common/UI/FormButton/FormButton";
+import { useLeaveRequests } from "../../../hooks/useLeaveRequest";
 
-export const Data = [
-  {
-    details: "5 Annual leave days requested from 15 to 20 May",
-    date: "May 10, 2022",
-    status: "Pending",
-  },
-  {
-    details: "5 Annual leave days requested from 15 to 20 May",
-    date: "May 10, 2022",
-    status: "Canceled",
-  },
-  {
-    details: "5 Annual leave days requested from 15 to 20 May",
-    date: "May 10, 2022",
-    status: "approved",
-  },
-];
+// export const Data = [
+//   {
+//     details: "5 Annual leave days requested from 15 to 20 May",
+//     date: "May 10, 2022",
+//     status: "Pending",
+//   },
+//   {
+//     details: "5 Annual leave days requested from 15 to 20 May",
+//     date: "May 10, 2022",
+//     status: "Canceled",
+//   },
+//   {
+//     details: "5 Annual leave days requested from 15 to 20 May",
+//     date: "May 10, 2022",
+//     status: "approved",
+//   },
+// ];
 
 const LeaveTrackerTable = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { data, isLoading } = useLeaveRequests();
   const leaveApplicationInitialValues = {
     reason: "",
     address_on_leave: "",
@@ -39,7 +41,8 @@ const LeaveTrackerTable = (props) => {
         <TrackerTable
           type="leave"
           action={props.handleLeaveClick}
-          data={Data}
+          data={data ? data.leaves : null}
+          isLoading={isLoading}
         />
         <div className={classes.leave_actions_wrapper}>
           <FormButton variant="filled" onClick={onOpen}>

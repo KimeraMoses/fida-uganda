@@ -8,9 +8,8 @@ const TableHeadColumn = (props) => {
   return <Th>{title}</Th>;
 };
 
-const TrackerTable = (props) => {
-  const { type, action, data, isLoading } = props;
-
+const TrackerTable = ({ type, action, data, isLoading }) => {
+  console.log(data, 'isLoading')
   return (
     <>
       <div className={classes.table_container}>
@@ -33,7 +32,7 @@ const TrackerTable = (props) => {
               data.map((item) => {
                 return (
                   <Tr>
-                    <Td className={classes.name_column}>{item.amount}</Td>
+                    <Td className={classes.name_column}>{item.reason}</Td>
                     <Td className={classes.data__purpose_primary_text}>
                       {new Date(item.createdAt).toLocaleString()}
                     </Td>
