@@ -20,6 +20,9 @@ export const itProductOrderSchema = yup.object().shape({
   currency: yup.string().required("Currency is required"),
   payment_status: yup.string().required("Payment status is required"),
   purchase_date: yup.string().required("Purchase date is required"),
+  service_provider: yup.string().required("Service is required"),
+  state: yup.string().required("State is required"),
+  expiry_date: yup.string().required("Expiry date is required"),
 });
 
 export const itComplaintOrderSchema = yup.object().shape({
