@@ -11,7 +11,7 @@ import { useMemo } from "react";
 import { MdClose } from "react-icons/md";
 
 const NewClvForm = ({ isSubmitting, ...rest }) => {
-  const { action, onClose } = rest;
+  const { action, onClose, values } = rest;
   const projectOptions = useProjectOptions();
   const projects = useMemo(() => projectOptions, [projectOptions]);
 
@@ -117,11 +117,17 @@ const NewClvForm = ({ isSubmitting, ...rest }) => {
       >
         {action !== "newClv" ? (
           <>
-            <FormButton variant="outlined" type="button" status="fail">
-              {action !== "editClv" ? "Reject" : "Deactivate"}
-            </FormButton>
+            {/* <FormButton variant="outlined" type="button" status="fail" onClick={onClose}>
+              Cancel
+            </FormButton> */}
             <FormButton variant="outlined" type="submit" status="success">
-              {action !== "editClv" ? "Approve" : "Save changes"}
+              {isSubmitting
+                ? "Saving..."
+                : action !== "editClv"
+                ? values.isActive
+                  ? "Deactivate"
+                  : "Approve"
+                : "Save changes"}
             </FormButton>
           </>
         ) : (
