@@ -29,7 +29,6 @@ const NewClientForm = ({ onClose, isNewClient }) => {
 
   const addClientId = (values) => {
     dispatch(selectClient(values));
-    console.log({ ...values, id: client?.id });
     return { ...values, id: client?.id };
   };
 
@@ -47,9 +46,8 @@ const NewClientForm = ({ onClose, isNewClient }) => {
   };
 
   const mutateInitialValues = (initialValues) => {
-    let { registeredBy, ...newValues } = client;
-
     if (client) {
+      let { registeredBy, ...newValues } = client;
       return { ...initialValues, ...newValues };
     }
     return initialValues;
