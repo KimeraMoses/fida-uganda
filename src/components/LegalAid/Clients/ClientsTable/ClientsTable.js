@@ -100,7 +100,7 @@ const ClientsTable = ({ data }) => {
           size="2xl"
           title="Client Registration Form"
         >
-          <NewClientForm onSuccess={onClose} />
+          <NewClientForm onClose={onClose} isNewClient={false} />
         </Modal>
       </div>
     </>

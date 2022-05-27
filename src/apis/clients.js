@@ -14,7 +14,10 @@ export const getClient = async (clientId) => {
 };
 
 export const updateClient = async (client) => {
-  return await axiosClient.patch(`${routes.clients.base}/${client.id}`, client);
+  return await axiosClient.patch(
+    `${routes.clients.editClient}/${client.id}`,
+    client
+  );
 };
 
 export const deleteClient = async (clientId) => {

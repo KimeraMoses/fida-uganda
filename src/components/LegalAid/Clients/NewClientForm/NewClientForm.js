@@ -60,11 +60,13 @@ const NewClientForm = ({ onClose, isNewClient }) => {
         <ClientFormOne
           initialValues={isNew ? complainantInitialValues : client}
           validationSchema={complainantSchema}
-          useMutate={isNew ? useAddClient : useAddClient}
+          useMutate={isNew ? useAddClient : useUpdateClient}
           onSuccess={isNew ? handleSuccessfulAdd : nextStep}
           success={isNew ? CLIENT_ADDED : CLIENT_UPDATED}
           limit={limit}
           page={page}
+          // isMutable={true}
+
         />
       );
     case 2:
@@ -72,7 +74,7 @@ const NewClientForm = ({ onClose, isNewClient }) => {
         <MultForm2
           initialValues={caseFileTwoInitialValues}
           useMutate={useUpdateClient}
-          onSuccess={onClose}
+          onSuccess={nextStep}
           success={CLIENT_UPDATED}
           onBack={prevStep}
           page={page}

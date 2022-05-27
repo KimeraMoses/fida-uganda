@@ -6,6 +6,7 @@ import {
   deleteClient,
   getAllClients,
   getClientStats,
+  updateClient,
 } from "../apis/clients";
 import { CLIENTS_KEY, CLIENT_STATS } from "../lib/constants";
 import { selectClient } from "../store/clientReducer";
@@ -58,7 +59,7 @@ export const useAddClient = () => {
         });
       } else {
         queryClient.setQueryData(CLIENTS_KEY, () => {
-          return { clients: [data?.clv] };
+          return { clients: [data?.client] };
         });
       }
     },
@@ -67,21 +68,22 @@ export const useAddClient = () => {
 
 export const useUpdateClient = () => {
   const queryClient = useQueryClient();
-  return useMutation(addClient, {
+  return useMutation(updateClient, {
     onSuccess: (data) => {
       const previousClients = queryClient.getQueryData(CLIENTS_KEY);
+      console.log(data);
       if (previousClients) {
         queryClient.setQueryData(CLIENTS_KEY, (previousClients) => {
           return produce(previousClients, (draft) => {
             const index = draft.clients.findIndex(
-              (client) => client.id === data?.client.id
+              (client) => client.id === data?.updatedClient.id
             );
-            draft.clients[index] = data?.client;
+            draft.clients[index] = data?.updatedClient;
           });
         });
       } else {
         queryClient.setQueryData(CLIENTS_KEY, () => {
-          return { clients: [data?.clv] };
+          return { clients: [data?.updatedClient] };
         });
       }
     },
@@ -91,19 +93,23 @@ export const useUpdateClient = () => {
 export const useDeleteClient = () => {
   const queryClient = useQueryClient();
   return useMutation(deleteClient, {
-    onSuccess: (data) => {
+    onMutate: async (id) => {
+      await queryClient.cancelMutations(CLIENTS_KEY);
+
       const previousClients = queryClient.getQueryData(CLIENTS_KEY);
       if (previousClients) {
         queryClient.setQueryData(CLIENTS_KEY, (previousClients) => {
           return produce(previousClients, (draft) => {
-            draft.clients.filter((client) => client.id !== data?.client.id);
+            draft.clients.filter((client) => client.id !== id);
           });
         });
-      } else {
-        queryClient.setQueryData(CLIENTS_KEY, () => {
-          return { clients: [] };
-        });
       }
+    },
+    onError: (_error, _clientId, context) => {
+      queryClient.setQueryData(CLIENTS_KEY, context.previousClients);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries(CLIENTS_KEY);
     },
   });
 };
