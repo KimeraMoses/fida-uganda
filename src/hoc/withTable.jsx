@@ -55,9 +55,6 @@ const withTable = (TableComponent) => {
     // formattedData()
 
     const handleDownload = () => {
-      // console.log('donwload function called')
-      // const theData = downloadFile(arrayToCsv(data, keys), "application/vnd.ms-excel", "Thedata.xlsx")
-      // setDownloadMetaData(theData)
       const doc = new jsPDF({
         orientation: 'landscape',
       })

@@ -1,20 +1,12 @@
 import React from "react";
-import { SimpleGrid, Button, Textarea } from "@chakra-ui/react";
-import { Form, Formik } from "formik";
+import { SimpleGrid, Button } from "@chakra-ui/react";
 import withForm from "./../../../../hoc/withForm";
 import InputField from "./../../../common/UI/InputField/InputField";
-import { itComplaintOrderSchema, itComplaintInitialValues } from "../../../forms/it/schemas/it";
 
 const ComplaintForm = ({ isSubmitting, onSubmit, ...rest }) => {
   return (
-    <Formik
-    initialValues={itComplaintInitialValues}
-    validationSchema={itComplaintOrderSchema}
-    onSubmit={(values) => {
-      onSubmit(values);
-    }}
-  >
-    <Form>
+
+ 
     <SimpleGrid p={5} gap={3}>
       <InputField name="submittedBy" placeholder="Submitted by" label="Submitted by" />
       <InputField
@@ -47,8 +39,7 @@ const ComplaintForm = ({ isSubmitting, onSubmit, ...rest }) => {
         Add Complaint
       </Button>
     </SimpleGrid>
-    </Form>
-    </Formik>
+
   );
 };
 

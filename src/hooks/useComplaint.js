@@ -30,20 +30,18 @@ export const useAddComplaint = () => {
     onSuccess: (data) => {
       const previousComplaints = queryClient.getQueryData(COMPLAINTS_KEY);
       if (previousComplaints) {
-        queryClient.setQueryData(COMPLAINTS_KEY, (previousComplaints) => {
+        queryClient.setQueryData(COMPLAINTS_KEY, () => {
           return produce(previousComplaints, (draft) => {
             draft.complaints.push(data?.complaint);
           });
         });
       } else {
-        queryClient.setQueryData(COMPLAINTS_KEY, () => {
-          return {complaints: [data?.complaint]}
-        })
-        // return { complaints: [data?.complaint] };
+        return { complaints: [data?.complaint] };
       }
     },
   });
 };
+
 
 export const useUpdateComplaint = () => {
   const queryClient = useQueryClient();
