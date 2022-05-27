@@ -84,14 +84,17 @@ const NewCaseFile = ({ isClvCaseFile, onClose, isNewCaseFile = false }) => {
   };
 
   const mutateInitialValues = (initialValues) => {
-    return { ...initialValues, ...caseFile };
+    if (caseFile) {
+      return { ...initialValues, ...caseFile };
+    }
+    return initialValues;
   };
 
   switch (page) {
     case 1:
       return (
         <MultForm1
-          initialValues={isNew ? caseFileInitialValues : caseFile}
+          initialValues={caseFileInitialValues}
           validationSchema={isClvCaseFile ? clvCaseFileSchema : caseFileSchema}
           isClvCaseFile={isClvCaseFile}
           isNew={isNew}
@@ -114,6 +117,7 @@ const NewCaseFile = ({ isClvCaseFile, onClose, isNewCaseFile = false }) => {
           mutateData={mutateForm1}
           selectedClvName={selectedClvName}
           setSelectedClvName={setSelectedClvName}
+          mutateInitialValues={mutateInitialValues}
         />
       );
     case 2:

@@ -29,6 +29,7 @@ const NewClientForm = ({ onClose, isNewClient }) => {
 
   const addClientId = (values) => {
     dispatch(selectClient(values));
+    console.log({ ...values, id: client?.id });
     return { ...values, id: client?.id };
   };
 
@@ -46,7 +47,12 @@ const NewClientForm = ({ onClose, isNewClient }) => {
   };
 
   const mutateInitialValues = (initialValues) => {
-    return { ...initialValues, ...client };
+    let { registeredBy, ...newValues } = client;
+
+    if (client) {
+      return { ...initialValues, ...newValues };
+    }
+    return initialValues;
   };
 
   const onSubmit = () => {
@@ -58,15 +64,16 @@ const NewClientForm = ({ onClose, isNewClient }) => {
     case 1:
       return (
         <ClientFormOne
-          initialValues={isNew ? complainantInitialValues : client}
+          initialValues={complainantInitialValues}
           validationSchema={complainantSchema}
           useMutate={isNew ? useAddClient : useUpdateClient}
           onSuccess={isNew ? handleSuccessfulAdd : nextStep}
           success={isNew ? CLIENT_ADDED : CLIENT_UPDATED}
           limit={limit}
           page={page}
-          // isMutable={true}
-
+          isMutable={true}
+          mutateData={addClientId}
+          mutateInitialValues={mutateInitialValues}
         />
       );
     case 2:
