@@ -3,7 +3,8 @@ import classes from "./LeaveTrackerTable.module.css";
 import Modal from "./../../common/Modal";
 import LeaveApplicationForm from "./LeaveApplicationForm/LeaveApplicationForm";
 import { useAddLeaveDays } from "../../../hooks/useLeaveTracker";
-import TrackerTable from "../TrackerTable/TrackerTable";
+import {useAddLeaveRequest} from "../../../hooks/useLeaveRequest";
+import LeaveTable from "../TrackerTable/LeaveTrackerTable";
 import { useDisclosure } from "@chakra-ui/react";
 import FormButton from "../../common/UI/FormButton/FormButton";
 import { useLeaveRequests } from "../../../hooks/useLeaveRequest";
@@ -38,7 +39,7 @@ const LeaveTrackerTable = (props) => {
   return (
     <>
       <div className={classes.table_container}>
-        <TrackerTable
+        <LeaveTable
           type="leave"
           action={props.handleLeaveClick}
           data={data ? data.leaves : null}
@@ -59,7 +60,7 @@ const LeaveTrackerTable = (props) => {
             initialValues={leaveApplicationInitialValues}
             onSuccess={onClose}
             success={`Leave request added successfully`}
-            useMutate={useAddLeaveDays}
+            useMutate={useAddLeaveRequest}
           />
         </Modal>
       </div>

@@ -5,6 +5,7 @@ export const routes = {
     getLeaveRequests: `${BASE_URL}/leaveRequests/getAll`,
     getLeaveRequest: `${BASE_URL}/leaveRequests`,
     base: `${BASE_URL}/leaveRequests`,
+    createLeaveRequest: `${BASE_URL}/leaveRequests/create`
   },
   membershipActivities: {
     getMembershipActivities: `${BASE_URL}/membershipActivities/getAll`,

@@ -9,3 +9,7 @@ export const getLeaveRequests = async () => {
   return await axiosClient.get(routes.leaveRequests.getLeaveRequests);
 };
 
+export const addLeaveRequests = async (leaveRequest) => {
+  return await axiosClient.post(routes.leaveRequests.createLeaveRequest, leaveRequest);
+};
+

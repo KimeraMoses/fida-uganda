@@ -15,35 +15,18 @@ const SelectInput = ({
   const optionsWrapper = isMulti
     ? [{ label: "Select All", value: "all" }, ...options]
     : options;
-  const [isOptionDisabled, setIsOptionDisabled] = React.useState(false);
-
-  const handleClear = (triggeredAction) => {
-    if (triggeredAction.action === "clear") {
-      // Clear happened
-      setIsOptionDisabled(false);
-    }
-  };
-  const handleAllSelect = (options, triggeredAction) => {
-    onChange(options.slice(1));
-    setIsOptionDisabled(true);
-    handleClear(triggeredAction);
-  };
-
-  const handleUniversalChange = (selected, triggeredAction) => {
-    !isMulti
-      ? onChange((selected && selected.value) || null)
-      : onChange(selected);
-    handleClear(triggeredAction);
-  };
   return (
     <Select
       placeholder={placeholder}
-      onChange={(selected, triggeredAction) => {
+      onChange={(selected) => {
+        console.log(selected, "selectd");
         isMulti &&
         selected.length &&
         selected.find((option) => option.value === "all")
-          ? handleAllSelect(options, triggeredAction)
-          : handleUniversalChange(selected, triggeredAction);
+          ? onChange(options.slice(1))
+          : !isMulti
+          ? onChange((selected && selected.value) || null)
+          : onChange(selected);
       }}
       components={animatedComponents}
       options={optionsWrapper}
@@ -52,7 +35,6 @@ const SelectInput = ({
       name={name}
       isClearable={true}
       isDisabled={disabled}
-      isOptionDisabled={() => isOptionDisabled}
     />
   );
 };
