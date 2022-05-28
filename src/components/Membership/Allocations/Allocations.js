@@ -31,7 +31,7 @@ const Allocations = () => {
           onClose={onClose}
           title="Allocations"
           initialValues={initialValues}
-          validationSchema={allocationFormSchema}
+          // validationSchema={allocationFormSchema}
           onSuccess={onClose}
           success={`Allocation added successfully`}
           useMutate={useAddAllocation}
