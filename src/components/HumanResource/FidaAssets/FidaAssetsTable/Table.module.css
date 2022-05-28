@@ -16,3 +16,11 @@
 .approval_table td:last-child {
   white-space: nowrap;
 }
+
+.primary_text_icon {
+  display: flex;
+  align-items: center;
+}
+.primary_text_icon svg {
+  margin-right: 5px;
+}

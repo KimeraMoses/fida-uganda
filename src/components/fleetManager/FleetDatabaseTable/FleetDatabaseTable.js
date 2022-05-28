@@ -22,6 +22,7 @@ import { useAddFleet } from "../../../hooks/useFleet";
 
 const FleetDatabaseTable = ({ data, ...rest }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  console.log(data);
   const handleEditItem = (item) => {
     console.log(item);
     onOpen();
@@ -41,27 +42,28 @@ const FleetDatabaseTable = ({ data, ...rest }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {data.map((item, index) => {
-              return (
-                <Tr key={item.id}>
-                  <Td>00{index + 1}</Td>
-                  <Td>{formatDate(item.createdAt)}</Td>
-                  <Td>{item.vehicle_model}</Td>
-                  <Td>{item.vehicle_number}</Td>
-                  <Td>{item.driver_address}</Td>
-                  <Td className={classes.table_actions_wrapper}>
-                    <div className={classes.table_actions_icon_wrapper}>
-                      <IconButton
-                        size="xs"
-                        aria-label="Edit Item"
-                        icon={<MdOutlineRemoveRedEye />}
-                        onClick={() => handleEditItem(item)}
-                      />
-                    </div>
-                  </Td>
-                </Tr>
-              );
-            })}
+            {data &&
+              data.map((item, index) => {
+                return (
+                  <Tr key={item.id}>
+                    <Td>00{index + 1}</Td>
+                    <Td>{formatDate(item.createdAt)}</Td>
+                    <Td>{item.vehicle_model}</Td>
+                    <Td>{item.vehicle_number}</Td>
+                    <Td>{item.driver_address}</Td>
+                    <Td className={classes.table_actions_wrapper}>
+                      <div className={classes.table_actions_icon_wrapper}>
+                        <IconButton
+                          size="xs"
+                          aria-label="Edit Item"
+                          icon={<MdOutlineRemoveRedEye />}
+                          onClick={() => handleEditItem(item)}
+                        />
+                      </div>
+                    </Td>
+                  </Tr>
+                );
+              })}
           </Tbody>
         </Table>
         <Modal
@@ -76,6 +78,7 @@ const FleetDatabaseTable = ({ data, ...rest }) => {
             onSuccess={onClose}
             success={`Vehicle added successfully`}
             useMutate={useAddFleet}
+            isEdit={true}
           />
         </Modal>
       </div>
