@@ -2,25 +2,11 @@ import React from "react";
 import withForm from "../../../../hoc/withForm";
 import classes from "./LeaveApplicationForm.module.css";
 import InputField from "./../../../common/UI/InputField/InputField";
-import { SimpleGrid, Textarea } from "@chakra-ui/react";
+import { SimpleGrid } from "@chakra-ui/react";
 import FormButton from "../../../common/UI/FormButton/FormButton";
-// import SelectField from "../../../common/SelectField";
 import SelectInput from "../../../Membership/Allocations/AllocationForm/SelectInput";
+import TextAreaField from "../../../common/TextAreaField";
 import { monthsLong } from "../../../../assets/text";
-
-/**
- * 
- * @param {
-    "reason":"tired of work",
-    "address_on_leave":"kasubi",
-    "from":"02/07/2021",
-    "to":"01/07/2021",
-    "month_of_application":"july",
-    "tel_on_leave":"012578552",
-    "duration_type":"quartely",
-    "details":"string"} props 
- * @returns 
- */
 
 const LeaveApplicationForm = (props) => {
   const { onClose, isSubmitting, setFieldValue } = props;
@@ -73,7 +59,7 @@ const LeaveApplicationForm = (props) => {
         style={{ alignItems: "center", marginBottom: "5px" }}
       >
         <div className={classes.field_row_label}>Reason:</div>
-        <Textarea name="reason" placeholder="Reason" />
+        <TextAreaField name="reason" placeholder="Reason" />
       </SimpleGrid>
 
       <SimpleGrid
@@ -82,7 +68,7 @@ const LeaveApplicationForm = (props) => {
         style={{ alignItems: "center", marginBottom: "5px" }}
       >
         <div className={classes.field_row_label}>Details:</div>
-        <Textarea name="details" placeholder="Details" />
+        <TextAreaField name="details" placeholder="Details" />
       </SimpleGrid>
 
       <SimpleGrid columns={1} spacing={1}>
