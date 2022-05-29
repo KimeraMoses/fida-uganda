@@ -5,9 +5,21 @@ import {
   ModalHeader,
 } from "@chakra-ui/react";
 
-const Modal = ({ isOpen, onClose, title, size = "lg", children }) => {
+const Modal = ({
+  isOpen,
+  onClose,
+  title,
+  isCentered,
+  size = "lg",
+  children,
+}) => {
   return (
-    <ChakraModal isOpen={isOpen} onClose={onClose} size={size}>
+    <ChakraModal
+      isOpen={isOpen}
+      onClose={onClose}
+      size={size}
+      isCentered={isCentered ? true : false}
+    >
       <ModalOverlay />
       <ModalContent>
         {title && (

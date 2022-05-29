@@ -1,0 +1,7 @@
+.breadcrumb_wrapper {
+  display: flex;
+  align-items: center;
+}
+.breadcrumb_wrapper svg {
+  margin-bottom: 14px;
+}

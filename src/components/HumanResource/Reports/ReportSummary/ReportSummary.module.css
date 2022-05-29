@@ -1,0 +1,91 @@
+.summary_header {
+  display: flex;
+  align-items: center;
+  color: var(--primary_color);
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.summary_header h1 {
+  font-size: 36px;
+}
+
+.summary_header svg {
+  font-size: 20px;
+  margin-right: 5px;
+  margin-top: 5px;
+  cursor: pointer;
+}
+.summary_wrapper_inner {
+  width: 50%;
+}
+.summary_details_wrapper {
+  background-color: #ffffff;
+  padding: 12px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 16px;
+}
+.summary_details_wrapper h2 {
+  font-size: 23px;
+  color: #000000;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.user_details h6 {
+  font-size: 16px;
+  font-weight: 400;
+}
+.table_wrapper {
+  margin-bottom: 10px;
+}
+.table_wrapper h6 {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 10px 0 5px;
+}
+.remarks_wrapper {
+  padding: 20px;
+}
+.form_action_wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.card_wrapper {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+.avater_wrapper {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.content_wrapper h4,
+h6 {
+  font-weight: 700;
+  /* font-size: 13px; */
+}
+.content_wrapper h6 {
+  font-weight: 400;
+  font-size: 13px;
+}
+.add_actions_btn {
+  margin-top: 10px;
+  text-align: right;
+}
+.name_wrapper {
+  display: flex;
+  align-items: center;
+}
+.name_wrapper p {
+  margin-left: 10px;
+  font-size: 12px;
+}
+
+.form_action_wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
