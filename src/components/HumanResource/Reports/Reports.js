@@ -5,6 +5,27 @@ import ReportsTable from "./ReportTable/ReportTable";
 import { useReports } from "../../../hooks/useReports";
 import AddNewFolder from "./AddNewFolder/AddNewFolder";
 
+export const FolderFileData = [
+  {
+    id: 1,
+    title: "First Quater 2022 (January to March)",
+    type: "Quatery Report",
+    date: "Oct 14, 2021",
+  },
+  {
+    id: 1,
+    title: "First Quater 2022 (January to March)",
+    type: "Quatery Report",
+    date: "Oct 14, 2021",
+  },
+  {
+    id: 1,
+    title: "First Quater 2022 (January to March)",
+    type: "Quatery Report",
+    date: "Oct 14, 2021",
+  },
+];
+
 const Reports = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data } = useReports();
@@ -15,11 +36,11 @@ const Reports = () => {
       {data?.reports && (
         <ReportsTable
           data={data?.reports}
-          btnLabel="Add Report"
+          btnLabel="Create"
           btnClick={onOpen}
         />
       )}
-      <Modal isOpen={isOpen} onClose={onClose} size="xs">
+      <Modal isOpen={isOpen} onClose={onClose} size="xs" isCentered>
         <AddNewFolder />
       </Modal>
     </>

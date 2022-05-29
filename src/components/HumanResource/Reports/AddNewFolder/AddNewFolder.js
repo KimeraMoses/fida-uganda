@@ -29,7 +29,7 @@ const AddNewFolder = () => {
         onClick={() => handleClick("report")}
       >
         <VscCloudUpload />
-        <h4>Create New Report</h4>
+        <h4>New Report</h4>
       </div>
       <Modal
         isOpen={isOpen}

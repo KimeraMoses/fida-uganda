@@ -44,7 +44,7 @@ const ActionForm = ({ user, values }) => {
   );
 };
 
-const ActionCard = ({ action }) => {
+export const ActionCard = ({ action }) => {
   return (
     <div className={styles.card_wrapper}>
       <div

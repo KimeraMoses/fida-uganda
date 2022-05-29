@@ -42,6 +42,7 @@ import EventAttendence from "./components/dashboard/EventsAttendence/EventAttend
 import ReportFiles from "./components/HumanResource/Reports/ReportFiles/ReportFiles";
 import SummaryDetails from "./components/dashboard/SummaryDetails/SummaryDetails";
 import LegalOfficer from "./components/CourtProcessServer/LegalOfficer/LegalOfficer";
+import ReportSummaryDetails from "./components/HumanResource/Reports/ReportSummary/ReportSummary";
 
 const View = () => {
   return (
@@ -92,6 +93,10 @@ const View = () => {
         <Route path="fida-assets" element={<FidaAssets />} />
         <Route path="reports" element={<Reports />} />
         <Route path="reports/:reportFolderName" element={<ReportFiles />} />
+        <Route
+          path="reports/reportFolder/:id"
+          element={<ReportSummaryDetails />}
+        />
         <Route path="it-products" element={<ITProducts />} />
         <Route path="it-services" element={<ITServices />} />
         <Route path="it-complaints" element={<ITComplaints />} />
