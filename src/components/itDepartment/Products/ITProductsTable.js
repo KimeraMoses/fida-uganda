@@ -1,11 +1,17 @@
-import React from "react";
+import React, {useState} from "react";
 import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
 import classes from "./Table.module.css";
 import { TableHeadColumn } from "../../Membership/Allocations/AllocationsTable/AllocationsTable";
 import { formatDate } from "../../../lib/data";
+import {downloadFile, arrayToCsv} from "../../downloadExcel"
 import withTable from "./../../../hoc/withTable";
 
 const ITProductsTable = ({ data, isProducts }) => {
+
+
+
+  
+
   return (
     <>
       <div className={classes.table_wrapper}>
@@ -14,6 +20,7 @@ const ITProductsTable = ({ data, isProducts }) => {
           colorScheme="gray"
           size="sm"
           className={classes.data_table}
+
         >
           <Thead
             className={`${classes.table_header} ${
@@ -22,6 +29,7 @@ const ITProductsTable = ({ data, isProducts }) => {
           >
             <Tr>
               <TableHeadColumn
+              
                 title="Name"
                 secondaryText={isProducts ? "Brand" : "Location"}
               />

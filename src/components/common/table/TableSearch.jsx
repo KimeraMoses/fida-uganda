@@ -14,14 +14,15 @@ import { AiOutlineFilePdf } from "react-icons/ai";
 import { MdFilterList, MdAdd, MdMoreVert } from "react-icons/md";
 
 function TableSearch({
+  handleDownload,
+  downloadExcel,
+  downloadMetaData,
   onSearchHandler,
   searchTerm,
   btnLabel,
   btnClick,
   showBtn = true,
 }) {
-  // const [search, setSearch] = useState("");
-
   return (
     <Flex
       as="form"
@@ -62,12 +63,16 @@ function TableSearch({
           icon={<MdMoreVert />}
         />
         <MenuList>
-          <MenuItem icon={<AiOutlineFilePdf size={20} />}>
-            Export As Pdf
-          </MenuItem>
+          <a onClick={handleDownload}>
+            <MenuItem icon={<AiOutlineFilePdf size={20} />}>
+              Export As Pdf
+            </MenuItem>
+          </a>
+          <a onClick={downloadExcel}>
           <MenuItem icon={<SiMicrosoftexcel size={20} />}>
             Export As Excel
           </MenuItem>
+          </a>
         </MenuList>
       </Menu>
     </Flex>

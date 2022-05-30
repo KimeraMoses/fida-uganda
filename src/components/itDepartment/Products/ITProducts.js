@@ -2,7 +2,7 @@ import React from "react";
 import { useDisclosure } from "@chakra-ui/react";
 import SectionHeader from "../../common/SectionHeader";
 import ITProductForm from "../../forms/it/AddITProductForm";
-import { itProductInitialValues } from "../../forms/it/schemas/it";
+import { itProductInitialValues, itProductOrderSchema } from "../../forms/it/schemas/it";
 import Modal from "../../common/Modal";
 import ITProductsTable from "./ITProductsTable";
 import { useAddItProduct, useItProducts } from "../../../hooks/useItProduct";
@@ -20,6 +20,8 @@ const ITProducts = () => {
         isLoading={isLoading}
         btnLabel="Add Product"
         btnClick={onOpen}
+        keys={['project_name', 'brand', 'id']}
+        tableName="IT Products"
       />
 
       <Modal
@@ -30,7 +32,7 @@ const ITProducts = () => {
         <ITProductForm
           title="It Products"
           initialValues={itProductInitialValues}
-          // validationSchema={itProductOrderSchema}
+          validationSchema={itProductOrderSchema}
           onSuccess={onClose}
           success={`IT Product added successfully`}
           useMutate={useAddItProduct}
