@@ -19,7 +19,6 @@ const withTable = (TableComponent) => {
     const [searchResults, setSearchResults] = useState([]);
     let tableKeys = [];
 
-  
     Array.isArray(data) && data.length && tableKeys.push(Object.keys(data[0]));
 
     let formattedData = [];
@@ -28,11 +27,6 @@ const withTable = (TableComponent) => {
       data.map((row) => {
         return formattedData.push(Object.values(row));
       });
-
-      console.log('keys',tableKeys);
-
-
-
 
     const handleDownload = () => {
       const doc = new jsPDF({
@@ -48,13 +42,12 @@ const withTable = (TableComponent) => {
       });
       doc.save(`${tableName}-${new Date().toLocaleString("en-GB")}.pdf`);
     };
-    
+
     const downloadExcel = () => {
       const workSheet = XLSX.utils.json_to_sheet(formattedData);
       const workBook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(workBook, workSheet, "Sheet1");
 
-    
       //binary string
       XLSX.write(workBook, { bookType: "xlsx", type: "binary" });
       //donwload
