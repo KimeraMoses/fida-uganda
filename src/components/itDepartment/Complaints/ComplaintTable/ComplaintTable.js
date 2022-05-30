@@ -3,6 +3,7 @@ import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
 import classes from "../../CommonTable/Table.module.css";
 import { TableHeadColumn } from "../../../Membership/Allocations/AllocationsTable/AllocationsTable";
 import withTable from "./../../../../hoc/withTable";
+import { formatDate } from "../../../../lib/data";
 
 const ComplaintsTable = ({ data }) => {
   return (
@@ -41,10 +42,14 @@ const ComplaintsTable = ({ data }) => {
                       <div
                         className={`${classes.data__primary_text} ${classes.single_line}`}
                       >
-                        {item.dueDate}
+                        {formatDate(item.dueDate)}
                       </div>
                       <div className={classes.data__secondary_text}>
-                        {item.time}
+                      {new Date(item.createdAt).toLocaleTimeString(undefined, {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        second: "2-digit",
+                      })}
                       </div>
                     </Td>
                     <Td className={classes.data_field}>
@@ -67,7 +72,7 @@ const ComplaintsTable = ({ data }) => {
                         </div>
                       </div>
                       <div className={classes.data__secondary_text}>
-                        {item.date_recieved}
+                        {formatDate(item.createdAt)}
                       </div>
                     </Td>
                   </Tr>
