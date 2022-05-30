@@ -3,7 +3,8 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
   getLeaveRequest,
   getLeaveRequests,
-  addLeaveRequests
+  addLeaveRequests,
+  approveLeaveRequest,
 } from "../apis/leaveRequests";
 import { LEAVE_REQUESTS_KEY } from "../lib/constants";
 
@@ -25,6 +26,29 @@ export const useAddLeaveRequest = () => {
         queryClient.setQueryData(LEAVE_REQUESTS_KEY, (previousLeaveRequests) => {
           return produce(previousLeaveRequests, (draft) => {
             draft.leaves.push(data.leave);
+          });
+        });
+      } else {
+        queryClient.setQueryData(LEAVE_REQUESTS_KEY, () => {
+          return { leaves: [data.leave] };
+        });
+      }
+    },
+  });
+};
+
+export const useApproveLeaveRequest = (id) => {
+  const queryClient = useQueryClient();
+  return useMutation(approveLeaveRequest, {
+    onSuccess: (data) => {
+      const previousAssets = queryClient.getQueryData(LEAVE_REQUESTS_KEY);
+      if (previousAssets) {
+        queryClient.setQueryData(LEAVE_REQUESTS_KEY, (previousAssets) => {
+          return produce(previousAssets, (draft) => {
+            const index = draft.leaves.findIndex(
+              (leave) => leave.id === data.leave.id
+            );
+            draft.leaves[index] = data.leave;
           });
         });
       } else {

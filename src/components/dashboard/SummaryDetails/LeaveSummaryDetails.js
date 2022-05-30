@@ -6,10 +6,6 @@ import SummaryTable from "./SummaryTable/SummaryTable";
 import { useNavigate, useLocation } from "react-router-dom";
 import FormButton from "../../common/UI/FormButton/FormButton";
 import { useAdvance } from "../../../hooks/useAdvances";
-import {
-  useLeaveRequest,
-  useApproveLeaveRequest,
-} from "../../../hooks/useLeaveRequest";
 
 const userDetails = [
   { field: "Date of application", value: "10/03/2022" },
@@ -40,10 +36,6 @@ const SummaryDetails = (props) => {
   const id = query.get("id");
 
   const { data, isLoading } = useAdvance(id);
-
-  const { data: leaveData, isLoading: loadingLeaveRequests } =
-    useLeaveRequest(id);
-  console.log(leaveData, "leave data");
 
   return (
     <div className={classes.summary_wrapper}>
@@ -84,7 +76,7 @@ const SummaryDetails = (props) => {
           </h2>
 
           <div className={classes.user_details}>
-            {!isLoading && data && selectedType !== "leave" && (
+            {!isLoading && data && (
               <SimpleGrid columns={2} spacing={1}>
                 <h6>Date of Application:</h6>
                 <h6>{new Date(data?.advance?.createdAt).toLocaleString()}</h6>
@@ -94,27 +86,10 @@ const SummaryDetails = (props) => {
                 <h6>{data?.advance?.project}</h6>
                 <h6>I wish to apply for:</h6>
                 <h6>{selectedType}</h6>
-              </SimpleGrid>
-            )}
-
-            {!loadingLeaveRequests && leaveData && selectedType === "leave" && (
-              <SimpleGrid columns={2} spacing={1}>
-                <h6>Date of Application:</h6>
-                <h6>
-                  {new Date(leaveData?.leave?.createdAt).toLocaleString()}
-                </h6>
-                <h6>Name:</h6>
-                <h6>{leaveData?.leave?.user?.full_name}</h6>
-                <h6>Designation:</h6>
-                <h6>{leaveData?.leave?.project}</h6>
-                <h6>I wish to apply for:</h6>
-                <h6>{selectedType}</h6>
-                <h6>Reason:</h6>
-                <h6>{leaveData?.leave?.reason}</h6>
-                <h6>While on leave my physical contact will be:</h6>
-                <h6>{leaveData?.leave?.address_on_leave}</h6>
-                <h6>Tel:</h6>
-                <h6>{leaveData?.leave?.tel_on_leave}</h6>
+                <h6>Amount:</h6>
+                <h6>{data?.advance?.amount}</h6>
+                <h6>Net Pay:</h6>
+                <h6>{data?.advance?.net_pay}</h6>
               </SimpleGrid>
             )}
           </div>
@@ -130,27 +105,14 @@ const SummaryDetails = (props) => {
           <Textarea placeholder="Type here" />
         </div>
 
-        {selectedType === "leave" && (
-          <div className={classes.form_action_wrapper}>
-            <FormButton variant="cancel" type="button">
-              Reject
-            </FormButton>
-            <FormButton variant="save" type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Approving..." : "Approve"}
-            </FormButton>
-          </div>
-        )}
-
-        {selectedType === "advance" && (
-          <div className={classes.form_action_wrapper}>
-            <FormButton variant="cancel" type="button">
-              Reject
-            </FormButton>
-            <FormButton variant="save" type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Approving..." : "Approve"}
-            </FormButton>
-          </div>
-        )}
+        <div className={classes.form_action_wrapper}>
+          <FormButton variant="cancel" type="button">
+            Reject
+          </FormButton>
+          <FormButton variant="save" type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Approving..." : "Approve"}
+          </FormButton>
+        </div>
       </div>
     </div>
   );
