@@ -7,14 +7,15 @@ import FormButton from "../../../common/UI/FormButton/FormButton";
 import SelectInput from "../../Allocations/AllocationForm/SelectInput";
 
 const NewActivityForm = (props) => {
-  const { onClose, membersData, projectOptions, setFieldValue, isSubmitting } = props;
+  const { onClose, membersData, projectOptions, setFieldValue, isSubmitting } =
+    props;
 
   const formattedMembers =
-  membersData &&
-  membersData.map((user) => ({
-    label: `${user.first_name} ${user.last_name}`,
-    value: user.id,
-  }));
+    membersData &&
+    membersData.map((user) => ({
+      label: `${user.first_name} ${user.last_name}`,
+      value: user.id,
+    }));
 
   return (
     <div className={classes.activity_form_wrapper}>
@@ -23,10 +24,16 @@ const NewActivityForm = (props) => {
         <div className={classes.input_field_wrapper}>
           <SelectInput
             fullWidth
-            isMulti={false}
+            isMulti={true}
             options={formattedMembers}
             name="member"
-            onChange={(option) => setFieldValue("member", option.value)}
+            // onChange={(option) => setFieldValue("member", option.value)}
+            onChange={(option) =>
+              setFieldValue(
+                "member",
+                option.map((item) => item.value)
+              )
+            }
             disabled={!membersData && !formattedMembers.length}
           />
         </div>
@@ -39,7 +46,7 @@ const NewActivityForm = (props) => {
             isMulti={false}
             options={projectOptions}
             name="project"
-            onChange={(option) => setFieldValue("project", option.value)}
+            onChange={(option) => setFieldValue("project", option)}
           />
         </div>
       </div>

@@ -19,7 +19,6 @@ const SelectInput = ({
     <Select
       placeholder={placeholder}
       onChange={(selected) => {
-        console.log(selected, "selectd");
         isMulti &&
         selected.length &&
         selected.find((option) => option.value === "all")
