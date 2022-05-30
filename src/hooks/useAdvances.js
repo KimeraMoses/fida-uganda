@@ -1,4 +1,5 @@
-import { useMutation, useQuery } from "react-query";
+import produce from "immer";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
   addAdvance,
   deleteAdvance,
@@ -17,7 +18,23 @@ export const useAdvance = (id) => {
 };
 
 export const useAddAdvance = () => {
-  return useMutation(addAdvance);
+  const queryClient = useQueryClient();
+  return useMutation(addAdvance, {
+    onSuccess: (data) => {
+      const previousAdvances = queryClient.getQueryData(ADVANCES_KEY);
+      if (previousAdvances) {
+        queryClient.setQueryData(ADVANCES_KEY, (previousAdvances) => {
+          return produce(previousAdvances, (draft) => {
+            draft.advances.push(data.advance);
+          });
+        });
+      } else {
+        queryClient.setQueryData(ADVANCES_KEY, () => {
+          return { advances: [data.advance] };
+        });
+      }
+    },
+  });
 };
 
 export const useEditAdvance = () => {

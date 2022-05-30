@@ -2,6 +2,7 @@ import React from "react";
 import { Table, Thead, Tbody, Tr, Th, Td, IconButton } from "@chakra-ui/react";
 import classes from "./Table.module.css";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
+import sortByDate from "../../../lib/sortByDate";
 
 const TableHeadColumn = (props) => {
   const { title } = props;
@@ -9,7 +10,6 @@ const TableHeadColumn = (props) => {
 };
 
 const TrackerTable = ({ type, action, data, isLoading }) => {
- 
   return (
     <>
       <div className={classes.table_container}>
@@ -29,10 +29,12 @@ const TrackerTable = ({ type, action, data, isLoading }) => {
           <Tbody>
             {!isLoading &&
               data &&
-              data.map((item) => {
+              sortByDate(data).map((item) => {
                 return (
                   <Tr>
-                    <Td className={classes.name_column}>{`${item.amount} requested in ${item.month}`}</Td>
+                    <Td
+                      className={classes.name_column}
+                    >{`${item.amount} requested in ${item.month}`}</Td>
                     <Td className={classes.data__purpose_primary_text}>
                       {new Date(item.createdAt).toLocaleString()}
                     </Td>
