@@ -1,17 +1,14 @@
 import React from "react";
 import SectionHeader from "../../common/SectionHeader";
-import TableSearch from "../../common/table/TableSearch";
-import ProjectTable from "./ProjectPFilesTable/ProjectFilesTable";
-import { useProjectFiles } from "../../../hooks/useProjectFiles";
+import ProjectTable from "./ProjectPFilesTable/ProjectTable";
 
 const ProjectFiles = () => {
-  const { data } = useProjectFiles();
+  // const { data } = useProjectFiles();
 
   return (
     <>
       <SectionHeader title="Project Files" />
-      <TableSearch showBtn={false} />
-      {data?.ProjectFiles && <ProjectTable data={data?.ProjectFiles} />}
+      <ProjectTable showBtn={false} />
     </>
   );
 };

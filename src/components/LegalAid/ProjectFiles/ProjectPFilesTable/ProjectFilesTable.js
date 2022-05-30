@@ -1,25 +1,25 @@
 import React from "react";
 import { Table, Thead, Tbody, Tr, Td, IconButton } from "@chakra-ui/react";
-import classes from "../../../HumanResource/FidaAssets/FidaAssetsTable/Table.module.css";
+import classes from "../../../common/table/TableStyles.module.css";
 import { TableHeadColumn } from "../../../Membership/Allocations/AllocationsTable/AllocationsTable";
 import { IoDocumentTextSharp } from "react-icons/io5";
-import { MdOutlineFileDownload } from "react-icons/md";
-import styles from "./Table.module.css";
-import { formatDate } from "../../../../lib/data";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
+import withTable from "./../../../../hoc/withTable";
 
-const ProjectTable = ({ data }) => {
+const ProjectFilesTable = ({ data }) => {
   return (
     <>
-      <div className={classes.approvals_table_wrapper}>
+      <div className={classes.table_wrapper}>
         <Table
           variant="striped"
           colorScheme="gray"
-          className={classes.approval_table}
+          size="sm"
+          className={classes.table}
         >
-          <Thead className={styles.table_header}>
+          <Thead className={classes.table_header}>
             <Tr>
               <TableHeadColumn title="Project Name" />
-              <TableHeadColumn title="Created By" />
+              <TableHeadColumn title="Report Type" />
               <TableHeadColumn title="Last Modified" />
               <TableHeadColumn title="Actions" />
             </Tr>
@@ -31,26 +31,19 @@ const ProjectTable = ({ data }) => {
                   <Td>
                     <div className={classes.primary_text_icon}>
                       <IoDocumentTextSharp />
-                      {item?.filename}
+                      {item?.title}
                     </div>
                   </Td>
-                  <Td className={classes.data__purpose_primary_text}>
-                    {item.createdBy?.id}
-                  </Td>
-                  <Td>{formatDate(item.updateAt)}</Td>
+                  <Td>{item.type}</Td>
+                  <Td>{item.date}</Td>
                   <Td style={{ textAlign: "center" }}>
-                    <div className={styles.table_actions_wrapperr}>
-                      <div className={styles.table_actions_icon_wrapper}>
-                        <IconButton
-                          size="sm"
-                          variant="outline"
-                          aria-label="Download Item"
-                          icon={<MdOutlineFileDownload />}
-                          // onClick={() =>
-                          //   handleDownload()
-                          // }
-                        />
-                      </div>
+                    <div className={classes.table_actions_icon_wrapper}>
+                      <IconButton
+                        size="sm"
+                        variant="outline"
+                        aria-label="Download Item"
+                        icon={<MdOutlineRemoveRedEye />}
+                      />
                     </div>
                   </Td>
                 </Tr>
@@ -63,4 +56,4 @@ const ProjectTable = ({ data }) => {
   );
 };
 
-export default ProjectTable;
+export default withTable(ProjectFilesTable);
