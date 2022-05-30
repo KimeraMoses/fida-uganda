@@ -63,16 +63,19 @@ function TableSearch({
           icon={<MdMoreVert />}
         />
         <MenuList>
-          <a onClick={handleDownload}>
-            <MenuItem icon={<AiOutlineFilePdf size={20} />}>
-              Export As Pdf
-            </MenuItem>
-          </a>
-          <a onClick={downloadExcel}>
-          <MenuItem icon={<SiMicrosoftexcel size={20} />}>
+          <MenuItem
+            onClick={handleDownload}
+            icon={<AiOutlineFilePdf size={20} />}
+          >
+            Export As Pdf
+          </MenuItem>
+
+          <MenuItem
+            onClick={downloadExcel}
+            icon={<SiMicrosoftexcel size={20} />}
+          >
             Export As Excel
           </MenuItem>
-          </a>
         </MenuList>
       </Menu>
     </Flex>
