@@ -14,3 +14,16 @@
 .table_wrapper td {
   font-weight: 600;
 }
+
+.primary_text_icon {
+  display: flex;
+  align-items: center;
+}
+.primary_text_icon svg {
+  margin-right: 5px;
+}
+
+.table_actions_wrapperr {
+  /* display: flex;
+  justify-content: center; */
+}

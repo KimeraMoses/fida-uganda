@@ -43,6 +43,7 @@ import ReportFiles from "./components/HumanResource/Reports/ReportFiles/ReportFi
 import SummaryDetails from "./components/dashboard/SummaryDetails/SummaryDetails";
 import LegalOfficer from "./components/CourtProcessServer/LegalOfficer/LegalOfficer";
 import ReportSummaryDetails from "./components/HumanResource/Reports/ReportSummary/ReportSummary";
+import ProjectFilesDocuments from "./components/LegalAid/ProjectFiles/ProjectDocuments/ProjectFilesDocuments";
 
 const View = () => {
   return (
@@ -67,6 +68,10 @@ const View = () => {
         <Route path="case-files" element={<CaseFiles />} />
         <Route path="legal-officer" element={<LegalOfficer />} />
         <Route path="project-files" element={<ProjectFiles />} />
+        <Route
+          path="project-files/documents"
+          element={<ProjectFilesDocuments />}
+        />
         <Route path="clv-case-files" element={<ClvCaseFiles />} />
         <Route path="clv-database" element={<ClvDatabase />} />
         <Route path="requisitions" element={<Requisitions />} />

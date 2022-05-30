@@ -39,6 +39,8 @@ const ReportSummaryDetails = (props) => {
   return (
     <div className={classes.summary_wrapper}>
       <ReportBreadCrumb
+        root="Reports"
+        rootLink="/reports"
         folderName={"Folder name"}
         folderLink="/reports/Folder-Name"
         reportName="Report name"

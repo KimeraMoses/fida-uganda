@@ -4,12 +4,18 @@ import { RiArrowRightSLine } from "react-icons/ri";
 import classes from "./BreadCrumb.module.css";
 import { Heading } from "@chakra-ui/react";
 
-const ReportBreadCrumb = ({ folderName, reportName, folderLink }) => {
+const ReportBreadCrumb = ({
+  root,
+  rootLink,
+  folderName,
+  reportName,
+  folderLink,
+}) => {
   return (
     <div className={classes.breadcrumb_wrapper}>
-      <Link to="/reports">
+      <Link to={rootLink}>
         <Heading color="purple.800" fontSize="4xl" mb={5}>
-          Reports
+          {root}
         </Heading>
       </Link>
       <RiArrowRightSLine size={40} />

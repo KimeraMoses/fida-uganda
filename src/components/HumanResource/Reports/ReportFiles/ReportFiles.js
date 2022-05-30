@@ -24,9 +24,11 @@ const ReportFiles = () => {
   return (
     <>
       <ReportBreadCrumb
+        root="Reports"
+        rootLink="/reports"
         folderName={reportFolderName.replace(/-/g, " ")}
         // folderLink="/"
-        reportName="Report name"
+        // reportName="Report name"
       />
 
       {data?.reports && (
