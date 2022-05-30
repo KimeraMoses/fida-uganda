@@ -8,24 +8,24 @@ import FormButton from "../../common/UI/FormButton/FormButton";
 import { useAdvance } from "../../../hooks/useAdvances";
 import {
   useLeaveRequest,
-  useApproveLeaveRequest,
+  // useApproveLeaveRequest,
 } from "../../../hooks/useLeaveRequest";
 
-const userDetails = [
-  { field: "Date of application", value: "10/03/2022" },
-  { field: "Name", value: "Kimera Moses" },
-  { field: "Designation", value: "Legal Officer" },
-  { field: "Date of Appointment", value: "10/02/2021" },
-  { field: "I wish to apply for", value: "Annual Leave days" },
-  { field: "From", value: "10/03/2022" },
-  { field: "To", value: "10/03/2022" },
-  { field: "Reason", value: "Preparation for my wedding" },
-  {
-    field: "While on leave my physical contact will be",
-    value: "Entebe kampala",
-  },
-  { field: "Tel", value: "+25777895623" },
-];
+// const userDetails = [
+//   { field: "Date of application", value: "10/03/2022" },
+//   { field: "Name", value: "Kimera Moses" },
+//   { field: "Designation", value: "Legal Officer" },
+//   { field: "Date of Appointment", value: "10/02/2021" },
+//   { field: "I wish to apply for", value: "Annual Leave days" },
+//   { field: "From", value: "10/03/2022" },
+//   { field: "To", value: "10/03/2022" },
+//   { field: "Reason", value: "Preparation for my wedding" },
+//   {
+//     field: "While on leave my physical contact will be",
+//     value: "Entebe kampala",
+//   },
+//   { field: "Tel", value: "+25777895623" },
+// ];
 
 const SummaryDetails = (props) => {
   const { type, isSubmitting } = props;
@@ -91,7 +91,7 @@ const SummaryDetails = (props) => {
                 <h6>Name:</h6>
                 <h6>{data?.advance?.user?.full_name}</h6>
                 <h6>Designation:</h6>
-                <h6>{data?.advance?.project}</h6>
+                <h6>{data?.advance?.designation}</h6>
                 <h6>I wish to apply for:</h6>
                 <h6>{selectedType}</h6>
               </SimpleGrid>
@@ -106,7 +106,7 @@ const SummaryDetails = (props) => {
                 <h6>Name:</h6>
                 <h6>{leaveData?.leave?.user?.full_name}</h6>
                 <h6>Designation:</h6>
-                <h6>{leaveData?.leave?.project}</h6>
+                <h6>{leaveData?.leave?.designation}</h6>
                 <h6>I wish to apply for:</h6>
                 <h6>{selectedType}</h6>
                 <h6>Reason:</h6>

@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./LeaveTrackerTable.module.css";
 import Modal from "./../../common/Modal";
 import LeaveApplicationForm from "./LeaveApplicationForm/LeaveApplicationForm";
-import { useAddLeaveDays } from "../../../hooks/useLeaveTracker";
+// import { useAddLeaveDays } from "../../../hooks/useLeaveTracker";
 import {useAddLeaveRequest} from "../../../hooks/useLeaveRequest";
 import LeaveTable from "../TrackerTable/LeaveTrackerTable";
 import { useDisclosure } from "@chakra-ui/react";
