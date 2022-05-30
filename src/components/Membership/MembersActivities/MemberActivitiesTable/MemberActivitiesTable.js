@@ -45,18 +45,18 @@ const MemberActivitiesTable = ({ data, isLoading }) => {
                   </Td>
                   <Td>
                     <div className={`${classes.data__primary_text}`}>
-                      {item.project.name}
+                      {item?.project?.name}
                     </div>
                     <div className={classes.data__secondary_text}>
-                      {item.projectActivity}
+                      {item?.projectActivity}
                     </div>
                   </Td>
                   <Td>
                     <div className={classes.data__primary_text}>
-                      {new Date(item.date_of_activity).toLocaleDateString()}
+                      {new Date(item?.date_of_activity).toLocaleDateString()}
                     </div>
                     <div className={classes.data__secondary_text}>
-                      {item.activityDescription}
+                      {item?.activityDescription}
                     </div>
                   </Td>
                 </Tr>
