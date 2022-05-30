@@ -23,10 +23,6 @@ function TableSearch({
   btnClick,
   showBtn = true,
 }) {
-  // const [search, setSearch] = useState("");
-
-  console.log('downloadMetaData', downloadMetaData)
-
   return (
     <Flex
       as="form"

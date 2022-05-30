@@ -3,6 +3,7 @@ import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
 import classes from "../../../Membership/Allocations/AllocationsTable/AllocationsTable.module.css";
 import styles from "./Table.module.css";
 import { TableHeadColumn } from "../../../Membership/Allocations/AllocationsTable/AllocationsTable";
+import withTable from "../../../../hoc/withTable";
 
 const LegalOfficerTable = ({ data }) => {
   return (
@@ -83,4 +84,4 @@ const LegalOfficerTable = ({ data }) => {
   );
 };
 
-export default LegalOfficerTable;
+export default withTable(LegalOfficerTable);
