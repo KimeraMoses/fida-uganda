@@ -1,9 +1,8 @@
-import React, {useState} from "react";
+import React from "react";
 import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
 import classes from "./Table.module.css";
 import { TableHeadColumn } from "../../Membership/Allocations/AllocationsTable/AllocationsTable";
 import { formatDate } from "../../../lib/data";
-import {downloadFile, arrayToCsv} from "../../downloadExcel"
 import withTable from "./../../../hoc/withTable";
 
 const ITProductsTable = ({ data, isProducts }) => {

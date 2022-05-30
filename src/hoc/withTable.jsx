@@ -6,7 +6,7 @@ import "jspdf-autotable";
 
 const withTable = (TableComponent) => {
   return function WithNewTable({
-    // keys,
+    tableName,
     data,
     subHeading,
     showBtn,
@@ -29,25 +29,16 @@ const withTable = (TableComponent) => {
         return formattedData.push(Object.values(row));
       });
 
-    const tableKeys2 =
-      Array.isArray(data) &&
-      data.length &&
-      tableKeys[0].filter((item) => {
-        console.log("item is", item);
-        return (
-          item !== "status" &&
-          "subject_of_procurement" &&
-          "delivery_location" &&
-          "createdAt"
-        );
-      });
+      console.log('keys',tableKeys);
+
+
 
 
     const handleDownload = () => {
       const doc = new jsPDF({
         orientation: "landscape",
       });
-      doc.text("IT services", 10, 10);
+      doc.text(`${tableName}`, 10, 10);
       doc.autoTable({
         theme: "grid",
         columnStyles: { valign: "center" },
@@ -55,20 +46,19 @@ const withTable = (TableComponent) => {
         head: tableKeys,
         body: formattedData,
       });
-      doc.save(`The Table.pdf`);
+      doc.save(`${tableName}-${new Date().toLocaleString("en-GB")}.pdf`);
     };
     
     const downloadExcel = () => {
       const workSheet = XLSX.utils.json_to_sheet(formattedData);
       const workBook = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(workBook, workSheet, "The table");
+      XLSX.utils.book_append_sheet(workBook, workSheet, "Sheet1");
 
-      //buffer
-      let buf = XLSX.write(workBook, { bookType: "xlsx", type: "buffer" });
+    
       //binary string
       XLSX.write(workBook, { bookType: "xlsx", type: "binary" });
       //donwload
-      XLSX.writeFile(workBook, "The table.xlsx");
+      XLSX.writeFile(workBook, `${tableName}.xlsx`);
     };
 
     const keyWordHandler = (e) => {

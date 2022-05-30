@@ -33,6 +33,7 @@ const ITServices = () => {
           onSuccess={onClose}
           success={`IT Service added successfully`}
           useMutate={useAddItService}
+          tableName="IT Services"
         />
       </Modal>
     </>
