@@ -71,7 +71,6 @@ export const useUpdateClient = () => {
   return useMutation(updateClient, {
     onSuccess: (data) => {
       const previousClients = queryClient.getQueryData(CLIENTS_KEY);
-      console.log(data);
       if (previousClients) {
         queryClient.setQueryData(CLIENTS_KEY, (previousClients) => {
           return produce(previousClients, (draft) => {
