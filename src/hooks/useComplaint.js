@@ -42,6 +42,7 @@ export const useAddComplaint = () => {
   });
 };
 
+
 export const useUpdateComplaint = () => {
   const queryClient = useQueryClient();
   return useMutation(editComplaint, {

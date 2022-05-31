@@ -5,7 +5,7 @@ import SectionHeader from "../../common/SectionHeader";
 import ComplaintsTable from "./ComplaintTable/ComplaintTable";
 import { useAddComplaint, useComplaints } from "../../../hooks/useComplaint";
 import ComplaintForm from "./ComplaintForm/ComplaintForm";
-import { complaintInitialValues } from "./ComplaintForm/schema";
+import {itComplaintInitialValues, itComplaintOrderSchema} from '../../forms/it/schemas/it'
 
 const ITComplaints = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -18,13 +18,15 @@ const ITComplaints = () => {
         isLoading={isLoading}
         btnLabel="Add Complaint"
         btnClick={onOpen}
+        tableName="IT Complaints"
       />
       <Modal isOpen={isOpen} onClose={onClose} title="New Complaint Form">
         <ComplaintForm
           title="It Products"
-          initialValues={complaintInitialValues}
+          initialValues={itComplaintInitialValues}
+          validationSchema={itComplaintOrderSchema}
           onSuccess={onClose}
-          success={`IT Product added successfully`}
+          success={`IT Complaint added successfully`}
           useMutate={useAddComplaint}
         />
       </Modal>

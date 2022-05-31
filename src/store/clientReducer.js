@@ -3,20 +3,31 @@ import { createSlice } from "@reduxjs/toolkit";
 const slice = createSlice({
   name: "client",
   initialState: {
-    selectedId: null,
+    client: null,
   },
   reducers: {
-    setSelectedId: (state, action) => {
-      state.selectedId = action.payload;
+    setClient: (state, action) => {
+      if (!state.client) {
+        state.client = action.payload;
+      } else {
+        state.client = { ...state.client, ...action.payload };
+      }
+    },
+    setClientNull: (state) => {
+      state.client = null;
     },
   },
 });
 
-const { setSelectedId } = slice.actions;
+const { setClient, setClientNull } = slice.actions;
 
-export const selectClientId = (id) => ({
-  type: setSelectedId.type,
+export const selectClient = (id) => ({
+  type: setClient.type,
   payload: id,
+});
+
+export const resetClient = () => ({
+  type: setClientNull.type,
 });
 
 export default slice.reducer;

@@ -1,15 +1,25 @@
 import React, { useMemo } from "react";
 import { SimpleGrid, Button } from "@chakra-ui/react";
 import withForm from "../../../hoc/withForm";
+import { Form, Formik } from "formik";
+import { itProductInitialValues, itProductOrderSchema } from "./schemas/it";
 import InputField from "../../common/UI/InputField/InputField";
 import { useProjectOptions } from "../../../hooks/useProjects";
 import SelectField from "../../Membership/Allocations/AllocationForm/SelectInput";
 
-const ITProductForm = ({ isSubmitting, setFieldValue }) => {
+const ITProductForm = ({ isSubmitting, setFieldValue, onSubmit }) => {
   const projects = useProjectOptions();
   const projectOptions = useMemo(() => projects, [projects]);
   console.log(projectOptions, "project options");
   return (
+    <Formik
+    initialValues={itProductInitialValues}
+    validationSchema={itProductOrderSchema}
+    onSubmit={(values) => {
+      onSubmit(values);
+    }}
+  >
+    <Form>
     <SimpleGrid p={5} gap={3}>
       <SimpleGrid columns={2} gap={5} style={{ alignItems: "center" }}>
         <SelectField
@@ -39,7 +49,7 @@ const ITProductForm = ({ isSubmitting, setFieldValue }) => {
           type="number"
         />
         <InputField
-          name="number_of_units_required"
+          name="num_units"
           placeholder="Number of Units Required"
           type="number"
         />
@@ -86,6 +96,8 @@ const ITProductForm = ({ isSubmitting, setFieldValue }) => {
         Add Requisition
       </Button>
     </SimpleGrid>
+    </Form>
+    </Formik>
   );
 };
 

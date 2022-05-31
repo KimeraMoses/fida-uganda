@@ -16,6 +16,7 @@ import NewClientForm from "../NewClientForm/NewClientForm";
 import { upperCaseFirstLetter } from "../../../../lib/data";
 // import { useUpdatePatient } from "../../../../hooks/usePatients";
 import { onSubmitAlert } from "../../../../lib/deleteInProd";
+import withTable from "../../../../hoc/withTable";
 
 const ClientFilesTable = ({ data }) => {
   const [selectedRow, setSelectedRow] = React.useState(null);
@@ -93,4 +94,4 @@ const ClientFilesTable = ({ data }) => {
   );
 };
 
-export default ClientFilesTable;
+export default withTable(ClientFilesTable);

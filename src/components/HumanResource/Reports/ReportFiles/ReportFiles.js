@@ -3,11 +3,11 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { toastSuccess } from "../../../../lib/toastDetails";
 import Modal from "../../../common/Modal";
-import SectionHeader from "../../../common/SectionHeader";
-import TableSearch from "../../../common/table/TableSearch";
 import NewReportForm from "../NewReportForm/NewReportForm";
-import ReportsTable from "../ReportTable/ReportTable";
+import FolderFilesTable from "../ReportTable/FolderFilesTable";
 import { useReports, useAddReport } from "./../../../../hooks/useReports";
+import ReportBreadCrumb from "./../BreadCrumb/ReportBreadCrumb";
+import { FolderFileData } from "./../Reports";
 
 const ReportFiles = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -23,12 +23,21 @@ const ReportFiles = () => {
   }, [isSuccess, toast, onClose]);
   return (
     <>
-      <SectionHeader
-        title={`Reports > ${reportFolderName.replace(/-/g, " ")}`}
+      <ReportBreadCrumb
+        root="Reports"
+        rootLink="/reports"
+        folderName={reportFolderName.replace(/-/g, " ")}
+        // folderLink="/"
+        // reportName="Report name"
       />
 
-      <TableSearch btnLabel="Add Report" btnClick={onOpen} />
-      {data?.reports && <ReportsTable data={data?.reports} isDocument={true} />}
+      {data?.reports && (
+        <FolderFilesTable
+          data={FolderFileData}
+          btnLabel="Add Report"
+          btnClick={onOpen}
+        />
+      )}
       <Modal isOpen={isOpen} onClose={onClose}>
         <NewReportForm
           onClose={onClose}

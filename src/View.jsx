@@ -42,6 +42,8 @@ import EventAttendence from "./components/dashboard/EventsAttendence/EventAttend
 import ReportFiles from "./components/HumanResource/Reports/ReportFiles/ReportFiles";
 import SummaryDetails from "./components/dashboard/SummaryDetails/SummaryDetails";
 import LegalOfficer from "./components/CourtProcessServer/LegalOfficer/LegalOfficer";
+import ReportSummaryDetails from "./components/HumanResource/Reports/ReportSummary/ReportSummary";
+import ProjectFilesDocuments from "./components/LegalAid/ProjectFiles/ProjectDocuments/ProjectFilesDocuments";
 
 const View = () => {
   return (
@@ -66,6 +68,10 @@ const View = () => {
         <Route path="case-files" element={<CaseFiles />} />
         <Route path="legal-officer" element={<LegalOfficer />} />
         <Route path="project-files" element={<ProjectFiles />} />
+        <Route
+          path="project-files/documents"
+          element={<ProjectFilesDocuments />}
+        />
         <Route path="clv-case-files" element={<ClvCaseFiles />} />
         <Route path="clv-database" element={<ClvDatabase />} />
         <Route path="requisitions" element={<Requisitions />} />
@@ -92,6 +98,10 @@ const View = () => {
         <Route path="fida-assets" element={<FidaAssets />} />
         <Route path="reports" element={<Reports />} />
         <Route path="reports/:reportFolderName" element={<ReportFiles />} />
+        <Route
+          path="reports/reportFolder/:id"
+          element={<ReportSummaryDetails />}
+        />
         <Route path="it-products" element={<ITProducts />} />
         <Route path="it-services" element={<ITServices />} />
         <Route path="it-complaints" element={<ITComplaints />} />

@@ -1,33 +1,35 @@
-import { SimpleGrid, Button, Flex } from "@chakra-ui/react";
-import TextField from "../../common/TextField";
+import { SimpleGrid, Button, Flex, Textarea } from "@chakra-ui/react";
 import withForm from "../../../hoc/withForm";
 import { MdAdd } from "react-icons/md";
 import { useProjectOptions } from "../../../hooks/useProjects";
 import { useMemo } from "react";
-import SelectField from "../../Membership/Allocations/AllocationForm/SelectInput";
+// import SelectField from "../../Membership/Allocations/AllocationForm/SelectInput";
+import InputField from "./../../common/UI/InputField/InputField";
+import SelectField from "./../../common/SelectField";
 
-const FleetDatabaseForm = ({ isSubmitting, setFieldValue }) => {
+const FleetDatabaseForm = ({ isSubmitting, isEdit, setFieldValue }) => {
   const projects = useProjectOptions();
   const projectOptions = useMemo(() => projects, [projects]);
 
   return (
     <SimpleGrid p={5} gap={3}>
+      <p>Vehicle Details</p>
       <SimpleGrid columns={2} gap={5}>
-        <TextField name="vehicle_make" placeholder="Vehicle make" />
-        <TextField name="vehicle_number" placeholder="Vehicle Number" />
-        <TextField name="vehicle_model" placeholder="Vehicle model" />
+        <InputField name="vehicle_make" placeholder="Vehicle make" />
+        <InputField name="vehicle_number" placeholder="Vehicle Number" />
+        <InputField name="vehicle_model" placeholder="Vehicle model" />
       </SimpleGrid>
       <p>Driver details</p>
       <SimpleGrid columns={2} gap={5}>
-        <TextField name="driver_first_name" placeholder="First name" />
-        <TextField name="driver_surname" placeholder="Surname" />
-        <TextField name="driver_phone" placeholder="Phone number" />
-        <TextField
+        <InputField name="driver_first_name" placeholder="First name" />
+        <InputField name="driver_surname" placeholder="Surname" />
+        <InputField name="driver_phone" placeholder="Phone number" />
+        <InputField
           name="driver_email"
           type="email"
           placeholder="Email Address"
         />
-        <TextField name="driver_address" placeholder="Physical Address" />
+        <InputField name="driver_address" placeholder="Physical Address" />
       </SimpleGrid>
       <hr />
       <SimpleGrid columns={2} gap={5} style={{ alignItems: "center" }}>
@@ -38,11 +40,104 @@ const FleetDatabaseForm = ({ isSubmitting, setFieldValue }) => {
           onChange={(value) => setFieldValue("project", value.value)}
           isMulti={false}
         />
-        <TextField
+        <InputField
           name="region_of_operation"
           placeholder="Region of Operation"
         />
       </SimpleGrid>
+      {isEdit && (
+        <>
+          <hr />
+          <SimpleGrid columns={3} gap={5} style={{ alignItems: "center" }}>
+            <InputField
+              name="region_of_operation"
+              placeholder="0000"
+              type="number"
+              label="Fuel Loaded(Litre)"
+            />
+            <InputField
+              name="region_of_operation"
+              placeholder="Region of Operation"
+              label="Fueling Date"
+              type="date"
+            />
+            <InputField
+              name="region_of_operation"
+              type="number"
+              placeholder="000.000"
+              label="Money Paid (UGX)"
+            />
+          </SimpleGrid>
+          <SimpleGrid columns={2} gap={5} style={{ alignItems: "center" }}>
+            <InputField
+              name="region_of_operation"
+              placeholder="0000"
+              type="number"
+              label="Fuel Consumed(Litre)"
+            />
+            <InputField
+              name="region_of_operation"
+              placeholder="Kilometers Traveled"
+              label="Kilometers Traveled"
+              type="number"
+            />
+          </SimpleGrid>
+          <hr />
+          <SimpleGrid columns={2} gap={5} style={{ alignItems: "center" }}>
+            <SelectField
+              options={[
+                { label: "YES", value: "yes" },
+                { label: "NO", value: "no" },
+              ]}
+              name="region_of_operation"
+              // placeholder="Have you made any repairs"
+              label="Have you made any repairs"
+            />
+            <InputField
+              name="region_of_operation"
+              placeholder="Date of repairs"
+              label="Date of repairs"
+              type="date"
+            />
+          </SimpleGrid>
+          <SimpleGrid columns={2} gap={5} style={{ alignItems: "center" }}>
+            <InputField
+              name="region_of_operation"
+              placeholder="If what item was repaired"
+              label="If Yes what item was repaired"
+              type="text"
+            />
+            <InputField
+              name="region_of_operation"
+              placeholder="Amount paid for repairs(UGX)"
+              label="Amount paid for repairs"
+              type="number"
+            />
+          </SimpleGrid>
+          <hr />
+          <SimpleGrid columns={2} gap={5} style={{ alignItems: "center" }}>
+            <SelectField
+              options={[
+                { label: "Valid", value: "valid" },
+                { label: "Expired", value: "expired" },
+                { label: "Invalid", value: "invalid" },
+              ]}
+              name="region_of_operation"
+              // placeholder="Have you made any repairs"
+              label="Insurance Status"
+            />
+            <InputField
+              name="region_of_operation"
+              placeholder="Amount Paid"
+              label="Amount Paid"
+              type="number"
+            />
+          </SimpleGrid>
+          <p>Comment</p>
+          <Textarea name="comment" />
+        </>
+      )}
+
       <Flex flexDir="row-reverse">
         <Button
           alignSelf="right"
@@ -56,7 +151,7 @@ const FleetDatabaseForm = ({ isSubmitting, setFieldValue }) => {
           disabled={isSubmitting}
           leftIcon={<MdAdd />}
         >
-          {isSubmitting ? "Saving" : "Add"}
+          {isSubmitting ? "Saving" : isEdit ? "Update" : "Add"}
         </Button>
       </Flex>
     </SimpleGrid>

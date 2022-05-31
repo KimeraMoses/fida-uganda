@@ -3,20 +3,31 @@ import { createSlice } from "@reduxjs/toolkit";
 const slice = createSlice({
   name: "caseFile",
   initialState: {
-    selectedId: null,
+    caseFile: null,
   },
   reducers: {
-    setSelectedId: (state, action) => {
-      state.selectedId = action.payload;
+    setCaseFile: (state, action) => {
+      if (!state.caseFile) {
+        state.caseFile = action.payload;
+      } else {
+        state.caseFile = { ...state.caseFile, ...action.payload };
+      }
+    },
+    setCaseFileNull: (state) => {
+      state.caseFile = null;
     },
   },
 });
 
-const { setSelectedId } = slice.actions;
+const { setCaseFile, setCaseFileNull } = slice.actions;
 
-export const selectCaseFile = (id) => ({
-  type: setSelectedId.type,
-  payload: id,
+export const selectCaseFile = (caseFile) => ({
+  type: setCaseFile.type,
+  payload: caseFile,
+});
+
+export const resetCaseFile = () => ({
+  type: setCaseFileNull.type,
 });
 
 export default slice.reducer;
