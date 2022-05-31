@@ -19,7 +19,7 @@ import { formatDate } from "../../../../lib/data";
 import { onSubmitAlert } from "../../../../lib/deleteInProd";
 import withTable from "./../../../../hoc/withTable";
 import { clvInitialValues, clvSchema } from "../CLVForms/schema";
-import { useEditClv } from "../../../../hooks/useClv";
+// import { useEditClv } from "../../../../hooks/useClv";
 
 const CLVTable = ({ data }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
