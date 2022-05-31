@@ -117,9 +117,14 @@ const NewClvForm = ({ isSubmitting, ...rest }) => {
       >
         {action !== "newClv" ? (
           <>
-            {/* <FormButton variant="outlined" type="button" status="fail" onClick={onClose}>
+            <FormButton
+              variant="outlined"
+              type="button"
+              status="fail"
+              onClick={onClose}
+            >
               Cancel
-            </FormButton> */}
+            </FormButton>
             <FormButton variant="outlined" type="submit" status="success">
               {isSubmitting
                 ? "Saving..."
