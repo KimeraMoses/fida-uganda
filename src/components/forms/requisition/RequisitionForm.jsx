@@ -1,22 +1,18 @@
-import { useState } from "react";
+import React from "react";
 import { SimpleGrid, Button } from "@chakra-ui/react";
 import { requisitionTypeOptions } from "../../../lib/options";
 import withForm from "../../../hoc/withForm";
 import InputField from "../../common/UI/InputField/InputField";
-// import TextAreaField from "../../common/TextAreaField";
-// import SelectField from "../../common/SelectField";
 import SelectInput from "../../../components/Membership/Allocations/AllocationForm/SelectInput.js";
-// import SelectInputField from "../../common/UI/SelectInputField/SelectInputField";
 import { useProjectOptions } from "../../../hooks/useProjects";
 
 const RequisitionForm = ({ isSubmitting, setFieldValue }) => {
   const projectOptions = useProjectOptions();
-
   return (
     <SimpleGrid p={5} gap={3}>
       <SelectInput
-        name="allocated_to"
-        onChange={(option) => setFieldValue("project_name", option.label)}
+        name="project_name"
+        onChange={(option) => setFieldValue("project_name", option)}
         options={projectOptions}
         placeholder="Choose a project"
         isMulti={false}
@@ -26,7 +22,7 @@ const RequisitionForm = ({ isSubmitting, setFieldValue }) => {
           name="type"
           placeholder="Select a Type"
           options={requisitionTypeOptions}
-          onChange={(option) => setFieldValue("type", option.value)}
+          onChange={(option) => setFieldValue("type", option)}
           isMulti={false}
         />
         <InputField

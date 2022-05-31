@@ -40,12 +40,9 @@ const AdvancedRequestForm = ({ isSubmitting, onClose }) => {
           placeholder="Amount"
           type="number"
         />
-         <SimpleGrid column={1}>
-        <InputField
-          name="reason"
-          label="Reason"
-        />
       </SimpleGrid>
+      <SimpleGrid column={1}>
+        <InputField name="reason" label="Reason" />
       </SimpleGrid>
       <SimpleGrid column={1}>
         <InputField

@@ -84,7 +84,7 @@ const NewActivityForm = (props) => {
           cancel
         </FormButton>
         <FormButton variant="save" type="submit" disabled={isSubmitting}>
-          Save
+          {isSubmitting ? "Saving" : "Save"}
         </FormButton>
       </div>
     </div>

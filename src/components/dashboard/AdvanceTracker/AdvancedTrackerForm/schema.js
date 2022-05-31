@@ -19,6 +19,7 @@ export const advanceRequestFormSchema = Yup.object().shape({
   address_on_leave: Yup.string().required(
     "Address on leave is a required field"
   ),
+  reason: Yup.string().required("Reason is a required field"),
   tel_on_leave: Yup.string().required("Telphone on leave is a required field"),
 });
 

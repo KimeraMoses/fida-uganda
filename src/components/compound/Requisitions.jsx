@@ -10,7 +10,7 @@ import {
 import TableSearch from "../common/table/TableSearch";
 import SubHeading from "./../Tasks/SubHeading/SubHeading";
 import RequisitionTable from "../dashboard/Requisitions/RequisitionsTable";
-import {requisitionInitialValues} from "../../components/forms/requisition/schemas/requisitions";
+import {requisitionInitialValues, requisitionSchema} from "../../components/forms/requisition/schemas/requisitions";
 
 const Requisitions = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -30,6 +30,7 @@ const Requisitions = () => {
         <RequisitionForm
           title="Requisitions"
           initialValues={requisitionInitialValues}
+          validationSchema={requisitionSchema}
           onSuccess={onClose}
           success={`Requisition added successfully`}
           useMutate={useAddRequisition}

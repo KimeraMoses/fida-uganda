@@ -2,30 +2,12 @@ import React from "react";
 import classes from "./LeaveTrackerTable.module.css";
 import Modal from "./../../common/Modal";
 import LeaveApplicationForm from "./LeaveApplicationForm/LeaveApplicationForm";
-// import { useAddLeaveDays } from "../../../hooks/useLeaveTracker";
-import {useAddLeaveRequest} from "../../../hooks/useLeaveRequest";
+import { schema } from "./LeaveApplicationForm/schema";
+import { useAddLeaveRequest } from "../../../hooks/useLeaveRequest";
 import LeaveTable from "../TrackerTable/LeaveTrackerTable";
 import { useDisclosure } from "@chakra-ui/react";
 import FormButton from "../../common/UI/FormButton/FormButton";
 import { useLeaveRequests } from "../../../hooks/useLeaveRequest";
-
-// export const Data = [
-//   {
-//     details: "5 Annual leave days requested from 15 to 20 May",
-//     date: "May 10, 2022",
-//     status: "Pending",
-//   },
-//   {
-//     details: "5 Annual leave days requested from 15 to 20 May",
-//     date: "May 10, 2022",
-//     status: "Canceled",
-//   },
-//   {
-//     details: "5 Annual leave days requested from 15 to 20 May",
-//     date: "May 10, 2022",
-//     status: "approved",
-//   },
-// ];
 
 const LeaveTrackerTable = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -33,7 +15,12 @@ const LeaveTrackerTable = (props) => {
   const leaveApplicationInitialValues = {
     reason: "",
     address_on_leave: "",
+    from: "",
+    to: "",
+    month_of_application: "",
     tel_on_leave: "",
+    duration_type: "",
+    details: "",
   };
 
   return (
@@ -58,6 +45,7 @@ const LeaveTrackerTable = (props) => {
           <LeaveApplicationForm
             onClose={onClose}
             initialValues={leaveApplicationInitialValues}
+            validationSchema={schema}
             onSuccess={onClose}
             success={`Leave request added successfully`}
             useMutate={useAddLeaveRequest}

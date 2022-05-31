@@ -79,7 +79,7 @@ const LegalOfficerTable = ({ data }) => {
               );
             })}
           </Tbody>
-        </Table>
+      </Table>
       </div>
     </>
   );

@@ -4,7 +4,7 @@ import Modal from "../../common/Modal";
 import SectionHeader from "../../common/SectionHeader";
 import MemberActivitiesTable from "./MemberActivitiesTable/MemberActivitiesTable";
 import NewActivityForm from "./NewActivityForm/NewActivityForm";
-import { newMembershipActivitySchema } from "./NewActivityForm/schema";
+import { schema } from "./NewActivityForm/schema";
 import { useMembers } from "../../../hooks/useMember";
 import {
   useAddActivity,
@@ -105,7 +105,7 @@ const MembersActivities = () => {
         <NewActivityForm
           onClose={onClose}
           initialValues={newActivityInitialValues}
-          validationSchema={newMembershipActivitySchema}
+          validationSchema={schema}
           onSuccess={onClose}
           success={`Membership Activity added successfully`}
           useMutate={useAddActivity}

@@ -8,9 +8,8 @@ import { initialValues } from "../dashboard/AdvanceTracker/AdvancedTrackerForm/s
 import { useNavigate } from "react-router-dom";
 import { useAddAdvance, useAdvances } from "../../hooks/useAdvances";
 import TrackerTable from "./../dashboard/TrackerTable/TrackerTable";
-import LeaveTrackerTable, {
-  Data,
-} from "../dashboard/LeaveTracker/LeaveTrackerTable";
+import LeaveTrackerTable from "../dashboard/LeaveTracker/LeaveTrackerTable";
+import { advanceRequestFormSchema } from "../dashboard/AdvanceTracker/AdvancedTrackerForm/schema";
 import FormButton from "./../common/UI/FormButton/FormButton";
 
 const Tracker = () => {
@@ -50,7 +49,7 @@ const Tracker = () => {
         <AdvancedRequestForm
           onClose={onClose}
           initialValues={initialValues}
-          // validationSchema={advanceRequestFormSchema}
+          validationSchema={advanceRequestFormSchema}
           onSuccess={onClose}
           success={`Advance request added successfully`}
           useMutate={useAddAdvance}

@@ -2,12 +2,12 @@ import React from "react";
 import { Table, Thead, Tbody, Tr, Td, IconButton } from "@chakra-ui/react";
 import classes from "../TravelOrder/Table.module.css";
 import { formatDate } from "../../../lib/data";
+import sortByDate from "../../../lib/sortByDate";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { TableHeadColumn } from "../../HumanResource/Approvals/ApprovalTable/ApprovedTable";
 import { useNavigate } from "react-router-dom";
 
 const RequisitionTable = ({ data }) => {
-  console.log(data);
   const navigate = useNavigate();
   const handleViewSummary = (name) => {
     navigate(`/requisitions/${name}`);
@@ -34,14 +34,14 @@ const RequisitionTable = ({ data }) => {
           </Thead>
           <Tbody>
             {data &&
-              data.map((item) => {
+              sortByDate(data).map((item) => {
                 return (
                   <Tr>
-                    <Td>{item.registeredBy && item.registeredBy.full_name}</Td>
-                    <Td>{item.project_name}</Td>
-                    <Td>{item.delivery_location}</Td>
-                    <Td>{item.status}</Td>
-                    <Td>{formatDate(item.updateAt)}</Td>
+                    <Td>{item?.registeredBy && item.registeredBy.full_name}</Td>
+                    <Td>{item?.project_name}</Td>
+                    <Td>{item?.delivery_location}</Td>
+                    <Td>{item?.status}</Td>
+                    <Td>{formatDate(item?.updateAt)}</Td>
                     <Td>
                       <div className={classes.table_actions_icon_wrapper}>
                         <IconButton
