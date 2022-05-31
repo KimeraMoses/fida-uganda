@@ -43,7 +43,6 @@ const SummaryDetails = (props) => {
 
   const { data: leaveData, isLoading: loadingLeaveRequests } =
     useLeaveRequest(id);
-  console.log(leaveData, "leave data");
 
   return (
     <div className={classes.summary_wrapper}>
@@ -91,7 +90,7 @@ const SummaryDetails = (props) => {
                 <h6>Name:</h6>
                 <h6>{data?.advance?.user?.full_name}</h6>
                 <h6>Designation:</h6>
-                <h6>{data?.advance?.designation}</h6>
+                <h6>{data?.advance?.user?.designation}</h6>
                 <h6>I wish to apply for:</h6>
                 <h6>{selectedType}</h6>
               </SimpleGrid>
@@ -106,7 +105,7 @@ const SummaryDetails = (props) => {
                 <h6>Name:</h6>
                 <h6>{leaveData?.leave?.user?.full_name}</h6>
                 <h6>Designation:</h6>
-                <h6>{leaveData?.leave?.designation}</h6>
+                <h6>{leaveData?.leave?.user?.designation}</h6>
                 <h6>I wish to apply for:</h6>
                 <h6>{selectedType}</h6>
                 <h6>Reason:</h6>

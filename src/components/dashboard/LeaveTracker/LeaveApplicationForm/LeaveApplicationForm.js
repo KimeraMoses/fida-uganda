@@ -7,6 +7,7 @@ import FormButton from "../../../common/UI/FormButton/FormButton";
 import SelectInput from "../../../Membership/Allocations/AllocationForm/SelectInput";
 import TextAreaField from "../../../common/TextAreaField";
 import { monthsLong } from "../../../../assets/text";
+import formatDate from "../../../../lib/formatDate"
 
 const LeaveApplicationForm = (props) => {
   const { onClose, isSubmitting, setFieldValue } = props;
@@ -26,7 +27,7 @@ const LeaveApplicationForm = (props) => {
             { label: "Quarterly", value: "quarterly" },
           ]}
           isMulti={false}
-          onChange={(option) => setFieldValue("duration_type", option.value)}
+          onChange={(option) => setFieldValue("duration_type", option)}
         />
       </SimpleGrid>
       <SimpleGrid
@@ -39,7 +40,7 @@ const LeaveApplicationForm = (props) => {
         <SelectInput
           name="month_of_application"
           onChange={(option) =>
-            setFieldValue("month_of_application", option.value)
+            setFieldValue("month_of_application", option)
           }
           options={monthsLong}
           isMulti={false}
@@ -50,8 +51,8 @@ const LeaveApplicationForm = (props) => {
         spacing={2}
         style={{ alignItems: "center", marginBottom: "5px" }}
       >
-        <InputField name="from" label="From:" placeholder="From" type="date" />
-        <InputField name="to" label="To:" placeholder="To" type="date" />
+        <InputField name="from" label="From:" placeholder="From" type="date" min={formatDate(new Date())} />
+        <InputField name="to" label="To:" placeholder="To" type="date" min={formatDate(new Date())} />
       </SimpleGrid>
       <SimpleGrid
         columns={1}
@@ -101,3 +102,15 @@ const LeaveApplicationForm = (props) => {
 };
 
 export default withForm(LeaveApplicationForm);
+
+
+// reason: Yup.string().required("A reason is required"),
+//   address_on_leave: Yup.string().required("An address on leave is required"),
+//   from: Yup.string().required("Start date is required"),
+//   to: Yup.string().required("End date is required"),
+//   month_of_application: Yup.string().required(
+//     "Month of application is required"
+//   ),
+//   tel_on_leave: Yup.string().required("Telephone on leave is required"),
+//   duration_type: Yup.string().required("Duration type is required"),
+//   details: Yup.string().required("Details required"),

@@ -35,11 +35,11 @@ const TrackerTable = ({ type, action, data, isLoading }) => {
                     <Td className={classes.name_column}>{`${daysDifference(
                       item.from,
                       item.to
-                    )} day(s) requested from ${getDay(item.to)} ${getMonthName(
-                      item.to
-                    )} to  ${getDay(item.from)} ${getMonthName(
+                    )} day(s) requested from  ${getDay(
                       item.from
-                    )} `}</Td>
+                    )} ${getMonthName(item.from)} to ${getDay(
+                      item.to
+                    )} ${getMonthName(item.to)} `}</Td>
                     <Td className={classes.data__purpose_primary_text}>
                       {new Date(item.createdAt).toLocaleString()}
                     </Td>
