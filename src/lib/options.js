@@ -30,7 +30,7 @@ export const sexOptions = [
 
 export const requisitionTypeOptions = [
   {
-    label: "Product Requisition Product Requisition Product Requisition",
+    label: "Product Requisition",
     value: "Product",
   },
   { label: "Service Requisition", value: "Service" },

@@ -8,6 +8,7 @@ import {
   useAddNotification,
   useNotifications,
 } from "../../../hooks/useNotification";
+import { notificationSchema } from "./schema";
 
 const Notifications = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -35,7 +36,7 @@ const Notifications = () => {
           onClose={onClose}
           title="Notifications"
           initialValues={initialValues}
-          // validationSchema={allocationFormSchema}
+          validationSchema={notificationSchema}
           onSuccess={onClose}
           success={`Notification added successfully`}
           useMutate={useAddNotification}

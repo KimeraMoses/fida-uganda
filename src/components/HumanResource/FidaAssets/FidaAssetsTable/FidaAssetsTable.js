@@ -3,6 +3,7 @@ import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
 import classes from "./Table.module.css";
 import { TableHeadColumn } from "../../../Membership/Allocations/AllocationsTable/AllocationsTable";
 import { formatDate } from "../../../../lib/data";
+import sortByDate from "../../../../lib/sortByDate";
 import withTable from "./../../../../hoc/withTable";
 
 const FidaAssetsTable = ({ data }) => {
@@ -23,7 +24,7 @@ const FidaAssetsTable = ({ data }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {data.map((item) => {
+            {sortByDate(data).map((item) => {
               return (
                 <Tr>
                   <Td>{item.name}</Td>

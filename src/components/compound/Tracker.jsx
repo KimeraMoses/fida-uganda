@@ -6,24 +6,25 @@ import Modal from "../common/Modal";
 import AdvancedRequestForm from "../dashboard/AdvanceTracker/AdvancedTrackerForm/AdvancedRequestForm";
 import { initialValues } from "../dashboard/AdvanceTracker/AdvancedTrackerForm/schema";
 import { useNavigate } from "react-router-dom";
-import { useAddAdvance } from "../../hooks/useAdvances";
+import { useAddAdvance, useAdvances } from "../../hooks/useAdvances";
 import TrackerTable from "./../dashboard/TrackerTable/TrackerTable";
-import LeaveTrackerTable, {
-  Data,
-} from "../dashboard/LeaveTracker/LeaveTrackerTable";
+import LeaveTrackerTable from "../dashboard/LeaveTracker/LeaveTrackerTable";
+import { advanceRequestFormSchema } from "../dashboard/AdvanceTracker/AdvancedTrackerForm/schema";
 import FormButton from "./../common/UI/FormButton/FormButton";
 
 const Tracker = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
-  const handleLeaveClick = (item, type) => {
+  const handleLeaveClick = (item, type, id) => {
     // console.log(item);
     navigate(
       `/application-summary?application-type=${
-        type === "leave" ? "leave" : "advance"
+        type === "leave" ? `leave&id=${id}` : `advance&id=${id}`
       }`
     );
   };
+
+  const { data, isLoading } = useAdvances();
 
   return (
     <>
@@ -31,7 +32,12 @@ const Tracker = () => {
       <LeaveTrackerTable handleLeaveClick={handleLeaveClick} />
       <SectionHeader title="Advance Tracker" />
       <Box bgColor="white" borderRadius={10}>
-        <TrackerTable type="advance" action={handleLeaveClick} data={Data} />
+        <TrackerTable
+          type="advance"
+          action={handleLeaveClick}
+          data={data?.advances}
+          isLoading={isLoading}
+        />
 
         <div style={{ padding: 10 }}>
           <FormButton variant="filled" onClick={onOpen}>
@@ -43,7 +49,7 @@ const Tracker = () => {
         <AdvancedRequestForm
           onClose={onClose}
           initialValues={initialValues}
-          // validationSchema={advanceRequestFormSchema}
+          validationSchema={advanceRequestFormSchema}
           onSuccess={onClose}
           success={`Advance request added successfully`}
           useMutate={useAddAdvance}

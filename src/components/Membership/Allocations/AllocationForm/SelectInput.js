@@ -12,12 +12,23 @@ const SelectInput = ({
   isMulti,
   disabled,
 }) => {
+  const optionsWrapper = isMulti
+    ? [{ label: "Select All", value: "all" }, ...options]
+    : options;
   return (
     <Select
       placeholder={placeholder}
-      onChange={onChange}
+      onChange={(selected) => {
+        isMulti &&
+        selected.length &&
+        selected.find((option) => option.value === "all")
+          ? onChange(options.slice(1))
+          : !isMulti
+          ? onChange((selected && selected.value) || null)
+          : onChange(selected);
+      }}
       components={animatedComponents}
-      options={options}
+      options={optionsWrapper}
       isMulti={isMulti}
       isSearchable={true}
       name={name}

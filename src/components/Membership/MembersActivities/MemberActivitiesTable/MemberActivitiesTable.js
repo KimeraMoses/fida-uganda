@@ -29,7 +29,15 @@ const MemberActivitiesTable = ({ data, isLoading }) => {
                   <Td>000{index + 1}</Td>
                   <Td>
                     <div className={classes.data__primary_text}>
-                      {item.member?.first_name + " " + item.member?.last_name}
+                      {item.member &&
+                        Array.isArray(item.member) &&
+                        item.member.map((memberData) => {
+                          if (index + 1 === item.member.length) {
+                            return `${memberData?.first_name} ${memberData?.last_name}`;
+                          } else {
+                            return `${memberData?.first_name} ${memberData?.last_name}, `;
+                          }
+                        })}
                     </div>
                     <div className={classes.data__secondary_text}>
                       {item.member?.id}
@@ -37,18 +45,18 @@ const MemberActivitiesTable = ({ data, isLoading }) => {
                   </Td>
                   <Td>
                     <div className={`${classes.data__primary_text}`}>
-                      {item.project.name}
+                      {item?.project?.name}
                     </div>
                     <div className={classes.data__secondary_text}>
-                      {item.projectActivity}
+                      {item?.projectActivity}
                     </div>
                   </Td>
                   <Td>
                     <div className={classes.data__primary_text}>
-                      {new Date(item.date_of_activity).toLocaleDateString()}
+                      {new Date(item?.date_of_activity).toLocaleDateString()}
                     </div>
                     <div className={classes.data__secondary_text}>
-                      {item.activityDescription}
+                      {item?.activityDescription}
                     </div>
                   </Td>
                 </Tr>

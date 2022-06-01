@@ -1,25 +1,16 @@
-import { useDisclosure, useToast } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import { useDisclosure } from "@chakra-ui/react";
+import React from "react";
 import { useAddEvent, useEvents } from "../../../hooks/useEvents";
-import { toastSuccess } from "../../../lib/toastDetails";
 import Modal from "../../common/Modal";
 import SectionHeader from "../../common/SectionHeader";
 import TableSearch from "../../common/table/TableSearch";
 import AttendenceTable from "./AttendenceTable/AttendenceTable";
 import NewAttendence from "./NewAttendence/NewAttendence";
+import { attendanceInitialValues } from "./NewAttendence/schema";
 
 const EventAttendence = () => {
-  const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data } = useEvents();
-  const { mutate, isLoading, isSuccess, isError, error } = useAddEvent();
-
-  useEffect(() => {
-    if (isSuccess) {
-      toast(toastSuccess("Event added successfully"));
-      onClose();
-    }
-  }, [isSuccess, onClose, toast]);
 
   return (
     <>
@@ -28,11 +19,12 @@ const EventAttendence = () => {
       {data?.events && <AttendenceTable data={data?.events} />}
       <Modal isOpen={isOpen} size="xl">
         <NewAttendence
+          title="Event Attendance"
+          initialValues={attendanceInitialValues}
+          onSuccess={onClose}
+          success={`Event added successfully`}
+          useMutate={useAddEvent}
           onClose={onClose}
-          onSubmit={mutate}
-          isSubmitting={isLoading}
-          error={error}
-          isError={isError}
         />
       </Modal>
     </>

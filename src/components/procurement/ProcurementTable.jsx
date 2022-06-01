@@ -1,14 +1,13 @@
 import React from "react";
 import { Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
-import classes from "./AllocationsTable.module.css";
-import sortByDate from "../../../../lib/sortByDate";
-import withTable from "./../../../../hoc/withTable";
+import classes from "./table.module.css";
+import sortByDate from "../../lib/sortByDate";
 
 export const TableHeadColumn = (props) => {
   const { title, secondaryText } = props;
   return (
     <Th>
-      <div className={classes.title_primary_text}>{title}</div>
+      {title}
       {secondaryText && (
         <div className={classes.title_secondary_text}>{secondaryText}</div>
       )}
@@ -16,9 +15,9 @@ export const TableHeadColumn = (props) => {
   );
 };
 
-const AllocationsTable = ({ data, isLoading }) => {
+const ProcurementTable = ({ data, isLoading }) => {
   return (
-    <div className={classes.allocations_table_wrapper}>
+    <div className={classes.table_wrapper}>
       <Table variant="simple">
         <Thead className={classes.table_header}>
           <Tr>
@@ -34,18 +33,13 @@ const AllocationsTable = ({ data, isLoading }) => {
         <Tbody>
           {!isLoading &&
             data &&
+            data.length &&
             sortByDate(data).map((item, index) => {
               return (
                 <Tr key={item.id}>
                   <Td className={classes.data_recepient_field}>
                     <div className={classes.data__primary_text}>
-                      {item.allocated_to.map((person, index) => {
-                        if (index + 1 === item.allocated_to.length) {
-                          return person.label || person;
-                        } else {
-                          return person.label || person + ", ";
-                        }
-                      })}
+                     
                     </div>
                     <div className={classes.data__secondary_text}>
                     {item.id}
@@ -92,4 +86,4 @@ const AllocationsTable = ({ data, isLoading }) => {
   );
 };
 
-export default withTable(AllocationsTable);
+export default ProcurementTable;

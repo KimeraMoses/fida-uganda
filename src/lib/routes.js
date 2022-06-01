@@ -1,9 +1,16 @@
 import { BASE_URL } from "./constants";
 
 export const routes = {
+  leaveRequests: {
+    getLeaveRequests: `${BASE_URL}/leaveRequests/getAll`,
+    getLeaveRequest: `${BASE_URL}/leaveRequests`,
+    base: `${BASE_URL}/leaveRequests`,
+    createLeaveRequest: `${BASE_URL}/leaveRequests/create`,
+    approveLeaveRequest: `${BASE_URL}/leaveRequests/approve`
+  },
   membershipActivities: {
     getMembershipActivities: `${BASE_URL}/membershipActivities/getAll`,
-    addMembershipActivity: `${BASE_URL}/membershipActivities/create`
+    addMembershipActivity: `${BASE_URL}/membershipActivities/create`,
   },
   notifications: {
     addNotification: `${BASE_URL}/notifications/create`,

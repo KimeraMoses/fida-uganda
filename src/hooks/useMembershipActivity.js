@@ -19,12 +19,12 @@ export const useAddActivity = () => {
       if (previousActivities) {
         queryClient.setQueryData(MEMBERSHIP_ACTIVITIES_KEY , () => {
           return produce(previousActivities, (draft) => {
-            draft.MembershipActivities.push(data?.embershipActivity);
+            draft.MembershipActivities.push(data?.membershipActivity);
           });
         });
       } else {
         queryClient.setQueryData(MEMBERSHIP_ACTIVITIES_KEY , () => {
-          return { members: [data?.embershipActivity] };
+          return { members: [data?.membershipActivity] };
         });
       }
     },

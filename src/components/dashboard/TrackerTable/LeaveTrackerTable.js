@@ -2,12 +2,16 @@ import React from "react";
 import { Table, Thead, Tbody, Tr, Th, Td, IconButton } from "@chakra-ui/react";
 import classes from "./Table.module.css";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
+import daysDifference from "../../../lib/datediff";
+import { getMonthName, getDay } from "../../../lib/date";
 import sortByDate from "../../../lib/sortByDate";
 
 const TableHeadColumn = (props) => {
   const { title } = props;
   return <Th>{title}</Th>;
 };
+
+// 5 Annual leave days requested from 15 to 20 May
 
 const TrackerTable = ({ type, action, data, isLoading }) => {
   return (
@@ -16,11 +20,7 @@ const TrackerTable = ({ type, action, data, isLoading }) => {
         <Table size="sm" variant="striped" className={classes.table__wrapper}>
           <Thead className={classes.table_header}>
             <Tr>
-              <TableHeadColumn
-                title={`${
-                  type === "leave" ? "Leave" : "Advanced"
-                } request Details`}
-              />
+              <TableHeadColumn title="Leave request Details" />
               <TableHeadColumn title="Date of application" />
               <TableHeadColumn title="Status" />
               <TableHeadColumn title="Action" />
@@ -32,9 +32,14 @@ const TrackerTable = ({ type, action, data, isLoading }) => {
               sortByDate(data).map((item) => {
                 return (
                   <Tr>
-                    <Td
-                      className={classes.name_column}
-                    >{`${item.amount} requested in ${item.month}`}</Td>
+                    <Td className={classes.name_column}>{`${daysDifference(
+                      item.from,
+                      item.to
+                    )} day(s) requested from  ${getDay(
+                      item.from
+                    )} ${getMonthName(item.from)} to ${getDay(
+                      item.to
+                    )} ${getMonthName(item.to)} `}</Td>
                     <Td className={classes.data__purpose_primary_text}>
                       {new Date(item.createdAt).toLocaleString()}
                     </Td>

@@ -17,6 +17,7 @@ export const MEMBERSHIP_KEY = "membership";
 export const MEMBERSHIP_ACTIVITIES_KEY = "membership_activities";
 export const NOTIFICATION_KEY = "notifications"
 export const LEAVE_TRACKER_KEY = "leave_tracker";
+export const LEAVE_REQUESTS_KEY = "leave_requests";
 export const REPORTS_KEY = "reports";
 export const EVENTS_KEY = "events";
 export const PATIENTS_KEY = "patients";
