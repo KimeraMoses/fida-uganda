@@ -24,6 +24,7 @@ const Allocations = () => {
         isLoading={isLoading}
         btnLabel="Send Allocation"
         btnClick={onOpen}
+        tableName="Allocations"
       />
       {isOpen && (
         <Form

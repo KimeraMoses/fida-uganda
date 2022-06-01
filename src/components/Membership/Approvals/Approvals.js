@@ -15,6 +15,7 @@ const Approvals = () => {
           showBtn={false}
           data={data?.approvals}
           subHeading={<SubHeading title="New Request" />}
+          tableName="Approvals"
         />
       )}
       <SubHeading title="Approved" />

@@ -19,6 +19,7 @@ const CLVs = () => {
           data={data ? data.clvs : null}
           btnLabel="Add CLV"
           btnClick={onOpen}
+          tableName="CLV"
         />
       )}
       <Modal isOpen={isOpen} onClose={onClose} size="xl">

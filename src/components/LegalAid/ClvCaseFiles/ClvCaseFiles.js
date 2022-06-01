@@ -27,6 +27,7 @@ const ClvCaseFiles = () => {
           data={data ? data.clv_cases : null}
           btnLabel="CLV Case File"
           btnClick={onOpenModal}
+          tableName="CLV Case File"
         />
       )}
       <Modal

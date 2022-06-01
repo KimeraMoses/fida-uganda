@@ -36,6 +36,7 @@ const PayRoll = () => {
           data={payrollNotes?.PayrollNotes}
           btnLabel="Add Notes"
           btnClick={onOpen}
+          tableName="Payroll"
         />
       )}
       {payroll?.payrolls && <PayrollTable data={payroll?.payrolls} />}

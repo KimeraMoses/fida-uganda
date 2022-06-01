@@ -26,6 +26,7 @@ const CaseFiles = () => {
           data={data ? data.cases : null}
           btnLabel="New Case File"
           btnClick={onOpenModal}
+          tableName="Case Files"
         />
       )}
       <Modal
