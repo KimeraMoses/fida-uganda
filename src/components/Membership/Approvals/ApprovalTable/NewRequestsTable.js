@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Thead, Tbody, Th, Tr, Td } from "@chakra-ui/react";
+import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
 import classes from "./Table.module.css";
 import sortByDate from "../../../../lib/sortByDate";
 import { TableHeadColumn } from "./ApprovedTable";
