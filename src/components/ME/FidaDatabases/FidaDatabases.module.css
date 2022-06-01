@@ -4,7 +4,7 @@
 }
 .folder_card_wrapper {
   width: 20%;
-  padding: 10px;
+  padding: 20px;
   user-select: none;
 }
 .folder_card_wrapper_inner {
@@ -16,11 +16,12 @@
   justify-content: center;
   cursor: pointer;
 }
+
 .folder_card_wrapper h4 {
   font-weight: 600;
-  font-size: 15px;
+  font-size: 20px;
   line-height: 120%;
   color: #562b85;
   text-transform: uppercase;
-  margin-top: 15px;
+  margin-top: 5px;
 }

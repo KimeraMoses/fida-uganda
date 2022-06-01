@@ -17,12 +17,13 @@ import { toastSuccess } from "../../lib/toastDetails";
 import CompletedTask from "./InProgressTasks/CompletedTask";
 import { AiOutlineSearch } from "react-icons/ai";
 import classes from "./Tasks.module.css";
+import Loader from "./../common/UI/Loader/Loader";
 
 const Tasks = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { mutate, isError, error, isSuccess, isLoading } = useAddTask();
   const toast = useToast();
-  const { data } = useTasks();
+  const tasksData = useTasks();
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   useEffect(() => {
@@ -36,7 +37,7 @@ const Tasks = () => {
     setSearchTerm(value);
 
     if (searchTerm !== "") {
-      const Results = data.tasks.filter((Result) => {
+      const Results = tasksData.data.tasks.filter((Result) => {
         return Object.values(Result)
           .join(" ")
           .replace(/-/g, " ")
@@ -70,24 +71,37 @@ const Tasks = () => {
           />
         </InputGroup>
       </div>
-      <SubHeading title="incoming Tasks" />
-      {data?.tasks && (
-        <IncomingTask
-          onOpen={onOpen}
-          tasks={searchResults.length > 0 ? searchResults : data?.tasks}
-        />
-      )}
-      <SubHeading title="In Progress" />
-      {data?.tasks && (
-        <InProgressTask
-          tasks={searchResults.length > 0 ? searchResults : data?.tasks}
-        />
-      )}
-      <SubHeading title="Completed" />
-      {data?.tasks && (
-        <CompletedTask
-          tasks={searchResults.length > 0 ? searchResults : data?.tasks}
-        />
+
+      {tasksData.isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <SubHeading title="incoming Tasks" />
+          {tasksData.data?.tasks && (
+            <IncomingTask
+              onOpen={onOpen}
+              tasks={
+                searchResults.length > 0 ? searchResults : tasksData.data?.tasks
+              }
+            />
+          )}
+          <SubHeading title="In Progress" />
+          {tasksData.data?.tasks && (
+            <InProgressTask
+              tasks={
+                searchResults.length > 0 ? searchResults : tasksData.data?.tasks
+              }
+            />
+          )}
+          <SubHeading title="Completed" />
+          {tasksData.data?.tasks && (
+            <CompletedTask
+              tasks={
+                searchResults.length > 0 ? searchResults : tasksData.data?.tasks
+              }
+            />
+          )}
+        </>
       )}
       <Modal isOpen={isOpen} onClose={onClose} title="Create a Task" size="2xl">
         <NewTaskForm
