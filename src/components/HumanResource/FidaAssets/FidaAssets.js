@@ -22,6 +22,7 @@ const FidaAssets = () => {
           isLoading={isLoading}
           btnLabel="Add Assets"
           btnClick={onOpen}
+          tableName="Fida Assets"
         />
       )}
       <Modal

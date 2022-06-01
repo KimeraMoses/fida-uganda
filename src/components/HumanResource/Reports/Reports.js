@@ -38,6 +38,7 @@ const Reports = () => {
           data={data?.reports}
           btnLabel="Create"
           btnClick={onOpen}
+          tableName="Reports"
         />
       )}
       <Modal isOpen={isOpen} onClose={onClose} size="xs" isCentered>

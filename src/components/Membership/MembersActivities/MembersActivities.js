@@ -95,6 +95,7 @@ const MembersActivities = () => {
         btnClick={onOpen}
         data={data ? data.MembershipActivities : null}
         isLoading={isLoading}
+        tableName="Member Activity"
       />
 
       <Modal

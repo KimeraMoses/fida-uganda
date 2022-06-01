@@ -18,6 +18,7 @@ const Members = () => {
         data={data ? data.Members : null}
         btnLabel="Add Member"
         btnClick={onOpen}
+        tableName="Members"
       />
       <Modal
         isOpen={isOpen}
