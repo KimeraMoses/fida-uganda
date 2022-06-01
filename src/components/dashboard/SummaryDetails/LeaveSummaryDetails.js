@@ -7,21 +7,21 @@ import { useNavigate, useLocation } from "react-router-dom";
 import FormButton from "../../common/UI/FormButton/FormButton";
 import { useAdvance } from "../../../hooks/useAdvances";
 
-const userDetails = [
-  { field: "Date of application", value: "10/03/2022" },
-  { field: "Name", value: "Kimera Moses" },
-  { field: "Designation", value: "Legal Officer" },
-  { field: "Date of Appointment", value: "10/02/2021" },
-  { field: "I wish to apply for", value: "Annual Leave days" },
-  { field: "From", value: "10/03/2022" },
-  { field: "To", value: "10/03/2022" },
-  { field: "Reason", value: "Preparation for my wedding" },
-  {
-    field: "While on leave my physical contact will be",
-    value: "Entebe kampala",
-  },
-  { field: "Tel", value: "+25777895623" },
-];
+// const userDetails = [
+//   { field: "Date of application", value: "10/03/2022" },
+//   { field: "Name", value: "Kimera Moses" },
+//   { field: "Designation", value: "Legal Officer" },
+//   { field: "Date of Appointment", value: "10/02/2021" },
+//   { field: "I wish to apply for", value: "Annual Leave days" },
+//   { field: "From", value: "10/03/2022" },
+//   { field: "To", value: "10/03/2022" },
+//   { field: "Reason", value: "Preparation for my wedding" },
+//   {
+//     field: "While on leave my physical contact will be",
+//     value: "Entebe kampala",
+//   },
+//   { field: "Tel", value: "+25777895623" },
+// ];
 
 const SummaryDetails = (props) => {
   const { type, isSubmitting } = props;
