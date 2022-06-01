@@ -8,7 +8,7 @@ const ProjectFiles = () => {
   return (
     <>
       <SectionHeader title="Project Files" />
-      <ProjectTable showBtn={false} />
+      <ProjectTable showBtn={false} tableName="Project Files" />
     </>
   );
 };

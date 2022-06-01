@@ -50,13 +50,13 @@ export const useEditClv = () => {
         queryClient.setQueryData(CLVS_KEY, () => {
           return produce(previousClvs, (draft) => {
             const index = draft.clvs.findIndex(
-              (clv) => clv.id === data?.clv.id
+              (clv) => clv.id === data?.updatedClv.id
             );
-            draft.clvs[index] = data?.clv;
+            draft.clvs[index] = data?.updatedClv;
           });
         });
       } else {
-        return { clvs: [data?.clv] };
+        return { clvs: [data?.updatedClv] };
       }
     },
   });
@@ -65,21 +65,23 @@ export const useEditClv = () => {
 export const useDeleteClv = () => {
   const queryClient = useQueryClient();
   return useMutation(deleteClv, {
-    onSuccess: (data) => {
-      const previousClvs = queryClient.getQueryData(CLVS_KEY);
+    onMutate: async (id) => {
+      await queryClient.cancelMutations(CLVS_KEY);
 
+      const previousClvs = queryClient.getQueryData(CLVS_KEY);
       if (previousClvs) {
-        queryClient.setQueryData(CLVS_KEY, () => {
+        queryClient.setQueryData(CLVS_KEY, (previousClvs) => {
           return produce(previousClvs, (draft) => {
-            const index = draft.clvs.findIndex(
-              (clv) => clv.id === data?.clv.id
-            );
-            draft.clvs.splice(index, 1);
+            draft.cases.filter((clv) => clv.id !== id);
           });
         });
-      } else {
-        return { clvs: [] };
       }
+    },
+    onError: (_error, _clvId, context) => {
+      queryClient.setQueryData(CLVS_KEY, context.previousClvs);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries(CLVS_KEY);
     },
   });
 };

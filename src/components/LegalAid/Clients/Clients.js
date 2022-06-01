@@ -26,6 +26,7 @@ const Clients = () => {
           data={data ? data.clients : null}
           btnLabel="Add Client"
           btnClick={onOpenModal}
+          tableName="Clients"
         />
       )}
       <Modal

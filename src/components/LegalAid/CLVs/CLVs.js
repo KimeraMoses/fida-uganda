@@ -4,7 +4,7 @@ import Modal from "../../common/Modal";
 import CLVTable from "./CLVTable/ClvTable";
 import NewClvForm from "./CLVForms/NewClvForm";
 import { useClvs, useAddClv } from "../../../hooks/useClv";
-import { clvInitialValues } from "./CLVForms/schema";
+import { clvInitialValues, clvSchema } from "./CLVForms/schema";
 
 const CLVs = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -19,11 +19,13 @@ const CLVs = () => {
           data={data ? data.clvs : null}
           btnLabel="Add CLV"
           btnClick={onOpen}
+          tableName="CLV"
         />
       )}
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <NewClvForm
           action="newClv"
+          validationSchema={clvSchema}
           onClose={onClose}
           initialValues={clvInitialValues}
           useMutate={useAddClv}

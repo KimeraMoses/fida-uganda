@@ -29,6 +29,7 @@ const Notifications = () => {
         isLoading={isLoading}
         btnLabel="Compose"
         btnClick={onOpen}
+        tableName="Notifications"
       />
       {isOpen && (
         <Form

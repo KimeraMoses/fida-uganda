@@ -17,6 +17,9 @@ const Approvals = () => {
         <NewRequestsTable
           data={data ? data.approvals : null}
           isLoading={isLoading}
+          showBtn={false}
+          subHeading={<SubHeading title="New Request" />}
+          tableName="Approvals"
         />
       )}
       <SubHeading title="Approved" />
