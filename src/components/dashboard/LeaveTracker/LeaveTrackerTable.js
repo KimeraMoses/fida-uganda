@@ -23,6 +23,8 @@ const LeaveTrackerTable = (props) => {
     details: "",
   };
 
+  console.log("Leave", data);
+
   return (
     <>
       <div className={classes.table_container}>

@@ -4,6 +4,7 @@ import classes from "./FidaDatabases.module.css";
 import Img from "../../../assets/images/folder.png";
 import { useNavigate } from "react-router-dom";
 import { useDatabases } from "../../../hooks/useDatabase";
+import Loader from "./../../common/UI/Loader/Loader";
 
 const FolderCard = ({ title, action }) => {
   return (
@@ -21,7 +22,7 @@ const FolderCard = ({ title, action }) => {
 
 const FidaDatabases = () => {
   const navigate = useNavigate();
-  const { data } = useDatabases();
+  const { data, isLoading } = useDatabases();
   const handleClick = (name) => {
     navigate(`/fida-databases/${name}`);
   };
@@ -29,13 +30,17 @@ const FidaDatabases = () => {
     <>
       <SectionHeader title="FIDA Database" />
       <div className={classes.fida_database_wrapper}>
-        {data?.databases.map((item) => (
-          <FolderCard
-            key={item.databaseName}
-            title={item.databaseName}
-            action={handleClick}
-          />
-        ))}
+        {isLoading ? (
+          <Loader />
+        ) : (
+          data?.databases.map((item) => (
+            <FolderCard
+              key={item.databaseName}
+              title={item.databaseName}
+              action={handleClick}
+            />
+          ))
+        )}
       </div>
     </>
   );

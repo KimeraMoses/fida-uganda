@@ -22,14 +22,24 @@ const ReportBreadCrumb = ({
       {folderLink && (
         <>
           <Link to={folderLink}>
-            <Heading color="purple.800" fontSize="4xl" mb={5}>
+            <Heading
+              color="purple.800"
+              fontSize="4xl"
+              mb={5}
+              textTransform="capitalize"
+            >
               {folderName}
             </Heading>
           </Link>
           <RiArrowRightSLine size={40} />
         </>
       )}
-      <Heading color="purple.800" fontSize="4xl" mb={5}>
+      <Heading
+        color="purple.800"
+        textTransform="capitalize"
+        fontSize="4xl"
+        mb={5}
+      >
         {folderLink ? reportName : folderName}
       </Heading>
     </div>

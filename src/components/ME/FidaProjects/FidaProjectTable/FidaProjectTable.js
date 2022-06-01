@@ -8,6 +8,7 @@ import { MdOutlineRemoveRedEye, MdOutlineFileDownload } from "react-icons/md";
 import { IoDocumentTextSharp } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { formatDate } from "../../../../lib/data";
+import withTable from "../../../../hoc/withTable";
 
 const FidaProjectTable = ({ isDocuments, data }) => {
   const navigate = useNavigate();
@@ -72,4 +73,4 @@ const FidaProjectTable = ({ isDocuments, data }) => {
   );
 };
 
-export default FidaProjectTable;
+export default withTable(FidaProjectTable);
