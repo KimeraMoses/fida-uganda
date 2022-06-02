@@ -18,6 +18,7 @@ const Employees = () => {
           data={data?.employees}
           btnLabel="Add Employee"
           btnClick={onOpen}
+          tableName="Employees table"
         />
       )}
       <Modal isOpen={isOpen} onClose={onClose}>

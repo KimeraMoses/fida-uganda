@@ -36,10 +36,10 @@ const PayRoll = () => {
           data={payrollNotes?.PayrollNotes}
           btnLabel="Add Notes"
           btnClick={onOpen}
-          tableName="Payroll"
+          tableName="Payroll Notes"
         />
       )}
-      {payroll?.payrolls && <PayrollTable data={payroll?.payrolls} />}
+      {payroll?.payrolls && <PayrollTable data={payroll?.payrolls} tableName="Payroll"/>}
       <Modal isOpen={isOpen} onClose={onClose}>
         <NewNotes
           onSubmit={mutate}

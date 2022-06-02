@@ -1,6 +1,7 @@
 import React from "react";
 import { Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
 import classes from "./LeaveManagentTable.module.css";
+import withTable from "../../../../hoc/withTable";
 
 export const TableHeadColumn = ({ title }) => {
   return <Th>{title}</Th>;
@@ -66,4 +67,4 @@ const LeaveManagementTable = ({ data }) => {
   );
 };
 
-export default LeaveManagementTable;
+export default withTable(LeaveManagementTable);

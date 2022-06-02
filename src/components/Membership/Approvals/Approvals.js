@@ -1,7 +1,6 @@
 import React from "react";
 import ApprovedTable from "./ApprovalTable/ApprovedTable";
 import NewRequestsTable from "./ApprovalTable/NewRequestsTable";
-import TableSearch from "../../common/table/TableSearch";
 import SectionHeader from "../../common/SectionHeader";
 import { useApprovals } from "../../../hooks/useApprovals";
 import SubHeading from "./../../Tasks/SubHeading/SubHeading";
@@ -11,21 +10,20 @@ const Approvals = () => {
   return (
     <div>
       <SectionHeader title="Approvals" />
-      <TableSearch showBtn={false} />
-      <SubHeading title="New Request" />
       {data?.approvals && (
         <NewRequestsTable
           data={data ? data.approvals : null}
           isLoading={isLoading}
           showBtn={false}
           subHeading={<SubHeading title="New Request" />}
-          tableName="Approvals"
+          tableName="New approval requests"
         />
       )}
       <SubHeading title="Approved" />
       <ApprovedTable
         data={data ? data.approvals : null}
         isLoading={isLoading}
+        tableName="Approved members"
       />
     </div>
   );

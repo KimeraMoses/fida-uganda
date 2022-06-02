@@ -10,6 +10,7 @@ const HRApprovals = () => {
         // isLoading={isLoading}
         // data={data ? data.data : null}
         showBtn={false}
+        tableName={'Human resource approvals'}
       />
     </div>
   );
