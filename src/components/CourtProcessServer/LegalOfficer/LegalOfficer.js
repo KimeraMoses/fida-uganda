@@ -1,4 +1,3 @@
-import TableSearch from "../../common/table/TableSearch";
 import SectionHeader from "../../common/SectionHeader";
 import LegalOfficerTable from "./LegalOfficerTable/LegalOfficerTable";
 
@@ -42,8 +41,11 @@ const LegalOfficer = () => {
   return (
     <>
       <SectionHeader title="Legal officer" />
-      <TableSearch showBtn={false} />
-      <LegalOfficerTable data={data} />
+      <LegalOfficerTable
+        data={data}
+        showBtn={false}
+        tableName="Legal Officer"
+      />
     </>
   );
 };
