@@ -1,57 +1,33 @@
 import { useDisclosure } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React from "react";
 import { useDeactivatedUsers } from "../../../hooks/useUser";
 import Modal from "../../common/Modal";
 import SectionHeader from "../../common/SectionHeader";
-import TableSearch from "../../common/table/TableSearch";
 import FidaApprovedTable from "./FidaApprovalTable/FidaApprovedTable";
 import NewEmployeeForm from "./NewEmployeeForm/NewEmployeeForm";
 import SubHeading from "./../../Tasks/SubHeading/SubHeading";
 
 const FidaApprovals = () => {
   const { data } = useDeactivatedUsers();
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+  const { isOpen,  onClose } = useDisclosure();
 
-  const userSearchHandler = (e) => {
-    const { value } = e.target;
-    setSearchTerm(value);
-    const { users } = data;
-    if (searchTerm !== "" && users) {
-      const Results = data?.users.filter((Result) => {
-        return Object.values(Result)
-          .join(" ")
-          .replace(/-/g, " ")
-          .toLowerCase()
-          .includes(searchTerm.toLowerCase());
-      });
-      setSearchResults(Results);
-    }
-  };
+
 
   return (
     <>
       <SectionHeader title="FIDA IIMS approvals" />
-      <TableSearch
-        btnLabel="Add employee"
-        btnClick={onOpen}
-        searchTerm={searchTerm}
-        onSearchHandler={userSearchHandler}
-      />
       <SubHeading title="Approved Users" />
       {data?.users ? (
         <FidaApprovedTable
-          searchResults={searchResults}
-          data={searchResults.length > 0 ? searchResults : data?.users}
+       
+          tableName="Approved users"
         />
       ) : null}
 
       <SubHeading title="Pending Approval" />
       {data?.users ? (
         <FidaApprovedTable
-          searchResults={searchResults}
-          data={searchResults.length > 0 ? searchResults : data?.users}
+          tableName="Users pending approval"
         />
       ) : null}
       <Modal isOpen={isOpen} onClose={onClose}>

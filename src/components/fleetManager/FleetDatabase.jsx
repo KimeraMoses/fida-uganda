@@ -26,6 +26,7 @@ const FleetDatabase = () => {
         isLoading={isLoading}
         btnLabel="Add Vehicle"
         btnClick={onOpen}
+        tableName={'Fleet Database'}
       />
       <Modal
         isOpen={isOpen}

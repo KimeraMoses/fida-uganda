@@ -12,68 +12,7 @@ import {
 } from "../../../hooks/useMembershipActivity";
 import { useProjectOptions } from "../../../hooks/useProjects";
 
-// export const MembersData = [
-//   {
-//     sn: "001",
-//     name: "Mutumba Joshep",
-//     memberNo: "FU/LE/20/064",
-//     project: "SGBV, Kamuli IDLO",
-//     projecctActivity: "Training in Management of SGBV cases ",
-//     date: "02/02/2022",
-//     activitySummary:
-//       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim enim ad minim adj ....",
-//   },
-//   {
-//     sn: "002",
-//     name: "Mutumba Joshep",
-//     memberNo: "FU/LE/20/064",
-//     project: "SGBV, Kamuli IDLO",
-//     projecctActivity: "Training in Management of SGBV cases ",
-//     date: "02/02/2022",
-//     activitySummary:
-//       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim enim ad minim adj ....",
-//   },
-//   {
-//     sn: "003",
-//     name: "Mutumba Joshep",
-//     memberNo: "FU/LE/20/064",
-//     project: "SGBV, Kamuli IDLO",
-//     projecctActivity: "Training in Management of SGBV cases ",
-//     date: "02/02/2022",
-//     activitySummary:
-//       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim enim ad minim adj ....",
-//   },
-//   {
-//     sn: "004",
-//     name: "Mutumba Joshep",
-//     memberNo: "FU/LE/20/064",
-//     project: "SGBV, Kamuli IDLO",
-//     projecctActivity: "Training in Management of SGBV cases ",
-//     date: "02/02/2022",
-//     activitySummary:
-//       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim enim ad minim adj ....",
-//   },
-//   {
-//     sn: "005",
-//     name: "Mutumba Joshep",
-//     memberNo: "FU/LE/20/064",
-//     project: "SGBV, Kamuli IDLO",
-//     projecctActivity: "Training in Management of SGBV cases ",
-//     date: "02/02/2022",
-//     activitySummary:
-//       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim enim ad minim adj ....",
-//   },
-//   {
-//     sn: "006",
-//     name: "Kimera Moses",
-//     memberNo: "FU/LE/20/064",
-//     project: "SGBV, Kamuli IDLO",
-//     projecctActivity: "Training in Management of SGBV cases ",
-//     date: "02/02/2022",
-//     activitySummary:
-//       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim enim ad minim adj ....",
-//   },
-// ];
+
 
 const MembersActivities = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();

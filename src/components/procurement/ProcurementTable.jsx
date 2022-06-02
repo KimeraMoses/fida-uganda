@@ -2,6 +2,7 @@ import React from "react";
 import { Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
 import classes from "./table.module.css";
 import sortByDate from "../../lib/sortByDate";
+import withTable from "../../hoc/withTable";
 
 export const TableHeadColumn = (props) => {
   const { title, secondaryText } = props;
@@ -86,4 +87,4 @@ const ProcurementTable = ({ data, isLoading }) => {
   );
 };
 
-export default ProcurementTable;
+export default withTable(ProcurementTable);

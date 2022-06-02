@@ -10,6 +10,7 @@ import { formatDate } from "../../../../lib/data";
 import { useRequestPasswordLink } from "../../../../hooks/useUser";
 import EmployeeCard from "../NewEmployeeForm/EmployeeCard";
 import { toastSuccess } from "../../../../lib/toastDetails";
+import withTable from "../../../../hoc/withTable";
 
 const FidaApprovedTable = ({ data }) => {
   const [user, setUser] = useState({});
@@ -102,4 +103,4 @@ const FidaApprovedTable = ({ data }) => {
   );
 };
 
-export default FidaApprovedTable;
+export default withTable(FidaApprovedTable);
