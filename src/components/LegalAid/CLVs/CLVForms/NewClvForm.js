@@ -9,9 +9,10 @@ import { useProjectOptions } from "../../../../hooks/useProjects";
 import withForm from "../../../../hoc/withForm";
 import { useMemo } from "react";
 import { MdClose } from "react-icons/md";
+import SelectAvatar from "../../../common/SelectAvatar";
 
 const NewClvForm = ({ isSubmitting, ...rest }) => {
-  const { action, onClose, values } = rest;
+  const { action, onClose, values, setAvatar, toast, url, setImageUrl } = rest;
   const projectOptions = useProjectOptions();
   const projects = useMemo(() => projectOptions, [projectOptions]);
 
@@ -23,7 +24,19 @@ const NewClvForm = ({ isSubmitting, ...rest }) => {
           <MdClose />
         </div>
       </div>
-      <div className={classes.user_image_wrapper}></div>
+      <div className={classes.user_image_wrapper}>
+        <SelectAvatar
+          setAvatar={setAvatar}
+          toast={toast}
+          alignSelf="center"
+          borderRadius="full"
+          h={20}
+          w={20}
+          iconObj={{ size: 24 }}
+          url={url}
+          setImageUrl={setImageUrl}
+        />
+      </div>
       <div className={classes.field_wrapper}>
         <div className={styles.field_label}>Personal Information</div>
         <SimpleGrid columns={2} spacing={2}>

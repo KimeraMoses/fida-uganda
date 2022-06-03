@@ -1,3 +1,4 @@
+import { useState } from "react";
 import SectionHeader from "../../common/SectionHeader";
 import { useDisclosure } from "@chakra-ui/react";
 import Modal from "../../common/Modal";
@@ -9,6 +10,9 @@ import { clvInitialValues, clvSchema } from "./CLVForms/schema";
 const CLVs = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data, isLoading } = useClvs();
+
+  const [avatar, setAvatar] = useState(null);
+  const [url, setImageUrl] = useState("");
 
   return (
     <>
@@ -30,6 +34,12 @@ const CLVs = () => {
           useMutate={useAddClv}
           onSuccess={onClose}
           success={"CLV added successfully"}
+          setAvatar={setAvatar}
+          setImageUrl={setImageUrl}
+          url={url}
+          file={avatar}
+          fileName="image"
+          isFormData={true}
         />
       </Modal>
     </>

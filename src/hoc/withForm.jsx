@@ -68,6 +68,7 @@ const withForm = (FormComponent) => {
               {...rest}
               setFieldValue={setFieldValue}
               resetForm={resetForm}
+              toast={toast}
             />
           </Form>
         )}
