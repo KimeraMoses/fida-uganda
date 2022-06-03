@@ -134,7 +134,7 @@ const CLVTable = ({ data }) => {
         <Modal isOpen={isOpen} onClose={onClose}>
           <NewClvForm
             action={isEdit ? "editClv" : "approveClv"}
-            validationSchema={clvSchema}
+            validationSchema={isEdit ? clvSchema : null}
             onSuccess={onClose}
             success={isEdit ? "CLV updated successfully" : "CLV Approved"}
             initialValues={clvInitialValues}
@@ -142,7 +142,7 @@ const CLVTable = ({ data }) => {
             mutateInitialValues={mutateInitialValues}
             onClose={onClose}
             isMutable={isEdit ? false : true}
-            mutateDate={toggleApproval}
+            mutateData={toggleApproval}
           />
         </Modal>
       </div>
