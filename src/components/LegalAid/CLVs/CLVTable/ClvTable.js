@@ -25,9 +25,13 @@ const CLVTable = ({ data }) => {
   const [selectedRow, setSelectedRow] = useState(null);
   const [isEdit, setIsEdit] = useState(false);
 
+  const [avatar, setAvatar] = useState(null);
+  const [url, setImageUrl] = useState("");
+
   const initiateApproval = (row) => {
     setIsEdit(false);
     setSelectedRow(row);
+    setImageUrl(row.image);
     onOpen();
   };
 
@@ -143,6 +147,12 @@ const CLVTable = ({ data }) => {
             onClose={onClose}
             isMutable={isEdit ? false : true}
             mutateData={toggleApproval}
+            setAvatar={setAvatar}
+            setImageUrl={setImageUrl}
+            url={url}
+            file={avatar}
+            fileName="image"
+            isFormData={true}
           />
         </Modal>
       </div>
