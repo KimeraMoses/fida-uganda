@@ -16,21 +16,25 @@ import { MdEdit } from "react-icons/md";
 import Modal from "../../../common/Modal";
 import NewClvForm from "../CLVForms/NewClvForm";
 import { formatDate } from "../../../../lib/data";
-import { onSubmitAlert } from "../../../../lib/deleteInProd";
 import withTable from "./../../../../hoc/withTable";
 import { clvInitialValues, clvSchema } from "../CLVForms/schema";
-// import { useEditClv } from "../../../../hooks/useClv";
+import { useEditClv } from "../../../../hooks/useClv";
 
 const CLVTable = ({ data }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedRow, setSelectedRow] = useState(null);
   const [isEdit, setIsEdit] = useState(false);
 
+  const [avatar, setAvatar] = useState(null);
+  const [url, setImageUrl] = useState("");
+
   const initiateApproval = (row) => {
     setIsEdit(false);
     setSelectedRow(row);
+    setImageUrl(row.image);
     onOpen();
   };
+
   const initiateEdit = (row) => {
     setIsEdit(true);
     setSelectedRow(row);
@@ -134,15 +138,21 @@ const CLVTable = ({ data }) => {
         <Modal isOpen={isOpen} onClose={onClose}>
           <NewClvForm
             action={isEdit ? "editClv" : "approveClv"}
-            validationSchema={clvSchema}
+            validationSchema={isEdit ? clvSchema : null}
             onSuccess={onClose}
             success={isEdit ? "CLV updated successfully" : "CLV Approved"}
             initialValues={clvInitialValues}
-            useMutate={onSubmitAlert}
+            useMutate={useEditClv}
             mutateInitialValues={mutateInitialValues}
             onClose={onClose}
             isMutable={isEdit ? false : true}
-            mutateDate={toggleApproval}
+            mutateData={toggleApproval}
+            setAvatar={setAvatar}
+            setImageUrl={setImageUrl}
+            url={url}
+            file={avatar}
+            fileName="image"
+            isFormData={true}
           />
         </Modal>
       </div>
