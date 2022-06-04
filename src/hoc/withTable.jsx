@@ -66,7 +66,7 @@ const withTable = (TableComponent) => {
       //binary string
       XLSX.write(workBook, { bookType: "xlsx", type: "binary" });
       //donwload
-      XLSX.writeFile(workBook, `${tableName}.xlsx`);
+      XLSX.writeFile(workBook, `${tableName}-${new Date().toLocaleString("en-GB")}.xlsx`);
     };
 
     const keyWordHandler = (e) => {
