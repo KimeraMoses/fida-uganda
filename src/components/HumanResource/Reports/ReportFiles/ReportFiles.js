@@ -27,8 +27,6 @@ const ReportFiles = () => {
         root="Reports"
         rootLink="/reports"
         folderName={reportFolderName.replace(/-/g, " ")}
-        // folderLink="/"
-        // reportName="Report name"
       />
 
       {data?.reports && (
@@ -38,7 +36,7 @@ const ReportFiles = () => {
           btnClick={onOpen}
         />
       )}
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} title="New Report Form">
         <NewReportForm
           onClose={onClose}
           onSubmit={mutate}

@@ -1,0 +1,24 @@
+.beneficiaries_form_wrapper {
+  padding: 20px 10px;
+  background: linear-gradient(100.32deg, #fcf5ff -6.29%, #f5e4ff 88.21%);
+  border: 1px solid rgba(86, 43, 133, 0.1);
+  box-sizing: border-box;
+  border-radius: 12px;
+  margin: 10px 0 20px;
+}
+
+.beneficiaries_form_wrapper h4 {
+  margin-bottom: 10px;
+  color: var(--primary_color);
+  font-weight: 500;
+}
+
+.select_field label {
+  margin-bottom: 2px !important;
+  color: var(--chakra-colors-blackAlpha-600);
+}
+.form_action_wrapper {
+  display: flex;
+  padding: 10px 0 0;
+  justify-content: end;
+}

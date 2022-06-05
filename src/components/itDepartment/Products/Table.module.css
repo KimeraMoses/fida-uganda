@@ -34,6 +34,7 @@
   align-items: center;
   padding: 4px;
   border-radius: 20px;
+  width: auto;
 }
 .status_indicator {
   width: 8px;

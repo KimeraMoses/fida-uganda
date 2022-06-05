@@ -17,7 +17,6 @@ const CaseFiles = () => {
     onOpen();
     dispatch(resetCaseFile());
   };
-
   return (
     <>
       <SectionHeader title="Case Files" />
