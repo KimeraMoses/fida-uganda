@@ -6,11 +6,6 @@ import { formatDate } from "../../../lib/data";
 import withTable from "./../../../hoc/withTable";
 
 const ITProductsTable = ({ data, isProducts }) => {
-
-
-
-  
-
   return (
     <>
       <div className={classes.table_wrapper}>
@@ -19,7 +14,6 @@ const ITProductsTable = ({ data, isProducts }) => {
           colorScheme="gray"
           size="sm"
           className={classes.data_table}
-
         >
           <Thead
             className={`${classes.table_header} ${
@@ -28,7 +22,6 @@ const ITProductsTable = ({ data, isProducts }) => {
           >
             <Tr>
               <TableHeadColumn
-              
                 title="Name"
                 secondaryText={isProducts ? "Brand" : "Location"}
               />
@@ -48,9 +41,7 @@ const ITProductsTable = ({ data, isProducts }) => {
                 return (
                   <Tr key={item.id}>
                     <Td className={classes.data_field}>
-                      <div
-                        className={`${classes.data__primary_text} ${classes.single_line}`}
-                      >
+                      <div className={`${classes.data__primary_text}`}>
                         {item.project_name}
                       </div>
                       <div className={classes.data__secondary_text}>
@@ -58,9 +49,7 @@ const ITProductsTable = ({ data, isProducts }) => {
                       </div>
                     </Td>
                     <Td className={classes.data_field}>
-                      <div
-                        className={`${classes.data__primary_text} ${classes.single_line}`}
-                      >
+                      <div className={`${classes.data__primary_text}`}>
                         {item.subject_of_procurement}
                       </div>
                       <div className={classes.data__secondary_text}>

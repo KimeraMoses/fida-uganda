@@ -3,6 +3,7 @@ import ActionButtons from "../../../../Membership/Members/NewMemberForm/MultiFor
 import { Radio, RadioGroup, SimpleGrid, Stack } from "@chakra-ui/react";
 import BenTable from "./BeneficiariesTable";
 import withForm from "../../../../../hoc/withForm";
+import AddBeneficiariesForm from "./AddBeneficiariesForm";
 
 const MultForm4 = ({ page, limit, onBack, isSubmitting }) => {
   return (
@@ -10,6 +11,7 @@ const MultForm4 = ({ page, limit, onBack, isSubmitting }) => {
       <div className={classes.field_wrapper}>
         <div className={classes.field_label}>7. Beneficiaries</div>
         <BenTable />
+        <AddBeneficiariesForm />
       </div>
       <div className={classes.field_wrapper}>
         <div className={classes.field_label}>

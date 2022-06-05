@@ -12,7 +12,7 @@ const SelectField = ({ label, name, options, ...rest }) => {
       {({ field, form }) => (
         <FormControl>
           <FormLabel htmlFor="country">{label}</FormLabel>
-          <SelectBase id="country" {...field} {...rest}>
+          <SelectBase id="country" {...field} {...rest} bgColor="white">
             <Field>
               {({ field }) =>
                 options.map((option) => (

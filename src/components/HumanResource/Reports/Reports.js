@@ -3,7 +3,8 @@ import Modal from "../../common/Modal";
 import SectionHeader from "../../common/SectionHeader";
 import ReportsTable from "./ReportTable/ReportTable";
 import { useReports } from "../../../hooks/useReports";
-import AddNewFolder from "./AddNewFolder/AddNewFolder";
+import NewFolderForm from "./AddNewFolder/NewFolderForm";
+import { useAddComplaint } from "../../../hooks/useComplaint";
 
 export const FolderFileData = [
   {
@@ -36,13 +37,13 @@ const Reports = () => {
       {data?.reports && (
         <ReportsTable
           data={data?.reports}
-          btnLabel="Create"
+          btnLabel="New Folder"
           btnClick={onOpen}
           tableName="Reports"
         />
       )}
-      <Modal isOpen={isOpen} onClose={onClose} size="xs" isCentered>
-        <AddNewFolder />
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <NewFolderForm useMutate={useAddComplaint} onClose={onClose} />
       </Modal>
     </>
   );
