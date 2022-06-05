@@ -5,7 +5,10 @@ import SectionHeader from "../../common/SectionHeader";
 import ComplaintsTable from "./ComplaintTable/ComplaintTable";
 import { useAddComplaint, useComplaints } from "../../../hooks/useComplaint";
 import ComplaintForm from "./ComplaintForm/ComplaintForm";
-import {itComplaintInitialValues, itComplaintOrderSchema} from '../../forms/it/schemas/it'
+import {
+  itComplaintInitialValues,
+  itComplaintOrderSchema,
+} from "../../forms/it/schemas/it";
 
 const ITComplaints = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
