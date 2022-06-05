@@ -22,30 +22,65 @@ const withTable = (TableComponent) => {
 
     Array.isArray(data) && data.length && tableKeys.push(Object.keys(data[0]));
 
-    const filteredtableKeys =
+    let filteredtableKeys;
+
+    if (
+      data &&
+      Array.isArray(data) &&
+      data.length &&
       keysToFilterOut &&
       keysToFilterOut.length &&
-      Array.isArray(keysToFilterOut) &&
-      tableKeys &&
-      tableKeys.length &&
-      tableKeys[0].filter((key) => !keysToFilterOut.includes(key));
+      Array.isArray(keysToFilterOut)
+    ) {
+      filteredtableKeys = tableKeys[0].filter(
+        (key) => !keysToFilterOut.includes(key)
+      );
+    } else {
+      filteredtableKeys = tableKeys[0];
+    }
 
-    let formattedData = [];
+    let formattedData;
+
+    if (
+      data &&
+      Array.isArray(data) &&
+      data.length &&
+      keysToFilterOut &&
+      keysToFilterOut.length &&
+      Array.isArray(keysToFilterOut)
+    ) {
+      let tempArr = [];
+      data.map((dat) => {
+        keysToFilterOut.forEach((e) => delete dat[e]);
+
+      return  tempArr.push(Object.values(dat));
+      });
+      formattedData = tempArr;
+    } else {
+      formattedData =
+        Array.isArray(data) &&
+        data.length &&
+        data.map((row) => {
+          return Object.values(row);
+        });
+    }
+
+    // let formattedData = [];
     // Array.isArray(data) &&
     //   data.length &&
     //   data.map((row) => {
     //     return formattedData.push(Object.values(row));
     //   });
-    keysToFilterOut &&
-      keysToFilterOut.length &&
-      Array.isArray(keysToFilterOut) &&
-      Array.isArray(data) &&
-      data.length &&
-      data.map((dat) => {
-        keysToFilterOut.forEach((e) => delete dat[e]);
+    // keysToFilterOut &&
+    //   keysToFilterOut.length &&
+    //   Array.isArray(keysToFilterOut) &&
+    //   Array.isArray(data) &&
+    //   data.length &&
+    //   data.map((dat) => {
+    //     keysToFilterOut.forEach((e) => delete dat[e]);
 
-        return formattedData.push(Object.values(dat));
-      });
+    //     return formattedData.push(Object.values(dat));
+    //   });
 
     const handleDownload = () => {
       const doc = new jsPDF({
