@@ -22,27 +22,65 @@ const withTable = (TableComponent) => {
 
     Array.isArray(data) && data.length && tableKeys.push(Object.keys(data[0]));
 
-    const filteredtableKeys =
-      tableKeys &&
-      tableKeys.length &&
-      tableKeys[0].filter(
-        (key) => keysToFilterOut && !keysToFilterOut.includes(key)
-      );
+    let filteredtableKeys;
 
-    let formattedData = [];
+    if (
+      data &&
+      Array.isArray(data) &&
+      data.length &&
+      keysToFilterOut &&
+      keysToFilterOut.length &&
+      Array.isArray(keysToFilterOut)
+    ) {
+      filteredtableKeys = tableKeys[0].filter(
+        (key) => !keysToFilterOut.includes(key)
+      );
+    } else {
+      filteredtableKeys = tableKeys[0];
+    }
+
+    let formattedData;
+
+    if (
+      data &&
+      Array.isArray(data) &&
+      data.length &&
+      keysToFilterOut &&
+      keysToFilterOut.length &&
+      Array.isArray(keysToFilterOut)
+    ) {
+      let tempArr = [];
+      data.map((dat) => {
+        keysToFilterOut.forEach((e) => delete dat[e]);
+
+        return tempArr.push(Object.values(dat));
+      });
+      formattedData = tempArr;
+    } else {
+      formattedData =
+        Array.isArray(data) &&
+        data.length &&
+        data.map((row) => {
+          return Object.values(row);
+        });
+    }
+
+
     // Array.isArray(data) &&
     //   data.length &&
     //   data.map((row) => {
     //     return formattedData.push(Object.values(row));
     //   });
+    // keysToFilterOut &&
+    //   keysToFilterOut.length &&
+    //   Array.isArray(keysToFilterOut) &&
+    //   Array.isArray(data) &&
+    //   data.length &&
+    //   data.map((dat) => {
+    //     keysToFilterOut.forEach((e) => delete dat[e]);
 
-    Array.isArray(data) &&
-      data.length &&
-      data.map((dat) => {
-        keysToFilterOut && keysToFilterOut.forEach((e) => delete dat[e]);
-
-        return formattedData.push(Object.values(dat));
-      });
+    //     return formattedData.push(Object.values(dat));
+    //   });
 
     const handleDownload = () => {
       const doc = new jsPDF({
