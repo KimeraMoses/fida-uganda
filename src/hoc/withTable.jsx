@@ -53,7 +53,7 @@ const withTable = (TableComponent) => {
       data.map((dat) => {
         keysToFilterOut.forEach((e) => delete dat[e]);
 
-      return  tempArr.push(Object.values(dat));
+        return tempArr.push(Object.values(dat));
       });
       formattedData = tempArr;
     } else {
@@ -65,7 +65,7 @@ const withTable = (TableComponent) => {
         });
     }
 
-    // let formattedData = [];
+
     // Array.isArray(data) &&
     //   data.length &&
     //   data.map((row) => {
