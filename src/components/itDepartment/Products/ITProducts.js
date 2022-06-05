@@ -2,7 +2,10 @@ import React from "react";
 import { useDisclosure } from "@chakra-ui/react";
 import SectionHeader from "../../common/SectionHeader";
 import ITProductForm from "../../forms/it/AddITProductForm";
-import { itProductInitialValues, itProductOrderSchema } from "../../forms/it/schemas/it";
+import {
+  itProductInitialValues,
+  itProductOrderSchema,
+} from "../../forms/it/schemas/it";
 import Modal from "../../common/Modal";
 import ITProductsTable from "./ITProductsTable";
 import { useAddItProduct, useItProducts } from "../../../hooks/useItProduct";
@@ -20,7 +23,20 @@ const ITProducts = () => {
         isLoading={isLoading}
         btnLabel="Add Product"
         btnClick={onOpen}
-        keys={['project_name', 'brand', 'id']}
+        keysToFilterOut={[
+          "project_name",
+          "brand",
+          "id",
+          "createdAt",
+          "ITProduct_roles",
+          "updateAt",
+          "date_required",
+          'budget_year',
+          'name',
+          'currency',
+          'class',
+          'registeredBy'
+        ]}
         tableName="IT Products"
       />
 
