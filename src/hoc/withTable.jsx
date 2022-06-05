@@ -23,10 +23,12 @@ const withTable = (TableComponent) => {
     Array.isArray(data) && data.length && tableKeys.push(Object.keys(data[0]));
 
     const filteredtableKeys =
+      keysToFilterOut &&
+      keysToFilterOut.length &&
+      Array.isArray(keysToFilterOut) &&
       tableKeys &&
       tableKeys.length &&
       tableKeys[0].filter((key) => !keysToFilterOut.includes(key));
-
 
     let formattedData = [];
     // Array.isArray(data) &&
@@ -34,13 +36,15 @@ const withTable = (TableComponent) => {
     //   data.map((row) => {
     //     return formattedData.push(Object.values(row));
     //   });
-
-    Array.isArray(data) &&
+    keysToFilterOut &&
+      keysToFilterOut.length &&
+      Array.isArray(keysToFilterOut) &&
+      Array.isArray(data) &&
       data.length &&
       data.map((dat) => {
         keysToFilterOut.forEach((e) => delete dat[e]);
 
-       return formattedData.push(Object.values(dat));
+        return formattedData.push(Object.values(dat));
       });
 
     const handleDownload = () => {
@@ -66,7 +70,10 @@ const withTable = (TableComponent) => {
       //binary string
       XLSX.write(workBook, { bookType: "xlsx", type: "binary" });
       //donwload
-      XLSX.writeFile(workBook, `${tableName}-${new Date().toLocaleString("en-GB")}.xlsx`);
+      XLSX.writeFile(
+        workBook,
+        `${tableName}-${new Date().toLocaleString("en-GB")}.xlsx`
+      );
     };
 
     const keyWordHandler = (e) => {
