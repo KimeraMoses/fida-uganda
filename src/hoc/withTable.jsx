@@ -65,7 +65,6 @@ const withTable = (TableComponent) => {
         });
     }
 
-
     // Array.isArray(data) &&
     //   data.length &&
     //   data.map((row) => {

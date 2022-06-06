@@ -1,19 +1,18 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import SectionHeader from "../../../common/SectionHeader";
-import TableSearch from "../../../common/table/TableSearch";
-import FidaProjectTable from "../FidaProjectTable/FidaProjectTable";
+import ProjectTable from "../../../LegalAid/ProjectFiles/ProjectPFilesTable/ProjectTable";
+import ReportBreadCrumb from "./../../../HumanResource/Reports/BreadCrumb/ReportBreadCrumb";
 
 const FidaProjectFiles = () => {
   const { folderName } = useParams();
   return (
     <>
-      <SectionHeader
-        title={`Fida Projects > ${folderName.replace(/-/g, " ")}`}
+      <ReportBreadCrumb
+        root="Fida Projects"
+        rootLink="/fida-projects"
+        folderName={folderName.toLowerCase().replace(/-/g, " ")}
       />
-
-      <TableSearch showBtn={false} />
-      <FidaProjectTable isDocuments={true} />
+      <ProjectTable showBtn={false} tableName="Project Files" />
     </>
   );
 };
