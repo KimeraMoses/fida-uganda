@@ -56,26 +56,26 @@ const Tasks = () => {
   return (
     <>
       <SectionHeader title="Tasks" />
-      <div className={classes.tasks_search_wrapper}>
-        <InputGroup>
-          <InputLeftElement
-            pointerEvents="none"
-            children={<AiOutlineSearch color="gray.300" />}
-          />
-          <Input
-            className={classes.search_input_field}
-            type="search"
-            value={searchTerm}
-            onChange={keyWordSearchHandler}
-            placeholder="Type to Search"
-          />
-        </InputGroup>
-      </div>
-
       {tasksData.isLoading ? (
         <Loader />
       ) : (
         <>
+          <div className={classes.tasks_search_wrapper}>
+            <InputGroup>
+              <InputLeftElement
+                pointerEvents="none"
+                children={<AiOutlineSearch color="gray.300" />}
+              />
+              <Input
+                className={classes.search_input_field}
+                type="search"
+                value={searchTerm}
+                onChange={keyWordSearchHandler}
+                placeholder="Type to Search"
+              />
+            </InputGroup>
+          </div>
+
           <SubHeading title="incoming Tasks" />
           {tasksData.data?.tasks && (
             <IncomingTask

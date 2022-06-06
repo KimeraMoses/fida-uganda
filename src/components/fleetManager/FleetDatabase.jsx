@@ -9,6 +9,7 @@ import {
   fleetDatabaseOrderSchema,
 } from "../forms/fleetDatabase/schemas/fleetDatabase";
 import FleetDatabaseTable from "./FleetDatabaseTable/FleetDatabaseTable";
+import Loader from "../common/UI/Loader/Loader";
 
 const FleetDatabase = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -19,15 +20,19 @@ const FleetDatabase = () => {
   return (
     <>
       <SectionHeader title="Fleet Database" />
-      <FleetDatabaseTable
-        data={data?.fleets}
-        columns={fleetDatabaseColumns}
-        onRowClick={onRowClick}
-        isLoading={isLoading}
-        btnLabel="Add Vehicle"
-        btnClick={onOpen}
-        tableName={'Fleet Database'}
-      />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <FleetDatabaseTable
+          data={data?.fleets}
+          columns={fleetDatabaseColumns}
+          onRowClick={onRowClick}
+          isLoading={isLoading}
+          btnLabel="Add Vehicle"
+          btnClick={onOpen}
+          tableName={"Fleet Database"}
+        />
+      )}
       <Modal
         isOpen={isOpen}
         onClose={onClose}
