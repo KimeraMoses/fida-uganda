@@ -17,10 +17,16 @@ const withForm = (FormComponent) => {
     id,
     isMutable,
     mutateData,
+    mutateInitialValues,
     ...rest
   }) {
     const { mutate, isError, error, isSuccess, isLoading } = useMutate(id);
     const toast = useToast();
+
+    let data = initialValues;
+    if (mutateInitialValues) {
+      data = mutateInitialValues(initialValues);
+    }
 
     React.useEffect(() => {
       if (isError) {
@@ -35,7 +41,7 @@ const withForm = (FormComponent) => {
     return (
       <Formik
         validationSchema={validationSchema}
-        initialValues={initialValues}
+        initialValues={data}
         onSubmit={(values) => {
           if (isFormData) {
             const formData = new FormData();
