@@ -9,25 +9,20 @@ import SubHeading from "./../../Tasks/SubHeading/SubHeading";
 
 const FidaApprovals = () => {
   const { data } = useDeactivatedUsers();
-  const { isOpen,  onClose } = useDisclosure();
-
-
-
+  const { isOpen, onClose } = useDisclosure();
   return (
     <>
       <SectionHeader title="FIDA IIMS approvals" />
       <SubHeading title="Approved Users" />
       {data?.users ? (
-        <FidaApprovedTable
-       
-          tableName="Approved users"
-        />
+        <FidaApprovedTable tableName="Approved users" data={data?.users} />
       ) : null}
 
       <SubHeading title="Pending Approval" />
       {data?.users ? (
         <FidaApprovedTable
           tableName="Users pending approval"
+          data={data?.users}
         />
       ) : null}
       <Modal isOpen={isOpen} onClose={onClose}>

@@ -29,7 +29,7 @@ const PayRoll = () => {
 
   return (
     <>
-      <SectionHeader title="Payroll" />
+      <SectionHeader title="Payroll Notes" />
       <TableSearch btnLabel="Add Notes" btnClick={onOpen} />
       {payrollNotes?.PayrollNotes && (
         <PayrollNotesTable
@@ -39,7 +39,10 @@ const PayRoll = () => {
           tableName="Payroll Notes"
         />
       )}
-      {payroll?.payrolls && <PayrollTable data={payroll?.payrolls} tableName="Payroll"/>}
+      <SectionHeader title="Payroll" />
+      {payroll?.payrolls && (
+        <PayrollTable data={payroll?.payrolls} tableName="Payroll" />
+      )}
       <Modal isOpen={isOpen} onClose={onClose}>
         <NewNotes
           onSubmit={mutate}

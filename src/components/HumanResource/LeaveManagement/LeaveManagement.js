@@ -9,7 +9,13 @@ const LeaveManagement = () => {
   return (
     <>
       <SectionHeader title="Leave management" />
-      {data?.userTrackers && <LeaveManagementTable data={data?.userTrackers} tableName="Leave management"/>}
+      {data?.userTrackers && (
+        <LeaveManagementTable
+          showBtn={false}
+          data={data?.userTrackers}
+          tableName="Leave management"
+        />
+      )}
     </>
   );
 };

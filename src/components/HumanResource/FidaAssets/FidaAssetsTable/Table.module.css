@@ -19,7 +19,7 @@
 
 .primary_text_icon {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
 }
 .primary_text_icon svg {
   margin-right: 5px;
