@@ -9,6 +9,7 @@ import {
   itComplaintInitialValues,
   itComplaintOrderSchema,
 } from "../../forms/it/schemas/it";
+import Loader from "../../common/UI/Loader/Loader";
 
 const ITComplaints = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -16,13 +17,17 @@ const ITComplaints = () => {
   return (
     <>
       <SectionHeader title="IT Complaints" />
-      <ComplaintsTable
-        data={data?.complaints}
-        isLoading={isLoading}
-        btnLabel="Add Complaint"
-        btnClick={onOpen}
-        tableName="IT Complaints"
-      />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <ComplaintsTable
+          data={data?.complaints}
+          isLoading={isLoading}
+          btnLabel="Add Complaint"
+          btnClick={onOpen}
+          tableName="IT Complaints"
+        />
+      )}
       <Modal isOpen={isOpen} onClose={onClose} title="New Complaint Form">
         <ComplaintForm
           title="It Products"

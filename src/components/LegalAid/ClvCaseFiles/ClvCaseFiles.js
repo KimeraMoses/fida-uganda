@@ -7,10 +7,11 @@ import NewCaseFile from "../CaseFIles/NewCaseFile/NewCaseFile";
 import { useClvCases } from "../../../hooks/useCaseFiles";
 import { resetCaseFile } from "../../../store/caseFileReducer";
 import { useDispatch } from "react-redux";
+import Loader from "./../../common/UI/Loader/Loader";
 
 const ClvCaseFiles = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data } = useClvCases();
+  const { data, isLoading } = useClvCases();
   const dispatch = useDispatch();
 
   const onOpenModal = () => {
@@ -22,13 +23,17 @@ const ClvCaseFiles = () => {
     <>
       <SectionHeader title="CLVs Case Files" />
 
-      {data && (
-        <CaseFilesTable
-          data={data ? data.clv_cases : null}
-          btnLabel="CLV Case File"
-          btnClick={onOpenModal}
-          tableName="CLV Case File"
-        />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        data && (
+          <CaseFilesTable
+            data={data ? data.clv_cases : null}
+            btnLabel="CLV Case File"
+            btnClick={onOpenModal}
+            tableName="CLV Case File"
+          />
+        )
       )}
       <Modal
         size="4xl"

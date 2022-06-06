@@ -6,6 +6,7 @@ import NewAsset from "./NewAsset/NewAsset";
 import { useAddAsset, useAssets } from "../../../hooks/useAsset";
 import { useProjectOptions } from "../../../hooks/useProjects";
 import { assetInitialValues } from "./NewAsset/schema";
+import Loader from "./../../common/UI/Loader/Loader";
 
 const FidaAssets = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -16,14 +17,18 @@ const FidaAssets = () => {
     <>
       <SectionHeader title="Assets" />
 
-      {data?.assets && (
-        <FidaAssetsTable
-          data={data?.assets}
-          isLoading={isLoading}
-          btnLabel="Add Assets"
-          btnClick={onOpen}
-          tableName="Fida Assets"
-        />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        data?.assets && (
+          <FidaAssetsTable
+            data={data?.assets}
+            isLoading={isLoading}
+            btnLabel="Add Assets"
+            btnClick={onOpen}
+            tableName="Fida Assets"
+          />
+        )
       )}
       <Modal
         isOpen={isOpen}

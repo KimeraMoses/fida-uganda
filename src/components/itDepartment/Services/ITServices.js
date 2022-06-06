@@ -5,7 +5,11 @@ import AddITServiceForm from "../../forms/it/AddITServiceForm";
 import Modal from "../../common/Modal";
 import ITServicesTable from "./ITServicesTable";
 import { useItServices, useAddItService } from "../../../hooks/useItServices";
-import { itServicesInitialValues, itProductOrderSchema } from "../../forms/it/schemas/it";
+import {
+  itServicesInitialValues,
+  itProductOrderSchema,
+} from "../../forms/it/schemas/it";
+import Loader from "../../common/UI/Loader/Loader";
 
 const ITServices = () => {
   // const [data, setData] = useState([])
@@ -16,15 +20,18 @@ const ITServices = () => {
   return (
     <>
       <SectionHeader title="IT Services" />
-      <ITServicesTable
-        data={data?.services}
-        isLoading={isLoading}
-        btnLabel="Add Service"
-        btnClick={onOpen}
-        keys={['project_name', 'brand', 'id']}
-        tableName="IT Services"
-      />
-
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <ITServicesTable
+          data={data?.services}
+          isLoading={isLoading}
+          btnLabel="Add Service"
+          btnClick={onOpen}
+          keys={["project_name", "brand", "id"]}
+          tableName="IT Services"
+        />
+      )}
       <Modal isOpen={isOpen} onClose={onClose} title="Service Requisition Form">
         <AddITServiceForm
           title="Allocations"

@@ -6,6 +6,7 @@ import Modal from "../../common/Modal";
 import NewClientForm from "./NewClientForm/NewClientForm";
 import { useDispatch } from "react-redux";
 import { resetClient } from "../../../store/clientReducer";
+import Loader from "./../../common/UI/Loader/Loader";
 
 const Clients = () => {
   const { data, isLoading } = useClients();
@@ -20,14 +21,18 @@ const Clients = () => {
   return (
     <>
       <SectionHeader title="Clients" />
-      {data?.clients && (
-        <ClientsTable
-          isLoading={isLoading}
-          data={data ? data.clients : null}
-          btnLabel="Add Client"
-          btnClick={onOpenModal}
-          tableName="Clients"
-        />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        data?.clients && (
+          <ClientsTable
+            isLoading={isLoading}
+            data={data ? data.clients : null}
+            btnLabel="Add Client"
+            btnClick={onOpenModal}
+            tableName="Clients"
+          />
+        )
       )}
       <Modal
         isOpen={isOpen}

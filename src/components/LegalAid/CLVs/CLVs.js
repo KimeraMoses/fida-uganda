@@ -6,6 +6,7 @@ import CLVTable from "./CLVTable/ClvTable";
 import NewClvForm from "./CLVForms/NewClvForm";
 import { useClvs, useAddClv } from "../../../hooks/useClv";
 import { clvInitialValues, clvSchema } from "./CLVForms/schema";
+import Loader from "./../../common/UI/Loader/Loader";
 
 const CLVs = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -17,14 +18,18 @@ const CLVs = () => {
   return (
     <>
       <SectionHeader title="CLVs" />
-      {data?.clvs && (
-        <CLVTable
-          isLoading={isLoading}
-          data={data ? data.clvs : null}
-          btnLabel="Add CLV"
-          btnClick={onOpen}
-          tableName="CLV"
-        />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        data?.clvs && (
+          <CLVTable
+            isLoading={isLoading}
+            data={data ? data.clvs : null}
+            btnLabel="Add CLV"
+            btnClick={onOpen}
+            tableName="CLV"
+          />
+        )
       )}
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <NewClvForm
