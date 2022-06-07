@@ -4,7 +4,12 @@ import SectionHeader from "../../common/SectionHeader";
 import ReportsTable from "./ReportTable/ReportTable";
 import { useReports } from "../../../hooks/useReports";
 import NewFolderForm from "./AddNewFolder/NewFolderForm";
-import { useAddComplaint } from "../../../hooks/useComplaint";
+import { onSubmitAlert } from "../../../lib/deleteInProd";
+import {
+  reportFolderInitialValues,
+  reportFolderValidationSchema,
+} from "../../../form_schemas/reportFolder";
+import { useReportFolders } from "../../../hooks/useReportFolder";
 
 export const FolderFileData = [
   {
@@ -30,6 +35,7 @@ export const FolderFileData = [
 const Reports = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data } = useReports();
+  const { data: reportFolders } = useReportFolders();
 
   return (
     <>
@@ -43,7 +49,12 @@ const Reports = () => {
         />
       )}
       <Modal isOpen={isOpen} onClose={onClose}>
-        <NewFolderForm useMutate={useAddComplaint} onClose={onClose} />
+        <NewFolderForm
+          useMutate={onSubmitAlert}
+          initialValues={reportFolderInitialValues}
+          validationSchema={reportFolderValidationSchema}
+          onClose={onClose}
+        />
       </Modal>
     </>
   );
