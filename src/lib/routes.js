@@ -157,6 +157,12 @@ export const routes = {
     getNarrativeReports: `${BASE_URL}/reports/getNarrativeReports`,
     getStatisticalReports: `${BASE_URL}/reports/getStatisticalReports`,
   },
+  reportFolders: {
+    addReportFolder: `${BASE_URL}/reportFolders/create`,
+    base: `${BASE_URL}/reportFolders`,
+    editReportFolder: `${BASE_URL}/reportFolders/edit`,
+    getAllReportFolders: `${BASE_URL}/reportFolders/getAll`,
+  },
   projectFiles: {
     addProjectFile: `${BASE_URL}/projectFiles/create`,
     base: `${BASE_URL}/projectFiles`,
