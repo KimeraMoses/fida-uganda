@@ -28,7 +28,14 @@ const ITServices = () => {
           isLoading={isLoading}
           btnLabel="Add Service"
           btnClick={onOpen}
-          keys={["project_name", "brand", "id"]}
+          keysToFilterOut={[
+            "status",
+            "createdBy"
+            // "expiry_date",
+            // "purchase_date",
+            // "updateAt",
+            // "id",
+          ]}
           tableName="IT Services"
         />
       )}
