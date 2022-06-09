@@ -2,9 +2,15 @@ import { useDisclosure } from "@chakra-ui/react";
 import Modal from "../../common/Modal";
 import SectionHeader from "../../common/SectionHeader";
 import ReportsTable from "./ReportTable/ReportTable";
-import { useReports } from "../../../hooks/useReports";
 import NewFolderForm from "./AddNewFolder/NewFolderForm";
-import { useAddComplaint } from "../../../hooks/useComplaint";
+import {
+  reportFolderInitialValues,
+  reportFolderValidationSchema,
+} from "../../../form_schemas/reportFolder";
+import {
+  useAddReportFolder,
+  useReportFolders,
+} from "../../../hooks/useReportFolder";
 import Loader from "./../../common/UI/Loader/Loader";
 
 export const FolderFileData = [
@@ -30,7 +36,8 @@ export const FolderFileData = [
 
 const Reports = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data, isLoading } = useReports();
+
+  const { data, isLoading } = useReportFolders();
 
   return (
     <>
@@ -38,17 +45,24 @@ const Reports = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        data?.reports && (
-          <ReportsTable
-            data={data?.reports}
-            btnLabel="New Folder"
-            btnClick={onOpen}
-            tableName="Reports"
-          />
-        )
+        data?.ReportFolders && (
+        <ReportsTable
+          data={data?.ReportFolders}
+          btnLabel="New Folder"
+          btnClick={onOpen}
+          tableName="Reports"
+        />
+      )
       )}
       <Modal isOpen={isOpen} onClose={onClose}>
-        <NewFolderForm useMutate={useAddComplaint} onClose={onClose} />
+        <NewFolderForm
+          useMutate={useAddReportFolder}
+          initialValues={reportFolderInitialValues}
+          validationSchema={reportFolderValidationSchema}
+          onClose={onClose}
+          onSuccess={onClose}
+          success={"Report Folder Added Successfully"}
+        />
       </Modal>
     </>
   );

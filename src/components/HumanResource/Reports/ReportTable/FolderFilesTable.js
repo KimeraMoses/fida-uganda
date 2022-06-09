@@ -6,6 +6,7 @@ import { IoDocumentTextSharp } from "react-icons/io5";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import withTable from "./../../../../hoc/withTable";
+import { formatDate } from "../../../../lib/data";
 
 const FolderFilesTable = ({ data }) => {
   const navigate = useNavigate();
@@ -36,12 +37,12 @@ const FolderFilesTable = ({ data }) => {
                   <Td>
                     <div className={classes.primary_text_icon}>
                       <IoDocumentTextSharp />
-                      {item.title}
+                      {item.report_title}
                     </div>
                   </Td>
                   <Td>{item.type}</Td>
                   <Td className={classes.data__purpose_primary_text}>
-                    {item.date}
+                    {formatDate(item.date)}
                   </Td>
                   <Td className={classes.table_actions_wrapper}>
                     <div className={classes.table_actions_icon_wrapper}>

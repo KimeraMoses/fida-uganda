@@ -6,7 +6,7 @@ export const routes = {
     getLeaveRequest: `${BASE_URL}/leaveRequests`,
     base: `${BASE_URL}/leaveRequests`,
     createLeaveRequest: `${BASE_URL}/leaveRequests/create`,
-    approveLeaveRequest: `${BASE_URL}/leaveRequests/approve`
+    approveLeaveRequest: `${BASE_URL}/leaveRequests/approve`,
   },
   membershipActivities: {
     getMembershipActivities: `${BASE_URL}/membershipActivities/getAll`,
@@ -156,6 +156,13 @@ export const routes = {
     getUserReports: `${BASE_URL}/reports/getMyReports`,
     getNarrativeReports: `${BASE_URL}/reports/getNarrativeReports`,
     getStatisticalReports: `${BASE_URL}/reports/getStatisticalReports`,
+    getFolderReports: `${BASE_URL}/reports/getFolderReports`,
+  },
+  reportFolders: {
+    addReportFolder: `${BASE_URL}/reportFolders/create`,
+    base: `${BASE_URL}/reportFolders`,
+    editReportFolder: `${BASE_URL}/reportFolders/edit`,
+    getAllReportFolders: `${BASE_URL}/reportFolders/getUserReportFolders`,
   },
   projectFiles: {
     addProjectFile: `${BASE_URL}/projectFiles/create`,

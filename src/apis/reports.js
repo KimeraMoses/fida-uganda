@@ -1,12 +1,14 @@
 import axiosClient from "../lib/axiosClient";
 import { routes } from "../lib/routes";
 
-export const getReports = async () => {
-  return await axiosClient.get(routes.reports.getReports);
-};
-
 export const getReport = async (reportId) => {
   return await axiosClient.get(`${routes.reports.base}/${reportId}`);
+};
+
+export const getReports = async (folderId) => {
+  return await axiosClient.get(
+    `${routes.reports.getFolderReports}/${folderId}`
+  );
 };
 
 export const addReport = async (report) => {
