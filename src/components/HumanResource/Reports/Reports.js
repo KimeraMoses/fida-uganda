@@ -11,6 +11,7 @@ import {
   useAddReportFolder,
   useReportFolders,
 } from "../../../hooks/useReportFolder";
+import Loader from "./../../common/UI/Loader/Loader";
 
 export const FolderFileData = [
   {
@@ -35,18 +36,23 @@ export const FolderFileData = [
 
 const Reports = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data } = useReportFolders();
+
+  const { data, isLoading } = useReportFolders();
 
   return (
     <>
       <SectionHeader title="Reports" />
-      {data?.ReportFolders && (
+      {isLoading ? (
+        <Loader />
+      ) : (
+        data?.ReportFolders && (
         <ReportsTable
           data={data?.ReportFolders}
           btnLabel="New Folder"
           btnClick={onOpen}
           tableName="Reports"
         />
+      )
       )}
       <Modal isOpen={isOpen} onClose={onClose}>
         <NewFolderForm

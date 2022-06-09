@@ -12,12 +12,19 @@ import {
   usePayrollNotes,
 } from "../../../hooks/usePayrollNotes";
 import { toastSuccess } from "../../../lib/toastDetails";
+import Loader from "../../common/UI/Loader/Loader";
 
 const PayRoll = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data: payrollNotes } = usePayrollNotes();
-  const { data: payroll } = usePayrolls();
-  const { mutate, isSuccess, isLoading, isError, error } = useAddPayrollNote();
+  const { data: payroll, isLoading } = usePayrolls();
+  const {
+    mutate,
+    isSuccess,
+    isLoading: isSubmitting,
+    isError,
+    error,
+  } = useAddPayrollNote();
 
   const toast = useToast();
 
@@ -29,21 +36,31 @@ const PayRoll = () => {
 
   return (
     <>
-      <SectionHeader title="Payroll" />
-      <TableSearch btnLabel="Add Notes" btnClick={onOpen} />
-      {payrollNotes?.PayrollNotes && (
-        <PayrollNotesTable
-          data={payrollNotes?.PayrollNotes}
-          btnLabel="Add Notes"
-          btnClick={onOpen}
-          tableName="Payroll Notes"
-        />
+      <SectionHeader title="Payroll Notes" />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <TableSearch btnLabel="Add Notes" btnClick={onOpen} />
+
+          {payrollNotes?.PayrollNotes && (
+            <PayrollNotesTable
+              data={payrollNotes?.PayrollNotes}
+              btnLabel="Add Notes"
+              btnClick={onOpen}
+              tableName="Payroll Notes"
+            />
+          )}
+          <SectionHeader title="Payroll" />
+          {payroll?.payrolls && (
+            <PayrollTable data={payroll?.payrolls} tableName="Payroll" />
+          )}
+        </>
       )}
-      {payroll?.payrolls && <PayrollTable data={payroll?.payrolls} tableName="Payroll"/>}
       <Modal isOpen={isOpen} onClose={onClose}>
         <NewNotes
           onSubmit={mutate}
-          isSubmitting={isLoading}
+          isSubmitting={isSubmitting}
           isError={isError}
           error={error}
         />

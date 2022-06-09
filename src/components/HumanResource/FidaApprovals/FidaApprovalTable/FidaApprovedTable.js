@@ -10,7 +10,6 @@ import { formatDate } from "../../../../lib/data";
 import { useRequestPasswordLink } from "../../../../hooks/useUser";
 import EmployeeCard from "../NewEmployeeForm/EmployeeCard";
 import { toastSuccess } from "../../../../lib/toastDetails";
-import withTable from "../../../../hoc/withTable";
 
 const FidaApprovedTable = ({ data }) => {
   const [user, setUser] = useState({});
@@ -63,39 +62,32 @@ const FidaApprovedTable = ({ data }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {data.map((item) => {
-              return (
-                <Tr key={item.id}>
-                  <Td>{item.full_name}</Td>
-                  <Td className={styles.data__primary_text_email}>
-                    {item.email}
-                  </Td>
-                  <Td style={{ textTransform: "uppercase" }}>
-                    {item.designation}
-                  </Td>
-                  <Td>{item.project?.name}</Td>
-                  <Td>{formatDate(item.createdAt)}</Td>
-                  <Td className={classes.table_actions_wrapper}>
-                    <div className={classes.table_actions_icon_wrapper}>
-                      <IconButton
-                        size="xs"
-                        aria-label="Edit Item"
-                        icon={<MdEdit />}
-                        onClick={() => onEditHandler(item)}
-                      />
-                    </div>
-                    {/* <div className={classes.table_actions_icon_wrapper}>
-                      <IconButton
-                        size="xs"
-                        variant="outline"
-                        aria-label="Edit Item"
-                        icon={<MdDelete />}
-                      />
-                    </div> */}
-                  </Td>
-                </Tr>
-              );
-            })}
+            {data &&
+              data.map((item) => {
+                return (
+                  <Tr key={item.id}>
+                    <Td>{item.full_name}</Td>
+                    <Td className={styles.data__primary_text_email}>
+                      {item.email}
+                    </Td>
+                    <Td style={{ textTransform: "uppercase" }}>
+                      {item.designation}
+                    </Td>
+                    <Td>{item.project?.name}</Td>
+                    <Td>{formatDate(item.createdAt)}</Td>
+                    <Td className={classes.table_actions_wrapper}>
+                      <div className={classes.table_actions_icon_wrapper}>
+                        <IconButton
+                          size="xs"
+                          aria-label="Edit Item"
+                          icon={<MdEdit />}
+                          onClick={() => onEditHandler(item)}
+                        />
+                      </div>
+                    </Td>
+                  </Tr>
+                );
+              })}
           </Tbody>
         </Table>
       </div>
@@ -103,4 +95,4 @@ const FidaApprovedTable = ({ data }) => {
   );
 };
 
-export default withTable(FidaApprovedTable);
+export default FidaApprovedTable;

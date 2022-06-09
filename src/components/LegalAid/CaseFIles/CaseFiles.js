@@ -7,10 +7,11 @@ import NewCaseFile from "./NewCaseFile/NewCaseFile";
 import { useCaseFiles } from "../../../hooks/useCaseFiles";
 import { useDispatch } from "react-redux";
 import { resetCaseFile } from "../../../store/caseFileReducer";
+import Loader from "./../../common/UI/Loader/Loader";
 
 const CaseFiles = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data } = useCaseFiles();
+  const { data, isLoading } = useCaseFiles();
   const dispatch = useDispatch();
 
   const onOpenModal = () => {
@@ -20,13 +21,17 @@ const CaseFiles = () => {
   return (
     <>
       <SectionHeader title="Case Files" />
-      {data?.cases && (
-        <CaseFilesTable
-          data={data ? data.cases : null}
-          btnLabel="New Case File"
-          btnClick={onOpenModal}
-          tableName="Case Files"
-        />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        data?.cases && (
+          <CaseFilesTable
+            data={data ? data.cases : null}
+            btnLabel="New Case File"
+            btnClick={onOpenModal}
+            tableName="Case Files"
+          />
+        )
       )}
       <Modal
         isOpen={isOpen}

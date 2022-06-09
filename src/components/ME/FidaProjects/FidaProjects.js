@@ -6,6 +6,7 @@ import FidaProjectTable from "./FidaProjectTable/FidaProjectTable";
 import NewFidaProjectForm from "./NewFidaProject/NewFidaProjectForm";
 import { useAddProject, useProjects } from "../../../hooks/useProjects";
 import { toastSuccess } from "../../../lib/toastDetails";
+import Loader from "./../../common/UI/Loader/Loader";
 
 const FidaProjects = () => {
   const toast = useToast();
@@ -17,7 +18,7 @@ const FidaProjects = () => {
     isSuccess,
     error,
   } = useAddProject();
-  const { data } = useProjects();
+  const { data, isLoading } = useProjects();
 
   useEffect(() => {
     if (isSuccess) {
@@ -29,12 +30,16 @@ const FidaProjects = () => {
   return (
     <>
       <SectionHeader title="Fida Projects" />
-      {data?.projects && (
-        <FidaProjectTable
-          data={data?.projects}
-          btnLabel="Add Project"
-          btnClick={onOpen}
-        />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        data?.projects && (
+          <FidaProjectTable
+            data={data?.projects}
+            btnLabel="Add Project"
+            btnClick={onOpen}
+          />
+        )
       )}
       <Modal isOpen={isOpen} onClose={onClose} title="Project Profiling Form">
         <NewFidaProjectForm
