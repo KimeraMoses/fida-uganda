@@ -14,7 +14,9 @@ export const useReportFolders = () => {
 };
 
 export const useReportFolder = (reportFolderId) => {
-  return useQuery([REPORT_FOLDERS, reportFolderId], () => getReportFolder);
+  return useQuery([REPORT_FOLDERS, reportFolderId], () =>
+    getReportFolder(reportFolderId)
+  );
 };
 
 export const useAddReportFolder = () => {
@@ -26,7 +28,7 @@ export const useAddReportFolder = () => {
       if (previousReportFolders) {
         queryClient.setQueryData(REPORT_FOLDERS, (previousReportFolders) => {
           return produce(previousReportFolders, (draft) => {
-            draft.reportFolders.push(data.reportFolder);
+            draft.ReportFolders.push(data.reportFolder);
           });
         });
       }
@@ -44,7 +46,7 @@ export const useUpdateReportFolder = () => {
       if (previousReportFolders) {
         queryClient.setQueryData(REPORT_FOLDERS, (previousReportFolders) => {
           return produce(previousReportFolders, (draft) => {
-            const index = draft.reportFolders.findIndex(
+            const index = draft.ReportFolders.findIndex(
               (reportFolder) => reportFolder.id === data.updatedReportFolder.id
             );
             draft.reportFolders[index] = data.updatedReportFolder;
@@ -69,7 +71,7 @@ export const useDeleteReportFolder = () => {
       if (previousReportFolders) {
         queryClient.setQueryData(REPORT_FOLDERS, (previousReportFolders) => {
           return produce(previousReportFolders, (draft) => {
-            draft.reportFolders.filter(
+            draft.ReportFolders.filter(
               (reportFolder) => reportFolder.id !== reportFolderId
             );
           });

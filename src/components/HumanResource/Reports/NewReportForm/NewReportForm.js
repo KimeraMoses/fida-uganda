@@ -5,13 +5,25 @@ import FormButton from "../../../common/UI/FormButton/FormButton";
 import { Form, Formik } from "formik";
 import { useToast } from "@chakra-ui/react";
 import { toastError } from "../../../../lib/toastDetails";
-import { initialValues, reportSchema } from "./schema";
+import { reportSchema, addFolderIdToReport } from "./schema";
 import SelectField from "../../../common/SelectField";
 import { reportTypeOptions } from "../../../../lib/options";
+import { useUsers } from "../../../../hooks/useUser";
+import SearchableField from "../../../common/UI/SearchableField/SearchableField";
 
-const NewReportForm = ({ onClose, error, isError, onSubmit, isSubmitting }) => {
+const NewReportForm = ({
+  onClose,
+  error,
+  isError,
+  onSubmit,
+  folderId,
+  isSubmitting,
+}) => {
   const [file, setFile] = useState(null);
+  const [selectedUser, setSelectedUser] = useState(null);
   const toast = useToast();
+
+  const users = useUsers();
 
   useEffect(() => {
     if (isError) {
@@ -24,13 +36,14 @@ const NewReportForm = ({ onClose, error, isError, onSubmit, isSubmitting }) => {
     setFile(file);
   };
 
+  const initialValues = addFolderIdToReport(folderId);
+
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={reportSchema}
       onSubmit={(values) => {
         //open console to see the form values on submit
-        console.log(values);
         if (!file) {
           toast(toastError("Please attach file"));
           return;
@@ -81,9 +94,11 @@ const NewReportForm = ({ onClose, error, isError, onSubmit, isSubmitting }) => {
             <div className={classes.input_group_wrapper}>
               <div className={classes.input_label}>Supervisor’s Name</div>
               <div className={classes.input_field_wrapper}>
-                <InputField
-                  placeholder="Type here"
-                  fullwidth
+                <SearchableField
+                  placeholder="Type client Name"
+                  data={users}
+                  setSelectedItem={setSelectedUser}
+                  selectedItem={selectedUser?.name}
                   name="supervisor_name"
                 />
               </div>

@@ -11,8 +11,8 @@ import {
 } from "../apis/reports";
 import { REPORTS_KEY } from "../lib/constants";
 
-export const useReports = () => {
-  return useQuery(REPORTS_KEY, getReports);
+export const useReports = (folderId) => {
+  return useQuery(REPORTS_KEY, () => getReports(folderId));
 };
 
 export const useReport = (reportId) => {

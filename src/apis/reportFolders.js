@@ -2,7 +2,7 @@ import axiosClient from "../lib/axiosClient";
 import { routes } from "../lib/routes";
 
 export const getReportFolders = async () => {
-  return await axiosClient.get(routes.reportFolders.addReportFolder);
+  return await axiosClient.get(routes.reportFolders.getAllReportFolders);
 };
 
 export const getReportFolder = async (reportFolderId) => {

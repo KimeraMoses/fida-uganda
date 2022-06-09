@@ -11,8 +11,8 @@ import withTable from "./../../../../hoc/withTable";
 const ReportsTable = (props) => {
   const { data } = props;
   const navigate = useNavigate();
-  const handleOpenFolder = (name) => {
-    navigate(`/reports/reportFolderName`);
+  const handleOpenFolder = (id) => {
+    navigate(`/reports/${id}`);
   };
 
   return (
@@ -38,7 +38,7 @@ const ReportsTable = (props) => {
                     <Td>
                       <div className={classes.primary_text_icon}>
                         <FolderIcon />
-                        {item.filename}
+                        {item.name}
                       </div>
                     </Td>
                     <Td className={classes.data__purpose_primary_text}>
@@ -50,7 +50,7 @@ const ReportsTable = (props) => {
                           size="xs"
                           aria-label="Edit Item"
                           icon={<MdOutlineRemoveRedEye />}
-                          onClick={() => handleOpenFolder("foldername")}
+                          onClick={() => handleOpenFolder(item.id)}
                         />
                       </div>
                     </Td>
