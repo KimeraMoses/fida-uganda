@@ -32,6 +32,7 @@
   display: flex;
   align-items: center;
   margin: 10px 0;
+  user-select: none;
 }
 
 .file_upload_label {
@@ -48,7 +49,8 @@
   border: 1px solid #000000;
   border-radius: 12px;
   width: 70%;
-  text-align: center;
+  cursor: pointer;
+  padding: 5px;
 }
 
 .form_actions_wrapper {

@@ -59,7 +59,7 @@ const CaseFilesTable = ({ data }) => {
                   <Td>{item.case_id}</Td>
                   <Td>{formatDate(item.createdAt)}</Td>
                   <Td>{item.complainant?.village}</Td>
-                  <Td>{item.district}</Td>
+                  {/* <Td>{item.district}</Td> */}
                   <Td>{item.complainant?.country}</Td>
                   <Td>{item.complainant?.nin}</Td>
                   <Td>{item.type}</Td>

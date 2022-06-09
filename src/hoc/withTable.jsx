@@ -50,7 +50,8 @@ const withTable = (TableComponent) => {
       Array.isArray(keysToFilterOut)
     ) {
       let tempArr = [];
-      data.map((dat) => {
+      const newArray = data.map((obj) => ({ ...obj }));
+      newArray.map((dat) => {
         keysToFilterOut.forEach((e) => delete dat[e]);
 
         return tempArr.push(Object.values(dat));
@@ -65,21 +66,14 @@ const withTable = (TableComponent) => {
         });
     }
 
-    // Array.isArray(data) &&
-    //   data.length &&
-    //   data.map((row) => {
-    //     return formattedData.push(Object.values(row));
-    //   });
-    // keysToFilterOut &&
-    //   keysToFilterOut.length &&
-    //   Array.isArray(keysToFilterOut) &&
-    //   Array.isArray(data) &&
-    //   data.length &&
-    //   data.map((dat) => {
-    //     keysToFilterOut.forEach((e) => delete dat[e]);
+    const excelData =
+      Array.isArray(data) &&
+      data.length &&
+      data.map((row) => {
+        return Object.values(row);
+      });
 
-    //     return formattedData.push(Object.values(dat));
-    //   });
+
 
     const handleDownload = () => {
       const doc = new jsPDF({
@@ -97,7 +91,7 @@ const withTable = (TableComponent) => {
     };
 
     const downloadExcel = () => {
-      const workSheet = XLSX.utils.json_to_sheet(formattedData);
+      const workSheet = XLSX.utils.json_to_sheet(excelData);
       const workBook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(workBook, workSheet, "Sheet1");
 

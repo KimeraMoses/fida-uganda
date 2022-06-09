@@ -26,6 +26,7 @@ const ITComplaints = () => {
           btnLabel="Add Complaint"
           btnClick={onOpen}
           tableName="IT Complaints"
+          keysToFilterOut={["body"]}
         />
       )}
       <Modal isOpen={isOpen} onClose={onClose} title="New Complaint Form">

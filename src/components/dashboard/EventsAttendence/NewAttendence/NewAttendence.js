@@ -136,9 +136,11 @@ const NewAttendence = ({ onClose, isSubmitting, setFieldValue }) => {
           <div className={classes.file_upload_label}>Upload file</div>
         </div>
         <div className={classes.file_upload_area}>
-          <input type="file" hidden accept=".pdf, .docx, .xls" />
-          Click to browse <br />
-          or drag and drop your files
+          <input
+            type="file"
+            accept=".pdf, .docx, .xls"
+            onChange={(e) => console.log(e)}
+          />
         </div>
       </div>
 

@@ -39,6 +39,7 @@ const ITProducts = () => {
             "name",
             "currency",
             "class",
+            "status",
             "registeredBy",
           ]}
           tableName="IT Products"

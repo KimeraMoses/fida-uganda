@@ -12,11 +12,12 @@ import TravelOrderForm from "../forms/travelOrder/TravelOrderForm";
 import TravelOrderTable from "../dashboard/TravelOrder/TravelOrderTable";
 import SubHeading from "./../Tasks/SubHeading/SubHeading";
 import TableSearch from "../common/table/TableSearch";
+import Loader from "../common/UI/Loader/Loader";
 
 const TravelOrder = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
-  const { data } = useTravelOrders();
+  const { data, isLoading } = useTravelOrders();
   const {
     mutate,
     isLoading: isSubmitting,
@@ -35,11 +36,17 @@ const TravelOrder = () => {
   return (
     <>
       <SectionHeader title="Travel Order" />
-      <TableSearch btnLabel="Travel Order" btnClick={onOpen} />
-      <SubHeading title="New Requests" />
-      <TravelOrderTable data={data?.travelOrders} />
-      <SubHeading title="Replied Requisitions" />
-      <TravelOrderTable data={data?.travelOrders} />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <TableSearch btnLabel="Travel Order" btnClick={onOpen} />
+          <SubHeading title="New Requests" />
+          <TravelOrderTable data={data?.travelOrders} />
+          <SubHeading title="Replied Requisitions" />
+          <TravelOrderTable data={data?.travelOrders} />
+        </>
+      )}
       <Modal isOpen={isOpen} onClose={onClose} title="Travel Order" size="2xl">
         <TravelOrderForm
           onSubmit={mutate}

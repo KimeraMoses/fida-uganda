@@ -57,16 +57,15 @@ const CaseFilesTable = ({ data }) => {
               return (
                 <Tr key={item.id} onClick={() => onHandleClick(item)}>
                   <Td>{item.case_id}</Td>
-                  <Td>{formatDate(item.createdAt)}</Td>
+                  <Td>{item.complainant?.name}</Td>
                   <Td>{item.complainant?.village}</Td>
-                  <Td>{item.district}</Td>
+                  {/* <Td>{item.district}</Td> */}
                   <Td>{item.complainant?.country}</Td>
                   <Td>{item.complainant?.nin}</Td>
                   <Td>{item.type}</Td>
                   <Td>{formatDate(item.createdAt)}</Td>
                   <Td>{item.case_id}</Td>
                   <Td>{item.complainant?.sex}</Td>
-                  <Td>{item.complainant?.name}</Td>
                   <Td>{item.complainant?.age}</Td>
                   <Td>{item.complainant?.numBeneficiaries}</Td>
                   <Td>{item.complainant?.occupation}</Td>
@@ -83,6 +82,7 @@ const CaseFilesTable = ({ data }) => {
                   <Td>{item.respondentName}</Td>
                   <Td>{item.respondentPhone}</Td>
                   <Td>{item.fida}</Td>
+                  <Td>{formatDate(item.createdAt)}</Td>
                   <Td style={{ textAlign: "center" }}>
                     <div className={classes.table_actions_icon_wrapper}>
                       <IconButton

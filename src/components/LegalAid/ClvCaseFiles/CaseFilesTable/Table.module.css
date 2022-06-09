@@ -10,7 +10,7 @@
   font-size: 15px;
   white-space: nowrap;
   font-weight: 700;
-  padding: 20px 10px !important;
+  text-transform: capitalize !important;
 }
 .approvals_table_wrapper td {
   font-weight: 600;

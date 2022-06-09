@@ -1,8 +1,8 @@
-import * as yup from "yup";
+// import * as yup from "yup";
 
-export const attendanceSchema = yup.object().shape({
+// export const attendanceSchema = yup.object().shape({
 //   project: yup.string().required("Project is required"),
-});
+// });
 
 export const attendanceInitialValues = {
   attendees: [],

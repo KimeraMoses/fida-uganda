@@ -1,6 +1,6 @@
 import React from "react";
 import { Table, Thead, Tbody, Tr, Td, IconButton } from "@chakra-ui/react";
-import classes from "./Table.module.css";
+import classes from "../../common/table/TableStyles.module.css";
 import { TableHeadColumn } from "../../HumanResource/Approvals/ApprovalTable/ApprovedTable";
 import { formatDate } from "../../../lib/data";
 import { useNavigate } from "react-router-dom";

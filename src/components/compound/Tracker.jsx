@@ -11,6 +11,7 @@ import TrackerTable from "./../dashboard/TrackerTable/TrackerTable";
 import LeaveTrackerTable from "../dashboard/LeaveTracker/LeaveTrackerTable";
 import { advanceRequestFormSchema } from "../dashboard/AdvanceTracker/AdvancedTrackerForm/schema";
 import FormButton from "./../common/UI/FormButton/FormButton";
+import Loader from "../common/UI/Loader/Loader";
 
 const Tracker = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -29,22 +30,28 @@ const Tracker = () => {
   return (
     <>
       <SectionHeader title="Leave Tracker" />
-      <LeaveTrackerTable handleLeaveClick={handleLeaveClick} />
-      <SectionHeader title="Advance Tracker" />
-      <Box bgColor="white" borderRadius={10}>
-        <TrackerTable
-          type="advance"
-          action={handleLeaveClick}
-          data={data?.advances}
-          isLoading={isLoading}
-        />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <LeaveTrackerTable handleLeaveClick={handleLeaveClick} />
+          <SectionHeader title="Advance Tracker" />
+          <Box bgColor="white" borderRadius={10}>
+            <TrackerTable
+              type="advance"
+              action={handleLeaveClick}
+              data={data?.advances}
+              isLoading={isLoading}
+            />
 
-        <div style={{ padding: 10 }}>
-          <FormButton variant="filled" onClick={onOpen}>
-            New Advance Request
-          </FormButton>
-        </div>
-      </Box>
+            <div style={{ padding: 10 }}>
+              <FormButton variant="filled" onClick={onOpen}>
+                New Advance Request
+              </FormButton>
+            </div>
+          </Box>
+        </>
+      )}
       <Modal isOpen={isOpen} onClose={onClose} title="Advance Request Form">
         <AdvancedRequestForm
           onClose={onClose}

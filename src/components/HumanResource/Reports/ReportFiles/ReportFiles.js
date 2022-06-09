@@ -8,12 +8,19 @@ import FolderFilesTable from "../ReportTable/FolderFilesTable";
 import { useAddReport, useReports } from "./../../../../hooks/useReports";
 import ReportBreadCrumb from "./../BreadCrumb/ReportBreadCrumb";
 import { useReportFolder } from "../../../../hooks/useReportFolder";
+import Loader from "./../../../common/UI/Loader/Loader";
 
 const ReportFiles = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { reportFolderName } = useParams();
   const { data } = useReports(reportFolderName);
-  const { mutate, isLoading, isError, error, isSuccess } = useAddReport();
+  const {
+    mutate,
+    isLoading: isSubmitting,
+    isError,
+    error,
+    isSuccess,
+  } = useAddReport();
   const toast = useToast();
   useEffect(() => {
     if (isSuccess) {
@@ -21,7 +28,8 @@ const ReportFiles = () => {
       onClose();
     }
   }, [isSuccess, toast, onClose]);
-  const { data: dataReportFolder } = useReportFolder(reportFolderName);
+  const { data: dataReportFolder, isLoading } =
+    useReportFolder(reportFolderName);
 
   return (
     <>
@@ -31,18 +39,22 @@ const ReportFiles = () => {
         folderName={dataReportFolder?.reportFolder?.name.replace(/-/g, " ")}
       />
 
-      {data?.reports && (
-        <FolderFilesTable
-          data={data?.reports}
-          btnLabel="Add Report"
-          btnClick={onOpen}
-        />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        data?.reports && (
+          <FolderFilesTable
+            data={data?.reports}
+            btnLabel="Add Report"
+            btnClick={onOpen}
+          />
+        )
       )}
       <Modal isOpen={isOpen} onClose={onClose} title="New Report Form">
         <NewReportForm
           onClose={onClose}
           onSubmit={mutate}
-          isSubmitting={isLoading}
+          isSubmitting={isSubmitting}
           isError={isError}
           error={error}
           folderId={dataReportFolder?.reportFolder?.id}
