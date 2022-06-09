@@ -1,11 +1,13 @@
 import React from "react";
 import { Table, Thead, Tbody, Tr, Td, IconButton } from "@chakra-ui/react";
-import classes from "../TravelOrder/Table.module.css";
+// import classes from "../TravelOrder/Table.module.css";
 import { formatDate } from "../../../lib/data";
 import sortByDate from "../../../lib/sortByDate";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { TableHeadColumn } from "../../HumanResource/Approvals/ApprovalTable/ApprovedTable";
 import { useNavigate } from "react-router-dom";
+
+import classes from "../../common/table/TableStyles.module.css";
 
 const RequisitionTable = ({ data }) => {
   const navigate = useNavigate();

@@ -3,34 +3,8 @@ import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
 import classes from "./Table.module.css";
 import { TableHeadColumn } from "../../../HumanResource/Approvals/ApprovalTable/ApprovedTable";
 
-const Data = [
-  {
-    stage: "Stage 1",
-    userName: "Kmera Moses",
-    designation: "Legal Officer",
-    status: "submitted",
-    remarks: "No remarks",
-    date: "10/03/2022",
-  },
-  {
-    stage: "Stage 2",
-    userName: "Kmera Moses",
-    designation: "Legal Officer",
-    status: "Approved",
-    remarks: "No remarks",
-    date: "10/03/2022",
-  },
-  {
-    stage: "Stage 3",
-    userName: "Kmera Moses",
-    designation: "Legal Officer",
-    status: "Pending",
-    remarks: "No remarks",
-    date: "10/03/2022",
-  },
-];
-
-const SummaryTable = () => {
+const SummaryTable = ({ data }) => {
+  console.log(data);
   return (
     <>
       <div className={classes.table_container}>
@@ -46,7 +20,7 @@ const SummaryTable = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {Data.map((item) => {
+            {data.map((item) => {
               return (
                 <Tr>
                   <Td>{item.stage}</Td>

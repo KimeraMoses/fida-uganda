@@ -30,10 +30,15 @@
   font-weight: 700;
   margin-bottom: 20px;
 }
+.user_details {
+  padding: 0 20px 20px;
+}
 
 .user_details h6 {
   font-size: 16px;
   font-weight: 400;
+  margin-top: 8px;
+  color: #562b85;
 }
 .table_wrapper {
   margin-bottom: 10px;

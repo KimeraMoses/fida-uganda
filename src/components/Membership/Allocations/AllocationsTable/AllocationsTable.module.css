@@ -3,7 +3,7 @@
 }
 .table_header {
   background: #fa05ff;
-  text-transform: uppercase;
+  text-transform: capitalize !important;
   font-weight: 700;
   font-style: "Open Sans";
   color: #000000;

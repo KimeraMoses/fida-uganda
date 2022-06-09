@@ -10,22 +10,31 @@ import {
 import TableSearch from "../common/table/TableSearch";
 import SubHeading from "./../Tasks/SubHeading/SubHeading";
 import RequisitionTable from "../dashboard/Requisitions/RequisitionsTable";
-import {requisitionInitialValues, requisitionSchema} from "../../components/forms/requisition/schemas/requisitions";
+import {
+  requisitionInitialValues,
+  requisitionSchema,
+} from "../../components/forms/requisition/schemas/requisitions";
+import Loader from "../common/UI/Loader/Loader";
 
 const Requisitions = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data } = useRequisitions();
+  const { data, isLoading } = useRequisitions();
 
   return (
     <>
       <SectionHeader title="Requisitions" />
 
-      <TableSearch btnLabel="Add Requisition" btnClick={onOpen} />
-      <SubHeading title="New Requests" />
-      <RequisitionTable data={data?.Requisitions} />
-      <SubHeading title="Replied Requisitions" />
-      <RequisitionTable data={data?.Requisitions} />
-
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <TableSearch btnLabel="Add Requisition" btnClick={onOpen} />
+          <SubHeading title="New Requests" />
+          <RequisitionTable data={data?.Requisitions} />
+          <SubHeading title="Replied Requisitions" />
+          <RequisitionTable data={data?.Requisitions} />
+        </>
+      )}
       <Modal isOpen={isOpen} onClose={onClose} title="Requisition">
         <RequisitionForm
           title="Requisitions"

@@ -8,6 +8,7 @@ import LeaveTable from "../TrackerTable/LeaveTrackerTable";
 import { useDisclosure } from "@chakra-ui/react";
 import FormButton from "../../common/UI/FormButton/FormButton";
 import { useLeaveRequests } from "../../../hooks/useLeaveRequest";
+import Loader from "../../common/UI/Loader/Loader";
 
 const LeaveTrackerTable = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -23,37 +24,39 @@ const LeaveTrackerTable = (props) => {
     details: "",
   };
 
-  console.log("Leave", data);
-
   return (
     <>
-      <div className={classes.table_container}>
-        <LeaveTable
-          type="leave"
-          action={props.handleLeaveClick}
-          data={data ? data.leaves : null}
-          isLoading={isLoading}
-        />
-        <div className={classes.leave_actions_wrapper}>
-          <FormButton variant="filled" onClick={onOpen}>
-            New Request
-          </FormButton>
-        </div>
-        <Modal
-          isOpen={isOpen}
-          onClose={onClose}
-          title="FIDA Leave Application Form"
-        >
-          <LeaveApplicationForm
-            onClose={onClose}
-            initialValues={leaveApplicationInitialValues}
-            validationSchema={schema}
-            onSuccess={onClose}
-            success={`Leave request added successfully`}
-            useMutate={useAddLeaveRequest}
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className={classes.table_container}>
+          <LeaveTable
+            type="leave"
+            action={props.handleLeaveClick}
+            data={data ? data.leaves : null}
+            isLoading={isLoading}
           />
-        </Modal>
-      </div>
+          <div className={classes.leave_actions_wrapper}>
+            <FormButton variant="filled" onClick={onOpen}>
+              New Request
+            </FormButton>
+          </div>
+          <Modal
+            isOpen={isOpen}
+            onClose={onClose}
+            title="FIDA Leave Application Form"
+          >
+            <LeaveApplicationForm
+              onClose={onClose}
+              initialValues={leaveApplicationInitialValues}
+              validationSchema={schema}
+              onSuccess={onClose}
+              success={`Leave request added successfully`}
+              useMutate={useAddLeaveRequest}
+            />
+          </Modal>
+        </div>
+      )}
     </>
   );
 };
