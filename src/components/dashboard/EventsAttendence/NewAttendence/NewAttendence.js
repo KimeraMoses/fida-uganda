@@ -4,7 +4,7 @@ import {
   InputLeftAddon,
   SimpleGrid,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import withForm from "../../../../hoc/withForm";
 import classes from "./NewAttendence.module.css";
 import InputField from "../../../common/UI/InputField/InputField";
@@ -14,6 +14,55 @@ import SelectInput from "../../../Membership/Allocations/AllocationForm/SelectIn
 
 const NewAttendence = ({ onClose, isSubmitting, setFieldValue }) => {
   const projectOptions = useProjectOptions();
+
+  const [totalPaticipants, setTotalPaticipants] = React.useState(0);
+  const [malePaticipants, setMalePaticipants] = React.useState();
+  const [femalePaticipants, setFemalePaticipants] = React.useState();
+  const [age0_17, setAge0_17] = React.useState("");
+  const [age18_30, setAge18_30] = React.useState("");
+  const [age31_59, setAge31_59] = React.useState("");
+  const [above59, setAbove59] = React.useState("");
+  const [undisclosed, setUndisclosed] = React.useState("");
+  const [sumOfAgeGroups, setSumOfAgeGroups] = React.useState(0);
+
+  const handleCalculateTotalPaticipants = () => {
+    setTotalPaticipants(
+      parseInt(malePaticipants) + parseInt(femalePaticipants)
+    );
+  };
+
+  const handleAgeGroups = () => {
+    if (age0_17 && age18_30 && age31_59 && above59 && undisclosed) {
+      setSumOfAgeGroups(
+        parseInt(age0_17) +
+          parseInt(age18_30) +
+          parseInt(age31_59) +
+          parseInt(above59) +
+          parseInt(undisclosed)
+      );
+      console.log(sumOfAgeGroups, "all ages filled");
+    }
+  };
+
+  const ensureTotalParticipants = () => {
+    if(totalPaticipants !== sumOfAgeGroups){
+      console.log('the numbers dont add up')
+    }else if(totalPaticipants === sumOfAgeGroups){
+      console.log('the numbers add up')
+    }
+  }
+
+  useEffect(()=>{
+    ensureTotalParticipants()
+  })
+
+  useEffect(() => {
+    handleAgeGroups();
+  });
+
+  useEffect(() => {
+    handleCalculateTotalPaticipants();
+  });
 
   return (
     <div className={classes.attendence_form_wrapper}>
@@ -66,19 +115,33 @@ const NewAttendence = ({ onClose, isSubmitting, setFieldValue }) => {
           <div className={classes.field_row_label}>
             Total No. of Participants
           </div>
-          <InputField placeholder="Type Here" name="total_participant" />
+          <InputField
+            placeholder="Type Here"
+            name="total_participant"
+            value={totalPaticipants}
+          />
         </div>
         <div>
           <div className={classes.field_row_label}>
             No. of Male Participants
           </div>
-          <InputField placeholder="Type Here" name="maleCount" />
+          <InputField
+            placeholder="Type Here"
+            name="maleCount"
+            value={malePaticipants}
+            onChange={(e) => setMalePaticipants(e.target.value)}
+          />
         </div>
         <div>
           <div className={classes.field_row_label}>
             No. of Female Participants
           </div>
-          <InputField placeholder="Type Here" name="femaleCount" />
+          <InputField
+            placeholder="Type Here"
+            name="femaleCount"
+            value={femalePaticipants}
+            onChange={(e) => setFemalePaticipants(e.target.value)}
+          />
         </div>
       </SimpleGrid>
       <div className={classes.field_row_label}>Summary of age groups</div>
@@ -93,6 +156,9 @@ const NewAttendence = ({ onClose, isSubmitting, setFieldValue }) => {
             type="number"
             placeholder="Type here"
             className={classes.input_field}
+            name="0-17"
+            value={age0_17}
+            onChange={(e) => setAge0_17(e.target.value)}
           />
         </InputGroup>
         <InputGroup>
@@ -101,6 +167,9 @@ const NewAttendence = ({ onClose, isSubmitting, setFieldValue }) => {
             type="number"
             placeholder="Type here"
             className={classes.input_field}
+            name="18-30"
+            value={age18_30}
+            onChange={(e) => setAge18_30(e.target.value)}
           />
         </InputGroup>
         <InputGroup>
@@ -108,8 +177,10 @@ const NewAttendence = ({ onClose, isSubmitting, setFieldValue }) => {
           <Input
             type="number"
             placeholder="Type here"
-            name="year"
+            name="31-59"
             className={classes.input_field}
+            value={age31_59}
+            onChange={(e) => setAge31_59(e.target.value)}
           />
         </InputGroup>
         <InputGroup>
@@ -117,8 +188,10 @@ const NewAttendence = ({ onClose, isSubmitting, setFieldValue }) => {
           <Input
             type="number"
             placeholder="Type here"
-            name="year"
+            name="59>"
             className={classes.input_field}
+            value={above59}
+            onChange={(e) => setAbove59(e.target.value)}
           />
         </InputGroup>
         <InputGroup>
@@ -126,8 +199,10 @@ const NewAttendence = ({ onClose, isSubmitting, setFieldValue }) => {
           <Input
             type="number"
             placeholder="Type here"
-            name="year"
+            name="undisclosed"
             className={classes.input_field}
+            value={undisclosed}
+            onChange={(e) => setUndisclosed(e.target.value)}
           />
         </InputGroup>
       </SimpleGrid>
