@@ -6,11 +6,14 @@ export const attendanceSchema = yup.object().shape({
   funder: yup.string().required("Funder is required"),
   date: yup.string().required("Date is required"),
   total_participant: yup.string().required("Total Participants is required"),
-  age0_17: yup.string().required("This field is required"),
-  age18_30: yup.string().required("This field is required"),
-  age31_59: yup.string().required("This field is required"),
-  above59: yup.string().required("This field is required"),
-  undisclosed: yup.string().required("This field is required"),
+  age0_17: yup.string(),
+  age18_30: yup.string(),
+  age31_59: yup.string(),
+  above59: yup.string(),
+  undisclosed: yup
+    .number()
+    .min(0)
+    .min(0, "Total participant and age group total do not match"),
 });
 
 export const attendanceInitialValues = {

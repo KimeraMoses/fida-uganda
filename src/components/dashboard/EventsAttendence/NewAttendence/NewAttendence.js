@@ -15,51 +15,22 @@ import SelectInput from "../../../Membership/Allocations/AllocationForm/SelectIn
 const NewAttendence = ({ onClose, isSubmitting, setFieldValue, values }) => {
   const projectOptions = useProjectOptions();
 
-  if (!values.femaleCount || !values.maleCount) {
-    values.total_participant = 0;
-  } else {
-    values.total_participant =
-      parseInt(values.femaleCount) + parseInt(values.maleCount);
-  }
-
-  const [age0_17, setAge0_17] = React.useState("");
-  const [age18_30, setAge18_30] = React.useState("");
-  const [age31_59, setAge31_59] = React.useState("");
-  const [above59, setAbove59] = React.useState("");
-  const [undisclosed, setUndisclosed] = React.useState("");
-  const [sumOfAgeGroups, setSumOfAgeGroups] = React.useState(0);
-
-
-
-  if (!values.age0_17 || !values.age18_30 || !values.age31_59 || !values.above59){
-
-  values.undisclosed = values.total_participant;
- }else{
-
-  values.undisclosed = 1
-}
-
-  const handleAgeGroups = () => {
-    if (age0_17 && age18_30 && age31_59 && above59 && undisclosed) {
-      setSumOfAgeGroups(
-        parseInt(age0_17) +
-          parseInt(age18_30) +
-          parseInt(age31_59) +
-          parseInt(above59) +
-          parseInt(undisclosed)
-      );
-      console.log(sumOfAgeGroups, "all ages filled");
-    }
-  };
-
-
+  const { femaleCount, maleCount, age0_17, age18_30, age31_59, above59 } =
+    values;
 
   useEffect(() => {
-    handleAgeGroups();
+    values.total_participant =
+      (parseInt(femaleCount) || 0) + (parseInt(maleCount) || 0);
+
+    values.undisclosed = values.total_participant;
+
+    values.undisclosed =
+      values.undisclosed -
+      ((parseInt(age0_17) || 0) +
+        (parseInt(age18_30) || 0) +
+        (parseInt(age31_59) || 0) +
+        (parseInt(above59) || 0));
   });
-
-
-
 
   return (
     <div className={classes.attendence_form_wrapper}>
@@ -112,28 +83,19 @@ const NewAttendence = ({ onClose, isSubmitting, setFieldValue, values }) => {
           <div className={classes.field_row_label}>
             Total No. of Participants
           </div>
-          <InputField
-            placeholder="Type Here"
-            name="total_participant"
-          />
+          <InputField placeholder="Type Here" name="total_participant" />
         </div>
         <div>
           <div className={classes.field_row_label}>
             No. of Male Participants
           </div>
-          <InputField
-            placeholder="Type Here"
-            name="maleCount"
-          />
+          <InputField placeholder="Type Here" name="maleCount" />
         </div>
         <div>
           <div className={classes.field_row_label}>
             No. of Female Participants
           </div>
-          <InputField
-            placeholder="Type Here"
-            name="femaleCount"
-          />
+          <InputField placeholder="Type Here" name="femaleCount" />
         </div>
       </SimpleGrid>
       <div className={classes.field_row_label}>Summary of age groups</div>
@@ -162,24 +124,20 @@ const NewAttendence = ({ onClose, isSubmitting, setFieldValue, values }) => {
         </InputGroup>
         <InputGroup>
           <InputLeftAddon children="31 - 59 years" />
-          <Input
+          <InputField
             type="number"
             placeholder="Type here"
             name="age31_59"
             className={classes.input_field}
-            value={age31_59}
-            onChange={(e) => setAge31_59(e.target.value)}
           />
         </InputGroup>
         <InputGroup>
           <InputLeftAddon children="59 and above years" />
-          <Input
+          <InputField
             type="number"
             placeholder="Type here"
-            name="above59>"
+            name="above59"
             className={classes.input_field}
-            value={above59}
-            onChange={(e) => setAbove59(e.target.value)}
           />
         </InputGroup>
         <InputGroup>
