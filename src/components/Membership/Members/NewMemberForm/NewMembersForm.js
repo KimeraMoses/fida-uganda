@@ -11,6 +11,7 @@ import UserInterests from "./MultiForm/UserInterests";
 import {
   initialValuesFour,
   initialValuesOne,
+  initialValuesOneSchema,
   initialValuesThree,
   initialValuesTwo,
 } from "./schema";
@@ -44,6 +45,7 @@ const NewMembersForm = ({ onClose }) => {
           onSuccess={nextStep}
           success={MEMBER_ADDED}
           initialValues={initialValuesOne}
+          validationSchema={initialValuesOneSchema}
           page={page}
           limit={limit}
         />
