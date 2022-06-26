@@ -1,11 +1,10 @@
 import { SimpleGrid, useToast } from "@chakra-ui/react";
-import { Form, Formik } from "formik";
 import { useEffect } from "react";
 import FormButton from "../../../common/UI/FormButton/FormButton";
 import InputField from "../../../common/UI/InputField/InputField";
 import classes from "./NewFidaProjectForm.module.css";
-import { projectInitialValues } from "./schema";
 import { toastError } from "../../../../lib/toastDetails";
+import withForm from "../../../../hoc/withForm";
 
 const NewFidaProjectForm = ({ isSubmitting, isError, error, onSubmit }) => {
   const toast = useToast();
@@ -17,14 +16,10 @@ const NewFidaProjectForm = ({ isSubmitting, isError, error, onSubmit }) => {
   }, [isError, error, toast]);
 
   return (
-    <Formik
-      initialValues={projectInitialValues}
-      onSubmit={(values) => {
-        onSubmit(values);
-      }}
-    >
+ 
+
       <div className={classes.new_project_wrapper}>
-        <Form>
+
           <div className={classes.field_wrapper}>
             <div className={classes.field_label}>Personal Information</div>
             <SimpleGrid columns={2} spacing={2}>
@@ -77,10 +72,8 @@ const NewFidaProjectForm = ({ isSubmitting, isError, error, onSubmit }) => {
               Add Project
             </FormButton>
           </div>
-        </Form>
       </div>
-    </Formik>
   );
 };
 
-export default NewFidaProjectForm;
+export default withForm(NewFidaProjectForm);
