@@ -12,6 +12,7 @@ import {
 } from "../../../hooks/useLeaveRequest";
 import {useTravelOrder} from "../../../hooks/useTravelOrders";
 import {useRequisition} from "../../../hooks/useRequisitions";
+import Loader from "../../common/UI/Loader/Loader";
 
 // export const TravelData = [
 //   {
@@ -223,7 +224,7 @@ const SummaryDetails = (props) => {
           </h2>
 
           <div className={classes.user_details}>
-            {!isLoading && data && selectedType !== "leave" && (
+            {isLoading? <Loader/>: !isLoading && data && selectedType !== "leave" && (
               <SimpleGrid columns={2} spacing={1}>
                 <h6>Date of Application:</h6>
                 <h6>{new Date(data?.advance?.createdAt).toLocaleString()}</h6>
@@ -243,7 +244,7 @@ const SummaryDetails = (props) => {
                 <h6>{data?.advance?.reason}</h6>
               </SimpleGrid>
             )}
-            {!loadingReqData && reqName && type === "requisition" && (
+            {loadingReqData? <Loader/>: !loadingReqData && reqName && type === "requisition" && (
               <SimpleGrid columns={2} spacing={1}>
                 <h6>Project Name:</h6>
                 <h6>{reqData?.requisition?.project_name}</h6>
@@ -257,7 +258,7 @@ const SummaryDetails = (props) => {
                 <h6>{reqData?.requisition?.num_units}</h6>
                 <h6>Total Amount:</h6>
                 {/*total amount not included*/}
-                <h6></h6>
+                <h6>45</h6>
                 <h6>Subject of Procurement:</h6>
                 <h6>{reqData?.requisition?.subject_of_procurement}</h6>
                 <h6>Date required:</h6>
@@ -267,7 +268,7 @@ const SummaryDetails = (props) => {
               </SimpleGrid>
             )}
 
-            { !loadingTravelOrders && travelData && type === "travel" && (
+            {loadingTravelOrders? <Loader/>: !loadingTravelOrders && travelData && type === "travel" && (
               <SimpleGrid columns={2} spacing={1}>
                 <h6>Date requested:</h6>
                 <h6>{new Date(travelData?.travelOrder?.createdAt).toLocaleString()}</h6>
@@ -291,7 +292,7 @@ const SummaryDetails = (props) => {
               </SimpleGrid>
             )}
 
-            {!loadingLeaveRequests && leaveData && selectedType === "leave" && (
+            {loadingTravelOrders? <Loader/>: !loadingLeaveRequests && leaveData && selectedType === "leave" && (
               <SimpleGrid columns={2} spacing={1}>
                 <h6>Date of Application:</h6>
                 <h6>
@@ -329,12 +330,20 @@ const SummaryDetails = (props) => {
             }
           />
         </div>
+        <form>
         <div className={classes.remarks_wrapper}>
           <h6>
             <strong>Remarks</strong>
           </h6>
           <Textarea placeholder="Type here" />
         </div>
+        {(type === "travel" || type === "requisition") && (
+          <div className={`${classes.form_action_wrapper} ${classes.single_btn}`}>
+            <FormButton variant="saved" type="submit" disabled={isSubmitting}>
+              Send
+            </FormButton>
+          </div>
+        )}
 
         {selectedType === "leave" && (
           <div className={classes.form_action_wrapper}>
@@ -357,6 +366,7 @@ const SummaryDetails = (props) => {
             </FormButton>
           </div>
         )}
+        </form>
       </div>
     </div>
   );

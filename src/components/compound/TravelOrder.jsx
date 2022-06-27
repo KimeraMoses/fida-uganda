@@ -43,6 +43,7 @@ const TravelOrder = () => {
           <TableSearch btnLabel="Travel Order" btnClick={onOpen} />
           <SubHeading title="New Requests" />
           <TravelOrderTable data={data?.travelOrders} />
+          <br/>
           <SubHeading title="Replied Requisitions" />
           <TravelOrderTable data={data?.travelOrders} />
         </>

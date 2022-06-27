@@ -3,4 +3,5 @@
   font-weight: 600;
   color: var(--primary_color);
   text-transform: capitalize;
+  margin-bottom: 14px;
 }

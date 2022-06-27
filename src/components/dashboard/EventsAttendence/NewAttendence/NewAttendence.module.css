@@ -19,14 +19,14 @@
   align-items: center;
 }
 
-.input_field {
-  user-select: none;
-  align-items: center;
+.input_field_group {
+  border-bottom-right-radius: 12px;
+  border-top-right-radius: 12px;
+  border-bottom-left-radius: 0px;
+  border-top-left-radius: 0px;
+  margin-bottom: 0!important;
 }
-.input_field:focus {
-  border-color: #3182ce !important;
-  box-shadow: none;
-}
+
 .attendence_upload_wrapper {
   width: 100%;
   display: flex;
@@ -57,4 +57,20 @@
   display: flex;
   justify-content: space-between;
   margin: 20px 0 10px;
+}
+
+
+/* INPUT GROUP */
+.label_wrapper{
+  white-space: nowrap;
+  padding: 5px 5px;
+  background-color: #EDF2F7;
+  border-bottom-left-radius: 12px;
+  border-top-left-radius: 12px;
+  display: flex;
+  align-items: center;
+}
+.input_group_wrapper{
+  display: flex;
+  width: 100%;
 }
