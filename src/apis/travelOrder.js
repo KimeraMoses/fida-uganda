@@ -5,8 +5,8 @@ export const getAllTravelOrders = async () => {
   return await axiosClient.get(routes.travelOrders.getTravelOrders);
 };
 
-export const getTravelOrder = async (travelOrderId) => {
-  return await axiosClient.get(`${routes.travelOrders.base}/${travelOrderId}`);
+export const getTravelOrder = async (id) => {
+  return await axiosClient.get(`${routes.travelOrders.base}/${id}`);
 };
 
 export const getTravelOrdersStats = async () => {

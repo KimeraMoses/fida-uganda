@@ -5,6 +5,11 @@ export const getAllRequisitions = async () => {
   return await axiosClient.get(routes.requisitions.getRequisitions);
 };
 
+export const getRequisition = async (id) => {
+  return await axiosClient.get(`${routes.requisitions.base}/${id}`);
+
+};
+
 export const getRequisitionsStats = async () => {
   return await axiosClient.get(routes.requisitions.stats);
 };
