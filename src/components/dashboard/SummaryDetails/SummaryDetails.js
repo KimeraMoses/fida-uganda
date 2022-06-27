@@ -257,7 +257,7 @@ const SummaryDetails = (props) => {
                 <h6>{reqData?.requisition?.num_units}</h6>
                 <h6>Total Amount:</h6>
                 {/*total amount not included*/}
-                <h6></h6>
+                <h6>45</h6>
                 <h6>Subject of Procurement:</h6>
                 <h6>{reqData?.requisition?.subject_of_procurement}</h6>
                 <h6>Date required:</h6>
