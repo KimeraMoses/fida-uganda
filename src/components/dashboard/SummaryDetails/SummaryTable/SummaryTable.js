@@ -3,8 +3,10 @@ import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
 import classes from "./Table.module.css";
 import { TableHeadColumn } from "../../../HumanResource/Approvals/ApprovalTable/ApprovedTable";
 
+
 const SummaryTable = ({ data }) => {
   console.log(data);
+
   return (
     <>
       <div className={classes.table_container}>
@@ -20,18 +22,59 @@ const SummaryTable = ({ data }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {data.map((item) => {
+
+            {data && data.travelOrder && data.travelOrder.approval_levels &&
+              data.travelOrder.approval_levels.map((item, index) => {
               return (
-                <Tr>
-                  <Td>{item.stage}</Td>
-                  <Td>{item.userName}</Td>
+                <Tr key={index}>
+                  <Td>{index + 1}</Td>
+                  <Td>{item.username}</Td>
                   <Td>{item.designation}</Td>
                   <Td>{item.status}</Td>
                   <Td>{item.remarks}</Td>
-                  <Td>{item.date}</Td>
+                  <Td>{new Date(item.date).toLocaleString()}</Td>
                 </Tr>
               );
             })}
+            {data && data.requisition && data.requisition.approval_levels &&
+                data.requisition.approval_levels.map((item, index) => {
+                  return (
+                      <Tr key={index}>
+                        <Td>{index + 1}</Td>
+                        <Td>{item.username}</Td>
+                        <Td>{item.designation}</Td>
+                        <Td>{item.status}</Td>
+                        <Td>{item.remarks}</Td>
+                        <Td>{new Date(item.date).toLocaleString()}</Td>
+                      </Tr>
+                  );
+                })}
+            {data && data.leave && data.leave.approval_levels &&
+                data.leave.approval_levels.map((item, index) => {
+                  return (
+                      <Tr key={index}>
+                        <Td>{index + 1}</Td>
+                        <Td>{item.username}</Td>
+                        <Td>{item.designation}</Td>
+                        <Td>{item.status}</Td>
+                        <Td>{item.remarks}</Td>
+                        <Td>{new Date(item.date).toLocaleString()}</Td>
+                      </Tr>
+                  );
+                })}
+            {data && data.advance && data.advance.approval_levels &&
+                data.advance.approval_levels.map((item, index) => {
+                  return (
+                      <Tr key={index}>
+                        <Td>{index + 1}</Td>
+                        <Td>{item.username}</Td>
+                        <Td>{item.designation}</Td>
+                        <Td>{item.status}</Td>
+                        <Td>{item.remarks}</Td>
+                        <Td>{new Date(item.date).toLocaleString()}</Td>
+                      </Tr>
+                  );
+                })}
           </Tbody>
         </Table>
       </div>

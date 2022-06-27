@@ -13,144 +13,144 @@ import {
 import {useTravelOrder} from "../../../hooks/useTravelOrders";
 import {useRequisition} from "../../../hooks/useRequisitions";
 
-export const TravelData = [
-  {
-    stage: "Stage 1",
-    userName: "David Balibali",
-    designation: "CLV Coordinator",
-    status: "Submited",
-    remarks: "No remarks",
-    date: "10/03/2022",
-  },
-  {
-    stage: "Stage 2",
-    userName: "Kityo Masanganzira",
-    designation: "DoP",
-    status: "Approved",
-    remarks: "No remarks",
-    date: "10/03/2022",
-  },
-  {
-    stage: "Stage 3",
-    userName: "Jane Mukasa",
-    designation: "Accountant IDLO",
-    status: "Approved",
-    remarks: "No remarks",
-    date: "10/03/2022",
-  },
-  {
-    stage: "Stage 4",
-    userName: "James Musinguzi.",
-    designation: "Fleet Manager",
-    status: "Pending",
-    remarks: "No remarks",
-    date: "14/03/2022",
-  },
-];
+// export const TravelData = [
+//   {
+//     stage: "Stage 1",
+//     userName: "David Balibali",
+//     designation: "CLV Coordinator",
+//     status: "Submited",
+//     remarks: "No remarks",
+//     date: "10/03/2022",
+//   },
+//   {
+//     stage: "Stage 2",
+//     userName: "Kityo Masanganzira",
+//     designation: "DoP",
+//     status: "Approved",
+//     remarks: "No remarks",
+//     date: "10/03/2022",
+//   },
+//   {
+//     stage: "Stage 3",
+//     userName: "Jane Mukasa",
+//     designation: "Accountant IDLO",
+//     status: "Approved",
+//     remarks: "No remarks",
+//     date: "10/03/2022",
+//   },
+//   {
+//     stage: "Stage 4",
+//     userName: "James Musinguzi.",
+//     designation: "Fleet Manager",
+//     status: "Pending",
+//     remarks: "No remarks",
+//     date: "14/03/2022",
+//   },
+// ];
+//
+// export const LeaveData = [
+//   {
+//     stage: "Stage 1",
+//     userName: "David Balibali",
+//     designation: "Legal Officer",
+//     status: "Submited",
+//     remarks: "No remarks",
+//     date: "10/03/2022",
+//   },
+//   {
+//     stage: "Stage 2",
+//     userName: "Kityo Masanganzira",
+//     designation: "Immediate Supervisor",
+//     status: "Approved",
+//     remarks: "No remarks",
+//     date: "10/03/2022",
+//   },
+//   {
+//     stage: "Stage 3",
+//     userName: "Jane Mukasa",
+//     designation: "HR",
+//     status: "Approved",
+//     remarks: "No remarks",
+//     date: "10/03/2022",
+//   },
+//   {
+//     stage: "Stage 4",
+//     userName: "James Musinguzi.",
+//     designation: "CEO",
+//     status: "Pending",
+//     remarks: "No remarks",
+//     date: "14/03/2022",
+//   },
+// ];
+// export const advanceData = [
+//   {
+//     stage: "Stage 1",
+//     userName: "David Balibali",
+//     designation: "Legal Officer",
+//     status: "Submited",
+//     remarks: "No remarks",
+//     date: "10/03/2022",
+//   },
+//   {
+//     stage: "Stage 2",
+//     userName: "Kityo Masanganzira",
+//     designation: "HR",
+//     status: "Approved",
+//     remarks: "No remarks",
+//     date: "10/03/2022",
+//   },
+//   {
+//     stage: "Stage 3",
+//     userName: "Jane Mukasa",
+//     designation: "CEO",
+//     status: "Approved",
+//     remarks: "No remarks",
+//     date: "10/03/2022",
+//   },
+//   {
+//     stage: "Stage 4",
+//     userName: "James Musinguzi.",
+//     designation: "Finance",
+//     status: "Pending",
+//     remarks: "No remarks",
+//     date: "14/03/2022",
+//   },
+// ];
 
-export const LeaveData = [
-  {
-    stage: "Stage 1",
-    userName: "David Balibali",
-    designation: "Legal Officer",
-    status: "Submited",
-    remarks: "No remarks",
-    date: "10/03/2022",
-  },
-  {
-    stage: "Stage 2",
-    userName: "Kityo Masanganzira",
-    designation: "Immediate Supervisor",
-    status: "Approved",
-    remarks: "No remarks",
-    date: "10/03/2022",
-  },
-  {
-    stage: "Stage 3",
-    userName: "Jane Mukasa",
-    designation: "HR",
-    status: "Approved",
-    remarks: "No remarks",
-    date: "10/03/2022",
-  },
-  {
-    stage: "Stage 4",
-    userName: "James Musinguzi.",
-    designation: "CEO",
-    status: "Pending",
-    remarks: "No remarks",
-    date: "14/03/2022",
-  },
-];
-export const advanceData = [
-  {
-    stage: "Stage 1",
-    userName: "David Balibali",
-    designation: "Legal Officer",
-    status: "Submited",
-    remarks: "No remarks",
-    date: "10/03/2022",
-  },
-  {
-    stage: "Stage 2",
-    userName: "Kityo Masanganzira",
-    designation: "HR",
-    status: "Approved",
-    remarks: "No remarks",
-    date: "10/03/2022",
-  },
-  {
-    stage: "Stage 3",
-    userName: "Jane Mukasa",
-    designation: "CEO",
-    status: "Approved",
-    remarks: "No remarks",
-    date: "10/03/2022",
-  },
-  {
-    stage: "Stage 4",
-    userName: "James Musinguzi.",
-    designation: "Finance",
-    status: "Pending",
-    remarks: "No remarks",
-    date: "14/03/2022",
-  },
-];
-
-export const requisitionData = [
-  {
-    stage: "Stage 1",
-    userName: "David Balibali",
-    designation: "CLV Coordinator",
-    status: "Submited",
-    remarks: "No remarks",
-    date: "10/03/2022",
-  },
-  {
-    stage: "Stage 2",
-    userName: "Kityo Masanganzira",
-    designation: "DoP",
-    status: "Approved",
-    remarks: "No remarks",
-    date: "10/03/2022",
-  },
-  {
-    stage: "Stage 3",
-    userName: "Jane Mukasa",
-    designation: "Accountant IDLO",
-    status: "Approved",
-    remarks: "No remarks",
-    date: "10/03/2022",
-  },
-  {
-    stage: "Stage 4",
-    userName: "James Musinguzi.",
-    designation: "Procurement Officier",
-    status: "Pending",
-    remarks: "No remarks",
-    date: "14/03/2022",
-  },
-];
+// export const requisitionData = [
+//   {
+//     stage: "Stage 1",
+//     userName: "David Balibali",
+//     designation: "CLV Coordinator",
+//     status: "Submited",
+//     remarks: "No remarks",
+//     date: "10/03/2022",
+//   },
+//   {
+//     stage: "Stage 2",
+//     userName: "Kityo Masanganzira",
+//     designation: "DoP",
+//     status: "Approved",
+//     remarks: "No remarks",
+//     date: "10/03/2022",
+//   },
+//   {
+//     stage: "Stage 3",
+//     userName: "Jane Mukasa",
+//     designation: "Accountant IDLO",
+//     status: "Approved",
+//     remarks: "No remarks",
+//     date: "10/03/2022",
+//   },
+//   {
+//     stage: "Stage 4",
+//     userName: "James Musinguzi.",
+//     designation: "Procurement Officier",
+//     status: "Pending",
+//     remarks: "No remarks",
+//     date: "14/03/2022",
+//   },
+// ];
 
 const SummaryDetails = (props) => {
   const { type, isSubmitting } = props;
@@ -178,11 +178,10 @@ const SummaryDetails = (props) => {
   // console.log(leaveData)
 
   const {data: travelData, isLoading: loadingTravelOrders} =  useTravelOrder(travelName);
-   // console.log(travelData)
+   console.log(travelData)
 
   const {data:reqData, isLoading: loadingReqData} = useRequisition(reqName);
    // console.log(reqData)
-
 
 
   return (
@@ -315,18 +314,18 @@ const SummaryDetails = (props) => {
           </div>
         </div>
         <div className={classes.table_wrapper}>
-          <h6>Requisition Roles{type}</h6>
+          <h6>Requisition Roles {type}</h6>
           <SummaryTable
             data={
               type === "requisition"
-                ? requisitionData
+                ? reqData
                 : type === "travel"
-                ? TravelData
+                ? travelData
                 : selectedType === "leave"
-                ? LeaveData
+                ? leaveData
                 : selectedType !== "leave"
-                ? advanceData
-                : TravelData
+                ? data
+                : travelData
             }
           />
         </div>
