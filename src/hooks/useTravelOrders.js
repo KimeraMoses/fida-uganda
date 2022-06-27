@@ -17,8 +17,8 @@ export const useTravelOrders = () => {
   return useQuery(TRAVEL_ORDER_KEY, getAllTravelOrders);
 };
 
-export const useTravelOrder = (travelOrderId) => {
-  return useQuery([TRAVEL_ORDER_KEY, travelOrderId], getTravelOrder);
+export const useTravelOrder = (id) => {
+  return useQuery([TRAVEL_ORDER_KEY, id], () => getTravelOrder(id));
 };
 
 export const useTravelOrderStats = () => {

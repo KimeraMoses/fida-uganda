@@ -11,8 +11,8 @@ import classes from "../../common/table/TableStyles.module.css";
 
 const RequisitionTable = ({ data }) => {
   const navigate = useNavigate();
-  const handleViewSummary = (name) => {
-    navigate(`/requisitions/${name}`);
+  const handleViewSummary = (id) => {
+    navigate(`/requisitions/${id}`);
   };
 
   return (

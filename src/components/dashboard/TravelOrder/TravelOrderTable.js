@@ -7,10 +7,10 @@ import { useNavigate } from "react-router-dom";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 
 const TravelOrderTable = ({ data }) => {
-  // console.log(data);
+  console.log(data);
   const navigate = useNavigate();
-  const handleViewSummary = (name) => {
-    navigate(`/travel-order/${name}`);
+  const handleViewSummary = (id) => {
+    navigate(`/travel-order/${id}`);
   };
   return (
     <>
