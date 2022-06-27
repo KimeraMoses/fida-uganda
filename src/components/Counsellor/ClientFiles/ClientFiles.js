@@ -2,10 +2,9 @@ import { useDisclosure } from "@chakra-ui/react";
 import { useAddPatient, usePatients } from "../../../hooks/usePatients";
 import Modal from "../../common/Modal";
 import SectionHeader from "../../common/SectionHeader";
-import TableSearch from "../../common/table/TableSearch";
 import ClientFilesTable from "./ClientFilesTable/ClientFilesTable";
 import NewClientForm from "./NewClientForm/NewClientForm";
-import { patientInitialValues } from "./NewClientForm/schema";
+import { patientInitialValues, patientSchema } from "./NewClientForm/schema";
 
 const ClientFiles = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -14,8 +13,13 @@ const ClientFiles = () => {
   return (
     <>
       <SectionHeader title="Client Files" />
-      <TableSearch btnLabel="Add Client" btnClick={onOpen} />
-      {data?.patients && <ClientFilesTable data={data?.patients} />}
+      {data?.patients && (
+        <ClientFilesTable
+          data={data?.patients}
+          btnLabel="Add Client"
+          btnClick={onOpen}
+        />
+      )}
       <Modal
         isOpen={isOpen}
         onClose={onClose}
@@ -24,6 +28,7 @@ const ClientFiles = () => {
       >
         <NewClientForm
           initialValues={patientInitialValues}
+          validationSchema={patientSchema}
           onSuccess={onClose}
           success={"Client added successfully"}
           useMutate={useAddPatient}
