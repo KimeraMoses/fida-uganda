@@ -6,7 +6,7 @@ import { Formik, Form } from "formik";
 import { toastError } from "../../../lib/toastDetails";
 import {
   travelOrderInitialValues,
-  // travelOrderSchema,
+   travelOrderSchema,
 } from "./schemas/travelOrder";
 
 const TravelOrderForm = ({ onSubmit, isSubmitting, isError, error }) => {
@@ -21,7 +21,7 @@ const TravelOrderForm = ({ onSubmit, isSubmitting, isError, error }) => {
   return (
     <Formik
       initialValues={travelOrderInitialValues}
-      // validationSchema={travelOrderSchema}
+     validationSchema={travelOrderSchema}
       onSubmit={(values) => {
         onSubmit(values);
       }}

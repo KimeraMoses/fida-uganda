@@ -7,7 +7,7 @@ import TableSearch from "../../common/table/TableSearch";
 import Loader from "../../common/UI/Loader/Loader";
 import AttendenceTable from "./AttendenceTable/AttendenceTable";
 import NewAttendence from "./NewAttendence/NewAttendence";
-import { attendanceInitialValues } from "./NewAttendence/schema";
+import { attendanceInitialValues, attendanceSchema } from "./NewAttendence/schema";
 
 const EventAttendence = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -24,14 +24,14 @@ const EventAttendence = () => {
           {data?.events && <AttendenceTable data={data?.events} />}
         </>
       )}
-      <Modal isOpen={isOpen} size="xl">
+      <Modal isOpen={isOpen} size="xl" title="Event Attendance"  onClose={onClose}>
         <NewAttendence
-          title="Event Attendance"
+          validationSchema={attendanceSchema}
           initialValues={attendanceInitialValues}
           onSuccess={onClose}
           success={`Event added successfully`}
           useMutate={useAddEvent}
-          onClose={onClose}
+         
         />
       </Modal>
     </>

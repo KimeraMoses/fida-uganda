@@ -1,5 +1,4 @@
 import React from "react";
-import TableSearch from "../../common/table/TableSearch";
 import SectionHeader from "../../common/SectionHeader";
 import PayrollTable from "./PayRollTables/PayrollTable";
 import PayrollNotesTable from "./PayRollTables/PayrollNotes";
@@ -41,7 +40,7 @@ const PayRoll = () => {
         <Loader />
       ) : (
         <>
-          <TableSearch btnLabel="Add Notes" btnClick={onOpen} />
+          {/* <TableSearch btnLabel="Add Notes" btnClick={onOpen} /> */}
 
           {payrollNotes?.PayrollNotes && (
             <PayrollNotesTable

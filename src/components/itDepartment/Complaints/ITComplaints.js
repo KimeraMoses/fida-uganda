@@ -31,7 +31,6 @@ const ITComplaints = () => {
       )}
       <Modal isOpen={isOpen} onClose={onClose} title="New Complaint Form">
         <ComplaintForm
-          title="It Products"
           initialValues={itComplaintInitialValues}
           validationSchema={itComplaintOrderSchema}
           onSuccess={onClose}

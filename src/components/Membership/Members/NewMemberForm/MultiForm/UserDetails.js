@@ -5,6 +5,7 @@ import ActionButtons from "./ActionButtons/ActionButtons";
 import { SimpleGrid } from "@chakra-ui/react";
 
 const UserDetails = ({ page, limit, isSubmitting, onBack }) => {
+  
   return (
     <div className={classes.form_wrapper}>
       <div className={classes.user_image_wrapper}>
@@ -13,17 +14,17 @@ const UserDetails = ({ page, limit, isSubmitting, onBack }) => {
       <div className={classes.field_wrapper}>
         <SimpleGrid columns={3} spacing={2}>
           <InputField name="first_name" placeholder="First Name" />
-          <InputField name="median_name" placeholder="Median Name" />
+          <InputField name="maiden_name" placeholder="Median Name" />
           <InputField name="last_name" placeholder="Last Name" />
         </SimpleGrid>
       </div>
       <div className={classes.field_wrapper}>
         <div className={classes.field_label}>Personal Address</div>
         <SimpleGrid columns={2} spacing={2}>
-          <InputField name="postal_address" placeholder="Postal Address" />
+          <InputField name="address" placeholder="Postal Address" />
           <InputField
             maxLength="12"
-            name="phone_number"
+            name="phoneNumber"
             placeholder="Telephone Number"
           />
         </SimpleGrid>
@@ -52,7 +53,7 @@ const UserDetails = ({ page, limit, isSubmitting, onBack }) => {
         />
         <p>Additional academic qualifications/trainings beyond LLB</p>
         <InputField
-          name="professional_experience"
+          name="additional_skills"
           placeholder="Additional academic qualifications/trainings beyond LLB"
           fullwidth
         />

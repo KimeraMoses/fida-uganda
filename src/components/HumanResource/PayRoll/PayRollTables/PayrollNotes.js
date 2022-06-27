@@ -1,14 +1,13 @@
 import React from "react";
 import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
 import classes from "./Table.module.css";
-import SectionHeader from "./SectionHeader";
 import { TableHeadColumn } from "../../Approvals/ApprovalTable/ApprovedTable";
 import { formatDate } from "../../../../lib/data";
+import withTable from "../../../../hoc/withTable";
 
 const PayrollNotesTable = ({ data }) => {
   return (
     <>
-      <SectionHeader title="Payroll Notes" />
       <div className={classes.approvals_table_wrapper}>
         <Table
           size="sm"
@@ -58,4 +57,4 @@ const PayrollNotesTable = ({ data }) => {
   );
 };
 
-export default PayrollNotesTable;
+export default withTable(PayrollNotesTable);
