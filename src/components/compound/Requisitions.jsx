@@ -31,6 +31,7 @@ const Requisitions = () => {
           <TableSearch btnLabel="Add Requisition" btnClick={onOpen} />
           <SubHeading title="New Requests" />
           <RequisitionTable data={data?.Requisitions} />
+          <br/>
           <SubHeading title="Replied Requisitions" />
           <RequisitionTable data={data?.Requisitions} />
         </>
