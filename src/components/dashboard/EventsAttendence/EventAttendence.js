@@ -29,6 +29,7 @@ const EventAttendence = () => {
           validationSchema={attendanceSchema}
           initialValues={attendanceInitialValues}
           onSuccess={onClose}
+          onClose={onClose}
           success={`Event added successfully`}
           useMutate={useAddEvent}
          

@@ -3,7 +3,7 @@ import { FormErrorMessage, FormControl, FormLabel } from "@chakra-ui/react";
 import classes from "./InputField.module.css";
 import { Field, useField } from "formik";
 
-const InputField = ({ type, name, disabled, label, fullwidth, ...rest }) => {
+const InputField = ({ type, name, disabled, label, fullwidth,className, ...rest }) => {
   const [field, meta] = useField(name);
   const isInvalid = meta.touched && meta.error ? true : false;
   return (
@@ -18,7 +18,7 @@ const InputField = ({ type, name, disabled, label, fullwidth, ...rest }) => {
           disabled ? classes.input_field__disabled : ""
         } ${fullwidth ? classes.fullwidth : ""} ${
           isInvalid ? classes.invalid_value : ""
-        }`}
+        } ${className}`}
         {...field}
         {...rest}
         type={type}

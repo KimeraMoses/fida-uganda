@@ -1,6 +1,4 @@
 import {
-  InputGroup,
-  InputLeftAddon,
   SimpleGrid,
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
@@ -10,6 +8,8 @@ import InputField from "../../../common/UI/InputField/InputField";
 import FormButton from "../../../common/UI/FormButton/FormButton";
 import { useProjectOptions } from "../../../../hooks/useProjects";
 import SelectInput from "../../../Membership/Allocations/AllocationForm/SelectInput";
+
+
 
 const NewAttendence = ({ onClose, isSubmitting, setFieldValue, values }) => {
   const projectOptions = useProjectOptions();
@@ -30,6 +30,21 @@ const NewAttendence = ({ onClose, isSubmitting, setFieldValue, values }) => {
         (parseInt(age31_59) || 0) +
         (parseInt(above59) || 0));
   });
+
+  const GroupInput =(props)=>{
+    const {label, type, placeholder, name} = props
+    return(
+      <div className={classes.input_group_wrapper}>
+      <div className={classes.label_wrapper}>{label}</div>
+      <InputField
+        type={type}
+        placeholder={placeholder}
+        className={classes.input_field_group}
+        name={name}
+      />
+    </div>
+    )
+  }
 
   return (
     <div className={classes.attendence_form_wrapper}>
@@ -103,51 +118,11 @@ const NewAttendence = ({ onClose, isSubmitting, setFieldValue, values }) => {
         spacing={1}
         className={classes.input_field_wrapperr}
       >
-        <InputGroup>
-          <InputLeftAddon children="0 - 17 years" />
-          <InputField
-            type="number"
-            placeholder="Type here"
-            className={classes.input_field}
-            name="age0_17"
-          />
-        </InputGroup>
-        <InputGroup>
-          <InputLeftAddon children="18 - 30 years" />
-          <InputField
-            type="number"
-            placeholder="Type here"
-            className={classes.input_field}
-            name="age18_30"
-          />
-        </InputGroup>
-        <InputGroup>
-          <InputLeftAddon children="31 - 59 years" />
-          <InputField
-            type="number"
-            placeholder="Type here"
-            name="age31_59"
-            className={classes.input_field}
-          />
-        </InputGroup>
-        <InputGroup>
-          <InputLeftAddon children="59 and above years" />
-          <InputField
-            type="number"
-            placeholder="Type here"
-            name="above59"
-            className={classes.input_field}
-          />
-        </InputGroup>
-        <InputGroup>
-          <InputLeftAddon children="Undisclosed" />
-          <InputField
-            type="number"
-            placeholder="Type here"
-            name="undisclosed"
-            className={classes.input_field}
-          />
-        </InputGroup>
+        <GroupInput type="number" label="0 - 17 years" name="age0_17" placeholder="Type here"/>
+        <GroupInput type="number" label="18 - 30 years" name="age18_30" placeholder="Type here"/>
+        <GroupInput type="number" label="31 - 59 years" name="age31_59" placeholder="Type here"/>
+        <GroupInput type="number" label="59 and above years" name="above59" placeholder="Type here"/>
+        <GroupInput type="number" label="Undisclosed" name="undisclosed" placeholder="Type here"/>
       </SimpleGrid>
       <div className={classes.attendence_upload_wrapper}>
         <div className={classes.file_upload}>
