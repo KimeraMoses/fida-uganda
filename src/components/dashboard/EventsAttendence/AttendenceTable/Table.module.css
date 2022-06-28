@@ -3,4 +3,7 @@
 }
 .table_header {
   border-bottom: 1px solid #000000;
+  background-color: var(--table_head_bg_color);
+  font-weight: 700;
+  color: #000000;
 }

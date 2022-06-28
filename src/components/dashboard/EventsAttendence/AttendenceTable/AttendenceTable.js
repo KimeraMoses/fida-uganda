@@ -8,7 +8,7 @@ import sortByDate from "../../../../lib/sortByDate";
 const AttendenceTable = ({ data }) => {
   return (
     <div className={classes.allocations_table_wrapper}>
-      <Table variant="striped">
+      <Table variant="striped" size="sm">
         <Thead className={classes.table_header}>
           <Tr>
             <TableHeadColumn title="No." />
