@@ -30,10 +30,13 @@ const Requisitions = () => {
         <>
           <TableSearch btnLabel="Add Requisition" btnClick={onOpen} />
           <SubHeading title="New Requests" />
-          <RequisitionTable data={data?.Requisitions} />
+          <RequisitionTable data={data?.Requisitions} type="new"/>
           <br/>
-          <SubHeading title="Replied Requisitions" />
-          <RequisitionTable data={data?.Requisitions} />
+          <SubHeading title="Approved Requisitions"  />
+          <RequisitionTable data={data?.Requisitions} type="approved"/>
+          <br/>
+          <SubHeading title="Rejected Requisitions" />
+          <RequisitionTable data={data?.Requisitions} type="rejected"/>
         </>
       )}
       <Modal isOpen={isOpen} onClose={onClose} title="Requisition">

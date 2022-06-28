@@ -224,7 +224,7 @@ const SummaryDetails = (props) => {
           </h2>
 
           <div className={classes.user_details}>
-            {isLoading? <Loader/>: !isLoading && data && selectedType !== "leave" && (
+            {(isLoading && selectedType==="advance") ?  <Loader/>: !isLoading && data && selectedType !== "leave" && (
               <SimpleGrid columns={2} spacing={1}>
                 <h6>Date of Application:</h6>
                 <h6>{new Date(data?.advance?.createdAt).toLocaleString()}</h6>
@@ -244,7 +244,7 @@ const SummaryDetails = (props) => {
                 <h6>{data?.advance?.reason}</h6>
               </SimpleGrid>
             )}
-            {loadingReqData? <Loader/>: !loadingReqData && reqName && type === "requisition" && (
+            {(loadingReqData && type === "requisition")? <Loader/>: !loadingReqData && reqName && type === "requisition" && (
               <SimpleGrid columns={2} spacing={1}>
                 <h6>Project Name:</h6>
                 <h6>{reqData?.requisition?.project_name}</h6>
@@ -268,7 +268,7 @@ const SummaryDetails = (props) => {
               </SimpleGrid>
             )}
 
-            {loadingTravelOrders? <Loader/>: !loadingTravelOrders && travelData && type === "travel" && (
+            {(loadingTravelOrders && type === "travel")? <Loader/>: !loadingTravelOrders && travelData && type === "travel" && (
               <SimpleGrid columns={2} spacing={1}>
                 <h6>Date requested:</h6>
                 <h6>{new Date(travelData?.travelOrder?.createdAt).toLocaleString()}</h6>
@@ -292,7 +292,7 @@ const SummaryDetails = (props) => {
               </SimpleGrid>
             )}
 
-            {loadingTravelOrders? <Loader/>: !loadingLeaveRequests && leaveData && selectedType === "leave" && (
+            {(loadingLeaveRequests && selectedType === "leave")? <Loader/>: !loadingLeaveRequests && leaveData && selectedType === "leave" && (
               <SimpleGrid columns={2} spacing={1}>
                 <h6>Date of Application:</h6>
                 <h6>
@@ -315,7 +315,7 @@ const SummaryDetails = (props) => {
           </div>
         </div>
         <div className={classes.table_wrapper}>
-          <h6>Requisition Roles {type}</h6>
+          <h6>Requisition Roles</h6>
           <SummaryTable
             data={
               type === "requisition"
@@ -335,17 +335,9 @@ const SummaryDetails = (props) => {
           <h6>
             <strong>Remarks</strong>
           </h6>
-          <Textarea placeholder="Type here" />
+          <Textarea placeholder="Leave a remark here" />
         </div>
-        {(type === "travel" || type === "requisition") && (
-          <div className={`${classes.form_action_wrapper} ${classes.single_btn}`}>
-            <FormButton variant="saved" type="submit" disabled={isSubmitting}>
-              Send
-            </FormButton>
-          </div>
-        )}
-
-        {selectedType === "leave" && (
+        <hr/>
           <div className={classes.form_action_wrapper}>
             <FormButton variant="cancel" type="button">
               Reject
@@ -354,18 +346,6 @@ const SummaryDetails = (props) => {
               {isSubmitting ? "Approving..." : "Approve"}
             </FormButton>
           </div>
-        )}
-
-        {selectedType === "advance" && (
-          <div className={classes.form_action_wrapper}>
-            <FormButton variant="cancel" type="button">
-              Reject
-            </FormButton>
-            <FormButton variant="save" type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Approving..." : "Approve"}
-            </FormButton>
-          </div>
-        )}
         </form>
       </div>
     </div>
