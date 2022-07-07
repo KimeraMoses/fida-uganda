@@ -43,4 +43,4 @@ deploy_fida_testing:
   allow_failure: false
   script:
     - firebase use fida-testing --token $FIREBASE_TOKEN_FIDA_TESTING
-    - firebase deploy -m "Pipe $CI_PIPELINE_ID Build $CI_BUILD_ID" --only hosting:staging --non-interactive --token $FIREBASE_TOKEN_FIDA_TESTING
+    - firebase deploy -m "Pipe $CI_PIPELINE_ID Build $CI_BUILD_ID" --only hosting --non-interactive --token $FIREBASE_TOKEN_FIDA_TESTING
