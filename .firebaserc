@@ -1,6 +1,7 @@
 {
   "projects": {
-    "default": "fida-staging"
+    "default": "fida-staging",
+    "fida-testing": "fida-staging"
   }
 }
 
