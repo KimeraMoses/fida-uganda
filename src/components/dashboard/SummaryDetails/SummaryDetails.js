@@ -1,161 +1,32 @@
-import React from "react";
+import React, {useState} from "react";
 import classes from "./SummaryDetails.module.css";
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
-import { SimpleGrid, Textarea } from "@chakra-ui/react";
+import {SimpleGrid, Textarea} from "@chakra-ui/react";
 import SummaryTable from "./SummaryTable/SummaryTable";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 import FormButton from "../../common/UI/FormButton/FormButton";
-import { useAdvance } from "../../../hooks/useAdvances";
+import {useAdvance, useApproveAdvance, useRejectAdvance} from "../../../hooks/useAdvances";
 import {
-  useLeaveRequest,
+  useApproveLeaveRequest,
+  useLeaveRequest, useRejectLeaveRequest,
   // useApproveLeaveRequest,
 } from "../../../hooks/useLeaveRequest";
-import {useTravelOrder} from "../../../hooks/useTravelOrders";
-import {useRequisition} from "../../../hooks/useRequisitions";
+import {useApproveTravelOrder, useRejectTravelOrder, useTravelOrder} from "../../../hooks/useTravelOrders";
+import {useApproveRequisition, useRejectRequisition, useRequisition} from "../../../hooks/useRequisitions";
 import Loader from "../../common/UI/Loader/Loader";
 
-// export const TravelData = [
-//   {
-//     stage: "Stage 1",
-//     userName: "David Balibali",
-//     designation: "CLV Coordinator",
-//     status: "Submited",
-//     remarks: "No remarks",
-//     date: "10/03/2022",
-//   },
-//   {
-//     stage: "Stage 2",
-//     userName: "Kityo Masanganzira",
-//     designation: "DoP",
-//     status: "Approved",
-//     remarks: "No remarks",
-//     date: "10/03/2022",
-//   },
-//   {
-//     stage: "Stage 3",
-//     userName: "Jane Mukasa",
-//     designation: "Accountant IDLO",
-//     status: "Approved",
-//     remarks: "No remarks",
-//     date: "10/03/2022",
-//   },
-//   {
-//     stage: "Stage 4",
-//     userName: "James Musinguzi.",
-//     designation: "Fleet Manager",
-//     status: "Pending",
-//     remarks: "No remarks",
-//     date: "14/03/2022",
-//   },
-// ];
-//
-// export const LeaveData = [
-//   {
-//     stage: "Stage 1",
-//     userName: "David Balibali",
-//     designation: "Legal Officer",
-//     status: "Submited",
-//     remarks: "No remarks",
-//     date: "10/03/2022",
-//   },
-//   {
-//     stage: "Stage 2",
-//     userName: "Kityo Masanganzira",
-//     designation: "Immediate Supervisor",
-//     status: "Approved",
-//     remarks: "No remarks",
-//     date: "10/03/2022",
-//   },
-//   {
-//     stage: "Stage 3",
-//     userName: "Jane Mukasa",
-//     designation: "HR",
-//     status: "Approved",
-//     remarks: "No remarks",
-//     date: "10/03/2022",
-//   },
-//   {
-//     stage: "Stage 4",
-//     userName: "James Musinguzi.",
-//     designation: "CEO",
-//     status: "Pending",
-//     remarks: "No remarks",
-//     date: "14/03/2022",
-//   },
-// ];
-// export const advanceData = [
-//   {
-//     stage: "Stage 1",
-//     userName: "David Balibali",
-//     designation: "Legal Officer",
-//     status: "Submited",
-//     remarks: "No remarks",
-//     date: "10/03/2022",
-//   },
-//   {
-//     stage: "Stage 2",
-//     userName: "Kityo Masanganzira",
-//     designation: "HR",
-//     status: "Approved",
-//     remarks: "No remarks",
-//     date: "10/03/2022",
-//   },
-//   {
-//     stage: "Stage 3",
-//     userName: "Jane Mukasa",
-//     designation: "CEO",
-//     status: "Approved",
-//     remarks: "No remarks",
-//     date: "10/03/2022",
-//   },
-//   {
-//     stage: "Stage 4",
-//     userName: "James Musinguzi.",
-//     designation: "Finance",
-//     status: "Pending",
-//     remarks: "No remarks",
-//     date: "14/03/2022",
-//   },
-// ];
 
-// export const requisitionData = [
-//   {
-//     stage: "Stage 1",
-//     userName: "David Balibali",
-//     designation: "CLV Coordinator",
-//     status: "Submited",
-//     remarks: "No remarks",
-//     date: "10/03/2022",
-//   },
-//   {
-//     stage: "Stage 2",
-//     userName: "Kityo Masanganzira",
-//     designation: "DoP",
-//     status: "Approved",
-//     remarks: "No remarks",
-//     date: "10/03/2022",
-//   },
-//   {
-//     stage: "Stage 3",
-//     userName: "Jane Mukasa",
-//     designation: "Accountant IDLO",
-//     status: "Approved",
-//     remarks: "No remarks",
-//     date: "10/03/2022",
-//   },
-//   {
-//     stage: "Stage 4",
-//     userName: "James Musinguzi.",
-//     designation: "Procurement Officier",
-//     status: "Pending",
-//     remarks: "No remarks",
-//     date: "14/03/2022",
-//   },
-// ];
+import {useSelector} from "react-redux";
+
 
 const SummaryDetails = (props) => {
   const { type, isSubmitting } = props;
   const navigate = useNavigate();
+
+  //get user and designation
+  const {user} = useSelector((state) => state.auth)
+  // console.log(user)
+  // console.log(user.designation)
 
   //====GET THE SELECTED DOCUMENT CATEGORY====//
   function useQuery() {
@@ -179,10 +50,68 @@ const SummaryDetails = (props) => {
   // console.log(leaveData)
 
   const {data: travelData, isLoading: loadingTravelOrders} =  useTravelOrder(travelName);
-   console.log(travelData)
+  //  console.log(travelData)
 
   const {data:reqData, isLoading: loadingReqData} = useRequisition(reqName);
-   // console.log(reqData)
+  //  console.log(reqData)
+  // console.log(reqName)
+
+
+
+  const [remarks, setRemarks] = useState('');
+
+  const {mutate: approveTravel} = useApproveTravelOrder();
+  const {mutate: rejectTravel} = useRejectTravelOrder();
+
+  const {mutate: approveReq} = useApproveRequisition();
+  const {mutate: rejectReq} = useRejectRequisition();
+
+  const {mutate:approveLeaveReq} = useApproveLeaveRequest();
+  const {mutate: rejectLeaveReq} = useRejectLeaveRequest();
+
+  const {mutate: approveAdv} = useApproveAdvance();
+  const {mutate: rejectAdv} = useRejectAdvance();
+
+
+
+  const approveTravelOrder = () =>{
+    approveTravel({travelName,remarks});
+    // console.log(travelName,remarks)
+  }
+
+  const rejectTravelOrder =()=>{
+    rejectTravel({travelName,remarks})
+    // console.log(travelName,remarks)
+  }
+
+  const approveRequisition = React.useCallback(() =>{
+    approveReq({reqName,remarks});
+    // console.log(remarks,reqName)
+
+  },[reqName,remarks])
+
+  const rejectRequisition =()=>{
+    rejectReq({reqName,remarks});
+  }
+
+  const approveLeave =() =>{
+   approveLeaveReq({id,remarks});
+  }
+
+  const rejectLeave =()=>{
+    rejectLeaveReq({id,remarks});
+
+  }
+
+  const approveAdvance =()=> {
+    approveAdv({id,remarks});
+
+  }
+  const rejectAdvance =()=>{
+    rejectAdv({id,remarks})
+
+  }
+
 
 
   return (
@@ -224,7 +153,8 @@ const SummaryDetails = (props) => {
           </h2>
 
           <div className={classes.user_details}>
-            {(isLoading && selectedType==="advance") ?  <Loader/>: !isLoading && data && selectedType !== "leave" && (
+            {
+              (isLoading && selectedType==="advance") ?  <Loader/>: !isLoading && data && selectedType !== "leave" && (
               <SimpleGrid columns={2} spacing={1}>
                 <h6>Date of Application:</h6>
                 <h6>{new Date(data?.advance?.createdAt).toLocaleString()}</h6>
@@ -243,8 +173,10 @@ const SummaryDetails = (props) => {
                 <h6>Reason:</h6>
                 <h6>{data?.advance?.reason}</h6>
               </SimpleGrid>
-            )}
-            {(loadingReqData && type === "requisition")? <Loader/>: !loadingReqData && reqName && type === "requisition" && (
+            )
+            }
+            {
+              (loadingReqData && type === "requisition")? <Loader/>: !loadingReqData && reqName && type === "requisition" && (
               <SimpleGrid columns={2} spacing={1}>
                 <h6>Project Name:</h6>
                 <h6>{reqData?.requisition?.project_name}</h6>
@@ -257,7 +189,7 @@ const SummaryDetails = (props) => {
                 <h6>Number of Units:</h6>
                 <h6>{reqData?.requisition?.num_units}</h6>
                 <h6>Total Amount:</h6>
-                {/*total amount not included*/}
+                total amount not included
                 <h6>45</h6>
                 <h6>Subject of Procurement:</h6>
                 <h6>{reqData?.requisition?.subject_of_procurement}</h6>
@@ -266,9 +198,11 @@ const SummaryDetails = (props) => {
                 <h6>Delivery Location:</h6>
                 <h6>{reqData?.requisition?.delivery_location}</h6>
               </SimpleGrid>
-            )}
+            )
+            }
 
-            {(loadingTravelOrders && type === "travel")? <Loader/>: !loadingTravelOrders && travelData && type === "travel" && (
+            {
+              (loadingTravelOrders && type === "travel")? <Loader/>: !loadingTravelOrders && travelData && type === "travel" && (
               <SimpleGrid columns={2} spacing={1}>
                 <h6>Date requested:</h6>
                 <h6>{new Date(travelData?.travelOrder?.createdAt).toLocaleString()}</h6>
@@ -290,9 +224,11 @@ const SummaryDetails = (props) => {
                 {/*Not sure of the date required field name*/}
                 <h6>{new Date(travelData?.travelOrder?.updateAt).toLocaleString()}</h6>
               </SimpleGrid>
-            )}
+            )
+            }
 
-            {(loadingLeaveRequests && selectedType === "leave")? <Loader/>: !loadingLeaveRequests && leaveData && selectedType === "leave" && (
+            {
+              (loadingLeaveRequests && selectedType === "leave")? <Loader/>: !loadingLeaveRequests && leaveData && selectedType === "leave" && (
               <SimpleGrid columns={2} spacing={1}>
                 <h6>Date of Application:</h6>
                 <h6>
@@ -311,42 +247,212 @@ const SummaryDetails = (props) => {
                 <h6>Tel:</h6>
                 <h6>{leaveData?.leave?.tel_on_leave}</h6>
               </SimpleGrid>
-            )}
-          </div>
-        </div>
-        <div className={classes.table_wrapper}>
-          <h6>Requisition Roles</h6>
-          <SummaryTable
-            data={
-              type === "requisition"
-                ? reqData
-                : type === "travel"
-                ? travelData
-                : selectedType === "leave"
-                ? leaveData
-                : selectedType !== "leave"
-                ? data
-                : travelData
+            )
             }
-          />
-        </div>
-        <form>
-        <div className={classes.remarks_wrapper}>
-          <h6>
-            <strong>Remarks</strong>
-          </h6>
-          <Textarea placeholder="Leave a remark here" />
-        </div>
-        <hr/>
-          <div className={classes.form_action_wrapper}>
-            <FormButton variant="cancel" type="button">
-              Reject
-            </FormButton>
-            <FormButton variant="save" type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Approving..." : "Approve"}
-            </FormButton>
           </div>
-        </form>
+        </div>
+
+
+
+
+
+        {type === "travel" && ((user.designation === "dop")  ||(user.designation === "accountant") ||
+                (user.designation === "fleetManager") ||(user.designation === "ceo")) &&
+
+            <div className={classes.table_wrapper}>
+              <h6>Travel Roles</h6>
+              <SummaryTable
+                  data={
+                    type === "requisition"
+                        ? reqData
+                        : type === "travel"
+                            ? travelData
+                            : selectedType === "leave"
+                                ? leaveData
+                                : selectedType !== "leave"
+                                    ? data
+                                    : travelData
+                  }
+              />
+
+              <form>
+                <div className={classes.remarks_wrapper}>
+                  <h6>
+                    <strong>Remarks</strong>
+                  </h6>
+                  <Textarea placeholder="Leave a remark here" name="remarks"
+                            value={remarks}
+                            onChange={(e) => setRemarks(e.target.value)}
+
+                  />
+                </div>
+                <hr/>
+                <div className={classes.form_action_wrapper}>
+                  <FormButton variant="cancel" type="submit" onClick={rejectTravelOrder}>
+                    Reject
+                  </FormButton>
+                  <FormButton variant="save" type="submit"  onClick={approveTravelOrder}>
+                    {isSubmitting ? "Approving..." : "Approve"}
+                  </FormButton>
+                </div>
+              </form>
+            </div>
+        }
+
+        {/*normal users*/}
+        {/*{type === "travel" && ((user.designation !== "dop")  ||(user.designation !== "accountant") ||*/}
+        {/*        (user.designation !== "fleetManager") ||(user.designation !== "ceo")) &&*/}
+
+        {/*    <div className={classes.table_wrapper}>*/}
+        {/*      <h6>Travel Roles</h6>*/}
+        {/*      <SummaryTable*/}
+        {/*          data={*/}
+        {/*            type === "requisition"*/}
+        {/*                ? reqData*/}
+        {/*                : type === "travel"*/}
+        {/*                    ? travelData*/}
+        {/*                    : selectedType === "leave"*/}
+        {/*                        ? leaveData*/}
+        {/*                        : selectedType !== "leave"*/}
+        {/*                            ? data*/}
+        {/*                            : travelData*/}
+        {/*          }*/}
+        {/*      />*/}
+
+        {/*    </div>*/}
+        {/*}*/}
+
+        {type === "requisition" && ((user.designation === "dop")  ||(user.designation === "accountant") ||
+                (user.designation === "procurement") || (user.designation === "ceo")) &&
+
+            <div className={classes.table_wrapper}>
+              <h6>Requisition Roles</h6>
+              <SummaryTable
+                  data={
+                    type === "requisition"
+                        ? reqData
+                        : type === "travel"
+                            ? travelData
+                            : selectedType === "leave"
+                                ? leaveData
+                                : selectedType !== "leave"
+                                    ? data
+                                    : travelData
+                  }
+              />
+
+              <form onSubmit={(e)=>{e.preventDefault()}}>
+                <div className={classes.remarks_wrapper}>
+                  <h6>
+                    <strong>Remarks</strong>
+                  </h6>
+                  <Textarea placeholder="Leave a remark here" name="remarks"
+                            value={remarks}
+                            onChange={(e) => setRemarks(e.target.value)}
+
+                  />
+                </div>
+                <hr/>
+                <div className={classes.form_action_wrapper}>
+                  <FormButton variant="cancel" type="submit" onClick={rejectRequisition}>
+                    Reject
+                  </FormButton>
+                  <FormButton variant="save" type="submit"  onClick={approveRequisition}>
+                    {isSubmitting ? "Approving..." : "Approve"}
+                  </FormButton>
+                </div>
+              </form >
+            </div>
+        }
+
+        {selectedType === "leave" && ((user.designation === "dop") ||(user.designation === "supervisor") || (user.designation === "humanResources") ||
+                (user.designation === "ceo")) &&
+
+            <div className={classes.table_wrapper}>
+              <h6>Leave Roles</h6>
+              <SummaryTable
+                  data={
+                    type === "requisition"
+                        ? reqData
+                        : type === "travel"
+                            ? travelData
+                            : selectedType === "leave"
+                                ? leaveData
+                                : selectedType !== "leave"
+                                    ? data
+                                    : travelData
+                  }
+              />
+
+              <form onSubmit={(e)=>{e.preventDefault()}}>
+                <div className={classes.remarks_wrapper}>
+                  <h6>
+                    <strong>Remarks</strong>
+                  </h6>
+                  <Textarea placeholder="Leave a remark here" name="remarks"
+                            value={remarks}
+                            onChange={(e) => setRemarks(e.target.value)}
+
+                  />
+                </div>
+                <hr/>
+                <div className={classes.form_action_wrapper}>
+                  <FormButton variant="cancel" type="submit" onClick={rejectLeave}>
+                    Reject
+                  </FormButton>
+                  <FormButton variant="save" type="submit"  onClick={approveLeave}>
+                    {isSubmitting ? "Approving..." : "Approve"}
+                  </FormButton>
+                </div>
+              </form >
+            </div>
+        }
+
+
+        {selectedType === "advance" && ((user.designation === "dop")  ||(user.designation === "accountant") || (user.designation === "ceo") ||
+                (user.designation === "finance")) &&
+
+            <div className={classes.table_wrapper}>
+              <h6>Advance Roles</h6>
+              <SummaryTable
+                  data={
+                    type === "requisition"
+                        ? reqData
+                        : type === "travel"
+                            ? travelData
+                            : selectedType === "leave"
+                                ? leaveData
+                                : selectedType !== "leave"
+                                    ? data
+                                    : travelData
+                  }
+              />
+
+              <form onSubmit={(e)=>{e.preventDefault()}}>
+                <div className={classes.remarks_wrapper}>
+                  <h6>
+                    <strong>Remarks</strong>
+                  </h6>
+                  <Textarea placeholder="Leave a remark here" name="remarks"
+                            value={remarks}
+                            onChange={(e) => setRemarks(e.target.value)}
+
+                  />
+                </div>
+                <hr/>
+                <div className={classes.form_action_wrapper}>
+                  <FormButton variant="cancel" type="submit" onClick={rejectAdvance}>
+                    Reject
+                  </FormButton>
+                  <FormButton variant="save" type="submit"  onClick={approveAdvance}>
+                    {isSubmitting ? "Approving..." : "Approve"}
+                  </FormButton>
+                </div>
+              </form>
+            </div>
+        }
+
+
       </div>
     </div>
   );

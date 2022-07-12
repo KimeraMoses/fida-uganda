@@ -18,9 +18,11 @@ export const addLeaveRequests = async (leaveRequest) => {
   );
 };
 
-export const approveLeaveRequest = async (id, remarks) => {
-  return await axiosClient.post(
-    `${routes.leaveRequests.approveLeaveRequest}/${id}`,
-    { remarks }
-  );
+export const approveLeaveRequest = async ({id, remarks}) => {
+  return await axiosClient.post(`${routes.leaveRequests.approveLeaveRequest}/${id}`, { remarks });
 };
+
+export const rejectLeaveRequest = async ({id, remarks}) => {
+  return await axiosClient.post(`${routes.leaveRequests.rejectLeaveRequest}/${id}`, { remarks });
+};
+
