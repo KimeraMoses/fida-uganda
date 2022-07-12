@@ -83,7 +83,6 @@ export const useRejectRequisition = () => {
   return useMutation(rejectRequisition,{
     onMutate: async({reqName,remarks}) => {
       await queryClient.cancelMutations(REQUISITIONS_KEY)
-
       const previousRequisitions = queryClient.getQueryData(REQUISITIONS_KEY)
       if (previousRequisitions){
         queryClient.setQueryData(REQUISITIONS_KEY,(requisitions) =>{
@@ -100,7 +99,6 @@ export const useRejectRequisition = () => {
       } else {
         queryClient.setQueryData(REQUISITIONS_KEY,() =>{
           return { Requisitions: [requisitions]
-
           }
         })
       }

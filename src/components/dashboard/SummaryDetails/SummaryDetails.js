@@ -25,8 +25,8 @@ const SummaryDetails = (props) => {
 
   //get user and designation
   const {user} = useSelector((state) => state.auth)
-  // console.log(user)
-  // console.log(user.designation)
+  console.log(user)
+  console.log(user.designation)
 
   //====GET THE SELECTED DOCUMENT CATEGORY====//
   function useQuery() {
@@ -300,27 +300,29 @@ const SummaryDetails = (props) => {
         }
 
         {/*normal users*/}
-        {/*{type === "travel" && ((user.designation !== "dop")  ||(user.designation !== "accountant") ||*/}
-        {/*        (user.designation !== "fleetManager") ||(user.designation !== "ceo")) &&*/}
+        { ((type === "travel") || (type === "requisition") || (selectedType === "leave") || (selectedType === "advance")) &&
+            ((user.designation !== "dop") && (user.designation !== "accountant") && (user.designation !== "finance") &&
+                (user.designation !== "fleetManager") ||(user.designation !== "ceo") &&
+                (user.designation !== "procurement") && (user.designation === "supervisor")) &&
 
-        {/*    <div className={classes.table_wrapper}>*/}
-        {/*      <h6>Travel Roles</h6>*/}
-        {/*      <SummaryTable*/}
-        {/*          data={*/}
-        {/*            type === "requisition"*/}
-        {/*                ? reqData*/}
-        {/*                : type === "travel"*/}
-        {/*                    ? travelData*/}
-        {/*                    : selectedType === "leave"*/}
-        {/*                        ? leaveData*/}
-        {/*                        : selectedType !== "leave"*/}
-        {/*                            ? data*/}
-        {/*                            : travelData*/}
-        {/*          }*/}
-        {/*      />*/}
+            <div className={classes.table_wrapper}>
+              <h6>{type} {selectedType}Roles</h6>
+              <SummaryTable
+                  data={
+                    type === "requisition"
+                        ? reqData
+                        : type === "travel"
+                            ? travelData
+                            : selectedType === "leave"
+                                ? leaveData
+                                : selectedType !== "leave"
+                                    ? data
+                                    : travelData
+                  }
+              />
 
-        {/*    </div>*/}
-        {/*}*/}
+            </div>
+        }
 
         {type === "requisition" && ((user.designation === "dop")  ||(user.designation === "accountant") ||
                 (user.designation === "procurement") || (user.designation === "ceo")) &&
@@ -341,7 +343,7 @@ const SummaryDetails = (props) => {
                   }
               />
 
-              <form onSubmit={(e)=>{e.preventDefault()}}>
+              <form>
                 <div className={classes.remarks_wrapper}>
                   <h6>
                     <strong>Remarks</strong>
@@ -384,7 +386,7 @@ const SummaryDetails = (props) => {
                   }
               />
 
-              <form onSubmit={(e)=>{e.preventDefault()}}>
+              <form>
                 <div className={classes.remarks_wrapper}>
                   <h6>
                     <strong>Remarks</strong>
@@ -428,7 +430,7 @@ const SummaryDetails = (props) => {
                   }
               />
 
-              <form onSubmit={(e)=>{e.preventDefault()}}>
+              <form>
                 <div className={classes.remarks_wrapper}>
                   <h6>
                     <strong>Remarks</strong>

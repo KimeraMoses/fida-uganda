@@ -43,12 +43,10 @@ export const getMyTravelOrders = async () => {
 };
 
 export const approveTravelOder = async ({travelName, remarks}) => {
-  return await axiosClient.post(`${routes.travelOrders.approveTravelOrder}/${travelName}`, {remarks} )
+  return await axiosClient.post(`${routes.travelOrders.approveTravelOrder}/${travelName}`, {remarks});
 
 }
 
 export const rejectTravelOrder = async ({travelName, remarks}) => {
-  return await axiosClient.post(`${routes.travelOrders.rejectTravelOrder}/${travelName}`,{remarks}
-
-  )
+  return await axiosClient.post(`${routes.travelOrders.rejectTravelOrder}/${travelName}`,{remarks});
 }
