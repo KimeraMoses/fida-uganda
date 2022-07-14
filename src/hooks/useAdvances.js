@@ -8,8 +8,7 @@ import {
   getAdvance, approveAdvance, rejectAdvance,
 } from "../apis/advances";
 import {ADVANCES_KEY} from "../lib/constants";
-import AdvanceTracker from "../components/compound/AdvanceTracker";
-import advanceTracker from "../components/compound/AdvanceTracker";
+import Tracker from "../components/compound/Tracker";
 
 export const useAdvances = () => {
   return useQuery(ADVANCES_KEY, getAllAdvances);
@@ -68,7 +67,7 @@ export const useApproveAdvance = () =>{
         // console.log("this is the remark",remarks,id)
       } else {
         queryClient.setQueryData(ADVANCES_KEY,() =>{
-          return { advances: [AdvanceTracker]
+          return { advances: [Tracker]
 
           }
         })
@@ -105,7 +104,7 @@ export const useApproveAdvance = () =>{
          // console.log("this is the remark",remarks,id)
        } else {
          queryClient.setQueryData(ADVANCES_KEY,() =>{
-           return { advances: [advanceTracker]
+           return { advances: [Tracker]
 
            }
          })
