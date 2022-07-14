@@ -25,8 +25,8 @@ const SummaryDetails = (props) => {
 
   //get user and designation
   const {user} = useSelector((state) => state.auth)
-  console.log(user)
-  console.log(user.designation)
+  // console.log(user)
+  // console.log(user.designation)
 
   //====GET THE SELECTED DOCUMENT CATEGORY====//
   function useQuery() {
