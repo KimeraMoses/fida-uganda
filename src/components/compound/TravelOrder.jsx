@@ -42,10 +42,13 @@ const TravelOrder = () => {
         <>
           <TableSearch btnLabel="Travel Order" btnClick={onOpen} />
           <SubHeading title="New Requests" />
-          <TravelOrderTable data={data?.travelOrders} />
+          <TravelOrderTable data={data?.travelOrders} type="new"/>
           <br/>
-          <SubHeading title="Replied Requisitions" />
-          <TravelOrderTable data={data?.travelOrders} />
+          <SubHeading title="Approved Request" />
+          <TravelOrderTable data={data?.travelOrders} type="approved"/>
+          <br/>
+          <SubHeading title="Rejected Request" />
+          <TravelOrderTable data={data?.travelOrders} type="rejected"/>
         </>
       )}
       <Modal isOpen={isOpen} onClose={onClose} title="Travel Order" size="2xl">

@@ -1,6 +1,5 @@
 import React from "react";
 import { Table, Thead, Tbody, Tr, Td, IconButton } from "@chakra-ui/react";
-// import classes from "../TravelOrder/Table.module.css";
 import { formatDate } from "../../../lib/data";
 import sortByDate from "../../../lib/sortByDate";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
@@ -9,10 +8,11 @@ import { useNavigate } from "react-router-dom";
 
 import classes from "../../common/table/TableStyles.module.css";
 
-const RequisitionTable = ({ data }) => {
+const RequisitionTable = ({ data, type }) => {
+  
   const navigate = useNavigate();
   const handleViewSummary = (id) => {
-    navigate(`/requisitions/${id}`);
+    navigate(`/requisitions/${id}?status=${type}`);
   };
 
   return (
