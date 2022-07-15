@@ -14,6 +14,8 @@ import { toastError } from "../../../lib/toastDetails";
 import Loader from "../../common/UI/Loader/Loader";
 import { payrollNotesInitialValues, payrollNotesSchema } from "./schema";
 import { TEN_MBS_IN_BYTES } from "../../../lib/constants";
+import {onSubmitAlert} from "../../../lib/deleteInProd";
+
 
 const PayRoll = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -60,7 +62,7 @@ const PayRoll = () => {
           initialValues={payrollNotesInitialValues}
           validationSchema={payrollNotesSchema }
           useMutate={useAddPayrollNote}
-          // useMutate={onSubmitAlert}
+          //useMutate={onSubmitAlert}
           onSuccess={onClose}
           success={`Note added successfully`}
           isFormData={true}
