@@ -62,22 +62,22 @@ const CaseFilesTable = ({ data }) => {
                   {/* <Td>{item.district}</Td> */}
                   <Td>{item.complainant?.country}</Td>
                   <Td>{item.complainant?.nin}</Td>
-                  <Td>{item.type}</Td>
+                  <Td>{item.file_opened}</Td>
                   <Td>{formatDate(item.createdAt)}</Td>
                   <Td>{item.case_id}</Td>
                   <Td>{item.complainant?.sex}</Td>
                   <Td>{item.complainant?.age}</Td>
-                  <Td>{item.complainant?.numBeneficiaries}</Td>
+                  <Td>{item.complainant?.num_beneficiaries}</Td>
                   <Td>{item.complainant?.occupation}</Td>
                   <Td>{item.nature}</Td>
-                  <Td>{item.action}</Td>
-                  <Td>{item.nextVisit}</Td>
-                  <Td>{item.officer}</Td>
-                  <Td>{item.referredBy}</Td>
-                  <Td>{item.reason}</Td>
-                  <Td>{item.feedback}</Td>
+                  <Td>{item.action_taken}</Td>
+                  <Td>{item.next_visit}</Td>
+                  <Td>{item.legal_officer}</Td>
+                  <Td>{item.referred_to}</Td>
+                  <Td>{item.reason_for_referral}</Td>
+                  <Td>{item.follow_up_feedback}</Td>
                   <Td>{formatDate(item.createdAt)}</Td>
-                  <Td>{item.complainant?.phoneNumber}</Td>
+                  <Td>{item.complainant?.respondent_contact}</Td>
                   <Td>{item.complainant?.disability}</Td>
                   <Td>{item.respondentName}</Td>
                   <Td>{item.respondentPhone}</Td>
