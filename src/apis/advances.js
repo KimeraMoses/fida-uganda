@@ -20,3 +20,11 @@ export const editAdvance = async (data) => {
 export const deleteAdvance = async (id) => {
   return await axiosClient.delete(routes.advances.base + id);
 };
+
+export const approveAdvance = async ({id, remarks})=>{
+  return await axiosClient.post(`${routes.advances.approveAdvance}/${id}`, { remarks });
+};
+
+export const rejectAdvance = async ({id, remarks})=>{
+  return await axiosClient.post(`${routes.advances.rejectAdvance}/${id}`, { remarks });
+};

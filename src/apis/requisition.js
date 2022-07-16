@@ -17,3 +17,11 @@ export const getRequisitionsStats = async () => {
 export const addRequisition = async (values) => {
   return await axiosClient.post(routes.requisitions.addRequisition, values);
 };
+
+export const approveRequisition = async ({reqName, remarks}) => {
+  return await axiosClient.post(`${routes.requisitions.approveRequisition}/${reqName}`, {remarks} );
+}
+
+export const rejectRequisition = async ({reqName, remarks}) => {
+  return await axiosClient.post(`${routes.requisitions.rejectRequisition}/${reqName}`,{remarks});
+}
