@@ -97,6 +97,8 @@ const SummaryDetails = (props) => {
   const approveRequisition = React.useCallback(() => {
     approveReq({ reqName, remarks });
     // console.log(remarks,reqName)
+
+    // eslint-disable-next-line
   }, [reqName, remarks]);
 
   const rejectRequisition = () => {
