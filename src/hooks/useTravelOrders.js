@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
-  addTravelOrder, approveTravelOder,
+  addTravelOrder, approveTravelOrder,
   deleteTravelOrder,
   editTravelOrder,
   getAllTravelOrders,
@@ -111,14 +111,90 @@ export const useDeleteTravelOrder = () => {
 
 
 
-export const useApproveTravelOrder =() =>{
+// export const useApproveTravelOrder =() =>{
+//   const queryClient = useQueryClient()
+//   return useMutation(approveTravelOder,{
+//     onMutate: async({travelName,remarks}) => {
+//       await queryClient.cancelMutations(TRAVEL_ORDER_KEY)
+//
+//       const previousTravelOrder = queryClient.getQueryData(TRAVEL_ORDER_KEY)
+//       if (previousTravelOrder){
+//         queryClient.setQueryData(TRAVEL_ORDER_KEY,(travelOrders) =>{
+//           return produce(travelOrders,(draft) =>{
+//             const index = draft.travelOrders.findIndex(
+//                 (travelOrders) => travelOrders.id === travelName);
+//             draft.travelOrders[index] = {
+//               ...travelOrders, remarks
+//
+//             }
+//           });
+//         });
+//         console.log("this is the remark",remarks,travelName)
+//       } else {
+//         queryClient.setQueryData(TRAVEL_ORDER_KEY,() =>{
+//           return { travelOrders: [travelOrder]
+//
+//           }
+//         })
+//       }
+//     },
+//     onError: (_error,_setId,context)=> {
+//       queryClient.setQueryData(TRAVEL_ORDER_KEY,context.travelOrders)
+//     },
+//
+//     onSettled: () =>{
+//       queryClient.invalidateQueries(TRAVEL_ORDER_KEY)
+//     }
+//   })
+// }
+//
+// export const useRejectTravelOrder =() =>{
+//   const queryClient = useQueryClient()
+//   return useMutation(rejectTravelOrder,{
+//     onMutate: async({travelName,remarks}) => {
+//       await queryClient.cancelMutations(TRAVEL_ORDER_KEY)
+//
+//       const previousTravelOrder = queryClient.getQueryData(TRAVEL_ORDER_KEY)
+//       if (previousTravelOrder){
+//         queryClient.setQueryData(TRAVEL_ORDER_KEY,(travelOrders) =>{
+//           return produce(travelOrders,(draft) =>{
+//             const index = draft.travelOrders.findIndex(
+//                 (travelOrders) => travelOrders.id === travelName);
+//             draft.travelOrders[index] = {
+//               ...travelOrders, remarks
+//
+//             }
+//           });
+//         });
+//         console.log("this is the remark",remarks,travelName)
+//       } else {
+//         queryClient.setQueryData(TRAVEL_ORDER_KEY,() =>{
+//           return { travelOrders: [travelOrder]
+//
+//           }
+//         })
+//       }
+//     },
+//     onError: (_error,_setId,context)=> {
+//       queryClient.setQueryData(TRAVEL_ORDER_KEY,context.travelOrders)
+//     },
+//
+//     onSettled: () =>{
+//       queryClient.invalidateQueries(TRAVEL_ORDER_KEY)
+//     }
+//   })
+// }
+
+
+
+export const useApproveTravelOrder = () => {
   const queryClient = useQueryClient()
-  return useMutation(approveTravelOder,{
+  return useMutation(approveTravelOrder,{
     onMutate: async({travelName,remarks}) => {
       await queryClient.cancelMutations(TRAVEL_ORDER_KEY)
 
-      const previousTravelOrder = queryClient.getQueryData(TRAVEL_ORDER_KEY)
-      if (previousTravelOrder){
+      const previousTravelOrders = queryClient.getQueryData(TRAVEL_ORDER_KEY)
+      if (previousTravelOrders){
         queryClient.setQueryData(TRAVEL_ORDER_KEY,(travelOrders) =>{
           return produce(travelOrders,(draft) =>{
             const index = draft.travelOrders.findIndex(
@@ -129,7 +205,7 @@ export const useApproveTravelOrder =() =>{
             }
           });
         });
-        // console.log("this is the remark",remarks,reqName)
+        // console.log("this is the remark",remarks,travelName)
       } else {
         queryClient.setQueryData(TRAVEL_ORDER_KEY,() =>{
           return { travelOrders: [travelOrder]
@@ -148,14 +224,14 @@ export const useApproveTravelOrder =() =>{
   })
 }
 
-export const useRejectTravelOrder =() =>{
+
+export const useRejectTravelOrder = () => {
   const queryClient = useQueryClient()
   return useMutation(rejectTravelOrder,{
     onMutate: async({travelName,remarks}) => {
       await queryClient.cancelMutations(TRAVEL_ORDER_KEY)
-
-      const previousTravelOrder = queryClient.getQueryData(TRAVEL_ORDER_KEY)
-      if (previousTravelOrder){
+      const previousTravelOrders = queryClient.getQueryData(TRAVEL_ORDER_KEY)
+      if (previousTravelOrders){
         queryClient.setQueryData(TRAVEL_ORDER_KEY,(travelOrders) =>{
           return produce(travelOrders,(draft) =>{
             const index = draft.travelOrders.findIndex(
@@ -170,7 +246,6 @@ export const useRejectTravelOrder =() =>{
       } else {
         queryClient.setQueryData(TRAVEL_ORDER_KEY,() =>{
           return { travelOrders: [travelOrder]
-
           }
         })
       }

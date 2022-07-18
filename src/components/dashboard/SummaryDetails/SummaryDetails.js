@@ -53,10 +53,10 @@ const SummaryDetails = (props) => {
   const { reqName } = useParams();
   // console.log(reqName)
 
-  console.log("Summary Details Reloaded");
+  // console.log("Summary Details Reloaded");
 
   const { data, isLoading } = useAdvance(id);
-  console.log(data);
+  // console.log(data);
 
   const { data: leaveData, isLoading: loadingLeaveRequests } =
     useLeaveRequest(id);
@@ -72,8 +72,6 @@ const SummaryDetails = (props) => {
 
   const [remarks, setRemarks] = useState("");
 
-  const { mutate: approveTravel } = useApproveTravelOrder();
-  const { mutate: rejectTravel } = useRejectTravelOrder();
 
   const { mutate: approveReq } = useApproveRequisition();
   const { mutate: rejectReq } = useRejectRequisition();
@@ -84,39 +82,48 @@ const SummaryDetails = (props) => {
   const { mutate: approveAdv } = useApproveAdvance();
   const { mutate: rejectAdv } = useRejectAdvance();
 
-  const approveTravelOrder = () => {
-    approveTravel({ travelName, remarks });
-    // console.log(travelName,remarks)
-  };
+  const {mutate: approveTravel} = useApproveTravelOrder();
+  const {mutate: rejectTravel} = useRejectTravelOrder();
 
-  const rejectTravelOrder = () => {
-    rejectTravel({ travelName, remarks });
-    // console.log(travelName,remarks)
-  };
+  const approveTravelOrder = (e) =>{
+    e.preventDefault();
+    approveTravel({travelName, remarks});
+  }
 
-  const approveRequisition = React.useCallback(() => {
+  const rejectTravelOrder = (e) =>{
+    e.preventDefault();
+    rejectTravel({travelName, remarks})
+  }
+
+  const approveRequisition = React.useCallback((e) => {
+    e.preventDefault();
     approveReq({ reqName, remarks });
     // console.log(remarks,reqName)
 
     // eslint-disable-next-line
   }, [reqName, remarks]);
 
-  const rejectRequisition = () => {
-    rejectReq({ reqName, remarks });
+  const rejectRequisition = (e) => {
+    e.preventDefault();
+    rejectReq({reqName, remarks });
   };
 
-  const approveLeave = () => {
+  const approveLeave = (e) => {
+    e.preventDefault();
     approveLeaveReq({ id, remarks });
   };
 
-  const rejectLeave = () => {
+  const rejectLeave = (e) => {
+    e.preventDefault();
     rejectLeaveReq({ id, remarks });
   };
 
-  const approveAdvance = () => {
+  const approveAdvance = (e) => {
+    e.preventDefault();
     approveAdv({ id, remarks });
   };
-  const rejectAdvance = () => {
+  const rejectAdvance = (e) => {
+    e.preventDefault();
     rejectAdv({ id, remarks });
   };
 
@@ -286,8 +293,12 @@ const SummaryDetails = (props) => {
 
         {type === "travel" &&
           (user.designation === "dop" ||
+           user.designation === "finance" ||
             user.designation === "accountant" ||
             user.designation === "fleetManager" ||
+            user.designation === "supervisor" ||
+            user.designation === "humanResources" ||
+            user.designation === "procurement" ||
             user.designation === "ceo") && (
             <div className={classes.table_wrapper}>
               <h6>Travel Roles</h6>
@@ -343,13 +354,14 @@ const SummaryDetails = (props) => {
           type === "requisition" ||
           selectedType === "leave" ||
           selectedType === "advance") &&
-          ((user.designation !== "dop" &&
+          (user.designation !== "dop" &&
+            user.designation !== "humanResources" &&
             user.designation !== "accountant" &&
             user.designation !== "finance" &&
-            user.designation !== "fleetManager") ||
-            (user.designation !== "ceo" &&
-              user.designation !== "procurement" &&
-              user.designation === "supervisor")) && (
+            user.designation !== "fleetManager" &&
+            user.designation !== "ceo" &&
+            user.designation !== "procurement" &&
+            user.designation !== "supervisor") && (
             <div className={classes.table_wrapper}>
               <h6>
                 {type} {selectedType}Roles
@@ -372,8 +384,12 @@ const SummaryDetails = (props) => {
 
         {type === "requisition" &&
           (user.designation === "dop" ||
+            user.designation === "finance" ||
             user.designation === "accountant" ||
             user.designation === "procurement" ||
+            user.designation === "fleetManager" ||
+            user.designation === "humanResources" ||
+            user.designation === "supervisor" ||
             user.designation === "ceo") && (
             <div className={classes.table_wrapper}>
               <h6>Requisition Roles</h6>
@@ -426,8 +442,12 @@ const SummaryDetails = (props) => {
 
         {selectedType === "leave" &&
           (user.designation === "dop" ||
+            user.designation === "finance" ||
             user.designation === "supervisor" ||
             user.designation === "humanResources" ||
+            user.designation === "procurement" ||
+            user.designation === "fleetManager" ||
+            user.designation === "accountant" ||
             user.designation === "ceo") && (
             <div className={classes.table_wrapper}>
               <h6>Leave Roles</h6>
@@ -482,6 +502,10 @@ const SummaryDetails = (props) => {
           (user.designation === "dop" ||
             user.designation === "accountant" ||
             user.designation === "ceo" ||
+            user.designation === "fleetManager" ||
+            user.designation === "procurement" ||
+            user.designation === "humanResources" ||
+            user.designation === "supervisor" ||
             user.designation === "finance") && (
             <div className={classes.table_wrapper}>
               <h6>Advance Roles</h6>
