@@ -19,12 +19,6 @@ const Approvals = () => {
           tableName="New approval requests"
         />
       )}
-      <SubHeading title="Approved" />
-      <ApprovedTable
-        data={data ? data.approvals : null}
-        isLoading={isLoading}
-        tableName="Approved members"
-      />
     </div>
   );
 };

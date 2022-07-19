@@ -77,10 +77,10 @@ const CaseFilesTable = ({ data }) => {
                   <Td>{item.reason_for_referral}</Td>
                   <Td>{item.follow_up_feedback}</Td>
                   <Td>{formatDate(item.createdAt)}</Td>
-                  <Td>{item.complainant?.respondent_contact}</Td>
+                  <Td>{item.respondent_contact}</Td>
                   <Td>{item.complainant?.disability}</Td>
                   <Td>{item.respondentName}</Td>
-                  <Td>{item.respondentPhone}</Td>
+                  <Td>{item.contact}</Td>
                   <Td>{item.fida}</Td>
                   <Td>{formatDate(item.createdAt)}</Td>
                   <Td style={{ textAlign: "center" }}>

@@ -14,7 +14,6 @@ import { toastError } from "../../../lib/toastDetails";
 import Loader from "../../common/UI/Loader/Loader";
 import { payrollNotesInitialValues, payrollNotesSchema } from "./schema";
 import { TEN_MBS_IN_BYTES } from "../../../lib/constants";
-import {onSubmitAlert} from "../../../lib/deleteInProd";
 
 
 const PayRoll = () => {
@@ -22,6 +21,7 @@ const PayRoll = () => {
   const { data: payrollNotes } = usePayrollNotes();
   const { data: payroll, isLoading } = usePayrolls();
   const [file, setFile] = useState(null);
+
   
   const handleFileChange = (event) => {
     console.log('event', event.target.files[0]);
@@ -62,7 +62,6 @@ const PayRoll = () => {
           initialValues={payrollNotesInitialValues}
           validationSchema={payrollNotesSchema }
           useMutate={useAddPayrollNote}
-          //useMutate={onSubmitAlert}
           onSuccess={onClose}
           success={`Note added successfully`}
           isFormData={true}
