@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { REQUISITIONS_KEY, REQUISITIONS_STATS } from "../lib/constants";
 import {
   addRequisition,
+  getAllApprovedRequisitions,
   getAllRequisitions, getRequisition,
   getRequisitionsStats,
 } from "../apis/requisition";
@@ -17,6 +18,10 @@ export const useRequisition = (id) => {
 export const useRequisitionsStats = () => {
   return useQuery(REQUISITIONS_STATS, getRequisitionsStats);
 };
+
+export const useApprovedRequisitions = () => {
+  return useQuery(REQUISITIONS_KEY, getAllApprovedRequisitions);
+}
 
 export const useAddRequisition = () => {
   const queryClient = useQueryClient();
