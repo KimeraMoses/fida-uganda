@@ -7,9 +7,13 @@ import SelectField from "../../../common/SelectField";
 import { assetTypeOptions } from "../../../../lib/options";
 import { AttachmentIcon } from "../../../../assets/Icons/Icons";
 import image1 from "../../../../assets/images/placeholder.png";
-import SelectInput from "./../../../Membership/Allocations/AllocationForm/SelectInput";
+import { useProjectOptions } from "../../../../hooks/useProjects";
+import { useMemo } from "react";
 
-const NewAsset = ({ isSubmitting, projectOptions, setFieldValue }) => {
+const NewAsset = ({ isSubmitting, setFieldValue }) => {
+  //const projectOptions = useProjectOptions();
+  const projectOptions = useProjectOptions();
+  const projects = useMemo(() => projectOptions, [projectOptions]);
   return (
     <div className={classes.new_asset_wrapper}>
       <SimpleGrid columns={2} spacing={2}>
@@ -17,12 +21,10 @@ const NewAsset = ({ isSubmitting, projectOptions, setFieldValue }) => {
         <InputField placeholder="Budget Year" name="budget_year" fullwidth />
       </SimpleGrid>
       <SimpleGrid columns={2} spacing={2} style={{ marginBottom: 10 }}>
-        <SelectInput
-          options={projectOptions}
-          placeholder="Project name"
+        <SelectField
+          placeholder="Project of Attachment"
           name="project"
-          onChange={(value) => setFieldValue("project", value.label)}
-          isMulti={false}
+          options={projects}
         />
         <SelectField
           placeholder="Select Asset Type"
@@ -35,8 +37,10 @@ const NewAsset = ({ isSubmitting, projectOptions, setFieldValue }) => {
         <InputField
           fullwidth
           placeholder="Number of Units Required"
-          name="amount"
+          name="num_units"
         />
+        {/* this field will need to be made auto calculated */}
+        <InputField fullwidth placeholder="Amount" name="amount" />
       </SimpleGrid>
       <InputField
         placeholder="Date Delivered"
@@ -73,8 +77,8 @@ const NewAsset = ({ isSubmitting, projectOptions, setFieldValue }) => {
         </div>
       </div>
       <div style={{ float: "right", padding: "20px 0" }}>
-        <FormButton variant="colored" rounded={true} disabled={isSubmitting}>
-          {isSubmitting ? "Adding..." : "Add Asset"}
+        <FormButton isSubmitting={isSubmitting} type="submit">
+          Add Asset
         </FormButton>
       </div>
     </div>
