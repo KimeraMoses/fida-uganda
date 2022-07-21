@@ -1,9 +1,16 @@
 import classes from '../../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css';
 import ActionButtons from '../../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons';
-import { Radio, RadioGroup, SimpleGrid, Stack } from '@chakra-ui/react';
+import {
+  Radio,
+  RadioGroup,
+  SimpleGrid,
+  Stack,
+  useToast,
+} from '@chakra-ui/react';
 import BenTable from './BeneficiariesTable';
 import withForm from '../../../../../hoc/withForm';
 import AddBeneficiariesForm from './AddBeneficiariesForm';
+import { toastError } from '../../../../../lib/toastDetails';
 
 const MultForm4 = ({
   values,
@@ -13,7 +20,13 @@ const MultForm4 = ({
   onBack,
   isSubmitting,
 }) => {
+  const toast = useToast();
+
   const addBeneficiary = (beneficiary) => {
+    if (values?.beneficiaries.length >= 10) {
+      toast(toastError(`You can only add 10 beneficiaries`));
+      return;
+    }
     const newBeneficiary = {
       id: values.beneficiaries.length + 1,
       ...beneficiary,
