@@ -5,7 +5,7 @@ import { TableHeadColumn } from "../../../HumanResource/Approvals/ApprovalTable/
 
 
 const SummaryTable = ({ data }) => {
-  console.log(data);
+  // console.log(data);
 
   return (
     <>

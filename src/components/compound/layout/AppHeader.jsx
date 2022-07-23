@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 
 const AppHeader = () => {
   const { user } = useSelector((state) => state.auth);
-  console.log("User Details", user)
   return (
     <Flex p={3} width="100%" alignItems="center" boxShadow="md">
       <Box width="25%">

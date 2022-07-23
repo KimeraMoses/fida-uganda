@@ -4,9 +4,10 @@ import {
   getLeaveRequest,
   getLeaveRequests,
   addLeaveRequests,
-  approveLeaveRequest,
+  approveLeaveRequest, rejectLeaveRequest,
 } from "../apis/leaveRequests";
-import { LEAVE_REQUESTS_KEY } from "../lib/constants";
+import {LEAVE_REQUESTS_KEY} from "../lib/constants";
+import Tracker from "../components/compound/Tracker";
 
 
 export const useLeaveRequest = (leaveRequestId) => {
@@ -37,25 +38,100 @@ export const useAddLeaveRequest = () => {
   });
 };
 
-export const useApproveLeaveRequest = (id) => {
-  const queryClient = useQueryClient();
-  return useMutation(approveLeaveRequest, {
-    onSuccess: (data) => {
-      const previousAssets = queryClient.getQueryData(LEAVE_REQUESTS_KEY);
-      if (previousAssets) {
-        queryClient.setQueryData(LEAVE_REQUESTS_KEY, (previousAssets) => {
-          return produce(previousAssets, (draft) => {
+// export const useApproveLeaveRequest = (id) => {
+//   const queryClient = useQueryClient();
+//   return useMutation(approveLeaveRequest(id), {
+//     onSuccess: (data) => {
+//       const previousAssets = queryClient.getQueryData(LEAVE_REQUESTS_KEY);
+//       if (previousAssets) {
+//         queryClient.setQueryData(LEAVE_REQUESTS_KEY, (previousAssets) => {
+//           return produce(previousAssets, (draft) => {
+//             const index = draft.leaves.findIndex(
+//               (leave) => leave.id === data.leave.id
+//             );
+//             draft.leaves[index] = data.leave;
+//           });
+//         });
+//       } else {
+//         queryClient.setQueryData(LEAVE_REQUESTS_KEY, () => {
+//           return { leaves: [data.leave] };
+//         });
+//       }
+//     },
+//   });
+// };
+
+export const useApproveLeaveRequest = () =>{
+  const queryClient = useQueryClient()
+  return useMutation(approveLeaveRequest,{
+    onMutate: async({id,remarks}) => {
+      await queryClient.cancelMutations(LEAVE_REQUESTS_KEY)
+
+      const previousLeaveRequests = queryClient.getQueryData(LEAVE_REQUESTS_KEY)
+      if (previousLeaveRequests){
+        queryClient.setQueryData(LEAVE_REQUESTS_KEY,(leaveRequests) =>{
+          return produce(leaveRequests,(draft) =>{
             const index = draft.leaves.findIndex(
-              (leave) => leave.id === data.leave.id
-            );
-            draft.leaves[index] = data.leave;
+                (leaves) => leaves.id === id);
+            draft.leaves[index] = {
+              ...leaveRequests, remarks
+
+            }
           });
         });
+        // console.log("this is the remark",remarks,id)
       } else {
-        queryClient.setQueryData(LEAVE_REQUESTS_KEY, () => {
-          return { leaves: [data.leave] };
-        });
+        queryClient.setQueryData(LEAVE_REQUESTS_KEY,() =>{
+          return { leaves: [Tracker]
+
+          }
+        })
       }
     },
-  });
-};
+    onError: (_error,_setId,context)=> {
+      queryClient.setQueryData(LEAVE_REQUESTS_KEY,context.leaves)
+    },
+
+    onSettled: () =>{
+      queryClient.invalidateQueries(LEAVE_REQUESTS_KEY)
+    }
+  })
+
+}
+
+export const useRejectLeaveRequest  = () =>{
+  const queryClient = useQueryClient();
+  return useMutation(rejectLeaveRequest,{
+    onMutate: async({id,remarks}) => {
+      await queryClient.cancelMutations(LEAVE_REQUESTS_KEY)
+
+      const previousLeaveRequests = queryClient.getQueryData(LEAVE_REQUESTS_KEY)
+      if (previousLeaveRequests){
+        queryClient.setQueryData(LEAVE_REQUESTS_KEY,(leaves) =>{
+          return produce(leaves,(draft) =>{
+            const index = draft.leaves.findIndex(
+                (leaves) => leaves.id === id);
+            draft.leaves[index] = {
+              ...leaves, remarks
+
+            }
+          });
+        });
+        // console.log("this is the remark",remarks,id)
+      } else {
+        queryClient.setQueryData(LEAVE_REQUESTS_KEY,() =>{
+          return { leaves: [Tracker]
+
+          }
+        })
+      }
+    },
+    onError: (_error,_setId,context)=> {
+      queryClient.setQueryData(LEAVE_REQUESTS_KEY,context.leaves)
+    },
+
+    onSettled: () =>{
+      queryClient.invalidateQueries(LEAVE_REQUESTS_KEY)
+    }
+  })
+}
