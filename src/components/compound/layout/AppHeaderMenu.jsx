@@ -13,6 +13,7 @@ import { logoutUser } from "../../../store/authReducer";
 
 const AppHeaderMenu = () => {
   const { user } = useSelector((state) => state.auth);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
