@@ -8,8 +8,8 @@ import { toastError } from "../../../../lib/toastDetails";
 import { reportSchema, addFolderIdToReport } from "./schema";
 import SelectField from "../../../common/SelectField";
 import { reportTypeOptions } from "../../../../lib/options";
-import { useUsers } from "../../../../hooks/useUser";
-import SearchableField from "../../../common/UI/SearchableField/SearchableField";
+// import { useUsers } from "../../../../hooks/useUser";
+// import SearchableField from "../../../common/UI/SearchableField/SearchableField";
 
 const NewReportForm = ({
   onClose,
@@ -20,10 +20,10 @@ const NewReportForm = ({
   isSubmitting,
 }) => {
   const [file, setFile] = useState(null);
-  const [selectedUser, setSelectedUser] = useState(null);
+  // const [selectedUser, setSelectedUser] = useState(null);
   const toast = useToast();
 
-  const users = useUsers();
+  // const users = useUsers();
 
   useEffect(() => {
     if (isError) {
@@ -53,7 +53,9 @@ const NewReportForm = ({
         formData.append("filename", values.report_title);
         //append all the values here depending on what the endpoint expects
         Object.keys(values).forEach((key) => {
-          formData.append(key, values[key]);
+          if(key !== "supervisor_name") {
+            formData.append(key, values[key]);
+          }
         });
         onSubmit(formData);
       }}
@@ -81,7 +83,7 @@ const NewReportForm = ({
               </div>
             </div>
             <div className={classes.input_group_wrapper}>
-              <div className={classes.input_label}>Report Title</div>
+              <div className={classes.input_label}>Report Type</div>
               <div className={classes.input_field_wrapper}>
                 <SelectField
                   placeholder="Select Report Type"
@@ -91,18 +93,18 @@ const NewReportForm = ({
                 />
               </div>
             </div>
-            <div className={classes.input_group_wrapper}>
-              <div className={classes.input_label}>Supervisor’s Name</div>
-              <div className={classes.input_field_wrapper}>
-                <SearchableField
-                  placeholder="Type client Name"
-                  data={users}
-                  setSelectedItem={setSelectedUser}
-                  selectedItem={selectedUser?.name}
-                  name="supervisor_name"
-                />
-              </div>
-            </div>
+            {/*<div className={classes.input_group_wrapper}>*/}
+            {/*  <div className={classes.input_label}>Supervisor’s Name</div>*/}
+            {/*  <div className={classes.input_field_wrapper}>*/}
+            {/*    <SearchableField*/}
+            {/*      placeholder="Type client Name"*/}
+            {/*      data={users}*/}
+            {/*      setSelectedItem={setSelectedUser}*/}
+            {/*      selectedItem={selectedUser?.name}*/}
+            {/*      name="supervisor_name"*/}
+            {/*    />*/}
+            {/*  </div>*/}
+            {/*</div>*/}
             <div className={classes.input_group_wrapper}>
               <div className={classes.input_label}>Reporting Period</div>
               <div className={classes.input_field_wrapper}>
