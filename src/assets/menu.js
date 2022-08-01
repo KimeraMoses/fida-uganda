@@ -235,6 +235,15 @@ const menu = {
     menuOptions.project,
     menuOptions.reports,
   ],
+  ceo: [
+    ...commonOptions,
+    menuOptions.clients,
+    menuOptions.clvs,
+    menuOptions.caseFiles,
+    menuOptions.clvCaseFiles,
+    menuOptions.project,
+    menuOptions.reports,
+  ],
   membership: [
     ...commonOptions,
     menuOptions.approvals,
@@ -270,6 +279,14 @@ const menu = {
     menuOptions.fidaDatabases,
     menuOptions.reports,
   ],
+  accountant: [
+    ...commonOptions,
+    menuOptions.approvals,
+    menuOptions.payRoll,
+    menuOptions.fidaProjects,
+    menuOptions.fidaDatabases,
+    menuOptions.reports,
+  ],
   me: [
     ...commonOptions,
     menuOptions.approvals,
@@ -279,6 +296,14 @@ const menu = {
     menuOptions.reports,
   ],
   programs: [
+    ...commonOptions,
+    menuOptions.approvals,
+    menuOptions.fidaProjects,
+    menuOptions.fidaDatabases,
+    menuOptions.fidaAssets,
+    menuOptions.reports,
+  ],
+  dop: [
     ...commonOptions,
     menuOptions.approvals,
     menuOptions.fidaProjects,
