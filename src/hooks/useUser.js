@@ -56,6 +56,7 @@ export const useGetMe = () => {
   const [token, setToken] = useState(null);
   const [status, setStatus] = useState(networkStatus.idle);
   const isOnline = useOnlineStatus();
+  const dispatch = useDispatch();
 
   const isLoadingOne = status === networkStatus.loading;
   const isLoading = isLoadingOne;
@@ -73,6 +74,7 @@ export const useGetMe = () => {
         getMe()
           .then((userData) => {
             setUser(userData);
+            dispatch(loginUser(userData));
             setStatus(networkStatus.success);
           })
           .catch(() => {
@@ -84,7 +86,7 @@ export const useGetMe = () => {
         setStatus(networkStatus.error);
       }
     });
-  }, [token]);
+  }, [token, dispatch]);
 
   useEffect(() => {
     if (!isOnline) {
