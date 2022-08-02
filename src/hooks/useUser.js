@@ -1,6 +1,7 @@
-import produce from "immer";
-import { useMutation, useQuery, useQueryClient } from "react-query";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from 'react';
+import produce from 'immer';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   getMe,
   logIn,
@@ -12,9 +13,12 @@ import {
   requestPasswordLink,
   updateProfile,
   getAllActivatedUsers,
-} from "../apis/users";
-import { USERS_KEY } from "../lib/constants";
-import { loginUser } from "../store/authReducer";
+} from '../apis/users';
+import { USERS_KEY } from '../lib/constants';
+import { loginUser } from '../store/authReducer';
+import { useEffect } from 'react';
+import { toast } from 'react-toastify';
+import useOnlineStatus from './useOnlineStatus';
 
 export const useUser = () => {
   return useSelector((state) => state.auth.user);
@@ -40,8 +44,57 @@ export const useUpdateProfile = () => {
   });
 };
 
+const networkStatus = {
+  loading: 'loading',
+  success: 'success',
+  error: 'error',
+  idle: 'idle',
+};
+
 export const useGetMe = () => {
-  return useQuery(USERS_KEY, getMe, { enabled: false });
+  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
+  const [status, setStatus] = useState(networkStatus.idle);
+  const isOnline = useOnlineStatus();
+  const dispatch = useDispatch();
+
+  const isLoadingOne = status === networkStatus.loading;
+  const isLoading = isLoadingOne;
+
+  const getUserToken = async () => {
+    const token = await localStorage.getItem('token');
+    return token;
+  };
+
+  useEffect(() => {
+    setStatus(networkStatus.loading);
+    getUserToken().then((userToken) => {
+      if (userToken) {
+        setToken(userToken);
+        getMe()
+          .then((userData) => {
+            setUser(userData);
+            dispatch(loginUser(userData));
+            setStatus(networkStatus.success);
+          })
+          .catch(() => {
+            setUser(null);
+            setStatus(networkStatus.error);
+          });
+      } else {
+        setUser(null);
+        setStatus(networkStatus.error);
+      }
+    });
+  }, [token, dispatch]);
+
+  useEffect(() => {
+    if (!isOnline) {
+      toast('You are offline. Please connect to the internet to continue.');
+    }
+  });
+
+  return { user, status, isLoading, setUser };
 };
 
 export const useSignUp = () => {
@@ -57,11 +110,11 @@ export const useSetPassword = () => {
 };
 
 export const useDeactivatedUsers = () => {
-  return useQuery([USERS_KEY, "DEACTIVATED"], getAllDeactivatedUsers);
+  return useQuery([USERS_KEY, 'DEACTIVATED'], getAllDeactivatedUsers);
 };
 
 export const useActivatedUsers = () => {
-  return useQuery([USERS_KEY, "ACTIVATED"], getAllActivatedUsers);
+  return useQuery([USERS_KEY, 'ACTIVATED'], getAllActivatedUsers);
 };
 
 export const useUsers = () => {
@@ -78,7 +131,7 @@ export const useUsers = () => {
 
 export const useActivateUser = () => {
   const queryClient = useQueryClient();
-  const key = [USERS_KEY, "DEACTIVATED"];
+  const key = [USERS_KEY, 'DEACTIVATED'];
   return useMutation(activateUser, {
     onMutate: async (userId) => {
       await queryClient.cancelMutations(key);
@@ -106,7 +159,7 @@ export const useActivateUser = () => {
 
 export const useRequestPasswordLink = () => {
   const queryClient = useQueryClient();
-  const key = [USERS_KEY, "DEACTIVATED"];
+  const key = [USERS_KEY, 'DEACTIVATED'];
   return useMutation(requestPasswordLink, {
     onMutate: async (userId) => {
       await queryClient.cancelMutations(key);
