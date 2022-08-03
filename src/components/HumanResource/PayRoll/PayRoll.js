@@ -12,9 +12,9 @@ import {
 } from "../../../hooks/usePayrollNotes";
 import { toastError } from "../../../lib/toastDetails";
 import Loader from "../../common/UI/Loader/Loader";
-import { payrollNotesInitialValues, payrollNotesSchema } from "./schema";
 import { TEN_MBS_IN_BYTES } from "../../../lib/constants";
 
+import { payrollNotesInitialValues, payrollNotesSchema } from "./PayrollSchema";
 
 const PayRoll = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -22,9 +22,8 @@ const PayRoll = () => {
   const { data: payroll, isLoading } = usePayrolls();
   const [file, setFile] = useState(null);
 
-  
   const handleFileChange = (event) => {
-    console.log('event', event.target.files[0]);
+    console.log("event", event.target.files[0]);
     const theFile = event.target.files[0];
     if (theFile.size > TEN_MBS_IN_BYTES) {
       toast(toastError("File size should be less than 10MB"));
@@ -32,7 +31,6 @@ const PayRoll = () => {
       setFile(theFile);
     }
   };
-  
 
   return (
     <>
@@ -60,7 +58,7 @@ const PayRoll = () => {
       <Modal isOpen={isOpen} onClose={onClose} title="Add New Note">
         <NewNotes
           initialValues={payrollNotesInitialValues}
-          validationSchema={payrollNotesSchema }
+          validationSchema={payrollNotesSchema}
           useMutate={useAddPayrollNote}
           onSuccess={onClose}
           success={`Note added successfully`}
