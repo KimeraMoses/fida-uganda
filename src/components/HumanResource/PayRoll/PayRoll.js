@@ -12,7 +12,7 @@ import {
 } from "../../../hooks/usePayrollNotes";
 import { toastError } from "../../../lib/toastDetails";
 import Loader from "../../common/UI/Loader/Loader";
-import { payrollNotesInitialValues, payrollNotesSchema } from "./schema";
+import { payrollNotesInitialValues, payrollNotesSchema } from "./PayrollSchema";
 import { TEN_MBS_IN_BYTES } from "../../../lib/constants";
 
 
