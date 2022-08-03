@@ -88,9 +88,8 @@ const SummaryDetails = (props) => {
       e.preventDefault();
       approveReq({ reqName, remarks });
       // console.log(remarks,reqName)
-
-      // eslint-disable-next-line
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [reqName, remarks]
   );
 
