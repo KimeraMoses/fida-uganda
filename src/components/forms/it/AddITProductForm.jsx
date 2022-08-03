@@ -1,34 +1,24 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { SimpleGrid, Button } from "@chakra-ui/react";
 import withForm from "../../../hoc/withForm";
-import { Form, Formik } from "formik";
-import { itProductInitialValues, itProductOrderSchema } from "./schemas/it";
-import InputField from "../../common/UI/InputField/InputField";
 import { useProjectOptions } from "../../../hooks/useProjects";
-import SelectField from "../../Membership/Allocations/AllocationForm/SelectInput";
+import InputField from "../../common/UI/InputField/InputField";
+import SelectInput from '../../Membership/Allocations/AllocationForm/SelectInput'
 
 const ITProductForm = ({ isSubmitting, setFieldValue, onSubmit }) => {
-  const projects = useProjectOptions();
-  const projectOptions = useMemo(() => projects, [projects]);
+  const projectOptions = useProjectOptions();
   console.log(projectOptions, "project options");
   return (
-    <Formik
-    initialValues={itProductInitialValues}
-    validationSchema={itProductOrderSchema}
-    onSubmit={(values) => {
-      onSubmit(values);
-    }}
-  >
-    <Form>
     <SimpleGrid p={5} gap={3}>
       <SimpleGrid columns={2} gap={5} style={{ alignItems: "center" }}>
-        <SelectField
-          options={projectOptions}
-          placeholder="Project name"
+        <SelectInput
           name="project_name"
-          onChange={(value) => setFieldValue("project_name", value.label)}
+          onChange={(option) => setFieldValue("project_name", option)}
+          options={projectOptions}
+          placeholder="Choose a project"
           isMulti={false}
         />
+
         <InputField name="budget_year" placeholder="Budget Year" />
       </SimpleGrid>
       <SimpleGrid columns={2} gap={5}>
@@ -64,11 +54,11 @@ const ITProductForm = ({ isSubmitting, setFieldValue, onSubmit }) => {
       </SimpleGrid>
       <SimpleGrid columns={2} gap={5}>
         <InputField name="delivery_location" placeholder="Delivery Location" />
-        <InputField
+        {/* <InputField
           name="num_units"
           placeholder="Number of Units"
           type="number"
-        />
+        /> */}
       </SimpleGrid>
       <SimpleGrid columns={2} gap={5}>
         <InputField name="type" placeholder="Type" />
@@ -96,8 +86,6 @@ const ITProductForm = ({ isSubmitting, setFieldValue, onSubmit }) => {
         Add Requisition
       </Button>
     </SimpleGrid>
-    </Form>
-    </Formik>
   );
 };
 
