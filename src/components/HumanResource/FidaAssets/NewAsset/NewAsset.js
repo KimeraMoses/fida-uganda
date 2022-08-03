@@ -10,8 +10,8 @@ import image1 from "../../../../assets/images/placeholder.png";
 import { useProjectOptions } from "../../../../hooks/useProjects";
 import { useMemo } from "react";
 
-const NewAsset = ({ isSubmitting, setFieldValue }) => {
-  //const projectOptions = useProjectOptions();
+const NewAsset = ({ isSubmitting}) => {
+
   const projectOptions = useProjectOptions();
   const projects = useMemo(() => projectOptions, [projectOptions]);
   return (
