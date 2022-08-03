@@ -22,13 +22,10 @@ const ProcurementTable = ({ data, isLoading }) => {
       <Table variant="simple">
         <Thead className={classes.table_header}>
           <Tr>
-            <TableHeadColumn
-              title="Recepient (s)"
-              secondaryText="Allocations No."
-            />
-            <TableHeadColumn title="Date" secondaryText="time" />
-            <TableHeadColumn title="Subject" secondaryText="body" />
-            <TableHeadColumn title="Status" />
+            <TableHeadColumn title="Item" />
+            <TableHeadColumn title="person in possession" />
+            <TableHeadColumn title="location" />
+            <TableHeadColumn title="Acquisition Date" />
           </Tr>
         </Thead>
         <Tbody>
@@ -39,11 +36,9 @@ const ProcurementTable = ({ data, isLoading }) => {
               return (
                 <Tr key={item.id}>
                   <Td className={classes.data_recepient_field}>
-                    <div className={classes.data__primary_text}>
-                     
-                    </div>
+                    <div className={classes.data__primary_text}></div>
                     <div className={classes.data__secondary_text}>
-                    {item.id}
+                      {item.id}
                     </div>
                   </Td>
                   <Td>
