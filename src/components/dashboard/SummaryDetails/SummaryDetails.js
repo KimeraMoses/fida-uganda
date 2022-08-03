@@ -320,20 +320,25 @@ const SummaryDetails = (props) => {
                     </div>
                     <hr />
                     <div className={classes.form_action_wrapper}>
+
                       <FormButton
-                        variant="cancel"
-                        type="submit"
-                        onClick={rejectTravelOrder}
+                          variant="cancel"
+                          disabled={isSubmitting}
+                          type="submit"
+                          onClick={rejectTravelOrder}
                       >
-                        Reject
+                        {isSubmitting ? "Rejecting..." : "Reject"}
                       </FormButton>
+
                       <FormButton
-                        variant="save"
-                        type="submit"
-                        onClick={approveTravelOrder}
+                          variant="save"
+                          disabled={isSubmitting}
+                          type="submit"
+                          onClick={approveTravelOrder}
                       >
                         {isSubmitting ? "Approving..." : "Approve"}
                       </FormButton>
+
                     </div>
                   </form>
                 )}
@@ -358,16 +363,19 @@ const SummaryDetails = (props) => {
                     <hr />
                     <div className={classes.form_action_wrapper}>
                       <FormButton
-                        variant="cancel"
-                        type="submit"
-                        onClick={rejectTravelOrder}
+                          variant="cancel"
+                          disabled={isSubmitting}
+                          type="submit"
+                          onClick={rejectTravelOrder}
                       >
-                        Reject
+                        {isSubmitting ? "Rejecting..." : "Reject"}
                       </FormButton>
+
                       <FormButton
-                        variant="save"
-                        type="submit"
-                        onClick={approveTravelOrder}
+                          variant="save"
+                          disabled={isSubmitting}
+                          type="submit"
+                          onClick={approveTravelOrder}
                       >
                         {isSubmitting ? "Approving..." : "Approve"}
                       </FormButton>
@@ -395,16 +403,19 @@ const SummaryDetails = (props) => {
                     <hr />
                     <div className={classes.form_action_wrapper}>
                       <FormButton
-                        variant="cancel"
-                        type="submit"
-                        onClick={rejectTravelOrder}
+                          variant="cancel"
+                          disabled={isSubmitting}
+                          type="submit"
+                          onClick={rejectTravelOrder}
                       >
-                        Reject
+                        {isSubmitting ? "Rejecting..." : "Reject"}
                       </FormButton>
+
                       <FormButton
-                        variant="save"
-                        type="submit"
-                        onClick={approveTravelOrder}
+                          variant="save"
+                          disabled={isSubmitting}
+                          type="submit"
+                          onClick={approveTravelOrder}
                       >
                         {isSubmitting ? "Approving..." : "Approve"}
                       </FormButton>
@@ -490,16 +501,19 @@ const SummaryDetails = (props) => {
                     <hr />
                     <div className={classes.form_action_wrapper}>
                       <FormButton
-                        variant="cancel"
-                        type="submit"
-                        onClick={rejectRequisition}
+                          variant="cancel"
+                          disabled={isSubmitting}
+                          type="submit"
+                          onClick={rejectRequisition}
                       >
-                        Reject
+                        {isSubmitting ? "Rejecting..." : "Reject"}
                       </FormButton>
+
                       <FormButton
-                        variant="save"
-                        type="submit"
-                        onClick={approveRequisition}
+                          variant="save"
+                          disabled={isSubmitting}
+                          type="submit"
+                          onClick={approveRequisition}
                       >
                         {isSubmitting ? "Approving..." : "Approve"}
                       </FormButton>
@@ -527,16 +541,19 @@ const SummaryDetails = (props) => {
                     <hr />
                     <div className={classes.form_action_wrapper}>
                       <FormButton
-                        variant="cancel"
-                        type="submit"
-                        onClick={rejectRequisition}
+                          variant="cancel"
+                          disabled={isSubmitting}
+                          type="submit"
+                          onClick={rejectRequisition}
                       >
-                        Reject
+                        {isSubmitting ? "Rejecting..." : "Reject"}
                       </FormButton>
+
                       <FormButton
-                        variant="save"
-                        type="submit"
-                        onClick={approveRequisition}
+                          variant="save"
+                          disabled={isSubmitting}
+                          type="submit"
+                          onClick={approveRequisition}
                       >
                         {isSubmitting ? "Approving..." : "Approve"}
                       </FormButton>
@@ -564,16 +581,19 @@ const SummaryDetails = (props) => {
                     <hr />
                     <div className={classes.form_action_wrapper}>
                       <FormButton
-                        variant="cancel"
-                        type="submit"
-                        onClick={rejectRequisition}
+                          variant="cancel"
+                          disabled={isSubmitting}
+                          type="submit"
+                          onClick={rejectRequisition}
                       >
-                        Reject
+                        {isSubmitting ? "Rejecting..." : "Reject"}
                       </FormButton>
+
                       <FormButton
-                        variant="save"
-                        type="submit"
-                        onClick={approveRequisition}
+                          variant="save"
+                          disabled={isSubmitting}
+                          type="submit"
+                          onClick={approveRequisition}
                       >
                         {isSubmitting ? "Approving..." : "Approve"}
                       </FormButton>
@@ -601,16 +621,19 @@ const SummaryDetails = (props) => {
                     <hr />
                     <div className={classes.form_action_wrapper}>
                       <FormButton
-                        variant="cancel"
-                        type="submit"
-                        onClick={rejectRequisition}
+                          variant="cancel"
+                          disabled={isSubmitting}
+                          type="submit"
+                          onClick={rejectRequisition}
                       >
-                        Reject
+                        {isSubmitting ? "Rejecting..." : "Reject"}
                       </FormButton>
+
                       <FormButton
-                        variant="save"
-                        type="submit"
-                        onClick={approveRequisition}
+                          variant="save"
+                          disabled={isSubmitting}
+                          type="submit"
+                          onClick={approveRequisition}
                       >
                         {isSubmitting ? "Approving..." : "Approve"}
                       </FormButton>
@@ -663,16 +686,19 @@ const SummaryDetails = (props) => {
                     <hr />
                     <div className={classes.form_action_wrapper}>
                       <FormButton
-                        variant="cancel"
-                        type="submit"
-                        onClick={rejectLeave}
+                          variant="cancel"
+                          disabled={isSubmitting}
+                          type="submit"
+                          onClick={rejectLeave}
                       >
-                        Reject
+                        {isSubmitting ? "Rejecting..." : "Reject"}
                       </FormButton>
+
                       <FormButton
-                        variant="save"
-                        type="submit"
-                        onClick={approveLeave}
+                          variant="save"
+                          disabled={isSubmitting}
+                          type="submit"
+                          onClick={approveLeave}
                       >
                         {isSubmitting ? "Approving..." : "Approve"}
                       </FormButton>
@@ -698,16 +724,19 @@ const SummaryDetails = (props) => {
                     <hr />
                     <div className={classes.form_action_wrapper}>
                       <FormButton
-                        variant="cancel"
-                        type="submit"
-                        onClick={rejectLeave}
+                          variant="cancel"
+                          disabled={isSubmitting}
+                          type="submit"
+                          onClick={rejectLeave}
                       >
-                        Reject
+                        {isSubmitting ? "Rejecting..." : "Reject"}
                       </FormButton>
+
                       <FormButton
-                        variant="save"
-                        type="submit"
-                        onClick={approveLeave}
+                          variant="save"
+                          disabled={isSubmitting}
+                          type="submit"
+                          onClick={approveLeave}
                       >
                         {isSubmitting ? "Approving..." : "Approve"}
                       </FormButton>
@@ -733,16 +762,19 @@ const SummaryDetails = (props) => {
                     <hr />
                     <div className={classes.form_action_wrapper}>
                       <FormButton
-                        variant="cancel"
-                        type="submit"
-                        onClick={rejectLeave}
+                          variant="cancel"
+                          disabled={isSubmitting}
+                          type="submit"
+                          onClick={rejectLeave}
                       >
-                        Reject
+                        {isSubmitting ? "Rejecting..." : "Reject"}
                       </FormButton>
+
                       <FormButton
-                        variant="save"
-                        type="submit"
-                        onClick={approveLeave}
+                          variant="save"
+                          disabled={isSubmitting}
+                          type="submit"
+                          onClick={approveLeave}
                       >
                         {isSubmitting ? "Approving..." : "Approve"}
                       </FormButton>
@@ -795,16 +827,19 @@ const SummaryDetails = (props) => {
                     <hr />
                     <div className={classes.form_action_wrapper}>
                       <FormButton
-                        variant="cancel"
-                        type="submit"
-                        onClick={rejectAdvance}
+                          variant="cancel"
+                          disabled={isSubmitting}
+                          type="submit"
+                          onClick={rejectAdvance}
                       >
-                        Reject
+                        {isSubmitting ? "Rejecting..." : "Reject"}
                       </FormButton>
+
                       <FormButton
-                        variant="save"
-                        type="submit"
-                        onClick={approveAdvance}
+                          variant="save"
+                          disabled={isSubmitting}
+                          type="submit"
+                          onClick={approveAdvance}
                       >
                         {isSubmitting ? "Approving..." : "Approve"}
                       </FormButton>
@@ -831,16 +866,19 @@ const SummaryDetails = (props) => {
                     <hr />
                     <div className={classes.form_action_wrapper}>
                       <FormButton
-                        variant="cancel"
-                        type="submit"
-                        onClick={rejectAdvance}
+                          variant="cancel"
+                          disabled={isSubmitting}
+                          type="submit"
+                          onClick={rejectAdvance}
                       >
-                        Reject
+                        {isSubmitting ? "Rejecting..." : "Reject"}
                       </FormButton>
+
                       <FormButton
-                        variant="save"
-                        type="submit"
-                        onClick={approveAdvance}
+                          variant="save"
+                          disabled={isSubmitting}
+                          type="submit"
+                          onClick={approveAdvance}
                       >
                         {isSubmitting ? "Approving..." : "Approve"}
                       </FormButton>
@@ -866,16 +904,19 @@ const SummaryDetails = (props) => {
                     <hr />
                     <div className={classes.form_action_wrapper}>
                       <FormButton
-                        variant="cancel"
-                        type="submit"
-                        onClick={rejectAdvance}
+                          variant="cancel"
+                          disabled={isSubmitting}
+                          type="submit"
+                          onClick={rejectAdvance}
                       >
-                        Reject
+                        {isSubmitting ? "Rejecting..." : "Reject"}
                       </FormButton>
+
                       <FormButton
-                        variant="save"
-                        type="submit"
-                        onClick={approveAdvance}
+                          variant="save"
+                          disabled={isSubmitting}
+                          type="submit"
+                          onClick={approveAdvance}
                       >
                         {isSubmitting ? "Approving..." : "Approve"}
                       </FormButton>
@@ -901,16 +942,19 @@ const SummaryDetails = (props) => {
                     <hr />
                     <div className={classes.form_action_wrapper}>
                       <FormButton
-                        variant="cancel"
-                        type="submit"
-                        onClick={rejectAdvance}
+                          variant="cancel"
+                          disabled={isSubmitting}
+                          type="submit"
+                          onClick={rejectAdvance}
                       >
-                        Reject
+                        {isSubmitting ? "Rejecting..." : "Reject"}
                       </FormButton>
+
                       <FormButton
-                        variant="save"
-                        type="submit"
-                        onClick={approveAdvance}
+                          variant="save"
+                          disabled={isSubmitting}
+                          type="submit"
+                          onClick={approveAdvance}
                       >
                         {isSubmitting ? "Approving..." : "Approve"}
                       </FormButton>
