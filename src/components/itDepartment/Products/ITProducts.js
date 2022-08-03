@@ -57,6 +57,7 @@ const ITProducts = () => {
           onSuccess={onClose}
           success={`IT Product added successfully`}
           useMutate={useAddItProduct}
+          // useMutate={onSubmitAlert}
         />
       </Modal>
     </>

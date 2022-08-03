@@ -8,6 +8,7 @@ import { useItServices, useAddItService } from "../../../hooks/useItServices";
 import {
   itServicesInitialValues,
   itProductOrderSchema,
+  itServiceSchema,
 } from "../../forms/it/schemas/it";
 import Loader from "../../common/UI/Loader/Loader";
 
@@ -41,9 +42,8 @@ const ITServices = () => {
       )}
       <Modal isOpen={isOpen} onClose={onClose} title="Service Requisition Form">
         <AddITServiceForm
-          title="Allocations"
           initialValues={itServicesInitialValues}
-          validationSchema={itProductOrderSchema}
+          validationSchema={itServiceSchema}
           onSuccess={onClose}
           success={`IT Service added successfully`}
           useMutate={useAddItService}
