@@ -36,8 +36,6 @@ const SummaryDetails = (props) => {
 
   //get user and designation
   const { user } = useSelector((state) => state.auth);
-  // console.log(user)
-  // console.log(user.designation)
 
   //====GET THE SELECTED DOCUMENT CATEGORY====//
   function useQuery() {
@@ -48,28 +46,20 @@ const SummaryDetails = (props) => {
   const id = query.get("id");
 
   const { travelName } = useParams();
-  // console.log(travelName)
 
   const { reqName } = useParams();
-  // console.log(reqName)
-  // console.log("Summary Details Reloaded");
 
   const { data, isLoading } = useAdvance(id);
-  // console.log(data);
 
   const { data: leaveData, isLoading: loadingLeaveRequests } =
     useLeaveRequest(id);
 
   const { data: travelData, isLoading: loadingTravelOrders } =
     useTravelOrder(travelName);
-   // console.log(travelData)
 
   const { data: reqData, isLoading: loadingReqData } = useRequisition(reqName);
-   // console.log(reqData)
-  // console.log(reqName)
 
   const [remarks, setRemarks] = useState("");
-
 
   const { mutate: approveReq } = useApproveRequisition();
   const { mutate: rejectReq } = useRejectRequisition();
@@ -80,30 +70,33 @@ const SummaryDetails = (props) => {
   const { mutate: approveAdv } = useApproveAdvance();
   const { mutate: rejectAdv } = useRejectAdvance();
 
-  const {mutate: approveTravel} = useApproveTravelOrder();
-  const {mutate: rejectTravel} = useRejectTravelOrder();
+  const { mutate: approveTravel } = useApproveTravelOrder();
+  const { mutate: rejectTravel } = useRejectTravelOrder();
 
-  const approveTravelOrder = (e) =>{
+  const approveTravelOrder = (e) => {
     e.preventDefault();
-    approveTravel({travelName, remarks});
-  }
+    approveTravel({ travelName, remarks });
+  };
 
-  const rejectTravelOrder = (e) =>{
+  const rejectTravelOrder = (e) => {
     e.preventDefault();
-    rejectTravel({travelName, remarks})
-  }
+    rejectTravel({ travelName, remarks });
+  };
 
-  const approveRequisition = React.useCallback((e) => {
-    e.preventDefault();
-    approveReq({ reqName, remarks });
-    // console.log(remarks,reqName)
+  const approveRequisition = React.useCallback(
+    (e) => {
+      e.preventDefault();
+      approveReq({ reqName, remarks });
+      // console.log(remarks,reqName)
 
-    // eslint-disable-next-line
-  }, [reqName, remarks]);
+      // eslint-disable-next-line
+    },
+    [reqName, remarks]
+  );
 
   const rejectRequisition = (e) => {
     e.preventDefault();
-    rejectReq({reqName, remarks });
+    rejectReq({ reqName, remarks });
   };
 
   const approveLeave = (e) => {
@@ -291,7 +284,7 @@ const SummaryDetails = (props) => {
 
         {type === "travel" &&
           (user.designation === "dop" ||
-           user.designation === "finance" ||
+            user.designation === "finance" ||
             user.designation === "accountant" ||
             user.designation === "fleetManager" ||
             user.designation === "supervisor" ||
@@ -314,133 +307,130 @@ const SummaryDetails = (props) => {
                 }
               />
 
-               {/*dop Approval- level 1*/}
-              {(travelData?.travelOrder?.approval_levels?.length === 0) &&
-                      user.designation === "dop" && (
-                <form>
-                  <div className={classes.remarks_wrapper}>
-                    <h6>
-                      <strong>Remarks</strong>
-                    </h6>
-                    <Textarea
+              {/*dop Approval- level 1*/}
+              {travelData?.travelOrder?.approval_levels?.length === 0 &&
+                user.designation === "dop" && (
+                  <form>
+                    <div className={classes.remarks_wrapper}>
+                      <h6>
+                        <strong>Remarks</strong>
+                      </h6>
+                      <Textarea
                         placeholder="Leave a remark here"
                         name="remarks"
                         value={remarks}
                         onChange={(e) => setRemarks(e.target.value)}
-                    />
-                  </div>
-                  <hr/>
-                  <div className={classes.form_action_wrapper}>
-                    <FormButton
+                      />
+                    </div>
+                    <hr />
+                    <div className={classes.form_action_wrapper}>
+                      <FormButton
                         variant="cancel"
                         type="submit"
                         onClick={rejectTravelOrder}
-                    >
-                      Reject
-                    </FormButton>
-                    <FormButton
+                      >
+                        Reject
+                      </FormButton>
+                      <FormButton
                         variant="save"
                         type="submit"
                         onClick={approveTravelOrder}
-                    >
-                      {isSubmitting ? "Approving..." : "Approve"}
-                    </FormButton>
-                  </div>
-                </form>
-
-                  ) }
+                      >
+                        {isSubmitting ? "Approving..." : "Approve"}
+                      </FormButton>
+                    </div>
+                  </form>
+                )}
 
               {/*accountant approval - level 2*/}
-              {(travelData?.travelOrder?.approval_levels?.length === 1) &&
-                  (travelData?.travelOrder?.approval_levels?.[0]?.status === "approved" ) &&
-                  user.designation === "accountant" && (
-                      <form>
-                        <div className={classes.remarks_wrapper}>
-                          <h6>
-                            <strong>Remarks</strong>
-                          </h6>
-                          <Textarea
-                              placeholder="Leave a remark here"
-                              name="remarks"
-                              value={remarks}
-                              onChange={(e) => setRemarks(e.target.value)}
-                          />
-                        </div>
-                        <hr/>
-                        <div className={classes.form_action_wrapper}>
-                          <FormButton
-                              variant="cancel"
-                              type="submit"
-                              onClick={rejectTravelOrder}
-                          >
-                            Reject
-                          </FormButton>
-                          <FormButton
-                              variant="save"
-                              type="submit"
-                              onClick={approveTravelOrder}
-                          >
-                            {isSubmitting ? "Approving..." : "Approve"}
-                          </FormButton>
-                        </div>
-                      </form>
-
-                  ) }
+              {travelData?.travelOrder?.approval_levels?.length === 1 &&
+                travelData?.travelOrder?.approval_levels?.[0]?.status ===
+                  "approved" &&
+                user.designation === "accountant" && (
+                  <form>
+                    <div className={classes.remarks_wrapper}>
+                      <h6>
+                        <strong>Remarks</strong>
+                      </h6>
+                      <Textarea
+                        placeholder="Leave a remark here"
+                        name="remarks"
+                        value={remarks}
+                        onChange={(e) => setRemarks(e.target.value)}
+                      />
+                    </div>
+                    <hr />
+                    <div className={classes.form_action_wrapper}>
+                      <FormButton
+                        variant="cancel"
+                        type="submit"
+                        onClick={rejectTravelOrder}
+                      >
+                        Reject
+                      </FormButton>
+                      <FormButton
+                        variant="save"
+                        type="submit"
+                        onClick={approveTravelOrder}
+                      >
+                        {isSubmitting ? "Approving..." : "Approve"}
+                      </FormButton>
+                    </div>
+                  </form>
+                )}
 
               {/*fleet manager approval level-3*/}
-              {(travelData?.travelOrder?.approval_levels?.length === 2) &&
-                  (travelData?.travelOrder?.approval_levels?.[1]?.status === "approved" ) &&
-                  user.designation === "fleetManager" && (
-                      <form>
-                        <div className={classes.remarks_wrapper}>
-                          <h6>
-                            <strong>Remarks</strong>
-                          </h6>
-                          <Textarea
-                              placeholder="Leave a remark here"
-                              name="remarks"
-                              value={remarks}
-                              onChange={(e) => setRemarks(e.target.value)}
-                          />
-                        </div>
-                        <hr/>
-                        <div className={classes.form_action_wrapper}>
-                          <FormButton
-                              variant="cancel"
-                              type="submit"
-                              onClick={rejectTravelOrder}
-                          >
-                            Reject
-                          </FormButton>
-                          <FormButton
-                              variant="save"
-                              type="submit"
-                              onClick={approveTravelOrder}
-                          >
-                            {isSubmitting ? "Approving..." : "Approve"}
-                          </FormButton>
-                        </div>
-                      </form>
-
-                  ) }
-
+              {travelData?.travelOrder?.approval_levels?.length === 2 &&
+                travelData?.travelOrder?.approval_levels?.[1]?.status ===
+                  "approved" &&
+                user.designation === "fleetManager" && (
+                  <form>
+                    <div className={classes.remarks_wrapper}>
+                      <h6>
+                        <strong>Remarks</strong>
+                      </h6>
+                      <Textarea
+                        placeholder="Leave a remark here"
+                        name="remarks"
+                        value={remarks}
+                        onChange={(e) => setRemarks(e.target.value)}
+                      />
+                    </div>
+                    <hr />
+                    <div className={classes.form_action_wrapper}>
+                      <FormButton
+                        variant="cancel"
+                        type="submit"
+                        onClick={rejectTravelOrder}
+                      >
+                        Reject
+                      </FormButton>
+                      <FormButton
+                        variant="save"
+                        type="submit"
+                        onClick={approveTravelOrder}
+                      >
+                        {isSubmitting ? "Approving..." : "Approve"}
+                      </FormButton>
+                    </div>
+                  </form>
+                )}
             </div>
           )}
-
 
         {/*normal users*/}
         {(type === "travel" ||
           type === "requisition" ||
           selectedType === "leave" ||
           selectedType === "advance") &&
-          (user.designation !== "dop" &&
-            user.designation !== "humanResources" &&
-            user.designation !== "accountant" &&
-            user.designation !== "finance" &&
-            user.designation !== "fleetManager" &&
-            user.designation !== "ceo" &&
-            user.designation !== "procurement" &&
-            user.designation !== "supervisor") && (
+          user.designation !== "dop" &&
+          user.designation !== "humanResources" &&
+          user.designation !== "accountant" &&
+          user.designation !== "finance" &&
+          user.designation !== "fleetManager" &&
+          user.designation !== "ceo" &&
+          user.designation !== "procurement" &&
+          user.designation !== "supervisor" && (
             <div className={classes.table_wrapper}>
               <h6>
                 {type} {selectedType}Roles
@@ -487,151 +477,150 @@ const SummaryDetails = (props) => {
               />
 
               {/*dop Approval- level 1*/}
-              {(reqData?.requisition?.approval_levels?.length === 0) &&
-                  user.designation === "dop" && (
-
-              <form>
-                <div className={classes.remarks_wrapper}>
-                  <h6>
-                    <strong>Remarks</strong>
-                  </h6>
-                  <Textarea
-                    placeholder="Leave a remark here"
-                    name="remarks"
-                    value={remarks}
-                    onChange={(e) => setRemarks(e.target.value)}
-                  />
-                </div>
-                <hr />
-                <div className={classes.form_action_wrapper}>
-                  <FormButton
-                    variant="cancel"
-                    type="submit"
-                    onClick={rejectRequisition}
-                  >
-                    Reject
-                  </FormButton>
-                  <FormButton
-                    variant="save"
-                    type="submit"
-                    onClick={approveRequisition}
-                  >
-                    {isSubmitting ? "Approving..." : "Approve"}
-                  </FormButton>
-                </div>
-              </form>
-                  )}
+              {reqData?.requisition?.approval_levels?.length === 0 &&
+                user.designation === "dop" && (
+                  <form>
+                    <div className={classes.remarks_wrapper}>
+                      <h6>
+                        <strong>Remarks</strong>
+                      </h6>
+                      <Textarea
+                        placeholder="Leave a remark here"
+                        name="remarks"
+                        value={remarks}
+                        onChange={(e) => setRemarks(e.target.value)}
+                      />
+                    </div>
+                    <hr />
+                    <div className={classes.form_action_wrapper}>
+                      <FormButton
+                        variant="cancel"
+                        type="submit"
+                        onClick={rejectRequisition}
+                      >
+                        Reject
+                      </FormButton>
+                      <FormButton
+                        variant="save"
+                        type="submit"
+                        onClick={approveRequisition}
+                      >
+                        {isSubmitting ? "Approving..." : "Approve"}
+                      </FormButton>
+                    </div>
+                  </form>
+                )}
 
               {/*accountant approval - level 2*/}
-              {(reqData?.requisition?.approval_levels?.length === 1) &&
-                  (reqData?.requisition?.approval_levels?.[0]?.status === "approved" ) &&
-                  user.designation === "accountant" && (
-                      <form>
-                        <div className={classes.remarks_wrapper}>
-                          <h6>
-                            <strong>Remarks</strong>
-                          </h6>
-                          <Textarea
-                              placeholder="Leave a remark here"
-                              name="remarks"
-                              value={remarks}
-                              onChange={(e) => setRemarks(e.target.value)}
-                          />
-                        </div>
-                        <hr />
-                        <div className={classes.form_action_wrapper}>
-                          <FormButton
-                              variant="cancel"
-                              type="submit"
-                              onClick={rejectRequisition}
-                          >
-                            Reject
-                          </FormButton>
-                          <FormButton
-                              variant="save"
-                              type="submit"
-                              onClick={approveRequisition}
-                          >
-                            {isSubmitting ? "Approving..." : "Approve"}
-                          </FormButton>
-                        </div>
-                      </form>
-
-                      )}
+              {reqData?.requisition?.approval_levels?.length === 1 &&
+                reqData?.requisition?.approval_levels?.[0]?.status ===
+                  "approved" &&
+                user.designation === "accountant" && (
+                  <form>
+                    <div className={classes.remarks_wrapper}>
+                      <h6>
+                        <strong>Remarks</strong>
+                      </h6>
+                      <Textarea
+                        placeholder="Leave a remark here"
+                        name="remarks"
+                        value={remarks}
+                        onChange={(e) => setRemarks(e.target.value)}
+                      />
+                    </div>
+                    <hr />
+                    <div className={classes.form_action_wrapper}>
+                      <FormButton
+                        variant="cancel"
+                        type="submit"
+                        onClick={rejectRequisition}
+                      >
+                        Reject
+                      </FormButton>
+                      <FormButton
+                        variant="save"
+                        type="submit"
+                        onClick={approveRequisition}
+                      >
+                        {isSubmitting ? "Approving..." : "Approve"}
+                      </FormButton>
+                    </div>
+                  </form>
+                )}
 
               {/*ceo approval - level 3*/}
-              {(reqData?.requisition?.approval_levels?.length === 2) &&
-                  (reqData?.requisition?.approval_levels?.[1]?.status === "approved" ) &&
-                  user.designation === "ceo" && (
-                      <form>
-                        <div className={classes.remarks_wrapper}>
-                          <h6>
-                            <strong>Remarks</strong>
-                          </h6>
-                          <Textarea
-                              placeholder="Leave a remark here"
-                              name="remarks"
-                              value={remarks}
-                              onChange={(e) => setRemarks(e.target.value)}
-                          />
-                        </div>
-                        <hr />
-                        <div className={classes.form_action_wrapper}>
-                          <FormButton
-                              variant="cancel"
-                              type="submit"
-                              onClick={rejectRequisition}
-                          >
-                            Reject
-                          </FormButton>
-                          <FormButton
-                              variant="save"
-                              type="submit"
-                              onClick={approveRequisition}
-                          >
-                            {isSubmitting ? "Approving..." : "Approve"}
-                          </FormButton>
-                        </div>
-                      </form>
-
-                  )}
+              {reqData?.requisition?.approval_levels?.length === 2 &&
+                reqData?.requisition?.approval_levels?.[1]?.status ===
+                  "approved" &&
+                user.designation === "ceo" && (
+                  <form>
+                    <div className={classes.remarks_wrapper}>
+                      <h6>
+                        <strong>Remarks</strong>
+                      </h6>
+                      <Textarea
+                        placeholder="Leave a remark here"
+                        name="remarks"
+                        value={remarks}
+                        onChange={(e) => setRemarks(e.target.value)}
+                      />
+                    </div>
+                    <hr />
+                    <div className={classes.form_action_wrapper}>
+                      <FormButton
+                        variant="cancel"
+                        type="submit"
+                        onClick={rejectRequisition}
+                      >
+                        Reject
+                      </FormButton>
+                      <FormButton
+                        variant="save"
+                        type="submit"
+                        onClick={approveRequisition}
+                      >
+                        {isSubmitting ? "Approving..." : "Approve"}
+                      </FormButton>
+                    </div>
+                  </form>
+                )}
 
               {/*procurement approval - level 4*/}
-              {(reqData?.requisition?.approval_levels?.length === 3) &&
-                  (reqData?.requisition?.approval_levels?.[2]?.status === "approved" ) &&
-                  user.designation === "procurement" && (
-                      <form>
-                        <div className={classes.remarks_wrapper}>
-                          <h6>
-                            <strong>Remarks</strong>
-                          </h6>
-                          <Textarea
-                              placeholder="Leave a remark here"
-                              name="remarks"
-                              value={remarks}
-                              onChange={(e) => setRemarks(e.target.value)}
-                          />
-                        </div>
-                        <hr />
-                        <div className={classes.form_action_wrapper}>
-                          <FormButton
-                              variant="cancel"
-                              type="submit"
-                              onClick={rejectRequisition}
-                          >
-                            Reject
-                          </FormButton>
-                          <FormButton
-                              variant="save"
-                              type="submit"
-                              onClick={approveRequisition}
-                          >
-                            {isSubmitting ? "Approving..." : "Approve"}
-                          </FormButton>
-                        </div>
-                      </form>
-
-                  )}
+              {reqData?.requisition?.approval_levels?.length === 3 &&
+                reqData?.requisition?.approval_levels?.[2]?.status ===
+                  "approved" &&
+                user.designation === "procurement" && (
+                  <form>
+                    <div className={classes.remarks_wrapper}>
+                      <h6>
+                        <strong>Remarks</strong>
+                      </h6>
+                      <Textarea
+                        placeholder="Leave a remark here"
+                        name="remarks"
+                        value={remarks}
+                        onChange={(e) => setRemarks(e.target.value)}
+                      />
+                    </div>
+                    <hr />
+                    <div className={classes.form_action_wrapper}>
+                      <FormButton
+                        variant="cancel"
+                        type="submit"
+                        onClick={rejectRequisition}
+                      >
+                        Reject
+                      </FormButton>
+                      <FormButton
+                        variant="save"
+                        type="submit"
+                        onClick={approveRequisition}
+                      >
+                        {isSubmitting ? "Approving..." : "Approve"}
+                      </FormButton>
+                    </div>
+                  </form>
+                )}
             </div>
           )}
 
@@ -661,111 +650,109 @@ const SummaryDetails = (props) => {
               />
 
               {/*dop Approval- level 1*/}
-              {(leaveData?.leave?.approval_levels?.length === 0) &&
-                  user.designation === "dop" && (
-
-              <form>
-                <div className={classes.remarks_wrapper}>
-                  <h6>
-                    <strong>Remarks</strong>
-                  </h6>
-                  <Textarea
-                    placeholder="Leave a remark here"
-                    name="remarks"
-                    value={remarks}
-                    onChange={(e) => setRemarks(e.target.value)}
-                  />
-                </div>
-                <hr />
-                <div className={classes.form_action_wrapper}>
-                  <FormButton
-                    variant="cancel"
-                    type="submit"
-                    onClick={rejectLeave}
-                  >
-                    Reject
-                  </FormButton>
-                  <FormButton
-                    variant="save"
-                    type="submit"
-                    onClick={approveLeave}
-                  >
-                    {isSubmitting ? "Approving..." : "Approve"}
-                  </FormButton>
-                </div>
-              </form>
-                  )}
+              {leaveData?.leave?.approval_levels?.length === 0 &&
+                user.designation === "dop" && (
+                  <form>
+                    <div className={classes.remarks_wrapper}>
+                      <h6>
+                        <strong>Remarks</strong>
+                      </h6>
+                      <Textarea
+                        placeholder="Leave a remark here"
+                        name="remarks"
+                        value={remarks}
+                        onChange={(e) => setRemarks(e.target.value)}
+                      />
+                    </div>
+                    <hr />
+                    <div className={classes.form_action_wrapper}>
+                      <FormButton
+                        variant="cancel"
+                        type="submit"
+                        onClick={rejectLeave}
+                      >
+                        Reject
+                      </FormButton>
+                      <FormButton
+                        variant="save"
+                        type="submit"
+                        onClick={approveLeave}
+                      >
+                        {isSubmitting ? "Approving..." : "Approve"}
+                      </FormButton>
+                    </div>
+                  </form>
+                )}
               {/*humanResources approval - level 2*/}
-              {(leaveData?.leave?.approval_levels?.length === 1) &&
-                  (leaveData?.leave?.approval_levels?.[0]?.status === "approved" ) &&
-                  user.designation === "humanResources" && (
-                      <form>
-                        <div className={classes.remarks_wrapper}>
-                          <h6>
-                            <strong>Remarks</strong>
-                          </h6>
-                          <Textarea
-                              placeholder="Leave a remark here"
-                              name="remarks"
-                              value={remarks}
-                              onChange={(e) => setRemarks(e.target.value)}
-                          />
-                        </div>
-                        <hr />
-                        <div className={classes.form_action_wrapper}>
-                          <FormButton
-                              variant="cancel"
-                              type="submit"
-                              onClick={rejectLeave}
-                          >
-                            Reject
-                          </FormButton>
-                          <FormButton
-                              variant="save"
-                              type="submit"
-                              onClick={approveLeave}
-                          >
-                            {isSubmitting ? "Approving..." : "Approve"}
-                          </FormButton>
-                        </div>
-                      </form>
-                  )}
+              {leaveData?.leave?.approval_levels?.length === 1 &&
+                leaveData?.leave?.approval_levels?.[0]?.status === "approved" &&
+                user.designation === "humanResources" && (
+                  <form>
+                    <div className={classes.remarks_wrapper}>
+                      <h6>
+                        <strong>Remarks</strong>
+                      </h6>
+                      <Textarea
+                        placeholder="Leave a remark here"
+                        name="remarks"
+                        value={remarks}
+                        onChange={(e) => setRemarks(e.target.value)}
+                      />
+                    </div>
+                    <hr />
+                    <div className={classes.form_action_wrapper}>
+                      <FormButton
+                        variant="cancel"
+                        type="submit"
+                        onClick={rejectLeave}
+                      >
+                        Reject
+                      </FormButton>
+                      <FormButton
+                        variant="save"
+                        type="submit"
+                        onClick={approveLeave}
+                      >
+                        {isSubmitting ? "Approving..." : "Approve"}
+                      </FormButton>
+                    </div>
+                  </form>
+                )}
               {/*ceo approval - level 3*/}
-              {(leaveData?.leave?.approval_levels?.length === 2) &&
-                  (leaveData?.leave?.approval_levels?.[1]?.status === "approved" ) &&
-                  user.designation === "ceo" && (
-                      <form>
-                        <div className={classes.remarks_wrapper}>
-                          <h6>
-                            <strong>Remarks</strong>
-                          </h6>
-                          <Textarea
-                              placeholder="Leave a remark here"
-                              name="remarks"
-                              value={remarks}
-                              onChange={(e) => setRemarks(e.target.value)}
-                          />
-                        </div>
-                        <hr />
-                        <div className={classes.form_action_wrapper}>
-                          <FormButton
-                              variant="cancel"
-                              type="submit"
-                              onClick={rejectLeave}
-                          >
-                            Reject
-                          </FormButton>
-                          <FormButton
-                              variant="save"
-                              type="submit"
-                              onClick={approveLeave}
-                          >
-                            {isSubmitting ? "Approving..." : "Approve"}
-                          </FormButton>
-                        </div>
-                      </form>
-                  )}
-
+              {leaveData?.leave?.approval_levels?.length === 2 &&
+                leaveData?.leave?.approval_levels?.[1]?.status === "approved" &&
+                user.designation === "ceo" && (
+                  <form>
+                    <div className={classes.remarks_wrapper}>
+                      <h6>
+                        <strong>Remarks</strong>
+                      </h6>
+                      <Textarea
+                        placeholder="Leave a remark here"
+                        name="remarks"
+                        value={remarks}
+                        onChange={(e) => setRemarks(e.target.value)}
+                      />
+                    </div>
+                    <hr />
+                    <div className={classes.form_action_wrapper}>
+                      <FormButton
+                        variant="cancel"
+                        type="submit"
+                        onClick={rejectLeave}
+                      >
+                        Reject
+                      </FormButton>
+                      <FormButton
+                        variant="save"
+                        type="submit"
+                        onClick={approveLeave}
+                      >
+                        {isSubmitting ? "Approving..." : "Approve"}
+                      </FormButton>
+                    </div>
+                  </form>
+                )}
             </div>
           )}
 
@@ -795,146 +782,145 @@ const SummaryDetails = (props) => {
               />
 
               {/*dop Approval- level 1*/}
-              {(data?.advance?.approval_levels?.length === 0) &&
-                  user.designation === "dop" && (
-              <form>
-                <div className={classes.remarks_wrapper}>
-                  <h6>
-                    <strong>Remarks</strong>
-                  </h6>
-                  <Textarea
-                    placeholder="Leave a remark here"
-                    name="remarks"
-                    value={remarks}
-                    onChange={(e) => setRemarks(e.target.value)}
-                  />
-                </div>
-                <hr />
-                <div className={classes.form_action_wrapper}>
-                  <FormButton
-                    variant="cancel"
-                    type="submit"
-                    onClick={rejectAdvance}
-                  >
-                    Reject
-                  </FormButton>
-                  <FormButton
-                    variant="save"
-                    type="submit"
-                    onClick={approveAdvance}
-                  >
-                    {isSubmitting ? "Approving..." : "Approve"}
-                  </FormButton>
-                </div>
-              </form>
-
-                  )}
+              {data?.advance?.approval_levels?.length === 0 &&
+                user.designation === "dop" && (
+                  <form>
+                    <div className={classes.remarks_wrapper}>
+                      <h6>
+                        <strong>Remarks</strong>
+                      </h6>
+                      <Textarea
+                        placeholder="Leave a remark here"
+                        name="remarks"
+                        value={remarks}
+                        onChange={(e) => setRemarks(e.target.value)}
+                      />
+                    </div>
+                    <hr />
+                    <div className={classes.form_action_wrapper}>
+                      <FormButton
+                        variant="cancel"
+                        type="submit"
+                        onClick={rejectAdvance}
+                      >
+                        Reject
+                      </FormButton>
+                      <FormButton
+                        variant="save"
+                        type="submit"
+                        onClick={approveAdvance}
+                      >
+                        {isSubmitting ? "Approving..." : "Approve"}
+                      </FormButton>
+                    </div>
+                  </form>
+                )}
 
               {/*accountant approval - level 2*/}
-              {(data?.advance?.approval_levels?.length === 1) &&
-                  (data?.advance?.approval_levels?.[0]?.status === "approved" ) &&
-                  user.designation === "accountant" && (
-                      <form>
-                        <div className={classes.remarks_wrapper}>
-                          <h6>
-                            <strong>Remarks</strong>
-                          </h6>
-                          <Textarea
-                              placeholder="Leave a remark here"
-                              name="remarks"
-                              value={remarks}
-                              onChange={(e) => setRemarks(e.target.value)}
-                          />
-                        </div>
-                        <hr />
-                        <div className={classes.form_action_wrapper}>
-                          <FormButton
-                              variant="cancel"
-                              type="submit"
-                              onClick={rejectAdvance}
-                          >
-                            Reject
-                          </FormButton>
-                          <FormButton
-                              variant="save"
-                              type="submit"
-                              onClick={approveAdvance}
-                          >
-                            {isSubmitting ? "Approving..." : "Approve"}
-                          </FormButton>
-                        </div>
-                      </form>
-                  )}
+              {data?.advance?.approval_levels?.length === 1 &&
+                data?.advance?.approval_levels?.[0]?.status === "approved" &&
+                user.designation === "accountant" && (
+                  <form>
+                    <div className={classes.remarks_wrapper}>
+                      <h6>
+                        <strong>Remarks</strong>
+                      </h6>
+                      <Textarea
+                        placeholder="Leave a remark here"
+                        name="remarks"
+                        value={remarks}
+                        onChange={(e) => setRemarks(e.target.value)}
+                      />
+                    </div>
+                    <hr />
+                    <div className={classes.form_action_wrapper}>
+                      <FormButton
+                        variant="cancel"
+                        type="submit"
+                        onClick={rejectAdvance}
+                      >
+                        Reject
+                      </FormButton>
+                      <FormButton
+                        variant="save"
+                        type="submit"
+                        onClick={approveAdvance}
+                      >
+                        {isSubmitting ? "Approving..." : "Approve"}
+                      </FormButton>
+                    </div>
+                  </form>
+                )}
               {/*ceo approval - level 3*/}
-              {(data?.advance?.approval_levels?.length === 2) &&
-                  (data?.advance?.approval_levels?.[1]?.status === "approved" ) &&
-                  user.designation === "ceo" && (
-                      <form>
-                        <div className={classes.remarks_wrapper}>
-                          <h6>
-                            <strong>Remarks</strong>
-                          </h6>
-                          <Textarea
-                              placeholder="Leave a remark here"
-                              name="remarks"
-                              value={remarks}
-                              onChange={(e) => setRemarks(e.target.value)}
-                          />
-                        </div>
-                        <hr />
-                        <div className={classes.form_action_wrapper}>
-                          <FormButton
-                              variant="cancel"
-                              type="submit"
-                              onClick={rejectAdvance}
-                          >
-                            Reject
-                          </FormButton>
-                          <FormButton
-                              variant="save"
-                              type="submit"
-                              onClick={approveAdvance}
-                          >
-                            {isSubmitting ? "Approving..." : "Approve"}
-                          </FormButton>
-                        </div>
-                      </form>
-                  )}
+              {data?.advance?.approval_levels?.length === 2 &&
+                data?.advance?.approval_levels?.[1]?.status === "approved" &&
+                user.designation === "ceo" && (
+                  <form>
+                    <div className={classes.remarks_wrapper}>
+                      <h6>
+                        <strong>Remarks</strong>
+                      </h6>
+                      <Textarea
+                        placeholder="Leave a remark here"
+                        name="remarks"
+                        value={remarks}
+                        onChange={(e) => setRemarks(e.target.value)}
+                      />
+                    </div>
+                    <hr />
+                    <div className={classes.form_action_wrapper}>
+                      <FormButton
+                        variant="cancel"
+                        type="submit"
+                        onClick={rejectAdvance}
+                      >
+                        Reject
+                      </FormButton>
+                      <FormButton
+                        variant="save"
+                        type="submit"
+                        onClick={approveAdvance}
+                      >
+                        {isSubmitting ? "Approving..." : "Approve"}
+                      </FormButton>
+                    </div>
+                  </form>
+                )}
               {/*finance approval - level 4*/}
-              {(data?.advance?.approval_levels?.length === 3) &&
-                  (data?.advance?.approval_levels?.[2]?.status === "approved" ) &&
-                  user.designation === "finance" && (
-                      <form>
-                        <div className={classes.remarks_wrapper}>
-                          <h6>
-                            <strong>Remarks</strong>
-                          </h6>
-                          <Textarea
-                              placeholder="Leave a remark here"
-                              name="remarks"
-                              value={remarks}
-                              onChange={(e) => setRemarks(e.target.value)}
-                          />
-                        </div>
-                        <hr />
-                        <div className={classes.form_action_wrapper}>
-                          <FormButton
-                              variant="cancel"
-                              type="submit"
-                              onClick={rejectAdvance}
-                          >
-                            Reject
-                          </FormButton>
-                          <FormButton
-                              variant="save"
-                              type="submit"
-                              onClick={approveAdvance}
-                          >
-                            {isSubmitting ? "Approving..." : "Approve"}
-                          </FormButton>
-                        </div>
-                      </form>
-                  )}
+              {data?.advance?.approval_levels?.length === 3 &&
+                data?.advance?.approval_levels?.[2]?.status === "approved" &&
+                user.designation === "finance" && (
+                  <form>
+                    <div className={classes.remarks_wrapper}>
+                      <h6>
+                        <strong>Remarks</strong>
+                      </h6>
+                      <Textarea
+                        placeholder="Leave a remark here"
+                        name="remarks"
+                        value={remarks}
+                        onChange={(e) => setRemarks(e.target.value)}
+                      />
+                    </div>
+                    <hr />
+                    <div className={classes.form_action_wrapper}>
+                      <FormButton
+                        variant="cancel"
+                        type="submit"
+                        onClick={rejectAdvance}
+                      >
+                        Reject
+                      </FormButton>
+                      <FormButton
+                        variant="save"
+                        type="submit"
+                        onClick={approveAdvance}
+                      >
+                        {isSubmitting ? "Approving..." : "Approve"}
+                      </FormButton>
+                    </div>
+                  </form>
+                )}
             </div>
           )}
       </div>
