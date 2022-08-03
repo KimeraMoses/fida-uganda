@@ -33,17 +33,17 @@ export const useAddMember = () => {
   const queryClient = useQueryClient();
   return useMutation(addMember, {
     onSuccess: (data) => {
-      dispatch(selectMemberId(data.member.id));
+      dispatch(selectMemberId(data?.member.id));
       const previousMembers = queryClient.getQueryData(MEMBERSHIP_KEY);
       if (previousMembers) {
         queryClient.setQueryData(MEMBERSHIP_KEY, () => {
           return produce(previousMembers, (draft) => {
-            draft.members.push(data?.member);
+            draft.Members.push(data?.member);
           });
         });
       } else {
         queryClient.setQueryData(MEMBERSHIP_KEY, () => {
-          return { members: [data?.member] };
+          return { Members: [data?.member] };
         });
       }
     },
@@ -58,15 +58,15 @@ export const useUpdateMember = () => {
       if (previousMembers) {
         queryClient.setQueryData(MEMBERSHIP_KEY, () => {
           return produce(previousMembers, (draft) => {
-            const index = draft.members.findIndex(
+            const index = draft.Members.findIndex(
               (member) => member.id === data.updatedMember.id
             );
-            draft.members[index] = data.updatedMember;
+            draft.Members[index] = data.updatedMember;
           });
         });
       } else {
         queryClient.setQueryData(MEMBERSHIP_KEY, () => {
-          return { members: [data?.updatedMember] };
+          return { Members: [data?.updatedMember] };
         });
       }
     },
@@ -83,7 +83,7 @@ export const useDeleteMember = () => {
       if (previousMembers) {
         queryClient.setQueryData(MEMBERSHIP_KEY, () => {
           return produce(previousMembers, (draft) => {
-            draft.members.filter((member) => member.id !== id);
+            draft.Members.filter((member) => member.id !== id);
           });
         });
       }

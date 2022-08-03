@@ -1,5 +1,4 @@
 import React from "react";
-import ApprovedTable from "./ApprovalTable/ApprovedTable";
 import NewRequestsTable from "./ApprovalTable/NewRequestsTable";
 import SectionHeader from "../../common/SectionHeader";
 import { useApprovals } from "../../../hooks/useApprovals";
@@ -10,7 +9,6 @@ const Approvals = () => {
   return (
     <div>
       <SectionHeader title="Approvals" />
-      {data?.approvals && (
         <NewRequestsTable
           data={data ? data.approvals : null}
           isLoading={isLoading}
@@ -18,13 +16,6 @@ const Approvals = () => {
           subHeading={<SubHeading title="New Request" />}
           tableName="New approval requests"
         />
-      )}
-      <SubHeading title="Approved" />
-      <ApprovedTable
-        data={data ? data.approvals : null}
-        isLoading={isLoading}
-        tableName="Approved members"
-      />
     </div>
   );
 };

@@ -41,7 +41,6 @@ const Requisitions = () => {
       )}
       <Modal isOpen={isOpen} onClose={onClose} title="Requisition">
         <RequisitionForm
-          title="Requisitions"
           initialValues={requisitionInitialValues}
           validationSchema={requisitionSchema}
           onSuccess={onClose}

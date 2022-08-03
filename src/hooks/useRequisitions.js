@@ -4,6 +4,7 @@ import {
   addRequisition, approveRequisition,
   getAllRequisitions, getRequisition,
   getRequisitionsStats, rejectRequisition,
+  getAllApprovedRequisitions
 } from "../apis/requisition";
 import produce from "immer";
 import requisitions from "../components/compound/Requisitions";
@@ -18,6 +19,10 @@ export const useRequisition = (id) => {
 export const useRequisitionsStats = () => {
   return useQuery(REQUISITIONS_STATS, getRequisitionsStats);
 };
+
+export const useApprovedRequisitions = () => {
+  return useQuery(REQUISITIONS_KEY, getAllApprovedRequisitions);
+}
 
 export const useAddRequisition = () => {
   const queryClient = useQueryClient();

@@ -2,27 +2,27 @@ import {
   useAddClient,
   useUpdateClient,
   useClientId,
-} from "../../../../hooks/useClients";
+} from '../../../../hooks/useClients';
 import {
   complainantInitialValues,
   complainantSchema,
-} from "../../../../form_schemas/complainant";
-import { useState } from "react";
-import ClientFormOne from "./ClientFormOne";
+} from '../../../../form_schemas/complainant';
+import { useState } from 'react';
+import ClientFormOne from './ClientFormOne';
 import {
   caseFileFourInitialValues,
   caseFileTwoInitialValues,
-} from "../../CaseFIles/NewCaseFile/MultiForm/schema";
-import MultForm2 from "../../CaseFIles/NewCaseFile/MultiForm/MultForm2";
-import MultForm4 from "../../CaseFIles/NewCaseFile/MultiForm/MultForm4";
-import { useDispatch } from "react-redux";
-import { resetClient, selectClient } from "../../../../store/clientReducer";
+} from '../../CaseFIles/NewCaseFile/MultiForm/schema';
+import MultForm2 from '../../CaseFIles/NewCaseFile/MultiForm/MultForm2';
+import MultForm4 from '../../CaseFIles/NewCaseFile/MultiForm/MultForm4';
+import { useDispatch } from 'react-redux';
+import { resetClient, selectClient } from '../../../../store/clientReducer';
 
 const NewClientForm = ({ onClose, isNewClient }) => {
   const client = useClientId();
   const limit = 3;
-  const CLIENT_ADDED = "Added Client Successfully";
-  const CLIENT_UPDATED = "Updated Client Successfully";
+  const CLIENT_ADDED = 'Added Client Successfully';
+  const CLIENT_UPDATED = 'Updated Client Successfully';
   const [page, setPage] = useState(1);
   const [isNew, setIsNew] = useState(isNewClient || false);
   const dispatch = useDispatch();

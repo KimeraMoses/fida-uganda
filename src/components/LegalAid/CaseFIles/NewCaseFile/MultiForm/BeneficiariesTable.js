@@ -1,28 +1,9 @@
-import React from "react";
-import { Table, Thead, Tbody, Tr, Td } from "@chakra-ui/react";
-import classes from "./Table.module.css";
-import { TableHeadColumn } from "../../../../Membership/Allocations/AllocationsTable/AllocationsTable";
+import React from 'react';
+import { Table, Thead, Tbody, Tr, Td } from '@chakra-ui/react';
+import classes from './Table.module.css';
+import { TableHeadColumn } from '../../../../Membership/Allocations/AllocationsTable/AllocationsTable';
 
-export const Data = [
-  {
-    num: 1,
-    name: "Kigozi Nickson",
-    age: 23,
-    sex: "Male",
-    location: "Kampala",
-    phone: "+256777226644",
-  },
-  {
-    num: 2,
-    name: "Kigozi Nickson",
-    age: 23,
-    sex: "Male",
-    location: "Kampala",
-    phone: "+256777226644",
-  },
-];
-
-const BenTable = () => {
+const BenTable = ({ data }) => {
   return (
     <>
       <div className={classes.approvals_table_wrapper}>
@@ -43,10 +24,10 @@ const BenTable = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {Data.map((item) => {
+            {data?.map((item) => {
               return (
-                <Tr>
-                  <Td>{item.num}</Td>
+                <Tr key={item.id}>
+                  <Td>{item.id}</Td>
                   <Td className={classes.primary_text_icon}>{item.name}</Td>
                   <Td className={classes.data__purpose_primary_text}>
                     {item.age}
