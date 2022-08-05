@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import classes from "./SummaryDetails.module.css";
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
-import { SimpleGrid, Textarea } from "@chakra-ui/react";
+import { SimpleGrid, Textarea, Button } from "@chakra-ui/react";
 import SummaryTable from "./SummaryTable/SummaryTable";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
-import FormButton from "../../common/UI/FormButton/FormButton";
+// import FormButton from "../../common/UI/FormButton/FormButton";
 import {
   useAdvance,
   useApproveAdvance,
@@ -31,8 +31,10 @@ import Loader from "../../common/UI/Loader/Loader";
 import { useSelector } from "react-redux";
 
 const SummaryDetails = (props) => {
-  const { type, isSubmitting } = props;
+  const { type } = props;
   const navigate = useNavigate();
+  const [disableReject,setDisableReject] = useState(false);
+  const [disableApprove,setDisableApprove] = useState(false);
 
   //get user and designation
   const { user } = useSelector((state) => state.auth);
@@ -75,17 +77,22 @@ const SummaryDetails = (props) => {
 
   const approveTravelOrder = (e) => {
     e.preventDefault();
+    setDisableApprove(true);
     approveTravel({ travelName, remarks });
+
   };
 
   const rejectTravelOrder = (e) => {
     e.preventDefault();
+    setDisableReject(true);
     rejectTravel({ travelName, remarks });
+
   };
 
   const approveRequisition = React.useCallback(
     (e) => {
       e.preventDefault();
+      setDisableApprove(true);
       approveReq({ reqName, remarks });
       // console.log(remarks,reqName)
     },
@@ -95,25 +102,30 @@ const SummaryDetails = (props) => {
 
   const rejectRequisition = (e) => {
     e.preventDefault();
+    setDisableReject(true);
     rejectReq({ reqName, remarks });
   };
 
   const approveLeave = (e) => {
     e.preventDefault();
+    setDisableApprove(true);
     approveLeaveReq({ id, remarks });
   };
 
   const rejectLeave = (e) => {
     e.preventDefault();
+    setDisableReject(true);
     rejectLeaveReq({ id, remarks });
   };
 
   const approveAdvance = (e) => {
     e.preventDefault();
+    setDisableApprove(true);
     approveAdv({ id, remarks });
   };
   const rejectAdvance = (e) => {
     e.preventDefault();
+    setDisableReject(true);
     rejectAdv({ id, remarks });
   };
 
@@ -320,24 +332,52 @@ const SummaryDetails = (props) => {
                     </div>
                     <hr />
                     <div className={classes.form_action_wrapper}>
-
-                      <FormButton
-                          variant="cancel"
-                          disabled={isSubmitting}
+                      <Button
+                          variant='outline'
                           type="submit"
-                          onClick={rejectTravelOrder}
-                      >
-                        {isSubmitting ? "Rejecting..." : "Reject"}
-                      </FormButton>
+                          borderRadius="full"
+                          colorScheme='#ff3838'
+                          _hover={{ color: "white", background:"#ff3838" }}
+                          size="lg"
+                          color="black"
+                          borderColor="#ff3838"
+                          isLoading={disableReject}
+                          loadingText='Rejecting'
+                          onClick={rejectTravelOrder}>
+                        Reject
+                      </Button>
 
-                      <FormButton
-                          variant="save"
-                          disabled={isSubmitting}
+                      <Button
+                          variant='outline'
                           type="submit"
-                          onClick={approveTravelOrder}
-                      >
-                        {isSubmitting ? "Approving..." : "Approve"}
-                      </FormButton>
+                          borderRadius="full"
+                          colorScheme='#562b85'
+                          _hover={{ color: "white", background:"#562b85" }}
+                          size="lg"
+                          color="black"
+                          borderColor="#562b85"
+                          isLoading={disableApprove}
+                          loadingText='Approving'
+                          onClick={approveTravelOrder}>
+                        Approve
+                      </Button>
+                      {/*<FormButton*/}
+                      {/*    variant="cancel"*/}
+                      {/*    disabled={isDisabled}*/}
+                      {/*    type="submit"*/}
+                      {/*    onClick={approveTravelOrder}*/}
+                      {/*>*/}
+                      {/*  {isSubmitting ? "Rejecting..." : "Reject"}*/}
+                      {/*</FormButton>*/}
+
+                      {/*<FormButton*/}
+                      {/*    variant="save"*/}
+                      {/*    disabled={isDisabled}*/}
+                      {/*    type="submit"*/}
+                      {/*    onClick={approveTravelOrder}*/}
+                      {/*>*/}
+                      {/*  {isSubmitting ? "Approving..." : "Approve"}*/}
+                      {/*</FormButton>*/}
 
                     </div>
                   </form>
@@ -362,23 +402,36 @@ const SummaryDetails = (props) => {
                     </div>
                     <hr />
                     <div className={classes.form_action_wrapper}>
-                      <FormButton
-                          variant="cancel"
-                          disabled={isSubmitting}
+                      <Button
+                          variant='outline'
                           type="submit"
-                          onClick={rejectTravelOrder}
-                      >
-                        {isSubmitting ? "Rejecting..." : "Reject"}
-                      </FormButton>
+                          borderRadius="full"
+                          colorScheme='#ff3838'
+                          _hover={{ color: "white", background:"#ff3838" }}
+                          size="lg"
+                          color="black"
+                          borderColor="#ff3838"
+                          isLoading={disableReject}
+                          loadingText='Rejecting'
+                          onClick={rejectTravelOrder}>
+                        Reject
+                      </Button>
 
-                      <FormButton
-                          variant="save"
-                          disabled={isSubmitting}
+                      <Button
+                          variant='outline'
                           type="submit"
-                          onClick={approveTravelOrder}
-                      >
-                        {isSubmitting ? "Approving..." : "Approve"}
-                      </FormButton>
+                          borderRadius="full"
+                          colorScheme='#562b85'
+                          _hover={{ color: "white", background:"#562b85" }}
+                          size="lg"
+                          color="black"
+                          borderColor="#562b85"
+                          isLoading={disableApprove}
+                          loadingText='Approving'
+                          onClick={approveTravelOrder}>
+                        Approve
+                      </Button>
+
                     </div>
                   </form>
                 )}
@@ -402,23 +455,36 @@ const SummaryDetails = (props) => {
                     </div>
                     <hr />
                     <div className={classes.form_action_wrapper}>
-                      <FormButton
-                          variant="cancel"
-                          disabled={isSubmitting}
+                      <Button
+                          variant='outline'
                           type="submit"
-                          onClick={rejectTravelOrder}
-                      >
-                        {isSubmitting ? "Rejecting..." : "Reject"}
-                      </FormButton>
+                          borderRadius="full"
+                          colorScheme='#ff3838'
+                          _hover={{ color: "white", background:"#ff3838" }}
+                          size="lg"
+                          color="black"
+                          borderColor="#ff3838"
+                          isLoading={disableReject}
+                          loadingText='Rejecting'
+                          onClick={rejectTravelOrder}>
+                        Reject
+                      </Button>
 
-                      <FormButton
-                          variant="save"
-                          disabled={isSubmitting}
+                      <Button
+                          variant='outline'
                           type="submit"
-                          onClick={approveTravelOrder}
-                      >
-                        {isSubmitting ? "Approving..." : "Approve"}
-                      </FormButton>
+                          borderRadius="full"
+                          colorScheme='#562b85'
+                          _hover={{ color: "white", background:"#562b85" }}
+                          size="lg"
+                          color="black"
+                          borderColor="#562b85"
+                          isLoading={disableApprove}
+                          loadingText='Approving'
+                          onClick={approveTravelOrder}>
+                        Approve
+                      </Button>
+
                     </div>
                   </form>
                 )}
@@ -500,23 +566,35 @@ const SummaryDetails = (props) => {
                     </div>
                     <hr />
                     <div className={classes.form_action_wrapper}>
-                      <FormButton
-                          variant="cancel"
-                          disabled={isSubmitting}
+                      <Button
+                          variant='outline'
                           type="submit"
-                          onClick={rejectRequisition}
-                      >
-                        {isSubmitting ? "Rejecting..." : "Reject"}
-                      </FormButton>
+                          borderRadius="full"
+                          colorScheme='#ff3838'
+                          _hover={{ color: "white", background:"#ff3838" }}
+                          size="lg"
+                          color="black"
+                          borderColor="#ff3838"
+                          isLoading={disableReject}
+                          loadingText='Rejecting'
+                          onClick={rejectRequisition}>
+                        Reject
+                      </Button>
 
-                      <FormButton
-                          variant="save"
-                          disabled={isSubmitting}
+                      <Button
+                          variant='outline'
                           type="submit"
-                          onClick={approveRequisition}
-                      >
-                        {isSubmitting ? "Approving..." : "Approve"}
-                      </FormButton>
+                          borderRadius="full"
+                          colorScheme='#562b85'
+                          _hover={{ color: "white", background:"#562b85" }}
+                          size="lg"
+                          color="black"
+                          borderColor="#562b85"
+                          isLoading={disableApprove}
+                          loadingText='Approving'
+                          onClick={approveRequisition}>
+                        Approve
+                      </Button>
                     </div>
                   </form>
                 )}
@@ -540,23 +618,36 @@ const SummaryDetails = (props) => {
                     </div>
                     <hr />
                     <div className={classes.form_action_wrapper}>
-                      <FormButton
-                          variant="cancel"
-                          disabled={isSubmitting}
-                          type="submit"
-                          onClick={rejectRequisition}
-                      >
-                        {isSubmitting ? "Rejecting..." : "Reject"}
-                      </FormButton>
 
-                      <FormButton
-                          variant="save"
-                          disabled={isSubmitting}
+                      <Button
+                          variant='outline'
                           type="submit"
-                          onClick={approveRequisition}
-                      >
-                        {isSubmitting ? "Approving..." : "Approve"}
-                      </FormButton>
+                          borderRadius="full"
+                          colorScheme='#ff3838'
+                          _hover={{ color: "white", background:"#ff3838" }}
+                          size="lg"
+                          color="black"
+                          borderColor="#ff3838"
+                          isLoading={disableReject}
+                          loadingText='Rejecting'
+                          onClick={rejectRequisition}>
+                        Reject
+                      </Button>
+
+                      <Button
+                          variant='outline'
+                          type="submit"
+                          borderRadius="full"
+                          colorScheme='#562b85'
+                          _hover={{ color: "white", background:"#562b85" }}
+                          size="lg"
+                          color="black"
+                          borderColor="#562b85"
+                          isLoading={disableApprove}
+                          loadingText='Approving'
+                          onClick={approveRequisition}>
+                        Approve
+                      </Button>
                     </div>
                   </form>
                 )}
@@ -580,23 +671,35 @@ const SummaryDetails = (props) => {
                     </div>
                     <hr />
                     <div className={classes.form_action_wrapper}>
-                      <FormButton
-                          variant="cancel"
-                          disabled={isSubmitting}
+                      <Button
+                          variant='outline'
                           type="submit"
-                          onClick={rejectRequisition}
-                      >
-                        {isSubmitting ? "Rejecting..." : "Reject"}
-                      </FormButton>
+                          borderRadius="full"
+                          colorScheme='#ff3838'
+                          _hover={{ color: "white", background:"#ff3838" }}
+                          size="lg"
+                          color="black"
+                          borderColor="#ff3838"
+                          isLoading={disableReject}
+                          loadingText='Rejecting'
+                          onClick={rejectRequisition}>
+                        Reject
+                      </Button>
 
-                      <FormButton
-                          variant="save"
-                          disabled={isSubmitting}
+                      <Button
+                          variant='outline'
                           type="submit"
-                          onClick={approveRequisition}
-                      >
-                        {isSubmitting ? "Approving..." : "Approve"}
-                      </FormButton>
+                          borderRadius="full"
+                          colorScheme='#562b85'
+                          _hover={{ color: "white", background:"#562b85" }}
+                          size="lg"
+                          color="black"
+                          borderColor="#562b85"
+                          isLoading={disableApprove}
+                          loadingText='Approving'
+                          onClick={approveRequisition}>
+                        Approve
+                      </Button>
                     </div>
                   </form>
                 )}
@@ -620,23 +723,35 @@ const SummaryDetails = (props) => {
                     </div>
                     <hr />
                     <div className={classes.form_action_wrapper}>
-                      <FormButton
-                          variant="cancel"
-                          disabled={isSubmitting}
+                      <Button
+                          variant='outline'
                           type="submit"
-                          onClick={rejectRequisition}
-                      >
-                        {isSubmitting ? "Rejecting..." : "Reject"}
-                      </FormButton>
+                          borderRadius="full"
+                          colorScheme='#ff3838'
+                          _hover={{ color: "white", background:"#ff3838" }}
+                          size="lg"
+                          color="black"
+                          borderColor="#ff3838"
+                          isLoading={disableReject}
+                          loadingText='Rejecting'
+                          onClick={rejectRequisition}>
+                        Reject
+                      </Button>
 
-                      <FormButton
-                          variant="save"
-                          disabled={isSubmitting}
+                      <Button
+                          variant='outline'
                           type="submit"
-                          onClick={approveRequisition}
-                      >
-                        {isSubmitting ? "Approving..." : "Approve"}
-                      </FormButton>
+                          borderRadius="full"
+                          colorScheme='#562b85'
+                          _hover={{ color: "white", background:"#562b85" }}
+                          size="lg"
+                          color="black"
+                          borderColor="#562b85"
+                          isLoading={disableApprove}
+                          loadingText='Approving'
+                          onClick={approveRequisition}>
+                        Approve
+                      </Button>
                     </div>
                   </form>
                 )}
@@ -685,23 +800,35 @@ const SummaryDetails = (props) => {
                     </div>
                     <hr />
                     <div className={classes.form_action_wrapper}>
-                      <FormButton
-                          variant="cancel"
-                          disabled={isSubmitting}
+                      <Button
+                          variant='outline'
                           type="submit"
-                          onClick={rejectLeave}
-                      >
-                        {isSubmitting ? "Rejecting..." : "Reject"}
-                      </FormButton>
+                          borderRadius="full"
+                          colorScheme='#ff3838'
+                          _hover={{ color: "white", background:"#ff3838" }}
+                          size="lg"
+                          color="black"
+                          borderColor="#ff3838"
+                          isLoading={disableReject}
+                          loadingText='Rejecting'
+                          onClick={rejectLeave}>
+                        Reject
+                      </Button>
 
-                      <FormButton
-                          variant="save"
-                          disabled={isSubmitting}
+                      <Button
+                          variant='outline'
                           type="submit"
-                          onClick={approveLeave}
-                      >
-                        {isSubmitting ? "Approving..." : "Approve"}
-                      </FormButton>
+                          borderRadius="full"
+                          colorScheme='#562b85'
+                          _hover={{ color: "white", background:"#562b85" }}
+                          size="lg"
+                          color="black"
+                          borderColor="#562b85"
+                          isLoading={disableApprove}
+                          loadingText='Approving'
+                          onClick={approveLeave}>
+                        Approve
+                      </Button>
                     </div>
                   </form>
                 )}
@@ -723,23 +850,35 @@ const SummaryDetails = (props) => {
                     </div>
                     <hr />
                     <div className={classes.form_action_wrapper}>
-                      <FormButton
-                          variant="cancel"
-                          disabled={isSubmitting}
+                      <Button
+                          variant='outline'
                           type="submit"
-                          onClick={rejectLeave}
-                      >
-                        {isSubmitting ? "Rejecting..." : "Reject"}
-                      </FormButton>
+                          borderRadius="full"
+                          colorScheme='#ff3838'
+                          _hover={{ color: "white", background:"#ff3838" }}
+                          size="lg"
+                          color="black"
+                          borderColor="#ff3838"
+                          isLoading={disableReject}
+                          loadingText='Rejecting'
+                          onClick={rejectLeave}>
+                        Reject
+                      </Button>
 
-                      <FormButton
-                          variant="save"
-                          disabled={isSubmitting}
+                      <Button
+                          variant='outline'
                           type="submit"
-                          onClick={approveLeave}
-                      >
-                        {isSubmitting ? "Approving..." : "Approve"}
-                      </FormButton>
+                          borderRadius="full"
+                          colorScheme='#562b85'
+                          _hover={{ color: "white", background:"#562b85" }}
+                          size="lg"
+                          color="black"
+                          borderColor="#562b85"
+                          isLoading={disableApprove}
+                          loadingText='Approving'
+                          onClick={approveLeave}>
+                        Approve
+                      </Button>
                     </div>
                   </form>
                 )}
@@ -761,23 +900,35 @@ const SummaryDetails = (props) => {
                     </div>
                     <hr />
                     <div className={classes.form_action_wrapper}>
-                      <FormButton
-                          variant="cancel"
-                          disabled={isSubmitting}
+                      <Button
+                          variant='outline'
                           type="submit"
-                          onClick={rejectLeave}
-                      >
-                        {isSubmitting ? "Rejecting..." : "Reject"}
-                      </FormButton>
+                          borderRadius="full"
+                          colorScheme='#ff3838'
+                          _hover={{ color: "white", background:"#ff3838" }}
+                          size="lg"
+                          color="black"
+                          borderColor="#ff3838"
+                          isLoading={disableReject}
+                          loadingText='Rejecting'
+                          onClick={rejectLeave}>
+                        Reject
+                      </Button>
 
-                      <FormButton
-                          variant="save"
-                          disabled={isSubmitting}
+                      <Button
+                          variant='outline'
                           type="submit"
-                          onClick={approveLeave}
-                      >
-                        {isSubmitting ? "Approving..." : "Approve"}
-                      </FormButton>
+                          borderRadius="full"
+                          colorScheme='#562b85'
+                          _hover={{ color: "white", background:"#562b85" }}
+                          size="lg"
+                          color="black"
+                          borderColor="#562b85"
+                          isLoading={disableApprove}
+                          loadingText='Approving'
+                          onClick={approveLeave}>
+                        Approve
+                      </Button>
                     </div>
                   </form>
                 )}
@@ -826,23 +977,35 @@ const SummaryDetails = (props) => {
                     </div>
                     <hr />
                     <div className={classes.form_action_wrapper}>
-                      <FormButton
-                          variant="cancel"
-                          disabled={isSubmitting}
+                      <Button
+                          variant='outline'
                           type="submit"
-                          onClick={rejectAdvance}
-                      >
-                        {isSubmitting ? "Rejecting..." : "Reject"}
-                      </FormButton>
+                          borderRadius="full"
+                          colorScheme='#ff3838'
+                          _hover={{ color: "white", background:"#ff3838" }}
+                          size="lg"
+                          color="black"
+                          borderColor="#ff3838"
+                          isLoading={disableReject}
+                          loadingText='Rejecting'
+                          onClick={rejectAdvance}>
+                        Reject
+                      </Button>
 
-                      <FormButton
-                          variant="save"
-                          disabled={isSubmitting}
+                      <Button
+                          variant='outline'
                           type="submit"
-                          onClick={approveAdvance}
-                      >
-                        {isSubmitting ? "Approving..." : "Approve"}
-                      </FormButton>
+                          borderRadius="full"
+                          colorScheme='#562b85'
+                          _hover={{ color: "white", background:"#562b85" }}
+                          size="lg"
+                          color="black"
+                          borderColor="#562b85"
+                          isLoading={disableApprove}
+                          loadingText='Approving'
+                          onClick={approveLeave}>
+                        Approve
+                      </Button>
                     </div>
                   </form>
                 )}
@@ -865,23 +1028,35 @@ const SummaryDetails = (props) => {
                     </div>
                     <hr />
                     <div className={classes.form_action_wrapper}>
-                      <FormButton
-                          variant="cancel"
-                          disabled={isSubmitting}
+                      <Button
+                          variant='outline'
                           type="submit"
-                          onClick={rejectAdvance}
-                      >
-                        {isSubmitting ? "Rejecting..." : "Reject"}
-                      </FormButton>
+                          borderRadius="full"
+                          colorScheme='#ff3838'
+                          _hover={{ color: "white", background:"#ff3838" }}
+                          size="lg"
+                          color="black"
+                          borderColor="#ff3838"
+                          isLoading={disableReject}
+                          loadingText='Rejecting'
+                          onClick={rejectAdvance}>
+                        Reject
+                      </Button>
 
-                      <FormButton
-                          variant="save"
-                          disabled={isSubmitting}
+                      <Button
+                          variant='outline'
                           type="submit"
-                          onClick={approveAdvance}
-                      >
-                        {isSubmitting ? "Approving..." : "Approve"}
-                      </FormButton>
+                          borderRadius="full"
+                          colorScheme='#562b85'
+                          _hover={{ color: "white", background:"#562b85" }}
+                          size="lg"
+                          color="black"
+                          borderColor="#562b85"
+                          isLoading={disableApprove}
+                          loadingText='Approving'
+                          onClick={approveAdvance}>
+                        Approve
+                      </Button>
                     </div>
                   </form>
                 )}
@@ -903,23 +1078,35 @@ const SummaryDetails = (props) => {
                     </div>
                     <hr />
                     <div className={classes.form_action_wrapper}>
-                      <FormButton
-                          variant="cancel"
-                          disabled={isSubmitting}
+                      <Button
+                          variant='outline'
                           type="submit"
-                          onClick={rejectAdvance}
-                      >
-                        {isSubmitting ? "Rejecting..." : "Reject"}
-                      </FormButton>
+                          borderRadius="full"
+                          colorScheme='#ff3838'
+                          _hover={{ color: "white", background:"#ff3838" }}
+                          size="lg"
+                          color="black"
+                          borderColor="#ff3838"
+                          isLoading={disableReject}
+                          loadingText='Rejecting'
+                          onClick={rejectAdvance}>
+                        Reject
+                      </Button>
 
-                      <FormButton
-                          variant="save"
-                          disabled={isSubmitting}
+                      <Button
+                          variant='outline'
                           type="submit"
-                          onClick={approveAdvance}
-                      >
-                        {isSubmitting ? "Approving..." : "Approve"}
-                      </FormButton>
+                          borderRadius="full"
+                          colorScheme='#562b85'
+                          _hover={{ color: "white", background:"#562b85" }}
+                          size="lg"
+                          color="black"
+                          borderColor="#562b85"
+                          isLoading={disableApprove}
+                          loadingText='Approving'
+                          onClick={approveAdvance}>
+                        Approve
+                      </Button>
                     </div>
                   </form>
                 )}
@@ -941,23 +1128,35 @@ const SummaryDetails = (props) => {
                     </div>
                     <hr />
                     <div className={classes.form_action_wrapper}>
-                      <FormButton
-                          variant="cancel"
-                          disabled={isSubmitting}
+                      <Button
+                          variant='outline'
                           type="submit"
-                          onClick={rejectAdvance}
-                      >
-                        {isSubmitting ? "Rejecting..." : "Reject"}
-                      </FormButton>
+                          borderRadius="full"
+                          colorScheme='#ff3838'
+                          _hover={{ color: "white", background:"#ff3838" }}
+                          size="lg"
+                          color="black"
+                          borderColor="#ff3838"
+                          isLoading={disableReject}
+                          loadingText='Rejecting'
+                          onClick={rejectAdvance}>
+                        Reject
+                      </Button>
 
-                      <FormButton
-                          variant="save"
-                          disabled={isSubmitting}
+                      <Button
+                          variant='outline'
                           type="submit"
-                          onClick={approveAdvance}
-                      >
-                        {isSubmitting ? "Approving..." : "Approve"}
-                      </FormButton>
+                          borderRadius="full"
+                          colorScheme='#562b85'
+                          _hover={{ color: "white", background:"#562b85" }}
+                          size="lg"
+                          color="black"
+                          borderColor="#562b85"
+                          isLoading={disableApprove}
+                          loadingText='Approving'
+                          onClick={approveAdvance}>
+                        Approve
+                      </Button>
                     </div>
                   </form>
                 )}
