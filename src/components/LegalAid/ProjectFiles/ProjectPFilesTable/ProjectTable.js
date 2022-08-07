@@ -9,11 +9,22 @@ import { useNavigate } from "react-router-dom";
 const ProjectTable = () => {
   const navigate = useNavigate();
   const handleClick = (type) => {
-    if (type === "documents") {
-      navigate("/project-files/documents");
-    } else {
-      return;
+    {type === "documents"
+      ? navigate("/project-files/documents")
+        : type === "progress"
+      ? navigate("/project-files/progress")
+            :navigate("/project-files/logframe")
+
+
     }
+
+
+    // if (type === "documents") {
+    //   navigate("/project-files/documents");
+    // } elseif(type === "progress") {
+    //   navigate("/project-files/progress")
+    // }
+    // }
   };
   return (
     <>
