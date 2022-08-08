@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Table,
   Thead,
@@ -7,18 +7,19 @@ import {
   Td,
   IconButton,
   useDisclosure,
-} from "@chakra-ui/react";
-import classes from "../../../Membership/Allocations/AllocationsTable/AllocationsTable.module.css";
-import styles from "./Table.module.css";
-import { TableHeadColumn } from "../../../Membership/Allocations/AllocationsTable/AllocationsTable";
-import { FcApproval } from "react-icons/fc";
-import { MdEdit } from "react-icons/md";
-import Modal from "../../../common/Modal";
-import NewClvForm from "../CLVForms/NewClvForm";
-import { formatDate } from "../../../../lib/data";
-import withTable from "./../../../../hoc/withTable";
-import { clvInitialValues, clvSchema } from "../CLVForms/schema";
-import { useEditClv } from "../../../../hooks/useClv";
+} from '@chakra-ui/react';
+import classes from '../../../Membership/Allocations/AllocationsTable/AllocationsTable.module.css';
+import styles from './Table.module.css';
+import { TableHeadColumn } from '../../../Membership/Allocations/AllocationsTable/AllocationsTable';
+import { FcApproval } from 'react-icons/fc';
+import { MdEdit } from 'react-icons/md';
+import Modal from '../../../common/Modal';
+import NewClvForm from '../CLVForms/NewClvForm';
+import { formatDate } from '../../../../lib/data';
+import withTable from './../../../../hoc/withTable';
+import { clvInitialValues, clvSchema } from '../CLVForms/schema';
+import { useEditClv } from '../../../../hooks/useClv';
+import { isoToDate } from '../../../../lib/formatDate';
 
 const CLVTable = ({ data }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -26,17 +27,21 @@ const CLVTable = ({ data }) => {
   const [isEdit, setIsEdit] = useState(false);
 
   const [avatar, setAvatar] = useState(null);
-  const [url, setImageUrl] = useState("");
+  const [url, setImageUrl] = useState('');
 
   const initiateApproval = (row) => {
     setIsEdit(false);
-    setSelectedRow(row);
     setImageUrl(row.image);
-    onOpen();
+    initiateRow(row);
   };
 
   const initiateEdit = (row) => {
     setIsEdit(true);
+    initiateRow(row);
+  };
+
+  const initiateRow = (row) => {
+    delete row.registeredBy;
     setSelectedRow(row);
     onOpen();
   };
@@ -45,8 +50,18 @@ const CLVTable = ({ data }) => {
     return { isActive: !values.isActive, id: values.id };
   };
 
+  const editClv = (values) => {
+    return { ...values, id: values.id };
+  };
+
   const mutateInitialValues = (initialValues) => {
-    return { ...initialValues, ...selectedRow };
+    return {
+      ...initialValues,
+      ...selectedRow,
+      recruitmentDate: isoToDate(selectedRow.recruitmentDate),
+      expiryDate: isoToDate(selectedRow.expiryDate),
+      project: selectedRow.project.name,
+    };
   };
 
   return (
@@ -137,16 +152,16 @@ const CLVTable = ({ data }) => {
         </Table>
         <Modal isOpen={isOpen} onClose={onClose}>
           <NewClvForm
-            action={isEdit ? "editClv" : "approveClv"}
+            action={isEdit ? 'editClv' : 'approveClv'}
             validationSchema={isEdit ? clvSchema : null}
             onSuccess={onClose}
-            success={isEdit ? "CLV updated successfully" : "CLV Approved"}
+            success={isEdit ? 'CLV updated successfully' : 'CLV Approved'}
             initialValues={clvInitialValues}
             useMutate={useEditClv}
             mutateInitialValues={mutateInitialValues}
             onClose={onClose}
             isMutable={isEdit ? false : true}
-            mutateData={toggleApproval}
+            mutateData={isEdit ? editClv : toggleApproval}
             setAvatar={setAvatar}
             setImageUrl={setImageUrl}
             url={url}
