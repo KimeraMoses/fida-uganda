@@ -31,18 +31,18 @@ const CLVTable = ({ data }) => {
 
   const initiateApproval = (row) => {
     setIsEdit(false);
-    setImageUrl(row.image);
     initiateRow(row);
   };
-
+  
   const initiateEdit = (row) => {
     setIsEdit(true);
     initiateRow(row);
   };
-
+  
   const initiateRow = (row) => {
     delete row.registeredBy;
     setSelectedRow(row);
+    setImageUrl(row.image);
     onOpen();
   };
 
@@ -60,7 +60,7 @@ const CLVTable = ({ data }) => {
       ...selectedRow,
       recruitmentDate: isoToDate(selectedRow.recruitmentDate),
       expiryDate: isoToDate(selectedRow.expiryDate),
-      project: selectedRow.project.name,
+      project: selectedRow.project.id,
     };
   };
 
