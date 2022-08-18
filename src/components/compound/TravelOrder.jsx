@@ -25,8 +25,7 @@ const TravelOrder = () => {
         <Loader />
       ) : (
         <>
-          <TableSearch btnLabel="Travel Order" btnClick={onOpen} />
-          <SubHeading title="New Requests" />
+      
           <TravelOrderTable data={data?.travelOrders} type="new"/>
           <br/>
           <SubHeading title="Approved Request" />
