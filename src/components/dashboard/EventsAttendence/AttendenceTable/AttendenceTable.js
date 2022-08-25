@@ -4,6 +4,7 @@ import classes from "./Table.module.css";
 import { TableHeadColumn } from "../../../Membership/Approvals/ApprovalTable/ApprovedTable";
 import { formatDate } from "../../../../lib/data";
 import sortByDate from "../../../../lib/sortByDate";
+import withTable from "../../../../hoc/withTable";
 
 const AttendenceTable = ({ data }) => {
   return (
@@ -64,4 +65,4 @@ const AttendenceTable = ({ data }) => {
   );
 };
 
-export default AttendenceTable;
+export default withTable(AttendenceTable);
