@@ -13,7 +13,7 @@ import Loader from "../common/UI/Loader/Loader";
 import { travelOrderInitialValues, travelOrderSchema } from "../forms/travelOrder/schemas/travelOrder";
 
 const TravelOrder = () => {
-  const { isOpen, onClose } = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const { data, isLoading } = useTravelOrders();
 
 
@@ -25,7 +25,7 @@ const TravelOrder = () => {
       ) : (
         <>
           <SubHeading title="New Requests" />
-          <TravelOrderTable data={data?.travelOrders} type="new"/>
+          <TravelOrderTable data={data?.travelOrders} type="new" btnLabel="Travel Order" btnClick={onOpen}/>
           <br/>
           <SubHeading title="Approved Request" />
           <TravelOrderTable data={data?.travelOrders} type="approved"/>

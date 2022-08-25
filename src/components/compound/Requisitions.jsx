@@ -7,6 +7,7 @@ import {
   useAddRequisition,
   useRequisitions,
 } from "../../hooks/useRequisitions";
+
 import SubHeading from "./../Tasks/SubHeading/SubHeading";
 import RequisitionTable from "../dashboard/Requisitions/RequisitionsTable";
 import {
@@ -16,7 +17,7 @@ import {
 import Loader from "../common/UI/Loader/Loader";
 
 const Requisitions = () => {
-  const { isOpen, onClose } = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const { data, isLoading } = useRequisitions();
 
   return (
@@ -28,7 +29,7 @@ const Requisitions = () => {
       ) : (
         <>
           <SubHeading title="New Requests" />
-          <RequisitionTable data={data?.Requisitions} type="new"/>
+          <RequisitionTable data={data?.Requisitions} type="new" btnLabel="Add Requisition" btnClick={onOpen} />
           <br/>
           <SubHeading title="Approved Requisitions"  />
           <RequisitionTable data={data?.Requisitions} type="approved"/>
