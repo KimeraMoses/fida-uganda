@@ -16,7 +16,7 @@ import {
 import Loader from "../common/UI/Loader/Loader";
 
 const Requisitions = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onClose } = useDisclosure();
   const { data, isLoading } = useRequisitions();
 
   return (
