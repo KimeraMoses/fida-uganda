@@ -3,14 +3,14 @@ import React from "react";
 import { useAddEvent, useEvents } from "../../../hooks/useEvents";
 import Modal from "../../common/Modal";
 import SectionHeader from "../../common/SectionHeader";
-import TableSearch from "../../common/table/TableSearch";
+// import TableSearch from "../../common/table/TableSearch";
 import Loader from "../../common/UI/Loader/Loader";
 import AttendenceTable from "./AttendenceTable/AttendenceTable";
 import NewAttendence from "./NewAttendence/NewAttendence";
 import { attendanceInitialValues, attendanceSchema } from "./NewAttendence/schema";
 
 const EventAttendence = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onClose } = useDisclosure();
   const { data, isLoading } = useEvents();
 
   return (
@@ -20,7 +20,7 @@ const EventAttendence = () => {
         <Loader />
       ) : (
         <>
-          <TableSearch btnLabel="Add Attendence" btnClick={onOpen} />
+          {/*<TableSearch btnLabel="Add Attendence" btnClick={onOpen} />*/}
           {data?.events && <AttendenceTable data={data?.events} />}
         </>
       )}
