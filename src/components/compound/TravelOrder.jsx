@@ -9,7 +9,6 @@ import Modal from "../common/Modal";
 import TravelOrderForm from "../forms/travelOrder/TravelOrderForm";
 import TravelOrderTable from "../dashboard/TravelOrder/TravelOrderTable";
 import SubHeading from "./../Tasks/SubHeading/SubHeading";
-import TableSearch from "../common/table/TableSearch";
 import Loader from "../common/UI/Loader/Loader";
 import { travelOrderInitialValues, travelOrderSchema } from "../forms/travelOrder/schemas/travelOrder";
 
@@ -25,7 +24,7 @@ const TravelOrder = () => {
         <Loader />
       ) : (
         <>
-          <TableSearch btnLabel="Travel Order" btnClick={onOpen} />
+          {/*<TableSearch btnLabel="Travel Order" btnClick={onOpen} />*/}
           <SubHeading title="New Requests" />
           <TravelOrderTable data={data?.travelOrders} type="new"/>
           <br/>

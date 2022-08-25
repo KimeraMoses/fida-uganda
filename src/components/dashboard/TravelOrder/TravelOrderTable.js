@@ -5,6 +5,7 @@ import { TableHeadColumn } from "../../HumanResource/Approvals/ApprovalTable/App
 import { formatDate } from "../../../lib/data";
 import { useNavigate } from "react-router-dom";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
+import withTable from "../../../hoc/withTable";
 
 const TravelOrderTable = ({ data, type }) => {
   // console.log(data);
@@ -63,4 +64,4 @@ const TravelOrderTable = ({ data, type }) => {
   );
 };
 
-export default TravelOrderTable;
+export default withTable(TravelOrderTable);
