@@ -298,9 +298,7 @@ const advanceData4 = [
 
 
 const SummaryTable = ({ data }) => {
-  console.log(data);
-  console.log(data?.requisition?.approval_levels?.length)
-
+  // console.log(data);
 
   return (
     <>

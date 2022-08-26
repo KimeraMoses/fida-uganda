@@ -7,6 +7,7 @@ import { TableHeadColumn } from "../../HumanResource/Approvals/ApprovalTable/App
 import { useNavigate } from "react-router-dom";
 
 import classes from "../../common/table/TableStyles.module.css";
+import withTable from "../../../hoc/withTable";
 
 const RequisitionTable = ({ data, type }) => {
   
@@ -64,4 +65,4 @@ const RequisitionTable = ({ data, type }) => {
   );
 };
 
-export default RequisitionTable;
+export default withTable(RequisitionTable);

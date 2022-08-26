@@ -13,7 +13,7 @@ const FolderFilesTable = ({ data }) => {
   const handleOpenFile = (id) => {
     navigate(`/reports/reportFolder/${id}`);
   };
-
+// console.log(data)
   return (
     <>
       <div className={classes.approvals_table_wrapper}>
