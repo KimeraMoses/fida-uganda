@@ -361,24 +361,6 @@ const SummaryDetails = (props) => {
                           onClick={approveTravelOrder}>
                         Approve
                       </Button>
-                      {/*<FormButton*/}
-                      {/*    variant="cancel"*/}
-                      {/*    disabled={isDisabled}*/}
-                      {/*    type="submit"*/}
-                      {/*    onClick={approveTravelOrder}*/}
-                      {/*>*/}
-                      {/*  {isSubmitting ? "Rejecting..." : "Reject"}*/}
-                      {/*</FormButton>*/}
-
-                      {/*<FormButton*/}
-                      {/*    variant="save"*/}
-                      {/*    disabled={isDisabled}*/}
-                      {/*    type="submit"*/}
-                      {/*    onClick={approveTravelOrder}*/}
-                      {/*>*/}
-                      {/*  {isSubmitting ? "Approving..." : "Approve"}*/}
-                      {/*</FormButton>*/}
-
                     </div>
                   </form>
                 )}

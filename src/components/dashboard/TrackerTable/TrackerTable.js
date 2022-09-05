@@ -10,7 +10,7 @@ const TableHeadColumn = (props) => {
 };
 
 const TrackerTable = ({ type, action, data, isLoading }) => {
-  console.log(data);
+  // console.log(data);
   return (
     <>
       <div className={classes.table_container}>
