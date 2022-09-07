@@ -6,9 +6,10 @@ import { formatDate } from "../../../lib/data";
 import { useNavigate } from "react-router-dom";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import withTable from "../../../hoc/withTable";
+import withTable from "../../../hoc/withTable";
 
 const TravelOrderTable = ({ data, type }) => {
-  console.log(data);
+  // console.log(data);
   const navigate = useNavigate();
   const handleViewSummary = (id) => {
     navigate(`/travel-order/${id}?status=${type}`);
