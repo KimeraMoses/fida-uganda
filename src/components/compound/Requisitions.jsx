@@ -7,7 +7,7 @@ import {
   useAddRequisition,
   useRequisitions,
 } from "../../hooks/useRequisitions";
-import TableSearch from "../common/table/TableSearch";
+
 import SubHeading from "./../Tasks/SubHeading/SubHeading";
 import RequisitionTable from "../dashboard/Requisitions/RequisitionsTable";
 import {
@@ -28,9 +28,8 @@ const Requisitions = () => {
         <Loader />
       ) : (
         <>
-          <TableSearch btnLabel="Add Requisition" btnClick={onOpen} />
           <SubHeading title="New Requests" />
-          <RequisitionTable data={data?.Requisitions} type="new"/>
+          <RequisitionTable data={data?.Requisitions} type="new" btnLabel="Add Requisition" btnClick={onOpen} />
           <br/>
           <SubHeading title="Approved Requisitions"  />
           <RequisitionTable data={data?.Requisitions} type="approved"/>
@@ -41,7 +40,6 @@ const Requisitions = () => {
       )}
       <Modal isOpen={isOpen} onClose={onClose} title="Requisition">
         <RequisitionForm
-          title="Requisitions"
           initialValues={requisitionInitialValues}
           validationSchema={requisitionSchema}
           onSuccess={onClose}

@@ -15,7 +15,7 @@ const AddITServiceForm = ({ isSubmitting }) => {
         <InputField name="description" placeholder="Description" />
       </SimpleGrid>
       <SimpleGrid columns={2} gap={5}>
-        <InputField name="state" placeholder="State" />
+        <InputField name="status" placeholder="Status" />
         <InputField name="class" placeholder="Class" />
       </SimpleGrid>
       <SimpleGrid columns={2} gap={5}>

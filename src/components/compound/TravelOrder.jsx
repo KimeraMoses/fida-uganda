@@ -1,37 +1,21 @@
-import { useEffect } from "react";
-import { useDisclosure, useToast } from "@chakra-ui/react";
-import { TRAVEL_ORDER_CREATED } from "../../lib/constants";
+
+import { useDisclosure } from "@chakra-ui/react";
 import {
   useAddTravelOrder,
   useTravelOrders,
 } from "../../hooks/useTravelOrders";
-import { toastSuccess } from "../../lib/toastDetails";
 import SectionHeader from "../common/SectionHeader";
 import Modal from "../common/Modal";
 import TravelOrderForm from "../forms/travelOrder/TravelOrderForm";
 import TravelOrderTable from "../dashboard/TravelOrder/TravelOrderTable";
 import SubHeading from "./../Tasks/SubHeading/SubHeading";
-import TableSearch from "../common/table/TableSearch";
 import Loader from "../common/UI/Loader/Loader";
+import { travelOrderInitialValues, travelOrderSchema } from "../forms/travelOrder/schemas/travelOrder";
 
 const TravelOrder = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const toast = useToast();
   const { data, isLoading } = useTravelOrders();
-  const {
-    mutate,
-    isLoading: isSubmitting,
-    isError,
-    error,
-    isSuccess,
-  } = useAddTravelOrder();
 
-  useEffect(() => {
-    if (isSuccess) {
-      toast(toastSuccess(TRAVEL_ORDER_CREATED));
-      onClose();
-    }
-  }, [isSuccess, onClose, toast]);
 
   return (
     <>
@@ -40,9 +24,8 @@ const TravelOrder = () => {
         <Loader />
       ) : (
         <>
-          <TableSearch btnLabel="Travel Order" btnClick={onOpen} />
           <SubHeading title="New Requests" />
-          <TravelOrderTable data={data?.travelOrders} type="new"/>
+          <TravelOrderTable data={data?.travelOrders} type="new" btnLabel="Travel Order" btnClick={onOpen}/>
           <br/>
           <SubHeading title="Approved Request" />
           <TravelOrderTable data={data?.travelOrders} type="approved"/>
@@ -53,10 +36,11 @@ const TravelOrder = () => {
       )}
       <Modal isOpen={isOpen} onClose={onClose} title="Travel Order" size="2xl">
         <TravelOrderForm
-          onSubmit={mutate}
-          isSubmitting={isSubmitting}
-          isError={isError}
-          error={error}
+          initialValues={travelOrderInitialValues}
+          validationSchema={travelOrderSchema}
+          onSuccess={onClose}
+          success={`Travel order added successfully`}
+          useMutate={useAddTravelOrder}
         />
       </Modal>
     </>

@@ -5,6 +5,10 @@ export const getAllRequisitions = async () => {
   return await axiosClient.get(routes.requisitions.getRequisitions);
 };
 
+export const getAllApprovedRequisitions = async () => {
+  return await axiosClient.get(routes.requisitions.getAllApproved);
+}
+
 export const getRequisition = async (id) => {
   return await axiosClient.get(`${routes.requisitions.base}/${id}`);
 
@@ -17,3 +21,11 @@ export const getRequisitionsStats = async () => {
 export const addRequisition = async (values) => {
   return await axiosClient.post(routes.requisitions.addRequisition, values);
 };
+
+export const approveRequisition = async ({reqName, remarks}) => {
+  return await axiosClient.post(`${routes.requisitions.approveRequisition}/${reqName}`, {remarks} );
+}
+
+export const rejectRequisition = async ({reqName, remarks}) => {
+  return await axiosClient.post(`${routes.requisitions.rejectRequisition}/${reqName}`,{remarks});
+}

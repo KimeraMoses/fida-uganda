@@ -5,7 +5,7 @@ import FidaAssetsTable from "./FidaAssetsTable/FidaAssetsTable";
 import NewAsset from "./NewAsset/NewAsset";
 import { useAddAsset, useAssets } from "../../../hooks/useAsset";
 import { useProjectOptions } from "../../../hooks/useProjects";
-import { assetInitialValues } from "./NewAsset/schema";
+import { assetInitialValues, assetSchema } from "./NewAsset/schema";
 import Loader from "./../../common/UI/Loader/Loader";
 
 const FidaAssets = () => {
@@ -37,12 +37,12 @@ const FidaAssets = () => {
         size="3xl"
       >
         <NewAsset
-          projectOptions={projectOptions}
           initialValues={assetInitialValues}
-          // validationSchema={assetSchema}
+          validationSchema={assetSchema}
           onSuccess={onClose}
           success={`Asset added successfully`}
           useMutate={useAddAsset}
+          projectOptions={projectOptions}
         />
       </Modal>
     </>
