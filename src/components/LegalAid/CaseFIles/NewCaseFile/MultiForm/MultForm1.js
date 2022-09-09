@@ -30,17 +30,24 @@ const MultForm1 = ({
       {isClvCaseFile && (
         <div className={classes.field_wrapper}>
           <div className={classes.field_label}>CLV Details</div>
-          <SimpleGrid columns={4} spacing={2} style={{ alignItems: "center" }}>
+          <SimpleGrid
+            columns={2}
+            spacing={2}
+            style={{ justifyContent: "space-between", alignItems: "center" }}
+          >
             <SearchableField
               placeholder="CLV Name"
               data={clvs}
               setSelectedItem={setSelectedClvName}
               selectedItem={selectedClvName.name}
               name="clvName"
+              defaultValue={
+                clvs?.find((clv) => clv?.id === selectedClvName?.id)?.name
+              }
             />
-            <div>{selectedClvName.id}</div>
+            {/* <div>{selectedClvName.id}</div> */}
             <div>{selectedClvName.project?.name}</div>
-            <div>{selectedClvName.district}</div>
+            {/* <div>{selectedClvName.district}</div> */}
           </SimpleGrid>
         </div>
       )}
@@ -61,6 +68,7 @@ const MultForm1 = ({
             setSelectedItem={setSelectedClient}
             selectedItem={selectedClient.name}
             name="searchClient"
+            defaultValue={selectedClient.name}
           />
 
           <InputField placeholder="Type Here" name="respondentName" fullwidth />

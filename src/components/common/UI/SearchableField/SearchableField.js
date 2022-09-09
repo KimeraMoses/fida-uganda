@@ -8,6 +8,7 @@ const SearchableField = ({
   name,
   selectedItem,
   disabled,
+  defaultValue,
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -43,6 +44,7 @@ const SearchableField = ({
       keyWordHandler={keyWordSearchHandler}
       searchTerm={searchTerm}
       selectedItem={selectedItem}
+      defaultValue={defaultValue}
       searchResults={searchResults}
       itemClickHandler={selectedItemHandler}
       name={name}
