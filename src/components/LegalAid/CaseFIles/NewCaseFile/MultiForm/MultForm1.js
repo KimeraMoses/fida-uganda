@@ -135,7 +135,15 @@ const MultForm1 = ({
         <SimpleGrid columns={3} spacing={2} style={{ alignItems: 'center' }}>
           <div className={styles.field_row_label}>Marital Status</div>
           <div>{selectedClient.marital_status}</div>
-          <InputField placeholder="Type Here" name="respondentMaritalStatus" />
+          <SelectField
+            name="respondentMaritalStatus"
+            placeholder="Select Status"
+            options={[
+              { label: 'Single', value: 'single' },
+              { label: 'Married', value: 'married' },
+              { label: 'Divorced', value: 'divorced' },
+            ]}
+          />
         </SimpleGrid>
         <SimpleGrid columns={3} spacing={2} style={{ alignItems: 'center' }}>
           <div className={styles.field_row_label}>Accompanied By</div>
