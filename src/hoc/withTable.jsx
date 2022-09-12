@@ -73,21 +73,22 @@ const withTable = (TableComponent) => {
         return Object.values(row);
       });
 
-
-
     const handleDownload = () => {
-      const doc = new jsPDF({
-        orientation: "landscape",
-      });
-      doc.text(`${tableName}`, 10, 10);
-      doc.autoTable({
-        theme: "grid",
-        columnStyles: { valign: "center" },
-        headStyles: { minCellWidth: 20 },
-        head: [filteredtableKeys],
-        body: formattedData,
-      });
-      doc.save(`${tableName}-${new Date().toLocaleString("en-GB")}.pdf`);
+      if (formattedData) {
+        const doc = new jsPDF({
+          orientation: "landscape",
+        });
+        doc.text(`${tableName}`, 10, 10);
+        doc.autoTable({
+          theme: "grid",
+          columnStyles: { valign: "center" },
+          headStyles: { minCellWidth: 20 },
+          head: [filteredtableKeys],
+          body: formattedData,
+        });
+        doc.save(`${tableName}-${new Date().toLocaleString("en-GB")}.pdf`);
+      }
+      return;
     };
 
     const downloadExcel = () => {
