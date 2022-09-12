@@ -101,6 +101,10 @@ export const routes = {
     stats: `${BASE_URL}/cases/getCasesNumber`,
     getMyCases: `${BASE_URL}/cases/getMyCases`,
     getClvCases: `${BASE_URL}/cases/getClvCases`,
+    addCaseComments: `${BASE_URL}/caseComments/create`,
+    baseCaseComment: `${BASE_URL}/caseComments/`,
+    getCommentsByCase: `${BASE_URL}/caseComments/getCommentByCase/`,
+    editCaseComment: `${BASE_URL}/caseComments/edit/`
   },
   requisitions: {
     getRequisitions: `${BASE_URL}/requisitions/getAll`,

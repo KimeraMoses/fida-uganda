@@ -38,7 +38,7 @@ const NewCaseFile = ({ isClvCaseFile, onClose, isNewCaseFile = false }) => {
   const [referredTo, setReferredTo] = useState({});
   const dispatch = useDispatch();
 
-  console.log(caseFile?.complainant);
+  console.log(caseFile);
 
   const mutateForm1 = (values) => {
     const data = {
