@@ -1,34 +1,46 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   useAddMember,
-  useMemberId,
   useUpdateMember,
-} from "../../../../hooks/useMember";
-import UserDetails from "./MultiForm/UserDetails";
-import UserExperience from "./MultiForm/UserExperience";
-import UserHobbies from "./MultiForm/UserHobbies";
-import UserInterests from "./MultiForm/UserInterests";
+  useSelectedMember,
+} from '../../../../hooks/useMember';
+import UserDetails from './MultiForm/UserDetails';
+import UserExperience from './MultiForm/UserExperience';
+import UserHobbies from './MultiForm/UserHobbies';
+import UserInterests from './MultiForm/UserInterests';
+import { useDispatch } from 'react-redux';
 import {
   initialValuesFour,
   initialValuesOne,
   initialValuesOneSchema,
   initialValuesThree,
   initialValuesTwo,
-} from "./schema";
+  mutateInitialValuesFour,
+  mutateInitialValuesOne,
+  mutateInitialValuesThree,
+  mutateInitialValuesTwo,
+} from './schema';
+import { resetCaseFile } from '../../../../store/caseFileReducer';
+import { selectMember } from '../../../../store/memberReducer';
 
-const NewMembersForm = ({ onClose }) => {
-  const memberId = useMemberId();
+const NewMembersForm = ({ onClose, isNew = false }) => {
+  const dispatch = useDispatch();
+  const selectedMember = useSelectedMember();
   const limit = 4;
-  const MEMBER_ADDED = "Member added successfully";
-  const MEMBER_UPDATED = "Member updated successfully";
+  const MEMBER_ADDED = 'Member added successfully';
+  const MEMBER_UPDATED = 'Member updated successfully';
   const [page, setPage] = useState(1);
 
-  const mutateData = (values) => {
-    return {
-      ...values,
-      id: memberId,
-    };
-  };
+  let valuesOne = initialValuesOne;
+  let valuesTwo = initialValuesTwo;
+  let valuesThree = initialValuesThree;
+  let valuesFour = initialValuesFour;
+  if (selectedMember) {
+    valuesOne = mutateInitialValuesOne(initialValuesOne, selectedMember);
+    valuesTwo = mutateInitialValuesTwo(initialValuesTwo, selectedMember);
+    valuesThree = mutateInitialValuesThree(initialValuesThree, selectedMember);
+    valuesFour = mutateInitialValuesFour(initialValuesFour, selectedMember);
+  }
 
   const prevStep = () => {
     setPage(page - 1);
@@ -37,14 +49,24 @@ const NewMembersForm = ({ onClose }) => {
     setPage(page + 1);
   };
 
+  const mutateData = (data) => {
+    dispatch(selectMember(data));
+    return data;
+  };
+
+  const onSubmit = (data) => {
+    dispatch(resetCaseFile());
+    onClose();
+  };
+
   switch (page) {
     case 1:
       return (
         <UserDetails
-          useMutate={useAddMember}
+          useMutate={selectedMember ? useUpdateMember : useAddMember}
           onSuccess={nextStep}
-          success={MEMBER_ADDED}
-          initialValues={initialValuesOne}
+          success={selectMember ? MEMBER_UPDATED : MEMBER_ADDED}
+          initialValues={valuesOne}
           validationSchema={initialValuesOneSchema}
           page={page}
           limit={limit}
@@ -56,11 +78,10 @@ const NewMembersForm = ({ onClose }) => {
           useMutate={useUpdateMember}
           onSuccess={nextStep}
           success={MEMBER_UPDATED}
-          initialValues={initialValuesTwo}
+          initialValues={valuesTwo}
           page={page}
           limit={limit}
           onBack={prevStep}
-          isMutable={true}
           mutateData={mutateData}
         />
       );
@@ -70,11 +91,10 @@ const NewMembersForm = ({ onClose }) => {
           useMutate={useUpdateMember}
           onSuccess={nextStep}
           success={MEMBER_UPDATED}
-          initialValues={initialValuesThree}
+          initialValues={valuesThree}
           page={page}
           limit={limit}
           onBack={prevStep}
-          isMutable={true}
           mutateData={mutateData}
         />
       );
@@ -82,13 +102,12 @@ const NewMembersForm = ({ onClose }) => {
       return (
         <UserHobbies
           useMutate={useUpdateMember}
-          onSuccess={onClose}
+          onSuccess={onSubmit}
           success={MEMBER_UPDATED}
-          initialValues={initialValuesFour}
+          initialValues={valuesFour}
           page={page}
           limit={limit}
           onBack={prevStep}
-          isMutable={true}
           mutateData={mutateData}
         />
       );

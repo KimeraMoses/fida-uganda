@@ -1,23 +1,18 @@
-import produce from "immer";
-import { useMutation, useQuery, useQueryClient } from "react-query";
-import { useDispatch, useSelector } from "react-redux";
+import produce from 'immer';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   addMember,
   deleteMember,
   getMember,
   getMembers,
   updateMember,
-} from "../apis/members";
-import { MEMBERSHIP_KEY } from "../lib/constants";
-import { selectMemberId } from "../store/memberReducer";
+} from '../apis/members';
+import { MEMBERSHIP_KEY } from '../lib/constants';
+import { selectMember } from '../store/memberReducer';
 
-export const useSelectMemberId = (id) => {
-  const dispatch = useDispatch();
-  dispatch(selectMemberId(id));
-};
-
-export const useMemberId = () => {
-  return useSelector((state) => state.member.selectedId);
+export const useSelectedMember = () => {
+  return useSelector((state) => state.member.member);
 };
 
 export const useMembers = () => {
@@ -33,17 +28,17 @@ export const useAddMember = () => {
   const queryClient = useQueryClient();
   return useMutation(addMember, {
     onSuccess: (data) => {
-      dispatch(selectMemberId(data.member.id));
+      dispatch(selectMember(data.member));
       const previousMembers = queryClient.getQueryData(MEMBERSHIP_KEY);
       if (previousMembers) {
         queryClient.setQueryData(MEMBERSHIP_KEY, () => {
           return produce(previousMembers, (draft) => {
-            draft.members.push(data?.member);
+            draft.Members.push(data?.member);
           });
         });
       } else {
         queryClient.setQueryData(MEMBERSHIP_KEY, () => {
-          return { members: [data?.member] };
+          return { Members: [data?.member] };
         });
       }
     },
@@ -58,15 +53,15 @@ export const useUpdateMember = () => {
       if (previousMembers) {
         queryClient.setQueryData(MEMBERSHIP_KEY, () => {
           return produce(previousMembers, (draft) => {
-            const index = draft.members.findIndex(
+            const index = draft.Members.findIndex(
               (member) => member.id === data.updatedMember.id
             );
-            draft.members[index] = data.updatedMember;
+            draft.Members[index] = data.updatedMember;
           });
         });
       } else {
         queryClient.setQueryData(MEMBERSHIP_KEY, () => {
-          return { members: [data?.updatedMember] };
+          return { Members: [data?.updatedMember] };
         });
       }
     },
@@ -83,7 +78,7 @@ export const useDeleteMember = () => {
       if (previousMembers) {
         queryClient.setQueryData(MEMBERSHIP_KEY, () => {
           return produce(previousMembers, (draft) => {
-            draft.members.filter((member) => member.id !== id);
+            draft.Members.filter((member) => member.id !== id);
           });
         });
       }
