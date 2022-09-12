@@ -2,7 +2,7 @@ import produce from "immer";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
   addProjectFile,
-  deleteProjectFile,
+  deleteProjectFile, getProjectFile,
   getProjectFiles,
   getProjectFilesByProject,
   updateProjectFile,
@@ -15,7 +15,7 @@ export const useProjectFiles = () => {
 
 export const useProjectFile = (projectFileId) => {
   return useQuery([PROJECT_FILES_KEY, projectFileId], () =>
-    getProjectFiles(projectFileId)
+    getProjectFile(projectFileId)
   );
 };
 
