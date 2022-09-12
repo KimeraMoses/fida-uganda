@@ -1,37 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import SectionHeader from "../../common/SectionHeader";
 import PayrollTable from "./PayRollTables/PayrollTable";
 import PayrollNotesTable from "./PayRollTables/PayrollNotes";
 import Modal from "../../common/Modal";
-import { useDisclosure, useToast } from "@chakra-ui/react";
+import { toast, useDisclosure } from "@chakra-ui/react";
 import NewNotes from "./NewNotes/NewNotes";
 import { usePayrolls } from "../../../hooks/usePayroll";
 import {
   useAddPayrollNote,
   usePayrollNotes,
 } from "../../../hooks/usePayrollNotes";
-import { toastSuccess } from "../../../lib/toastDetails";
+import { toastError } from "../../../lib/toastDetails";
 import Loader from "../../common/UI/Loader/Loader";
+import { TEN_MBS_IN_BYTES } from "../../../lib/constants";
+
+import { payrollNotesInitialValues, payrollNotesSchema } from "./PayrollSchema";
 
 const PayRoll = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data: payrollNotes } = usePayrollNotes();
   const { data: payroll, isLoading } = usePayrolls();
-  const {
-    mutate,
-    isSuccess,
-    isLoading: isSubmitting,
-    isError,
-    error,
-  } = useAddPayrollNote();
+  const [file, setFile] = useState(null);
 
-  const toast = useToast();
-
-  React.useEffect(() => {
-    if (isSuccess) {
-      toast(toastSuccess("Payroll note added successfully"));
+  const handleFileChange = (event) => {
+    console.log("event", event.target.files[0]);
+    const theFile = event.target.files[0];
+    if (theFile.size > TEN_MBS_IN_BYTES) {
+      toast(toastError("File size should be less than 10MB"));
+    } else {
+      setFile(theFile);
     }
-  }, [isSuccess, toast]);
+  };
 
   return (
     <>
@@ -56,12 +55,17 @@ const PayRoll = () => {
           )}
         </>
       )}
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} title="Add New Note">
         <NewNotes
-          onSubmit={mutate}
-          isSubmitting={isSubmitting}
-          isError={isError}
-          error={error}
+          initialValues={payrollNotesInitialValues}
+          validationSchema={payrollNotesSchema}
+          useMutate={useAddPayrollNote}
+          onSuccess={onClose}
+          success={`Note added successfully`}
+          isFormData={true}
+          fileName={"note"}
+          handleFileChange={handleFileChange}
+          file={file}
         />
       </Modal>
     </>

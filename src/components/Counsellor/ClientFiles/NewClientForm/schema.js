@@ -24,6 +24,6 @@ export const patientSchema = yup.object().shape({
   village: yup.string().required("Village is required"),
   sex: yup.string().required("Sex is required"),
   mode_of_communication: yup.string().required("Mode of communication"),
-  data_of_first_session: yup.date().required("Date is required"),
+  date_of_first_session: yup.date().required("Date is required"),
   pwd: yup.boolean().required("PWD is required"),
 });

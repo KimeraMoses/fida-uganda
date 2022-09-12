@@ -33,7 +33,7 @@ const FidaProjects = () => {
           initialValues={projectInitialValues}
           validationSchema={projectSchema}
           onSuccess={onClose}
-          success={`IT Complaint added successfully`}
+          success={`Project added successfully`}
           useMutate={useAddProject}
         />
       </Modal>

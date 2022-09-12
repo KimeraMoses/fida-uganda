@@ -1,12 +1,11 @@
-import { SimpleGrid, useToast } from "@chakra-ui/react";
+import {Button, SimpleGrid, useToast} from "@chakra-ui/react";
 import { useEffect } from "react";
-import FormButton from "../../../common/UI/FormButton/FormButton";
 import InputField from "../../../common/UI/InputField/InputField";
 import classes from "./NewFidaProjectForm.module.css";
 import { toastError } from "../../../../lib/toastDetails";
 import withForm from "../../../../hoc/withForm";
 
-const NewFidaProjectForm = ({ isSubmitting, isError, error, onSubmit }) => {
+const NewFidaProjectForm = ({ isSubmitting, isError, error }) => {
   const toast = useToast();
 
   useEffect(() => {
@@ -68,9 +67,22 @@ const NewFidaProjectForm = ({ isSubmitting, isError, error, onSubmit }) => {
             <InputField placeholder="Project Main objective" name="objective" />
           </div>
           <div style={{ float: "right", padding: "20px 0" }}>
-            <FormButton variant="colored" isSubmitting={isSubmitting}>
-              Add Project
-            </FormButton>
+            {/*<FormButton variant="colored" isSubmitting={isSubmitting}>*/}
+            {/*  Add Project*/}
+            {/*</FormButton>*/}
+              <Button
+                  mt={5}
+                  type="submit"
+                  borderRadius="full"
+                  bgGradient="linear(to-r, purple.400, purple.700)"
+                  _hover={{ bgGradient: "linear(to-r, purple.600, purple.900)" }}
+                  size="lg"
+                  w="100%"
+                  color="white"
+                  isLoading={isSubmitting}
+              >
+                  Add Project
+              </Button>
           </div>
       </div>
   );

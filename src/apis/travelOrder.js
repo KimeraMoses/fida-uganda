@@ -41,3 +41,11 @@ export const getPendingTravelOrders = async () => {
 export const getMyTravelOrders = async () => {
   return await axiosClient.get(routes.travelOrders.getMyTravelOrders);
 };
+
+export const approveTravelOrder = async ({travelName, remarks}) => {
+  return await axiosClient.post(`${routes.travelOrders.approveTravelOrder}/${travelName}`, {remarks} );
+}
+
+export const rejectTravelOrder = async ({travelName, remarks}) => {
+  return await axiosClient.post(`${routes.travelOrders.rejectTravelOrder}/${travelName}`,{remarks});
+}

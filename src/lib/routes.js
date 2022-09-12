@@ -7,6 +7,7 @@ export const routes = {
     base: `${BASE_URL}/leaveRequests`,
     createLeaveRequest: `${BASE_URL}/leaveRequests/create`,
     approveLeaveRequest: `${BASE_URL}/leaveRequests/approve`,
+    rejectLeaveRequest: `${BASE_URL}/leaveRequests/reject`,
   },
   membershipActivities: {
     getMembershipActivities: `${BASE_URL}/membershipActivities/getAll`,
@@ -115,6 +116,8 @@ export const routes = {
     stats: `${BASE_URL}/requisitions/getStats`,
     number: `${BASE_URL}/requisitions/getRequisitionNumbers`,
     base: `${BASE_URL}/requisitions`,
+    approveRequisition: `${BASE_URL}/requisitions/approve`,
+    rejectRequisition: `${BASE_URL}/requisitions/reject`,
   },
   travelOrders: {
     getTravelOrders: `${BASE_URL}/travelOrders/getAll`,
@@ -125,6 +128,8 @@ export const routes = {
     getPendingTravelOrders: `${BASE_URL}/travelOrders/getPendingTravelOrders`,
     getApprovedTravelOrders: `${BASE_URL}/travelOrders/getApprovedTravelOrders`,
     editTravelOrder: `${BASE_URL}/travelOrders/edit`,
+    approveTravelOrder: `${BASE_URL}/travelOrders/approve`,
+    rejectTravelOrder: `${BASE_URL}/travelOrders/reject`,
   },
   projects: {
     getProjects: `${BASE_URL}/projects/getAll`,
@@ -243,5 +248,7 @@ export const routes = {
     base: `${BASE_URL}/advances/`,
     editAdvance: `${BASE_URL}/advances/edit/`,
     getAllAdvances: `${BASE_URL}/advances/getAll`,
+    approveAdvance:`${BASE_URL}/advances/approve`,
+    rejectAdvance:`${BASE_URL}/advances/reject`,
   },
 };

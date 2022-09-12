@@ -1,6 +1,7 @@
 {
   "projects": {
-    "default": "fida-staging"
+    "default": "fida-staging",
+    "fida-ims": "fida-ims-5e4ce"
   }
 }
 

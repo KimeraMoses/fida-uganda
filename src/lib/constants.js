@@ -1,4 +1,5 @@
 export const BASE_URL = "https://fida-ims-staging-v2.herokuapp.com/api/v1";
+// export const BASE_URL = "https://api.fidaims.com"; //Fida version
 export const TEN_MBS_IN_BYTES = 10485760;
 
 export const USERS_KEY = "users";
@@ -15,7 +16,7 @@ export const PROJECTS_KEY = "projects";
 export const ASSETS_KEY = "assets";
 export const MEMBERSHIP_KEY = "membership";
 export const MEMBERSHIP_ACTIVITIES_KEY = "membership_activities";
-export const NOTIFICATION_KEY = "notifications"
+export const NOTIFICATION_KEY = "notifications";
 export const LEAVE_TRACKER_KEY = "leave_tracker";
 export const LEAVE_REQUESTS_KEY = "leave_requests";
 export const REPORTS_KEY = "reports";

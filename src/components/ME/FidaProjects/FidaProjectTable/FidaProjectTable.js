@@ -39,7 +39,7 @@ const FidaProjectTable = ({ isDocuments, data }) => {
                     </div>
                   </Td>
                   <Td className={classes.data__purpose_primary_text}>
-                    {formatDate(item.createdAt)}
+                    {item.createdBy.full_name}
                   </Td>
                   <Td>{formatDate(item.updateAt)}</Td>
                   <Td style={{ textAlign: "center" }}>
