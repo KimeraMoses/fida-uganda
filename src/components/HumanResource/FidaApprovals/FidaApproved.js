@@ -11,6 +11,7 @@ const FidaApproved = () => {
       {isLoading ? (
         <Loader />
       ) : (
+        
         <>
           <SubHeading title="Approved Users" />
           {data?.users ? (
