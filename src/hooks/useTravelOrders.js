@@ -1,14 +1,24 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
-  addTravelOrder, approveTravelOrder,
+  addTravelOrder,
+  approveTravelOrder,
   deleteTravelOrder,
   editTravelOrder,
   getAllTravelOrders,
+  getApprovedAccountantTravelOrders,
+  getApprovedDopTravelOrders,
+  getApprovedFleetManagerTravelOrders,
   getApprovedTravelOrders,
   getMyTravelOrders,
+  getPendingAccountantTravelOrders,
+  getPendingDopTravelOrders,
+  getPendingFleetManagerTravelOrders,
   getPendingTravelOrders,
+  getRejectedAccountantTravelOrders,
+  getRejectedDopTravelOrders, getRejectedFleetManagerTravelOrders,
   getTravelOrder,
-  getTravelOrdersStats, rejectTravelOrder,
+  getTravelOrdersStats,
+  rejectTravelOrder,
 } from "../apis/travelOrder";
 import {TRAVEL_ORDER_KEY, TRAVEL_ORDER_STATS} from "../lib/constants";
 import produce from "immer";
@@ -34,6 +44,41 @@ export const usePendingTravelOrders = () => {
   return useQuery([TRAVEL_ORDER_KEY, "PENDING"], getPendingTravelOrders);
 };
 
+export const usePendingDopTravelOrders = () => {
+  return useQuery([TRAVEL_ORDER_KEY, "PENDING"], getPendingDopTravelOrders);
+};
+
+export const useApprovedDopTravelOrders = () => {
+  return useQuery([TRAVEL_ORDER_KEY, "APPROVED"], getApprovedDopTravelOrders);
+};
+
+export const useRejectedDopTravelOrders = () => {
+  return useQuery([TRAVEL_ORDER_KEY, "REJECTED"], getRejectedDopTravelOrders);
+};
+
+export const usePendingAccountantTravelOrders = () => {
+  return useQuery([TRAVEL_ORDER_KEY, "PENDING"], getPendingAccountantTravelOrders);
+};
+
+export const useApprovedAccountantTravelOrders = () => {
+  return useQuery([TRAVEL_ORDER_KEY, "APPROVED"], getApprovedAccountantTravelOrders);
+};
+
+export const useRejectedAccountantTravelOrders = () => {
+  return useQuery([TRAVEL_ORDER_KEY, "REJECTED"], getRejectedAccountantTravelOrders);
+};
+
+export const usePendingFleetManagerTravelOrders = () => {
+  return useQuery([TRAVEL_ORDER_KEY, "PENDING"], getPendingFleetManagerTravelOrders);
+};
+
+export const useApprovedFleetManagerTravelOrders = () => {
+  return useQuery([TRAVEL_ORDER_KEY, "APPROVED"], getApprovedFleetManagerTravelOrders);
+};
+
+export const useRejectedFleetManagerTravelOrders = () => {
+  return useQuery([TRAVEL_ORDER_KEY, "REJECTED"], getRejectedFleetManagerTravelOrders);
+};
 export const useMyTraveOrders = () => {
   return useQuery([TRAVEL_ORDER_KEY, "MY"], getMyTravelOrders);
 };

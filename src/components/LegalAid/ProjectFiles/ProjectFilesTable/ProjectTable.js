@@ -3,10 +3,15 @@ import { Table, Thead, Tbody, Tr, Td, IconButton } from "@chakra-ui/react";
 import { TableHeadColumn } from "../../../Membership/Allocations/AllocationsTable/AllocationsTable";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import classes from "../../../common/table/TableStyles.module.css";
-import withTable from "./../../../../hoc/withTable";
-import { useNavigate } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
+import {useProject} from "../../../../hooks/useProjects";
+import Loader from "../../../common/UI/Loader/Loader";
 
 const ProjectTable = () => {
+  const {folderName,id} = useParams();
+  const { data, isLoading } = useProject(id);
+  console.log(data)
+
   const navigate = useNavigate();
   const handleClick = (type) => {
     // type === "documents"
@@ -16,7 +21,7 @@ const ProjectTable = () => {
     //         :navigate("/project-files/logframe")
 
     if (type === "documents") {
-      navigate("/project-files/documents");
+      navigate(`/project-files/documents/${folderName}/${id}`);
     } else {
 
     }
@@ -24,6 +29,9 @@ const ProjectTable = () => {
   };
   return (
     <>
+      {isLoading ? (
+          <Loader />
+      ) : (
       <div className={classes.table_wrapper}>
         <Table
           variant="striped"
@@ -59,9 +67,9 @@ const ProjectTable = () => {
                 </div>
               </Td>
               <Td className={classes.data__purpose_primary_text}>
-                Kimera Moses
+                {/*Kimera Moses*/} {data?.project?.createdBy?.full_name}
               </Td>
-              <Td>Oct 14, 2021</Td>
+              <Td>{new Date(data?.project?.createdAt).toLocaleString()}</Td>
               <Td>
                 <div className={classes.table_actions_wrapperr}>
                   <IconButton
@@ -93,9 +101,10 @@ const ProjectTable = () => {
                 </div>
               </Td>
               <Td className={classes.data__purpose_primary_text}>
-                Geoffrey Ariong
+                {/*Geoffrey Ariong*/}
+                {data?.project?.createdBy?.full_name}
               </Td>
-              <Td>Oct 14, 2021</Td>
+              <Td>{new Date(data?.project?.createdAt).toLocaleString()}</Td>
               <Td>
                 <div className={classes.table_actions_wrapperr}>
                   <IconButton
@@ -127,9 +136,10 @@ const ProjectTable = () => {
                 </div>
               </Td>
               <Td className={classes.data__purpose_primary_text}>
-                Andrew Tebandeke
+                {/*Andrew Tebandeke*/}
+                {data?.project?.createdBy?.full_name}
               </Td>
-              <Td>Oct 14, 2021</Td>
+              <Td>{new Date(data?.project?.createdAt).toLocaleString()}</Td>
               <Td>
                 <div className={classes.table_actions_wrapperr}>
                   <IconButton
@@ -145,8 +155,9 @@ const ProjectTable = () => {
           </Tbody>
         </Table>
       </div>
+        )}
     </>
   );
 };
-
-export default withTable(ProjectTable);
+export default ProjectTable;
+// export default withTable(ProjectTable);
