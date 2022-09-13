@@ -36,7 +36,6 @@ const NewDocumentForm = ({
     return (
         <Formik
             initialValues=""
-            // validationSchema={reportSchema}
             onSubmit={(values) => {
                 //open console to see the form values on submit
                 if (!file) {
