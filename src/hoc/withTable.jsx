@@ -92,6 +92,7 @@ const withTable = (TableComponent) => {
     };
 
     const downloadExcel = () => {
+      if(excelData){
       const workSheet = XLSX.utils.json_to_sheet(excelData);
       const workBook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(workBook, workSheet, "Sheet1");
@@ -102,7 +103,8 @@ const withTable = (TableComponent) => {
       XLSX.writeFile(
         workBook,
         `${tableName}-${new Date().toLocaleString("en-GB")}.xlsx`
-      );
+      );}
+      return
     };
 
     const keyWordHandler = (e) => {
