@@ -985,7 +985,7 @@ const SummaryDetails = (props) => {
                           borderColor="#562b85"
                           isLoading={disableApprove}
                           loadingText='Approving'
-                          onClick={approveLeave}>
+                          onClick={approveAdvance}>
                         Approve
                       </Button>
                     </div>
