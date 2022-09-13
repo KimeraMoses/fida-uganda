@@ -38,7 +38,7 @@ const TravelOrderTable = ({ data, type }) => {
               data.map((item) => {
                 return (
                   <Tr>
-                    <Td>{item.createdBy.full_name}</Td>
+                    <Td>{item?.createdBy?.full_name}</Td>
                     <Td>{item.project_activity}</Td>
                     <Td>{item.purpose}</Td>
                     <Td>{item.DOPApprovalStatus}</Td>

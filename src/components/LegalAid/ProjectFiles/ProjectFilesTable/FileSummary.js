@@ -1,40 +1,35 @@
 import React from "react";
-import classes from "./ReportSummary.module.css";
+import classes from "../../../HumanResource/Reports/ReportSummary/ReportSummary.module.css";
 // import {Textarea} from "@chakra-ui/react";
 // import SummaryTable from "./../../../dashboard/SummaryDetails/SummaryTable/SummaryTable";
-import ReportBreadCrumb from "./../BreadCrumb/ReportBreadCrumb";
+import ReportBreadCrumb from "../../../HumanResource/Reports/BreadCrumb/ReportBreadCrumb";
 // import Logo from "../../../../assets/images/Avater.png";
 import FormButton from "../../../common/UI/FormButton/FormButton";
-import {useReport} from "../../../../hooks/useReports";
 import { useParams} from "react-router-dom";
 import Loader from "../../../common/UI/Loader/Loader";
 import {SimpleGrid} from "@chakra-ui/react";
+import {useProjectFile} from "../../../../hooks/useProjectFiles";
 
 
-const ReportSummaryDetails = (props) => {
-    //====GET THE SELECTED DOCUMENT CATEGORY====//
-    //   function useQuery() {
-    //     return new URLSearchParams(useLocation().search);
-    //   }
-    //   let query = useQuery();
-    //   const selectedType = query.get("application-type");
-    // // const id = query.get("id")
-    // // console.log(id)
+const FileSummaryDetails = () => {
+
     const {id} = useParams();
 
-    const {data, isLoading} = useReport(id);
+    const {data, isLoading} = useProjectFile(id);
+    console.log(data)
 
-    const folderId = data?.report?.folder?.id;
+    const folderName = data?.projectFile?.project?.name;
+    const projectId = data?.projectFile?.project?.id;
 
 
     return (
         <div className={classes.summary_wrapper}>
             <ReportBreadCrumb
-                root="Reports"
-                rootLink="/reports"
-                folderName={data?.report?.folder?.name}
-                folderLink={"/reports/" + folderId}
-                reportName={data?.report?.report_title}
+                root={folderName}
+                rootLink={`/fida-projects/${folderName}/${projectId}`}
+                folderName="Project Documents"
+                folderLink={`/project-files/documents/${folderName}/${projectId}`}
+                reportName="Document"
             />
 
 
@@ -51,20 +46,16 @@ const ReportSummaryDetails = (props) => {
                             !isLoading &&
                             data && (
                                 <SimpleGrid columns={2} spacing={1}>
-                                    <h6>Report title:</h6>
-                                    <h6>{data?.report?.report_title}</h6>
-                                    <h6>Report type:</h6>
-                                    <h6>{data?.report?.type}</h6>
-                                    <h6>Reporting Period:</h6>
-                                    <h6>{data?.report?.reporting_period}</h6>
+                                    <h6>File Name:</h6>
+                                    <h6>{data?.projectFile?.filename}</h6>
+                                    <h6>Created By:</h6>
+                                    <h6>{data?.projectFile?.createdBy?.full_name}</h6>
+                                    <h6>Project:</h6>
+                                    <h6>{data?.projectFile?.project?.name}</h6>
                                     <h6>Created At:</h6>
-                                    <h6>{new Date(data?.report?.createdAt).toLocaleString()}</h6>
-                                    <h6>Date:</h6>
-                                    <h6>{new Date(data?.report?.date).toLocaleString()}</h6>
-                                    <h6>Created by:</h6>
-                                    <h6>{data?.report?.createdBy?.id}</h6>
-                                    <h6>File name:</h6>
-                                    <h6>{data?.report?.filename}</h6>
+                                    <h6>{new Date(data?.projectFile?.createdAt).toLocaleString()}</h6>
+                                    <h6>Update:</h6>
+                                    <h6>{new Date(data?.projectFile?.updateAt).toLocaleString()}</h6>
                                 </SimpleGrid>
                             )
                         )}
@@ -85,7 +76,7 @@ const ReportSummaryDetails = (props) => {
                         {/*</svg>*/}
                         <br/>
                         <FormButton variant="save" type="submit">
-                            <a href={data?.report?.downloadUrl}>Download Report </a>
+                            <a href={data?.projectFile?.downloadUrl}>Download Report </a>
                         </FormButton>
                     </div>
                 </div>
@@ -95,4 +86,4 @@ const ReportSummaryDetails = (props) => {
     );
 };
 
-export default ReportSummaryDetails;
+export default FileSummaryDetails;

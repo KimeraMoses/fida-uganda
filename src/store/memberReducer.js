@@ -1,22 +1,33 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const slice = createSlice({
-  name: "member",
+  name: 'member',
   initialState: {
-    selectedId: null,
+    member: null,
   },
   reducers: {
-    setSelectedId: (state, action) => {
-      state.selectedId = action.payload;
+    setMember: (state, action) => {
+      if (!state.member) {
+        state.member = action.payload;
+      } else {
+        state.member = { ...state.member, ...action.payload };
+      }
+    },
+    setMemberNull: (state) => {
+      state.member = null;
     },
   },
 });
 
-const { setSelectedId } = slice.actions;
+const { setMember, setMemberNull } = slice.actions;
 
-export const selectMemberId = (id) => ({
-  type: setSelectedId.type,
-  payload: id,
+export const selectMember = (member) => ({
+  type: setMember.type,
+  payload: member,
+});
+
+export const resetMember = () => ({
+  type: setMemberNull.type,
 });
 
 export default slice.reducer;

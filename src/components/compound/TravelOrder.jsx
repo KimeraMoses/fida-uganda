@@ -1,8 +1,8 @@
 
 import { useDisclosure } from "@chakra-ui/react";
 import {
-  useAddTravelOrder,
-  useTravelOrders,
+    useAddTravelOrder,
+    useTravelOrders,
 } from "../../hooks/useTravelOrders";
 import SectionHeader from "../common/SectionHeader";
 import Modal from "../common/Modal";
@@ -13,38 +13,39 @@ import Loader from "../common/UI/Loader/Loader";
 import { travelOrderInitialValues, travelOrderSchema } from "../forms/travelOrder/schemas/travelOrder";
 
 const TravelOrder = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data, isLoading } = useTravelOrders();
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const { data, isLoading } = useTravelOrders();
 
 
-  return (
-    <>
-      <SectionHeader title="Travel Order" />
-      {isLoading ? (
-        <Loader />
-      ) : (
+
+    return (
         <>
-      
-          <TravelOrderTable data={data?.travelOrders} type="new"/>
-          <br/>
-          <SubHeading title="Approved Request" />
-          <TravelOrderTable data={data?.travelOrders} type="approved"/>
-          <br/>
-          <SubHeading title="Rejected Request" />
-          <TravelOrderTable data={data?.travelOrders} type="rejected"/>
+            <SectionHeader title="Travel Order" />
+            {isLoading ? (
+                <Loader />
+            ) : (
+                <>
+                    <SubHeading title="New Requests" />
+                    <TravelOrderTable data={data?.travelOrders} type="new" btnLabel="Travel Order" btnClick={onOpen}/>
+                    <br/>
+                    <SubHeading title="Approved Request" />
+                    <TravelOrderTable data={data?.travelOrders} type="approved" showBtn={false}/>
+                    <br/>
+                    <SubHeading title="Rejected Request" />
+                    <TravelOrderTable data={data?.travelOrders} type="rejected" showBtn={false}/>
+                </>
+            )}
+            <Modal isOpen={isOpen} onClose={onClose} title="Travel Order" size="2xl">
+                <TravelOrderForm
+                    initialValues={travelOrderInitialValues}
+                    validationSchema={travelOrderSchema}
+                    onSuccess={onClose}
+                    success={`Travel order added successfully`}
+                    useMutate={useAddTravelOrder}
+                />
+            </Modal>
         </>
-      )}
-      <Modal isOpen={isOpen} onClose={onClose} title="Travel Order" size="2xl">
-        <TravelOrderForm
-          initialValues={travelOrderInitialValues}
-          validationSchema={travelOrderSchema}
-          onSuccess={onClose}
-          success={`Travel order added successfully`}
-          useMutate={useAddTravelOrder}
-        />
-      </Modal>
-    </>
-  );
+    );
 };
 
 export default TravelOrder;

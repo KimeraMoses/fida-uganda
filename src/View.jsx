@@ -44,6 +44,7 @@ import SummaryDetails from "./components/dashboard/SummaryDetails/SummaryDetails
 import LegalOfficer from "./components/CourtProcessServer/LegalOfficer/LegalOfficer";
 import ReportSummaryDetails from "./components/HumanResource/Reports/ReportSummary/ReportSummary";
 import ProjectFilesDocuments from "./components/LegalAid/ProjectFiles/ProjectDocuments/ProjectFilesDocuments";
+import FileSummary from "./components/LegalAid/ProjectFiles/ProjectFilesTable/FileSummary";
 
 const View = () => {
   return (
@@ -69,9 +70,10 @@ const View = () => {
         <Route path="legal-officer" element={<LegalOfficer />} />
         <Route path="project-files" element={<ProjectFiles />} />
         <Route
-          path="project-files/documents"
+          path="project-files/documents/:folderName/:id"
           element={<ProjectFilesDocuments />}
         />
+        <Route path="project-files/documents/:id" element={<FileSummary/>}/>
         <Route path="clv-case-files" element={<ClvCaseFiles />} />
         <Route path="clv-database" element={<ClvDatabase />} />
         <Route path="requisitions" element={<Requisitions />} />
@@ -111,7 +113,7 @@ const View = () => {
         <Route path="fida-databases/:dbName" element={<DatabaseOpen />} />
         <Route path="fida-projects" element={<FidaProjects />} />
         <Route
-          path="fida-projects/:folderName"
+          path="fida-projects/:folderName/:id"
           element={<FidaProjectFiles />}
         />
       </Route>

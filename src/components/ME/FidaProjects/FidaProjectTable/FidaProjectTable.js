@@ -12,8 +12,8 @@ import withTable from "../../../../hoc/withTable";
 
 const FidaProjectTable = ({ isDocuments, data }) => {
   const navigate = useNavigate();
-  const handleOpenFolder = (name) => {
-    navigate(`/fida-projects/${name}`);
+  const handleOpenFolder = (name,id) => {
+    navigate(`/fida-projects/${name}/${id}`);
   };
   return (
     <>
@@ -57,7 +57,7 @@ const FidaProjectTable = ({ isDocuments, data }) => {
                             )
                           }
                           onClick={() =>
-                            handleOpenFolder(item.name.replace(/ /g, "-"))
+                            handleOpenFolder(item.name.replace(/ /g, "-"),item.id)
                           }
                         />
                       </div>

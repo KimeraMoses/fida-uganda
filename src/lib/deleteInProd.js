@@ -1,5 +1,6 @@
 export const onSubmitAlert = (id) => {
   const mutate = (values) => {
+    console.log('data', values);
     alert(JSON.stringify(values, null, 2));
   };
   const isLoading = false;

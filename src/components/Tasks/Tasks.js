@@ -26,11 +26,13 @@ const Tasks = () => {
   const tasksData = useTasks();
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+
   useEffect(() => {
     if (isSuccess) {
       toast(toastSuccess("Task Added Successfully"));
+      onClose();
     }
-  }, [isSuccess, toast]);
+  }, [isSuccess, toast, onClose]);
 
   const keyWordSearchHandler = (e) => {
     const { value } = e.target;

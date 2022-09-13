@@ -32,10 +32,10 @@ const Requisitions = () => {
           <RequisitionTable data={data?.Requisitions} type="new" btnLabel="Add Requisition" btnClick={onOpen} />
           <br/>
           <SubHeading title="Approved Requisitions"  />
-          <RequisitionTable data={data?.Requisitions} type="approved"/>
+          <RequisitionTable data={data?.Requisitions} type="approved" showBtn={false}/>
           <br/>
           <SubHeading title="Rejected Requisitions" />
-          <RequisitionTable data={data?.Requisitions} type="rejected"/>
+          <RequisitionTable data={data?.Requisitions} type="rejected" showBtn={false}/>
         </>
       )}
       <Modal isOpen={isOpen} onClose={onClose} title="Requisition">
