@@ -1,5 +1,5 @@
-import axiosClient from "../lib/axiosClient";
-import { routes } from "../lib/routes";
+import axiosClient from '../lib/axiosClient';
+import { routes } from '../lib/routes';
 
 export const getClvs = async () => {
   return await axiosClient.get(routes.clvs.getClvs);
@@ -14,7 +14,8 @@ export const addClv = async (clv) => {
 };
 
 export const editClv = async (clv) => {
-  return await axiosClient.patch(`${routes.clvs.editClv}/${clv.id}`, clv);
+  const id = clv.get('id');
+  return await axiosClient.patch(`${routes.clvs.editClv}/${id}`, clv);
 };
 
 export const deleteClv = async (clvId) => {

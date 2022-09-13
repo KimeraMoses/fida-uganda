@@ -52,7 +52,7 @@ const withForm = (FormComponent) => {
             mutate(formData);
             return;
           }
-          if (isMutable) {
+          if (mutateData) {
             mutate(mutateData(values));
             return;
           }

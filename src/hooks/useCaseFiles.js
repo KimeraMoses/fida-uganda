@@ -1,9 +1,9 @@
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import {
   CASES_KEY,
   CLV_CASES_KEY,
   CLV_CASE_FILE_STATS,
-} from "../lib/constants";
+} from '../lib/constants';
 import {
   addCaseFile,
   deleteCaseFile,
@@ -13,10 +13,14 @@ import {
   getCasesStats,
   getMyCases,
   updateCaseFile,
-} from "../apis/cases";
-import produce from "immer";
-import { useDispatch, useSelector } from "react-redux";
-import { selectCaseFile } from "../store/caseFileReducer";
+  getCaseComment,
+  getCommentsByCase,
+  deleteCaseComment,
+  addCaseComment,
+} from '../apis/cases';
+import produce from 'immer';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCaseFile } from '../store/caseFileReducer';
 
 export const useCaseFileTemp = () => {
   return useSelector((state) => state.caseFile.caseFile);
@@ -35,7 +39,7 @@ export const useClvCases = () => {
 };
 
 export const useMyCases = () => {
-  return useQuery([CLV_CASES_KEY, "MY"], getMyCases);
+  return useQuery([CLV_CASES_KEY, 'MY'], getMyCases);
 };
 
 export const useCasesStats = () => {
@@ -180,6 +184,66 @@ export const useDeleteClvCaseFile = () => {
     },
     onSettled: () => {
       queryClient.invalidateQueries(CLV_CASES_KEY);
+    },
+  });
+};
+
+export const useCaseComment = (id) => {
+  return useQuery([CASES_KEY, id], () => getCaseComment(id));
+};
+
+export const useCaseComments = () => {
+  return useQuery(CASES_KEY, getCommentsByCase);
+};
+
+export const useAddCaseComment = () => {
+  const queryClient = useQueryClient();
+  const { user } = useSelector((state) => state.auth);
+  return useMutation(addCaseComment, {
+    onSuccess: (data) => {
+      const key = [CASES_KEY, data?.caseComment?.id];
+      const previousCaseComments = queryClient.getQueryData(key);
+      if (previousCaseComments) {
+        queryClient.setQueryData(key, () => {
+          return produce(previousCaseComments, (draft) => {
+            data.caseComment.createdBy = { ...user };
+            draft.comments.push(data?.comment);
+          });
+        });
+      } else {
+        queryClient.setQueryData(key, () => {
+          return { comments: [data?.comment] };
+        });
+      }
+    },
+  });
+};
+
+export const useUpdateCaseComment = () => {};
+
+export const useDeleteCaseComment = () => {
+  const queryClient = useQueryClient();
+  return useMutation(deleteCaseComment, {
+    onMutate: async (id) => {
+      await queryClient.cancelMutations([CASES_KEY, id]);
+
+      const previousClvCaseFiles = queryClient.getQueryData([CASES_KEY, id]);
+      if (previousClvCaseFiles) {
+        queryClient.setQueryData([CASES_KEY, id], (previousClvCaseFiles) => {
+          return produce(previousClvCaseFiles, (draft) => {
+            draft.clv_cases.filter((client) => client.id !== id);
+          });
+        });
+      }
+    },
+    onError: (_error, _clientId, context) => {
+      queryClient.setQueryData(
+        [CASES_KEY, _clientId],
+        context.previousClvCaseFiles
+      );
+    },
+    onSettled: (_id) => {
+      queryClient.invalidateQueries([CASES_KEY, _id]);
     },
   });
 };

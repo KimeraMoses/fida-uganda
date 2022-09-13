@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from 'react';
 import {
   Table,
   Thead,
@@ -7,19 +7,23 @@ import {
   Td,
   IconButton,
   useDisclosure,
-} from "@chakra-ui/react";
-import classes from "../../Allocations/AllocationsTable/AllocationsTable.module.css";
-import { TableHeadColumn } from "../../Allocations/AllocationsTable/AllocationsTable";
-import withTable from "../../../../hoc/withTable";
-import { MdOutlineRemoveRedEye } from "react-icons/md";
-import NewMembersForm from "./../NewMemberForm/NewMembersForm";
-import Modal from "../../../common/Modal";
+} from '@chakra-ui/react';
+import classes from '../../Allocations/AllocationsTable/AllocationsTable.module.css';
+import { TableHeadColumn } from '../../Allocations/AllocationsTable/AllocationsTable';
+import withTable from '../../../../hoc/withTable';
+import { MdOutlineEdit } from 'react-icons/md';
+import NewMembersForm from './../NewMemberForm/NewMembersForm';
+import Modal from '../../../common/Modal';
+import { useDispatch } from 'react-redux';
+import { selectMember } from '../../../../store/memberReducer';
 
 const MemberTable = ({ data, isLoading }) => {
-  const [id, setId] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const userEditHandler = (userId) => {
-    setId(userId);
+  const dispatch = useDispatch();
+
+  const userEditHandler = (member) => {
+    const { registeredBy, ...rest } = member;
+    dispatch(selectMember(rest));
     onOpen();
   };
   return (
@@ -44,7 +48,7 @@ const MemberTable = ({ data, isLoading }) => {
                 <Tr>
                   <Td className={classes.data_recepient_field}>
                     <div className={classes.data__primary_text}>
-                      {item.first_name + " " + item.last_name}
+                      {item.first_name + ' ' + item.last_name}
                     </div>
                     <div className={classes.data__secondary_text}>
                       00{index + 1}
@@ -68,17 +72,17 @@ const MemberTable = ({ data, isLoading }) => {
                       } ${classes.members_status}`}
                     >
                       <span className={classes.status_indicator}></span>
-                      <h5>{item.hasPaid ? "Paid" : "Pending"}</h5>
+                      <h5>{item.hasPaid ? 'Paid' : 'Pending'}</h5>
                     </div>
                   </Td>
-                  <Td style={{ textAlign: "center" }}>
+                  <Td style={{ textAlign: 'center' }}>
                     <div className={classes.table_actions_icon_wrapper}>
                       <IconButton
                         size="sm"
                         variant="outline"
                         aria-label="Open Item"
-                        icon={<MdOutlineRemoveRedEye />}
-                        onClick={() => userEditHandler(item.id)}
+                        icon={<MdOutlineEdit />}
+                        onClick={() => userEditHandler(item)}
                       />
                     </div>
                   </Td>
@@ -93,7 +97,6 @@ const MemberTable = ({ data, isLoading }) => {
         title="Membership Form"
         size="3xl"
       >
-        {id}
         <NewMembersForm onClose={onClose} />
       </Modal>
     </div>
