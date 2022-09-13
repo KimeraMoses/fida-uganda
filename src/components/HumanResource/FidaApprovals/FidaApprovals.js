@@ -7,6 +7,7 @@ import FidaApprovedTable from "./FidaApprovalTable/FidaApprovedTable";
 import NewEmployeeForm from "./NewEmployeeForm/NewEmployeeForm";
 import SubHeading from "./../../Tasks/SubHeading/SubHeading";
 import Loader from "./../../common/UI/Loader/Loader";
+import FidaApproved from "./FidaApproved";
 
 const FidaApprovals = () => {
   const { data, isLoading } = useDeactivatedUsers();
@@ -18,10 +19,7 @@ const FidaApprovals = () => {
         <Loader />
       ) : (
         <>
-          <SubHeading title="Approved Users" />
-          {data?.users ? (
-            <FidaApprovedTable tableName="Approved users" data={data?.users} />
-          ) : null}
+      <FidaApproved />
 
           <SubHeading title="Pending Approval" />
           {data?.users ? (

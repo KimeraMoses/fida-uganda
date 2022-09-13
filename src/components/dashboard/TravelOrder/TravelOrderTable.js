@@ -64,4 +64,4 @@ const TravelOrderTable = ({ data, type }) => {
   );
 };
 
-export default withTable(TravelOrderTable);
+export default withTable(TravelOrderTable)
