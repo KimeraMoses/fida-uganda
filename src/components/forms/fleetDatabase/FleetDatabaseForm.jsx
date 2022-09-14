@@ -2,10 +2,11 @@ import { SimpleGrid, Button, Flex, Textarea } from "@chakra-ui/react";
 import withForm from "../../../hoc/withForm";
 import { MdAdd } from "react-icons/md";
 import { useProjectOptions } from "../../../hooks/useProjects";
-import { useMemo } from "react";
+import React, { useMemo } from "react";
 // import SelectField from "../../Membership/Allocations/AllocationForm/SelectInput";
 import InputField from "./../../common/UI/InputField/InputField";
 import SelectField from "./../../common/SelectField";
+
 
 const FleetDatabaseForm = ({ isSubmitting, isEdit, setFieldValue }) => {
   const projects = useProjectOptions();
@@ -45,6 +46,7 @@ const FleetDatabaseForm = ({ isSubmitting, isEdit, setFieldValue }) => {
           placeholder="Region of Operation"
         />
       </SimpleGrid>
+
       {isEdit && (
         <>
           <hr />
@@ -151,11 +153,11 @@ const FleetDatabaseForm = ({ isSubmitting, isEdit, setFieldValue }) => {
           disabled={isSubmitting}
           leftIcon={<MdAdd />}
         >
-          {isSubmitting ? "Saving" : isEdit ? "Update" : "Add"}
+          {isSubmitting ? "Saving" : isEdit ? "Update" : "Add Vehicle"}
         </Button>
       </Flex>
     </SimpleGrid>
   );
 };
 
-export default withForm(FleetDatabaseForm);
+export default  withForm(FleetDatabaseForm);
