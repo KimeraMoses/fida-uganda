@@ -2,7 +2,6 @@ import classes from '../../../../Membership/Members/NewMemberForm/MultiForm/Mult
 import { SimpleGrid } from '@chakra-ui/react';
 import InputField from '../../../../common/UI/InputField/InputField';
 import ActionButtons from '../../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons';
-import NumberField from '../../../../common/NumberField';
 import SelectField from '../../../../common/SelectField';
 import { trueFalseOptions } from '../../../../../lib/options';
 import TextAreaField from '../../../../common/TextAreaField';
@@ -32,7 +31,7 @@ const MultForm3 = ({ page, limit, onBack, isSubmitting }) => {
           <div className={classes.field_label}>
             4. How long has this been happening?
           </div>
-          <NumberField name="duration" placeholder="In Days" />
+          <InputField name="duration" placeholder="In Days" />
         </SimpleGrid>
       </div>
       <div className={classes.field_wrapper}>

@@ -24,11 +24,7 @@ const CaseFilesTable = ({ data }) => {
   const dispatch = useDispatch();
 
   const onHandleClick = (caseFile) => {
-    const newCaseFile = {
-      ...caseFile,
-      duration: parseInt(caseFile.duration)
-    }
-    dispatch(selectCaseFile(newCaseFile));
+    dispatch(selectCaseFile(caseFile));
     onOpen();
   };
 
