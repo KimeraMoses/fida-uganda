@@ -34,6 +34,42 @@ export const getApprovedTravelOrders = async () => {
   return await axiosClient.get(routes.travelOrders.getApprovedTravelOrders);
 };
 
+export const getPendingDopTravelOrders = async () => {
+  return await axiosClient.get(routes.travelOrders.getPendingDopTravelOrders);
+};
+
+export const getApprovedDopTravelOrders = async () => {
+  return await axiosClient.get(routes.travelOrders.getApprovedDopTravelOrders);
+};
+
+export const getRejectedDopTravelOrders = async () => {
+  return await axiosClient.get(routes.travelOrders.getRejectedDopTravelOrders);
+};
+
+export const getPendingAccountantTravelOrders = async () => {
+  return await axiosClient.get(routes.travelOrders.getPendingAccountantTravelOrders);
+};
+
+export const getApprovedAccountantTravelOrders = async () => {
+  return await axiosClient.get(routes.travelOrders.getApprovedAccountantTravelOrders);
+};
+
+export const getRejectedAccountantTravelOrders = async () => {
+  return await axiosClient.get(routes.travelOrders.getRejectedAccountantTravelOrders);
+};
+
+export const getPendingFleetManagerTravelOrders = async () => {
+  return await axiosClient.get(routes.travelOrders.getPendingFleetManagerTravelOrders);
+};
+
+export const getApprovedFleetManagerTravelOrders = async () => {
+  return await axiosClient.get(routes.travelOrders.getApprovedFleetManagerTravelOrders);
+};
+
+export const getRejectedFleetManagerTravelOrders = async () => {
+  return await axiosClient.get(routes.travelOrders.getRejectedFleetManagerTravelOrders);
+};
+
 export const getPendingTravelOrders = async () => {
   return await axiosClient.get(routes.travelOrders.getPendingTravelOrders);
 };

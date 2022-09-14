@@ -39,7 +39,7 @@ import MemberTable from "../../Membership/Members/MemberTable/MemberTable";
 import { useMembers } from "../../../hooks/useMember";
 import FidaAssetsTable from "../../HumanResource/FidaAssets/FidaAssetsTable/FidaAssetsTable";
 import { useAssets } from "../../../hooks/useAsset";
-import ProjectTable from "../../LegalAid/ProjectFiles/ProjectPFilesTable/ProjectTable";
+import ProjectTable from "../../LegalAid/ProjectFiles/ProjectFilesTable/ProjectTable";
 import FleetDatabaseTable from "../../fleetManager/FleetDatabaseTable/FleetDatabaseTable";
 import { useFleets } from "../../../hooks/useFleet";
 

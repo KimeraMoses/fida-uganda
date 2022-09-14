@@ -1,6 +1,6 @@
 import React from "react";
 import SectionHeader from "../../common/SectionHeader";
-import ProjectTable from "./ProjectPFilesTable/ProjectTable";
+import ProjectTable from "./ProjectFilesTable/ProjectTable";
 
 const ProjectFiles = () => {
   // const { data } = useProjectFiles();
