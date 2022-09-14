@@ -92,7 +92,7 @@ const MultForm1 = ({
           <div>{selectedClient.phoneNumber}</div>
           <InputField
             placeholder="Type Here"
-            name="respondentPhoneNumber"
+            name="respondentPhone"
             maxLength="12"
           />
         </SimpleGrid>
@@ -120,7 +120,7 @@ const MultForm1 = ({
         <SimpleGrid columns={3} spacing={2} style={{ alignItems: 'center' }}>
           <div className={styles.field_row_label}>SubCounty/Town Council</div>
           <div>{selectedClient.subcounty}</div>
-          <InputField placeholder="Type Here" name="respondentSubCounty" />
+          <InputField placeholder="Type Here" name="respondentCounty" />
         </SimpleGrid>
         <SimpleGrid columns={3} spacing={2} style={{ alignItems: 'center' }}>
           <div className={styles.field_row_label}>Parish</div>
@@ -173,7 +173,7 @@ const MultForm1 = ({
           <div>{selectedClient.preferred_language}</div>
           <InputField
             placeholder="Type Here"
-            name="respondentPreferredLanguage"
+            name="respondentLanguage"
           />
         </SimpleGrid>
         <SimpleGrid columns={3} spacing={2} style={{ alignItems: 'center' }}>
@@ -183,7 +183,7 @@ const MultForm1 = ({
           <div></div>
           <InputField
             placeholder="Type Here"
-            name="respondentRelationshipWithComplainant"
+            name="respondentRelation"
           />
         </SimpleGrid>
       </div>

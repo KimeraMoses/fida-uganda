@@ -1,26 +1,25 @@
-import classes from "../../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css";
-import { SimpleGrid } from "@chakra-ui/react";
-import InputField from "../../../../common/UI/InputField/InputField";
-import ActionButtons from "../../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons";
-import NumberField from "../../../../common/NumberField";
-import SelectField from "../../../../common/SelectField";
-import { trueFalseOptions } from "../../../../../lib/options";
-import TextAreaField from "../../../../common/TextAreaField";
-import withForm from "../../../../../hoc/withForm";
+import classes from '../../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css';
+import { SimpleGrid } from '@chakra-ui/react';
+import InputField from '../../../../common/UI/InputField/InputField';
+import ActionButtons from '../../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons';
+import SelectField from '../../../../common/SelectField';
+import { trueFalseOptions } from '../../../../../lib/options';
+import TextAreaField from '../../../../common/TextAreaField';
+import withForm from '../../../../../hoc/withForm';
 
 const MultForm3 = ({ page, limit, onBack, isSubmitting }) => {
   return (
     <div className={classes.form_wrapper}>
       <div className={classes.field_wrapper}>
-        <SimpleGrid columns={2} spacing={2} style={{ alignItems: "center" }}>
+        <SimpleGrid columns={2} spacing={2} style={{ alignItems: 'center' }}>
           <div className={classes.field_label}>
             2. Type of Issue/Matter/Case
           </div>
-          <InputField name="type" placeholder="Type of Issue/Matter/Case" />
+          <InputField name="about" placeholder="Type of Issue/Matter/Case" />
         </SimpleGrid>
       </div>
       <div className={classes.field_wrapper}>
-        <SimpleGrid columns={2} spacing={2} style={{ alignItems: "center" }}>
+        <SimpleGrid columns={2} spacing={2} style={{ alignItems: 'center' }}>
           <div className={classes.field_label}>
             3. Nature of Issue/Matter/Case
           </div>
@@ -28,15 +27,15 @@ const MultForm3 = ({ page, limit, onBack, isSubmitting }) => {
         </SimpleGrid>
       </div>
       <div className={classes.field_wrapper}>
-        <SimpleGrid columns={2} spacing={2} style={{ alignItems: "center" }}>
+        <SimpleGrid columns={2} spacing={2} style={{ alignItems: 'center' }}>
           <div className={classes.field_label}>
             4. How long has this been happening?
           </div>
-          <NumberField name="duration" placeholder="In Days" />
+          <InputField name="duration" placeholder="In Days" />
         </SimpleGrid>
       </div>
       <div className={classes.field_wrapper}>
-        <SimpleGrid columns={2} spacing={2} style={{ alignItems: "center" }}>
+        <SimpleGrid columns={2} spacing={2} style={{ alignItems: 'center' }}>
           <div className={classes.field_label}>
             5. Have you talked to anyone before?
           </div>
@@ -58,7 +57,7 @@ const MultForm3 = ({ page, limit, onBack, isSubmitting }) => {
         <div className={classes.field_label}>
           7. Tell us the person or organization and the action that was taken.
         </div>
-        <TextAreaField name="actionsTaken" placeholder="Type here" />
+        <TextAreaField name="organizationTalkedTo" placeholder="Type here" />
       </div>
 
       <ActionButtons

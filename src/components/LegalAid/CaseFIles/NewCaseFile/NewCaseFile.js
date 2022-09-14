@@ -23,6 +23,7 @@ import {
   resetCaseFile,
   selectCaseFile,
 } from "../../../../store/caseFileReducer";
+import { onSubmitAlert } from "../../../../lib/deleteInProd";
 
 const NewCaseFile = ({ isClvCaseFile, onClose, isNewCaseFile = false }) => {
   const caseFile = useCaseFileTemp();
@@ -37,8 +38,6 @@ const NewCaseFile = ({ isClvCaseFile, onClose, isNewCaseFile = false }) => {
   const [selectedClvName, setSelectedClvName] = useState(caseFile?.clv || {});
   const [referredTo, setReferredTo] = useState({});
   const dispatch = useDispatch();
-
-  console.log(caseFile);
 
   const mutateForm1 = (values) => {
     const data = {
@@ -156,7 +155,7 @@ const NewCaseFile = ({ isClvCaseFile, onClose, isNewCaseFile = false }) => {
       return (
         <MultForm6
           initialValues={caseFileSixInitialValues}
-          useMutate={isClvCaseFile ? useUpdateCaseFile : useUpdateClvCaseFile}
+          useMutate={isClvCaseFile ? onSubmitAlert : useUpdateClvCaseFile}
           onSuccess={onSubmit}
           success={CASE_FILE_UPDATED}
           onBack={prevStep}

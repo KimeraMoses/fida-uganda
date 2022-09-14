@@ -2,7 +2,6 @@ import classes from '../../../../Membership/Members/NewMemberForm/MultiForm/Mult
 import { SimpleGrid, Textarea } from '@chakra-ui/react';
 import ActionButtons from '../../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons';
 import styles from './MultForm6.module.css';
-import Logo from '../../../../../assets/images/Avater.png';
 import withForm from '../../../../../hoc/withForm';
 import TextAreaField from '../../../../common/TextAreaField';
 import SelectField from '../../../../common/SelectField';
@@ -10,15 +9,13 @@ import { caseFileStatusOptions } from '../../../../../lib/options';
 import SearchableField from '../../../../common/UI/SearchableField/SearchableField';
 import { useUsers } from '../../../../../hooks/useUser';
 import { useState } from 'react';
-import { useCaseComments } from '../../../../../hooks/useCaseFiles';
+import { useSelector } from 'react-redux';
 
-const ActionForm = ({ values }) => {
-  const { data } = useCaseComments();
-  console.log('case comments', data);
+const ActionForm = ({ values, addAction }) => {
   const [value, setValue] = useState('');
 
-  const addAction = () => {
-    values.actionsTaken.push({ message: value });
+  const onClick = () => {
+    addAction(value);
     setValue('');
   };
 
@@ -38,7 +35,7 @@ const ActionForm = ({ values }) => {
           type="button"
           className="fida__fm_btn fida__btn_outlined"
           disabled={value ? false : true}
-          onClick={addAction}
+          onClick={onClick}
         >
           Add Action
         </button>
@@ -48,19 +45,23 @@ const ActionForm = ({ values }) => {
 };
 
 export const ActionCard = ({ action }) => {
+  const { user } = useSelector((state) => state.auth);
+  const full_name = action?.full_name ? action.full_name : user?.full_name;
+  const image = action?.image ? action?.image : user.image;
+
   return (
     <div className={styles.card_wrapper}>
       <div
         className={styles.avater_wrapper}
         style={{
-          backgroundImage: `url(${Logo})`,
+          backgroundImage: `url(${image})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center top',
         }}
       ></div>
       <div className={styles.content_wrapper}>
-        <h4>{action?.full_name}</h4>
-        <h6>{action?.message}</h6>
+        <h4>{full_name}</h4>
+        <h6>{action?.action}</h6>
       </div>
     </div>
   );
@@ -74,8 +75,15 @@ const MultForm6 = ({
   setReferredTo,
   referredTo,
   values,
+  setFieldValue,
 }) => {
   const users = useUsers();
+  const { user } = useSelector((state) => state.auth);
+
+  const addAction = (value) => {
+    const action = { userId: user?.id, action: value };
+    setFieldValue('actionsTaken', [...values?.actionsTaken, action]);
+  };
 
   return (
     <div className={classes.form_wrapper}>
@@ -109,7 +117,7 @@ const MultForm6 = ({
       <div className={classes.field_wrapper}>
         <div className={classes.field_label}>15. Action Taken. </div>
         <div className={styles.action_taken_wrapper}>
-          <ActionForm values={values} />
+          <ActionForm values={values} addAction={addAction} />
         </div>
       </div>
 
