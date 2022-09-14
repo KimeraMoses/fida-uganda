@@ -60,14 +60,14 @@ const MultForm2 = ({ values, page, limit, onBack, isSubmitting }) => {
             v. Do you have difficulty (with self-care such as) washing all over
             or dressing?
           </div>
-          <RadioSelect options={disabilityOptions} name="washing" />
+          <RadioSelect options={disabilityOptions} name="dressing" />
         </div>
         <div className={styles.field_label_inner}>
           <div className={classes.field_inner_label}>
             vi. Using your usual (customary) language, do you have difficulty
             communicating, for example understanding or being understood?
           </div>
-          <RadioSelect options={disabilityOptions} name="communicating" />
+          <RadioSelect options={disabilityOptions} name="speech" />
         </div>
         <div className={styles.field_label_inner}>
           <div className={classes.field_inner_label}>

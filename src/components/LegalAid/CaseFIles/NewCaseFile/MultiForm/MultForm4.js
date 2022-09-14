@@ -62,6 +62,7 @@ const MultForm4 = ({
           onChange={setAbout}
           colorScheme="purple"
           style={{ marginLeft: 15 }}
+          value={values?.about}
         >
           <SimpleGrid columns={2} spacing={2} style={{ alignItems: 'center' }}>
             <Stack direction="column">
