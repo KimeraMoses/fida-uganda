@@ -1,15 +1,15 @@
-import classes from "../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css";
-import { SimpleGrid } from "@chakra-ui/react";
-import InputField from "../../../common/UI/InputField/InputField";
-import FormButton from "../../../common/UI/FormButton/FormButton";
-import styles from "./NewClvForm.module.css";
-import SelectField from "../../../common/SelectField";
-import { sexOptions } from "../../../../lib/options";
-import { useProjectOptions } from "../../../../hooks/useProjects";
-import withForm from "../../../../hoc/withForm";
-import { useMemo } from "react";
-import { MdClose } from "react-icons/md";
-import SelectAvatar from "../../../common/SelectAvatar";
+import classes from '../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css';
+import { SimpleGrid } from '@chakra-ui/react';
+import InputField from '../../../common/UI/InputField/InputField';
+import FormButton from '../../../common/UI/FormButton/FormButton';
+import styles from './NewClvForm.module.css';
+import SelectField from '../../../common/SelectField';
+import { sexOptions } from '../../../../lib/options';
+import { useProjectOptions } from '../../../../hooks/useProjects';
+import withForm from '../../../../hoc/withForm';
+import { useMemo } from 'react';
+import { MdClose } from 'react-icons/md';
+import SelectAvatar from '../../../common/SelectAvatar';
 
 const NewClvForm = ({ isSubmitting, ...rest }) => {
   const { action, onClose, values, setAvatar, toast, url, setImageUrl } = rest;
@@ -125,10 +125,10 @@ const NewClvForm = ({ isSubmitting, ...rest }) => {
 
       <div
         className={`${styles.form_action_btn_wrapper} ${
-          action === "newClv" ? styles.btn_right : ""
+          action === 'newClv' ? styles.btn_right : ''
         }`}
       >
-        {action !== "newClv" ? (
+        {action !== 'newClv' ? (
           <>
             <FormButton
               variant="outlined"
@@ -140,12 +140,12 @@ const NewClvForm = ({ isSubmitting, ...rest }) => {
             </FormButton>
             <FormButton variant="outlined" type="submit" status="success">
               {isSubmitting
-                ? "Saving..."
-                : action !== "editClv"
+                ? 'Saving...'
+                : action !== 'editClv'
                 ? values.isActive
-                  ? "Deactivate"
-                  : "Approve"
-                : "Save changes"}
+                  ? 'Deactivate'
+                  : 'Approve'
+                : 'Save changes'}
             </FormButton>
           </>
         ) : (
@@ -154,7 +154,7 @@ const NewClvForm = ({ isSubmitting, ...rest }) => {
             type="submit"
             isSubmitting={isSubmitting}
           >
-            {isSubmitting ? "Saving..." : "Add"}
+            {isSubmitting ? 'Saving...' : 'Add'}
           </FormButton>
         )}
       </div>
