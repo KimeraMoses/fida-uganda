@@ -18,7 +18,7 @@ import FleetDatabaseForm from "../../forms/fleetDatabase/FleetDatabaseForm";
 import Modal from "./../../common/Modal";
 import { fleetDatabaseInitialValues } from "../../forms/fleetDatabase/schemas/fleetDatabase";
 import { fleetDatabaseOrderSchema } from "./../../forms/fleetDatabase/schemas/fleetDatabase";
-import { useAddFleet } from "../../../hooks/useFleet";
+import { useUpdateFleet} from "../../../hooks/useFleet";
 
 const FleetDatabaseTable = ({ data, ...rest }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -69,15 +69,15 @@ const FleetDatabaseTable = ({ data, ...rest }) => {
         <Modal
           isOpen={isOpen}
           onClose={onClose}
-          title="Vehicle Profiling Form"
+          title=" Edit Vehicle Profiling Form"
           size="2xl"
         >
           <FleetDatabaseForm
             initialValues={fleetDatabaseInitialValues}
             validationSchema={fleetDatabaseOrderSchema}
             onSuccess={onClose}
-            success={`Vehicle added successfully`}
-            useMutate={useAddFleet}
+            success={`Vehicle Edited successfully`}
+            useMutate={useUpdateFleet}
             isEdit={true}
           />
         </Modal>
