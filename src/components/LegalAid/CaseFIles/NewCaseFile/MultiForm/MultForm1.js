@@ -25,7 +25,7 @@ const MultForm1 = ({
   const clvs = useClvsDetails();
   const clients = useClientOptions();
 
-  console.log(selectedClvName);
+  console.log(selectedClvName, selectedClient);
 
   return (
     <div className={classes.form_wrapper}>
@@ -37,16 +37,16 @@ const MultForm1 = ({
             spacing={5}
             style={{ alignItems: "center", justifyContent: "space-between" }}
           >
-            <div>
-              <div>{selectedClvName.id}</div>
-              <SearchableField
-                placeholder="CLV Name"
-                data={clvs}
-                setSelectedItem={setSelectedClvName}
-                selectedItem={selectedClvName.name}
-                name="clvName"
-              />
-            </div>
+            <SearchableField
+              placeholder="CLV Name"
+              data={clvs}
+              setSelectedItem={setSelectedClvName}
+              selectedItem={selectedClvName.name}
+              name="clvName"
+              defaultValue={
+                selectedClvName?.first_name + " " + selectedClvName?.last_name
+              }
+            />
             <div className={styles.selected_project_name}>
               {selectedClvName.project?.name}
             </div>
@@ -71,7 +71,7 @@ const MultForm1 = ({
             setSelectedItem={setSelectedClient}
             selectedItem={selectedClient.name}
             name="searchClient"
-            defaultValue={selectedClient.name}
+            defaultValue={selectedClient?.name}
           />
 
           <InputField placeholder="Type Here" name="respondentName" fullwidth />
