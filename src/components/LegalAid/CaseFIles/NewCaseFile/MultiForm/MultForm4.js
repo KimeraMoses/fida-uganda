@@ -1,16 +1,18 @@
-import classes from "../../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css";
-import ActionButtons from "../../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons";
+import classes from '../../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css';
+import ActionButtons from '../../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons';
 import {
   Radio,
   RadioGroup,
   SimpleGrid,
   Stack,
   useToast,
-} from "@chakra-ui/react";
-import BenTable from "./BeneficiariesTable";
-import withForm from "../../../../../hoc/withForm";
-import AddBeneficiariesForm from "./AddBeneficiariesForm";
-import { toastError } from "../../../../../lib/toastDetails";
+} from '@chakra-ui/react';
+import BenTable from './BeneficiariesTable';
+import withForm from '../../../../../hoc/withForm';
+import AddBeneficiariesForm from './AddBeneficiariesForm';
+import { toastError } from '../../../../../lib/toastDetails';
+import { useDispatch } from 'react-redux';
+import { selectClient } from '../../../../../store/clientReducer';
 
 const MultForm4 = ({
   values,
@@ -21,6 +23,12 @@ const MultForm4 = ({
   isSubmitting,
 }) => {
   const toast = useToast();
+  const dispatch = useDispatch();
+
+  const handleGoBack = () => {
+    dispatch(selectClient(values));
+    onBack();
+  };
 
   const addBeneficiary = (beneficiary) => {
     if (values?.beneficiaries.length >= 10) {
@@ -31,18 +39,18 @@ const MultForm4 = ({
       id: values.beneficiaries.length + 1,
       ...beneficiary,
     };
-    setFieldValue("beneficiaries", [newBeneficiary, ...values?.beneficiaries]);
+    setFieldValue('beneficiaries', [newBeneficiary, ...values?.beneficiaries]);
   };
 
   const removeBeneficiary = (index) => {
     const newBeneficiaries = [...values?.beneficiaries];
     newBeneficiaries.splice(index, 1);
-    setFieldValue("beneficiaries", newBeneficiaries);
+    setFieldValue('beneficiaries', newBeneficiaries);
     console.log(newBeneficiaries);
   };
 
   const setAbout = (option) => {
-    setFieldValue("about", option);
+    setFieldValue('about', option);
   };
 
   return (
@@ -65,7 +73,7 @@ const MultForm4 = ({
           style={{ marginLeft: 15 }}
           value={values?.about}
         >
-          <SimpleGrid columns={2} spacing={2} style={{ alignItems: "center" }}>
+          <SimpleGrid columns={2} spacing={2} style={{ alignItems: 'center' }}>
             <Stack direction="column">
               <Radio value="1">Brochures</Radio>
               <Radio value="2">Posters</Radio>
@@ -90,7 +98,7 @@ const MultForm4 = ({
 
       <ActionButtons
         page={page}
-        onBack={onBack}
+        onBack={handleGoBack}
         disabled={isSubmitting}
         limit={limit}
       />
