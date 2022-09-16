@@ -22,7 +22,7 @@ const Form = (props) => {
   } = props;
   const formatUserOptions =
     membersData &&
-    membersData.map((user) => ({
+    membersData?.map((user) => ({
       label: `${user.first_name} ${user.last_name}`,
       value: user.id,
     }));

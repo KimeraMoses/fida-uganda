@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import ProjectTable from "../../../LegalAid/ProjectFiles/ProjectPFilesTable/ProjectTable";
+import ProjectTable from "../../../LegalAid/ProjectFiles/ProjectFilesTable/ProjectTable";
 import ReportBreadCrumb from "./../../../HumanResource/Reports/BreadCrumb/ReportBreadCrumb";
 
 const FidaProjectFiles = () => {
@@ -12,7 +12,8 @@ const FidaProjectFiles = () => {
         rootLink="/fida-projects"
         folderName={folderName.toLowerCase().replace(/-/g, " ")}
       />
-      <ProjectTable showBtn={false} tableName="Project Files" />
+        <ProjectTable/>
+      {/*<ProjectTable showBtn={false} tableName="Project Files" />*/}
     </>
   );
 };

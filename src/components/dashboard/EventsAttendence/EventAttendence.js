@@ -12,7 +12,7 @@ import { attendanceInitialValues, attendanceSchema } from "./NewAttendence/schem
 const EventAttendence = () => {
   const { isOpen,onOpen, onClose } = useDisclosure();
   const { data, isLoading } = useEvents();
-
+console.log(data)
   return (
     <>
       <SectionHeader title="Events Attendence" />
@@ -20,8 +20,8 @@ const EventAttendence = () => {
         <Loader />
       ) : (
         <>
-          {/*<TableSearch btnLabel="Add Attendence" btnClick={onOpen} />*/}
-          {data?.events && <AttendenceTable data={data?.events} btnLabel="Add Attendence" btnClick={onOpen}/>}
+
+          {data?.events && <AttendenceTable data={data?.events} btnLabel="Add Attendance" btnClick={onOpen}/>}
         </>
       )}
       <Modal isOpen={isOpen} size="xl" title="Event Attendance"  onClose={onClose}>

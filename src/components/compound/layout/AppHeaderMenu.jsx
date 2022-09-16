@@ -9,6 +9,7 @@ import {
   IconButton,
   Avatar,
 } from "@chakra-ui/react";
+import {QueryCache} from "react-query"
 import { logoutUser } from "../../../store/authReducer";
 
 const AppHeaderMenu = () => {
@@ -20,6 +21,8 @@ const AppHeaderMenu = () => {
   const logout = () => {
     dispatch(logoutUser());
     navigate("/");
+    const queryCache = new QueryCache();
+    queryCache.clear();
   };
 
   return (

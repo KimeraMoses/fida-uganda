@@ -20,13 +20,17 @@ const MultForm5 = ({ page, limit, onBack, isSubmitting }) => {
       </div>
       <div className={classes.field_wrapper}>
         <div className={classes.field_label}>11. Declaration.</div>
-        <p>
+        <input type="checkbox" />
+        <label
+          htmlFor="declaration"
+          style={{ marginLeft: 4, marginRight: 4, color: "" }}
+        >
           I have read and discussed the above information with the officer and
           understood the risks and benefits involved, the nature and limits of
           confidentiality, and what is expected of me as a client of the legal
           aid services. I hereby instruct FIDA - Uganda to take over the
           management of my case.
-        </p>
+        </label>
       </div>
 
       <ActionButtons

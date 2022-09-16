@@ -25,29 +25,32 @@ const MultForm1 = ({
   const clvs = useClvsDetails();
   const clients = useClientOptions();
 
+  console.log(selectedClvName);
+
   return (
     <div className={classes.form_wrapper}>
       {isClvCaseFile && (
         <div className={classes.field_wrapper}>
           <div className={classes.field_label}>CLV Details</div>
           <SimpleGrid
-            columns={2}
-            spacing={2}
-            style={{ justifyContent: "space-between", alignItems: "center" }}
+            columns={3}
+            spacing={5}
+            style={{ alignItems: "center", justifyContent: "space-between" }}
           >
-            <SearchableField
-              placeholder="CLV Name"
-              data={clvs}
-              setSelectedItem={setSelectedClvName}
-              selectedItem={selectedClvName.name}
-              name="clvName"
-              defaultValue={
-                clvs?.find((clv) => clv?.id === selectedClvName?.id)?.name
-              }
-            />
-            {/* <div>{selectedClvName.id}</div> */}
-            <div>{selectedClvName.project?.name}</div>
-            {/* <div>{selectedClvName.district}</div> */}
+            <div>
+              <div>{selectedClvName.id}</div>
+              <SearchableField
+                placeholder="CLV Name"
+                data={clvs}
+                setSelectedItem={setSelectedClvName}
+                selectedItem={selectedClvName.name}
+                name="clvName"
+              />
+            </div>
+            <div className={styles.selected_project_name}>
+              {selectedClvName.project?.name}
+            </div>
+            <div>{selectedClvName.district}</div>
           </SimpleGrid>
         </div>
       )}
@@ -100,7 +103,7 @@ const MultForm1 = ({
           <div>{selectedClient.phoneNumber}</div>
           <InputField
             placeholder="Type Here"
-            name="respondentPhoneNumber"
+            name="respondentPhone"
             maxLength="12"
           />
         </SimpleGrid>
@@ -128,7 +131,7 @@ const MultForm1 = ({
         <SimpleGrid columns={3} spacing={2} style={{ alignItems: "center" }}>
           <div className={styles.field_row_label}>SubCounty/Town Council</div>
           <div>{selectedClient.subcounty}</div>
-          <InputField placeholder="Type Here" name="respondentSubCounty" />
+          <InputField placeholder="Type Here" name="respondentCounty" />
         </SimpleGrid>
         <SimpleGrid columns={3} spacing={2} style={{ alignItems: "center" }}>
           <div className={styles.field_row_label}>Parish</div>
@@ -140,10 +143,22 @@ const MultForm1 = ({
           <div>{selectedClient.village}</div>
           <InputField placeholder="Type Here" name="respondentVillage" />
         </SimpleGrid>
-        <SimpleGrid columns={3} spacing={2} style={{ alignItems: "center" }}>
+        <SimpleGrid
+          columns={3}
+          spacing={2}
+          style={{ alignItems: "center", marginBottom: 8 }}
+        >
           <div className={styles.field_row_label}>Marital Status</div>
           <div>{selectedClient.marital_status}</div>
-          <InputField placeholder="Type Here" name="respondentMaritalStatus" />
+          <SelectField
+            name="respondentMaritalStatus"
+            placeholder="Select Status"
+            options={[
+              { label: "Single", value: "single" },
+              { label: "Married", value: "married" },
+              { label: "Divorced", value: "divorced" },
+            ]}
+          />
         </SimpleGrid>
         <SimpleGrid columns={3} spacing={2} style={{ alignItems: "center" }}>
           <div className={styles.field_row_label}>Accompanied By</div>
@@ -171,20 +186,14 @@ const MultForm1 = ({
         <SimpleGrid columns={3} spacing={2} style={{ alignItems: "center" }}>
           <div className={styles.field_row_label}>Preferred Language</div>
           <div>{selectedClient.preferred_language}</div>
-          <InputField
-            placeholder="Type Here"
-            name="respondentPreferredLanguage"
-          />
+          <InputField placeholder="Type Here" name="respondentLanguage" />
         </SimpleGrid>
         <SimpleGrid columns={3} spacing={2} style={{ alignItems: "center" }}>
           <div className={styles.field_row_label}>
             Relationship with Respondent
           </div>
           <div></div>
-          <InputField
-            placeholder="Type Here"
-            name="respondentRelationshipWithComplainant"
-          />
+          <InputField placeholder="Type Here" name="respondentRelation" />
         </SimpleGrid>
       </div>
       <ActionButtons

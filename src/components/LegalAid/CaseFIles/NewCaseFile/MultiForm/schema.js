@@ -8,7 +8,7 @@ export const caseFileInitialValues = {
   respondentCountry: '',
   respondentNIN: '',
   respondentDistrict: '',
-  respondentSubCounty: '',
+  respondentCounty: '',
   respondentParish: '',
   respondentVillage: '',
   respondentMaritalStatus: '',
@@ -16,8 +16,8 @@ export const caseFileInitialValues = {
   respondentJob: '',
   respondentPlaceOfWork: '',
   respondentLevelOfEducation: '',
-  respondentPreferredLanguage: '',
-  respondentRelationshipWithComplainant: '',
+  respondentLanguage: '',
+  respondentRelation: '',
 };
 
 export const caseFileTwoInitialValues = {
@@ -31,12 +31,12 @@ export const caseFileTwoInitialValues = {
 };
 
 export const caseFileThreeInitialValues = {
+  about: '',
   nature: '',
-  type: '',
   duration: '',
-  details: '',
-  actionsTaken: '',
   hasTalkedToAnyone: '',
+  details: '',
+  organizationTalkedTo: '',
 };
 
 export const caseFileFourInitialValues = {
@@ -72,7 +72,7 @@ export const caseFileSchema = Yup.object().shape({
   respondentAge: Yup.number()
     .max(150, 'Age can not be more than 150')
     .required('Age is required'),
-  respondentPhoneNumber: Yup.number().required('Phone Number is required'),
+  respondentPhone: Yup.number().required('Phone Number is required'),
   respondentNIN: Yup.string()
     .required('National ID is required')
     .matches(

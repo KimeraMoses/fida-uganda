@@ -27,7 +27,12 @@ const RadioSelect = ({ label, name, options, ...rest }) => {
                   value={option.value}
                   checked={field.value === option.value}
                 />
-                <label htmlFor={option.value}>{option.label}</label>
+                <label
+                  htmlFor={option.value}
+                  style={{ marginLeft: 4, marginRight: 4 }}
+                >
+                  {option.label}
+                </label>
               </Fragment>
             );
           });

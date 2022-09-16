@@ -1,8 +1,31 @@
 .approvals_table_wrapper {
   border: 1px solid #572b859c;
+  border-radius: 4px;
 }
 
 .table_header th {
   font-size: 15px;
   text-transform: capitalize;
+}
+.table_actions_wrapperr {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4px;
+}
+
+/* MODAL STYLES */
+.confirm_delete_modal {
+  padding: 20px;
+}
+.modal__header {
+  font-size: 32px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.form_action_wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0 0;
 }
