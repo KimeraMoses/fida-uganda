@@ -1,15 +1,15 @@
-import React from 'react';
-import { SimpleGrid } from '@chakra-ui/react';
-import InputField from './../../../../common/UI/InputField/InputField';
-import SelectField from './../../../../common/SelectField';
-import { sexOptions } from './../../../../../lib/options';
-import classes from './AddBeneficiariesForm.module.css';
-import FormButton from './../../../../common/UI/FormButton/FormButton';
+import React from "react";
+import { SimpleGrid } from "@chakra-ui/react";
+import InputField from "./../../../../common/UI/InputField/InputField";
+import SelectField from "./../../../../common/SelectField";
+import { sexOptions } from "./../../../../../lib/options";
+import classes from "./AddBeneficiariesForm.module.css";
+import FormButton from "./../../../../common/UI/FormButton/FormButton";
 import {
   beneficiariesInitialValues,
   beneficiariesSchema,
-} from '../../../../../form_schemas/beneficiaries';
-import { Form, Formik } from 'formik';
+} from "../../../../../form_schemas/beneficiaries";
+import { Form, Formik } from "formik";
 
 const AddBeneficiariesForm = ({ addBeneficiary }) => {
   return (
@@ -24,7 +24,7 @@ const AddBeneficiariesForm = ({ addBeneficiary }) => {
             <SimpleGrid
               columns={5}
               spacing={1}
-              style={{ alignItems: 'center' }}
+              style={{ alignItems: "center" }}
             >
               <InputField
                 placeholder="Name"
