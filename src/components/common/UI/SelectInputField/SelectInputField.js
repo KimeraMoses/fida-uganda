@@ -16,6 +16,7 @@ const SelectInputField = (props) => {
   const selectedItemHandler = (option) => {
     setSelected(option.label);
     setIsActive(false);
+    props?.setFieldValue(name, option?.value);
   };
 
   return (

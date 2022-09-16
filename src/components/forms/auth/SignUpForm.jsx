@@ -10,9 +10,11 @@ import SubmitButton from "./SubmitButton";
 import { toastError } from "../../../lib/toastDetails";
 import SelectAvatar from "../../common/SelectAvatar";
 import { useProjectOptions } from "../../../hooks/useProjects";
+import SelectInputField from "../../common/UI/SelectInputField/SelectInputField";
 
 const SignUpForm = ({ onSubmit, isSubmitting, isError, error }) => {
   const [avatar, setAvatar] = useState(null);
+  const [selected, setSelected] = useState("");
   const [url, setImageUrl] = useState("");
   const toast = useToast();
   const projectOptions = useProjectOptions();
@@ -40,7 +42,7 @@ const SignUpForm = ({ onSubmit, isSubmitting, isError, error }) => {
         onSubmit(formData);
       }}
     >
-      {({ values }) => {
+      {({ values, setFieldValue, errors, touched }) => {
         return (
           <Flex as={Form} flexDir="column" gap={5} py={10}>
             <SelectAvatar
@@ -66,11 +68,13 @@ const SignUpForm = ({ onSubmit, isSubmitting, isError, error }) => {
               options={designationOptions}
               color={values.designation ? "black" : "gray.300"}
             />
-            <SelectField
+            <SelectInputField
+              data={projectOptions}
               name="project"
               placeholder="Select Project"
-              options={projectOptions}
-              color={values.project ? "black" : "gray.300"}
+              selected={selected}
+              setSelected={setSelected}
+              setFieldValue={setFieldValue}
             />
             <SubmitButton isLoading={isSubmitting} label="Sign Up" />
             <Text as="u" alignSelf="center" color="purple.900">
