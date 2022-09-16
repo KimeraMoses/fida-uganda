@@ -1,9 +1,18 @@
-import classes from "../../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css";
-import ActionButtons from "../../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons";
-import withForm from "../../../../../hoc/withForm";
-import TextAreaField from "../../../../common/TextAreaField";
+import classes from '../../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css';
+import ActionButtons from '../../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons';
+import withForm from '../../../../../hoc/withForm';
+import TextAreaField from '../../../../common/TextAreaField';
+import { useDispatch } from 'react-redux';
+import { selectCaseFile } from '../../../../../store/caseFileReducer';
 
-const MultForm5 = ({ page, limit, onBack, isSubmitting }) => {
+const MultForm5 = ({ page, limit, values, onBack, isSubmitting }) => {
+  const dispatch = useDispatch();
+
+  const handleGoBack = () => {
+    dispatch(selectCaseFile(values));
+    onBack();
+  };
+
   return (
     <div className={classes.form_wrapper}>
       <div className={classes.field_wrapper}>
@@ -23,7 +32,7 @@ const MultForm5 = ({ page, limit, onBack, isSubmitting }) => {
         <input type="checkbox" />
         <label
           htmlFor="declaration"
-          style={{ marginLeft: 4, marginRight: 4, color: "" }}
+          style={{ marginLeft: 4, marginRight: 4, color: '' }}
         >
           I have read and discussed the above information with the officer and
           understood the risks and benefits involved, the nature and limits of
@@ -35,7 +44,7 @@ const MultForm5 = ({ page, limit, onBack, isSubmitting }) => {
 
       <ActionButtons
         page={page}
-        onBack={onBack}
+        onBack={handleGoBack}
         disabled={isSubmitting}
         limit={limit}
       />
