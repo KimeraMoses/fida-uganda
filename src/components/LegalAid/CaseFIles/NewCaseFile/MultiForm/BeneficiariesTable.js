@@ -61,7 +61,7 @@ const BenTable = ({ data }) => {
                         variant="outline"
                         aria-label="Edit Item"
                         icon={<MdOutlineEdit />}
-                        onClick={() => handleClick(item)}
+                        // onClick={() => handleClick(item)}
                       />
                       <IconButton
                         size="sm"
