@@ -8,6 +8,7 @@ const SearchableField = ({
   name,
   selectedItem,
   disabled,
+  defaultValue,
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -48,6 +49,7 @@ const SearchableField = ({
       name={name}
       isSelected={isSearched}
       disabled={disabled}
+      defaultValue={defaultValue}
     />
   );
 };
