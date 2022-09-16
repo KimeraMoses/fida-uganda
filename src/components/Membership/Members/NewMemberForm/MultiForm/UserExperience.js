@@ -1,16 +1,24 @@
-import React from "react";
-import withForm from "../../../../../hoc/withForm";
-import classes from "./MultiForm.module.css";
-import ActionButtons from "./ActionButtons/ActionButtons";
+import React from 'react';
+import withForm from '../../../../../hoc/withForm';
+import classes from './MultiForm.module.css';
+import ActionButtons from './ActionButtons/ActionButtons';
 import {
   Checkbox,
   CheckboxGroup,
   Radio,
   RadioGroup,
   Stack,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
+import { useDispatch } from 'react-redux';
+import { selectMember } from '../../../../../store/memberReducer';
 
-const UserExperience = ({ page, limit, isSubmitting, onBack }) => {
+const UserExperience = ({ page, limit, isSubmitting, onBack, values }) => {
+  const dispatch = useDispatch();
+
+  const handleGoBack = () => {
+    dispatch(selectMember(values));
+  };
+
   return (
     <div className={classes.form_wrapper}>
       <div className={classes.field_wrapper}>
@@ -25,7 +33,7 @@ const UserExperience = ({ page, limit, isSubmitting, onBack }) => {
           </Stack>
         </RadioGroup>
         <CheckboxGroup colorScheme="purple">
-          <Stack spacing={[1]} direction={["column"]}>
+          <Stack spacing={[1]} direction={['column']}>
             <Checkbox>Kiswahili</Checkbox>
             <Checkbox>French</Checkbox>
             <Checkbox>Others</Checkbox>
@@ -53,7 +61,7 @@ const UserExperience = ({ page, limit, isSubmitting, onBack }) => {
         page={page}
         limit={limit}
         disabled={isSubmitting}
-        onBack={onBack}
+        onBack={handleGoBack}
       />
     </div>
   );

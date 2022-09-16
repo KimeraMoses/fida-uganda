@@ -1,10 +1,18 @@
-import React from "react";
-import withForm from "../../../../../hoc/withForm";
-import classes from "./MultiForm.module.css";
-import ActionButtons from "./ActionButtons/ActionButtons";
-import { Radio, RadioGroup, Stack } from "@chakra-ui/react";
+import React from 'react';
+import withForm from '../../../../../hoc/withForm';
+import classes from './MultiForm.module.css';
+import ActionButtons from './ActionButtons/ActionButtons';
+import { Radio, RadioGroup, Stack } from '@chakra-ui/react';
+import { useDispatch } from 'react-redux';
+import { selectMember } from '../../../../../store/memberReducer';
 
-const UserInterests = ({ page, limit, isSubmitting, onBack }) => {
+const UserInterests = ({ page, limit, isSubmitting, onBack, values }) => {
+  const dispatch = useDispatch();
+
+  const handleGoBack = () => {
+    dispatch(selectMember(values));
+  };
+
   return (
     <div className={classes.form_wrapper}>
       <div className={classes.field_wrapper}>
@@ -34,7 +42,7 @@ const UserInterests = ({ page, limit, isSubmitting, onBack }) => {
         page={page}
         limit={limit}
         disabled={isSubmitting}
-        onBack={onBack}
+        onBack={handleGoBack}
       />
     </div>
   );
