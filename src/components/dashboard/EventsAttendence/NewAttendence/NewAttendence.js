@@ -1,11 +1,11 @@
 import {
-  SimpleGrid,
+    Button, Flex,
+    SimpleGrid,
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import withForm from "../../../../hoc/withForm";
 import classes from "./NewAttendence.module.css";
 import InputField from "../../../common/UI/InputField/InputField";
-import FormButton from "../../../common/UI/FormButton/FormButton";
 import { useProjectOptions } from "../../../../hooks/useProjects";
 import SelectInput from "../../../Membership/Allocations/AllocationForm/SelectInput";
 
@@ -14,14 +14,14 @@ import SelectInput from "../../../Membership/Allocations/AllocationForm/SelectIn
 const NewAttendence = ({ onClose, isSubmitting, setFieldValue, values }) => {
   const projectOptions = useProjectOptions();
 
-  const { femaleCount, maleCount, age0_17, age18_30, age31_59, above59 } =
+  const { num_female, num_male, age0_17, age18_30, age31_59, above59 } =
     values;
 
   useEffect(() => {
-    values.total_participant =
-      (parseInt(femaleCount) || 0) + (parseInt(maleCount) || 0);
+    values.total_num_participants =
+      (parseInt(num_female) || 0) + (parseInt(num_male) || 0);
 
-    values.undisclosed = values.total_participant;
+    values.undisclosed = values.total_num_participants;
 
     values.undisclosed =
       values.undisclosed -
@@ -57,11 +57,12 @@ const NewAttendence = ({ onClose, isSubmitting, setFieldValue, values }) => {
         <div className={classes.field_row_label}>Project Name</div>
         <SelectInput
           placeholder="Select Project"
-          name="project_name"
+          name="project"
           fullwidth
           options={projectOptions}
           isMulti={false}
-          onChange={(option) => setFieldValue("project_name", option.label)}
+          onChange={(option) => setFieldValue("project", option.label)}
+          required
         />
       </SimpleGrid>
       <SimpleGrid
@@ -97,19 +98,19 @@ const NewAttendence = ({ onClose, isSubmitting, setFieldValue, values }) => {
           <div className={classes.field_row_label}>
             Total No. of Participants
           </div>
-          <InputField placeholder="Type Here" name="total_participant" />
+          <InputField placeholder="Type Here" name="total_num_participants" />
         </div>
         <div>
           <div className={classes.field_row_label}>
             No. of Male Participants
           </div>
-          <InputField placeholder="Type Here" name="maleCount" />
+          <InputField placeholder="Type Here" name="num_male" />
         </div>
         <div>
           <div className={classes.field_row_label}>
             No. of Female Participants
           </div>
-          <InputField placeholder="Type Here" name="femaleCount" />
+          <InputField placeholder="Type Here" name="num_female" />
         </div>
       </SimpleGrid>
       <div className={classes.field_row_label}>Summary of age groups</div>
@@ -124,27 +125,35 @@ const NewAttendence = ({ onClose, isSubmitting, setFieldValue, values }) => {
         <GroupInput type="number" label="59 and above years" name="above59" placeholder="Type here"/>
         <GroupInput type="number" label="Undisclosed" name="undisclosed" placeholder="Type here"/>
       </SimpleGrid>
-      <div className={classes.attendence_upload_wrapper}>
-        <div className={classes.file_upload}>
-          <div className={classes.file_upload_label}>Upload file</div>
-        </div>
-        <div className={classes.file_upload_area}>
-          <input
-            type="file"
-            accept=".pdf, .docx, .xls"
-            onChange={(e) => console.log(e)}
-          />
-        </div>
-      </div>
+      {/*<div className={classes.attendence_upload_wrapper}>*/}
+      {/*  <div className={classes.file_upload}>*/}
+      {/*    <div className={classes.file_upload_label}>Upload file</div>*/}
+      {/*  </div>*/}
+      {/*  <div className={classes.file_upload_area}>*/}
+      {/*    <input*/}
+      {/*      type="file"*/}
+      {/*      accept=".pdf, .docx, .xls"*/}
+      {/*      onChange={(e) => console.log(e)}*/}
+      {/*    />*/}
+      {/*  </div>*/}
+      {/*</div>*/}
 
-      <div className={classes.form_actions_wrapper}>
-        <FormButton variant="cancel" onClick={onClose} type="button">
-          Cancel
-        </FormButton>
-        <FormButton variant="save" type="submit" disabled={isSubmitting}>
-          Submit
-        </FormButton>
-      </div>
+
+        <Flex flexDir="row-reverse">
+          <Button
+              alignSelf="right"
+              mt={5}
+              type="submit"
+              borderRadius="full"
+              bgGradient="linear(to-r, purple.400, purple.700)"
+              _hover={{ bgGradient: "linear(to-r, purple.600, purple.900)" }}
+              size="lg"
+              color="white"
+              disabled={isSubmitting}
+          >
+              {isSubmitting ? "Saving" : "Submit"}
+          </Button>
+        </Flex>
     </div>
   );
 };
