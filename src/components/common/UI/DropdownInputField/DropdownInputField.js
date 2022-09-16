@@ -12,6 +12,7 @@ const DropdownInputField = (props) => {
     placeholder,
     name,
     disabled,
+    defaultValue,
   } = props;
 
   return (
@@ -23,7 +24,9 @@ const DropdownInputField = (props) => {
           name={name}
           fullwidth={true}
           disabled={disabled || false}
-          value={isSelected ? selectedItem : searchTerm}
+          value={
+            isSelected ? selectedItem : defaultValue ? defaultValue : searchTerm
+          }
           onChange={keyWordHandler}
         />
 
