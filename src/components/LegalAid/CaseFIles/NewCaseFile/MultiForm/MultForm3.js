@@ -6,8 +6,17 @@ import SelectField from '../../../../common/SelectField';
 import { trueFalseOptions } from '../../../../../lib/options';
 import TextAreaField from '../../../../common/TextAreaField';
 import withForm from '../../../../../hoc/withForm';
+import { useDispatch } from 'react-redux';
+import { selectCaseFile } from '../../../../../store/caseFileReducer';
 
-const MultForm3 = ({ page, limit, onBack, isSubmitting }) => {
+const MultForm3 = ({ page, limit, values, onBack, isSubmitting }) => {
+  const dispatch = useDispatch();
+
+  const handleGoBack = () => {
+    dispatch(selectCaseFile(values));
+    onBack();
+  };
+
   return (
     <div className={classes.form_wrapper}>
       <div className={classes.field_wrapper}>
@@ -62,7 +71,7 @@ const MultForm3 = ({ page, limit, onBack, isSubmitting }) => {
 
       <ActionButtons
         page={page}
-        onBack={onBack}
+        onBack={handleGoBack}
         disabled={isSubmitting}
         limit={limit}
       />

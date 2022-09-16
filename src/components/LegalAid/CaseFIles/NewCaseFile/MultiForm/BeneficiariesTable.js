@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { Table, Thead, Tbody, Tr, Td, IconButton } from "@chakra-ui/react";
-import classes from "./Table.module.css";
-import { TableHeadColumn } from "../../../../Membership/Allocations/AllocationsTable/AllocationsTable";
-import { MdOutlineDelete, MdOutlineEdit } from "react-icons/md";
-import Modal from "../../../../common/Modal";
-import FormButton from "../../../../common/UI/FormButton/FormButton";
+import React, { useState } from 'react';
+import { Table, Thead, Tbody, Tr, Td, IconButton } from '@chakra-ui/react';
+import classes from './Table.module.css';
+import { TableHeadColumn } from '../../../../Membership/Allocations/AllocationsTable/AllocationsTable';
+import { MdOutlineDelete, MdOutlineEdit } from 'react-icons/md';
+import Modal from '../../../../common/Modal';
+import FormButton from '../../../../common/UI/FormButton/FormButton';
 
-const BenTable = ({ data }) => {
+const BenTable = ({ data, removeBeneficiary }) => {
   const [showDelete, setShowDelete] = useState(false);
   const [record, setRecord] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -15,6 +15,7 @@ const BenTable = ({ data }) => {
     setIsLoading(true);
     // console.log(record);
     //Logic to delete record?.id goes here
+    removeBeneficiary(record?.index);
 
     setIsLoading(false);
     setShowDelete(false);
@@ -45,7 +46,7 @@ const BenTable = ({ data }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {data?.map((item) => {
+            {data?.map((item, index) => {
               return (
                 <Tr key={item.id}>
                   <Td>{item.id}</Td>
@@ -53,7 +54,7 @@ const BenTable = ({ data }) => {
                   <Td>{item.age}</Td>
                   <Td>{item.sex}</Td>
                   <Td>{item.location}</Td>
-                  <Td>{item.phoneNumber ? item.phoneNumber : "N/A"}</Td>
+                  <Td>{item.phoneNumber ? item.phoneNumber : 'N/A'}</Td>
                   <Td>
                     <div className={classes.table_actions_wrapperr}>
                       <IconButton
@@ -68,7 +69,7 @@ const BenTable = ({ data }) => {
                         variant="outline"
                         aria-label="Delete Item"
                         icon={<MdOutlineDelete />}
-                        onClick={() => handleClick(item)}
+                        onClick={() => handleClick({ ...item, index })}
                       />
                     </div>
                   </Td>
@@ -104,7 +105,7 @@ const BenTable = ({ data }) => {
               rounded={false}
               onClick={handleDelete}
             >
-              {isLoading ? "Deleting..." : "Delete"}
+              {isLoading ? 'Deleting...' : 'Delete'}
             </FormButton>
           </div>
         </div>

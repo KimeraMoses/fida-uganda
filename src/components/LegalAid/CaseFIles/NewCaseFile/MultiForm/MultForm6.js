@@ -10,6 +10,8 @@ import SearchableField from '../../../../common/UI/SearchableField/SearchableFie
 import { useUsers } from '../../../../../hooks/useUser';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { selectCaseFile } from '../../../../../store/caseFileReducer';
 
 const ActionForm = ({ values, addAction }) => {
   const [value, setValue] = useState('');
@@ -79,6 +81,12 @@ const MultForm6 = ({
 }) => {
   const users = useUsers();
   const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  const handleGoBack = () => {
+    dispatch(selectCaseFile(values));
+    onBack();
+  };
 
   const addAction = (value) => {
     const action = { userId: user?.id, action: value };
@@ -123,7 +131,7 @@ const MultForm6 = ({
 
       <ActionButtons
         page={page}
-        onBack={onBack}
+        onBack={handleGoBack}
         disabled={isSubmitting}
         limit={limit}
       />
