@@ -25,8 +25,6 @@ const MultForm1 = ({
   const clvs = useClvsDetails();
   const clients = useClientOptions();
 
-  console.log(selectedClvName, selectedClient);
-
   return (
     <div className={classes.form_wrapper}>
       {isClvCaseFile && (
