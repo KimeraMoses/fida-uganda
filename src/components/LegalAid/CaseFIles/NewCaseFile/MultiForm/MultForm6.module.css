@@ -1,5 +1,5 @@
 .action_taken_wrapper {
-    padding: 10px;
+  padding: 10px;
 }
 .card_wrapper {
   display: flex;
@@ -12,15 +12,23 @@
   border-radius: 50%;
   margin-right: 10px;
 }
-.content_wrapper h4, h6 {
+.content_wrapper h4,
+h6 {
   font-weight: 700;
   font-size: 13px;
 }
-.content_wrapper h6{
-    font-weight: 400;
-    font-size: 13px;
+.content_wrapper h6 {
+  font-weight: 400;
+  font-size: 13px;
 }
-.add_actions_btn{
-    margin-top: 10px;
-    text-align: right;
+.add_actions_btn {
+  margin-top: 10px;
+  text-align: right;
+}
+
+button:disabled,
+button[disabled] {
+  background: #cccccc !important;
+  color: #666666;
+  pointer-events: none;
 }

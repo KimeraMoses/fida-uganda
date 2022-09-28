@@ -1,10 +1,10 @@
-import classes from '../../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css';
-import ActionButtons from '../../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons';
-import withForm from '../../../../../hoc/withForm';
-import TextAreaField from '../../../../common/TextAreaField';
-import { useDispatch } from 'react-redux';
-import { selectCaseFile } from '../../../../../store/caseFileReducer';
-import { Field } from 'formik';
+import classes from "../../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css";
+import ActionButtons from "../../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons";
+import withForm from "../../../../../hoc/withForm";
+import TextAreaField from "../../../../common/TextAreaField";
+import { useDispatch } from "react-redux";
+import { selectCaseFile } from "../../../../../store/caseFileReducer";
+import { Field } from "formik";
 
 const MultForm5 = ({ page, limit, values, onBack, isSubmitting }) => {
   const dispatch = useDispatch();
@@ -32,9 +32,9 @@ const MultForm5 = ({ page, limit, values, onBack, isSubmitting }) => {
         <div className={classes.field_label}>11. Declaration.</div>
         <label
           htmlFor="declaration"
-          style={{ marginLeft: 4, marginRight: 4, color: '' }}
+          style={{ marginLeft: 4, marginRight: 4, color: "" }}
         >
-          <Field type="checkbox" name="declaration" />I have read and discussed
+          <Field type="checkbox" name="declaration" /> I have read and discussed
           the above information with the officer and understood the risks and
           benefits involved, the nature and limits of confidentiality, and what
           is expected of me as a client of the legal aid services. I hereby
@@ -45,6 +45,7 @@ const MultForm5 = ({ page, limit, values, onBack, isSubmitting }) => {
       <ActionButtons
         page={page}
         onBack={handleGoBack}
+        loading={isSubmitting}
         disabled={!values?.declaration || isSubmitting}
         limit={limit}
       />
