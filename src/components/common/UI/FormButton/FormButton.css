@@ -57,3 +57,10 @@
   color: #ffffff;
   padding: 8px 20px;
 }
+
+.fida__fm_btn:disabled,
+.fida__fm_btn[disabled] {
+  background: #cccccc !important;
+  color: #666666;
+  pointer-events: none;
+}
