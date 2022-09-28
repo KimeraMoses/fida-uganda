@@ -1,30 +1,39 @@
-import classes from "../../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css";
-import styles from "./MultiForm.module.css";
-import ActionButtons from "../../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons";
-import "./RadioLabel.css";
-import RadioSelect from "../../../../common/RadioSelect";
-import { disabilityOptions, yesNoOptions } from "../../../../../lib/options";
-import withForm from "../../../../../hoc/withForm";
+import classes from '../../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css';
+import styles from './MultiForm.module.css';
+import ActionButtons from '../../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons';
+import './RadioLabel.css';
+import RadioSelect from '../../../../common/RadioSelect';
+import { disabilityOptions, yesNoOptions } from '../../../../../lib/options';
+import withForm from '../../../../../hoc/withForm';
+import { useDispatch } from 'react-redux';
+import { selectClient } from '../../../../../store/clientReducer';
 
 const MultForm2 = ({ values, page, limit, onBack, isSubmitting }) => {
   if (
-    values.hearing === "Yes" ||
-    values.sight === "Yes" ||
-    values.movement === "Yes" ||
-    values.remembering === "Yes" ||
-    values.washing === "Yes" ||
-    values.communicating === "Yes" ||
-    values.hearing === "Mostly" ||
-    values.sight === "Mostly" ||
-    values.movement === "Mostly" ||
-    values.remembering === "Mostly" ||
-    values.washing === "Mostly" ||
-    values.communicating === "Mostly"
+    values.hearing === 'Yes' ||
+    values.sight === 'Yes' ||
+    values.movement === 'Yes' ||
+    values.remembering === 'Yes' ||
+    values.washing === 'Yes' ||
+    values.communicating === 'Yes' ||
+    values.hearing === 'Mostly' ||
+    values.sight === 'Mostly' ||
+    values.movement === 'Mostly' ||
+    values.remembering === 'Mostly' ||
+    values.washing === 'Mostly' ||
+    values.communicating === 'Mostly'
   ) {
-    values.isDisabled = "Yes";
+    values.isDisabled = 'Yes';
   } else {
-    values.isDisabled = "No";
+    values.isDisabled = 'No';
   }
+
+  const dispatch = useDispatch();
+
+  const handleGoBack = () => {
+    dispatch(selectClient(values));
+    onBack();
+  };
 
   return (
     <div className={classes.form_wrapper}>
@@ -78,7 +87,7 @@ const MultForm2 = ({ values, page, limit, onBack, isSubmitting }) => {
       </div>
       <ActionButtons
         page={page}
-        onBack={onBack}
+        onBack={handleGoBack}
         disabled={isSubmitting}
         limit={limit}
       />

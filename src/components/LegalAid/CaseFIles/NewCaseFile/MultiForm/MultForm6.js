@@ -1,22 +1,24 @@
-import classes from '../../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css';
-import { SimpleGrid, Textarea } from '@chakra-ui/react';
-import ActionButtons from '../../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons';
-import styles from './MultForm6.module.css';
-import withForm from '../../../../../hoc/withForm';
-import TextAreaField from '../../../../common/TextAreaField';
-import SelectField from '../../../../common/SelectField';
-import { caseFileStatusOptions } from '../../../../../lib/options';
-import SearchableField from '../../../../common/UI/SearchableField/SearchableField';
-import { useUsers } from '../../../../../hooks/useUser';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import classes from "../../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css";
+import { SimpleGrid, Textarea } from "@chakra-ui/react";
+import ActionButtons from "../../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons";
+import styles from "./MultForm6.module.css";
+import withForm from "../../../../../hoc/withForm";
+import TextAreaField from "../../../../common/TextAreaField";
+import SelectField from "../../../../common/SelectField";
+import { caseFileStatusOptions } from "../../../../../lib/options";
+import SearchableField from "../../../../common/UI/SearchableField/SearchableField";
+import { useUsers } from "../../../../../hooks/useUser";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { selectCaseFile } from "../../../../../store/caseFileReducer";
 
 const ActionForm = ({ values, addAction }) => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
 
   const onClick = () => {
     addAction(value);
-    setValue('');
+    setValue("");
   };
 
   return (
@@ -55,8 +57,8 @@ export const ActionCard = ({ action }) => {
         className={styles.avater_wrapper}
         style={{
           backgroundImage: `url(${image})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center top',
+          backgroundSize: "cover",
+          backgroundPosition: "center top",
         }}
       ></div>
       <div className={styles.content_wrapper}>
@@ -79,16 +81,22 @@ const MultForm6 = ({
 }) => {
   const users = useUsers();
   const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  const handleGoBack = () => {
+    dispatch(selectCaseFile(values));
+    onBack();
+  };
 
   const addAction = (value) => {
     const action = { userId: user?.id, action: value };
-    setFieldValue('actionsTaken', [...values?.actionsTaken, action]);
+    setFieldValue("actionsTaken", [...values?.actionsTaken, action]);
   };
 
   return (
     <div className={classes.form_wrapper}>
       <div className={classes.field_wrapper}>
-        <SimpleGrid columns={2} spacing={2} style={{ alignItems: 'center' }}>
+        <SimpleGrid columns={2} spacing={2} style={{ alignItems: "center" }}>
           <div className={classes.field_label}>12. Status</div>
           <SelectField
             name="status"
@@ -98,7 +106,7 @@ const MultForm6 = ({
         </SimpleGrid>
       </div>
       <div className={classes.field_wrapper}>
-        <SimpleGrid columns={2} spacing={2} style={{ alignItems: 'center' }}>
+        <SimpleGrid columns={2} spacing={2} style={{ alignItems: "center" }}>
           <div className={classes.field_label}>13. Refer Case</div>
           <SearchableField
             placeholder="Search person"
@@ -123,7 +131,8 @@ const MultForm6 = ({
 
       <ActionButtons
         page={page}
-        onBack={onBack}
+        onBack={handleGoBack}
+        loading={isSubmitting}
         disabled={isSubmitting}
         limit={limit}
       />

@@ -6,7 +6,7 @@ import { MdOutlineDelete, MdOutlineEdit } from "react-icons/md";
 import Modal from "../../../../common/Modal";
 import FormButton from "../../../../common/UI/FormButton/FormButton";
 
-const BenTable = ({ data }) => {
+const BenTable = ({ data, removeBeneficiary, handleEdit }) => {
   const [showDelete, setShowDelete] = useState(false);
   const [record, setRecord] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -15,6 +15,7 @@ const BenTable = ({ data }) => {
     setIsLoading(true);
     // console.log(record);
     //Logic to delete record?.id goes here
+    removeBeneficiary(record?.index);
 
     setIsLoading(false);
     setShowDelete(false);
@@ -45,7 +46,7 @@ const BenTable = ({ data }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {data?.map((item) => {
+            {data?.map((item, index) => {
               return (
                 <Tr key={item.id}>
                   <Td>{item.id}</Td>
@@ -61,14 +62,14 @@ const BenTable = ({ data }) => {
                         variant="outline"
                         aria-label="Edit Item"
                         icon={<MdOutlineEdit />}
-                        // onClick={() => handleClick(item)}
+                        onClick={() => handleEdit(item)}
                       />
                       <IconButton
                         size="sm"
                         variant="outline"
                         aria-label="Delete Item"
                         icon={<MdOutlineDelete />}
-                        onClick={() => handleClick(item)}
+                        onClick={() => handleClick({ ...item, index })}
                       />
                     </div>
                   </Td>

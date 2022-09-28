@@ -2,8 +2,18 @@ import classes from "../../../../Membership/Members/NewMemberForm/MultiForm/Mult
 import ActionButtons from "../../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons";
 import withForm from "../../../../../hoc/withForm";
 import TextAreaField from "../../../../common/TextAreaField";
+import { useDispatch } from "react-redux";
+import { selectCaseFile } from "../../../../../store/caseFileReducer";
+import { Field } from "formik";
 
-const MultForm5 = ({ page, limit, onBack, isSubmitting }) => {
+const MultForm5 = ({ page, limit, values, onBack, isSubmitting }) => {
+  const dispatch = useDispatch();
+
+  const handleGoBack = () => {
+    dispatch(selectCaseFile(values));
+    onBack();
+  };
+
   return (
     <div className={classes.form_wrapper}>
       <div className={classes.field_wrapper}>
@@ -20,23 +30,23 @@ const MultForm5 = ({ page, limit, onBack, isSubmitting }) => {
       </div>
       <div className={classes.field_wrapper}>
         <div className={classes.field_label}>11. Declaration.</div>
-        <input type="checkbox" />
         <label
           htmlFor="declaration"
           style={{ marginLeft: 4, marginRight: 4, color: "" }}
         >
-          I have read and discussed the above information with the officer and
-          understood the risks and benefits involved, the nature and limits of
-          confidentiality, and what is expected of me as a client of the legal
-          aid services. I hereby instruct FIDA - Uganda to take over the
-          management of my case.
+          <Field type="checkbox" name="declaration" /> I have read and discussed
+          the above information with the officer and understood the risks and
+          benefits involved, the nature and limits of confidentiality, and what
+          is expected of me as a client of the legal aid services. I hereby
+          instruct FIDA - Uganda to take over the management of my case.
         </label>
       </div>
 
       <ActionButtons
         page={page}
-        onBack={onBack}
-        disabled={isSubmitting}
+        onBack={handleGoBack}
+        loading={isSubmitting}
+        disabled={!values?.declaration || isSubmitting}
         limit={limit}
       />
     </div>

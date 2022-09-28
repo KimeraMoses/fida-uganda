@@ -11,6 +11,9 @@ import BenTable from "./BeneficiariesTable";
 import withForm from "../../../../../hoc/withForm";
 import AddBeneficiariesForm from "./AddBeneficiariesForm";
 import { toastError } from "../../../../../lib/toastDetails";
+import { useDispatch } from "react-redux";
+import { selectClient } from "../../../../../store/clientReducer";
+import { useState } from "react";
 
 const MultForm4 = ({
   values,
@@ -20,7 +23,15 @@ const MultForm4 = ({
   onBack,
   isSubmitting,
 }) => {
+  const [isEdit, setIsEdit] = useState(false);
+  const [editValues, setEditValues] = useState({});
   const toast = useToast();
+  const dispatch = useDispatch();
+
+  const handleGoBack = () => {
+    dispatch(selectClient(values));
+    onBack();
+  };
 
   const addBeneficiary = (beneficiary) => {
     if (values?.beneficiaries.length >= 10) {
@@ -38,11 +49,16 @@ const MultForm4 = ({
     const newBeneficiaries = [...values?.beneficiaries];
     newBeneficiaries.splice(index, 1);
     setFieldValue("beneficiaries", newBeneficiaries);
-    console.log(newBeneficiaries);
+    // console.log(newBeneficiaries);
   };
 
   const setAbout = (option) => {
     setFieldValue("about", option);
+  };
+
+  const handleEdit = (item) => {
+    setIsEdit(true);
+    setEditValues(item);
   };
 
   return (
@@ -52,8 +68,15 @@ const MultForm4 = ({
         <BenTable
           data={values?.beneficiaries}
           removeBeneficiary={removeBeneficiary}
+          handleEdit={handleEdit}
         />
-        <AddBeneficiariesForm addBeneficiary={addBeneficiary} />
+        <AddBeneficiariesForm
+          addBeneficiary={addBeneficiary}
+          isEdit={isEdit}
+          setIsEdit={setIsEdit}
+          editValues={editValues}
+          setEditValues={setEditValues}
+        />
       </div>
       <div className={classes.field_wrapper}>
         <div className={classes.field_label}>
@@ -90,7 +113,7 @@ const MultForm4 = ({
 
       <ActionButtons
         page={page}
-        onBack={onBack}
+        onBack={handleGoBack}
         disabled={isSubmitting}
         limit={limit}
       />

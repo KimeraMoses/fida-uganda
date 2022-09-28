@@ -47,6 +47,7 @@ export const caseFileFourInitialValues = {
 export const caseFileFiveInitialValues = {
   natureOfSupport: '',
   comments: '',
+  declaration: false,
 };
 
 export const caseFileSixInitialValues = {
