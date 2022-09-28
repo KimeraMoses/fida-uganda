@@ -11,16 +11,30 @@ import {
 } from "../../../../../form_schemas/beneficiaries";
 import { Form, Formik } from "formik";
 
-const AddBeneficiariesForm = ({ addBeneficiary }) => {
+const AddBeneficiariesForm = ({
+  addBeneficiary,
+  editValues,
+  isEdit,
+  setIsEdit,
+}) => {
+  const newInitialValues = {
+    name: editValues?.name,
+    age: editValues?.age,
+    sex: editValues?.sex,
+    location: editValues?.location,
+    phoneNumber: editValues?.phoneNumber,
+  };
+
   return (
     <Formik
       validationSchema={beneficiariesSchema}
-      initialValues={beneficiariesInitialValues}
+      enableReinitialize
+      initialValues={isEdit ? newInitialValues : beneficiariesInitialValues}
     >
       {({ values, resetForm }) => (
         <Form>
           <div className={classes.beneficiaries_form_wrapper}>
-            <h4>Add New Beneficiary</h4>
+            <h4>{isEdit ? "Edit" : "Add New"} Beneficiary</h4>
             <SimpleGrid
               columns={5}
               spacing={1}
@@ -69,11 +83,17 @@ const AddBeneficiariesForm = ({ addBeneficiary }) => {
                 variant="colored"
                 rounded={true}
                 onClick={() => {
-                  addBeneficiary(values);
+                  if (isEdit) {
+                    //Editing logic here
+                    console.log("new values", values);
+                    setIsEdit(false);
+                  } else {
+                    addBeneficiary(values);
+                  }
                   resetForm();
                 }}
               >
-                + Add
+                {isEdit ? "Save" : "+ Add"}
               </FormButton>
             </div>
           </div>

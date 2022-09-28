@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { Table, Thead, Tbody, Tr, Td, IconButton } from '@chakra-ui/react';
-import classes from './Table.module.css';
-import { TableHeadColumn } from '../../../../Membership/Allocations/AllocationsTable/AllocationsTable';
-import { MdOutlineDelete, MdOutlineEdit } from 'react-icons/md';
-import Modal from '../../../../common/Modal';
-import FormButton from '../../../../common/UI/FormButton/FormButton';
+import React, { useState } from "react";
+import { Table, Thead, Tbody, Tr, Td, IconButton } from "@chakra-ui/react";
+import classes from "./Table.module.css";
+import { TableHeadColumn } from "../../../../Membership/Allocations/AllocationsTable/AllocationsTable";
+import { MdOutlineDelete, MdOutlineEdit } from "react-icons/md";
+import Modal from "../../../../common/Modal";
+import FormButton from "../../../../common/UI/FormButton/FormButton";
 
-const BenTable = ({ data, removeBeneficiary }) => {
+const BenTable = ({ data, removeBeneficiary, handleEdit }) => {
   const [showDelete, setShowDelete] = useState(false);
   const [record, setRecord] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -54,7 +54,7 @@ const BenTable = ({ data, removeBeneficiary }) => {
                   <Td>{item.age}</Td>
                   <Td>{item.sex}</Td>
                   <Td>{item.location}</Td>
-                  <Td>{item.phoneNumber ? item.phoneNumber : 'N/A'}</Td>
+                  <Td>{item.phoneNumber ? item.phoneNumber : "N/A"}</Td>
                   <Td>
                     <div className={classes.table_actions_wrapperr}>
                       <IconButton
@@ -62,7 +62,7 @@ const BenTable = ({ data, removeBeneficiary }) => {
                         variant="outline"
                         aria-label="Edit Item"
                         icon={<MdOutlineEdit />}
-                        // onClick={() => handleClick(item)}
+                        onClick={() => handleEdit(item)}
                       />
                       <IconButton
                         size="sm"
@@ -105,7 +105,7 @@ const BenTable = ({ data, removeBeneficiary }) => {
               rounded={false}
               onClick={handleDelete}
             >
-              {isLoading ? 'Deleting...' : 'Delete'}
+              {isLoading ? "Deleting..." : "Delete"}
             </FormButton>
           </div>
         </div>
