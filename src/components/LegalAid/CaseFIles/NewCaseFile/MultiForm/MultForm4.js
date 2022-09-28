@@ -75,6 +75,7 @@ const MultForm4 = ({
           isEdit={isEdit}
           setIsEdit={setIsEdit}
           editValues={editValues}
+          setEditValues={setEditValues}
         />
       </div>
       <div className={classes.field_wrapper}>

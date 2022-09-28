@@ -14,6 +14,7 @@ import { Form, Formik } from "formik";
 const AddBeneficiariesForm = ({
   addBeneficiary,
   editValues,
+  setEditValues,
   isEdit,
   setIsEdit,
 }) => {
@@ -78,6 +79,20 @@ const AddBeneficiariesForm = ({
               />
             </SimpleGrid>
             <div className={classes.form_action_wrapper}>
+              {isEdit && (
+                <FormButton
+                  type="button"
+                  variant="cancel"
+                  rounded={true}
+                  onClick={() => {
+                    setIsEdit(false);
+                    setEditValues({});
+                    resetForm();
+                  }}
+                >
+                  Cancel
+                </FormButton>
+              )}
               <FormButton
                 type="button"
                 variant="colored"
