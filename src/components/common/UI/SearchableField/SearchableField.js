@@ -44,12 +44,12 @@ const SearchableField = ({
       keyWordHandler={keyWordSearchHandler}
       searchTerm={searchTerm}
       selectedItem={selectedItem}
+      defaultValue={defaultValue}
       searchResults={searchResults}
       itemClickHandler={selectedItemHandler}
       name={name}
       isSelected={isSearched}
       disabled={disabled}
-      defaultValue={defaultValue}
     />
   );
 };
