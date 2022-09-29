@@ -5,6 +5,7 @@ import Textarea from "../../../common/TextAreaField";
 import InputField from "../../../common/UI/InputField/InputField";
 import FormButton from "../../../common/UI/FormButton/FormButton";
 import SelectInput from "../../Allocations/AllocationForm/SelectInput";
+import SelectInputField from "../../../common/UI/SelectInputField/SelectInputField";
 
 const NewActivityForm = (props) => {
   const { onClose, membersData, projectOptions, setFieldValue, isSubmitting } =
@@ -41,12 +42,11 @@ const NewActivityForm = (props) => {
       <div className={classes.input_group_wrapper}>
         <div className={classes.input_label}>Project</div>
         <div className={classes.input_field_wrapper}>
-          <SelectInput
-            fullWidth
-            isMulti={false}
-            options={projectOptions}
+          <SelectInputField
+            data={projectOptions}
             name="project"
-            onChange={(option) => setFieldValue("project", option)}
+            placeholder="Choose a project"
+            setFieldValue={setFieldValue}
           />
         </div>
       </div>

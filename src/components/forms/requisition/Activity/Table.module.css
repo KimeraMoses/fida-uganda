@@ -1,0 +1,158 @@
+.approvals_table_wrapper {
+  border: 1px solid #572b859c;
+  border-radius: 4px;
+}
+
+.table_header th {
+  font-size: 15px;
+  text-transform: capitalize;
+}
+.table_actions_wrapperr {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4px;
+}
+
+/* MODAL STYLES */
+.confirm_delete_modal {
+  padding: 20px;
+}
+.modal__header {
+  font-size: 32px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.form_action_wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0 0;
+}
+
+.allocations_table_wrapper {
+  background-color: #ffffff;
+}
+.table_header {
+  background: #fa05ff;
+  text-transform: capitalize !important;
+  font-weight: 700;
+  font-style: "Open Sans";
+  color: #000000;
+}
+th {
+  padding: 10px !important;
+}
+.allocations_table_wrapper td {
+  vertical-align: top;
+  padding-left: 10px;
+}
+.title_primary_text {
+  color: #000000;
+  font-size: 18px;
+  font-weight: 700;
+}
+.title_secondary_text {
+  font-size: 14px;
+  font-weight: 500;
+  color: #000000;
+  margin-top: 8px;
+}
+.data__primary_text {
+  color: var(--text_color);
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: capitalize;
+  margin-bottom: 8px;
+}
+.data_recepient_field {
+  width: 200px;
+}
+.subject__title {
+  text-transform: uppercase;
+}
+.data__secondary_text {
+  color: var(--secondary_text_color);
+}
+
+.allocation_status_wrapper {
+  border-radius: 20px;
+  padding: 3px 20px 3px 10px;
+  white-space: nowrap;
+  user-select: none;
+  font-weight: 600;
+  max-width: 115px;
+}
+
+.allocation_status_wrapper {
+  display: flex;
+  align-items: center;
+}
+.status_indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.allocation_status_wrapper.success {
+  background-color: rgba(26, 214, 152, 0.3);
+  color: var(--text_color);
+}
+.allocation_status_wrapper.fail {
+  background-color: #ffe0e0;
+  color: #ff3838;
+}
+.allocation_status_wrapper.paid {
+  background-color: #d7ffed;
+  color: #38cb89;
+}
+.allocation_status_wrapper.balance {
+  background-color: #fff8bc;
+  color: #baa802;
+}
+.allocation_status_wrapper.paid span {
+  background-color: #38cb89;
+}
+.allocation_status_wrapper.balance span {
+  background-color: #baa802;
+}
+
+.allocation_status_wrapper.success span {
+  background-color: var(--text_color);
+}
+.allocation_status_wrapper.fail span {
+  background-color: #d30000;
+}
+
+/* ======MEMBERS TABLE======== */
+.members_status h6 {
+  font-size: 14px;
+  font-weight: 400;
+}
+.members_status.sucess h6 {
+  color: #05fe00;
+}
+.members_status.fail h6 {
+  color: #ff0000;
+}
+
+/* NO RECORDS WRAPPER */
+.no_records_wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+  font-size: 35px;
+  font-weight: 700;
+  color: #00000085;
+}
+.total_row {
+  background: #d7ffed;
+}
+.total_row td {
+  color: #000000;
+  font-weight: 600;
+  font-size: 18px;
+}
