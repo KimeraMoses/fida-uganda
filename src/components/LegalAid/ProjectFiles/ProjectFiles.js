@@ -1,13 +1,16 @@
 import React from "react";
 import SectionHeader from "../../common/SectionHeader";
 import ProjectTable from "./ProjectFilesTable/ProjectTable";
+import {useSelector} from "react-redux";
 
 const ProjectFiles = () => {
   // const { data } = useProjectFiles();
+    const { user } = useSelector((state) => state.auth);
+    const projectName =user?.project?.name
 
-  return (
+    return (
     <>
-      <SectionHeader title="Project Files" />
+      <SectionHeader title={projectName + " Project Files"} />
       <ProjectTable showBtn={false} tableName="Project Files" />
     </>
   );

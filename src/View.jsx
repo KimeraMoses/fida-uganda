@@ -45,6 +45,8 @@ import LegalOfficer from "./components/CourtProcessServer/LegalOfficer/LegalOffi
 import ReportSummaryDetails from "./components/HumanResource/Reports/ReportSummary/ReportSummary";
 import ProjectFilesDocuments from "./components/LegalAid/ProjectFiles/ProjectDocuments/ProjectFilesDocuments";
 import FileSummary from "./components/LegalAid/ProjectFiles/ProjectFilesTable/FileSummary";
+import FidaProjectFilesDocuments from "./components/ME/FidaProjects/FidaProjectFiles/FidaProjectFilesDocuments";
+import FidaDocumentSummary from "./components/ME/FidaProjects/FidaProjectFiles/FidaDocumentSummary";
 
 const View = () => {
   return (
@@ -116,6 +118,11 @@ const View = () => {
           path="fida-projects/:folderName/:id"
           element={<FidaProjectFiles />}
         />
+        <Route
+            path="fida-project-files/documents/:folderName/:id"
+            element={<FidaProjectFilesDocuments />}
+        />
+        <Route path="fida-project-files/documents/:id" element={<FidaDocumentSummary/>}/>
       </Route>
     </Routes>
   );
