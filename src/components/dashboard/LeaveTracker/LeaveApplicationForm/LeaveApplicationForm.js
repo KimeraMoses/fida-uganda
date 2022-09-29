@@ -23,8 +23,9 @@ const LeaveApplicationForm = (props) => {
           name="duration_type"
           placeholder="Select Duration Type"
           options={[
-            { label: "Annual", value: "annual" },
-            { label: "Quarterly", value: "quarterly" },
+            { label: "Annual", value: "Annual leave" },
+            { label: "Paternal", value: "Paternal leave" },
+              {label: "Maternal", value: "Maternal leave"}
           ]}
           isMulti={false}
           onChange={(option) => setFieldValue("duration_type", option)}

@@ -41,7 +41,7 @@ const TrackerTable = ({ type, action, data, isLoading }) => {
                       item.to
                     )} ${getMonthName(item.to)} `}</Td>
                     <Td className={classes.data__purpose_primary_text}>
-                      {new Date(item.createdAt).toLocaleString()}
+                      {new Date(item.updateAt).toLocaleString()}
                     </Td>
                     <Td
                       className={`${
