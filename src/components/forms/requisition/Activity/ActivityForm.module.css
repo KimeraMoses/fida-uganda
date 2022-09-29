@@ -13,10 +13,6 @@
   font-weight: 500;
 }
 
-.select_field label {
-  margin-bottom: 2px !important;
-  color: var(--chakra-colors-blackAlpha-600);
-}
 .form_action_wrapper {
   display: flex;
   padding: 10px 0 0;

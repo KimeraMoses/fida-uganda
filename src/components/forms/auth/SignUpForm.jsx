@@ -14,7 +14,6 @@ import SelectInputField from "../../common/UI/SelectInputField/SelectInputField"
 
 const SignUpForm = ({ onSubmit, isSubmitting, isError, error }) => {
   const [avatar, setAvatar] = useState(null);
-  const [selected, setSelected] = useState("");
   const [url, setImageUrl] = useState("");
   const toast = useToast();
   const projectOptions = useProjectOptions();
@@ -72,8 +71,6 @@ const SignUpForm = ({ onSubmit, isSubmitting, isError, error }) => {
               data={projectOptions}
               name="project"
               placeholder="Select Project"
-              selected={selected}
-              setSelected={setSelected}
               setFieldValue={setFieldValue}
             />
             <SubmitButton isLoading={isSubmitting} label="Sign Up" />

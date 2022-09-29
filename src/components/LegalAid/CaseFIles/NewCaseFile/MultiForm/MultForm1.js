@@ -198,6 +198,7 @@ const MultForm1 = ({
         page={page}
         onBack={onBack}
         disabled={isSubmitting}
+        loading={isSubmitting}
         limit={limit}
       />
     </div>

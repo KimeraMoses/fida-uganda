@@ -7,7 +7,7 @@ import styles from "./FidaApprovalTable.module.css";
 import { TableHeadColumn } from "../../../Membership/Allocations/AllocationsTable/AllocationsTable";
 import Modal from "../../../common/Modal";
 import { formatDate } from "../../../../lib/data";
-import { useActivateUser } from "../../../../hooks/useUser";
+import { useRequestPasswordLink } from "../../../../hooks/useUser";
 import EmployeeCard from "../NewEmployeeForm/EmployeeCard";
 import { toastSuccess } from "../../../../lib/toastDetails";
 
@@ -15,7 +15,7 @@ const FidaApprovedTable = ({ data }) => {
   const [user, setUser] = useState({});
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { mutate, isLoading, isSuccess, isError, error } =
-    useActivateUser();
+    useRequestPasswordLink();
   const toast = useToast();
   // console.log(data)
   const onEditHandler = (user) => {
@@ -75,7 +75,7 @@ const FidaApprovedTable = ({ data }) => {
                     </Td>
                     <Td>{item.project?.name}</Td>
                     <Td>{formatDate(item.createdAt)}</Td>
-                    <Td className={classes.table_actions_wrapper}>
+                    <Td>
                       <div className={classes.table_actions_icon_wrapper}>
                         <IconButton
                           size="xs"

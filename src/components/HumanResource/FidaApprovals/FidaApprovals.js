@@ -19,7 +19,7 @@ const FidaApprovals = () => {
         <Loader />
       ) : (
         <>
-      <FidaApproved />
+          <FidaApproved />
 
           <SubHeading title="Pending Approval" />
           {data?.users ? (
