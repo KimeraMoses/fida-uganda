@@ -270,14 +270,14 @@ const SummaryDetails = (props) => {
                 <SimpleGrid columns={2} spacing={1}>
                   <h6>Date of Application:</h6>
                   <h6>
-                    {new Date(leaveData?.leave?.createdAt).toLocaleString()}
+                    {new Date(leaveData?.leave?.updateAt).toLocaleString()}
                   </h6>
                   <h6>Name:</h6>
                   <h6>{leaveData?.leave?.user?.full_name}</h6>
                   <h6>Designation:</h6>
                   <h6>{leaveData?.leave?.user?.designation}</h6>
                   <h6>I wish to apply for:</h6>
-                  <h6>{selectedType}</h6>
+                  <h6>{leaveData?.leave?.duration_type}</h6>
                   <h6>Reason:</h6>
                   <h6>{leaveData?.leave?.reason}</h6>
                   <h6>While on leave my physical contact will be:</h6>

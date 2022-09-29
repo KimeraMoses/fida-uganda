@@ -11,12 +11,12 @@ import {SimpleGrid} from "@chakra-ui/react";
 import {useProjectFile} from "../../../../hooks/useProjectFiles";
 
 
-const FileSummaryDetails = () => {
+const FidaDocumentSummary = () => {
 
     const {id} = useParams();
 
     const {data, isLoading} = useProjectFile(id);
-
+    // console.log(data)
 
     const folderName = data?.projectFile?.project?.name;
     const projectId = data?.projectFile?.project?.id;
@@ -26,9 +26,9 @@ const FileSummaryDetails = () => {
         <div className={classes.summary_wrapper}>
             <ReportBreadCrumb
                 root={folderName}
-                rootLink={`/project-files`}
+                rootLink={`/fida-projects/${folderName}/${projectId}`}
                 folderName="Project Documents"
-                folderLink={`/project-files/documents/${folderName}/${projectId}`}
+                folderLink={`/fida-project-files/documents/${folderName}/${projectId}`}
                 reportName={data?.projectFile?.filename}
             />
 
@@ -86,4 +86,4 @@ const FileSummaryDetails = () => {
     );
 };
 
-export default FileSummaryDetails;
+export default FidaDocumentSummary;

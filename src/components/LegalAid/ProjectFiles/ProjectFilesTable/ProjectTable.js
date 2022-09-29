@@ -3,13 +3,19 @@ import { Table, Thead, Tbody, Tr, Td, IconButton } from "@chakra-ui/react";
 import { TableHeadColumn } from "../../../Membership/Allocations/AllocationsTable/AllocationsTable";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import classes from "../../../common/table/TableStyles.module.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import { useProject } from "../../../../hooks/useProjects";
 import Loader from "../../../common/UI/Loader/Loader";
+import {useSelector} from "react-redux";
 
 const ProjectTable = () => {
-  const { folderName, id } = useParams();
-  const { data, isLoading } = useProject(id);
+  //get project id
+  const { user } = useSelector((state) => state.auth);
+  const projectId = user?.project?.id
+  const projectName =user?.project?.name
+
+
+  const { data, isLoading } = useProject(projectId);
 
   const navigate = useNavigate();
   const handleClick = (type) => {
@@ -20,10 +26,11 @@ const ProjectTable = () => {
     //         :navigate("/project-files/logframe")
 
     if (type === "documents") {
-      navigate(`/project-files/documents/${folderName}/${id}`);
+      navigate(`/project-files/documents/${projectName}/${projectId}`);
     } else {
     }
   };
+
   return (
     <>
       {isLoading ? (

@@ -30,11 +30,9 @@ const ProjectFilesDocuments = () => {
   return (
     <>
       <ReportBreadCrumb
-          root="Fida Projects"
-          rootLink="/fida-projects"
-          folderName={folderName.toLowerCase().replace(/-/g, " ")}
-        folderLink={`/fida-projects/${folderName}/${id}`}
-        reportName="Project Documents"
+          root={folderName.toLowerCase().replace(/-/g, " ")}
+          rootLink="/project-files"
+          folderName="Project Documents"
 
       />
         {isLoading ? (
@@ -61,21 +59,6 @@ const ProjectFilesDocuments = () => {
                 onSucess={onClose}
 
             />
-            {/*<NewFidaProjectForm*/}
-            {/*    initialValues={projectInitialValues}*/}
-            {/*    validationSchema={projectSchema}*/}
-            {/*    onSuccess={onClose}*/}
-            {/*    success={`Project added successfully`}*/}
-            {/*    useMutate={useAddProject}*/}
-            {/*/>*/}
-            {/*<NewDocumentForm*/}
-            {/*    onClose={onClose}*/}
-            {/*    onSubmit={mutate}*/}
-            {/*    isSubmitting={isSubmitting}*/}
-            {/*    isError={isError}*/}
-            {/*    error={error}*/}
-            {/*    projectId={id}*/}
-            {/*/>*/}
         </Modal>
     </>
   );

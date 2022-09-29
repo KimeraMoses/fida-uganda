@@ -13,7 +13,7 @@ const ProjectFilestable = ({ data }) => {
   const handleOpenFile = (id) => {
     navigate(`/project-files/documents/${id}`);
   };
-// console.log(data)
+
   return (
       <>
         <div className={classes.approvals_table_wrapper}>
