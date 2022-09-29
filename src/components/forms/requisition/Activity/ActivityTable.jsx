@@ -1,12 +1,23 @@
 import React, { useState } from "react";
-import { Table, Thead, Tbody, Tr, Td, IconButton } from "@chakra-ui/react";
+import { Table, Thead, Tbody, Tr, Td, IconButton, Th } from "@chakra-ui/react";
 import classes from "./Table.module.css";
-import { TableHeadColumn } from "../../../../Membership/Allocations/AllocationsTable/AllocationsTable";
 import { MdOutlineDelete, MdOutlineEdit } from "react-icons/md";
-import Modal from "../../../../common/Modal";
-import FormButton from "../../../../common/UI/FormButton/FormButton";
+import FormButton from "../../../common/UI/FormButton/FormButton";
+import Modal from "../../../common/Modal";
 
-const BenTable = ({ data, removeBeneficiary, handleEdit }) => {
+const TableHeadColumn = (props) => {
+  const { title, secondaryText } = props;
+  return (
+    <Th>
+      <div className={classes.title_primary_text}>{title}</div>
+      {secondaryText && (
+        <div className={classes.title_secondary_text}>{secondaryText}</div>
+      )}
+    </Th>
+  );
+};
+
+const ActivityTable = ({ data, handleEdit }) => {
   const [showDelete, setShowDelete] = useState(false);
   const [record, setRecord] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -15,7 +26,6 @@ const BenTable = ({ data, removeBeneficiary, handleEdit }) => {
     setIsLoading(true);
     // console.log(record);
     //Logic to delete record?.id goes here
-    removeBeneficiary(record?.index);
 
     setIsLoading(false);
     setShowDelete(false);
@@ -23,6 +33,19 @@ const BenTable = ({ data, removeBeneficiary, handleEdit }) => {
   const handleClick = (data) => {
     setShowDelete(true);
     setRecord(data);
+  };
+
+  const getTotalPrice = () => {
+    const priceArray = [];
+    data?.forEach((item) => {
+      const price = item?.qty * item?.unit;
+      priceArray.push(price);
+    });
+    let sum = 0;
+    for (let i = 0; i < priceArray.length; i += 1) {
+      sum += priceArray[i];
+    }
+    return sum;
   };
 
   return (
@@ -36,25 +59,23 @@ const BenTable = ({ data, removeBeneficiary, handleEdit }) => {
         >
           <Thead className={classes.table_header}>
             <Tr>
-              <TableHeadColumn title="No" />
-              <TableHeadColumn title="Name" />
-              <TableHeadColumn title="Age" />
-              <TableHeadColumn title="Sex" />
-              <TableHeadColumn title="Location" />
-              <TableHeadColumn title="Tel No." />
+              <TableHeadColumn title="No." />
+              <TableHeadColumn title="Item Description" />
+              <TableHeadColumn title="Qty" />
+              <TableHeadColumn title="Unit Price" />
+              <TableHeadColumn title="Total" />
               <TableHeadColumn title="Actions" />
             </Tr>
           </Thead>
           <Tbody>
             {data?.map((item, index) => {
               return (
-                <Tr key={item.id}>
-                  <Td>{item.id}</Td>
-                  <Td>{item.name}</Td>
-                  <Td>{item.age}</Td>
-                  <Td>{item.sex}</Td>
-                  <Td>{item.location}</Td>
-                  <Td>{item.phoneNumber ? item.phoneNumber : "N/A"}</Td>
+                <Tr key={item.item}>
+                  <Td>{index + 1}</Td>
+                  <Td>{item.item}</Td>
+                  <Td>{item.qty}</Td>
+                  <Td>{item.unit}</Td>
+                  <Td>{item.qty * item.unit}</Td>
                   <Td>
                     <div className={classes.table_actions_wrapperr}>
                       <IconButton
@@ -76,6 +97,14 @@ const BenTable = ({ data, removeBeneficiary, handleEdit }) => {
                 </Tr>
               );
             })}
+            <Tr className={classes.total_row}>
+              <Td></Td>
+              <Td>Total</Td>
+              <Td></Td>
+              <Td></Td>
+              <Td>{getTotalPrice()}</Td>
+              <Td></Td>
+            </Tr>
           </Tbody>
         </Table>
       </div>
@@ -85,9 +114,8 @@ const BenTable = ({ data, removeBeneficiary, handleEdit }) => {
             <h3>Confirm Delete</h3>
           </div>
           <div className="mb-[32px]">
-            Are you sure you wish to delete <strong>{record?.name}</strong> from
-            the beneficiaries list? This action is permanent and can not be
-            undone
+            Are you sure you wish to delete <strong>{record?.item}</strong> from
+            the items list? This action is permanent and can not be undone
           </div>
 
           <div className={classes.form_action_wrapper}>
@@ -114,4 +142,4 @@ const BenTable = ({ data, removeBeneficiary, handleEdit }) => {
   );
 };
 
-export default BenTable;
+export default ActivityTable;

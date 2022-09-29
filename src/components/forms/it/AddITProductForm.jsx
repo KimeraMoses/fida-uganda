@@ -3,22 +3,19 @@ import { SimpleGrid, Button } from "@chakra-ui/react";
 import withForm from "../../../hoc/withForm";
 import { useProjectOptions } from "../../../hooks/useProjects";
 import InputField from "../../common/UI/InputField/InputField";
-import SelectInput from '../../Membership/Allocations/AllocationForm/SelectInput'
+import SelectInputField from "../../common/UI/SelectInputField/SelectInputField";
 
 const ITProductForm = ({ isSubmitting, setFieldValue, onSubmit }) => {
   const projectOptions = useProjectOptions();
-  console.log(projectOptions, "project options");
   return (
     <SimpleGrid p={5} gap={3}>
       <SimpleGrid columns={2} gap={5} style={{ alignItems: "center" }}>
-        <SelectInput
+        <SelectInputField
+          data={projectOptions}
           name="project_name"
-          onChange={(option) => setFieldValue("project_name", option)}
-          options={projectOptions}
           placeholder="Choose a project"
-          isMulti={false}
+          setFieldValue={setFieldValue}
         />
-
         <InputField name="budget_year" placeholder="Budget Year" />
       </SimpleGrid>
       <SimpleGrid columns={2} gap={5}>

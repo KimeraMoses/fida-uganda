@@ -3,7 +3,7 @@ import TextField from "../../common/TextField";
 import TextAreaField from "../../common/TextAreaField";
 import withForm from "../../../hoc/withForm";
 import { useProjectOptions } from "../../../hooks/useProjects";
-import SelectInput from "../../Membership/Allocations/AllocationForm/SelectInput";
+import SelectInputField from "../../common/UI/SelectInputField/SelectInputField";
 
 const TravelOrderForm = ({ onSubmit, isSubmitting, setFieldValue }) => {
   const projectOptions = useProjectOptions();
@@ -19,12 +19,11 @@ const TravelOrderForm = ({ onSubmit, isSubmitting, setFieldValue }) => {
         <div></div>
       </SimpleGrid>
       <SimpleGrid columns={2} gap={5}>
-        <SelectInput
+        <SelectInputField
+          data={projectOptions}
           name="project"
-          onChange={(option) => setFieldValue("project", option)}
-          options={projectOptions}
           placeholder="Choose a project"
-          isMulti={false}
+          setFieldValue={setFieldValue}
         />
         <TextField
           name="journey_start_time"

@@ -6,6 +6,7 @@ const FormButton = (props) => {
   return (
     <button
       type={type}
+      disabled={disabled}
       className={`fida__fm_btn ${
         variant === "cancel"
           ? "fida__btn_cancel"
@@ -18,9 +19,9 @@ const FormButton = (props) => {
           : variant === "filled"
           ? "fida__btn_filled"
           : "fida__btn_colored"
-      } ${fullWidth ? "fida__btn_full" : ""} ${
-        disabled ? "btn__disabled" : ""
-      } ${rounded ? "btn__rounded" : ""}${color ? "btn_custom_color" : ""}${
+      } ${fullWidth ? "fida__btn_full" : ""}  ${rounded ? "btn__rounded" : ""}${
+        color ? "btn_custom_color" : ""
+      }${
         status === "success"
           ? "btn_color_success"
           : status === "fail"

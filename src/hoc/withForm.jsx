@@ -41,6 +41,7 @@ const withForm = (FormComponent) => {
     return (
       <Formik
         validationSchema={validationSchema}
+        enableReinitialize
         initialValues={data}
         onSubmit={(values) => {
           if (isFormData) {
