@@ -29,16 +29,29 @@ const Requisitions = () => {
       ) : (
         <>
           <SubHeading title="New Requests" />
-          <RequisitionTable data={data?.Requisitions} type="new" btnLabel="Add Requisition" btnClick={onOpen} />
-          <br/>
-          <SubHeading title="Approved Requisitions"  />
-          <RequisitionTable data={data?.Requisitions} type="approved" showBtn={false}/>
-          <br/>
+          <RequisitionTable
+            data={data?.Requisitions}
+            type="new"
+            btnLabel="Add Requisition"
+            btnClick={onOpen}
+          />
+          <br />
+          <SubHeading title="Approved Requisitions" />
+          <RequisitionTable
+            data={data?.Requisitions}
+            type="approved"
+            showBtn={false}
+          />
+          <br />
           <SubHeading title="Rejected Requisitions" />
-          <RequisitionTable data={data?.Requisitions} type="rejected" showBtn={false}/>
+          <RequisitionTable
+            data={data?.Requisitions}
+            type="rejected"
+            showBtn={false}
+          />
         </>
       )}
-      <Modal isOpen={isOpen} onClose={onClose} title="Requisition">
+      <Modal isOpen={isOpen} onClose={onClose} title="Requisition" size="xl">
         <RequisitionForm
           initialValues={requisitionInitialValues}
           validationSchema={requisitionSchema}

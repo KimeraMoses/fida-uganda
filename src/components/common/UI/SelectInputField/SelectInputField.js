@@ -8,7 +8,8 @@ import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
 import classes from "./SelectInputField.module.css";
 
 const SelectInputField = (props) => {
-  const { data, selected, setSelected, placeholder, name, ...rest } = props;
+  const [selected, setSelected] = useState("");
+  const { data, placeholder, name, ...rest } = props;
   const [meta] = useField(name);
   const isInvalid = meta.touched && meta.error ? true : false;
 
