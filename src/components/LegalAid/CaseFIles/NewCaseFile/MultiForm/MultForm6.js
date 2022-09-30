@@ -1,30 +1,70 @@
-import classes from "../../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css";
-import { SimpleGrid, Textarea } from "@chakra-ui/react";
-import ActionButtons from "../../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons";
-import styles from "./MultForm6.module.css";
-import withForm from "../../../../../hoc/withForm";
-import TextAreaField from "../../../../common/TextAreaField";
-import SelectField from "../../../../common/SelectField";
-import { caseFileStatusOptions } from "../../../../../lib/options";
-import SearchableField from "../../../../common/UI/SearchableField/SearchableField";
-import { useUsers } from "../../../../../hooks/useUser";
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { selectCaseFile } from "../../../../../store/caseFileReducer";
+import { useEffect } from 'react';
+import classes from '../../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css';
+import { SimpleGrid, Textarea, useToast } from '@chakra-ui/react';
+import ActionButtons from '../../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons';
+import styles from './MultForm6.module.css';
+import withForm from '../../../../../hoc/withForm';
+import TextAreaField from '../../../../common/TextAreaField';
+import SelectField from '../../../../common/SelectField';
+import { caseFileStatusOptions } from '../../../../../lib/options';
+import SearchableField from '../../../../common/UI/SearchableField/SearchableField';
+import { useUsers } from '../../../../../hooks/useUser';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { selectCaseFile } from '../../../../../store/caseFileReducer';
+import {
+  useAddCaseComment,
+  useCaseComments,
+} from '../../../../../hooks/useCaseFiles';
+import { toastError, toastSuccess } from '../../../../../lib/toastDetails';
 
-const ActionForm = ({ values, addAction }) => {
-  const [value, setValue] = useState("");
+const ActionForm = ({ values }) => {
+  const {
+    data,
+    isLoading,
+    isError: isLoadingError,
+  } = useCaseComments(values.id);
+  const {
+    mutate,
+    isLoading: isAdding,
+    error,
+    isSuccess,
+    isError,
+  } = useAddCaseComment();
+  const { user } = useSelector((state) => state.auth);
+  const [value, setValue] = useState('');
+  const toast = useToast();
+  const success = 'Added an action';
+  const isDisabled = isAdding || !value;
+
+  useEffect(() => {
+    if (isError) {
+      toast(toastError(error));
+    }
+    if (isSuccess) {
+      toast(toastSuccess(success));
+      setValue('');
+    }
+  }, [toast, isError, error, isSuccess, success]);
 
   const onClick = () => {
-    addAction(value);
-    setValue("");
+    const actions = { case: values.id, body: value, createdBy: user.id };
+    mutate(actions);
   };
+
+  if (isLoading) {
+    return <div>Loading Actions...</div>;
+  }
+
+  if (isLoadingError) {
+    return <div>Error Loading Actions</div>;
+  }
 
   return (
     <div>
-      {values?.actionsTaken.map((action, index) => (
-        <ActionCard action={action} key={index} />
+      {data?.CaseComments?.map((action) => (
+        <ActionCard action={action} key={action.id} />
       ))}
       <Textarea
         name="comment"
@@ -36,7 +76,7 @@ const ActionForm = ({ values, addAction }) => {
         <button
           type="button"
           className="fida__fm_btn fida__btn_outlined"
-          disabled={value ? false : true}
+          disabled={isDisabled}
           onClick={onClick}
         >
           Add Action
@@ -47,9 +87,8 @@ const ActionForm = ({ values, addAction }) => {
 };
 
 export const ActionCard = ({ action }) => {
-  const { user } = useSelector((state) => state.auth);
-  const full_name = action?.full_name ? action.full_name : user?.full_name;
-  const image = action?.image ? action?.image : user.image;
+  const full_name = action?.createdBy?.full_name;
+  const image = action?.createdBy?.image;
 
   return (
     <div className={styles.card_wrapper}>
@@ -57,13 +96,13 @@ export const ActionCard = ({ action }) => {
         className={styles.avater_wrapper}
         style={{
           backgroundImage: `url(${image})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center top",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center top',
         }}
       ></div>
       <div className={styles.content_wrapper}>
         <h4>{full_name}</h4>
-        <h6>{action?.action}</h6>
+        <h6>{action?.body}</h6>
       </div>
     </div>
   );
@@ -90,13 +129,13 @@ const MultForm6 = ({
 
   const addAction = (value) => {
     const action = { userId: user?.id, action: value };
-    setFieldValue("actionsTaken", [...values?.actionsTaken, action]);
+    setFieldValue('actionsTaken', [...values?.actionsTaken, action]);
   };
 
   return (
     <div className={classes.form_wrapper}>
       <div className={classes.field_wrapper}>
-        <SimpleGrid columns={2} spacing={2} style={{ alignItems: "center" }}>
+        <SimpleGrid columns={2} spacing={2} style={{ alignItems: 'center' }}>
           <div className={classes.field_label}>12. Status</div>
           <SelectField
             name="status"
@@ -106,7 +145,7 @@ const MultForm6 = ({
         </SimpleGrid>
       </div>
       <div className={classes.field_wrapper}>
-        <SimpleGrid columns={2} spacing={2} style={{ alignItems: "center" }}>
+        <SimpleGrid columns={2} spacing={2} style={{ alignItems: 'center' }}>
           <div className={classes.field_label}>13. Refer Case</div>
           <SearchableField
             placeholder="Search person"

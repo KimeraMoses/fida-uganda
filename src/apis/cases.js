@@ -44,8 +44,8 @@ export const getCaseComment = async (actionId) => {
   return await axiosClient.get(routes.cases.baseCaseComment + actionId);
 };
 
-export const getCommentsByCase = async (actionId) => {
-  return await axiosClient.get(routes.cases.getCommentsByCase + actionId);
+export const getCommentsByCase = async (caseId) => {
+  return await axiosClient.get(routes.cases.getCommentsByCase + caseId);
 };
 
 export const updateCaseComment = async (action) => {
