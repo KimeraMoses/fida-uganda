@@ -44,6 +44,7 @@ const ActionForm = ({ values }) => {
     }
     if (isSuccess) {
       toast(toastSuccess(success));
+      setValue('');
     }
   }, [toast, isError, error, isSuccess, success]);
 
@@ -51,8 +52,6 @@ const ActionForm = ({ values }) => {
     const actions = { case: values.id, body: value, createdBy: user.id };
     mutate(actions);
   };
-
-  console.log(data);
 
   if (isLoading) {
     return <div>Loading Actions...</div>;
@@ -64,10 +63,9 @@ const ActionForm = ({ values }) => {
 
   return (
     <div>
-      {data?.CaseComments?.map((action, index) => (
-        <ActionCard action={action} key={index} />
+      {data?.CaseComments?.map((action) => (
+        <ActionCard action={action} key={action.id} />
       ))}
-      {/* <>{JSON.stringify(data?.CaseComments)}</> */}
       <Textarea
         name="comment"
         placeholder="Type here"

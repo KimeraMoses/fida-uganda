@@ -202,7 +202,7 @@ export const useAddCaseComment = () => {
   const { user } = useSelector((state) => state.auth);
   return useMutation(addCaseComment, {
     onSuccess: (data) => {
-      const key = [CASE_COMMENTS, data?.caseComment?.id];
+      const key = [CASE_COMMENTS, data?.caseComment?.case];
       const previousCaseComments = queryClient.getQueryData(key);
       if (previousCaseComments) {
         queryClient.setQueryData(key, () => {
