@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import {
   CASES_KEY,
+  CASE_COMMENTS,
   CLV_CASES_KEY,
   CLV_CASE_FILE_STATS,
 } from '../lib/constants';
@@ -192,8 +193,8 @@ export const useCaseComment = (id) => {
   return useQuery([CASES_KEY, id], () => getCaseComment(id));
 };
 
-export const useCaseComments = () => {
-  return useQuery(CASES_KEY, getCommentsByCase);
+export const useCaseComments = (caseId) => {
+  return useQuery([CASE_COMMENTS, caseId], () => getCommentsByCase(caseId));
 };
 
 export const useAddCaseComment = () => {
@@ -201,18 +202,18 @@ export const useAddCaseComment = () => {
   const { user } = useSelector((state) => state.auth);
   return useMutation(addCaseComment, {
     onSuccess: (data) => {
-      const key = [CASES_KEY, data?.caseComment?.id];
+      const key = [CASE_COMMENTS, data?.caseComment?.id];
       const previousCaseComments = queryClient.getQueryData(key);
       if (previousCaseComments) {
         queryClient.setQueryData(key, () => {
           return produce(previousCaseComments, (draft) => {
             data.caseComment.createdBy = { ...user };
-            draft.comments.push(data?.comment);
+            draft.CaseComments.push(data?.caseComment);
           });
         });
       } else {
         queryClient.setQueryData(key, () => {
-          return { comments: [data?.comment] };
+          return { CaseComments: [data?.caseComment] };
         });
       }
     },
@@ -225,25 +226,31 @@ export const useDeleteCaseComment = () => {
   const queryClient = useQueryClient();
   return useMutation(deleteCaseComment, {
     onMutate: async (id) => {
-      await queryClient.cancelMutations([CASES_KEY, id]);
+      await queryClient.cancelMutations([CASE_COMMENTS, id]);
 
-      const previousClvCaseFiles = queryClient.getQueryData([CASES_KEY, id]);
+      const previousClvCaseFiles = queryClient.getQueryData([
+        CASE_COMMENTS,
+        id,
+      ]);
       if (previousClvCaseFiles) {
-        queryClient.setQueryData([CASES_KEY, id], (previousClvCaseFiles) => {
-          return produce(previousClvCaseFiles, (draft) => {
-            draft.clv_cases.filter((client) => client.id !== id);
-          });
-        });
+        queryClient.setQueryData(
+          [CASE_COMMENTS, id],
+          (previousClvCaseFiles) => {
+            return produce(previousClvCaseFiles, (draft) => {
+              draft.clv_cases.filter((client) => client.id !== id);
+            });
+          }
+        );
       }
     },
     onError: (_error, _clientId, context) => {
       queryClient.setQueryData(
-        [CASES_KEY, _clientId],
+        [CASE_COMMENTS, _clientId],
         context.previousClvCaseFiles
       );
     },
     onSettled: (_id) => {
-      queryClient.invalidateQueries([CASES_KEY, _id]);
+      queryClient.invalidateQueries([CASE_COMMENTS, _id]);
     },
   });
 };
