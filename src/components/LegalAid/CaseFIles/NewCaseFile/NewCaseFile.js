@@ -1,15 +1,15 @@
-import { useState } from "react";
-import MultForm5 from "./MultiForm/MultForm5";
-import MultForm3 from "./MultiForm/MultForm3";
-import MultForm1 from "./MultiForm/MultForm1";
-import MultForm6 from "./MultiForm/MultForm6";
+import { useState } from 'react';
+import MultForm5 from './MultiForm/MultForm5';
+import MultForm3 from './MultiForm/MultForm3';
+import MultForm1 from './MultiForm/MultForm1';
+import MultForm6 from './MultiForm/MultForm6';
 import {
   useAddCaseFiles,
   useUpdateCaseFile,
   useCaseFileTemp,
   useUpdateClvCaseFile,
   useAddClvCaseFile,
-} from "../../../../hooks/useCaseFiles";
+} from '../../../../hooks/useCaseFiles';
 import {
   caseFileFiveInitialValues,
   caseFileInitialValues,
@@ -17,32 +17,33 @@ import {
   caseFileSixInitialValues,
   caseFileThreeInitialValues,
   clvCaseFileSchema,
-} from "./MultiForm/schema";
-import { useDispatch } from "react-redux";
+} from './MultiForm/schema';
+import { useDispatch } from 'react-redux';
 import {
   resetCaseFile,
   selectCaseFile,
-} from "../../../../store/caseFileReducer";
-import { onSubmitAlert } from "../../../../lib/deleteInProd";
+} from '../../../../store/caseFileReducer';
+import { onSubmitAlert } from '../../../../lib/deleteInProd';
 
 const NewCaseFile = ({ isClvCaseFile, onClose, isNewCaseFile = false }) => {
   const caseFile = useCaseFileTemp();
   const limit = 4;
-  const CASE_FILE_ADDED = "Case File Added Successfully";
-  const CASE_FILE_UPDATED = "Case File Updated Successfully";
+  const CASE_FILE_ADDED = 'Case File Added Successfully';
+  const CASE_FILE_UPDATED = 'Case File Updated Successfully';
   const [isNew, setIsNew] = useState(isNewCaseFile);
   const [page, setPage] = useState(1);
   const [selectedClient, setSelectedClient] = useState(
     caseFile?.complainant || {}
   );
   const [selectedClvName, setSelectedClvName] = useState(caseFile?.clv || {});
-  const [referredTo, setReferredTo] = useState({});
+  const [referredTo, setReferredTo] = useState(caseFile?.referred_to || {});
   const dispatch = useDispatch();
 
   const mutateForm1 = (values) => {
     const data = {
       ...values,
       complainant: selectedClient.id,
+      referred_to: referredTo?.id,
     };
 
     if (isClvCaseFile) {
