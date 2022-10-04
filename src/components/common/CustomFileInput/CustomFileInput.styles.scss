@@ -1,0 +1,38 @@
+.file-input {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &-label {
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 18px;
+      color: #969696;
+      font-family: Poppins;
+    }
+  }
+
+  &__label {
+    height: 120px;
+    width: 120px;
+    background: #ffffff;
+    border: 1px dashed #d1d1d1;
+    box-sizing: border-box;
+    border-radius: 12px;
+    display: block;
+    cursor: pointer;
+  }
+  &__handle {
+    visibility: hidden;
+  }
+  &__close {
+    background-color: #e53935;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+}
