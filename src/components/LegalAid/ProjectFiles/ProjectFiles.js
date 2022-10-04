@@ -10,8 +10,19 @@ const ProjectFiles = () => {
 
     return (
     <>
-      <SectionHeader title={projectName + " Project Files"} />
-      <ProjectTable showBtn={false} tableName="Project Files" />
+        { user.project == null ? (
+            <SectionHeader title="No project attached"/>
+        ): (
+            <>
+            <SectionHeader title={projectName + " Project Files"} />
+            <ProjectTable showBtn={false} tableName="Project Files" />
+            </>
+        )
+
+
+
+    }
+
     </>
   );
 };
