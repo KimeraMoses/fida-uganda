@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Table,
   Thead,
@@ -7,20 +7,20 @@ import {
   Td,
   useDisclosure,
   IconButton,
-} from '@chakra-ui/react';
-import classes from './Table.module.css';
-import { TableHeadColumn } from '../../../Membership/Allocations/AllocationsTable/AllocationsTable';
-import { caseFilesColumns } from '../../../../assets/tableColumns/cases';
-import { formatDate } from '../../../../lib/data';
-import Modal from '../../../common/Modal';
-import NewCaseFile from '../NewCaseFile/NewCaseFile';
-import { useDispatch } from 'react-redux';
+} from "@chakra-ui/react";
+import classes from "./Table.module.css";
+import { TableHeadColumn } from "../../../Membership/Allocations/AllocationsTable/AllocationsTable";
+import { caseFilesColumns } from "../../../../assets/tableColumns/cases";
+import { formatDate } from "../../../../lib/data";
+import Modal from "../../../common/Modal";
+import NewCaseFile from "../NewCaseFile/NewCaseFile";
+import { useDispatch } from "react-redux";
 import {
   resetCaseFile,
   selectCaseFile,
-} from '../../../../store/caseFileReducer';
-import withTable from '../../../../hoc/withTable';
-import { MdOutlineRemoveRedEye } from 'react-icons/md';
+} from "../../../../store/caseFileReducer";
+import withTable from "../../../../hoc/withTable";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
 
 const CaseFilesTable = ({ data }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -39,7 +39,7 @@ const CaseFilesTable = ({ data }) => {
     <>
       <div
         className={classes.approvals_table_wrapper}
-        style={{ overflowX: 'auto' }}
+        style={{ overflowX: "auto" }}
       >
         <Table
           variant="striped"
@@ -135,7 +135,7 @@ const CaseFilesTable = ({ data }) => {
                   </Td>
                   <Td>{item?.fida ? item?.fida : "N/A"}</Td>
                   <Td>{formatDate(item.createdAt)}</Td>
-                  <Td style={{ textAlign: 'center' }}>
+                  <Td style={{ textAlign: "center" }}>
                     <div className={classes.table_actions_icon_wrapper}>
                       <IconButton
                         size="sm"
