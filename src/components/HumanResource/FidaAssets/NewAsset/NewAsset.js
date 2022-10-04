@@ -6,12 +6,11 @@ import classes from "./NewAsset.module.css";
 import SelectField from "../../../common/SelectField";
 import { assetTypeOptions } from "../../../../lib/options";
 import { AttachmentIcon } from "../../../../assets/Icons/Icons";
-import image1 from "../../../../assets/images/placeholder.png";
 import { useProjectOptions } from "../../../../hooks/useProjects";
 import { useMemo } from "react";
+import { FileInput } from "../../../common/CustomFileInput/CustomFileInput.component";
 
-const NewAsset = ({ isSubmitting}) => {
-
+const NewAsset = ({ isSubmitting, setFieldValue }) => {
   const projectOptions = useProjectOptions();
   const projects = useMemo(() => projectOptions, [projectOptions]);
   return (
@@ -61,19 +60,14 @@ const NewAsset = ({ isSubmitting}) => {
       <InputField placeholder="Location" name="location" fullwidth />
       <div className={classes.asset_attachement_wrapper}>
         <h6>
-          <AttachmentIcon /> Attachments (2)
+          <AttachmentIcon /> Attachment
         </h6>
         <div className={classes.attachement_display_wrapper}>
-          <div
-            className={classes.uploaded_files}
-            style={{
-              backgroundImage: `url(${image1})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center center",
-            }}
-          ></div>
-
-          <div className={classes.new_attachment}>+</div>
+          <FileInput
+            name="assetImage"
+            setFieldValue={setFieldValue}
+            accept=".jpg, .png, jpeg"
+          />
         </div>
       </div>
       <div style={{ float: "right", padding: "20px 0" }}>
