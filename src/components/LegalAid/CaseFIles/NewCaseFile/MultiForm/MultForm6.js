@@ -153,6 +153,9 @@ const MultForm6 = ({
             setSelectedItem={setReferredTo}
             selectedItem={referredTo.full_name}
             name="referredTo"
+            defaultValue={
+              referredTo?.full_name
+            }
           />
         </SimpleGrid>
       </div>
