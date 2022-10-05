@@ -14,7 +14,7 @@ import FormButton from "../../../common/UI/FormButton/FormButton";
 import classes from "./NewContract.module.css";
 
 const RecentUploadCard = (props) => {
-  const { name, time, size, error, isFolder, fileType } = props;
+  const { name, time, size, error, fileType } = props;
   return (
     <div className={classes.recent_upload_card_wrapper}>
       <div className={classes.card_content_left}>
