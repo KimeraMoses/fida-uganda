@@ -10,13 +10,14 @@ import {
 } from "../../../../form_schemas/beneficiaries";
 
 const ActivityForm = ({
-  // handleAddEditItem,
+  handleAddEditItem,
   editValues,
   setEditValues,
   isEdit,
   setIsEdit,
 }) => {
   const newInitialValues = {
+    id: editValues?.id,
     item: editValues?.item,
     qty: editValues?.qty,
     unit: editValues?.unit,
@@ -80,11 +81,11 @@ const ActivityForm = ({
                 rounded={true}
                 onClick={() => {
                   if (isEdit) {
-                    // console.log("new values", values);
-                    // handleAddEditItem(values, 'EDIT');
+                    console.log("new values", values);
+                    handleAddEditItem(values, 'EDIT');
                     setIsEdit(false);
                   } else {
-                    // handleAddEditItem(values, 'ADD');
+                    handleAddEditItem(values, 'ADD');
                   }
                   resetForm();
                 }}
