@@ -12,14 +12,22 @@ import SubHeading from "./../Tasks/SubHeading/SubHeading";
 import RequisitionTable from "../dashboard/Requisitions/RequisitionsTable";
 import {
   requisitionInitialValues,
+  activityRequisitionSchema,
+  activityRequisitionInitialValues,
   requisitionSchema,
 } from "../../components/forms/requisition/schemas/requisitions";
 import Loader from "../common/UI/Loader/Loader";
+import { useState } from "react";
 
 const Requisitions = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data, isLoading } = useRequisitions();
+  const [activityType, setActivityType] = useState("");
 
+  const handleGetActivityType = (activity) => {
+    console.log(activity);
+    setActivityType(activity);
+  };
   return (
     <>
       <SectionHeader title="Requisitions" />
@@ -53,11 +61,20 @@ const Requisitions = () => {
       )}
       <Modal isOpen={isOpen} onClose={onClose} title="Requisition" size="xl">
         <RequisitionForm
-          initialValues={requisitionInitialValues}
-          validationSchema={requisitionSchema}
+          initialValues={
+            activityType === "Activity"
+              ? activityRequisitionInitialValues
+              : requisitionInitialValues
+          }
+          validationSchema={
+            activityType === "Activity"
+              ? activityRequisitionSchema
+              : requisitionSchema
+          }
           onSuccess={onClose}
           success={`Requisition added successfully`}
           useMutate={useAddRequisition}
+          handleGetActivityType={handleGetActivityType}
         />
       </Modal>
     </>
