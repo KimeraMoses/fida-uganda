@@ -1,30 +1,31 @@
-import { useEffect } from "react";
-import classes from "../../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css";
-import { SimpleGrid, Textarea, useToast } from "@chakra-ui/react";
-import ActionButtons from "../../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons";
-import styles from "./MultForm6.module.css";
-import withForm from "../../../../../hoc/withForm";
-import TextAreaField from "../../../../common/TextAreaField";
-import SelectField from "../../../../common/SelectField";
-import { caseFileStatusOptions } from "../../../../../lib/options";
-import SearchableField from "../../../../common/UI/SearchableField/SearchableField";
-import { useUsers } from "../../../../../hooks/useUser";
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { selectCaseFile } from "../../../../../store/caseFileReducer";
+import { useEffect } from 'react';
+import classes from '../../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css';
+import { SimpleGrid, Textarea, useToast } from '@chakra-ui/react';
+import ActionButtons from '../../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons';
+import styles from './MultForm6.module.css';
+import withForm from '../../../../../hoc/withForm';
+import TextAreaField from '../../../../common/TextAreaField';
+import SelectField from '../../../../common/SelectField';
+import { caseFileStatusOptions } from '../../../../../lib/options';
+import SearchableField from '../../../../common/UI/SearchableField/SearchableField';
+import { useUsers } from '../../../../../hooks/useUser';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { selectCaseFile } from '../../../../../store/caseFileReducer';
 import {
   useAddCaseComment,
   useCaseComments,
-} from "../../../../../hooks/useCaseFiles";
-import { toastError, toastSuccess } from "../../../../../lib/toastDetails";
-import FormButton from "../../../../common/UI/FormButton/FormButton";
-import Loader from "../../../../common/UI/Loader/Loader";
+  useDeleteCaseComment,
+} from '../../../../../hooks/useCaseFiles';
+import { toastError, toastSuccess } from '../../../../../lib/toastDetails';
+import FormButton from '../../../../common/UI/FormButton/FormButton';
+import Loader from '../../../../common/UI/Loader/Loader';
 
 const UserName = ({ user, isLoggedIn = true }) => {
-  let userName = "";
+  let userName = '';
   if (isLoggedIn) {
-    let userN = user.split(" ");
+    let userN = user.split(' ');
     if (userN.length < 2) {
       userName = userN[0].charAt(0);
     } else {
@@ -39,7 +40,7 @@ const ActionForm = ({ values }) => {
     data,
     isLoading,
     isError: isLoadingError,
-  } = useCaseComments(values.id);
+  } = useCaseComments(values?.id);
 
   const {
     mutate,
@@ -48,13 +49,14 @@ const ActionForm = ({ values }) => {
     isSuccess,
     isError,
   } = useAddCaseComment();
-  const { user } = useSelector((state) => state.auth);
-  const [value, setValue] = useState("");
-  const toast = useToast();
-  const success = "Added an action";
-  const isDisabled = isAdding || !value;
 
-  console.log("user", user);
+  const { mutate: onDelete, isLoading: isDeleting } = useDeleteCaseComment();
+  const [actionId, setActionId] = useState();
+  const { user } = useSelector((state) => state.auth);
+  const [value, setValue] = useState('');
+  const toast = useToast();
+  const success = 'Added an action';
+  const isDisabled = isAdding || !value;
 
   useEffect(() => {
     if (isError) {
@@ -62,7 +64,7 @@ const ActionForm = ({ values }) => {
     }
     if (isSuccess) {
       toast(toastSuccess(success));
-      setValue("");
+      setValue('');
     }
   }, [toast, isError, error, isSuccess, success]);
 
@@ -79,8 +81,9 @@ const ActionForm = ({ values }) => {
     return <div>Error Loading Actions</div>;
   }
 
-  const handleDelete = (actionId) => {
-    //delete action logic
+  const handleDelete = (action) => {
+    setActionId(action.actionId);
+    onDelete(action);
   };
 
   return (
@@ -90,6 +93,8 @@ const ActionForm = ({ values }) => {
           action={action}
           key={action.id}
           handleDelete={handleDelete}
+          isDeleting={isDeleting}
+          actionId={actionId}
         />
       ))}
       <Textarea
@@ -113,10 +118,9 @@ const ActionForm = ({ values }) => {
   );
 };
 
-export const ActionCard = ({ action, handleDelete }) => {
+export const ActionCard = ({ action, handleDelete, isDeleting, actionId }) => {
   const { user } = useSelector((state) => state.auth);
   const full_name = action?.createdBy?.full_name;
-  // const image = action?.createdBy?.image;
 
   return (
     <div className={styles.card_wrapper}>
@@ -129,12 +133,20 @@ export const ActionCard = ({ action, handleDelete }) => {
           <p>{action?.body}</p>
         </div>
         {user && user?.id === action?.createdBy?.id && (
-          <div
-            className={styles.delete_btn}
-            onClick={() => handleDelete(action?.id)}
-          >
-            Delete
-          </div>
+          <>
+            {isDeleting && actionId === action?.id ? (
+              <p>Deletion in progress</p>
+            ) : (
+              <div
+                className={styles.delete_btn}
+                onClick={() =>
+                  handleDelete({ actionId: action?.id, caseId: action?.case })
+                }
+              >
+                Delete
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>
@@ -162,13 +174,13 @@ const MultForm6 = ({
 
   const addAction = (value) => {
     const action = { userId: user?.id, action: value };
-    setFieldValue("actionsTaken", [...values?.actionsTaken, action]);
+    setFieldValue('actionsTaken', [...values?.actionsTaken, action]);
   };
 
   return (
     <div className={classes.form_wrapper}>
       <div className={classes.field_wrapper}>
-        <SimpleGrid columns={2} spacing={2} style={{ alignItems: "center" }}>
+        <SimpleGrid columns={2} spacing={2} style={{ alignItems: 'center' }}>
           <div className={classes.field_label}>12. Status</div>
           <SelectField
             name="status"
@@ -178,7 +190,7 @@ const MultForm6 = ({
         </SimpleGrid>
       </div>
       <div className={classes.field_wrapper}>
-        <SimpleGrid columns={2} spacing={2} style={{ alignItems: "center" }}>
+        <SimpleGrid columns={2} spacing={2} style={{ alignItems: 'center' }}>
           <div className={classes.field_label}>13. Refer Case</div>
           <SearchableField
             placeholder="Search person"
