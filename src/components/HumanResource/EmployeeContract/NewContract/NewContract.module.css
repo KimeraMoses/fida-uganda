@@ -44,7 +44,7 @@
   font-style: italic;
 }
 .time_uploaded {
-  margin-left: 24px;
+  margin-left: 28px;
 }
 .file_name svg {
   margin-right: 10px;
@@ -90,6 +90,6 @@
   align-items: center;
 }
 
-.last_sync_wrapper svg{
-    margin-right: 5px;
+.last_sync_wrapper svg {
+  margin-right: 5px;
 }

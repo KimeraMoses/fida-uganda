@@ -6,7 +6,7 @@ import { TableHeadColumn } from "../../../Membership/Allocations/AllocationsTabl
 import withTable from "./../../../../hoc/withTable";
 
 const EmployeeContractTable = ({ data }) => {
-  console.log(data);
+  // console.log(data);
   return (
     <>
       <div className={classes.allocations_table_wrapper}>
