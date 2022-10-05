@@ -21,23 +21,26 @@ const ActivityTable = ({ data, handleEdit }) => {
   const [showDelete, setShowDelete] = useState(false);
   const [record, setRecord] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-
+  const [idToDelete, setIdToDelete] = useState('')
+console.log('table data', data)
   const handleDelete = async () => {
     setIsLoading(true);
     // console.log(record);
     //Logic to delete record?.id goes here
-
+     const removeIndex = data.map(item => item.id).indexOf(idToDelete);
+    ~removeIndex && data.splice(removeIndex, 1);
     setIsLoading(false);
     setShowDelete(false);
   };
   const handleClick = (data) => {
     setShowDelete(true);
     setRecord(data);
+    setIdToDelete(data.id)
   };
 
   const getTotalPrice = () => {
     const priceArray = [];
-    data?.forEach((item) => {
+    data && data.length > 0 && data?.forEach((item) => {
       const price = item?.qty * item?.unit;
       priceArray.push(price);
     });
@@ -68,7 +71,7 @@ const ActivityTable = ({ data, handleEdit }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {data?.map((item, index) => {
+            {data && data.length > 0 && data?.map((item, index) => {
               return (
                 <Tr key={item.item}>
                   <Td>{index + 1}</Td>

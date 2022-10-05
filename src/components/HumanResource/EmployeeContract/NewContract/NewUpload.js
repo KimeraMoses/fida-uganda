@@ -14,7 +14,6 @@ import {
   PopoverFooter,
   PopoverHeader,
   PopoverTrigger,
-  useDisclosure,
 } from "@chakra-ui/react";
 import { MdDeleteOutline } from "react-icons/md";
 import FormButton from "../../../common/UI/FormButton/FormButton";
@@ -24,8 +23,8 @@ const fileSizeConverter = (SIZE_IN_BYTES) => {
   return SIZE_IN_MBS?.toFixed(1);
 };
 
-const FilePreview = ({ file, setShowDelete, handleDelete }) => {
-  const { onClose } = useDisclosure();
+const FilePreview = ({ file, handleDelete }) => {
+  const initRef = React.useRef();
   const type = file.file.type.split("/");
   const fileType = type[type?.length - 1];
   return (
@@ -88,45 +87,50 @@ const FilePreview = ({ file, setShowDelete, handleDelete }) => {
         <div className={classes.file_size_wrapper}>
           {fileSizeConverter(file.file.size)} MB
         </div>
-        <Popover>
-          <PopoverTrigger>
-            <div
-              className={classes.delete_icons}
-              onClick={() => {
-                setShowDelete(true);
-              }}
-            >
-              <MdDeleteOutline />
-            </div>
-          </PopoverTrigger>
-          <PopoverContent>
-            <PopoverArrow />
-            <PopoverCloseButton />
-            <PopoverHeader color="purple.500" fontSize="3xl">
-              Confirm Delete
-            </PopoverHeader>
-            <PopoverBody>
-              Are you sure you wish to delete{" "}
-              <strong>{file?.file?.name}</strong>? This action is permanent and
-              can not be undone
-            </PopoverBody>
-            <PopoverFooter
-              border="0"
-              display="flex"
-              alignItems="center"
-              justifyContent="space-between"
-              pb={4}
-            >
-              <ButtonGroup size="sm">
-                <Button colorScheme="green" onClick={onClose}>
-                  Cancel
-                </Button>
-                <Button colorScheme="red" onClick={() => handleDelete(file)}>
-                  Delete
-                </Button>
-              </ButtonGroup>
-            </PopoverFooter>
-          </PopoverContent>
+        <Popover initialFocusRef={initRef}>
+          {({ onClose }) => (
+            <>
+              <PopoverTrigger>
+                <div className={classes.delete_icons}>
+                  <MdDeleteOutline />
+                </div>
+              </PopoverTrigger>
+              <PopoverContent>
+                <PopoverArrow />
+                <PopoverCloseButton />
+                <PopoverHeader color="purple.500" fontSize="3xl">
+                  Confirm Delete
+                </PopoverHeader>
+                <PopoverBody>
+                  Are you sure you wish to delete{" "}
+                  <strong>{file?.file?.name}</strong>? This action is permanent
+                  and can not be undone
+                </PopoverBody>
+                <PopoverFooter
+                  border="0"
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="space-between"
+                  pb={4}
+                >
+                  <ButtonGroup size="sm">
+                    <Button colorScheme="green" onClick={onClose} ref={initRef}>
+                      Cancel
+                    </Button>
+                    <Button
+                      colorScheme="red"
+                      onClick={() => {
+                        handleDelete(file?.id);
+                        onClose();
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </ButtonGroup>
+                </PopoverFooter>
+              </PopoverContent>
+            </>
+          )}
         </Popover>
       </div>
     </div>
@@ -134,7 +138,6 @@ const FilePreview = ({ file, setShowDelete, handleDelete }) => {
 };
 
 const NewUpload = () => {
-  const [showDelete, setShowDelete] = useState(false);
   const [files, setFiles] = useState([]);
   const onDrop = useCallback((acceptedFiles) => {
     acceptedFiles.map((file) => {
@@ -157,7 +160,6 @@ const NewUpload = () => {
     const newFiles = files;
     const filteredFiles = newFiles.filter((file) => file.id !== id);
     setFiles(filteredFiles);
-    setShowDelete(false);
   };
 
   const handleSubmit = async () => {
@@ -209,11 +211,7 @@ const NewUpload = () => {
         <div className={classes.file_upload_preview_wrapper}>
           <ul className={classes.gpa__related_doc_recent_list_wrapper}>
             {files.map((file) => (
-              <FilePreview
-                file={file}
-                handleDelete={handleDelete}
-                setShowDelete={setShowDelete}
-              />
+              <FilePreview file={file} handleDelete={handleDelete} />
             ))}
             {files?.length > 0 && (
               <div className={classes.form_action_wrapper}>
