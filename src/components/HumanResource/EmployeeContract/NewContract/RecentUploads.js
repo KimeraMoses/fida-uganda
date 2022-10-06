@@ -1,4 +1,7 @@
 import {
+  List,
+  ListIcon,
+  ListItem,
   Popover,
   PopoverArrow,
   PopoverBody,
@@ -8,7 +11,12 @@ import {
   PopoverTrigger,
 } from "@chakra-ui/react";
 import React from "react";
-import { MdTaskAlt } from "react-icons/md";
+import {
+  MdDeleteOutline,
+  MdDownload,
+  MdShare,
+  MdTaskAlt,
+} from "react-icons/md";
 import { RetryIcon } from "../../../../assets/Icons/Icons";
 import FormButton from "../../../common/UI/FormButton/FormButton";
 import classes from "./NewContract.module.css";
@@ -108,7 +116,20 @@ const RecentUploadCard = (props) => {
             <PopoverCloseButton />
             <PopoverHeader>File Actions</PopoverHeader>
             <PopoverBody>
-              Are you sure you want to have that milkshake?
+              <List spacing={3}>
+                <ListItem cursor="pointer">
+                  <ListIcon as={MdDownload} color="green.500" />
+                  Download
+                </ListItem>
+                <ListItem cursor="pointer">
+                  <ListIcon as={MdDeleteOutline} color="green.500" />
+                  Delete Contract
+                </ListItem>
+                <ListItem cursor="pointer">
+                  <ListIcon as={MdShare} color="green.500" />
+                  Share Contract
+                </ListItem>
+              </List>
             </PopoverBody>
           </PopoverContent>
         </Popover>
