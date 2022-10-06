@@ -6,7 +6,6 @@ import {
     useMyTravelOrders, usePendingAccountantTravelOrders,
     usePendingDopTravelOrders, usePendingFleetManagerTravelOrders, useRejectedAccountantTravelOrders,
     useRejectedDopTravelOrders, useRejectedFleetManagerTravelOrders,
-    useTravelOrders,
 } from "../../hooks/useTravelOrders";
 import SectionHeader from "../common/SectionHeader";
 import Modal from "../common/Modal";
@@ -23,8 +22,8 @@ const TravelOrder = () => {
     const { user } = useSelector((state) => state.auth);
 
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const {  isLoading } = useTravelOrders();
-    const { data:myTravelOrders } = useMyTravelOrders();
+    // const {  isLoading } = useTravelOrders();
+    const { data:myTravelOrders, isLoading } = useMyTravelOrders();
 
     const {data: pendingDopTravelOrders} = usePendingDopTravelOrders();
     const {data: approvedDopTravelOrders} = useApprovedDopTravelOrders();
