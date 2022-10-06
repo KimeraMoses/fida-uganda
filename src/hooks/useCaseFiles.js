@@ -225,32 +225,29 @@ export const useUpdateCaseComment = () => {};
 export const useDeleteCaseComment = () => {
   const queryClient = useQueryClient();
   return useMutation(deleteCaseComment, {
-    onMutate: async (id) => {
-      await queryClient.cancelMutations([CASE_COMMENTS, id]);
+    onMutate: async ({ caseId, actionId }) => {
+      const queryKey = [CASE_COMMENTS, caseId];
+      await queryClient.cancelMutations(queryKey);
 
-      const previousClvCaseFiles = queryClient.getQueryData([
-        CASE_COMMENTS,
-        id,
-      ]);
-      if (previousClvCaseFiles) {
-        queryClient.setQueryData(
-          [CASE_COMMENTS, id],
-          (previousClvCaseFiles) => {
-            return produce(previousClvCaseFiles, (draft) => {
-              draft.clv_cases.filter((client) => client.id !== id);
-            });
-          }
-        );
+      const previousCaseComments = queryClient.getQueryData(queryKey);
+      if (previousCaseComments) {
+        queryClient.setQueryData(queryKey, (previousCaseComments) => {
+          return produce(previousCaseComments, (draft) => {
+            draft.CaseComments.filter(
+              (caseComment) => caseComment.id !== actionId
+            );
+          });
+        });
       }
     },
-    onError: (_error, _clientId, context) => {
+    onError: (_error, { caseId }, context) => {
       queryClient.setQueryData(
-        [CASE_COMMENTS, _clientId],
-        context.previousClvCaseFiles
+        [CASE_COMMENTS, caseId],
+        context.previousCaseComments
       );
     },
-    onSettled: (_id) => {
-      queryClient.invalidateQueries([CASE_COMMENTS, _id]);
+    onSettled: (_, _error, { caseId }) => {
+      queryClient.invalidateQueries([CASE_COMMENTS, caseId]);
     },
   });
 };

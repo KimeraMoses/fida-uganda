@@ -16,6 +16,7 @@ import { selectCaseFile } from "../../../../../store/caseFileReducer";
 import {
   useAddCaseComment,
   useCaseComments,
+  useDeleteCaseComment,
 } from "../../../../../hooks/useCaseFiles";
 import { toastError, toastSuccess } from "../../../../../lib/toastDetails";
 import FormButton from "../../../../common/UI/FormButton/FormButton";
@@ -39,7 +40,7 @@ const ActionForm = ({ values }) => {
     data,
     isLoading,
     isError: isLoadingError,
-  } = useCaseComments(values.id);
+  } = useCaseComments(values?.id);
 
   const {
     mutate,
@@ -48,13 +49,14 @@ const ActionForm = ({ values }) => {
     isSuccess,
     isError,
   } = useAddCaseComment();
+
+  const { mutate: onDelete, isLoading: isDeleting } = useDeleteCaseComment();
+  const [actionId, setActionId] = useState();
   const { user } = useSelector((state) => state.auth);
   const [value, setValue] = useState("");
   const toast = useToast();
   const success = "Added an action";
   const isDisabled = isAdding || !value;
-
-  console.log("user", user);
 
   useEffect(() => {
     if (isError) {
@@ -79,8 +81,9 @@ const ActionForm = ({ values }) => {
     return <div>Error Loading Actions</div>;
   }
 
-  const handleDelete = (actionId) => {
-    //delete action logic
+  const handleDelete = (action) => {
+    setActionId(action.actionId);
+    onDelete(action);
   };
 
   return (
@@ -90,6 +93,8 @@ const ActionForm = ({ values }) => {
           action={action}
           key={action.id}
           handleDelete={handleDelete}
+          isDeleting={isDeleting}
+          actionId={actionId}
         />
       ))}
       <Textarea
@@ -106,17 +111,16 @@ const ActionForm = ({ values }) => {
           disabled={isDisabled}
           onClick={onClick}
         >
-          Add Action
+          {isAdding ? "Adding..." : "Add Action"}
         </FormButton>
       </div>
     </div>
   );
 };
 
-export const ActionCard = ({ action, handleDelete }) => {
+export const ActionCard = ({ action, handleDelete, isDeleting, actionId }) => {
   const { user } = useSelector((state) => state.auth);
   const full_name = action?.createdBy?.full_name;
-  // const image = action?.createdBy?.image;
 
   return (
     <div className={styles.card_wrapper}>
@@ -129,12 +133,21 @@ export const ActionCard = ({ action, handleDelete }) => {
           <p>{action?.body}</p>
         </div>
         {user && user?.id === action?.createdBy?.id && (
-          <div
-            className={styles.delete_btn}
-            onClick={() => handleDelete(action?.id)}
-          >
-            Delete
-          </div>
+          <>
+            <div
+              className={styles.delete_btn}
+              onClick={() =>
+                isDeleting && actionId === action?.id
+                  ? null
+                  : handleDelete({
+                      actionId: action?.id,
+                      caseId: action?.case,
+                    })
+              }
+            >
+              {isDeleting && actionId === action?.id ? "Deleting..." : "Delete"}
+            </div>
+          </>
         )}
       </div>
     </div>

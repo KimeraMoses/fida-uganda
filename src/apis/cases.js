@@ -55,6 +55,6 @@ export const updateCaseComment = async (action) => {
   );
 };
 
-export const deleteCaseComment = async (actionId) => {
+export const deleteCaseComment = async ({ actionId, caseId }) => {
   return await axiosClient.delete(routes.cases.baseCaseComment + actionId);
 };
