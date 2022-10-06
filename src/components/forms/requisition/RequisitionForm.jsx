@@ -15,28 +15,7 @@ const RequisitionForm = ({ isSubmitting, setFieldValue, handleGetActivityType })
   const projectOptions = useProjectOptions();
   const [activity, setActivity] = useState("");
 
-  const datas = [
-    {
-      id: 1,
-      item: "Transport",
-      qty: 3,
-      unit: 40000,
-    },
-    {
-      id: 2,
-      item: "Lunch and Breackfast at cafe javas",
-      qty: 10,
-      unit: 5000,
-    },
-    {
-      id: 3,
-      item: "Clothes",
-      qty: 2,
-      unit: 50000,
-    },
-  ];
-
-  const [data, setData] = useState(datas)
+  const [data, setData] = useState([])
   const handleEdit = (item) => {
     setIsEdit(true);
     setEditValues(item);
