@@ -53,11 +53,11 @@ const ActivityForm = ({
                 label="Qty"
               />
               <InputField
-                placeholder="10.00"
+                placeholder="1000"
                 name="unit"
                 fullwidth
                 type="number"
-                label="Unit Price"
+                label="Unit Price(UGX)"
               />
             </SimpleGrid>
             <div className={classes.form_action_wrapper}>
@@ -82,10 +82,10 @@ const ActivityForm = ({
                 onClick={() => {
                   if (isEdit) {
                     console.log("new values", values);
-                    handleAddEditItem(values, 'EDIT');
+                    handleAddEditItem(values, "EDIT");
                     setIsEdit(false);
                   } else {
-                    handleAddEditItem(values, 'ADD');
+                    handleAddEditItem(values, "ADD");
                   }
                   resetForm();
                 }}
