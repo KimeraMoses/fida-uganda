@@ -1,31 +1,31 @@
-import { useEffect } from 'react';
-import classes from '../../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css';
-import { SimpleGrid, Textarea, useToast } from '@chakra-ui/react';
-import ActionButtons from '../../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons';
-import styles from './MultForm6.module.css';
-import withForm from '../../../../../hoc/withForm';
-import TextAreaField from '../../../../common/TextAreaField';
-import SelectField from '../../../../common/SelectField';
-import { caseFileStatusOptions } from '../../../../../lib/options';
-import SearchableField from '../../../../common/UI/SearchableField/SearchableField';
-import { useUsers } from '../../../../../hooks/useUser';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { selectCaseFile } from '../../../../../store/caseFileReducer';
+import { useEffect } from "react";
+import classes from "../../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css";
+import { SimpleGrid, Textarea, useToast } from "@chakra-ui/react";
+import ActionButtons from "../../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons";
+import styles from "./MultForm6.module.css";
+import withForm from "../../../../../hoc/withForm";
+import TextAreaField from "../../../../common/TextAreaField";
+import SelectField from "../../../../common/SelectField";
+import { caseFileStatusOptions } from "../../../../../lib/options";
+import SearchableField from "../../../../common/UI/SearchableField/SearchableField";
+import { useUsers } from "../../../../../hooks/useUser";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { selectCaseFile } from "../../../../../store/caseFileReducer";
 import {
   useAddCaseComment,
   useCaseComments,
   useDeleteCaseComment,
-} from '../../../../../hooks/useCaseFiles';
-import { toastError, toastSuccess } from '../../../../../lib/toastDetails';
-import FormButton from '../../../../common/UI/FormButton/FormButton';
-import Loader from '../../../../common/UI/Loader/Loader';
+} from "../../../../../hooks/useCaseFiles";
+import { toastError, toastSuccess } from "../../../../../lib/toastDetails";
+import FormButton from "../../../../common/UI/FormButton/FormButton";
+import Loader from "../../../../common/UI/Loader/Loader";
 
 const UserName = ({ user, isLoggedIn = true }) => {
-  let userName = '';
+  let userName = "";
   if (isLoggedIn) {
-    let userN = user.split(' ');
+    let userN = user.split(" ");
     if (userN.length < 2) {
       userName = userN[0].charAt(0);
     } else {
@@ -53,9 +53,9 @@ const ActionForm = ({ values }) => {
   const { mutate: onDelete, isLoading: isDeleting } = useDeleteCaseComment();
   const [actionId, setActionId] = useState();
   const { user } = useSelector((state) => state.auth);
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
   const toast = useToast();
-  const success = 'Added an action';
+  const success = "Added an action";
   const isDisabled = isAdding || !value;
 
   useEffect(() => {
@@ -64,7 +64,7 @@ const ActionForm = ({ values }) => {
     }
     if (isSuccess) {
       toast(toastSuccess(success));
-      setValue('');
+      setValue("");
     }
   }, [toast, isError, error, isSuccess, success]);
 
@@ -111,7 +111,7 @@ const ActionForm = ({ values }) => {
           disabled={isDisabled}
           onClick={onClick}
         >
-          Add Action
+          {isAdding ? "Adding..." : "Add Action"}
         </FormButton>
       </div>
     </div>
@@ -134,18 +134,19 @@ export const ActionCard = ({ action, handleDelete, isDeleting, actionId }) => {
         </div>
         {user && user?.id === action?.createdBy?.id && (
           <>
-            {isDeleting && actionId === action?.id ? (
-              <p>Deletion in progress</p>
-            ) : (
-              <div
-                className={styles.delete_btn}
-                onClick={() =>
-                  handleDelete({ actionId: action?.id, caseId: action?.case })
-                }
-              >
-                Delete
-              </div>
-            )}
+            <div
+              className={styles.delete_btn}
+              onClick={() =>
+                isDeleting && actionId === action?.id
+                  ? null
+                  : handleDelete({
+                      actionId: action?.id,
+                      caseId: action?.case,
+                    })
+              }
+            >
+              {isDeleting && actionId === action?.id ? "Deleting..." : "Delete"}
+            </div>
           </>
         )}
       </div>
@@ -174,13 +175,13 @@ const MultForm6 = ({
 
   const addAction = (value) => {
     const action = { userId: user?.id, action: value };
-    setFieldValue('actionsTaken', [...values?.actionsTaken, action]);
+    setFieldValue("actionsTaken", [...values?.actionsTaken, action]);
   };
 
   return (
     <div className={classes.form_wrapper}>
       <div className={classes.field_wrapper}>
-        <SimpleGrid columns={2} spacing={2} style={{ alignItems: 'center' }}>
+        <SimpleGrid columns={2} spacing={2} style={{ alignItems: "center" }}>
           <div className={classes.field_label}>12. Status</div>
           <SelectField
             name="status"
@@ -190,7 +191,7 @@ const MultForm6 = ({
         </SimpleGrid>
       </div>
       <div className={classes.field_wrapper}>
-        <SimpleGrid columns={2} spacing={2} style={{ alignItems: 'center' }}>
+        <SimpleGrid columns={2} spacing={2} style={{ alignItems: "center" }}>
           <div className={classes.field_label}>13. Refer Case</div>
           <SearchableField
             placeholder="Search person"

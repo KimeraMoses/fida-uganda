@@ -21,29 +21,29 @@ const ActivityTable = ({ data, handleEdit }) => {
   const [showDelete, setShowDelete] = useState(false);
   const [record, setRecord] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const [idToDelete, setIdToDelete] = useState('')
-console.log('table data', data)
+  const [idToDelete, setIdToDelete] = useState("");
+
   const handleDelete = async () => {
     setIsLoading(true);
-    // console.log(record);
-    //Logic to delete record?.id goes here
-     const removeIndex = data.map(item => item.id).indexOf(idToDelete);
-    ~removeIndex && data.splice(removeIndex, 1);
+    const removeIndex = data.map((item) => item.id).indexOf(idToDelete);
+    removeIndex && data.splice(removeIndex, 1);
     setIsLoading(false);
     setShowDelete(false);
   };
   const handleClick = (data) => {
     setShowDelete(true);
     setRecord(data);
-    setIdToDelete(data.id)
+    setIdToDelete(data.id);
   };
 
   const getTotalPrice = () => {
     const priceArray = [];
-    data && data.length > 0 && data?.forEach((item) => {
-      const price = item?.qty * item?.unit;
-      priceArray.push(price);
-    });
+    data &&
+      data.length > 0 &&
+      data?.forEach((item) => {
+        const price = item?.qty * item?.unit;
+        priceArray.push(price);
+      });
     let sum = 0;
     for (let i = 0; i < priceArray.length; i += 1) {
       sum += priceArray[i];
@@ -71,35 +71,37 @@ console.log('table data', data)
             </Tr>
           </Thead>
           <Tbody>
-            {data && data.length > 0 && data?.map((item, index) => {
-              return (
-                <Tr key={item.item}>
-                  <Td>{index + 1}</Td>
-                  <Td>{item.item}</Td>
-                  <Td>{item.qty}</Td>
-                  <Td>{item.unit}</Td>
-                  <Td>{item.qty * item.unit}</Td>
-                  <Td>
-                    <div className={classes.table_actions_wrapperr}>
-                      <IconButton
-                        size="sm"
-                        variant="outline"
-                        aria-label="Edit Item"
-                        icon={<MdOutlineEdit />}
-                        onClick={() => handleEdit(item)}
-                      />
-                      <IconButton
-                        size="sm"
-                        variant="outline"
-                        aria-label="Delete Item"
-                        icon={<MdOutlineDelete />}
-                        onClick={() => handleClick({ ...item, index })}
-                      />
-                    </div>
-                  </Td>
-                </Tr>
-              );
-            })}
+            {data &&
+              data.length > 0 &&
+              data?.map((item, index) => {
+                return (
+                  <Tr key={item.item}>
+                    <Td>{index + 1}</Td>
+                    <Td>{item.item}</Td>
+                    <Td>{item.qty}</Td>
+                    <Td>{item.unit}</Td>
+                    <Td>{item.qty * item.unit}</Td>
+                    <Td>
+                      <div className={classes.table_actions_wrapperr}>
+                        <IconButton
+                          size="sm"
+                          variant="outline"
+                          aria-label="Edit Item"
+                          icon={<MdOutlineEdit />}
+                          onClick={() => handleEdit(item)}
+                        />
+                        <IconButton
+                          size="sm"
+                          variant="outline"
+                          aria-label="Delete Item"
+                          icon={<MdOutlineDelete />}
+                          onClick={() => handleClick({ ...item, index })}
+                        />
+                      </div>
+                    </Td>
+                  </Tr>
+                );
+              })}
             <Tr className={classes.total_row}>
               <Td></Td>
               <Td>Total</Td>

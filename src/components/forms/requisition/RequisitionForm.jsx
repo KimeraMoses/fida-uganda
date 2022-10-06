@@ -9,56 +9,32 @@ import SelectInputField from "../../common/UI/SelectInputField/SelectInputField"
 import ActivityTable from "./Activity/ActivityTable";
 import ActivityForm from "./Activity/ActivityForm";
 
-const RequisitionForm = ({ isSubmitting, setFieldValue, handleGetActivityType }) => {
+const RequisitionForm = ({
+  isSubmitting,
+  setFieldValue,
+  handleGetActivityType,
+}) => {
   const [isEdit, setIsEdit] = useState(false);
   const [editValues, setEditValues] = useState({});
   const projectOptions = useProjectOptions();
   const [activity, setActivity] = useState("");
 
-  const datas = [
-    {
-      id: 1,
-      item: "Transport",
-      qty: 3,
-      unit: 40000,
-    },
-    {
-      id: 2,
-      item: "Lunch and Breackfast at cafe javas",
-      qty: 10,
-      unit: 5000,
-    },
-    {
-      id: 3,
-      item: "Clothes",
-      qty: 2,
-      unit: 50000,
-    },
-  ];
-
-  const [data, setData] = useState(datas)
+  const [data, setData] = useState([]);
   const handleEdit = (item) => {
     setIsEdit(true);
     setEditValues(item);
   };
 
   const handleAddEditItem = (item, action) => {
-    // console.log('item', item);
-    console.log('iteemm', item)
     if (action === "ADD") {
-      //Add Item logic here
-      // data.push(item)
-      setData([...data, item])
-      setFieldValue('activities', data)
-      console.log('data', data)
+      setData([...data, item]);
+      setFieldValue("activities", data);
     } else if (action === "EDIT") {
-      //Edit Item logic here
-      console.log('edit vakues', item)
-          //Find index of specific object using findIndex method.
-   const objIndex = data.findIndex((obj) => obj.id === item.id);
-    data[objIndex].item = item.item
-    data[objIndex].qty = item.qty
-    data[objIndex].unit = item.unit
+      //Find index of specific object using findIndex method.
+      const objIndex = data.findIndex((obj) => obj.id === item.id);
+      data[objIndex].item = item.item;
+      data[objIndex].qty = item.qty;
+      data[objIndex].unit = item.unit;
     } else {
       return;
     }
@@ -79,7 +55,7 @@ const RequisitionForm = ({ isSubmitting, setFieldValue, handleGetActivityType })
           options={requisitionTypeOptions}
           onChange={(option) => {
             setFieldValue("type", option);
-            handleGetActivityType(option)
+            handleGetActivityType(option);
             if (option === "Activity") {
               setActivity(option);
             } else {
