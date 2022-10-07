@@ -87,24 +87,15 @@ const TableHeadColumn = (props) => {
   );
 };
 
-const ActivityTable = ({ data, handleEdit }) => {
+const ActivityTable = ({ data, handleEdit, handleDelete }) => {
   const initRef = React.useRef();
-  const [showDelete, setShowDelete] = useState(false);
   const [record, setRecord] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const [idToDelete, setIdToDelete] = useState("");
 
-  const handleDelete = async () => {
-    setIsLoading(true);
-    const removeIndex = data.map((item) => item.id).indexOf(idToDelete);
-    removeIndex && data.splice(removeIndex, 1);
-    setIsLoading(false);
-    setShowDelete(false);
-  };
+
   const handleClick = (data) => {
-    // setShowDelete(true);
+    console.log('data', data)
     setRecord(data);
-    setIdToDelete(data.id);
   };
 
   const getTotalPrice = () => {
@@ -177,7 +168,7 @@ const ActivityTable = ({ data, handleEdit }) => {
                                   aria-label="Delete Item"
                                   icon={<MdOutlineDelete />}
                                   onClick={() =>
-                                    handleClick({ ...item, index })
+                                    handleClick(item)
                                   }
                                 />
                               </PopoverTrigger>
@@ -214,7 +205,9 @@ const ActivityTable = ({ data, handleEdit }) => {
                                     <Button
                                       colorScheme="red"
                                       onClick={() => {
-                                        handleDelete();
+                                        setIsLoading(true)
+                                        handleDelete(record.id);
+                                        setIsLoading(false)
                                         onClose();
                                       }}
                                     >
