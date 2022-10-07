@@ -18,6 +18,7 @@ const RequisitionForm = ({
   const [editValues, setEditValues] = useState({});
   const projectOptions = useProjectOptions();
   const [activity, setActivity] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const [data, setData] = useState([]);
   const handleEdit = (item) => {
@@ -27,10 +28,10 @@ const RequisitionForm = ({
 
   const handleAddEditItem = (item, action) => {
     if (action === "ADD") {
-      const newItem={
-        id: Math.random()*Math.random(),
-        ...item
-      }
+      const newItem = {
+        id: Math.random() * Math.random(),
+        ...item,
+      };
       setData([...data, newItem]);
       setFieldValue("activities", data);
     } else if (action === "EDIT") {
@@ -44,14 +45,13 @@ const RequisitionForm = ({
     }
   };
 
-  const handleDelete =  (recordId) => {
-    console.log(recordId)
-    const newData= data
-    const filteredData=newData.filter(item=>item.id !==recordId)
-    console.log("new data",newData)
-    setData(filteredData)
+  const handleDelete = (recordId) => {
+    setIsLoading(true);
+    const newData = data;
+    const filteredData = newData.filter((item) => item.id !== recordId);
+    setData(filteredData);
+    setIsLoading(false);
   };
-
 
   return (
     <SimpleGrid p={5} gap={3}>
@@ -114,7 +114,12 @@ const RequisitionForm = ({
             placeholder="Activity Title"
             // type="number"
           />
-          <ActivityTable data={data} handleEdit={handleEdit} handleDelete={handleDelete}/>
+          <ActivityTable
+            data={data}
+            handleEdit={handleEdit}
+            handleDelete={handleDelete}
+            isLoading={isLoading}
+          />
           <ActivityForm
             isEdit={isEdit}
             setIsEdit={setIsEdit}

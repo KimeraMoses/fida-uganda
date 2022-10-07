@@ -1,79 +1,8 @@
-import React, { useState } from "react";
-import {
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Td,
-  IconButton,
-  Th,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverArrow,
-  PopoverCloseButton,
-  PopoverHeader,
-  PopoverBody,
-  PopoverFooter,
-  ButtonGroup,
-  Button,
-} from "@chakra-ui/react";
+import React from "react";
+import { Table, Thead, Tbody, Tr, Td, IconButton, Th } from "@chakra-ui/react";
 import classes from "./Table.module.css";
-import { MdOutlineDelete, MdOutlineEdit } from "react-icons/md";
-
-const DeletePopup = ({ handleClick, handleDelete, isLoading, item }) => {
-  const initRef = React.useRef();
-  return (
-    <Popover initialFocusRef={initRef}>
-      {({ onClose }) => (
-        <>
-          <PopoverTrigger>
-            <IconButton
-              size="sm"
-              variant="outline"
-              aria-label="Delete Item"
-              icon={<MdOutlineDelete />}
-              onClick={() => handleClick(item)}
-            />
-          </PopoverTrigger>
-          <PopoverContent>
-            <PopoverArrow />
-            <PopoverCloseButton />
-            <PopoverHeader color="purple.500" fontSize="3xl" py={5}>
-              Confirm Delete
-            </PopoverHeader>
-            <PopoverBody>
-              Are you sure you wish to delete <strong>{item}</strong>? This
-              action is permanent and can not be undone
-            </PopoverBody>
-            <PopoverFooter
-              border="0"
-              display="flex"
-              alignItems="center"
-              justifyContent="space-between"
-              pb={4}
-            >
-              <ButtonGroup size="sm">
-                <Button colorScheme="green" onClick={onClose} ref={initRef}>
-                  Cancel
-                </Button>
-                <Button
-                  colorScheme="red"
-                  onClick={() => {
-                    handleDelete();
-                    onClose();
-                  }}
-                >
-                  {isLoading ? "Deleting..." : "Delete"}
-                </Button>
-              </ButtonGroup>
-            </PopoverFooter>
-          </PopoverContent>
-        </>
-      )}
-    </Popover>
-  );
-};
+import { MdOutlineEdit } from "react-icons/md";
+import { DeletePopup } from "../../../common/DeletePopup";
 
 const TableHeadColumn = (props) => {
   const { title, secondaryText } = props;
@@ -87,17 +16,7 @@ const TableHeadColumn = (props) => {
   );
 };
 
-const ActivityTable = ({ data, handleEdit, handleDelete }) => {
-  const initRef = React.useRef();
-  const [record, setRecord] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
-
-
-  const handleClick = (data) => {
-    console.log('data', data)
-    setRecord(data);
-  };
-
+const ActivityTable = ({ data, handleEdit, handleDelete, isLoading }) => {
   const getTotalPrice = () => {
     const priceArray = [];
     data &&
@@ -153,72 +72,11 @@ const ActivityTable = ({ data, handleEdit, handleDelete }) => {
                           onClick={() => handleEdit(item)}
                         />
                         <DeletePopup
-                          handleClick={handleClick}
                           handleDelete={handleDelete}
                           isLoading={isLoading}
-                          item={item?.item}
+                          record={item}
+                          name={item?.item}
                         />
-                        {/* <Popover initialFocusRef={initRef}>
-                          {({ onClose }) => (
-                            <>
-                              <PopoverTrigger>
-                                <IconButton
-                                  size="sm"
-                                  variant="outline"
-                                  aria-label="Delete Item"
-                                  icon={<MdOutlineDelete />}
-                                  onClick={() =>
-                                    handleClick(item)
-                                  }
-                                />
-                              </PopoverTrigger>
-                              <PopoverContent>
-                                <PopoverArrow />
-                                <PopoverCloseButton />
-                                <PopoverHeader
-                                  color="purple.500"
-                                  fontSize="3xl"
-                                  py={5}
-                                >
-                                  Confirm Delete
-                                </PopoverHeader>
-                                <PopoverBody>
-                                  Are you sure you wish to delete{" "}
-                                  <strong>{record?.item}</strong>? This action
-                                  is permanent and can not be undone
-                                </PopoverBody>
-                                <PopoverFooter
-                                  border="0"
-                                  display="flex"
-                                  alignItems="center"
-                                  justifyContent="space-between"
-                                  pb={4}
-                                >
-                                  <ButtonGroup size="sm">
-                                    <Button
-                                      colorScheme="green"
-                                      onClick={onClose}
-                                      ref={initRef}
-                                    >
-                                      Cancel
-                                    </Button>
-                                    <Button
-                                      colorScheme="red"
-                                      onClick={() => {
-                                        setIsLoading(true)
-                                        handleDelete(record.id);
-                                        setIsLoading(false)
-                                        onClose();
-                                      }}
-                                    >
-                                      {isLoading ? "Deleting..." : "Delete"}
-                                    </Button>
-                                  </ButtonGroup>
-                                </PopoverFooter>
-                              </PopoverContent>
-                            </>
-                          )}
-                        </Popover> */}
                       </div>
                     </Td>
                   </Tr>
