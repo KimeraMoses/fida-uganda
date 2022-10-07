@@ -27,7 +27,11 @@ const RequisitionForm = ({
 
   const handleAddEditItem = (item, action) => {
     if (action === "ADD") {
-      setData([...data, item]);
+      const newItem={
+        id: Math.random()*Math.random(),
+        ...item
+      }
+      setData([...data, newItem]);
       setFieldValue("activities", data);
     } else if (action === "EDIT") {
       //Find index of specific object using findIndex method.
@@ -39,6 +43,15 @@ const RequisitionForm = ({
       return;
     }
   };
+
+  const handleDelete =  (recordId) => {
+    console.log(recordId)
+    const newData= data
+    const filteredData=newData.filter(item=>item.id !==recordId)
+    console.log("new data",newData)
+    setData(filteredData)
+  };
+
 
   return (
     <SimpleGrid p={5} gap={3}>
@@ -101,7 +114,7 @@ const RequisitionForm = ({
             placeholder="Activity Title"
             // type="number"
           />
-          <ActivityTable data={data} handleEdit={handleEdit} />
+          <ActivityTable data={data} handleEdit={handleEdit} handleDelete={handleDelete}/>
           <ActivityForm
             isEdit={isEdit}
             setIsEdit={setIsEdit}
