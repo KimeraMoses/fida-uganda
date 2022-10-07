@@ -1,9 +1,25 @@
 import React, { useState } from "react";
-import { Table, Thead, Tbody, Tr, Td, IconButton, Th } from "@chakra-ui/react";
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Td,
+  IconButton,
+  Th,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverArrow,
+  PopoverCloseButton,
+  PopoverHeader,
+  PopoverBody,
+  PopoverFooter,
+  ButtonGroup,
+  Button,
+} from "@chakra-ui/react";
 import classes from "./Table.module.css";
 import { MdOutlineDelete, MdOutlineEdit } from "react-icons/md";
-import FormButton from "../../../common/UI/FormButton/FormButton";
-import Modal from "../../../common/Modal";
 
 const TableHeadColumn = (props) => {
   const { title, secondaryText } = props;
@@ -18,6 +34,7 @@ const TableHeadColumn = (props) => {
 };
 
 const ActivityTable = ({ data, handleEdit }) => {
+  const initRef = React.useRef();
   const [showDelete, setShowDelete] = useState(false);
   const [record, setRecord] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -31,7 +48,7 @@ const ActivityTable = ({ data, handleEdit }) => {
     setShowDelete(false);
   };
   const handleClick = (data) => {
-    setShowDelete(true);
+    // setShowDelete(true);
     setRecord(data);
     setIdToDelete(data.id);
   };
@@ -90,13 +107,65 @@ const ActivityTable = ({ data, handleEdit }) => {
                           icon={<MdOutlineEdit />}
                           onClick={() => handleEdit(item)}
                         />
-                        <IconButton
-                          size="sm"
-                          variant="outline"
-                          aria-label="Delete Item"
-                          icon={<MdOutlineDelete />}
-                          onClick={() => handleClick({ ...item, index })}
-                        />
+                        <Popover initialFocusRef={initRef}>
+                          {({ onClose }) => (
+                            <>
+                              <PopoverTrigger>
+                                <IconButton
+                                  size="sm"
+                                  variant="outline"
+                                  aria-label="Delete Item"
+                                  icon={<MdOutlineDelete />}
+                                  onClick={() =>
+                                    handleClick({ ...item, index })
+                                  }
+                                />
+                              </PopoverTrigger>
+                              <PopoverContent>
+                                <PopoverArrow />
+                                <PopoverCloseButton />
+                                <PopoverHeader
+                                  color="purple.500"
+                                  fontSize="3xl"
+                                  py={5}
+                                >
+                                  Confirm Delete
+                                </PopoverHeader>
+                                <PopoverBody>
+                                  Are you sure you wish to delete{" "}
+                                  <strong>{record?.item}</strong>? This action
+                                  is permanent and can not be undone
+                                </PopoverBody>
+                                <PopoverFooter
+                                  border="0"
+                                  display="flex"
+                                  alignItems="center"
+                                  justifyContent="space-between"
+                                  pb={4}
+                                >
+                                  <ButtonGroup size="sm">
+                                    <Button
+                                      colorScheme="green"
+                                      onClick={onClose}
+                                      ref={initRef}
+                                    >
+                                      Cancel
+                                    </Button>
+                                    <Button
+                                      colorScheme="red"
+                                      onClick={() => {
+                                        handleDelete();
+                                        onClose();
+                                      }}
+                                    >
+                                      {isLoading ? "Deleting..." : "Delete"}
+                                    </Button>
+                                  </ButtonGroup>
+                                </PopoverFooter>
+                              </PopoverContent>
+                            </>
+                          )}
+                        </Popover>
                       </div>
                     </Td>
                   </Tr>
@@ -113,36 +182,6 @@ const ActivityTable = ({ data, handleEdit }) => {
           </Tbody>
         </Table>
       </div>
-      <Modal isOpen={showDelete} size="xs">
-        <div className={classes.confirm_delete_modal}>
-          <div className={classes.modal__header}>
-            <h3>Confirm Delete</h3>
-          </div>
-          <div className="mb-[32px]">
-            Are you sure you wish to delete <strong>{record?.item}</strong> from
-            the items list? This action is permanent and can not be undone
-          </div>
-
-          <div className={classes.form_action_wrapper}>
-            <FormButton
-              type="button"
-              variant="cancel"
-              rounded={false}
-              onClick={() => setShowDelete(false)}
-            >
-              Cancel
-            </FormButton>
-            <FormButton
-              type="button"
-              variant="save"
-              rounded={false}
-              onClick={handleDelete}
-            >
-              {isLoading ? "Deleting..." : "Delete"}
-            </FormButton>
-          </div>
-        </div>
-      </Modal>
     </>
   );
 };
