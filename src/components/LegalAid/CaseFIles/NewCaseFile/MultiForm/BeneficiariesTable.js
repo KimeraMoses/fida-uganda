@@ -2,26 +2,20 @@ import React, { useState } from "react";
 import { Table, Thead, Tbody, Tr, Td, IconButton } from "@chakra-ui/react";
 import classes from "./Table.module.css";
 import { TableHeadColumn } from "../../../../Membership/Allocations/AllocationsTable/AllocationsTable";
-import { MdOutlineDelete, MdOutlineEdit } from "react-icons/md";
-import Modal from "../../../../common/Modal";
-import FormButton from "../../../../common/UI/FormButton/FormButton";
+import { MdOutlineEdit } from "react-icons/md";
+import { DeletePopup } from "../../../../common/DeletePopup";
 
 const BenTable = ({ data, removeBeneficiary, handleEdit }) => {
-  const [showDelete, setShowDelete] = useState(false);
   const [record, setRecord] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
   const handleDelete = async () => {
     setIsLoading(true);
-    // console.log(record);
-    //Logic to delete record?.id goes here
     removeBeneficiary(record?.index);
 
     setIsLoading(false);
-    setShowDelete(false);
   };
   const handleClick = (data) => {
-    setShowDelete(true);
     setRecord(data);
   };
 
@@ -64,11 +58,11 @@ const BenTable = ({ data, removeBeneficiary, handleEdit }) => {
                         icon={<MdOutlineEdit />}
                         onClick={() => handleEdit(item)}
                       />
-                      <IconButton
-                        size="sm"
-                        variant="outline"
-                        aria-label="Delete Item"
-                        icon={<MdOutlineDelete />}
+                      <DeletePopup
+                        handleDelete={handleDelete}
+                        isLoading={isLoading}
+                        record={item}
+                        name={item?.name}
                         onClick={() => handleClick({ ...item, index })}
                       />
                     </div>
@@ -79,37 +73,6 @@ const BenTable = ({ data, removeBeneficiary, handleEdit }) => {
           </Tbody>
         </Table>
       </div>
-      <Modal isOpen={showDelete} size="xs">
-        <div className={classes.confirm_delete_modal}>
-          <div className={classes.modal__header}>
-            <h3>Confirm Delete</h3>
-          </div>
-          <div className="mb-[32px]">
-            Are you sure you wish to delete <strong>{record?.name}</strong> from
-            the beneficiaries list? This action is permanent and can not be
-            undone
-          </div>
-
-          <div className={classes.form_action_wrapper}>
-            <FormButton
-              type="button"
-              variant="cancel"
-              rounded={false}
-              onClick={() => setShowDelete(false)}
-            >
-              Cancel
-            </FormButton>
-            <FormButton
-              type="button"
-              variant="save"
-              rounded={false}
-              onClick={handleDelete}
-            >
-              {isLoading ? "Deleting..." : "Delete"}
-            </FormButton>
-          </div>
-        </div>
-      </Modal>
     </>
   );
 };

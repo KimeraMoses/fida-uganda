@@ -25,7 +25,6 @@ const Requisitions = () => {
   const [activityType, setActivityType] = useState("");
 
   const handleGetActivityType = (activity) => {
-    console.log(activity);
     setActivityType(activity);
   };
   return (
