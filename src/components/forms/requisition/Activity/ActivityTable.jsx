@@ -21,6 +21,60 @@ import {
 import classes from "./Table.module.css";
 import { MdOutlineDelete, MdOutlineEdit } from "react-icons/md";
 
+const DeletePopup = ({ handleClick, handleDelete, isLoading, item }) => {
+  const initRef = React.useRef();
+  return (
+    <Popover initialFocusRef={initRef}>
+      {({ onClose }) => (
+        <>
+          <PopoverTrigger>
+            <IconButton
+              size="sm"
+              variant="outline"
+              aria-label="Delete Item"
+              icon={<MdOutlineDelete />}
+              onClick={() => handleClick(item)}
+            />
+          </PopoverTrigger>
+          <PopoverContent>
+            <PopoverArrow />
+            <PopoverCloseButton />
+            <PopoverHeader color="purple.500" fontSize="3xl" py={5}>
+              Confirm Delete
+            </PopoverHeader>
+            <PopoverBody>
+              Are you sure you wish to delete <strong>{item}</strong>? This
+              action is permanent and can not be undone
+            </PopoverBody>
+            <PopoverFooter
+              border="0"
+              display="flex"
+              alignItems="center"
+              justifyContent="space-between"
+              pb={4}
+            >
+              <ButtonGroup size="sm">
+                <Button colorScheme="green" onClick={onClose} ref={initRef}>
+                  Cancel
+                </Button>
+                <Button
+                  colorScheme="red"
+                  onClick={() => {
+                    handleDelete();
+                    onClose();
+                  }}
+                >
+                  {isLoading ? "Deleting..." : "Delete"}
+                </Button>
+              </ButtonGroup>
+            </PopoverFooter>
+          </PopoverContent>
+        </>
+      )}
+    </Popover>
+  );
+};
+
 const TableHeadColumn = (props) => {
   const { title, secondaryText } = props;
   return (
@@ -107,7 +161,13 @@ const ActivityTable = ({ data, handleEdit }) => {
                           icon={<MdOutlineEdit />}
                           onClick={() => handleEdit(item)}
                         />
-                        <Popover initialFocusRef={initRef}>
+                        <DeletePopup
+                          handleClick={handleClick}
+                          handleDelete={handleDelete}
+                          isLoading={isLoading}
+                          item={item?.item}
+                        />
+                        {/* <Popover initialFocusRef={initRef}>
                           {({ onClose }) => (
                             <>
                               <PopoverTrigger>
@@ -165,7 +225,7 @@ const ActivityTable = ({ data, handleEdit }) => {
                               </PopoverContent>
                             </>
                           )}
-                        </Popover>
+                        </Popover> */}
                       </div>
                     </Td>
                   </Tr>
