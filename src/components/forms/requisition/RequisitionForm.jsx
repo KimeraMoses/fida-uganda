@@ -18,6 +18,7 @@ const RequisitionForm = ({
   const [editValues, setEditValues] = useState({});
   const projectOptions = useProjectOptions();
   const [activity, setActivity] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const [data, setData] = useState([]);
   const handleEdit = (item) => {
@@ -27,7 +28,11 @@ const RequisitionForm = ({
 
   const handleAddEditItem = (item, action) => {
     if (action === "ADD") {
-      setData([...data, item]);
+      const newItem = {
+        id: Math.random() * Math.random(),
+        ...item,
+      };
+      setData([...data, newItem]);
       setFieldValue("activities", data);
     } else if (action === "EDIT") {
       //Find index of specific object using findIndex method.
@@ -38,6 +43,14 @@ const RequisitionForm = ({
     } else {
       return;
     }
+  };
+
+  const handleDelete = (recordId) => {
+    setIsLoading(true);
+    const newData = data;
+    const filteredData = newData.filter((item) => item.id !== recordId);
+    setData(filteredData);
+    setIsLoading(false);
   };
 
   return (
@@ -101,7 +114,12 @@ const RequisitionForm = ({
             placeholder="Activity Title"
             // type="number"
           />
-          <ActivityTable data={data} handleEdit={handleEdit} />
+          <ActivityTable
+            data={data}
+            handleEdit={handleEdit}
+            handleDelete={handleDelete}
+            isLoading={isLoading}
+          />
           <ActivityForm
             isEdit={isEdit}
             setIsEdit={setIsEdit}

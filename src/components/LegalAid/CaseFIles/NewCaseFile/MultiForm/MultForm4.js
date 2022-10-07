@@ -49,7 +49,6 @@ const MultForm4 = ({
     const newBeneficiaries = [...values?.beneficiaries];
     newBeneficiaries.splice(index, 1);
     setFieldValue("beneficiaries", newBeneficiaries);
-    // console.log(newBeneficiaries);
   };
 
   const setAbout = (option) => {
