@@ -1,18 +1,19 @@
-import React from "react";
-import { SimpleGrid } from "@chakra-ui/react";
-import InputField from "./../../../../common/UI/InputField/InputField";
-import SelectField from "./../../../../common/SelectField";
-import { sexOptions } from "./../../../../../lib/options";
-import classes from "./AddBeneficiariesForm.module.css";
-import FormButton from "./../../../../common/UI/FormButton/FormButton";
+import React from 'react';
+import { SimpleGrid } from '@chakra-ui/react';
+import InputField from './../../../../common/UI/InputField/InputField';
+import SelectField from './../../../../common/SelectField';
+import { sexOptions } from './../../../../../lib/options';
+import classes from './AddBeneficiariesForm.module.css';
+import FormButton from './../../../../common/UI/FormButton/FormButton';
 import {
   beneficiariesInitialValues,
   beneficiariesSchema,
-} from "../../../../../form_schemas/beneficiaries";
-import { Form, Formik } from "formik";
+} from '../../../../../form_schemas/beneficiaries';
+import { Form, Formik } from 'formik';
 
 const AddBeneficiariesForm = ({
   addBeneficiary,
+  editBeneficiary,
   editValues,
   setEditValues,
   isEdit,
@@ -24,6 +25,7 @@ const AddBeneficiariesForm = ({
     sex: editValues?.sex,
     location: editValues?.location,
     phoneNumber: editValues?.phoneNumber,
+    id: editValues?.id,
   };
 
   return (
@@ -35,11 +37,11 @@ const AddBeneficiariesForm = ({
       {({ values, resetForm }) => (
         <Form>
           <div className={classes.beneficiaries_form_wrapper}>
-            <h4>{isEdit ? "Edit" : "Add New"} Beneficiary</h4>
+            <h4>{isEdit ? 'Edit' : 'Add New'} Beneficiary</h4>
             <SimpleGrid
               columns={5}
               spacing={1}
-              style={{ alignItems: "center" }}
+              style={{ alignItems: 'center' }}
             >
               <InputField
                 placeholder="Name"
@@ -100,7 +102,7 @@ const AddBeneficiariesForm = ({
                 onClick={() => {
                   if (isEdit) {
                     //Editing logic here
-                    console.log("new values", values);
+                    editBeneficiary(values);
                     setIsEdit(false);
                   } else {
                     addBeneficiary(values);
@@ -108,7 +110,7 @@ const AddBeneficiariesForm = ({
                   resetForm();
                 }}
               >
-                {isEdit ? "Save" : "+ Add"}
+                {isEdit ? 'Save' : '+ Add'}
               </FormButton>
             </div>
           </div>
