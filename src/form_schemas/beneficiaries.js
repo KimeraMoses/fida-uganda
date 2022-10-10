@@ -19,7 +19,7 @@ export const beneficiariesSchema = yup.object().shape({
   age: yup.string().required("Age is required"),
   sex: yup.string().required("Sex is required"),
   location: yup.string().required("Location is required"),
-  phoneNumber: yup.string()
+  phoneNumber: yup.number()
 });
 
 export const activitySchema = yup.object().shape({

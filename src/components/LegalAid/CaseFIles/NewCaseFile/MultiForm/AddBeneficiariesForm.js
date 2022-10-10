@@ -78,6 +78,7 @@ const AddBeneficiariesForm = ({
                 fullwidth
                 type="tel"
                 label="Phone Number"
+                maxLength={12}
               />
             </SimpleGrid>
             <div className={classes.form_action_wrapper}>
