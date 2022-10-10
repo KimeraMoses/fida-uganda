@@ -43,7 +43,7 @@ const BenTable = ({ data, removeBeneficiary, handleEdit }) => {
             {data?.map((item, index) => {
               return (
                 <Tr key={item.id}>
-                  <Td>{item.id}</Td>
+                  <Td>{index + 1}</Td>
                   <Td>{item.name}</Td>
                   <Td>{item.age}</Td>
                   <Td>{item.sex}</Td>
