@@ -1,22 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import SectionHeader from "../../common/SectionHeader";
 import { useDisclosure } from "@chakra-ui/react";
-import CaseFilesTable from "./CaseFilesTable/CaseFilesTable";
 import Modal from "../../common/Modal";
 import NewCaseFile from "../CaseFIles/NewCaseFile/NewCaseFile";
 import { useClvCases } from "../../../hooks/useCaseFiles";
-import { resetCaseFile } from "../../../store/caseFileReducer";
+import { resetCaseFile, selectCaseFile } from "../../../store/caseFileReducer";
 import { useDispatch } from "react-redux";
 import Loader from "./../../common/UI/Loader/Loader";
+import { caseColumns } from "../CaseFIles/CaseFiles";
+import Table from "../../common/TableComponent/Table";
 
 const ClvCaseFiles = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data, isLoading } = useClvCases();
+  const [isEdit, setIsEdit] = useState(false);
   const dispatch = useDispatch();
 
   const onOpenModal = () => {
     onOpen();
     dispatch(resetCaseFile());
+    setIsEdit(false);
+  };
+
+  const onHandleClick = (caseFile) => {
+    setIsEdit(true);
+    dispatch(selectCaseFile(caseFile));
+    onOpen();
   };
 
   return (
@@ -27,11 +36,14 @@ const ClvCaseFiles = () => {
         <Loader />
       ) : (
         data && (
-          <CaseFilesTable
-            data={data ? data.clv_cases : null}
-            btnLabel="CLV Case File"
+          <Table
+            data={data.clv_cases}
+            columns={caseColumns}
             btnClick={onOpenModal}
-            tableName="CLV Case File"
+            btnLabel="CLV Case File"
+            tableName="CLV Case Files"
+            loading={isLoading}
+            onEditHandler={onHandleClick}
           />
         )
       )}
@@ -44,7 +56,7 @@ const ClvCaseFiles = () => {
         <NewCaseFile
           isClvCaseFile={true}
           onClose={onClose}
-          isNewCaseFile={true}
+          isNewCaseFile={isEdit ? false : true}
         />
       </Modal>
     </>
