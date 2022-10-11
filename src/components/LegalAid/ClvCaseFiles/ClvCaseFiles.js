@@ -7,8 +7,8 @@ import { useClvCases } from "../../../hooks/useCaseFiles";
 import { resetCaseFile, selectCaseFile } from "../../../store/caseFileReducer";
 import { useDispatch } from "react-redux";
 import Loader from "./../../common/UI/Loader/Loader";
-import { caseColumns } from "../CaseFIles/CaseFiles";
 import Table from "../../common/TableComponent/Table";
+import { caseColumns } from "../../../lib/tableColumns";
 
 const ClvCaseFiles = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();

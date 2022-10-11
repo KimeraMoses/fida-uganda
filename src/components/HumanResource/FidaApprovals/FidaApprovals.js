@@ -5,9 +5,10 @@ import Modal from "../../common/Modal";
 import SectionHeader from "../../common/SectionHeader";
 import SubHeading from "./../../Tasks/SubHeading/SubHeading";
 import Loader from "./../../common/UI/Loader/Loader";
-import FidaApproved, { ApprovalColumns } from "./FidaApproved";
+import FidaApproved from "./FidaApproved";
 import Table from "../../common/TableComponent/Table";
 import EmployeeCard from "./NewEmployeeForm/EmployeeCard";
+import { approvalTableColumns } from "../../../lib/tableColumns";
 
 const FidaApprovals = () => {
   const { data: approvalData, isLoading } = useDeactivatedUsers();
@@ -45,7 +46,7 @@ const FidaApprovals = () => {
           <Table
             data={data}
             onEditHandler={onEditHandler}
-            columns={ApprovalColumns}
+            columns={approvalTableColumns}
             showBtn={false}
             loading={isLoading}
             hideSearch

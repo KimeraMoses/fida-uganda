@@ -5,32 +5,14 @@ import {
 } from "../../../hooks/useUser";
 import SubHeading from "./../../Tasks/SubHeading/SubHeading";
 import Loader from "./../../common/UI/Loader/Loader";
-import { formatDate } from "../../../lib/data";
 import Table from "../../common/TableComponent/Table";
 import Modal from "../../common/Modal";
 import EmployeeCard from "./NewEmployeeForm/EmployeeCard";
 import { useDisclosure } from "@chakra-ui/react";
+import { approvalTableColumns } from "../../../lib/tableColumns";
 
 // import CustomTable from ""
-export const ApprovalColumns = [
-  {
-    Header: "Name",
-    accessor: "full_name",
-  },
-  {
-    Header: "Email",
-    accessor: "email",
-  },
-  {
-    Header: "Designation",
-    accessor: "designation",
-  },
-  {
-    Header: "Sign Up Date",
-    accessor: "createdAt",
-    Cell: ({ cell: { value } }) => formatDate(value),
-  },
-];
+
 
 const FidaApproved = () => {
   const { data: userData, isLoading } = useActivatedUsers();
@@ -74,7 +56,7 @@ const FidaApproved = () => {
           <SubHeading title="Approved Users" />
           <Table
             data={data}
-            columns={ApprovalColumns}
+            columns={approvalTableColumns}
             showBtn={false}
             loading={isLoading}
             showActions={true}
