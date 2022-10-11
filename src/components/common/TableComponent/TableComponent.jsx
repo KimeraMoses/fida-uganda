@@ -29,6 +29,7 @@ function TableComponent({
   hideSearch,
   loading,
   onRowClickHandler,
+  emptyText,
 }) {
   const {
     getTableProps,
@@ -98,6 +99,11 @@ function TableComponent({
                 })}
               </Tbody>
             </Table>
+            {data?.length < 1 && (
+              <div className={classes.no_data_wrapper}>
+                {emptyText ? emptyText : "No data"}
+              </div>
+            )}
 
             <Flex
               justifyContent={!hideSearch ? "flex-end" : "space-between"}

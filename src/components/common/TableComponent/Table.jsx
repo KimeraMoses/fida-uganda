@@ -14,6 +14,7 @@ const Table = ({
   showBtn,
   btnLabel,
   btnClick,
+  emptyText,
   loading,
   keysToFilterOut,
   tableName,
@@ -209,6 +210,7 @@ const Table = ({
         handleDownload={handleDownload}
         onEditHandler={onEditHandler}
         hideSearch={hideSearch}
+        emptyText={emptyText}
         onRowClickHandler={
           onEditHandler ? onEditHandler : onViewHandler ? onViewHandler : null
         }
