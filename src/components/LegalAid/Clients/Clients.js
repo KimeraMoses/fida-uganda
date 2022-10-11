@@ -10,7 +10,6 @@ import { useEffect, useState } from "react";
 import Table from "../../common/TableComponent/Table";
 import { clientsTableColumns } from "../../../lib/tableColumns";
 
-
 const Clients = () => {
   const { data: clientsData, isLoading } = useClients();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -25,16 +24,16 @@ const Clients = () => {
           ...b,
           name: {
             name: b?.name,
-            occupation:b?.occupation
+            occupation: b?.occupation,
           },
           contacts: {
             phoneNumber: b?.phoneNumber,
-            email: b?.email
+            email: b?.email,
           },
           address: {
-            address: b?.address?b?.address: "N/A",
-            city: b?.village
-          }
+            address: b?.address ? b?.address : "N/A",
+            city: b?.village,
+          },
         };
       });
       setData(dataToSet);
@@ -46,13 +45,12 @@ const Clients = () => {
     dispatch(resetClient());
   };
 
-  console.log("clt", data);
   const onEditHandler = (client) => {
-    console.log('client', client)
-    dispatch(selectClient(clientsData?.clients?.find(el=>el?.id ===client?.id)));
+    dispatch(
+      selectClient(clientsData?.clients?.find((el) => el?.id === client?.id))
+    );
     onOpen();
   };
-  
 
   return (
     <>
@@ -60,17 +58,15 @@ const Clients = () => {
       {isLoading ? (
         <Loader />
       ) : (
-      
-          <Table
-            isLoading={isLoading}
-            data={data ? data : null}
-            btnLabel="Add Client"
-            btnClick={onOpenModal}
-            tableName="Clients"
-            columns={clientsTableColumns}
-            onEditHandler={onEditHandler}
-          />
-      
+        <Table
+          isLoading={isLoading}
+          data={data ? data : null}
+          btnLabel="Add Client"
+          btnClick={onOpenModal}
+          tableName="Clients"
+          columns={clientsTableColumns}
+          onEditHandler={onEditHandler}
+        />
       )}
       <Modal
         isOpen={isOpen}

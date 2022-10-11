@@ -100,7 +100,6 @@ const AddBeneficiariesForm = ({
                 onClick={() => {
                   if (isEdit) {
                     //Editing logic here
-                    console.log("new values", values);
                     setIsEdit(false);
                   } else {
                     addBeneficiary(values);

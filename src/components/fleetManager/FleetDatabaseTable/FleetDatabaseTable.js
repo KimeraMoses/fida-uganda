@@ -18,13 +18,11 @@ import FleetDatabaseForm from "../../forms/fleetDatabase/FleetDatabaseForm";
 import Modal from "./../../common/Modal";
 import { fleetDatabaseInitialValues } from "../../forms/fleetDatabase/schemas/fleetDatabase";
 import { fleetDatabaseOrderSchema } from "./../../forms/fleetDatabase/schemas/fleetDatabase";
-import { useUpdateFleet} from "../../../hooks/useFleet";
+import { useUpdateFleet } from "../../../hooks/useFleet";
 
 const FleetDatabaseTable = ({ data, ...rest }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  console.log(data);
   const handleEditItem = (item) => {
-    console.log(item);
     onOpen();
   };
   return (

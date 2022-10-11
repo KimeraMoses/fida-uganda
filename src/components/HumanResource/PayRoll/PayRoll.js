@@ -23,7 +23,6 @@ const PayRoll = () => {
   const [file, setFile] = useState(null);
 
   const handleFileChange = (event) => {
-    console.log("event", event.target.files[0]);
     const theFile = event.target.files[0];
     if (theFile.size > TEN_MBS_IN_BYTES) {
       toast(toastError("File size should be less than 10MB"));

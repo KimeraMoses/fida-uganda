@@ -75,18 +75,19 @@ function TableComponent({
                 {page.map((row, i) => {
                   prepareRow(row);
                   return (
-                    <Tr
-                      onClick={() =>
-                        onRowClickHandler !== null
-                          ? onRowClickHandler(row?.original)
-                          : null
-                      }
-                      {...row.getRowProps()}
-                    >
+                    <Tr {...row.getRowProps()}>
                       {row.cells.map((cell) => {
                         return (
                           <>
-                            <Td {...cell.getCellProps()}>
+                            <Td
+                              {...cell.getCellProps()}
+                              onClick={() =>
+                                onRowClickHandler !== null &&
+                                cell?.column?.Header !== "Actions"
+                                  ? onRowClickHandler(row?.original)
+                                  : null
+                              }
+                            >
                               {cell.render("Cell")}
                             </Td>
                           </>
