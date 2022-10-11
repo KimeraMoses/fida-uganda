@@ -6,9 +6,13 @@ import SectionHeader from "../common/SectionHeader";
 import Table from "../common/Table";
 import { clientsColumns } from "../../assets/tableColumns/clients";
 
+
+
 const Clients = () => {
   const { data, isLoading, isError, error } = useClients();
   const toast = useToast();
+
+  console.log("clt", data)
 
   useEffect(() => {
     if (isError) {

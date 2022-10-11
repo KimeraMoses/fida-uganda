@@ -1,17 +1,39 @@
 import { useDisclosure } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDeactivatedUsers } from "../../../hooks/useUser";
 import Modal from "../../common/Modal";
 import SectionHeader from "../../common/SectionHeader";
-import FidaApprovedTable from "./FidaApprovalTable/FidaApprovedTable";
-import NewEmployeeForm from "./NewEmployeeForm/NewEmployeeForm";
 import SubHeading from "./../../Tasks/SubHeading/SubHeading";
 import Loader from "./../../common/UI/Loader/Loader";
 import FidaApproved from "./FidaApproved";
+import Table from "../../common/TableComponent/Table";
+import EmployeeCard from "./NewEmployeeForm/EmployeeCard";
+import { approvalTableColumns } from "../../../lib/tableColumns";
 
 const FidaApprovals = () => {
-  const { data, isLoading } = useDeactivatedUsers();
-  const { isOpen, onClose } = useDisclosure();
+  const { data: approvalData, isLoading } = useDeactivatedUsers();
+  const { isOpen, onClose, onOpen } = useDisclosure();
+  const [user, setUser] = useState({});
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    setData([]);
+    if (approvalData?.users?.length) {
+      const dataToSet = approvalData?.users?.map((b) => {
+        return {
+          ...b,
+          key: b?.id,
+          full_name: b?.full_name ? b.full_name : "N/A",
+        };
+      });
+      setData(dataToSet);
+    }
+  }, [approvalData]);
+
+  const onEditHandler = (user) => {
+    setUser(user);
+    onOpen();
+  };
   return (
     <>
       <SectionHeader title="FIDA IIMS approvals" />
@@ -20,18 +42,26 @@ const FidaApprovals = () => {
       ) : (
         <>
           <FidaApproved />
-
           <SubHeading title="Pending Approval" />
-          {data?.users ? (
-            <FidaApprovedTable
-              tableName="Users pending approval"
-              data={data?.users}
-            />
-          ) : null}
+          <Table
+            data={data}
+            onEditHandler={onEditHandler}
+            columns={approvalTableColumns}
+            showBtn={false}
+            loading={isLoading}
+            hideSearch
+          />
         </>
       )}
       <Modal isOpen={isOpen} onClose={onClose}>
-        <NewEmployeeForm onClose={onClose} />
+        <EmployeeCard
+          // isSubmitting={isLoading}
+          onClose={onClose}
+          user={user}
+          // onSubmit={mutate}
+          // isError={isError}
+          // error={error}
+        />
       </Modal>
     </>
   );

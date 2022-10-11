@@ -13,6 +13,7 @@ import { Form, Formik } from "formik";
 
 const AddBeneficiariesForm = ({
   addBeneficiary,
+  editBeneficiary,
   editValues,
   setEditValues,
   isEdit,
@@ -24,6 +25,7 @@ const AddBeneficiariesForm = ({
     sex: editValues?.sex,
     location: editValues?.location,
     phoneNumber: editValues?.phoneNumber,
+    id: editValues?.id,
   };
 
   return (
@@ -76,6 +78,7 @@ const AddBeneficiariesForm = ({
                 fullwidth
                 type="tel"
                 label="Phone Number"
+                maxLength={12}
               />
             </SimpleGrid>
             <div className={classes.form_action_wrapper}>
@@ -100,7 +103,7 @@ const AddBeneficiariesForm = ({
                 onClick={() => {
                   if (isEdit) {
                     //Editing logic here
-                    console.log("new values", values);
+                    editBeneficiary(values);
                     setIsEdit(false);
                   } else {
                     addBeneficiary(values);

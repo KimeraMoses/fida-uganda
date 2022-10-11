@@ -1,37 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { useActivatedUsers } from "../../../hooks/useUser";
+import {
+  useActivatedUsers,
+  useRequestPasswordLink,
+} from "../../../hooks/useUser";
 import SubHeading from "./../../Tasks/SubHeading/SubHeading";
 import Loader from "./../../common/UI/Loader/Loader";
-import { formatDate } from "../../../lib/data";
 import Table from "../../common/TableComponent/Table";
+import Modal from "../../common/Modal";
+import EmployeeCard from "./NewEmployeeForm/EmployeeCard";
+import { useDisclosure } from "@chakra-ui/react";
+import { approvalTableColumns } from "../../../lib/tableColumns";
+
 // import CustomTable from ""
-const columns = [
-  {
-    Header: "Name",
-    accessor: "name",
-  },
-  {
-    Header: "Email",
-    accessor: "email",
-  },
-  {
-    Header: "Role",
-    accessor: "role",
-  },
-  {
-    Header: "Designation",
-    accessor: "designation",
-  },
-  {
-    Header: "Project of Attachement",
-    accessor: "createdAt",
-  },
-];
+
 
 const FidaApproved = () => {
   const { data: userData, isLoading } = useActivatedUsers();
-  // Setting data properly
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isSuccess, isError, error } = useRequestPasswordLink();
+
   const [data, setData] = useState([]);
+  const [user, setUser] = useState({});
   useEffect(() => {
     setData([]);
     if (userData?.users?.length) {
@@ -39,13 +28,24 @@ const FidaApproved = () => {
         return {
           ...b,
           key: b?.id,
-          name: b?.first_name ? `${b?.first_name} ${b?.last_name}` : "N/A",
-          createdAt: formatDate(b?.createdAt),
+          full_name: b?.full_name ? b.full_name : "N/A",
         };
       });
       setData(dataToSet);
     }
   }, [userData]);
+
+  useEffect(() => {
+    if (isSuccess) {
+      // toast(toastSuccess("User activated successfully"));
+      onClose();
+    }
+  }, [isSuccess, onClose]);
+
+  const onEditHandler = (user) => {
+    setUser(user);
+    onOpen();
+  };
 
   return (
     <>
@@ -54,9 +54,26 @@ const FidaApproved = () => {
       ) : (
         <>
           <SubHeading title="Approved Users" />
-          <Table data={data} columns={columns} />
+          <Table
+            data={data}
+            columns={approvalTableColumns}
+            showBtn={false}
+            loading={isLoading}
+            showActions={true}
+            onEditHandler={onEditHandler}
+          />
         </>
       )}
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <EmployeeCard
+          // isSubmitting={isLoading}
+          onClose={onClose}
+          user={user}
+          // onSubmit={mutate}
+          isError={isError}
+          error={error}
+        />
+      </Modal>
     </>
   );
 };

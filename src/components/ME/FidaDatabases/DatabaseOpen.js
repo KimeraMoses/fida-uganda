@@ -1,20 +1,17 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useClients } from "../../../hooks/useClients";
-import { useClvs } from "../../../hooks/useClv";
 import { useLeaveRequests } from "../../../hooks/useLeaveRequest";
 import { useProjects } from "../../../hooks/useProjects";
 import TrackerTable from "../../dashboard/TrackerTable/TrackerTable";
 import ReportBreadCrumb from "../../HumanResource/Reports/BreadCrumb/ReportBreadCrumb";
 import ClientsTable from "../../LegalAid/Clients/ClientsTable/ClientsTable";
-import ClvTable from "../../LegalAid/CLVs/CLVTable/ClvTable";
 import FidaProjectTable from "../FidaProjects/FidaProjectTable/FidaProjectTable";
 import Loader from "./../../common/UI/Loader/Loader";
 import { useAdvances } from "./../../../hooks/useAdvances";
 import FolderFilesTable from "../../HumanResource/Reports/ReportTable/FolderFilesTable";
 import { FolderFileData } from "./../../HumanResource/Reports/Reports";
-import CaseFilesTable from "../../LegalAid/ClvCaseFiles/CaseFilesTable/CaseFilesTable";
-import { useCaseFiles } from "../../../hooks/useCaseFiles";
+import { useCaseFiles, useClvCases } from "../../../hooks/useCaseFiles";
 import { useItProducts } from "../../../hooks/useItProduct";
 import ITProductsTable from "../../itDepartment/Products/ITProductsTable";
 import ITServicesTable from "../../itDepartment/Services/ITServicesTable";
@@ -42,6 +39,8 @@ import { useAssets } from "../../../hooks/useAsset";
 import ProjectTable from "../../LegalAid/ProjectFiles/ProjectFilesTable/ProjectTable";
 import FleetDatabaseTable from "../../fleetManager/FleetDatabaseTable/FleetDatabaseTable";
 import { useFleets } from "../../../hooks/useFleet";
+import Table from "../../common/TableComponent/Table";
+import { caseColumns } from "../../../lib/tableColumns";
 
 const DatabaseOpen = () => {
   useEffect(() => {
@@ -49,7 +48,7 @@ const DatabaseOpen = () => {
   }, []);
 
   const { dbName } = useParams();
-  const { data, isLoading } = useClvs();
+  const { data, isLoading } = useClvCases();
   const clientsData = useClients();
   const projectsData = useProjects();
   const leaveData = useLeaveRequests();
@@ -67,7 +66,6 @@ const DatabaseOpen = () => {
   const membersData = useMembers();
   const assetsData = useAssets();
   const fleetsData = useFleets();
-
   return (
     <>
       <ReportBreadCrumb
@@ -95,11 +93,12 @@ const DatabaseOpen = () => {
       tasksData.isLoading |
       caseData.isLoading ? (
         <Loader />
-      ) : dbName === "clvs" && data?.clvs ? (
-        <ClvTable
+      ) : dbName === "clvs" && data?.clv_cases ? (
+        <Table
+          columns={caseColumns}
           showBtn={false}
-          data={data ? data.clvs : null}
-          btnLabel="Add CLV"
+          data={data?.clv_cases}
+          hideActions
           tableName="CLV"
         />
       ) : dbName === "clients" && clientsData.data?.clients ? (
@@ -116,10 +115,12 @@ const DatabaseOpen = () => {
           tableName="Fida Projects"
         />
       ) : dbName === "cases" && caseData.data?.cases ? (
-        <CaseFilesTable
+        <Table
+          columns={caseColumns}
           showBtn={false}
-          data={caseData.data ? caseData.data.cases : null}
+          data={caseData?.data?.cases}
           tableName="Case Files"
+          hideActions
         />
       ) : dbName === "leavetrackers" && leaveData.data.leaves ? (
         <TrackerTable

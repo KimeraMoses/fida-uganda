@@ -48,7 +48,9 @@ const MultForm1 = ({
             <div className={styles.selected_project_name}>
               {selectedClvName.project?.name}
             </div>
-            <div>{selectedClvName.district}</div>
+            <div style={{ textAlign: "center" }}>
+              {selectedClvName.district}
+            </div>
           </SimpleGrid>
         </div>
       )}
