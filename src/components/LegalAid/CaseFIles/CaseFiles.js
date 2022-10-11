@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SectionHeader from "../../common/SectionHeader";
 import { useDisclosure } from "@chakra-ui/react";
 import Modal from "../../common/Modal";
@@ -8,62 +8,11 @@ import { useDispatch } from "react-redux";
 import { resetCaseFile, selectCaseFile } from "../../../store/caseFileReducer";
 import Loader from "./../../common/UI/Loader/Loader";
 import Table from "../../common/TableComponent/Table";
-import { formatDate } from "../../../lib/data";
-
-export const caseColumns = [
-  { Header: "File No.", accessor: "case_id" },
-  { Header: "Name", accessor: "complainant.name" },
-  { Header: "SubCounty", accessor: "complainant.village" },
-  // { Header: "District", accessor: "districtOfOrigin" },
-  { Header: "Nationality", accessor: "complainant.country" },
-  { Header: "NIN", accessor: "complainant.NIN" },
-  // { Header: "File type", accessor: "fileType" },
-  {
-    Header: "Date of opening",
-    accessor: "createdAt",
-    Cell: ({ cell: { value } }) => formatDate(value),
-  },
-  // { Header: "Case Number", accessor: "caseNumber" },
-  { Header: "Gender", accessor: "complainant.sex" },
-  { Header: "Age", accessor: "complainant.age" },
-  {
-    Header: "No. of beneficiaries",
-    accessor: "complainant.beneficiaries",
-    Cell: ({ cell: { value } }) => value?.length,
-  },
-  { Header: "Occupation", accessor: "complainant.occupation" },
-
-  { Header: "Nature of problem", accessor: "nature" },
-  {
-    Header: "Action taken",
-    accessor: "actionsTaken",
-    Cell: ({ cell: { value } }) => value?.length,
-  },
-  { Header: "Next visit", accessor: "next_visit" },
-  { Header: "Legal Officer", accessor: "legal_officer" },
-  { Header: "Referred by", accessor: "referred_to.full_name" },
-  { Header: "Reason for referral", accessor: "reason_for_referral" },
-  { Header: "Follow up feedback", accessor: "follow_up_feedback" },
-  {
-    Header: "File closing date",
-    accessor: "updateAt",
-    Cell: ({ cell: { value } }) => formatDate(value),
-  },
-  { Header: "Phone Number", accessor: "respondent_contact" },
-  { Header: "Disability", accessor: "complainant.disability" },
-  { Header: "Respondent Name", accessor: "respondentName" },
-  { Header: "Respondent Phone Number", accessor: "respondentPhone" },
-  { Header: "How did you find fida", accessor: "fida" },
-  // {
-  //   Header: "Date Uploaded",
-  //   accessor: "dateUploaded",
-  //   Cell: ({ cell: { value } }) => formatDate(value),
-  // },
-];
+import { caseColumns } from "../../../lib/tableColumns";
 
 const CaseFiles = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data, isLoading } = useCaseFiles();
+  const { data: clvData, isLoading } = useCaseFiles();
   const [isEdit, setIsEdit] = useState(false);
   const dispatch = useDispatch();
 
@@ -80,20 +29,55 @@ const CaseFiles = () => {
 
   const onHandleClick = (caseFile) => {
     setIsEdit(true);
-    dispatch(selectCaseFile(caseFile));
+    dispatch(
+      selectCaseFile(clvData?.cases?.find((el) => el?.id === caseFile?.id))
+    );
     onOpen();
   };
 
-  console.log("case file", data);
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    setData([]);
+    if (clvData?.cases?.length) {
+      const dataToSet = clvData?.cases?.map((b) => {
+        return {
+          ...b,
+          nature: b?.nature ? b?.nature : "N/A",
+          next_visit: b?.next_visit ? b?.next_visit : "N/A",
+          legal_officer: b?.legal_officer ? b?.legal_officer : "N/A",
+          referred_to: b?.referred_to?.full_name
+            ? b?.referred_to?.full_name
+            : "N/A",
+          reason_for_referral: b?.reason_for_referral
+            ? b?.reason_for_referral
+            : "N/A",
+          follow_up_feedback: b?.follow_up_feedback
+            ? b?.follow_up_feedback
+            : "N/A",
+          respondentPhone: b?.respondentPhone ? b?.respondentPhone : "N/A",
+          complainantDisability: b?.complainant?.disability
+            ? b?.complainant?.disability
+            : "N/A",
+          phoneNumber: b?.complainant?.phoneNumber
+            ? b?.complainant?.phoneNumber
+            : "N/A",
+          respondentName: b?.respondentName ? b?.respondentName : "N/A",
+          fida: b?.fida ? b?.fida : "N/A",
+        };
+      });
+      setData(dataToSet);
+    }
+  }, [clvData]);
+
   return (
     <>
       <SectionHeader title="Case Files" />
       {isLoading ? (
         <Loader />
       ) : (
-        data?.cases && (
+        clvData?.cases && (
           <Table
-            data={data.cases}
+            data={data}
             columns={caseColumns}
             btnClick={onOpenModal}
             btnLabel="New Case File"

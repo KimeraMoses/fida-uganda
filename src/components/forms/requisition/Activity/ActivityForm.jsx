@@ -81,7 +81,6 @@ const ActivityForm = ({
                 rounded={true}
                 onClick={() => {
                   if (isEdit) {
-                    console.log("new values", values);
                     handleAddEditItem(values, "EDIT");
                     setIsEdit(false);
                   } else {

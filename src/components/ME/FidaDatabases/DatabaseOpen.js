@@ -40,7 +40,7 @@ import ProjectTable from "../../LegalAid/ProjectFiles/ProjectFilesTable/ProjectT
 import FleetDatabaseTable from "../../fleetManager/FleetDatabaseTable/FleetDatabaseTable";
 import { useFleets } from "../../../hooks/useFleet";
 import Table from "../../common/TableComponent/Table";
-import { caseColumns } from "../../LegalAid/CaseFIles/CaseFiles";
+import { caseColumns } from "../../../lib/tableColumns";
 
 const DatabaseOpen = () => {
   useEffect(() => {

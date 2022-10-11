@@ -23,7 +23,6 @@
   align-items: center;
   gap: 5px;
 }
-
 .table_header tr th:last-of-type {
   text-align: center;
 }

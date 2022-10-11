@@ -147,7 +147,6 @@ const Table = ({
       const actionColumn = {
         Header: "Actions",
         accessor: "actions",
-        className: "actions",
         Cell: ({ row }) => {
           return (
             <div className={classes.table_actions_icon_wrapper}>
