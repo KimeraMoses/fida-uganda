@@ -26,3 +26,10 @@
 .table_header tr th:last-of-type {
   text-align: center;
 }
+.no_data_wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  background-color: aliceblue;
+  font-weight: 700;
+}

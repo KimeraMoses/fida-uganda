@@ -82,6 +82,7 @@ const CaseFiles = () => {
             btnClick={onOpenModal}
             btnLabel="New Case File"
             tableName="Case Files"
+            emptyText="No cases"
             loading={isLoading}
             onEditHandler={onHandleClick}
           />

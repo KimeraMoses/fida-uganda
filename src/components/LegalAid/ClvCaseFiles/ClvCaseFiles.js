@@ -82,6 +82,7 @@ const ClvCaseFiles = () => {
             tableName="CLV Case Files"
             loading={isLoading}
             onEditHandler={onHandleClick}
+            emptyText="No clv cases"
           />
         )
       )}
