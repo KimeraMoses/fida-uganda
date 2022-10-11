@@ -1,19 +1,20 @@
-import classes from "../../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css";
-import ActionButtons from "../../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons";
+import classes from '../../../../Membership/Members/NewMemberForm/MultiForm/MultiForm.module.css';
+import ActionButtons from '../../../../Membership/Members/NewMemberForm/MultiForm/ActionButtons/ActionButtons';
 import {
   Radio,
   RadioGroup,
   SimpleGrid,
   Stack,
   useToast,
-} from "@chakra-ui/react";
-import BenTable from "./BeneficiariesTable";
-import withForm from "../../../../../hoc/withForm";
-import AddBeneficiariesForm from "./AddBeneficiariesForm";
-import { toastError } from "../../../../../lib/toastDetails";
-import { useDispatch } from "react-redux";
-import { selectClient } from "../../../../../store/clientReducer";
-import { useState } from "react";
+} from '@chakra-ui/react';
+import BenTable from './BeneficiariesTable';
+import withForm from '../../../../../hoc/withForm';
+import AddBeneficiariesForm from './AddBeneficiariesForm';
+import { toastError } from '../../../../../lib/toastDetails';
+import { useDispatch } from 'react-redux';
+import { selectClient } from '../../../../../store/clientReducer';
+import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 const MultForm4 = ({
   values,
@@ -39,20 +40,30 @@ const MultForm4 = ({
       return;
     }
     const newBeneficiary = {
-      id: values.beneficiaries.length + 1,
+      id: uuidv4(),
       ...beneficiary,
     };
-    setFieldValue("beneficiaries", [newBeneficiary, ...values?.beneficiaries]);
+    setFieldValue('beneficiaries', [...values?.beneficiaries, newBeneficiary]);
   };
 
   const removeBeneficiary = (index) => {
     const newBeneficiaries = [...values?.beneficiaries];
     newBeneficiaries.splice(index, 1);
-    setFieldValue("beneficiaries", newBeneficiaries);
+    setFieldValue('beneficiaries', newBeneficiaries);
+  };
+
+  const editBeneficiary = (beneficiary) => {
+    if (values?.beneficiaries.length < 0) {
+      return;
+    }
+    const beneficiaries = values?.beneficiaries.map((ben) =>
+      ben.id === beneficiary.id ? beneficiary : ben
+    );
+    setFieldValue('beneficiaries', beneficiaries);
   };
 
   const setAbout = (option) => {
-    setFieldValue("about", option);
+    setFieldValue('about', option);
   };
 
   const handleEdit = (item) => {
@@ -71,6 +82,7 @@ const MultForm4 = ({
         />
         <AddBeneficiariesForm
           addBeneficiary={addBeneficiary}
+          editBeneficiary={editBeneficiary}
           isEdit={isEdit}
           setIsEdit={setIsEdit}
           editValues={editValues}
@@ -87,7 +99,7 @@ const MultForm4 = ({
           style={{ marginLeft: 15 }}
           value={values?.about}
         >
-          <SimpleGrid columns={2} spacing={2} style={{ alignItems: "center" }}>
+          <SimpleGrid columns={2} spacing={2} style={{ alignItems: 'center' }}>
             <Stack direction="column">
               <Radio value="1">Brochures</Radio>
               <Radio value="2">Posters</Radio>
