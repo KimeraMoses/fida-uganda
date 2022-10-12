@@ -14,6 +14,7 @@ import { toastError } from '../../../../../lib/toastDetails';
 import { useDispatch } from 'react-redux';
 import { selectClient } from '../../../../../store/clientReducer';
 import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 const MultForm4 = ({
   values,
@@ -39,10 +40,10 @@ const MultForm4 = ({
       return;
     }
     const newBeneficiary = {
-      id: values.beneficiaries.length + 1,
+      id: uuidv4(),
       ...beneficiary,
     };
-    setFieldValue('beneficiaries', [newBeneficiary, ...values?.beneficiaries]);
+    setFieldValue('beneficiaries', [...values?.beneficiaries, newBeneficiary]);
   };
 
   const removeBeneficiary = (index) => {

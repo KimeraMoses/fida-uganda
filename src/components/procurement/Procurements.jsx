@@ -6,7 +6,6 @@ import Loader from "../common/UI/Loader/Loader";
 
 const Procurements = () => {
   const { data, isLoading } = useApprovedRequisitions();
-  console.log('approved procs',data);
   return (
     <>
       <SectionHeader title="Procurement" />

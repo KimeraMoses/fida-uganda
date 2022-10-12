@@ -1,12 +1,13 @@
 .table_header {
   background-color: var(--table_head_bg_color);
-
   margin-top: 10px;
 }
 .table_header tr th {
   padding: 10px;
-  font-weight: 600;
-  color: var(--text_color) !important;
+  font-weight: 700;
+  color: #000000;
+  white-space: nowrap;
+  text-transform: uppercase;
 }
 
 .table {
@@ -15,4 +16,20 @@
   border-radius: 14px;
   padding-bottom: 10px;
   margin: 20px 0;
+  overflow-x: auto;
+}
+.table_actions_icon_wrapper {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.table_header tr th:last-of-type {
+  text-align: center;
+}
+.no_data_wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  background-color: aliceblue;
+  font-weight: 700;
 }

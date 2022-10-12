@@ -50,8 +50,8 @@ const withTable = (TableComponent) => {
       Array.isArray(keysToFilterOut)
     ) {
       let tempArr = [];
-      const newArray = data.map((obj) => ({ ...obj }));
-      newArray.map((dat) => {
+      const newArray = data?.map((obj) => ({ ...obj }));
+      newArray?.map((dat) => {
         keysToFilterOut.forEach((e) => delete dat[e]);
 
         return tempArr.push(Object.values(dat));
@@ -60,16 +60,16 @@ const withTable = (TableComponent) => {
     } else {
       formattedData =
         Array.isArray(data) &&
-        data.length &&
-        data.map((row) => {
+        data?.length &&
+        data?.map((row) => {
           return Object.values(row);
         });
     }
 
     const excelData =
       Array.isArray(data) &&
-      data.length &&
-      data.map((row) => {
+      data?.length &&
+      data?.map((row) => {
         return Object.values(row);
       });
 
@@ -92,19 +92,20 @@ const withTable = (TableComponent) => {
     };
 
     const downloadExcel = () => {
-      if(excelData){
-      const workSheet = XLSX.utils.json_to_sheet(excelData);
-      const workBook = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(workBook, workSheet, "Sheet1");
+      if (excelData) {
+        const workSheet = XLSX.utils.json_to_sheet(excelData);
+        const workBook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workBook, workSheet, "Sheet1");
 
-      //binary string
-      XLSX.write(workBook, { bookType: "xlsx", type: "binary" });
-      //donwload
-      XLSX.writeFile(
-        workBook,
-        `${tableName}-${new Date().toLocaleString("en-GB")}.xlsx`
-      );}
-      return
+        //binary string
+        XLSX.write(workBook, { bookType: "xlsx", type: "binary" });
+        //donwload
+        XLSX.writeFile(
+          workBook,
+          `${tableName}-${new Date().toLocaleString("en-GB")}.xlsx`
+        );
+      }
+      return;
     };
 
     const keyWordHandler = (e) => {
@@ -145,8 +146,8 @@ const withTable = (TableComponent) => {
         />
         {subHeading && subHeading}
         <TableComponent
+          data={searchResults?.length > 0 ? searchResults : data}
           isLoading={isLoading}
-          data={searchResults.length > 0 ? searchResults : data}
         />
       </>
     );

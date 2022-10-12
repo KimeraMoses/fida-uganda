@@ -25,6 +25,9 @@ const MultForm1 = ({
   const clvs = useClvsDetails();
   const clients = useClientOptions();
 
+  const selectedClv =
+    selectedClvName?.first_name + " " + selectedClvName?.last_name;
+
   return (
     <div className={classes.form_wrapper}>
       {isClvCaseFile && (
@@ -41,14 +44,14 @@ const MultForm1 = ({
               setSelectedItem={setSelectedClvName}
               selectedItem={selectedClvName.name}
               name="clvName"
-              defaultValue={
-                selectedClvName?.first_name + " " + selectedClvName?.last_name
-              }
+              defaultValue={selectedClvName?.first_name ? selectedClv : null}
             />
             <div className={styles.selected_project_name}>
               {selectedClvName.project?.name}
             </div>
-            <div>{selectedClvName.district}</div>
+            <div style={{ textAlign: "center" }}>
+              {selectedClvName.district}
+            </div>
           </SimpleGrid>
         </div>
       )}
