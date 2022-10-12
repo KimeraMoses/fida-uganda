@@ -3,7 +3,7 @@ import classes from "./LeaveTrackerTable.module.css";
 import Modal from "./../../common/Modal";
 import LeaveApplicationForm from "./LeaveApplicationForm/LeaveApplicationForm";
 import { schema } from "./LeaveApplicationForm/schema";
-import {useAddLeaveRequest, useMyLeaveRequests} from "../../../hooks/useLeaveRequest";
+import {useAddLeaveRequest} from "../../../hooks/useLeaveRequest";
 import LeaveTable from "../TrackerTable/LeaveTrackerTable";
 import { useDisclosure } from "@chakra-ui/react";
 import FormButton from "../../common/UI/FormButton/FormButton";
@@ -28,9 +28,9 @@ const LeaveTrackerTable = (props) => {
   //get user and designation
   const {user} = useSelector((state) => state.auth);
 
-  const { data:myLeaveRequest } = useMyLeaveRequests();
-  console.log(myLeaveRequest)
-  console.log(data)
+  // const { data:myLeaveRequest } = useMyLeaveRequests();
+  // console.log(myLeaveRequest)
+  // console.log(data)
 
   return (
     <>
@@ -43,7 +43,7 @@ const LeaveTrackerTable = (props) => {
           <LeaveTable
             type="leave"
             action={props.handleLeaveClick}
-            data={myLeaveRequest ? myLeaveRequest.leaveTracker : null}
+            data={data ? data.leaves : null}
             isLoading={isLoading}
           />
           )
