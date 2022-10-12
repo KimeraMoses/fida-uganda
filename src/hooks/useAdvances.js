@@ -5,13 +5,17 @@ import {
   deleteAdvance,
   editAdvance,
   getAllAdvances,
-  getAdvance, approveAdvance, rejectAdvance,
+  getAdvance, approveAdvance, rejectAdvance, getMyAdvances,
 } from "../apis/advances";
 import {ADVANCES_KEY} from "../lib/constants";
 import Tracker from "../components/compound/Tracker";
 
 export const useAdvances = () => {
   return useQuery(ADVANCES_KEY, getAllAdvances);
+};
+
+export const useMyAdvances = () => {
+  return useQuery([ADVANCES_KEY, "MY"], getMyAdvances);
 };
 
 export const useAdvance = (id) => {

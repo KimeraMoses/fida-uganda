@@ -64,6 +64,9 @@ const TrackerTable = ({ type, action, data, isLoading }) => {
               })}
           </Tbody>
         </Table>
+        {data && data.length < 1 && (
+            <div className={classes.no_records_wrapper}>No Advance Requests made!</div>
+        )}
       </div>
     </>
   );
