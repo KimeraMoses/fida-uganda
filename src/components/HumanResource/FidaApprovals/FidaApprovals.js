@@ -30,10 +30,13 @@ const FidaApprovals = () => {
     }
   }, [approvalData]);
 
+  console.log("data", approvalData);
+
   const onEditHandler = (user) => {
     setUser(user);
     onOpen();
   };
+
   return (
     <>
       <SectionHeader title="FIDA IIMS approvals" />
@@ -45,8 +48,8 @@ const FidaApprovals = () => {
           <SubHeading title="Pending Approval" />
           <Table
             data={data}
-            onEditHandler={onEditHandler}
             columns={approvalTableColumns}
+            onEditHandler={onEditHandler}
             showBtn={false}
             loading={isLoading}
             hideSearch

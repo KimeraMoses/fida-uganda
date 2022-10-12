@@ -61,10 +61,10 @@ const Clients = () => {
         <Table
           isLoading={isLoading}
           data={data ? data : null}
+          columns={clientsTableColumns}
           btnLabel="Add Client"
           btnClick={onOpenModal}
           tableName="Clients"
-          columns={clientsTableColumns}
           onEditHandler={onEditHandler}
         />
       )}
