@@ -18,11 +18,10 @@ export const FileInput = (props) => {
 
   const handleChange = async (e) => {
     const [file] = e.target.files;
-
     const assetImage = await convertbase64Logo(file);
     setHasImage(true);
-    if (props.change) {
-      props.setFieldValue(props?.name, assetImage);
+    if (props.setFieldValue) {
+      props.setFieldValue(props?.name, file);
     }
     setHasBg(assetImage);
     setImage(URL.createObjectURL(file));

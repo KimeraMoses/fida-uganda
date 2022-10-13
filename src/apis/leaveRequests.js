@@ -11,6 +11,10 @@ export const getLeaveRequests = async () => {
   return await axiosClient.get(routes.leaveRequests.getLeaveRequests);
 };
 
+export const getMyLeaveRequests = async () => {
+  return await axiosClient.get(routes.leaveRequests.getMyLeaveRequests);
+};
+
 export const addLeaveRequests = async (leaveRequest) => {
   return await axiosClient.post(
     routes.leaveRequests.createLeaveRequest,

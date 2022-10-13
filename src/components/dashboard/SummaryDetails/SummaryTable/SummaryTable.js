@@ -88,7 +88,7 @@ const requisitionData1 = [
   {
     stage: "4",
     userName: "Kityo Masanganzira",
-    designation: "Procument Officer",
+    designation: "Procurement Officer",
     status: "Pending",
     remarks: "No remarks",
     date: "No date",
@@ -115,7 +115,7 @@ const requisitionData2 = [
   {
     stage: "4",
     userName: "Kityo Masanganzira",
-    designation: "Procument Officer",
+    designation: "Procurement Officer",
     status: "Pending",
     remarks: "No remarks",
     date: "No date",
@@ -133,7 +133,7 @@ const requisitionData3 = [
   {
     stage: "4",
     userName: "Kityo Masanganzira",
-    designation: "Procument Officer",
+    designation: "Procurement Officer",
     status: "Pending",
     remarks: "No remarks",
     date: "No date",
@@ -143,7 +143,7 @@ const requisitionData4 = [
   {
     stage: "4",
     userName: "Kityo Masanganzira",
-    designation: "procument Officer",
+    designation: "procurement Officer",
     status: "Pending",
     remarks: "No remarks",
     date: "No date",
