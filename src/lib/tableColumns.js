@@ -58,6 +58,36 @@ export const approvalTableColumns = [
   },
 ];
 
+export const allApprovalsTableColumns = [
+  {
+    Header: "Name",
+    accessor: "full_name",
+  },
+  {
+    Header: "Designation",
+    accessor: "designation",
+  },
+  {
+    Header: "type Of Approval",
+    accessor: "doc_type",
+  },
+  {
+    Header: "Approval Status",
+    accessor: "status",
+  },
+  {
+    Header: "date Applied",
+    accessor: "createdAt",
+    Cell: ({ cell: { value } }) => formatDate(value),
+  },
+  {
+    Header: "Updated Date",
+    accessor: "updateAt",
+    Cell: ({ cell: { value } }) => formatDate(value),
+  },
+
+];
+
 export const caseColumns = [
   { Header: "File No.", accessor: "case_id" },
   { Header: "Name", accessor: "complainant.name" },

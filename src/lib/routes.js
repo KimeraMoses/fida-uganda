@@ -8,6 +8,7 @@ export const routes = {
     createLeaveRequest: `${BASE_URL}/leaveRequests/create`,
     approveLeaveRequest: `${BASE_URL}/leaveRequests/approve`,
     rejectLeaveRequest: `${BASE_URL}/leaveRequests/reject`,
+    getMyLeaveRequests:`${BASE_URL}/leaveRequests/getMyLeaveDays`,
   },
   membershipActivities: {
     getMembershipActivities: `${BASE_URL}/membershipActivities/getAll`,
@@ -108,6 +109,7 @@ export const routes = {
     editCaseComment: `${BASE_URL}/caseComments/edit/`
   },
   requisitions: {
+    getMyRequisitions: `${BASE_URL}/requisitions/getMyRequisitions`,
     getRequisitions: `${BASE_URL}/requisitions/getAll`,
     addRequisition: `${BASE_URL}/requisitions/create`,
     editRequisition: `${BASE_URL}/requisitions/edit`,
@@ -118,6 +120,18 @@ export const routes = {
     base: `${BASE_URL}/requisitions`,
     approveRequisition: `${BASE_URL}/requisitions/approve`,
     rejectRequisition: `${BASE_URL}/requisitions/reject`,
+    getPendingDopRequisitions: `${BASE_URL}/requisitions/getAllPendingDOPRequisitions`,
+    getApprovedDopRequisitions: `${BASE_URL}/requisitions/getAllApprovedDOPRequisitions`,
+    getRejectedDopRequisitions: `${BASE_URL}/requisitions/getAllRejectedDOPRequisitions`,
+    getPendingAccountantRequisitions: `${BASE_URL}/requisitions/getAllPendingAccountantRequisitions`,
+    getApprovedAccountantRequisitions: `${BASE_URL}/requisitions/getAllApprovedAccountantRequisitions`,
+    getRejectedAccountantRequisitions: `${BASE_URL}/requisitions/getAllRejectedAccountantRequisitions`,
+    getPendingCeoRequisitions: `${BASE_URL}/requisitions/getAllPendingCEORequisitions`,
+    getApprovedCeoRequisitions: `${BASE_URL}/requisitions/getAllApprovedCEORequisitions`,
+    getRejectedCeoRequisitions: `${BASE_URL}/requisitions/getAllRejectedCEORequisitions`,
+    getPendingProcurementRequisitions: `${BASE_URL}/requisitions/getAllPendingProcurementRequisitions`,
+    getApprovedProcurementRequisitions: `${BASE_URL}/requisitions/getAllApprovedProcurementRequisitions`,
+    getRejectedProcurementRequisitions: `${BASE_URL}/requisitions/getAllRejectedProcurementRequisitions`,
   },
   travelOrders: {
     getTravelOrders: `${BASE_URL}/travelOrders/getAll`,
@@ -259,5 +273,6 @@ export const routes = {
     getAllAdvances: `${BASE_URL}/advances/getAll`,
     approveAdvance:`${BASE_URL}/advances/approve`,
     rejectAdvance:`${BASE_URL}/advances/reject`,
+    getMyAdvances: `${BASE_URL}/advances/getMyAdvances`,
   },
 };

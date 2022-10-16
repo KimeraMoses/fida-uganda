@@ -4,6 +4,9 @@ import { routes } from "../lib/routes";
 export const getAllAdvances = async () => {
   return await axiosClient.get(routes.advances.getAllAdvances);
 };
+export const getMyAdvances = async () => {
+  return await axiosClient.get(routes.advances.getMyAdvances);
+};
 
 export const getAdvance = async (id) => {
   return await axiosClient.get(routes.advances.base + id);

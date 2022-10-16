@@ -67,21 +67,7 @@ const FidaProjectFilesDocuments = () => {
                     onSucess={onClose}
 
                 />
-                {/*<NewFidaProjectForm*/}
-                {/*    initialValues={projectInitialValues}*/}
-                {/*    validationSchema={projectSchema}*/}
-                {/*    onSuccess={onClose}*/}
-                {/*    success={`Project added successfully`}*/}
-                {/*    useMutate={useAddProject}*/}
-                {/*/>*/}
-                {/*<NewDocumentForm*/}
-                {/*    onClose={onClose}*/}
-                {/*    onSubmit={mutate}*/}
-                {/*    isSubmitting={isSubmitting}*/}
-                {/*    isError={isError}*/}
-                {/*    error={error}*/}
-                {/*    projectId={id}*/}
-                {/*/>*/}
+
             </Modal>
         </>
     );

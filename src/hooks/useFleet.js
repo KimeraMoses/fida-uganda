@@ -5,7 +5,7 @@ import {
   deleteFleet,
   getAllFleets,
   getFleet,
-  getFleetByProject,
+  getFleetByProject, updateFleet,
 } from "../apis/fleet";
 import { FLEET_MANAGEMENT_KEY } from "../lib/constants";
 
@@ -46,7 +46,7 @@ export const useAddFleet = () => {
 
 export const useUpdateFleet = () => {
   const queryClient = useQueryClient();
-  return useMutation(addFleet, {
+  return useMutation(updateFleet, {
     onSuccess: (data) => {
       const previousFleets = queryClient.getQueryData(FLEET_MANAGEMENT_KEY);
       if (previousFleets) {
