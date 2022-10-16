@@ -7,8 +7,6 @@ export const getAllContracts = () => {
 
 export const uploadContracts = (contracts) => {
   const formData = new FormData();
-  contracts.forEach(file => {
-    formData.append(file.name, file)
-  });
+  formData.append('file', contracts);
   return axiosClient.post(routes.contracts.uploadContracts, formData);
 };
