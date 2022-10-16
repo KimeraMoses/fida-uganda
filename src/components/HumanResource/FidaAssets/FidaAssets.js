@@ -7,6 +7,8 @@ import { useAddAsset, useAssets } from "../../../hooks/useAsset";
 import { useProjectOptions } from "../../../hooks/useProjects";
 import { assetInitialValues, assetSchema } from "./NewAsset/schema";
 import Loader from "./../../common/UI/Loader/Loader";
+import Table from "../../common/TableComponent/Table";
+import { fidaAssetsColumns } from "../../../lib/tableColumns";
 
 const FidaAssets = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -21,13 +23,20 @@ const FidaAssets = () => {
         <Loader />
       ) : (
         data?.assets && (
-          <FidaAssetsTable
-            data={data?.assets}
-            isLoading={isLoading}
-            btnLabel="Add Assets"
-            btnClick={onOpen}
-            tableName="Fida Assets"
-          />
+          <Table
+          isLoading={isLoading}
+          data={data?data?.assets : null}
+          btnLabel="Add Assets"
+          tableName="Fida Assets"
+          columns={ fidaAssetsColumns}
+        />
+          // <FidaAssetsTable
+          //   data={data?.assets}
+          //   isLoading={isLoading}
+          //   btnLabel="Add Assets"
+          //   btnClick={onOpen}
+          //   tableName="Fida Assets"
+          // />
         )
       )}
       <Modal
