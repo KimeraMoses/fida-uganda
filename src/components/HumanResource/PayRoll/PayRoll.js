@@ -15,6 +15,8 @@ import Loader from "../../common/UI/Loader/Loader";
 import { TEN_MBS_IN_BYTES } from "../../../lib/constants";
 
 import { payrollNotesInitialValues, payrollNotesSchema } from "./PayrollSchema";
+import { payrollNotesTableColumns } from "../../../lib/tableColumns";
+import Table from "../../common/TableComponent/Table";
 
 const PayRoll = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -41,12 +43,19 @@ const PayRoll = () => {
           {/* <TableSearch btnLabel="Add Notes" btnClick={onOpen} /> */}
 
           {payrollNotes?.PayrollNotes && (
-            <PayrollNotesTable
-              data={payrollNotes?.PayrollNotes}
-              btnLabel="Add Notes"
-              btnClick={onOpen}
-              tableName="Payroll Notes"
-            />
+               <Table
+               data={payrollNotes?.PayrollNotes}
+               columns={payrollNotesTableColumns}
+               showBtn={false}
+               loading={isLoading}
+               showActions={true}
+             />
+            // <PayrollNotesTable
+            //   data={payrollNotes?.PayrollNotes}
+            //   btnLabel="Add Notes"
+            //   btnClick={onOpen}
+            //   tableName="Payroll Notes"
+            // />
           )}
           <SectionHeader title="Payroll" />
           {payroll?.payrolls && (
