@@ -1,8 +1,7 @@
 import { useDisclosure } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "../../common/Modal";
 import SectionHeader from "../../common/SectionHeader";
-import MemberActivitiesTable from "./MemberActivitiesTable/MemberActivitiesTable";
 import NewActivityForm from "./NewActivityForm/NewActivityForm";
 import { schema } from "./NewActivityForm/schema";
 import { useMembers } from "../../../hooks/useMember";
@@ -11,14 +10,16 @@ import {
   useActivities,
 } from "../../../hooks/useMembershipActivity";
 import { useProjectOptions } from "../../../hooks/useProjects";
+import { membersActivitiesColumns } from "../../../lib/tableColumns";
+import Table from "../../common/TableComponent/Table";
 
 
 
 const MembersActivities = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onClose } = useDisclosure();
   const { data: membersData } = useMembers();
   const projectOptions = useProjectOptions();
-  const { isLoading, data } = useActivities();
+  const { isLoading, data: membersActivities } = useActivities();
   const newActivityInitialValues = {
     member: "",
     project: "",
@@ -26,16 +27,49 @@ const MembersActivities = () => {
     date_of_activity: "",
     activityDescription: "",
   };
+console.log('memebr sactivities', membersActivities)
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    setData([]);
+    if (membersActivities?.MembershipActivities?.length) {
+      const dataToSet = membersActivities?.MembershipActivities?.map((b) => {
+        return {
+          ...b,
+          name: {
+            id: b?.member[0]?.first_name,
+            membership_number: b?.name,
+          },
+          project: {
+            name: b?.project?.name,
+            time: b?.project_no,
+          },
+          date: {
+            date: b?.date_of_activity,
+            activityDescription: b?.activityDescription
+          }
+        };
+      });
+      console.log('it data', dataToSet)
+      setData(dataToSet);
+    }
+  }, [membersActivities]);
   return (
     <>
       <SectionHeader title="Members Activities" />
-      <MemberActivitiesTable
+      <Table
+        isLoading={isLoading}
+        data={data ? data : null}
+        btnLabel="Add Activity"
+        tableName="Members Activities"
+        columns={membersActivitiesColumns}
+      />
+      {/* <MemberActivitiesTable
         btnLabel="Add Activity"
         btnClick={onOpen}
         data={data ? data.MembershipActivities : null}
         isLoading={isLoading}
         tableName="Member Activity"
-      />
+      /> */}
 
       <Modal
         isOpen={isOpen}
