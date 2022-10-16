@@ -1,24 +1,34 @@
 import { useDisclosure } from "@chakra-ui/react";
 import { useAddPatient, usePatients } from "../../../hooks/usePatients";
+import { clientFilesColumns } from "../../../lib/tableColumns";
 import Modal from "../../common/Modal";
 import SectionHeader from "../../common/SectionHeader";
+import Table from "../../common/TableComponent/Table";
 import ClientFilesTable from "./ClientFilesTable/ClientFilesTable";
 import NewClientForm from "./NewClientForm/NewClientForm";
 import { patientInitialValues, patientSchema } from "./NewClientForm/schema";
 
 const ClientFiles = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data } = usePatients();
-
+  const { data, isLoading } = usePatients();
+console.log('clients', data)
   return (
     <>
       <SectionHeader title="Client Files" />
       {data?.patients && (
-        <ClientFilesTable
-          data={data?.patients}
-          btnLabel="Add Client"
-          btnClick={onOpen}
-        />
+              <Table
+              isLoading={isLoading}
+              data={data ? data?.patients : null}
+              btnLabel="Add Client"
+              tableName="Client Files"
+              columns={ clientFilesColumns}
+            />
+       
+        // <ClientFilesTable
+        //   data={data?.patients}
+        //   btnLabel="Add Client"
+        //   btnClick={onOpen}
+        // />
       )}
       <Modal
         isOpen={isOpen}

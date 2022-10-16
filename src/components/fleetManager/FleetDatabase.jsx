@@ -7,7 +7,8 @@ import FleetDatabaseForm from "../forms/fleetDatabase/FleetDatabaseForm";
 import {fleetDatabaseInitialValues, fleetDatabaseOrderSchema} from "../forms/fleetDatabase/schemas/fleetDatabase";
 import FleetDatabaseTable from "./FleetDatabaseTable/FleetDatabaseTable";
 import {useAddFleet, useFleets} from "../../hooks/useFleet";
-import {fleetDatabaseColumns} from "../../assets/tableColumns/fleetDatabase";
+import Table from "../common/TableComponent/Table";
+import { fleetDatabaseColumns } from "../../lib/tableColumns";
 
 const Requisitions = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -24,15 +25,22 @@ const Requisitions = () => {
             {isLoading ? (
                 <Loader />
             ) : (
-                <FleetDatabaseTable
-                    data={data?.fleets}
-                    columns={fleetDatabaseColumns}
-                    onRowClick={onRowClick}
-                    isLoading={isLoading}
-                    btnLabel="Add Vehicle"
-                    btnClick={onOpen}
-                    tableName={"Fleet Database"}
-                />
+                <Table
+                isLoading={isLoading}
+                data={data?data?.fleets : null}
+                btnLabel="Add Vehicle"
+                tableName="Fleet Database"
+                columns={ fleetDatabaseColumns}
+              />
+                // <FleetDatabaseTable
+                //     data={data?.fleets}
+                //     columns={fleetDatabaseColumns}
+                //     onRowClick={onRowClick}
+                //     isLoading={isLoading}
+                //     btnLabel="Add Vehicle"
+                //     btnClick={onOpen}
+                //     tableName={"Fleet Database"}
+                // />
 
             )}
             <Modal isOpen={isOpen} onClose={onClose} title="Vehicle Profiling Form" size="2xl">
