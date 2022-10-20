@@ -19,7 +19,7 @@ const EmployeeContract = () => {
       ) : (
         data?.employees && (
           <EmployeeContractTable
-            data={data?.contracts}
+            data={data?.employees}
             btnLabel="Add Contract"
             btnClick={onOpen}
             tableName="Employee contracts"

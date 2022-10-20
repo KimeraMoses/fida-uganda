@@ -162,7 +162,7 @@ const RecentUploads = () => {
           <Loader />
         ) : (
           <>
-            {memoizedData.slice(0, 3).map((contract) => {
+            {memoizedData.map((contract) => {
               const size = `${+contract.size / 1000} MB`;
               const filenameArray = contract.filename.split('.');
               const fileType = filenameArray[filenameArray.length - 1];
