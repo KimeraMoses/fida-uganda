@@ -58,6 +58,26 @@ export const approvalTableColumns = [
   },
 ];
 
+export const fidaAssetsColumns = [
+  {
+    Header: "Name",
+    accessor: "name",
+  },
+  {
+    Header: "Person in possession",
+    accessor: "person_in_possession",
+  },
+  {
+    Header: "Location",
+    accessor: "location",
+  },
+  {
+    Header: " Acquisition date",
+    accessor: "date_delivered",
+    Cell: ({ cell: { value } }) => formatDate(value),
+  },
+];
+
 export const allApprovalsTableColumns = [
   {
     Header: "Name",

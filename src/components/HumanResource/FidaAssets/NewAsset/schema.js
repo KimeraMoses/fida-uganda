@@ -12,7 +12,7 @@ export const assetInitialValues = {
   amount: "",
   date_delivered: "",
   location: "",
-  assetImage: "",
+  file: "",
 };
 
 export const assetSchema = yup.object().shape({
