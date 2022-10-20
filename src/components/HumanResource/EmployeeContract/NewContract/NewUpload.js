@@ -1,6 +1,6 @@
-import React, { useCallback, useState } from "react";
-import classes from "../../PayRoll/NewNotes/NewNotes.module.css";
-import { useDropzone } from "react-dropzone";
+import React, { useCallback, useState } from 'react';
+import classes from '../../PayRoll/NewNotes/NewNotes.module.css';
+import { useDropzone } from 'react-dropzone';
 import {
   Alert,
   AlertIcon,
@@ -14,9 +14,12 @@ import {
   PopoverFooter,
   PopoverHeader,
   PopoverTrigger,
-} from "@chakra-ui/react";
-import { MdDeleteOutline } from "react-icons/md";
-import FormButton from "../../../common/UI/FormButton/FormButton";
+  useToast,
+} from '@chakra-ui/react';
+import { MdDeleteOutline } from 'react-icons/md';
+import FormButton from '../../../common/UI/FormButton/FormButton';
+import { useAddContracts } from '../../../../hooks/useContract';
+import { toastError, toastSuccess } from '../../../../lib/toastDetails';
 
 const fileSizeConverter = (SIZE_IN_BYTES) => {
   const SIZE_IN_MBS = 0.000001 * SIZE_IN_BYTES;
@@ -25,12 +28,12 @@ const fileSizeConverter = (SIZE_IN_BYTES) => {
 
 const FilePreview = ({ file, handleDelete }) => {
   const initRef = React.useRef();
-  const type = file.file.type.split("/");
+  const type = file.file.type.split('/');
   const fileType = type[type?.length - 1];
   return (
     <div className={classes.file_wrapper}>
       <div className={classes.file_wrapper_doc}>
-        {fileType === "pdf" ? (
+        {fileType === 'pdf' ? (
           <svg
             width="22"
             height="26"
@@ -51,7 +54,7 @@ const FilePreview = ({ file, handleDelete }) => {
             width="28"
             height="28"
             viewBox="0 0 48 48"
-            style={{ fill: "#000000" }}
+            style={{ fill: '#000000' }}
           >
             <path
               fill="#ddbaff"
@@ -102,7 +105,7 @@ const FilePreview = ({ file, handleDelete }) => {
                   Confirm Delete
                 </PopoverHeader>
                 <PopoverBody>
-                  Are you sure you wish to delete{" "}
+                  Are you sure you wish to delete{' '}
                   <strong>{file?.file?.name}</strong>? This action is permanent
                   and can not be undone
                 </PopoverBody>
@@ -138,6 +141,8 @@ const FilePreview = ({ file, handleDelete }) => {
 };
 
 const NewUpload = () => {
+  const { mutate, isLoading, isSuccess, isError } = useAddContracts();
+  const toast = useToast();
   const [files, setFiles] = useState([]);
   const onDrop = useCallback((acceptedFiles) => {
     acceptedFiles.map((file) => {
@@ -150,9 +155,9 @@ const NewUpload = () => {
     useDropzone({
       onDrop,
       accept: {
-        "application/pdf": [".pdf"],
-        "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
-          [".doc", ".docx"],
+        'application/pdf': ['.pdf'],
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+          ['.doc', '.docx'],
       },
     });
 
@@ -163,9 +168,18 @@ const NewUpload = () => {
   };
 
   const handleSubmit = async () => {
-    //File upload logic goes here
-    // console.log(files);
+    console.log(files);
+    mutate(files);
   };
+
+  React.useEffect(() => {
+    if (isSuccess) {
+      toast(toastSuccess('Report added successfully'));
+    }
+    if (isError) {
+      toast(toastError('Failed to add contract'));
+    }
+  }, [isSuccess, isError, toast]);
 
   return (
     <div className={classes.new_note_upload_wrapper}>
@@ -177,14 +191,14 @@ const NewUpload = () => {
       )}
       <div
         className={`${classes.upload_section_wrapper} ${
-          files.length > 0 ? classes.hasFiles : ""
+          files.length > 0 ? classes.hasFiles : ''
         }`}
       >
         <div
           {...getRootProps({
             className: `dropzone ${classes.upload_area} ${
-              isDragActive ? classes.active : ""
-            } ${files.length > 0 ? classes.hasFiles : ""}`,
+              isDragActive ? classes.active : ''
+            } ${files.length > 0 ? classes.hasFiles : ''}`,
           })}
         >
           <label id="label-file-upload" htmlFor="input-file-upload">
@@ -220,6 +234,7 @@ const NewUpload = () => {
                   variant="colored"
                   rounded={true}
                   onClick={handleSubmit}
+                  disabled={isLoading ? true : false}
                 >
                   Upload
                 </FormButton>

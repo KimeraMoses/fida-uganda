@@ -9,17 +9,19 @@ import {
   PopoverContent,
   PopoverHeader,
   PopoverTrigger,
-} from "@chakra-ui/react";
-import React from "react";
+} from '@chakra-ui/react';
+import React from 'react';
 import {
   MdDeleteOutline,
   MdDownload,
   MdShare,
   MdTaskAlt,
-} from "react-icons/md";
-import { RetryIcon } from "../../../../assets/Icons/Icons";
-import FormButton from "../../../common/UI/FormButton/FormButton";
-import classes from "./NewContract.module.css";
+} from 'react-icons/md';
+import { RetryIcon } from '../../../../assets/Icons/Icons';
+import { useContracts } from '../../../../hooks/useContract';
+import FormButton from '../../../common/UI/FormButton/FormButton';
+import Loader from '../../../common/UI/Loader/Loader';
+import classes from './NewContract.module.css';
 
 const RecentUploadCard = (props) => {
   const { name, time, size, error, fileType } = props;
@@ -28,7 +30,7 @@ const RecentUploadCard = (props) => {
       <div className={classes.card_content_left}>
         <div className={classes.upload_name}>
           <div className={classes.file_name}>
-            {fileType === "pdf" ? (
+            {fileType === 'pdf' ? (
               <svg
                 width="22"
                 height="26"
@@ -49,7 +51,7 @@ const RecentUploadCard = (props) => {
                 width="28"
                 height="28"
                 viewBox="0 0 48 48"
-                style={{ fill: "#000000" }}
+                style={{ fill: '#000000' }}
               >
                 <path
                   fill="#ddbaff"
@@ -91,7 +93,7 @@ const RecentUploadCard = (props) => {
           </div>
         )}
         <div
-          className={`${classes.size_wrapper} ${error ? classes.error : ""}`}
+          className={`${classes.size_wrapper} ${error ? classes.error : ''}`}
         >
           {size}
         </div>
@@ -139,31 +141,57 @@ const RecentUploadCard = (props) => {
 };
 
 const RecentUploads = () => {
+  const { data, isLoading } = useContracts();
+  const [showAll, setShowAll] = React.useState(false);
+
+  const toggleShowAll = () => {
+    setShowAll(!showAll);
+  };
+
+  const memoizedData = React.useMemo(() => {
+    if (showAll) {
+      return data?.contracts || [];
+    }
+    return data?.contracts.slice(0, 3) || [];
+  }, [showAll, data?.contracts]);
+
   return (
     <div className={classes.recent_upload_wrapper}>
       <div className={classes.upload_card_wrapper}>
-        <RecentUploadCard
-          name="Nalubwama Contract.pdf"
-          time="2m"
-          size="22.4GB"
-          fileType="pdf"
-        />
-        <RecentUploadCard
-          name="Conrad Contract.pdf"
-          time="6m"
-          size="4.3GB"
-          error={true}
-        />
-        <RecentUploadCard
-          name="Kimera Moses Contract.pdf"
-          time="7hours"
-          size="3.2GB"
-          fileType="pdf"
-        />
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <>
+            {memoizedData.map((contract) => {
+              const size = `${+contract.size / 1000} MB`;
+              const filenameArray = contract.filename.split('.');
+              const fileType = filenameArray[filenameArray.length - 1];
+              const diff = Math.abs(
+                new Date(contract.createdAt) - new Date(contract.updatedAt)
+              );
+              const timeInSeconds = Math.ceil(diff / 1000);
+
+              return (
+                <RecentUploadCard
+                  key={contract.id}
+                  name={contract.filename}
+                  time={`${timeInSeconds} seconds`}
+                  size={size}
+                  fileType={fileType}
+                />
+              );
+            })}
+          </>
+        )}
       </div>
       <div className={classes.load_all_uploads_btn}>
-        <FormButton variant="outlined" rounded={true} color="gray">
-          View all uploads
+        <FormButton
+          variant="outlined"
+          rounded={true}
+          color="gray"
+          onClick={toggleShowAll}
+        >
+          {showAll ? 'View less' : 'View all uploads'}
         </FormButton>
       </div>
       <div className={classes.last_sync_wrapper}>
