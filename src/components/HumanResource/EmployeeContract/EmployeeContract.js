@@ -4,12 +4,12 @@ import Modal from '../../common/Modal';
 import { useDisclosure } from '@chakra-ui/react';
 import EmployeeContractTable from './EmployeeContractTable/EmployeeContractTable';
 import NewContract from './NewContract/NewContract';
+import { useEmployees } from '../../../hooks/useEmployee';
 import Loader from './../../common/UI/Loader/Loader';
-import { useContracts } from '../../../hooks/useContract';
 
 const EmployeeContract = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data, isLoading } = useContracts();
+  const { data, isLoading } = useEmployees();
 
   return (
     <>
@@ -17,7 +17,7 @@ const EmployeeContract = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        data?.contracts && (
+        data?.employees && (
           <EmployeeContractTable
             data={data?.contracts}
             btnLabel="Add Contract"

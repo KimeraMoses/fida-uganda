@@ -142,6 +142,18 @@ const RecentUploadCard = (props) => {
 
 const RecentUploads = () => {
   const { data, isLoading } = useContracts();
+  const [showAll, setShowAll] = React.useState(false);
+
+  const toggleShowAll = () => {
+    setShowAll(!showAll);
+  };
+
+  const memoizedData = React.useMemo(() => {
+    if (showAll) {
+      return data?.contracts || [];
+    }
+    return data?.contracts.slice(0, 3) || [];
+  });
 
   return (
     <div className={classes.recent_upload_wrapper}>
@@ -150,7 +162,7 @@ const RecentUploads = () => {
           <Loader />
         ) : (
           <>
-            {data?.contracts.slice(0, 3).map((contract) => {
+            {memoizedData.slice(0, 3).map((contract) => {
               const size = `${+contract.size / 1000} MB`;
               const filenameArray = contract.filename.split('.');
               const fileType = filenameArray[filenameArray.length - 1];
@@ -173,8 +185,13 @@ const RecentUploads = () => {
         )}
       </div>
       <div className={classes.load_all_uploads_btn}>
-        <FormButton variant="outlined" rounded={true} color="gray">
-          View all uploads
+        <FormButton
+          variant="outlined"
+          rounded={true}
+          color="gray"
+          onClick={toggleShowAll}
+        >
+          {showAll ? 'View less' : 'View all uploads'}
         </FormButton>
       </div>
       <div className={classes.last_sync_wrapper}>
