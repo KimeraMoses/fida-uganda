@@ -148,6 +148,19 @@ const RecentUploads = () => {
     setShowAll(!showAll);
   };
 
+  const computeTimeDuration = (timeInSeconds) => {
+    if (timeInSeconds > 86400) {
+      return { time: Math.ceil(timeInSeconds / 86400), duration: 'day(s)' };
+    }
+    if (timeInSeconds > 3600) {
+      return { time: Math.ceil(timeInSeconds / 3600), duration: 'hour(s)' };
+    }
+    if (timeInSeconds > 60) {
+      return { time: Math.ceil(timeInSeconds / 60), duration: 'minute(s)' };
+    }
+    return { time: timeInSeconds, duration: 'second(s)' };
+  };
+
   const memoizedData = React.useMemo(() => {
     if (showAll) {
       return data?.contracts || [];
@@ -166,16 +179,16 @@ const RecentUploads = () => {
               const size = `${+contract.size / 1000} MB`;
               const filenameArray = contract.filename.split('.');
               const fileType = filenameArray[filenameArray.length - 1];
-              const diff = Math.abs(
-                new Date(contract.createdAt) - new Date(contract.updatedAt)
-              );
+              const diff = Math.abs(new Date() - new Date(contract.createdAt));
               const timeInSeconds = Math.ceil(diff / 1000);
+
+              const { time, duration } = computeTimeDuration(timeInSeconds);
 
               return (
                 <RecentUploadCard
                   key={contract.id}
                   name={contract.filename}
-                  time={`${timeInSeconds} seconds`}
+                  time={`${time} ${duration}`}
                   size={size}
                   fileType={fileType}
                 />

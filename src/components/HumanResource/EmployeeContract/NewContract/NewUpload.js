@@ -182,7 +182,7 @@ const NewUpload = ({ files, setFiles }) => {
     if (isError) {
       toast(toastError('Failed to add contract'));
     }
-  }, [isSuccess, isError, toast]);
+  }, [isSuccess, isError, toast, setFiles]);
 
   return (
     <div className={classes.new_note_upload_wrapper}>
