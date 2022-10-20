@@ -177,6 +177,7 @@ const NewUpload = ({ files, setFiles }) => {
   React.useEffect(() => {
     if (isSuccess) {
       toast(toastSuccess('Report added successfully'));
+      setFiles([])
     }
     if (isError) {
       toast(toastError('Failed to add contract'));
