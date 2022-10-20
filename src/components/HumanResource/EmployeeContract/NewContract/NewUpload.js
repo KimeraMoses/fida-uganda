@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import classes from '../../PayRoll/NewNotes/NewNotes.module.css';
 import { useDropzone } from 'react-dropzone';
 import {
@@ -140,16 +140,18 @@ const FilePreview = ({ file, handleDelete }) => {
   );
 };
 
-const NewUpload = () => {
+const NewUpload = ({ files, setFiles }) => {
   const { mutate, isLoading, isSuccess, isError } = useAddContracts();
   const toast = useToast();
-  const [files, setFiles] = useState([]);
-  const onDrop = useCallback((acceptedFiles) => {
-    acceptedFiles.map((file) => {
-      setFiles((prevState) => [...prevState, { id: Math.random(), file }]);
-      return file;
-    });
-  }, []);
+  const onDrop = useCallback(
+    (acceptedFiles) => {
+      acceptedFiles.map((file) => {
+        setFiles((prevState) => [...prevState, { id: Math.random(), file }]);
+        return file;
+      });
+    },
+    [setFiles]
+  );
 
   const { getRootProps, getInputProps, isDragActive, fileRejections } =
     useDropzone({
