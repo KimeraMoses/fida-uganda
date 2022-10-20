@@ -153,7 +153,7 @@ const RecentUploads = () => {
       return data?.contracts || [];
     }
     return data?.contracts.slice(0, 3) || [];
-  });
+  }, [showAll, data?.contracts]);
 
   return (
     <div className={classes.recent_upload_wrapper}>
