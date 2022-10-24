@@ -58,6 +58,26 @@ export const approvalTableColumns = [
   },
 ];
 
+export const fidaAssetsColumns = [
+  {
+    Header: "Name",
+    accessor: "name",
+  },
+  {
+    Header: "Person in possession",
+    accessor: "person_in_possession",
+  },
+  {
+    Header: "Location",
+    accessor: "location",
+  },
+  {
+    Header: " Acquisition date",
+    accessor: "date_delivered",
+    Cell: ({ cell: { value } }) => formatDate(value),
+  },
+];
+
 export const allApprovalsTableColumns = [
   {
     Header: "Name",
@@ -322,23 +342,23 @@ export const fleetDatabaseColumns = [
   { Header: "Office Location", accessor: "region_of_operation" },
 ];
 
-export const fidaAssetsColumns = [
-  {
-    Header: "item",
-    accessor: "name",
-  },
-  { Header: "person in possession", accessor: "person_in_possession" },
-  { Header: "location", accessor: "location" },
-  {
-    Header: "aquisition date",
-    accessor: "date",
-    Cell: ({ cell: { value } }) => (
-      <div>
-        <div>{formatDate(value.date)}</div>
-      </div>
-    ),
-  },
-];
+// export const fidaAssetsColumns = [
+//   {
+//     Header: "item",
+//     accessor: "name",
+//   },
+//   { Header: "person in possession", accessor: "person_in_possession" },
+//   { Header: "location", accessor: "location" },
+//   {
+//     Header: "aquisition date",
+//     accessor: "date",
+//     Cell: ({ cell: { value } }) => (
+//       <div>
+//         <div>{formatDate(value.date)}</div>
+//       </div>
+//     ),
+//   },
+// ];
 
 export const procurementApprovalTableColumns = [
   { Header: "applicant's name", accessor: "full_name" },
