@@ -9,12 +9,27 @@ import { assetInitialValues, assetSchema } from "./NewAsset/schema";
 import Loader from "./../../common/UI/Loader/Loader";
 import Table from "../../common/TableComponent/Table";
 import { fidaAssetsColumns } from "../../../lib/tableColumns";
+import { useEffect, useState } from "react";
 
 const FidaAssets = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data, isLoading } = useAssets();
+  const { data:assets, isLoading } = useAssets();
   const projectOptions = useProjectOptions();
-
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    setData([]);
+    if (assets?.assets?.length) {
+      const dataToSet = assets?.assets?.map((b) => {
+        return {
+          ...b,
+          date: {
+            date: b?.date_delivered
+          }
+        };
+      });
+      setData(dataToSet);
+    }
+  }, [assets]);
   return (
     <>
       <SectionHeader title="Assets" />
@@ -22,10 +37,11 @@ const FidaAssets = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        data?.assets && (
+        data && (
           <Table
           isLoading={isLoading}
-          data={data?data?.assets : null}
+          hideActions
+          data={data?data : null}
           btnLabel="Add Assets"
           tableName="Fida Assets"
           columns={ fidaAssetsColumns}

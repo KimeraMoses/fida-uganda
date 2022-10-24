@@ -42,11 +42,12 @@ const Members = () => {
     <>
       <SectionHeader title="Members" />
       <Table
-        isLoading={isLoading}
+        loading={isLoading}
         data={data ? data : null}
         btnLabel="Add Member"
         tableName="Members"
         columns={membersTableColumns}
+        onEditHandler
       />
       {/* <MemberTable
         isLoading={isLoading}

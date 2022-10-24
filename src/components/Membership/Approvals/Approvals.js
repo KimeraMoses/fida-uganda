@@ -21,6 +21,7 @@ const Approvals = () => {
           showBtn={false}
           tableName="Fida Assets"
           columns={ procurementApprovalTableColumns}
+          hideActions
         />
         /* <NewRequestsTable
           data={data ? data.approvals : null}

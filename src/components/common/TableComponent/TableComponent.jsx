@@ -56,9 +56,9 @@ function TableComponent({
   return (
     <>
       <div className={classes.table}>
-        {loading ? (
+        {/* {loading ? (
           <Loader />
-        ) : (
+        ) : ( */}
           <>
             <Table {...getTableProps()} variant="striped" size="sm">
               <Thead className={classes.table_header}>
@@ -101,7 +101,7 @@ function TableComponent({
             </Table>
             {data?.length < 1 && (
               <div className={classes.no_data_wrapper}>
-                {emptyText ? emptyText : "No data"}
+                {loading? "Loading data...": emptyText ? emptyText : "No data"}
               </div>
             )}
 
@@ -163,7 +163,7 @@ function TableComponent({
               </Flex>
             </Flex>
           </>
-        )}
+        {/* )} */}
       </div>
     </>
   );
