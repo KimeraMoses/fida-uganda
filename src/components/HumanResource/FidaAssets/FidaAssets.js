@@ -50,7 +50,7 @@ const FidaAssets = () => {
             ) : (
 
                     <Table
-                    data={data}
+                    data={data.slice().reverse()}
                     columns={fidaAssetsColumns}
                     isLoading={isLoading}
                     btnLabel="Add Assets"
