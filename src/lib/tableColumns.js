@@ -58,25 +58,25 @@ export const approvalTableColumns = [
   },
 ];
 
-export const fidaAssetsColumns = [
-  {
-    Header: "Name",
-    accessor: "name",
-  },
-  {
-    Header: "Person in possession",
-    accessor: "person_in_possession",
-  },
-  {
-    Header: "Location",
-    accessor: "location",
-  },
-  {
-    Header: " Acquisition date",
-    accessor: "date_delivered",
-    Cell: ({ cell: { value } }) => formatDate(value),
-  },
-];
+// export const fidaAssetsColumns = [
+//   {
+//     Header: "Name",
+//     accessor: "name",
+//   },
+//   {
+//     Header: "Person in possession",
+//     accessor: "person_in_possession",
+//   },
+//   {
+//     Header: "Location",
+//     accessor: "location",
+//   },
+//   {
+//     Header: " Acquisition date",
+//     accessor: "date_delivered",
+//     Cell: ({ cell: { value } }) => formatDate(value),
+//   },
+// ];
 
 export const allApprovalsTableColumns = [
   {
@@ -105,7 +105,6 @@ export const allApprovalsTableColumns = [
     accessor: "updateAt",
     Cell: ({ cell: { value } }) => formatDate(value),
   },
-
 ];
 
 export const caseColumns = [
@@ -293,7 +292,7 @@ export const itComplaintsColumns = [
     ),
   },
   {
-    Header: "Status and date recieved",
+    Header: "Status and date received",
     accessor: "status",
     Cell: ({ cell: { value } }) => (
       <div>
@@ -303,7 +302,6 @@ export const itComplaintsColumns = [
     ),
   },
 ];
-
 
 export const clientFilesColumns = [
   { Header: "S/N", accessor: "S/N" },
@@ -379,8 +377,11 @@ export const notificationsTableColumns = [
   },
   { Header: "purpose of notification", accessor: "message" },
   { Header: "date the notification was sent", accessor: "createdAt" },
-  { Header: "members to whom the notification was sent", accessor: "full_name" },
-]
+  {
+    Header: "members to whom the notification was sent",
+    accessor: "full_name",
+  },
+];
 
 export const allocationsTableColumns = [
   {
@@ -389,8 +390,11 @@ export const allocationsTableColumns = [
   },
   { Header: "purpose of notification", accessor: "message" },
   { Header: "date the notification was sent", accessor: "createdAt" },
-  { Header: "members to whom the notification was sent", accessor: "full_name" },
-]
+  {
+    Header: "members to whom the notification was sent",
+    accessor: "full_name",
+  },
+];
 
 export const membersTableColumns = [
   {
@@ -463,7 +467,6 @@ export const membersActivitiesColumns = [
 ];
 
 export const membersAllocationsColumns = [
-
   {
     Header: "recipient (s) and allocations no.",
     accessor: "recipient",
