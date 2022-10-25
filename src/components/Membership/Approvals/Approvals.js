@@ -1,8 +1,6 @@
 import React from "react";
-import NewRequestsTable from "./ApprovalTable/NewRequestsTable";
 import SectionHeader from "../../common/SectionHeader";
 import { useApprovals } from "../../../hooks/useApprovals";
-import SubHeading from "./../../Tasks/SubHeading/SubHeading";
 import Table from "../../common/TableComponent/Table";
 import { procurementApprovalTableColumns } from "../../../lib/tableColumns";
 import Loader from "../../common/UI/Loader/Loader";

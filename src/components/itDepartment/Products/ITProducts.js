@@ -7,14 +7,13 @@ import {
   itProductOrderSchema,
 } from "../../forms/it/schemas/it";
 import Modal from "../../common/Modal";
-import ITProductsTable from "./ITProductsTable";
 import { useAddItProduct, useItProducts } from "../../../hooks/useItProduct";
 import Loader from "../../common/UI/Loader/Loader";
 import Table from "../../common/TableComponent/Table";
 import { itProductsColumns } from "../../../lib/tableColumns";
 
 const ITProducts = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onClose } = useDisclosure();
   const { data: itProductsData, isLoading } = useItProducts();
 
   const [data, setData] = useState([]);
