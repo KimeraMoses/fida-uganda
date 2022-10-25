@@ -39,10 +39,14 @@ const ITServices = () => {
             payment_status:{
               payment_status:b?.payment_status ? b?.payment_status : 'N/A',
               purchase_date: b?.purchase_date ? b?.purchase_date : 'N/A'
+            },
+            status:{
+              status: b?.status,
+              isPaid: b?.status==='paid'?true:false
             }
         };
       });
-      console.log('it data', dataToSet)
+      // console.log('it data', dataToSet)
       setData(dataToSet);
     }
   }, [itServicesData]);
@@ -61,7 +65,7 @@ const ITServices = () => {
         columns={itServicesColumns}
       />
         // <ITServicesTable
-        //   data={data?.services}
+        //   data={itServicesData?.services}
         //   isLoading={isLoading}
         //   btnLabel="Add Service"
         //   btnClick={onOpen}

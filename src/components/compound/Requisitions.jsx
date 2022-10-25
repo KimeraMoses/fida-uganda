@@ -36,7 +36,7 @@ import {useSelector} from "react-redux";
 const Requisitions = () => {
     //get user and designation
     const {user} = useSelector((state) => state.auth);
-    console.log(user)
+    // console.log(user)
     const {isOpen, onOpen, onClose} = useDisclosure();
     // const {data, isLoading} = useRequisitions();
     const [activityType, setActivityType] = useState("");

@@ -29,7 +29,7 @@ const ITComplaints = () => {
           },
           date: {
             date: b?.createdAt,
-            time: b?.time,
+            time: b?.createdAt,
           },
           subject: {
             subject: b?.subject,
@@ -41,7 +41,7 @@ const ITComplaints = () => {
             }
         };
       });
-      console.log('it data', dataToSet)
+      // console.log('it data', dataToSet)
       setData(dataToSet);
     }
   }, [itComplaintsData]);
@@ -58,6 +58,7 @@ const ITComplaints = () => {
         btnLabel="Add Complaint"
         tableName="IT Complaints"
         columns={itComplaintsColumns}
+        hideActions
       />
         // <ComplaintsTable
         //   data={data?.complaints}

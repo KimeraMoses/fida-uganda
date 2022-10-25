@@ -4,26 +4,24 @@ import { clientFilesColumns } from "../../../lib/tableColumns";
 import Modal from "../../common/Modal";
 import SectionHeader from "../../common/SectionHeader";
 import Table from "../../common/TableComponent/Table";
-import ClientFilesTable from "./ClientFilesTable/ClientFilesTable";
 import NewClientForm from "./NewClientForm/NewClientForm";
 import { patientInitialValues, patientSchema } from "./NewClientForm/schema";
 
 const ClientFiles = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onClose } = useDisclosure();
   const { data, isLoading } = usePatients();
-console.log('clients', data)
   return (
     <>
       <SectionHeader title="Client Files" />
       {data?.patients && (
-              <Table
-              isLoading={isLoading}
-              data={data ? data?.patients : null}
-              btnLabel="Add Client"
-              tableName="Client Files"
-              columns={ clientFilesColumns}
-            />
-       
+        <Table
+          isLoading={isLoading}
+          data={data ? data?.patients : null}
+          btnLabel="Add Client"
+          tableName="Client Files"
+          columns={clientFilesColumns}
+        />
+
         // <ClientFilesTable
         //   data={data?.patients}
         //   btnLabel="Add Client"

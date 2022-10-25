@@ -1,20 +1,30 @@
 import { useDisclosure } from "@chakra-ui/react";
 import Modal from "../../common/Modal";
 import SectionHeader from "../../common/SectionHeader";
-import FidaProjectTable from "./FidaProjectTable/FidaProjectTable";
 import NewFidaProjectForm from "./NewFidaProject/NewFidaProjectForm";
 import { useAddProject, useProjects } from "../../../hooks/useProjects";
 import Loader from "./../../common/UI/Loader/Loader";
 import { projectInitialValues, projectSchema } from "./NewFidaProject/schema";
 import { fidaProjectsTableColumns } from "../../../lib/tableColumns";
 import Table from "../../common/TableComponent/Table";
+import { useEffect, useState } from "react";
 
 const FidaProjects = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onClose } = useDisclosure();
 
-  const { data, isLoading } = useProjects();
-
-
+  const { data: projects, isLoading } = useProjects();
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    setData([]);
+    if (projects?.projects?.length) {
+      const dataToSet = projects?.projects?.map((b) => {
+        return {
+          ...b,
+        };
+      });
+      setData(dataToSet);
+    }
+  }, [projects]);
 
   return (
     <>
@@ -22,14 +32,15 @@ const FidaProjects = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        data?.projects && (
+        data && (
           <Table
-          data={data?.projects}
-          columns={fidaProjectsTableColumns}
-          showBtn={false}
-          loading={isLoading}
-          showActions={true}
-        />
+            onViewHandler
+            data={data ? data : null}
+            columns={fidaProjectsTableColumns}
+            showBtn={false}
+            loading={isLoading}
+            showActions={true}
+          />
           // <FidaProjectTable
           //   data={data?.projects}
           //   btnLabel="Add Project"

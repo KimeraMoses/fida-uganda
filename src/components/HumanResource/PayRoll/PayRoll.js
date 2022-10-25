@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SectionHeader from "../../common/SectionHeader";
 import PayrollTable from "./PayRollTables/PayrollTable";
 import PayrollNotesTable from "./PayRollTables/PayrollNotes";
@@ -33,6 +33,22 @@ const PayRoll = () => {
     }
   };
 
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    setData([]);
+    if (payrollNotes?.PayrollNotes.length) {
+      const dataToSet = payrollNotes?.PayrollNotes.map((b) => {
+        return {
+          ...b,
+          date: {
+            date: b?.createdAt
+          }
+        };
+      });
+      setData(dataToSet);
+    }
+  }, [payrollNotes]);
+
   return (
     <>
       <SectionHeader title="Payroll Notes" />
@@ -44,11 +60,11 @@ const PayRoll = () => {
 
           {payrollNotes?.PayrollNotes && (
                <Table
-               data={payrollNotes?.PayrollNotes}
+               data={data?data:null}
                columns={payrollNotesTableColumns}
                showBtn={false}
                loading={isLoading}
-               showActions={true}
+               hideActions
              />
             // <PayrollNotesTable
             //   data={payrollNotes?.PayrollNotes}
