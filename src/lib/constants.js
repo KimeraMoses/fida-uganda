@@ -41,6 +41,7 @@ export const IT_PRODUCTS_KEY = "it_products";
 export const IT_SERVICES_KEY = "it_services";
 export const REPORT_FOLDERS = "report_folders";
 export const CASE_COMMENTS = "case_comments";
+export const CONTRACTS = "contracts";
 
 export const REQUISITIONS_STATS = "requisitions/stats";
 export const TRAVEL_ORDER_STATS = "travel_orders/stats";

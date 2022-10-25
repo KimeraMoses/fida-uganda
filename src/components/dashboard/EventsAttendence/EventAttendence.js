@@ -12,7 +12,7 @@ import { attendanceInitialValues, attendanceSchema } from "./NewAttendence/schem
 const EventAttendence = () => {
   const { isOpen,onOpen, onClose } = useDisclosure();
   const { data, isLoading } = useEvents();
-console.log(data)
+// console.log(data)
   return (
     <>
       <SectionHeader title="Events Attendence" />

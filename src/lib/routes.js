@@ -1,6 +1,10 @@
-import { BASE_URL } from "./constants";
+import { BASE_URL } from './constants';
 
 export const routes = {
+  contracts: {
+    getContracts: `${BASE_URL}/contracts/getAll`,
+    uploadContracts: `${BASE_URL}/contracts/upload`,
+  },
   leaveRequests: {
     getLeaveRequests: `${BASE_URL}/leaveRequests/getAll`,
     getLeaveRequest: `${BASE_URL}/leaveRequests`,
@@ -8,7 +12,7 @@ export const routes = {
     createLeaveRequest: `${BASE_URL}/leaveRequests/create`,
     approveLeaveRequest: `${BASE_URL}/leaveRequests/approve`,
     rejectLeaveRequest: `${BASE_URL}/leaveRequests/reject`,
-    getMyLeaveRequests:`${BASE_URL}/leaveRequests/getMyLeaveDays`,
+    getMyLeaveRequests: `${BASE_URL}/leaveRequests/getMyLeaveDays`,
   },
   membershipActivities: {
     getMembershipActivities: `${BASE_URL}/membershipActivities/getAll`,
@@ -106,7 +110,7 @@ export const routes = {
     addCaseComments: `${BASE_URL}/caseComments/create`,
     baseCaseComment: `${BASE_URL}/caseComments/`,
     getCommentsByCase: `${BASE_URL}/caseComments/getCommentByCase/`,
-    editCaseComment: `${BASE_URL}/caseComments/edit/`
+    editCaseComment: `${BASE_URL}/caseComments/edit/`,
   },
   requisitions: {
     getMyRequisitions: `${BASE_URL}/requisitions/getMyRequisitions`,
@@ -271,8 +275,8 @@ export const routes = {
     base: `${BASE_URL}/advances/`,
     editAdvance: `${BASE_URL}/advances/edit/`,
     getAllAdvances: `${BASE_URL}/advances/getAll`,
-    approveAdvance:`${BASE_URL}/advances/approve`,
-    rejectAdvance:`${BASE_URL}/advances/reject`,
+    approveAdvance: `${BASE_URL}/advances/approve`,
+    rejectAdvance: `${BASE_URL}/advances/reject`,
     getMyAdvances: `${BASE_URL}/advances/getMyAdvances`,
   },
 };
