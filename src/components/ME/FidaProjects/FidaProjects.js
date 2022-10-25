@@ -20,7 +20,6 @@ const FidaProjects = () => {
       const dataToSet = projects?.projects?.map((b) => {
         return {
           ...b,
-          date: b?.updateAt,
         };
       });
       setData(dataToSet);
