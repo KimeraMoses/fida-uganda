@@ -350,11 +350,11 @@ export const fidaAssetsColumns = [
   { Header: "person in possession", accessor: "person_in_possession" },
   { Header: "location", accessor: "location" },
   {
-    Header: "aquisition date",
-    accessor: "date",
+    Header: "acquisition date",
+    accessor: "createdAt",
     Cell: ({ cell: { value } }) => (
       <div>
-        <div>{formatDate(value.date)}</div>
+        <div>{formatDate(value)}</div>
       </div>
     ),
   },
@@ -385,7 +385,7 @@ export const procurementsTableColumns = [
   },
   { Header: "person in possession", accessor: "person_in_possession" },
   { Header: "location", accessor: "location" },
-  { Header: "aquisition date", accessor: "date_delivered" },
+  { Header: "acquisition date", accessor: "date_delivered" },
 ];
 
 export const payrollNotesTableColumns = [
@@ -400,7 +400,7 @@ export const payrollNotesTableColumns = [
     accessor: "date",
     Cell: ({ cell: { value } }) => (
       <div>
-        <div>{formatDate(value.date)}</div>
+        <div>{formatDate(value)}</div>
       </div>
     ),
   },
@@ -420,7 +420,7 @@ export const fidaProjectsTableColumns = [
     accessor: "date",
     Cell: ({ cell: { value } }) => (
       <div>
-        <div>{formatDate(value.date)}</div>
+        <div>{formatDate(value)}</div>
       </div>
     ),
   },
