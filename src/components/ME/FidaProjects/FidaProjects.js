@@ -1,7 +1,6 @@
 import { useDisclosure } from "@chakra-ui/react";
 import Modal from "../../common/Modal";
 import SectionHeader from "../../common/SectionHeader";
-import FidaProjectTable from "./FidaProjectTable/FidaProjectTable";
 import NewFidaProjectForm from "./NewFidaProject/NewFidaProjectForm";
 import { useAddProject, useProjects } from "../../../hooks/useProjects";
 import Loader from "./../../common/UI/Loader/Loader";
@@ -11,7 +10,7 @@ import Table from "../../common/TableComponent/Table";
 import { useEffect, useState } from "react";
 
 const FidaProjects = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onClose } = useDisclosure();
 
   const { data:projects, isLoading } = useProjects();
   const [data, setData] = useState([]);
@@ -21,9 +20,6 @@ const FidaProjects = () => {
       const dataToSet = projects?.projects?.map((b) => {
         return {
           ...b,
-          date: {
-            date: b?.updateAt
-          }
         };
       });
       setData(dataToSet);

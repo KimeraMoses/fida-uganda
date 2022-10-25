@@ -14,13 +14,12 @@ import {
   Select,
 } from "@chakra-ui/react";
 import classes from "./Table.module.css";
-
+import './ExtraFormats.css'
 import {
   MdCloudDownload,
   MdKeyboardArrowLeft,
   MdKeyboardArrowRight,
 } from "react-icons/md";
-import Loader from "../UI/Loader/Loader";
 
 function TableComponent({
   columns,

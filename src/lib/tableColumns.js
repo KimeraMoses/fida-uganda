@@ -163,20 +163,20 @@ export const itProductsColumns = [
     Header: "Name and Location",
     accessor: "name",
     Cell: ({ cell: { value } }) => (
-      <div>
+      <>
         <strong>{value.name}</strong>
         <div>{value.location}</div>
-      </div>
+      </>
     ),
   },
   {
     Header: "Category and Class",
     accessor: "category",
     Cell: ({ cell: { value } }) => (
-      <div>
+      <>
         <strong>{value.category}</strong>
         <div>{value.class}</div>
-      </div>
+      </>
     ),
   },
   {
@@ -191,20 +191,20 @@ export const itProductsColumns = [
     Header: "payment status and purchase date",
     accessor: "payment_status",
     Cell: ({ cell: { value } }) => (
-      <div>
+      <>
         <div>{value.payment_status}</div>
         <div>{formatDate(value.purchase_date)}</div>
-      </div>
+      </>
     ),
   },
   {
     Header: "amount and currency",
     accessor: "amount",
     Cell: ({ cell: { value } }) => (
-      <div>
+      <>
         <strong>{value.amount}</strong>
         <div>{value.currency}</div>
-      </div>
+      </>
     ),
   },
 ];
@@ -214,20 +214,20 @@ export const itServicesColumns = [
     Header: "Name and Location",
     accessor: "name",
     Cell: ({ cell: { value } }) => (
-      <div>
+      <>
         <strong>{value.name}</strong>
         <div>{value.location}</div>
-      </div>
+      </>
     ),
   },
   {
     Header: "Category and Class",
     accessor: "category",
     Cell: ({ cell: { value } }) => (
-      <div>
+      <>
         <strong>{value.category}</strong>
         <div>{value.class}</div>
-      </div>
+      </>
     ),
   },
   {
@@ -237,25 +237,35 @@ export const itServicesColumns = [
   {
     Header: "Status",
     accessor: "status",
+    Cell: ({ cell: { value } }) => (
+      <div
+      className={`${'allocation_status_wrapper'} ${
+        value.isPaid ? 'paid' :' fail'
+      }`}
+    >
+      <span className={'status_indicator'}></span>
+      <h5>{value.status}</h5>
+    </div>
+    ),
   },
   {
     Header: "payment status and purchase date",
     accessor: "payment_status",
     Cell: ({ cell: { value } }) => (
-      <div>
+      <>
         <strong>{value.payment_status}</strong>
         <div>{formatDate(value.purchase_date)}</div>
-      </div>
+      </>
     ),
   },
   {
     Header: "amount and currency",
     accessor: "amount",
     Cell: ({ cell: { value } }) => (
-      <div>
+      <>
         <strong>{value.amount}</strong>
         <div>{value.currency}</div>
-      </div>
+      </>
     ),
   },
 ];
@@ -417,12 +427,8 @@ export const fidaProjectsTableColumns = [
   },
   {
     Header: "last modified",
-    accessor: "date",
-    Cell: ({ cell: { value } }) => (
-      <div>
-        <div>{formatDate(value.date)}</div>
-      </div>
-    ),
+    accessor: "updatedAt",
+    Cell: ({ cell: { value } }) => formatDate(value),
   },
   // { Header: "actions", accessor: "name" },
 ];
@@ -609,10 +615,12 @@ export const CLVTableColumns = [
   {
     Header: "name and profession",
     accessor: "name",
-    Cell: ({ cell: { value } }) =>  <div>
-    <strong>{value.name}</strong>
-    <div>{value.profession}</div>
-  </div>,
+    Cell: ({ cell: { value } }) => (
+      <div>
+        <strong>{value.name}</strong>
+        <div>{value.profession}</div>
+      </div>
+    ),
   },
   {
     Header: "phone number and email",

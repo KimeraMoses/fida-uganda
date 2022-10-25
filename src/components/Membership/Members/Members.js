@@ -33,7 +33,7 @@ const Members = () => {
           },
         };
       });
-      console.log('it data', dataToSet)
+      // console.log('it data', dataToSet)
       setData(dataToSet);
     }
   }, [members]);

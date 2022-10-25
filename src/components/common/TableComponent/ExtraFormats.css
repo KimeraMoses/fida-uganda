@@ -1,0 +1,47 @@
+
+.allocation_status_wrapper {
+    display: flex;
+    align-items: center;
+    padding: 4px 6px;
+    border-radius: 20px;
+  }
+
+  .allocation_status_wrapper h5{
+    text-transform: capitalize;
+  }
+  .status_indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  .allocation_status_wrapper.success {
+    background-color: rgba(26, 214, 152, 0.3);
+    color: var(--text_color);
+  }
+  .allocation_status_wrapper.fail {
+    background-color: #ffe0e0;
+    color: #ff3838;
+  }
+  .allocation_status_wrapper.paid {
+    background-color: #d7ffed;
+    color: #38cb89;
+  }
+  .allocation_status_wrapper.balance {
+    background-color: #fff8bc;
+    color: #baa802;
+  }
+  .allocation_status_wrapper.paid span {
+    background-color: #38cb89;
+  }
+  .allocation_status_wrapper.balance span {
+    background-color: #baa802;
+  }
+  
+  .allocation_status_wrapper.success span {
+    background-color: var(--text_color);
+  }
+  .allocation_status_wrapper.fail span {
+    background-color: #d30000;
+  }
+  

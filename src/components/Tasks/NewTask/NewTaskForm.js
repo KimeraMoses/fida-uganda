@@ -112,7 +112,7 @@ const NewTaskForm = ({ onSubmit, error, isError, isSubmitting }) => {
               <div style={{ marginRight: 10 }}>
                 <SelectInput
                   name="tags"
-                  onChange={(value) => console.log("tags", value)}
+                  // onChange={(value) => console.log("tags", value)}
                   options={Tags}
                   placeholder="Select tags"
                 />
@@ -126,7 +126,7 @@ const NewTaskForm = ({ onSubmit, error, isError, isSubmitting }) => {
               <div style={{ marginLeft: 10 }}>
                 <SelectInput
                   name="teams"
-                  onChange={(value) => console.log("teams", value)}
+                  // onChange={(value) => console.log("teams", value)}
                   options={userArray}
                   placeholder="Select teams"
                 />

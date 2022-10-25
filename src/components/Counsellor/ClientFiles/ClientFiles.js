@@ -11,7 +11,6 @@ import { patientInitialValues, patientSchema } from "./NewClientForm/schema";
 const ClientFiles = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data, isLoading } = usePatients();
-console.log('clients', data)
   return (
     <>
       <SectionHeader title="Client Files" />
