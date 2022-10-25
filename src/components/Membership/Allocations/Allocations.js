@@ -15,22 +15,18 @@ const Allocations = () => {
   const initialValues = { subject: "", message: "", allocated_to: [] };
 
   const { data: membersData } = useMembers();
-console.log('allocations', membersData)
   const {
-    //  data:allocations,
+     data:allocationsData,
      isLoading } = useAllocations();
-
+     console.log('allocations orig', allocationsData?.Allocations)
   const [data, setData] = useState([]);
   useEffect(() => {
     setData([]);
-    if (membersData?.Members?.length) {
-      const dataToSet = membersData?.Members?.map((b) => {
+    if (allocationsData?.Allocations?.length) {
+      const dataToSet = allocationsData?.Allocations?.map((b) => {
         return {
           ...b,
-          recipient: {
-            email: b?.email,
-            id: b?.id,
-          },
+          recipient: b?.allocated_to,
           date: {
             date: b?.createdAt,
             time: b?.createdAt,
@@ -41,7 +37,6 @@ console.log('allocations', membersData)
           }
         };
       });
-      console.log('it data', dataToSet)
       setData(dataToSet);
     }
   }, [membersData]);
@@ -54,6 +49,7 @@ console.log('allocations', membersData)
         btnLabel="Add Activity"
         tableName="Members Activities"
         columns={membersAllocationsColumns}
+        hideActions
       />
       {/* <AllocationsTable
         data={data?.Allocations}

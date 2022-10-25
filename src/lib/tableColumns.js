@@ -192,8 +192,8 @@ export const itProductsColumns = [
     accessor: "payment_status",
     Cell: ({ cell: { value } }) => (
       <div>
-        <strong>{value.payment_status}</strong>
-        <div>{value.purchase_date}</div>
+        <div>{value.payment_status}</div>
+        <div>{formatDate(value.purchase_date)}</div>
       </div>
     ),
   },
@@ -244,7 +244,7 @@ export const itServicesColumns = [
     Cell: ({ cell: { value } }) => (
       <div>
         <strong>{value.payment_status}</strong>
-        <div>{value.purchase_date}</div>
+        <div>{formatDate(value.purchase_date)}</div>
       </div>
     ),
   },
@@ -276,8 +276,14 @@ export const itComplaintsColumns = [
     accessor: "date",
     Cell: ({ cell: { value } }) => (
       <div>
-        <strong>{value.date}</strong>
-        <div>{value.time}</div>
+        <strong>{formatDate(value.date)}</strong>
+        <div>
+          {new Date(value.date).toLocaleTimeString(undefined, {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+          })}
+        </div>
       </div>
     ),
   },
@@ -297,7 +303,7 @@ export const itComplaintsColumns = [
     Cell: ({ cell: { value } }) => (
       <div>
         <strong>{value.status}</strong>
-        <div>{value.date_recieved}</div>
+        <div>{formatDate(value.date_recieved)}</div>
       </div>
     ),
   },
@@ -313,8 +319,24 @@ export const clientFilesColumns = [
 ];
 
 export const fleetDatabaseColumns = [
-  { Header: "S/n", accessor: "createdAt" },
-  { Header: "Month & Year of consideration", accessor: "updateAt" },
+  {
+    Header: "S/n",
+    accessor: "sn",
+    Cell: ({ cell: { value } }) => (
+      <div>
+        <div>{value.sn}</div>
+      </div>
+    ),
+  },
+  {
+    Header: "Month & Year of consideration",
+    accessor: "updateAt",
+    Cell: ({ cell: { value } }) => (
+      <div>
+        <div>{formatDate(value)}</div>
+      </div>
+    ),
+  },
   { Header: "Vehicle Make/Model", accessor: "vehicle_make" },
   { Header: "Vehicle Number", accessor: "vehicle_number" },
   { Header: "Office Location", accessor: "region_of_operation" },
@@ -327,7 +349,15 @@ export const fidaAssetsColumns = [
   },
   { Header: "person in possession", accessor: "person_in_possession" },
   { Header: "location", accessor: "location" },
-  { Header: "aquisition date", accessor: "date_delivered" },
+  {
+    Header: "aquisition date",
+    accessor: "date",
+    Cell: ({ cell: { value } }) => (
+      <div>
+        <div>{formatDate(value.date)}</div>
+      </div>
+    ),
+  },
 ];
 
 export const procurementApprovalTableColumns = [
@@ -335,7 +365,15 @@ export const procurementApprovalTableColumns = [
   { Header: "document type", accessor: "doc_type" },
   { Header: "amount", accessor: "amount" },
   { Header: "net pay", accessor: "net_pay" },
-  { Header: "date of application", accessor: "createdAt" },
+  {
+    Header: "date of application",
+    accessor: "createdAt",
+    Cell: ({ cell: { value } }) => (
+      <div>
+        <div>{formatDate(value)}</div>
+      </div>
+    ),
+  },
   { Header: "budget year", accessor: "budget_year" },
   { Header: "dop approval status", accessor: "DOPApprovalStatus" },
 ];
@@ -357,7 +395,15 @@ export const payrollNotesTableColumns = [
   },
   { Header: "month", accessor: "month" },
   { Header: "year", accessor: "year" },
-  { Header: "date written", accessor: "createdAt" },
+  {
+    Header: "date written",
+    accessor: "date",
+    Cell: ({ cell: { value } }) => (
+      <div>
+        <div>{formatDate(value.date)}</div>
+      </div>
+    ),
+  },
   { Header: "status", accessor: "status" },
 ];
 export const fidaProjectsTableColumns = [
@@ -365,8 +411,19 @@ export const fidaProjectsTableColumns = [
     Header: "project name",
     accessor: "name",
   },
-  // { Header: "created by", accessor: "createdBy.full_name" },
-  { Header: "last modified", accessor: "updateAt" },
+  {
+    Header: "created by",
+    accessor: "createdBy.full_name",
+  },
+  {
+    Header: "last modified",
+    accessor: "date",
+    Cell: ({ cell: { value } }) => (
+      <div>
+        <div>{formatDate(value.date)}</div>
+      </div>
+    ),
+  },
   // { Header: "actions", accessor: "name" },
 ];
 
@@ -376,10 +433,23 @@ export const notificationsTableColumns = [
     accessor: "subject",
   },
   { Header: "purpose of notification", accessor: "message" },
-  { Header: "date the notification was sent", accessor: "createdAt" },
+  {
+    Header: "date the notification was sent",
+    accessor: "createdAt",
+    Cell: ({ cell: { value } }) => (
+      <div>
+        <div>{formatDate(value)}</div>
+      </div>
+    ),
+  },
   {
     Header: "members to whom the notification was sent",
-    accessor: "full_name",
+    accessor: "membersSentNotification",
+    Cell: ({ cell: { value } }) => (
+      <div>
+        <div>{value.name}</div>
+      </div>
+    ),
   },
 ];
 
@@ -423,7 +493,7 @@ export const membersTableColumns = [
     Cell: ({ cell: { value } }) => (
       <div>
         <strong>{value.duration}</strong>
-        <div>{value.feeStatus}</div>
+        <div>{value.feeStatus.hasPaid ? "Paid" : "Pending"}</div>
       </div>
     ),
   },
@@ -432,7 +502,12 @@ export const membersTableColumns = [
 export const membersActivitiesColumns = [
   {
     Header: "S/N",
-    accessor: "s/n",
+    accessor: "sn",
+    Cell: ({ cell: { value } }) => (
+      <div>
+        <div>{value.sn}</div>
+      </div>
+    ),
   },
   {
     Header: "name and membership no.",
@@ -450,7 +525,7 @@ export const membersActivitiesColumns = [
     Cell: ({ cell: { value } }) => (
       <div>
         <strong>{value.name}</strong>
-        <div>{value.time}</div>
+        <div>{value.projectActivity}</div>
       </div>
     ),
   },
@@ -459,7 +534,7 @@ export const membersActivitiesColumns = [
     accessor: "date",
     Cell: ({ cell: { value } }) => (
       <div>
-        <strong>{value.date}</strong>
+        <strong>{formatDate(value.date)}</strong>
         <div>{value.activityDescription}</div>
       </div>
     ),
@@ -472,8 +547,29 @@ export const membersAllocationsColumns = [
     accessor: "recipient",
     Cell: ({ cell: { value } }) => (
       <div>
-        <strong>{value.email}</strong>
-        <div>{value.id}</div>
+        {value.slice(0, 4).map((recipient, idx) => (
+          <div>
+            {idx + 1}-{recipient}
+          </div>
+        ))}{" "}
+        {value.length > 4 ? (
+          <div
+            style={{
+              backgroundColor: "#553C9A",
+              color: "white",
+              width: 90,
+              display: "flex",
+              justifyContent: "center",
+              padding: "2px 3px",
+              marginTop: 4,
+              borderRadius: "10px",
+            }}
+          >
+            + {value.length - 4} more
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     ),
   },
@@ -482,8 +578,14 @@ export const membersAllocationsColumns = [
     accessor: "date",
     Cell: ({ cell: { value } }) => (
       <div>
-        <strong>{value.date}</strong>
-        <div>{value.time}</div>
+        <strong>{formatDate(value.date)}</strong>
+        <div>
+          {new Date(value.time).toLocaleTimeString(undefined, {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+          })}
+        </div>
       </div>
     ),
   },
@@ -500,5 +602,48 @@ export const membersAllocationsColumns = [
   {
     Header: "status",
     accessor: "status",
+  },
+];
+
+export const CLVTableColumns = [
+  {
+    Header: "name and profession",
+    accessor: "name",
+    Cell: ({ cell: { value } }) => (
+      <div>
+        <strong>{value.name}</strong>
+        <div>{value.profession}</div>
+      </div>
+    ),
+  },
+  {
+    Header: "phone number and email",
+    accessor: "contacts",
+    Cell: ({ cell: { value } }) => (
+      <div>
+        <strong>{value.phoneNumber}</strong>
+        <div>{value.email}</div>
+      </div>
+    ),
+  },
+  {
+    Header: "address and city",
+    accessor: "address",
+    Cell: ({ cell: { value } }) => (
+      <div>
+        <strong>{value.address}</strong>
+        <div>{value.city}</div>
+      </div>
+    ),
+  },
+  {
+    Header: "fida id no. and registration date",
+    accessor: "idNumber",
+    Cell: ({ cell: { value } }) => (
+      <div>
+        <strong>{value.idNumber}</strong>
+        <div>{formatDate(value.date)}</div>
+      </div>
+    ),
   },
 ];

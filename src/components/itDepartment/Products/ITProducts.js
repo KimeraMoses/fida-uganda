@@ -59,6 +59,7 @@ const ITProducts = () => {
         btnLabel="Add Product"
         tableName="IT Products"
         columns={itProductsColumns}
+        hideActions
       />
         
         // <ITProductsTable

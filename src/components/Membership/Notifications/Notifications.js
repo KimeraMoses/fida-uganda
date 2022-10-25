@@ -1,5 +1,5 @@
 import { useDisclosure } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SectionHeader from "../../common/SectionHeader";
 import Form from "./NotificationForm";
 import { useMembers } from "../../../hooks/useMember";
@@ -14,19 +14,48 @@ import Table from "../../common/TableComponent/Table";
 const Notifications = () => {
   const { isOpen,  onClose } = useDisclosure();
   const { data: membersData } = useMembers();
-  const { data, isLoading } = useNotifications();
+  const { data: notifications, isLoading } = useNotifications();
 
   const initialValues = {
     user: "",
     message: "",
     subject: "",
   };
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    setData([]);
+    if (notifications?.Notifications?.length) {
+      const dataToSet = notifications?.Notifications?.map((b) => {
+        return {
+          ...b,
+          membersSentNotification: {
+            name: b?.user.map((person, index) => {
+              if (person?.full_name) {
+                if (index + 1 === b.user.length) {
+                  return person?.full_name;
+                } else {
+                  return person?.full_name + ", ";
+                }
+              }
+              // eslint-disable-next-line array-callback-return
+              return;
+            })
+          },
+          date: {
+            date: b?.createdAt
+          }
+      
+        };
+      });
+      setData(dataToSet);
+    }
+  }, [notifications]);
   return (
     <div>
       <SectionHeader title="Notifications" />
       {/* <TableSearch btnLabel="Compose" btnClick={onOpen} /> */}
       <Table
-            data={data ? data.Notifications : null}
+            data={data ? data : null}
             columns={notificationsTableColumns}
         btnLabel="Compose"
             loading={isLoading}

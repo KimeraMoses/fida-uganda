@@ -27,21 +27,23 @@ const MembersActivities = () => {
     date_of_activity: "",
     activityDescription: "",
   };
-console.log('memebr sactivities', membersActivities)
   const [data, setData] = useState([]);
   useEffect(() => {
     setData([]);
     if (membersActivities?.MembershipActivities?.length) {
-      const dataToSet = membersActivities?.MembershipActivities?.map((b) => {
+      const dataToSet = membersActivities?.MembershipActivities?.map((b, index) => {
         return {
           ...b,
+          sn:{
+            sn:'000'+(index + 1)
+          },
           name: {
             id: b?.member[0]?.first_name,
             membership_number: b?.name,
           },
           project: {
             name: b?.project?.name,
-            time: b?.project_no,
+            projectActivity: b?.projectActivity,
           },
           date: {
             date: b?.date_of_activity,
@@ -57,11 +59,12 @@ console.log('memebr sactivities', membersActivities)
     <>
       <SectionHeader title="Members Activities" />
       <Table
-        isLoading={isLoading}
+        loading={isLoading}
         data={data ? data : null}
         btnLabel="Add Activity"
         tableName="Members Activities"
         columns={membersActivitiesColumns}
+        hideActions
       />
       {/* <MemberActivitiesTable
         btnLabel="Add Activity"
