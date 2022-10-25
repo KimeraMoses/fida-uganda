@@ -5,18 +5,16 @@ import Modal from "../common/Modal";
 import Loader from "../common/UI/Loader/Loader";
 import FleetDatabaseForm from "../forms/fleetDatabase/FleetDatabaseForm";
 import {fleetDatabaseInitialValues, fleetDatabaseOrderSchema} from "../forms/fleetDatabase/schemas/fleetDatabase";
-import FleetDatabaseTable from "./FleetDatabaseTable/FleetDatabaseTable";
 import {useAddFleet, useFleets} from "../../hooks/useFleet";
 import Table from "../common/TableComponent/Table";
 import { fleetDatabaseColumns } from "../../lib/tableColumns";
 
 const Requisitions = () => {
-    const { isOpen, onOpen, onClose } = useDisclosure();
+    const { isOpen, onClose } = useDisclosure();
     // const { data, isLoading } = useRequisitions();
 
     const {data: fleets, isLoading} =useFleets();
 
-    const onRowClick = (row) => {};
     const [data, setData] = useState([]);
     useEffect(() => {
       setData([]);

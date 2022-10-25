@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import SectionHeader from "../../common/SectionHeader";
 import { useDisclosure } from "@chakra-ui/react";
 import Modal from "../../common/Modal";
-import CLVTable from "./CLVTable/ClvTable";
 import NewClvForm from "./CLVForms/NewClvForm";
 import { useClvs, useAddClv } from "../../../hooks/useClv";
 import { clvInitialValues, clvSchema } from "./CLVForms/schema";
