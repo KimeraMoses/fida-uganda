@@ -1,21 +1,51 @@
-import React from "react";
-import { useDisclosure } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import {  useDisclosure } from "@chakra-ui/react";
 import SectionHeader from "../../common/SectionHeader";
 import AddITServiceForm from "../../forms/it/AddITServiceForm";
 import Modal from "../../common/Modal";
-import ITServicesTable from "./ITServicesTable";
 import { useItServices, useAddItService } from "../../../hooks/useItServices";
 import {
   itServicesInitialValues,
   itServiceSchema,
 } from "../../forms/it/schemas/it";
 import Loader from "../../common/UI/Loader/Loader";
+import { itServicesColumns } from "../../../lib/tableColumns";
+import TableComponent from "../../common/TableComponent/TableComponent";
 
 const ITServices = () => {
   // const [data, setData] = useState([])
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data, isLoading } = useItServices();
+  const { isOpen, onClose } = useDisclosure();
+  const { data: itServicesData, isLoading } = useItServices();
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    setData([]);
+    if (itServicesData?.services?.length) {
+      const dataToSet = itServicesData?.services?.map((b) => {
+        return {
+          ...b,
+          name: {
+            name: b?.name,
+            location: b?.delivery_location,
+          },
+          category: {
+            category: b?.category ? b?.category : "N/A",
+            class: b?.class,
+          },
+          amount: {
+            amount: b?.amount,
+            currency: b?.currency
+          },
+            payment_status:{
+              payment_status:b?.payment_status ? b?.payment_status : 'N/A',
+              purchase_date: b?.purchase_date ? b?.purchase_date : 'N/A'
+            }
+        };
+      });
+      console.log('it data', dataToSet)
+      setData(dataToSet);
+    }
+  }, [itServicesData]);
 
   return (
     <>
@@ -23,21 +53,28 @@ const ITServices = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        <ITServicesTable
-          data={data?.services}
-          isLoading={isLoading}
-          btnLabel="Add Service"
-          btnClick={onOpen}
-          keysToFilterOut={[
-            "status",
-            "createdBy",
-            // "expiry_date",
-            // "purchase_date",
-            // "updateAt",
-            // "id",
-          ]}
-          tableName="IT Services"
-        />
+        <TableComponent
+        isLoading={isLoading}
+        data={data?data : null}
+        btnLabel="Add Service"
+        tableName="IT Services"
+        columns={itServicesColumns}
+      />
+        // <ITServicesTable
+        //   data={data?.services}
+        //   isLoading={isLoading}
+        //   btnLabel="Add Service"
+        //   btnClick={onOpen}
+        //   keysToFilterOut={[
+        //     "status",
+        //     "createdBy",
+        //     // "expiry_date",
+        //     // "purchase_date",
+        //     // "updateAt",
+        //     // "id",
+        //   ]}
+        //   tableName="IT Services"
+        // />
       )}
       <Modal isOpen={isOpen} onClose={onClose} title="Service Requisition Form">
         <AddITServiceForm

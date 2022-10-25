@@ -6,6 +6,8 @@ import NewFidaProjectForm from "./NewFidaProject/NewFidaProjectForm";
 import { useAddProject, useProjects } from "../../../hooks/useProjects";
 import Loader from "./../../common/UI/Loader/Loader";
 import { projectInitialValues, projectSchema } from "./NewFidaProject/schema";
+import { fidaProjectsTableColumns } from "../../../lib/tableColumns";
+import Table from "../../common/TableComponent/Table";
 
 const FidaProjects = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -21,11 +23,18 @@ const FidaProjects = () => {
         <Loader />
       ) : (
         data?.projects && (
-          <FidaProjectTable
-            data={data?.projects}
-            btnLabel="Add Project"
-            btnClick={onOpen}
-          />
+          <Table
+          data={data?.projects}
+          columns={fidaProjectsTableColumns}
+          showBtn={false}
+          loading={isLoading}
+          showActions={true}
+        />
+          // <FidaProjectTable
+          //   data={data?.projects}
+          //   btnLabel="Add Project"
+          //   btnClick={onOpen}
+          // />
         )
       )}
       <Modal isOpen={isOpen} onClose={onClose} title="Project Profiling Form">
