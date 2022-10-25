@@ -1,4 +1,4 @@
-export const BASE_URL = "https://fida-ims-staging-v2.herokuapp.com/api/v1";
+export const BASE_URL = "https://new-fida.herokuapp.com/api/v1";
 // export const BASE_URL = "https://api.fidaims.com/api/v1"; //Fida version
 export const TEN_MBS_IN_BYTES = 10485760;
 
