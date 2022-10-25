@@ -1,11 +1,11 @@
-import React from 'react';
-import SectionHeader from '../../common/SectionHeader';
-import Modal from '../../common/Modal';
-import { useDisclosure } from '@chakra-ui/react';
-import EmployeeContractTable from './EmployeeContractTable/EmployeeContractTable';
-import NewContract from './NewContract/NewContract';
-import { useEmployees } from '../../../hooks/useEmployee';
-import Loader from './../../common/UI/Loader/Loader';
+import React from "react";
+import SectionHeader from "../../common/SectionHeader";
+import Modal from "../../common/Modal";
+import { useDisclosure } from "@chakra-ui/react";
+import EmployeeContractTable from "./EmployeeContractTable/EmployeeContractTable";
+import NewContract from "./NewContract/NewContract";
+import { useEmployees } from "../../../hooks/useEmployee";
+import Loader from "./../../common/UI/Loader/Loader";
 
 const EmployeeContract = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();

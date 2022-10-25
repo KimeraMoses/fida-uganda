@@ -4,21 +4,20 @@ import SectionHeader from "../../common/SectionHeader";
 import Form from "../Allocations/AllocationForm/Form";
 import { allocationFormSchema } from "../Allocations/AllocationForm/schema";
 import {
-  useAddAllocation, useAllocations,
+  useAddAllocation,
+  useAllocations,
 } from "../../../hooks/useAllocations";
 import { useMembers } from "../../../hooks/useMember";
 import Table from "../../common/TableComponent/Table";
 import { membersAllocationsColumns } from "../../../lib/tableColumns";
 
 const Allocations = () => {
-  const { isOpen,  onClose } = useDisclosure();
+  const { isOpen, onClose } = useDisclosure();
   const initialValues = { subject: "", message: "", allocated_to: [] };
 
   const { data: membersData } = useMembers();
-  const {
-     data:allocationsData,
-     isLoading } = useAllocations();
-     console.log('allocations orig', allocationsData?.Allocations)
+  const { data: allocationsData, isLoading } = useAllocations();
+
   const [data, setData] = useState([]);
   useEffect(() => {
     setData([]);
@@ -33,12 +32,14 @@ const Allocations = () => {
           },
           subject: {
             subject: b?.subject,
-            body: b?.message
-          }
+            body: b?.message,
+          },
         };
       });
       setData(dataToSet);
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [membersData]);
   return (
     <>

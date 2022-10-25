@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SectionHeader from "../../common/SectionHeader";
 import PayrollTable from "./PayRollTables/PayrollTable";
-import PayrollNotesTable from "./PayRollTables/PayrollNotes";
 import Modal from "../../common/Modal";
 import { toast, useDisclosure } from "@chakra-ui/react";
 import NewNotes from "./NewNotes/NewNotes";
@@ -19,7 +18,7 @@ import { payrollNotesTableColumns } from "../../../lib/tableColumns";
 import Table from "../../common/TableComponent/Table";
 
 const PayRoll = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onClose } = useDisclosure();
   const { data: payrollNotes } = usePayrollNotes();
   const { data: payroll, isLoading } = usePayrolls();
   const [file, setFile] = useState(null);
@@ -41,12 +40,13 @@ const PayRoll = () => {
         return {
           ...b,
           date: {
-            date: b?.createdAt
-          }
+            date: b?.createdAt,
+          },
         };
       });
       setData(dataToSet);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [payrollNotes]);
 
   return (
@@ -59,13 +59,13 @@ const PayRoll = () => {
           {/* <TableSearch btnLabel="Add Notes" btnClick={onOpen} /> */}
 
           {payrollNotes?.PayrollNotes && (
-               <Table
-               data={data?data:null}
-               columns={payrollNotesTableColumns}
-               showBtn={false}
-               loading={isLoading}
-               hideActions
-             />
+            <Table
+              data={data ? data : null}
+              columns={payrollNotesTableColumns}
+              showBtn={false}
+              loading={isLoading}
+              hideActions
+            />
             // <PayrollNotesTable
             //   data={payrollNotes?.PayrollNotes}
             //   btnLabel="Add Notes"
