@@ -4,6 +4,7 @@ export const routes = {
   contracts: {
     getContracts: `${BASE_URL}/contracts/getAll`,
     uploadContracts: `${BASE_URL}/contracts/upload`,
+    base: `${BASE_URL}/contracts`,
   },
   leaveRequests: {
     getLeaveRequests: `${BASE_URL}/leaveRequests/getAll`,

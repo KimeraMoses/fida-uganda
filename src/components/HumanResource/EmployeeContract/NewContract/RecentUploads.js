@@ -24,7 +24,8 @@ import Loader from "../../../common/UI/Loader/Loader";
 import classes from "./NewContract.module.css";
 
 export const RecentUploadCard = (props) => {
-  const { name, time, size, error, fileType, isTable } = props;
+  const { name, time, size, error, fileType, isTable, file } = props;
+  console.log(file)
   return (
     <div
       className={`${classes.recent_upload_card_wrapper} ${
@@ -195,6 +196,7 @@ const RecentUploads = () => {
                   time={`${time} ${duration}`}
                   size={size}
                   fileType={fileType}
+                  file={contract}
                 />
               );
             })}

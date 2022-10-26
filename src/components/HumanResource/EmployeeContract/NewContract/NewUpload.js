@@ -18,7 +18,7 @@ import {
 } from '@chakra-ui/react';
 import { MdDeleteOutline } from 'react-icons/md';
 import FormButton from '../../../common/UI/FormButton/FormButton';
-import { useAddContracts } from '../../../../hooks/useContract';
+import { useAddContracts, useContracts } from '../../../../hooks/useContract';
 import { toastError, toastSuccess } from '../../../../lib/toastDetails';
 
 const fileSizeConverter = (SIZE_IN_BYTES) => {
@@ -142,6 +142,7 @@ const FilePreview = ({ file, handleDelete }) => {
 
 const NewUpload = ({ files, setFiles }) => {
   const { mutate, isLoading, isSuccess, isError } = useAddContracts();
+  const { data } = useContracts();
   const toast = useToast();
   const onDrop = useCallback(
     (acceptedFiles) => {
@@ -153,6 +154,30 @@ const NewUpload = ({ files, setFiles }) => {
     [setFiles]
   );
 
+  const duplicateNameValidator = (file) => {
+    console.log('before', file.name)
+    for (const contract of files) {
+      console.log('file', file.name, '=== contract:file', contract.file.name)
+      if (contract.file.name === file.name) {
+        console.log('returning', file.name)
+        return {
+          code: 'duplicate-file',
+          message: `File with name ${file.name} already exists`,
+        };
+      }
+    }
+    if (data?.contracts) {
+      for (const contract of data?.contracts) {
+        if (contract.filename === file.name) {
+          return {
+            code: 'duplicate-file',
+            message: `File with name ${file.name} already exists`,
+          };
+        }
+      }
+    }
+  };
+
   const { getRootProps, getInputProps, isDragActive, fileRejections } =
     useDropzone({
       onDrop,
@@ -161,6 +186,7 @@ const NewUpload = ({ files, setFiles }) => {
         'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
           ['.doc', '.docx'],
       },
+      validator: duplicateNameValidator
     });
 
   const handleDelete = (id) => {
@@ -170,7 +196,6 @@ const NewUpload = ({ files, setFiles }) => {
   };
 
   const handleSubmit = async () => {
-    console.log(files);
     mutate(files);
   };
 
@@ -189,7 +214,7 @@ const NewUpload = ({ files, setFiles }) => {
       {fileRejections?.length > 0 && (
         <Alert status="error">
           <AlertIcon />
-          File type not allowed, pdf and word documents accepted only
+          You cannot upload files with the same name
         </Alert>
       )}
       <div
