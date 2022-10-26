@@ -9,28 +9,32 @@ import {
   PopoverContent,
   PopoverHeader,
   PopoverTrigger,
-} from '@chakra-ui/react';
-import React from 'react';
+} from "@chakra-ui/react";
+import React from "react";
 import {
   MdDeleteOutline,
   MdDownload,
   MdShare,
   MdTaskAlt,
-} from 'react-icons/md';
-import { RetryIcon } from '../../../../assets/Icons/Icons';
-import { useContracts } from '../../../../hooks/useContract';
-import FormButton from '../../../common/UI/FormButton/FormButton';
-import Loader from '../../../common/UI/Loader/Loader';
-import classes from './NewContract.module.css';
+} from "react-icons/md";
+import { RetryIcon } from "../../../../assets/Icons/Icons";
+import { useContracts } from "../../../../hooks/useContract";
+import FormButton from "../../../common/UI/FormButton/FormButton";
+import Loader from "../../../common/UI/Loader/Loader";
+import classes from "./NewContract.module.css";
 
-const RecentUploadCard = (props) => {
-  const { name, time, size, error, fileType } = props;
+export const RecentUploadCard = (props) => {
+  const { name, time, size, error, fileType, isTable } = props;
   return (
-    <div className={classes.recent_upload_card_wrapper}>
+    <div
+      className={`${classes.recent_upload_card_wrapper} ${
+        isTable ? classes.table : ""
+      }`}
+    >
       <div className={classes.card_content_left}>
         <div className={classes.upload_name}>
           <div className={classes.file_name}>
-            {fileType === 'pdf' ? (
+            {fileType === "pdf" ? (
               <svg
                 width="22"
                 height="26"
@@ -51,7 +55,7 @@ const RecentUploadCard = (props) => {
                 width="28"
                 height="28"
                 viewBox="0 0 48 48"
-                style={{ fill: '#000000' }}
+                style={{ fill: "#000000" }}
               >
                 <path
                   fill="#ddbaff"
@@ -93,7 +97,7 @@ const RecentUploadCard = (props) => {
           </div>
         )}
         <div
-          className={`${classes.size_wrapper} ${error ? classes.error : ''}`}
+          className={`${classes.size_wrapper} ${error ? classes.error : ""}`}
         >
           {size}
         </div>
@@ -140,25 +144,25 @@ const RecentUploadCard = (props) => {
   );
 };
 
+export const computeTimeDuration = (timeInSeconds) => {
+  if (timeInSeconds > 86400) {
+    return { time: Math.ceil(timeInSeconds / 86400), duration: "day(s)" };
+  }
+  if (timeInSeconds > 3600) {
+    return { time: Math.ceil(timeInSeconds / 3600), duration: "hour(s)" };
+  }
+  if (timeInSeconds > 60) {
+    return { time: Math.ceil(timeInSeconds / 60), duration: "minute(s)" };
+  }
+  return { time: timeInSeconds, duration: "second(s)" };
+};
+
 const RecentUploads = () => {
   const { data, isLoading } = useContracts();
   const [showAll, setShowAll] = React.useState(false);
 
   const toggleShowAll = () => {
     setShowAll(!showAll);
-  };
-
-  const computeTimeDuration = (timeInSeconds) => {
-    if (timeInSeconds > 86400) {
-      return { time: Math.ceil(timeInSeconds / 86400), duration: 'day(s)' };
-    }
-    if (timeInSeconds > 3600) {
-      return { time: Math.ceil(timeInSeconds / 3600), duration: 'hour(s)' };
-    }
-    if (timeInSeconds > 60) {
-      return { time: Math.ceil(timeInSeconds / 60), duration: 'minute(s)' };
-    }
-    return { time: timeInSeconds, duration: 'second(s)' };
   };
 
   const memoizedData = React.useMemo(() => {
@@ -177,7 +181,7 @@ const RecentUploads = () => {
           <>
             {memoizedData.map((contract) => {
               const size = `${+contract.size / 1000} MB`;
-              const filenameArray = contract.filename.split('.');
+              const filenameArray = contract.filename.split(".");
               const fileType = filenameArray[filenameArray.length - 1];
               const diff = Math.abs(new Date() - new Date(contract.createdAt));
               const timeInSeconds = Math.ceil(diff / 1000);
@@ -204,7 +208,7 @@ const RecentUploads = () => {
           color="gray"
           onClick={toggleShowAll}
         >
-          {showAll ? 'View less' : 'View all uploads'}
+          {showAll ? "View less" : "View all uploads"}
         </FormButton>
       </div>
       <div className={classes.last_sync_wrapper}>

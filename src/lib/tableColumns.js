@@ -1,3 +1,4 @@
+import { RecentUploadCard } from "../components/HumanResource/EmployeeContract/NewContract/RecentUploads";
 import { formatDate } from "./data";
 
 export const clientsTableColumns = [
@@ -58,25 +59,22 @@ export const approvalTableColumns = [
   },
 ];
 
-// export const fidaAssetsColumns = [
-//   {
-//     Header: "Name",
-//     accessor: "name",
-//   },
-//   {
-//     Header: "Person in possession",
-//     accessor: "person_in_possession",
-//   },
-//   {
-//     Header: "Location",
-//     accessor: "location",
-//   },
-//   {
-//     Header: " Acquisition date",
-//     accessor: "date_delivered",
-//     Cell: ({ cell: { value } }) => formatDate(value),
-//   },
-// ];
+export const contractsTableColumn = [
+  {
+    Header: "Employees Contract",
+    accessor: "contract",
+    Cell: ({ cell: { value } }) => (
+      <RecentUploadCard
+        isTable
+        name={value?.name}
+        time={value?.time}
+        size={value?.size}
+        fileType={value?.fileType}
+        downloadUrl={value?.downloadUrl}
+      />
+    ),
+  },
+];
 
 export const allApprovalsTableColumns = [
   {
