@@ -4,8 +4,21 @@ import { getAllContracts, uploadContracts } from '../apis/contract';
 import { CONTRACTS } from '../lib/constants';
 import produce from 'immer';
 
+const compareDateCreated = (a, b) => {
+  if (a.createdAt > b.createdAt) return -1;
+  if (a.createdAt < b.createdAt) return 1;
+  return 0;
+};
+
+const sortContractsAccordingToDateCreated = (data) => {
+  data?.contracts?.sort(compareDateCreated);
+  return data;
+};
+
 export const useContracts = () => {
-  return useQuery(CONTRACTS, getAllContracts);
+  return useQuery(CONTRACTS, getAllContracts, {
+    select: sortContractsAccordingToDateCreated,
+  });
 };
 
 export const useAddContracts = () => {
