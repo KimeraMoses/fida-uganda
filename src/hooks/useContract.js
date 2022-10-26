@@ -1,6 +1,6 @@
 import { v4 } from 'uuid';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { getAllContracts, uploadContracts } from '../apis/contract';
+import { deleteContract, getAllContracts, uploadContracts } from '../apis/contract';
 import { CONTRACTS } from '../lib/constants';
 import produce from 'immer';
 
