@@ -25,7 +25,6 @@ export const useAddContracts = () => {
   const queryClient = useQueryClient();
   return useMutation(uploadContracts, {
     onMutate: async (files) => {
-      // console.log('files', files);
       await queryClient.cancelMutations(CONTRACTS);
 
       const previousContracts = queryClient.getQueryData(CONTRACTS);
@@ -43,7 +42,6 @@ export const useAddContracts = () => {
           size: file.file.size,
         });
       });
-      // console.log('new files', newFiles);
       if (previousContracts) {
         queryClient.setQueryData(CONTRACTS, (previousContracts) => {
           return produce(previousContracts, (draft) => {
