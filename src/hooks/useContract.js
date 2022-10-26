@@ -64,3 +64,28 @@ export const useAddContracts = () => {
     },
   });
 };
+
+export const useDeleteContract = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation(deleteContract, {
+    onMutate: async (id) => {
+      await queryClient.cancelMutations(CONTRACTS);
+
+      const previousContracts = queryClient.getQueryData(CONTRACTS);
+      if (previousContracts) {
+        queryClient.setQueryData(CONTRACTS, (previousContracts) => {
+          return produce(previousContracts, (draft) => {
+            draft.contracts.filter((contract) => contract.id !== id);
+          });
+        });
+      }
+    },
+    onError: (_error, _contractId, context) => {
+      queryClient.setQueryData(CONTRACTS, context.previousContracts);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries(CONTRACTS);
+    },
+  });
+};

@@ -12,3 +12,7 @@ export const uploadContracts = (contracts) => {
   });
   return axiosClient.post(routes.contracts.uploadContracts, formData);
 };
+
+export const deleteContract = async (contractId) => {
+  return await axiosClient.delete(`${routes.contracts.base}/${contractId}`)
+}
