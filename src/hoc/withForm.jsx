@@ -62,6 +62,7 @@ const withForm = (FormComponent) => {
       >
         {({ values, setFieldValue, resetForm }) => (
           <Form>
+            <pre>{JSON.stringify(values)}</pre>
             <FormComponent
               values={values}
               isSubmitting={isLoading}
