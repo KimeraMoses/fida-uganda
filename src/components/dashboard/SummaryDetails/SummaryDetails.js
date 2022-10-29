@@ -61,7 +61,7 @@ const SummaryDetails = (props) => {
 
   const { data: reqData, isLoading: loadingReqData } = useRequisition(reqName);
 
-  // console.log("req", reqData);
+  console.log("req", reqData);
 
   const [remarks, setRemarks] = useState("");
 
