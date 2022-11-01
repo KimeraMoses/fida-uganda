@@ -15,5 +15,5 @@ export const getMonthName = (date) => {
 };
 
 export const getDay = (date) => {
-  return new Date(date).getDay();
+  return new Date(date).getDate();
 };

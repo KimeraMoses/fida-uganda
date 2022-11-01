@@ -3,7 +3,7 @@ import {Table, Thead, Tbody, Tr, Th, Td, IconButton} from "@chakra-ui/react";
 import classes from "./Table.module.css";
 import {MdOutlineRemoveRedEye} from "react-icons/md";
 import daysDifference from "../../../lib/datediff";
-import {getMonthName} from "../../../lib/date";
+import {getDay, getMonthName} from "../../../lib/date";
 import sortByDate from "../../../lib/sortByDate";
 
 const TableHeadColumn = (props) => {
@@ -33,9 +33,9 @@ const TrackerTable = ({type, action, data, isLoading}) => {
                                 return (
                                     <Tr>
                                         <Td className={classes.name_column}>{`${daysDifference(item.from, item.to)}
-                                         day(s) requested from  ${new Date(item.from).getDate()} 
+                                         day(s) requested from  ${getDay(item.from)}
                                           ${getMonthName(item.from)}         to 
-                                          ${new Date(item.to).getDate()} ${getMonthName(item.to)} `}
+                                          ${getDay(item.to)} ${getMonthName(item.to)} `}
                                         </Td>
                                         <Td className={classes.data__purpose_primary_text}>
                                             {new Date(item.updateAt).toLocaleString()}
