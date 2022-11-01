@@ -280,6 +280,8 @@ const SummaryDetails = (props) => {
                   <h6>{leaveData?.leave?.duration_type}</h6>
                   <h6>Reason:</h6>
                   <h6>{leaveData?.leave?.reason}</h6>
+                  <h6>Details:</h6>
+                  <h6>{leaveData?.leave?.details}</h6>
                   <h6>While on leave my physical contact will be:</h6>
                   <h6>{leaveData?.leave?.address_on_leave}</h6>
                   <h6>Tel:</h6>
