@@ -6,7 +6,7 @@ export const initialValues = {
   net_pay: "",
   month: "",
   budget_year: "",
-  address_on_leave: "",
+  reason: "",
   tel_on_leave: "",
 };
 
@@ -16,9 +16,6 @@ export const advanceRequestFormSchema = Yup.object().shape({
   net_pay: Yup.number().required("Net pay is a required field"),
   month: Yup.string().required("Month is a required field"),
   budget_year: Yup.string().required("Budget year is a required field"),
-  address_on_leave: Yup.string().required(
-    "Address on leave is a required field"
-  ),
   reason: Yup.string().required("Reason is a required field"),
   tel_on_leave: Yup.string().required("Telphone on leave is a required field"),
 });
