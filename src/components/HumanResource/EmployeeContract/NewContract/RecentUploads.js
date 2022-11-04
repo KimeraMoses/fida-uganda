@@ -14,7 +14,7 @@ import React from "react";
 import {
   MdDeleteOutline,
   MdDownload,
-  MdShare,
+  // MdShare,
   MdTaskAlt,
 } from "react-icons/md";
 import { RetryIcon } from "../../../../assets/Icons/Icons";
@@ -132,10 +132,10 @@ export const RecentUploadCard = (props) => {
                   <ListIcon as={MdDeleteOutline} color="green.500" />
                   Delete Contract
                 </ListItem>
-                <ListItem cursor="pointer">
+                {/* <ListItem cursor="pointer">
                   <ListIcon as={MdShare} color="green.500" />
                   Share Contract
-                </ListItem>
+                </ListItem> */}
               </List>
             </PopoverBody>
           </PopoverContent>
