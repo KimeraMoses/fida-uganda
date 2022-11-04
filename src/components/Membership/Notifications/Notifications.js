@@ -12,7 +12,7 @@ import { notificationsTableColumns } from "../../../lib/tableColumns";
 import Table from "../../common/TableComponent/Table";
 
 const Notifications = () => {
-  const { isOpen, onClose } = useDisclosure();
+  const { isOpen, onClose, onOpen } = useDisclosure();
   const { data: membersData } = useMembers();
   const { data: notifications, isLoading } = useNotifications();
 
@@ -21,7 +21,6 @@ const Notifications = () => {
     message: "",
     subject: "",
   };
-  console.log("noti", notifications?.Notifications);
   const [data, setData] = useState([]);
   useEffect(() => {
     setData([]);
@@ -57,6 +56,7 @@ const Notifications = () => {
         data={data ? data : null}
         columns={notificationsTableColumns}
         btnLabel="Compose"
+        btnClick={onOpen}
         loading={isLoading}
         hideActions
       />

@@ -189,6 +189,16 @@ export const itProductsColumns = [
   {
     Header: "Status",
     accessor: "status",
+    Cell: ({ cell: { value } }) => (
+      <div
+        className={`${"allocation_status_wrapper"} ${
+          value === "paid" ? "paid" : " fail"
+        }`}
+      >
+        <span className={"status_indicator"}></span>
+        <h5>{value}</h5>
+      </div>
+    ),
   },
   {
     Header: "payment status",
@@ -325,8 +335,19 @@ export const itComplaintsColumns = [
     accessor: "status",
     Cell: ({ cell: { value } }) => (
       <>
-        <strong>{value.status}</strong>
-        <div>{formatDate(value.date_recieved)}</div>
+        <div
+          className={`allocation_status_wrapper ${
+            value?.status === "read"
+              ? " paid"
+              : value?.status === "pending"
+              ? " balance"
+              : " fail"
+          }`}
+        >
+          <span className={"status_indicator"}></span>
+          <h5>{value?.status}</h5>
+        </div>
+        <div style={{ marginTop: 4 }}>{formatDate(value.date_recieved)}</div>
       </>
     ),
   },
@@ -642,10 +663,10 @@ export const CLVTableColumns = [
     subHeader: "profession",
     accessor: "name",
     Cell: ({ cell: { value } }) => (
-      <div>
+      <>
         <strong>{value.name}</strong>
         <div>{value.profession}</div>
-      </div>
+      </>
     ),
   },
   {
@@ -653,21 +674,21 @@ export const CLVTableColumns = [
     subHeader: "email",
     accessor: "contacts",
     Cell: ({ cell: { value } }) => (
-      <div>
+      <>
         <strong>{value.phoneNumber}</strong>
         <div>{value.email}</div>
-      </div>
+      </>
     ),
   },
   {
-    Header: "address and city",
+    Header: "address",
     subHeader: "city",
     accessor: "address",
     Cell: ({ cell: { value } }) => (
-      <div>
+      <>
         <strong>{value.address}</strong>
         <div>{value.city}</div>
-      </div>
+      </>
     ),
   },
   {
@@ -675,10 +696,67 @@ export const CLVTableColumns = [
     subHeader: "registration date",
     accessor: "idNumber",
     Cell: ({ cell: { value } }) => (
-      <div>
+      <>
         <strong>{value.idNumber}</strong>
         <div>{formatDate(value.date)}</div>
+      </>
+    ),
+  },
+];
+
+export const legalOfficeColumn = [
+  {
+    Header: "Name",
+    subHeader: "profession",
+    accessor: "name",
+    Cell: ({ cell: { value } }) => (
+      <>
+        <strong>{value.name}</strong>
+        <div>{value.profession}</div>
+      </>
+    ),
+  },
+  {
+    Header: "phone number",
+    subHeader: "email",
+    accessor: "contacts",
+    Cell: ({ cell: { value } }) => (
+      <>
+        <strong>{value.phoneNumber}</strong>
+        <div>{value.email}</div>
+      </>
+    ),
+  },
+  {
+    Header: "address",
+    subHeader: "city",
+    accessor: "address",
+    Cell: ({ cell: { value } }) => (
+      <>
+        <strong>{value.address}</strong>
+        <div>{value.city}</div>
+      </>
+    ),
+  },
+  {
+    Header: "User Status",
+    accessor: "active",
+    Cell: ({ cell: { value } }) => (
+      <div className={`allocation_status_wrapper ${value ? " paid" : " fail"}`}>
+        <span className={"status_indicator"}></span>
+        <h5>{value ? "active" : "closed"}</h5>
       </div>
+    ),
+  },
+  {
+    Header: "Recruitment date",
+    subHeader: "clv expiry",
+    accessor: "date",
+    Cell: ({ cell: { value } }) => (
+      <>
+        <strong>{value.date}</strong>
+        <div>{value.expDate}</div>
+      </>
     ),
   },
 ];

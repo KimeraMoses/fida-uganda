@@ -10,10 +10,10 @@ import {
 } from "../../forms/it/schemas/it";
 import Loader from "../../common/UI/Loader/Loader";
 import { itServicesColumns } from "../../../lib/tableColumns";
-import TableComponent from "../../common/TableComponent/TableComponent";
+import Table from "../../common/TableComponent/Table";
 
 const ITServices = () => {
-  const { isOpen, onClose } = useDisclosure();
+  const { isOpen, onClose, onOpen } = useDisclosure();
   const { data: itServicesData, isLoading } = useItServices();
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -55,12 +55,14 @@ const ITServices = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        <TableComponent
+        <Table
           isLoading={isLoading}
           data={data ? data : null}
           btnLabel="Add Service"
           tableName="IT Services"
           columns={itServicesColumns}
+          btnClick={onOpen}
+          hideActions
         />
         // <ITServicesTable
         //   data={itServicesData?.services}

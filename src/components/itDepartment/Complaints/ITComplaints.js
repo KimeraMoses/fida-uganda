@@ -13,7 +13,7 @@ import Table from "../../common/TableComponent/Table";
 import { itComplaintsColumns } from "../../../lib/tableColumns";
 
 const ITComplaints = () => {
-  const { isOpen,  onClose } = useDisclosure();
+  const { isOpen, onClose, onOpen } = useDisclosure();
   const { data: itComplaintsData, isLoading } = useComplaints();
 
   const [data, setData] = useState([]);
@@ -33,12 +33,12 @@ const ITComplaints = () => {
           },
           subject: {
             subject: b?.subject,
-            body: b?.body
+            body: b?.body,
           },
-            status:{
-              status:b?.status,
-              date_recieved: b?.dueDate
-            }
+          status: {
+            status: b?.status,
+            date_recieved: b?.dueDate,
+          },
         };
       });
       // console.log('it data', dataToSet)
@@ -53,13 +53,14 @@ const ITComplaints = () => {
         <Loader />
       ) : (
         <Table
-        isLoading={isLoading}
-        data={data ? data : null}
-        btnLabel="Add Complaint"
-        tableName="IT Complaints"
-        columns={itComplaintsColumns}
-        hideActions
-      />
+          isLoading={isLoading}
+          data={data ? data : null}
+          btnLabel="Add Complaint"
+          tableName="IT Complaints"
+          btnClick={onOpen}
+          columns={itComplaintsColumns}
+          hideActions
+        />
         // <ComplaintsTable
         //   data={data?.complaints}
         //   isLoading={isLoading}
