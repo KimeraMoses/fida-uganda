@@ -4,7 +4,6 @@ import { MdOutlineArrowBackIosNew } from "react-icons/md";
 import { SimpleGrid, Textarea, Button } from "@chakra-ui/react";
 import SummaryTable from "./SummaryTable/SummaryTable";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
-// import FormButton from "../../common/UI/FormButton/FormButton";
 import {
   useAdvance,
   useApproveAdvance,
@@ -29,6 +28,7 @@ import {
 import Loader from "../../common/UI/Loader/Loader";
 
 import { useSelector } from "react-redux";
+import {useProject} from "../../../hooks/useProjects";
 
 const SummaryDetails = (props) => {
   const { type } = props;
@@ -58,6 +58,9 @@ const SummaryDetails = (props) => {
 
   const { data: travelData, isLoading: loadingTravelOrders } =
     useTravelOrder(travelName);
+
+  const projectName = useProject( travelData?.travelOrder?.project);
+  // console.log(projectName?.data?.project?.name)
 
   const { data: reqData, isLoading: loadingReqData } = useRequisition(reqName);
 
@@ -262,7 +265,7 @@ const SummaryDetails = (props) => {
                   <h6>Destination:</h6>
                   <h6>{travelData?.travelOrder?.destination}</h6>
                   <h6>Project:</h6>
-                  <h6>{travelData?.travelOrder?.project}</h6>
+                  <h6>{projectName?.data?.project?.name}</h6>
                   <h6>Project Activity:</h6>
                   <h6>{travelData?.travelOrder?.project_activity}</h6>
                   <h6>Purpose of Activity:</h6>
@@ -297,6 +300,8 @@ const SummaryDetails = (props) => {
                   <h6>{leaveData?.leave?.duration_type}</h6>
                   <h6>Reason:</h6>
                   <h6>{leaveData?.leave?.reason}</h6>
+                  <h6>Details:</h6>
+                  <h6>{leaveData?.leave?.details}</h6>
                   <h6>While on leave my physical contact will be:</h6>
                   <h6>{leaveData?.leave?.address_on_leave}</h6>
                   <h6>Tel:</h6>

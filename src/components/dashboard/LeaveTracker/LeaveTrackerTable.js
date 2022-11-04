@@ -43,7 +43,7 @@ const LeaveTrackerTable = (props) => {
           <LeaveTable
             type="leave"
             action={props.handleLeaveClick}
-            data={myLeaveRequest ? myLeaveRequest.leaves : null}
+            data={myLeaveRequest ? myLeaveRequest.leaves.slice().reverse() : null}
             isLoading={isLoading}
           />
           )
@@ -51,7 +51,7 @@ const LeaveTrackerTable = (props) => {
           <LeaveTable
               type="leave"
               action={props.handleLeaveClick}
-              data={data ? data.leaves : null}
+              data={data ? data.leaves.slice().reverse() : null}
               isLoading={isLoading}
           />
           )}

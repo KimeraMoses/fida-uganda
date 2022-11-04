@@ -1,7 +1,7 @@
 export const getMonthName = (date) => {
   //fix app crashing after leave remarks submission
   function dateIsValid(date) {
-    return !Number.isNaN(new Date(date).getTime());
+    return !Number.isNaN(new Date(date).getMonth());
   }
 
   if (dateIsValid(date)) {
@@ -15,5 +15,5 @@ export const getMonthName = (date) => {
 };
 
 export const getDay = (date) => {
-  return new Date(date).getDay();
+  return new Date(date).getDate();
 };
