@@ -217,7 +217,7 @@ const menu = {
     menuOptions.clvs,
     menuOptions.caseFiles,
     menuOptions.clvDatabase,
-    menuOptions.clvComplaints,
+    // menuOptions.clvComplaints,
     menuOptions.reports,
   ],
   courtProcessServer: [

@@ -22,7 +22,7 @@ const DropdownInputField = (props) => {
           placeholder={placeholder}
           type="search"
           name={name}
-          fullwidth={true}
+          fullWidth={true}
           disabled={disabled || false}
           value={
             isSelected ? selectedItem : defaultValue ? defaultValue : searchTerm

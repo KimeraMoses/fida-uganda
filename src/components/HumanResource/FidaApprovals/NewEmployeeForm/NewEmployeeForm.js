@@ -75,13 +75,13 @@ const NewEmployeeForm = ({ isApprove, onClose, user }) => {
               </Select>
             </GridItem>
             <GridItem colSpan={8}>
-              <InputField name="name" placeholder="First Name" fullwidth />
+              <InputField name="name" placeholder="First Name" fullWidth />
             </GridItem>
           </Grid>
         </div>
         <div className={classes.field_wrapper}>
           <SimpleGrid columns={2} spacing={2}>
-            <Select name="name" placeholder="Specialities">
+            <Select name="name" placeholder="Specialties">
               <option value="option1">Lawyer</option>
               <option value="option2">Legal Officer</option>
             </Select>

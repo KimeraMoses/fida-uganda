@@ -28,13 +28,13 @@ import {
 import Loader from "../../common/UI/Loader/Loader";
 
 import { useSelector } from "react-redux";
-import {useProject} from "../../../hooks/useProjects";
+import { useProject } from "../../../hooks/useProjects";
 
 const SummaryDetails = (props) => {
   const { type } = props;
   const navigate = useNavigate();
-  const [disableReject,setDisableReject] = useState(false);
-  const [disableApprove,setDisableApprove] = useState(false);
+  const [disableReject, setDisableReject] = useState(false);
+  const [disableApprove, setDisableApprove] = useState(false);
 
   //get user and designation
   const { user } = useSelector((state) => state.auth);
@@ -59,10 +59,12 @@ const SummaryDetails = (props) => {
   const { data: travelData, isLoading: loadingTravelOrders } =
     useTravelOrder(travelName);
 
-  const projectName = useProject( travelData?.travelOrder?.project);
+  const projectName = useProject(travelData?.travelOrder?.project);
   // console.log(projectName?.data?.project?.name)
 
   const { data: reqData, isLoading: loadingReqData } = useRequisition(reqName);
+
+  console.log("req", reqData);
 
   const [remarks, setRemarks] = useState("");
 
@@ -82,14 +84,12 @@ const SummaryDetails = (props) => {
     e.preventDefault();
     setDisableApprove(true);
     approveTravel({ travelName, remarks });
-
   };
 
   const rejectTravelOrder = (e) => {
     e.preventDefault();
     setDisableReject(true);
     rejectTravel({ travelName, remarks });
-
   };
 
   const approveRequisition = React.useCallback(
@@ -208,12 +208,29 @@ const SummaryDetails = (props) => {
                   <h6>{reqData?.requisition?.budget_year}</h6>
                   <h6>Type: </h6>
                   <h6>{reqData?.requisition?.type}</h6>
-                  <h6>Unit Price:</h6>
-                  <h6>{reqData?.requisition?.unit_price}</h6>
-                  <h6>Number of Units:</h6>
-                  <h6>{reqData?.requisition?.num_units}</h6>
-                  <h6>Subject of Procurement:</h6>
-                  <h6>{reqData?.requisition?.subject_of_procurement}</h6>
+                  {reqData?.requisition?.type !== "Activity" ? (
+                    <>
+                      <h6>Unit Price:</h6>
+                      <h6>{reqData?.requisition?.unit_price}</h6>
+                      <h6>Number of Units:</h6>
+                      <h6>{reqData?.requisition?.num_units}</h6>
+                      <h6>Subject of Procurement:</h6>
+                      <h6>{reqData?.requisition?.subject_of_procurement}</h6>
+                    </>
+                  ) : (
+                    <>
+                      <h6>Activity items:</h6>
+                      <h6>
+                        {reqData?.requisition?.activities.map((item) => (
+                          <div key={item.id}>
+                            <h3>Item: {item.item}</h3>
+                            <p>Quantity: {item.qty}</p>
+                            <p>Unit: {item.unit}</p>
+                          </div>
+                        ))}
+                      </h6>
+                    </>
+                  )}
                   <h6>Date required:</h6>
                   <h6>
                     {new Date(
@@ -338,32 +355,34 @@ const SummaryDetails = (props) => {
                     <hr />
                     <div className={classes.form_action_wrapper}>
                       <Button
-                          variant='outline'
-                          type="submit"
-                          borderRadius="full"
-                          colorScheme='#ff3838'
-                          _hover={{ color: "white", background:"#ff3838" }}
-                          size="lg"
-                          color="black"
-                          borderColor="#ff3838"
-                          isLoading={disableReject}
-                          loadingText='Rejecting'
-                          onClick={rejectTravelOrder}>
+                        variant="outline"
+                        type="submit"
+                        borderRadius="full"
+                        colorScheme="#ff3838"
+                        _hover={{ color: "white", background: "#ff3838" }}
+                        size="lg"
+                        color="black"
+                        borderColor="#ff3838"
+                        isLoading={disableReject}
+                        loadingText="Rejecting"
+                        onClick={rejectTravelOrder}
+                      >
                         Reject
                       </Button>
 
                       <Button
-                          variant='outline'
-                          type="submit"
-                          borderRadius="full"
-                          colorScheme='#562b85'
-                          _hover={{ color: "white", background:"#562b85" }}
-                          size="lg"
-                          color="black"
-                          borderColor="#562b85"
-                          isLoading={disableApprove}
-                          loadingText='Approving'
-                          onClick={approveTravelOrder}>
+                        variant="outline"
+                        type="submit"
+                        borderRadius="full"
+                        colorScheme="#562b85"
+                        _hover={{ color: "white", background: "#562b85" }}
+                        size="lg"
+                        color="black"
+                        borderColor="#562b85"
+                        isLoading={disableApprove}
+                        loadingText="Approving"
+                        onClick={approveTravelOrder}
+                      >
                         Approve
                       </Button>
                     </div>
@@ -390,35 +409,36 @@ const SummaryDetails = (props) => {
                     <hr />
                     <div className={classes.form_action_wrapper}>
                       <Button
-                          variant='outline'
-                          type="submit"
-                          borderRadius="full"
-                          colorScheme='#ff3838'
-                          _hover={{ color: "white", background:"#ff3838" }}
-                          size="lg"
-                          color="black"
-                          borderColor="#ff3838"
-                          isLoading={disableReject}
-                          loadingText='Rejecting'
-                          onClick={rejectTravelOrder}>
+                        variant="outline"
+                        type="submit"
+                        borderRadius="full"
+                        colorScheme="#ff3838"
+                        _hover={{ color: "white", background: "#ff3838" }}
+                        size="lg"
+                        color="black"
+                        borderColor="#ff3838"
+                        isLoading={disableReject}
+                        loadingText="Rejecting"
+                        onClick={rejectTravelOrder}
+                      >
                         Reject
                       </Button>
 
                       <Button
-                          variant='outline'
-                          type="submit"
-                          borderRadius="full"
-                          colorScheme='#562b85'
-                          _hover={{ color: "white", background:"#562b85" }}
-                          size="lg"
-                          color="black"
-                          borderColor="#562b85"
-                          isLoading={disableApprove}
-                          loadingText='Approving'
-                          onClick={approveTravelOrder}>
+                        variant="outline"
+                        type="submit"
+                        borderRadius="full"
+                        colorScheme="#562b85"
+                        _hover={{ color: "white", background: "#562b85" }}
+                        size="lg"
+                        color="black"
+                        borderColor="#562b85"
+                        isLoading={disableApprove}
+                        loadingText="Approving"
+                        onClick={approveTravelOrder}
+                      >
                         Approve
                       </Button>
-
                     </div>
                   </form>
                 )}
@@ -443,35 +463,36 @@ const SummaryDetails = (props) => {
                     <hr />
                     <div className={classes.form_action_wrapper}>
                       <Button
-                          variant='outline'
-                          type="submit"
-                          borderRadius="full"
-                          colorScheme='#ff3838'
-                          _hover={{ color: "white", background:"#ff3838" }}
-                          size="lg"
-                          color="black"
-                          borderColor="#ff3838"
-                          isLoading={disableReject}
-                          loadingText='Rejecting'
-                          onClick={rejectTravelOrder}>
+                        variant="outline"
+                        type="submit"
+                        borderRadius="full"
+                        colorScheme="#ff3838"
+                        _hover={{ color: "white", background: "#ff3838" }}
+                        size="lg"
+                        color="black"
+                        borderColor="#ff3838"
+                        isLoading={disableReject}
+                        loadingText="Rejecting"
+                        onClick={rejectTravelOrder}
+                      >
                         Reject
                       </Button>
 
                       <Button
-                          variant='outline'
-                          type="submit"
-                          borderRadius="full"
-                          colorScheme='#562b85'
-                          _hover={{ color: "white", background:"#562b85" }}
-                          size="lg"
-                          color="black"
-                          borderColor="#562b85"
-                          isLoading={disableApprove}
-                          loadingText='Approving'
-                          onClick={approveTravelOrder}>
+                        variant="outline"
+                        type="submit"
+                        borderRadius="full"
+                        colorScheme="#562b85"
+                        _hover={{ color: "white", background: "#562b85" }}
+                        size="lg"
+                        color="black"
+                        borderColor="#562b85"
+                        isLoading={disableApprove}
+                        loadingText="Approving"
+                        onClick={approveTravelOrder}
+                      >
                         Approve
                       </Button>
-
                     </div>
                   </form>
                 )}
@@ -554,32 +575,34 @@ const SummaryDetails = (props) => {
                     <hr />
                     <div className={classes.form_action_wrapper}>
                       <Button
-                          variant='outline'
-                          type="submit"
-                          borderRadius="full"
-                          colorScheme='#ff3838'
-                          _hover={{ color: "white", background:"#ff3838" }}
-                          size="lg"
-                          color="black"
-                          borderColor="#ff3838"
-                          isLoading={disableReject}
-                          loadingText='Rejecting'
-                          onClick={rejectRequisition}>
+                        variant="outline"
+                        type="submit"
+                        borderRadius="full"
+                        colorScheme="#ff3838"
+                        _hover={{ color: "white", background: "#ff3838" }}
+                        size="lg"
+                        color="black"
+                        borderColor="#ff3838"
+                        isLoading={disableReject}
+                        loadingText="Rejecting"
+                        onClick={rejectRequisition}
+                      >
                         Reject
                       </Button>
 
                       <Button
-                          variant='outline'
-                          type="submit"
-                          borderRadius="full"
-                          colorScheme='#562b85'
-                          _hover={{ color: "white", background:"#562b85" }}
-                          size="lg"
-                          color="black"
-                          borderColor="#562b85"
-                          isLoading={disableApprove}
-                          loadingText='Approving'
-                          onClick={approveRequisition}>
+                        variant="outline"
+                        type="submit"
+                        borderRadius="full"
+                        colorScheme="#562b85"
+                        _hover={{ color: "white", background: "#562b85" }}
+                        size="lg"
+                        color="black"
+                        borderColor="#562b85"
+                        isLoading={disableApprove}
+                        loadingText="Approving"
+                        onClick={approveRequisition}
+                      >
                         Approve
                       </Button>
                     </div>
@@ -605,34 +628,35 @@ const SummaryDetails = (props) => {
                     </div>
                     <hr />
                     <div className={classes.form_action_wrapper}>
-
                       <Button
-                          variant='outline'
-                          type="submit"
-                          borderRadius="full"
-                          colorScheme='#ff3838'
-                          _hover={{ color: "white", background:"#ff3838" }}
-                          size="lg"
-                          color="black"
-                          borderColor="#ff3838"
-                          isLoading={disableReject}
-                          loadingText='Rejecting'
-                          onClick={rejectRequisition}>
+                        variant="outline"
+                        type="submit"
+                        borderRadius="full"
+                        colorScheme="#ff3838"
+                        _hover={{ color: "white", background: "#ff3838" }}
+                        size="lg"
+                        color="black"
+                        borderColor="#ff3838"
+                        isLoading={disableReject}
+                        loadingText="Rejecting"
+                        onClick={rejectRequisition}
+                      >
                         Reject
                       </Button>
 
                       <Button
-                          variant='outline'
-                          type="submit"
-                          borderRadius="full"
-                          colorScheme='#562b85'
-                          _hover={{ color: "white", background:"#562b85" }}
-                          size="lg"
-                          color="black"
-                          borderColor="#562b85"
-                          isLoading={disableApprove}
-                          loadingText='Approving'
-                          onClick={approveRequisition}>
+                        variant="outline"
+                        type="submit"
+                        borderRadius="full"
+                        colorScheme="#562b85"
+                        _hover={{ color: "white", background: "#562b85" }}
+                        size="lg"
+                        color="black"
+                        borderColor="#562b85"
+                        isLoading={disableApprove}
+                        loadingText="Approving"
+                        onClick={approveRequisition}
+                      >
                         Approve
                       </Button>
                     </div>
@@ -659,32 +683,34 @@ const SummaryDetails = (props) => {
                     <hr />
                     <div className={classes.form_action_wrapper}>
                       <Button
-                          variant='outline'
-                          type="submit"
-                          borderRadius="full"
-                          colorScheme='#ff3838'
-                          _hover={{ color: "white", background:"#ff3838" }}
-                          size="lg"
-                          color="black"
-                          borderColor="#ff3838"
-                          isLoading={disableReject}
-                          loadingText='Rejecting'
-                          onClick={rejectRequisition}>
+                        variant="outline"
+                        type="submit"
+                        borderRadius="full"
+                        colorScheme="#ff3838"
+                        _hover={{ color: "white", background: "#ff3838" }}
+                        size="lg"
+                        color="black"
+                        borderColor="#ff3838"
+                        isLoading={disableReject}
+                        loadingText="Rejecting"
+                        onClick={rejectRequisition}
+                      >
                         Reject
                       </Button>
 
                       <Button
-                          variant='outline'
-                          type="submit"
-                          borderRadius="full"
-                          colorScheme='#562b85'
-                          _hover={{ color: "white", background:"#562b85" }}
-                          size="lg"
-                          color="black"
-                          borderColor="#562b85"
-                          isLoading={disableApprove}
-                          loadingText='Approving'
-                          onClick={approveRequisition}>
+                        variant="outline"
+                        type="submit"
+                        borderRadius="full"
+                        colorScheme="#562b85"
+                        _hover={{ color: "white", background: "#562b85" }}
+                        size="lg"
+                        color="black"
+                        borderColor="#562b85"
+                        isLoading={disableApprove}
+                        loadingText="Approving"
+                        onClick={approveRequisition}
+                      >
                         Approve
                       </Button>
                     </div>
@@ -711,32 +737,34 @@ const SummaryDetails = (props) => {
                     <hr />
                     <div className={classes.form_action_wrapper}>
                       <Button
-                          variant='outline'
-                          type="submit"
-                          borderRadius="full"
-                          colorScheme='#ff3838'
-                          _hover={{ color: "white", background:"#ff3838" }}
-                          size="lg"
-                          color="black"
-                          borderColor="#ff3838"
-                          isLoading={disableReject}
-                          loadingText='Rejecting'
-                          onClick={rejectRequisition}>
+                        variant="outline"
+                        type="submit"
+                        borderRadius="full"
+                        colorScheme="#ff3838"
+                        _hover={{ color: "white", background: "#ff3838" }}
+                        size="lg"
+                        color="black"
+                        borderColor="#ff3838"
+                        isLoading={disableReject}
+                        loadingText="Rejecting"
+                        onClick={rejectRequisition}
+                      >
                         Reject
                       </Button>
 
                       <Button
-                          variant='outline'
-                          type="submit"
-                          borderRadius="full"
-                          colorScheme='#562b85'
-                          _hover={{ color: "white", background:"#562b85" }}
-                          size="lg"
-                          color="black"
-                          borderColor="#562b85"
-                          isLoading={disableApprove}
-                          loadingText='Approving'
-                          onClick={approveRequisition}>
+                        variant="outline"
+                        type="submit"
+                        borderRadius="full"
+                        colorScheme="#562b85"
+                        _hover={{ color: "white", background: "#562b85" }}
+                        size="lg"
+                        color="black"
+                        borderColor="#562b85"
+                        isLoading={disableApprove}
+                        loadingText="Approving"
+                        onClick={approveRequisition}
+                      >
                         Approve
                       </Button>
                     </div>
@@ -788,32 +816,34 @@ const SummaryDetails = (props) => {
                     <hr />
                     <div className={classes.form_action_wrapper}>
                       <Button
-                          variant='outline'
-                          type="submit"
-                          borderRadius="full"
-                          colorScheme='#ff3838'
-                          _hover={{ color: "white", background:"#ff3838" }}
-                          size="lg"
-                          color="black"
-                          borderColor="#ff3838"
-                          isLoading={disableReject}
-                          loadingText='Rejecting'
-                          onClick={rejectLeave}>
+                        variant="outline"
+                        type="submit"
+                        borderRadius="full"
+                        colorScheme="#ff3838"
+                        _hover={{ color: "white", background: "#ff3838" }}
+                        size="lg"
+                        color="black"
+                        borderColor="#ff3838"
+                        isLoading={disableReject}
+                        loadingText="Rejecting"
+                        onClick={rejectLeave}
+                      >
                         Reject
                       </Button>
 
                       <Button
-                          variant='outline'
-                          type="submit"
-                          borderRadius="full"
-                          colorScheme='#562b85'
-                          _hover={{ color: "white", background:"#562b85" }}
-                          size="lg"
-                          color="black"
-                          borderColor="#562b85"
-                          isLoading={disableApprove}
-                          loadingText='Approving'
-                          onClick={approveLeave}>
+                        variant="outline"
+                        type="submit"
+                        borderRadius="full"
+                        colorScheme="#562b85"
+                        _hover={{ color: "white", background: "#562b85" }}
+                        size="lg"
+                        color="black"
+                        borderColor="#562b85"
+                        isLoading={disableApprove}
+                        loadingText="Approving"
+                        onClick={approveLeave}
+                      >
                         Approve
                       </Button>
                     </div>
@@ -838,32 +868,34 @@ const SummaryDetails = (props) => {
                     <hr />
                     <div className={classes.form_action_wrapper}>
                       <Button
-                          variant='outline'
-                          type="submit"
-                          borderRadius="full"
-                          colorScheme='#ff3838'
-                          _hover={{ color: "white", background:"#ff3838" }}
-                          size="lg"
-                          color="black"
-                          borderColor="#ff3838"
-                          isLoading={disableReject}
-                          loadingText='Rejecting'
-                          onClick={rejectLeave}>
+                        variant="outline"
+                        type="submit"
+                        borderRadius="full"
+                        colorScheme="#ff3838"
+                        _hover={{ color: "white", background: "#ff3838" }}
+                        size="lg"
+                        color="black"
+                        borderColor="#ff3838"
+                        isLoading={disableReject}
+                        loadingText="Rejecting"
+                        onClick={rejectLeave}
+                      >
                         Reject
                       </Button>
 
                       <Button
-                          variant='outline'
-                          type="submit"
-                          borderRadius="full"
-                          colorScheme='#562b85'
-                          _hover={{ color: "white", background:"#562b85" }}
-                          size="lg"
-                          color="black"
-                          borderColor="#562b85"
-                          isLoading={disableApprove}
-                          loadingText='Approving'
-                          onClick={approveLeave}>
+                        variant="outline"
+                        type="submit"
+                        borderRadius="full"
+                        colorScheme="#562b85"
+                        _hover={{ color: "white", background: "#562b85" }}
+                        size="lg"
+                        color="black"
+                        borderColor="#562b85"
+                        isLoading={disableApprove}
+                        loadingText="Approving"
+                        onClick={approveLeave}
+                      >
                         Approve
                       </Button>
                     </div>
@@ -888,32 +920,34 @@ const SummaryDetails = (props) => {
                     <hr />
                     <div className={classes.form_action_wrapper}>
                       <Button
-                          variant='outline'
-                          type="submit"
-                          borderRadius="full"
-                          colorScheme='#ff3838'
-                          _hover={{ color: "white", background:"#ff3838" }}
-                          size="lg"
-                          color="black"
-                          borderColor="#ff3838"
-                          isLoading={disableReject}
-                          loadingText='Rejecting'
-                          onClick={rejectLeave}>
+                        variant="outline"
+                        type="submit"
+                        borderRadius="full"
+                        colorScheme="#ff3838"
+                        _hover={{ color: "white", background: "#ff3838" }}
+                        size="lg"
+                        color="black"
+                        borderColor="#ff3838"
+                        isLoading={disableReject}
+                        loadingText="Rejecting"
+                        onClick={rejectLeave}
+                      >
                         Reject
                       </Button>
 
                       <Button
-                          variant='outline'
-                          type="submit"
-                          borderRadius="full"
-                          colorScheme='#562b85'
-                          _hover={{ color: "white", background:"#562b85" }}
-                          size="lg"
-                          color="black"
-                          borderColor="#562b85"
-                          isLoading={disableApprove}
-                          loadingText='Approving'
-                          onClick={approveLeave}>
+                        variant="outline"
+                        type="submit"
+                        borderRadius="full"
+                        colorScheme="#562b85"
+                        _hover={{ color: "white", background: "#562b85" }}
+                        size="lg"
+                        color="black"
+                        borderColor="#562b85"
+                        isLoading={disableApprove}
+                        loadingText="Approving"
+                        onClick={approveLeave}
+                      >
                         Approve
                       </Button>
                     </div>
@@ -965,32 +999,34 @@ const SummaryDetails = (props) => {
                     <hr />
                     <div className={classes.form_action_wrapper}>
                       <Button
-                          variant='outline'
-                          type="submit"
-                          borderRadius="full"
-                          colorScheme='#ff3838'
-                          _hover={{ color: "white", background:"#ff3838" }}
-                          size="lg"
-                          color="black"
-                          borderColor="#ff3838"
-                          isLoading={disableReject}
-                          loadingText='Rejecting'
-                          onClick={rejectAdvance}>
+                        variant="outline"
+                        type="submit"
+                        borderRadius="full"
+                        colorScheme="#ff3838"
+                        _hover={{ color: "white", background: "#ff3838" }}
+                        size="lg"
+                        color="black"
+                        borderColor="#ff3838"
+                        isLoading={disableReject}
+                        loadingText="Rejecting"
+                        onClick={rejectAdvance}
+                      >
                         Reject
                       </Button>
 
                       <Button
-                          variant='outline'
-                          type="submit"
-                          borderRadius="full"
-                          colorScheme='#562b85'
-                          _hover={{ color: "white", background:"#562b85" }}
-                          size="lg"
-                          color="black"
-                          borderColor="#562b85"
-                          isLoading={disableApprove}
-                          loadingText='Approving'
-                          onClick={approveAdvance}>
+                        variant="outline"
+                        type="submit"
+                        borderRadius="full"
+                        colorScheme="#562b85"
+                        _hover={{ color: "white", background: "#562b85" }}
+                        size="lg"
+                        color="black"
+                        borderColor="#562b85"
+                        isLoading={disableApprove}
+                        loadingText="Approving"
+                        onClick={approveAdvance}
+                      >
                         Approve
                       </Button>
                     </div>
@@ -1016,32 +1052,34 @@ const SummaryDetails = (props) => {
                     <hr />
                     <div className={classes.form_action_wrapper}>
                       <Button
-                          variant='outline'
-                          type="submit"
-                          borderRadius="full"
-                          colorScheme='#ff3838'
-                          _hover={{ color: "white", background:"#ff3838" }}
-                          size="lg"
-                          color="black"
-                          borderColor="#ff3838"
-                          isLoading={disableReject}
-                          loadingText='Rejecting'
-                          onClick={rejectAdvance}>
+                        variant="outline"
+                        type="submit"
+                        borderRadius="full"
+                        colorScheme="#ff3838"
+                        _hover={{ color: "white", background: "#ff3838" }}
+                        size="lg"
+                        color="black"
+                        borderColor="#ff3838"
+                        isLoading={disableReject}
+                        loadingText="Rejecting"
+                        onClick={rejectAdvance}
+                      >
                         Reject
                       </Button>
 
                       <Button
-                          variant='outline'
-                          type="submit"
-                          borderRadius="full"
-                          colorScheme='#562b85'
-                          _hover={{ color: "white", background:"#562b85" }}
-                          size="lg"
-                          color="black"
-                          borderColor="#562b85"
-                          isLoading={disableApprove}
-                          loadingText='Approving'
-                          onClick={approveAdvance}>
+                        variant="outline"
+                        type="submit"
+                        borderRadius="full"
+                        colorScheme="#562b85"
+                        _hover={{ color: "white", background: "#562b85" }}
+                        size="lg"
+                        color="black"
+                        borderColor="#562b85"
+                        isLoading={disableApprove}
+                        loadingText="Approving"
+                        onClick={approveAdvance}
+                      >
                         Approve
                       </Button>
                     </div>
@@ -1066,32 +1104,34 @@ const SummaryDetails = (props) => {
                     <hr />
                     <div className={classes.form_action_wrapper}>
                       <Button
-                          variant='outline'
-                          type="submit"
-                          borderRadius="full"
-                          colorScheme='#ff3838'
-                          _hover={{ color: "white", background:"#ff3838" }}
-                          size="lg"
-                          color="black"
-                          borderColor="#ff3838"
-                          isLoading={disableReject}
-                          loadingText='Rejecting'
-                          onClick={rejectAdvance}>
+                        variant="outline"
+                        type="submit"
+                        borderRadius="full"
+                        colorScheme="#ff3838"
+                        _hover={{ color: "white", background: "#ff3838" }}
+                        size="lg"
+                        color="black"
+                        borderColor="#ff3838"
+                        isLoading={disableReject}
+                        loadingText="Rejecting"
+                        onClick={rejectAdvance}
+                      >
                         Reject
                       </Button>
 
                       <Button
-                          variant='outline'
-                          type="submit"
-                          borderRadius="full"
-                          colorScheme='#562b85'
-                          _hover={{ color: "white", background:"#562b85" }}
-                          size="lg"
-                          color="black"
-                          borderColor="#562b85"
-                          isLoading={disableApprove}
-                          loadingText='Approving'
-                          onClick={approveAdvance}>
+                        variant="outline"
+                        type="submit"
+                        borderRadius="full"
+                        colorScheme="#562b85"
+                        _hover={{ color: "white", background: "#562b85" }}
+                        size="lg"
+                        color="black"
+                        borderColor="#562b85"
+                        isLoading={disableApprove}
+                        loadingText="Approving"
+                        onClick={approveAdvance}
+                      >
                         Approve
                       </Button>
                     </div>
@@ -1116,32 +1156,34 @@ const SummaryDetails = (props) => {
                     <hr />
                     <div className={classes.form_action_wrapper}>
                       <Button
-                          variant='outline'
-                          type="submit"
-                          borderRadius="full"
-                          colorScheme='#ff3838'
-                          _hover={{ color: "white", background:"#ff3838" }}
-                          size="lg"
-                          color="black"
-                          borderColor="#ff3838"
-                          isLoading={disableReject}
-                          loadingText='Rejecting'
-                          onClick={rejectAdvance}>
+                        variant="outline"
+                        type="submit"
+                        borderRadius="full"
+                        colorScheme="#ff3838"
+                        _hover={{ color: "white", background: "#ff3838" }}
+                        size="lg"
+                        color="black"
+                        borderColor="#ff3838"
+                        isLoading={disableReject}
+                        loadingText="Rejecting"
+                        onClick={rejectAdvance}
+                      >
                         Reject
                       </Button>
 
                       <Button
-                          variant='outline'
-                          type="submit"
-                          borderRadius="full"
-                          colorScheme='#562b85'
-                          _hover={{ color: "white", background:"#562b85" }}
-                          size="lg"
-                          color="black"
-                          borderColor="#562b85"
-                          isLoading={disableApprove}
-                          loadingText='Approving'
-                          onClick={approveAdvance}>
+                        variant="outline"
+                        type="submit"
+                        borderRadius="full"
+                        colorScheme="#562b85"
+                        _hover={{ color: "white", background: "#562b85" }}
+                        size="lg"
+                        color="black"
+                        borderColor="#562b85"
+                        isLoading={disableApprove}
+                        loadingText="Approving"
+                        onClick={approveAdvance}
+                      >
                         Approve
                       </Button>
                     </div>

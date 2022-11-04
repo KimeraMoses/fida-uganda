@@ -13,10 +13,8 @@ import { useProjectOptions } from "../../../hooks/useProjects";
 import { membersActivitiesColumns } from "../../../lib/tableColumns";
 import Table from "../../common/TableComponent/Table";
 
-
-
 const MembersActivities = () => {
-  const { isOpen, onClose } = useDisclosure();
+  const { isOpen, onClose, onOpen } = useDisclosure();
   const { data: membersData } = useMembers();
   const projectOptions = useProjectOptions();
   const { isLoading, data: membersActivities } = useActivities();
@@ -31,26 +29,28 @@ const MembersActivities = () => {
   useEffect(() => {
     setData([]);
     if (membersActivities?.MembershipActivities?.length) {
-      const dataToSet = membersActivities?.MembershipActivities?.map((b, index) => {
-        return {
-          ...b,
-          sn:{
-            sn:'000'+(index + 1)
-          },
-          name: {
-            id: b?.member[0]?.first_name,
-            membership_number: b?.name,
-          },
-          project: {
-            name: b?.project?.name,
-            projectActivity: b?.projectActivity,
-          },
-          date: {
-            date: b?.date_of_activity,
-            activityDescription: b?.activityDescription
-          }
-        };
-      });
+      const dataToSet = membersActivities?.MembershipActivities?.map(
+        (b, index) => {
+          return {
+            ...b,
+            sn: {
+              sn: "000" + (index + 1),
+            },
+            name: {
+              id: b?.member[0]?.first_name,
+              membership_number: b?.name,
+            },
+            project: {
+              name: b?.project?.name,
+              projectActivity: b?.projectActivity,
+            },
+            date: {
+              date: b?.date_of_activity,
+              activityDescription: b?.activityDescription,
+            },
+          };
+        }
+      );
       // console.log('it data', dataToSet)
       setData(dataToSet);
     }
@@ -61,6 +61,7 @@ const MembersActivities = () => {
       <Table
         loading={isLoading}
         data={data ? data : null}
+        btnClick={onOpen}
         btnLabel="Add Activity"
         tableName="Members Activities"
         columns={membersActivitiesColumns}

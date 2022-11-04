@@ -9,11 +9,7 @@ import SelectInputField from "../../common/UI/SelectInputField/SelectInputField"
 import ActivityTable from "./Activity/ActivityTable";
 import ActivityForm from "./Activity/ActivityForm";
 
-const RequisitionForm = ({
-  isSubmitting,
-  setFieldValue,
-  handleGetActivityType,
-}) => {
+const RequisitionForm = ({ isSubmitting, setFieldValue }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [editValues, setEditValues] = useState({});
   const projectOptions = useProjectOptions();
@@ -33,7 +29,7 @@ const RequisitionForm = ({
         ...item,
       };
       setData([...data, newItem]);
-      setFieldValue("activities", data);
+      setFieldValue("activities", [...data, newItem]);
     } else if (action === "EDIT") {
       //Find index of specific object using findIndex method.
       const objIndex = data.findIndex((obj) => obj.id === item.id);
@@ -68,7 +64,6 @@ const RequisitionForm = ({
           options={requisitionTypeOptions}
           onChange={(option) => {
             setFieldValue("type", option);
-            handleGetActivityType(option);
             if (option === "Activity") {
               setActivity(option);
             } else {

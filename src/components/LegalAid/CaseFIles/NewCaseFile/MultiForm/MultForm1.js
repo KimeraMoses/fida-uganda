@@ -75,7 +75,7 @@ const MultForm1 = ({
             defaultValue={selectedClient?.name}
           />
 
-          <InputField placeholder="Type Here" name="respondentName" fullwidth />
+          <InputField placeholder="Type Here" name="respondentName" fullWidth />
         </SimpleGrid>
         <SimpleGrid
           columns={3}

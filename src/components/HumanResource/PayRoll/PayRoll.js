@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import SectionHeader from "../../common/SectionHeader";
-import PayrollTable from "./PayRollTables/PayrollTable";
+// import PayrollTable from "./PayRollTables/PayrollTable";
 import Modal from "../../common/Modal";
 import { toast, useDisclosure } from "@chakra-ui/react";
 import NewNotes from "./NewNotes/NewNotes";
-import { usePayrolls } from "../../../hooks/usePayroll";
+// import { usePayrolls } from "../../../hooks/usePayroll";
 import {
   useAddPayrollNote,
   usePayrollNotes,
@@ -19,8 +19,8 @@ import Table from "../../common/TableComponent/Table";
 
 const PayRoll = () => {
   const { isOpen, onClose } = useDisclosure();
-  const { data: payrollNotes } = usePayrollNotes();
-  const { data: payroll, isLoading } = usePayrolls();
+  const { data, isLoading } = usePayrollNotes();
+  // const { data: payroll, isLoading } = usePayrolls();
   const [file, setFile] = useState(null);
 
   const handleFileChange = (event) => {
@@ -32,23 +32,6 @@ const PayRoll = () => {
     }
   };
 
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    setData([]);
-    if (payrollNotes?.PayrollNotes.length) {
-      const dataToSet = payrollNotes?.PayrollNotes.map((b) => {
-        return {
-          ...b,
-          date: {
-            date: b?.createdAt,
-          },
-        };
-      });
-      setData(dataToSet);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [payrollNotes]);
-
   return (
     <>
       <SectionHeader title="Payroll Notes" />
@@ -58,9 +41,9 @@ const PayRoll = () => {
         <>
           {/* <TableSearch btnLabel="Add Notes" btnClick={onOpen} /> */}
 
-          {payrollNotes?.PayrollNotes && (
+          {data?.PayrollNotes && (
             <Table
-              data={data ? data : null}
+              data={data ? data?.PayrollNotes : null}
               columns={payrollNotesTableColumns}
               showBtn={false}
               loading={isLoading}
@@ -73,10 +56,10 @@ const PayRoll = () => {
             //   tableName="Payroll Notes"
             // />
           )}
-          <SectionHeader title="Payroll" />
+          {/* <SectionHeader title="Payroll" />
           {payroll?.payrolls && (
             <PayrollTable data={payroll?.payrolls} tableName="Payroll" />
-          )}
+          )} */}
         </>
       )}
       <Modal isOpen={isOpen} onClose={onClose} title="Add New Note">

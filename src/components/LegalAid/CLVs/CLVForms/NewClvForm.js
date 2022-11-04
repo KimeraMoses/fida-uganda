@@ -10,9 +10,12 @@ import withForm from "../../../../hoc/withForm";
 import { useMemo } from "react";
 import { MdClose } from "react-icons/md";
 import SelectAvatar from "../../../common/SelectAvatar";
+import SelectInputField from "../../../common/UI/SelectInputField/SelectInputField";
+import { useSelector } from "react-redux";
 
-const NewClvForm = ({ isSubmitting, ...rest }) => {
+const NewClvForm = ({ isSubmitting, setFieldValue, ...rest }) => {
   const { action, onClose, values, setAvatar, toast, url, setImageUrl } = rest;
+  const clv = useSelector((state) => state.CLV);
   const projectOptions = useProjectOptions();
   const projects = useMemo(() => projectOptions, [projectOptions]);
 
@@ -101,10 +104,12 @@ const NewClvForm = ({ isSubmitting, ...rest }) => {
       </div>
       <div className={classes.field_wrapper}>
         <SimpleGrid columns={2} spacing={2}>
-          <SelectField
-            placeholder="Project of Attachment"
+          <SelectInputField
+            data={projects}
             name="project"
-            options={projects}
+            placeholder="Project of Attachment"
+            setFieldValue={setFieldValue}
+            defaultValue={clv?.CLV?.project?.id}
           />
           <InputField
             placeholder="Category of Training Attended"

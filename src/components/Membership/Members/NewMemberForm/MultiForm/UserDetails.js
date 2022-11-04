@@ -5,7 +5,6 @@ import ActionButtons from "./ActionButtons/ActionButtons";
 import { SimpleGrid } from "@chakra-ui/react";
 
 const UserDetails = ({ page, limit, isSubmitting, onBack }) => {
-  
   return (
     <div className={classes.form_wrapper}>
       <div className={classes.user_image_wrapper}>
@@ -32,7 +31,7 @@ const UserDetails = ({ page, limit, isSubmitting, onBack }) => {
           type="email"
           name="email"
           placeholder="Email Address"
-          fullwidth
+          fullWidth
         />
       </div>
       <div className={classes.field_wrapper}>
@@ -40,7 +39,7 @@ const UserDetails = ({ page, limit, isSubmitting, onBack }) => {
         <InputField
           name="employment_status"
           placeholder="Employment Status"
-          fullwidth
+          fullWidth
         />
       </div>
       <div className={classes.field_wrapper}>
@@ -49,19 +48,19 @@ const UserDetails = ({ page, limit, isSubmitting, onBack }) => {
         <InputField
           name="year_of_undergraduate_completion"
           placeholder="YYYY"
-          fullwidth
+          fullWidth
         />
         <p>Additional academic qualifications/trainings beyond LLB</p>
         <InputField
           name="additional_skills"
           placeholder="Additional academic qualifications/trainings beyond LLB"
-          fullwidth
+          fullWidth
         />
         <p>Duration/Period as FIDA-Uganda Member</p>
         <InputField
           name="membership_duration"
           placeholder="2 Years"
-          fullwidth
+          fullWidth
         />
       </div>
 
