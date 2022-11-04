@@ -76,6 +76,34 @@ export const contractsTableColumn = [
   },
 ];
 
+export const eventsAttendanceTableColumns = [
+  {
+    Header: "No:",
+    accessor: "index",
+  },
+  {
+    Header: "Title of Event",
+    accessor: "title",
+  },
+  {
+    Header: "Project",
+    accessor: "project",
+  },
+  {
+    Header: "Funder",
+    accessor: "funder",
+  },
+  {
+    Header: "Date",
+    accessor: "date",
+    Cell: ({ cell: { value } }) => formatDate(value),
+  },
+  {
+    Header: "Recorded by",
+    accessor: "full_name",
+  },
+];
+
 export const allApprovalsTableColumns = [
   {
     Header: "Name",

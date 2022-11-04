@@ -7,11 +7,12 @@ import withForm from "../../../../hoc/withForm";
 import classes from "./NewAttendence.module.css";
 import InputField from "../../../common/UI/InputField/InputField";
 import { useProjectOptions } from "../../../../hooks/useProjects";
-import SelectInput from "../../../Membership/Allocations/AllocationForm/SelectInput";
+// import SelectInput from "../../../Membership/Allocations/AllocationForm/SelectInput";
+import SelectInputField from "../../../common/UI/SelectInputField/SelectInputField";
 
 
 
-const NewAttendence = ({ onClose, isSubmitting, setFieldValue, values }) => {
+const NewAttendence = ({isSubmitting, setFieldValue, values }) => {
   const projectOptions = useProjectOptions();
 
   const { num_female, num_male, age0_17, age18_30, age31_59, above59 } =
@@ -55,15 +56,21 @@ const NewAttendence = ({ onClose, isSubmitting, setFieldValue, values }) => {
         style={{ marginBottom: 10 }}
       >
         <div className={classes.field_row_label}>Project Name</div>
-        <SelectInput
-          placeholder="Select Project"
-          name="project"
-          fullwidth
-          options={projectOptions}
-          isMulti={false}
-          onChange={(option) => setFieldValue("project", option.label)}
-          required
-        />
+          <SelectInputField
+              data={projectOptions}
+              name="project"
+              placeholder="Choose a project"
+              setFieldValue={setFieldValue}
+          />
+        {/*<SelectInput*/}
+        {/*  placeholder="Select Project"*/}
+        {/*  name="project"*/}
+        {/*  fullwidth*/}
+        {/*  options={projectOptions}*/}
+        {/*  isMulti={false}*/}
+        {/*  onChange={(option) => setFieldValue("project", option.value)}*/}
+        {/*  required*/}
+        {/*/>*/}
       </SimpleGrid>
       <SimpleGrid
         columns={2}
