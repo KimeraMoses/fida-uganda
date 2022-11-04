@@ -1,27 +1,31 @@
-import React, { useEffect, useState } from 'react';
-import { useDisclosure } from '@chakra-ui/react';
-import Modal from '../../common/Modal';
-import SectionHeader from '../../common/SectionHeader';
-import NewMembersForm from './NewMemberForm/NewMembersForm';
-import { useMembers } from '../../../hooks/useMember';
-import Table from '../../common/TableComponent/Table';
-import { membersTableColumns } from '../../../lib/tableColumns';
+import React, { useEffect, useState } from "react";
+import { useDisclosure } from "@chakra-ui/react";
+import Modal from "../../common/Modal";
+import SectionHeader from "../../common/SectionHeader";
+import NewMembersForm from "./NewMemberForm/NewMembersForm";
+import { useMembers } from "../../../hooks/useMember";
+import Table from "../../common/TableComponent/Table";
+import { membersTableColumns } from "../../../lib/tableColumns";
+import { useDispatch } from "react-redux";
+import { selectMember } from "../../../store/memberReducer";
 
 const Members = () => {
-  const { data: members, isLoading } = useMembers();
-  const { isOpen,  onClose } = useDisclosure();
-
+  const { data: membersData, isLoading } = useMembers();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const dispatch = useDispatch();
 
   const [data, setData] = useState([]);
   useEffect(() => {
     setData([]);
-    if (members?.Members?.length) {
-      const dataToSet = members?.Members?.map((b) => {
+    if (membersData?.Members?.length) {
+      const dataToSet = membersData?.Members?.map((b, idx) => {
         return {
           ...b,
           name: {
-            name: b?.first_name + b?.last_name,
-            membership_no: b?.membership_no,
+            name: b?.first_name + " " + b?.last_name,
+            membership_no: b?.membership_no
+              ? b?.membership_no
+              : `FDA00${idx + 1}`,
           },
           contacts: {
             phone: b?.phoneNumber,
@@ -29,14 +33,20 @@ const Members = () => {
           },
           membership: {
             duration: b?.membership_duration,
-            feeStatus: b?.hasPaid
+            feeStatus: b?.hasPaid,
           },
         };
       });
-      // console.log('it data', dataToSet)
       setData(dataToSet);
     }
-  }, [members]);
+  }, [membersData]);
+
+  const onEditHandler = (member) => {
+    dispatch(
+      selectMember(membersData?.Members?.find((el) => el?.id === member?.id))
+    );
+    onOpen();
+  };
 
   return (
     <>
@@ -45,9 +55,10 @@ const Members = () => {
         loading={isLoading}
         data={data ? data : null}
         btnLabel="Add Member"
+        btnClick={onOpen}
         tableName="Members"
         columns={membersTableColumns}
-        onEditHandler
+        onEditHandler={onEditHandler}
       />
       {/* <MemberTable
         isLoading={isLoading}

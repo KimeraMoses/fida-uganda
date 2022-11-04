@@ -44,4 +44,14 @@
   .allocation_status_wrapper.fail span {
     background-color: #d30000;
   }
+  .notes_status h6 {
+    font-size: 14px;
+    font-weight: 400;
+  }
+  .notes_status.read h6 {
+    color: #38CB89;
+  }
+  .notes_status.unread h6 {
+    color: #FF3838;
+  }
   

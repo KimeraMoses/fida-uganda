@@ -53,7 +53,7 @@ const NewReportForm = ({
         formData.append("filename", values.report_title);
         //append all the values here depending on what the endpoint expects
         Object.keys(values).forEach((key) => {
-          if(key !== "supervisor_name") {
+          if (key !== "supervisor_name") {
             formData.append(key, values[key]);
           }
         });
@@ -76,7 +76,7 @@ const NewReportForm = ({
               <div className={classes.input_field_wrapper}>
                 <InputField
                   placeholder="Type here"
-                  fullwidth
+                  fullWidth
                   name="report_title"
                   // onChange={handleChange}
                 />
@@ -110,7 +110,7 @@ const NewReportForm = ({
               <div className={classes.input_field_wrapper}>
                 <InputField
                   placeholder="Type here"
-                  fullwidth
+                  fullWidth
                   name="reporting_period"
                   onChange={handleChange}
                 />
@@ -122,7 +122,7 @@ const NewReportForm = ({
                 <InputField
                   type="date"
                   placeholder="Type here"
-                  fullwidth
+                  fullWidth
                   name="date"
                   onChange={handleChange}
                 />

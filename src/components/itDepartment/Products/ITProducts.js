@@ -13,7 +13,7 @@ import Table from "../../common/TableComponent/Table";
 import { itProductsColumns } from "../../../lib/tableColumns";
 
 const ITProducts = () => {
-  const { isOpen, onClose } = useDisclosure();
+  const { isOpen, onClose, onOpen } = useDisclosure();
   const { data: itProductsData, isLoading } = useItProducts();
 
   const [data, setData] = useState([]);
@@ -33,12 +33,12 @@ const ITProducts = () => {
           },
           amount: {
             amount: b?.amount,
-            currency: b?.currency
+            currency: b?.currency,
           },
-            payment_status:{
-              payment_status:b?.payment_status ? b?.payment_status : 'N/A',
-              purchase_date: b?.purchase_date ? b?.purchase_date : 'N/A'
-            }
+          payment_status: {
+            payment_status: b?.payment_status ? b?.payment_status : "N/A",
+            purchase_date: b?.purchase_date ? b?.purchase_date : "N/A",
+          },
         };
       });
       // console.log('it data', dataToSet)
@@ -53,14 +53,15 @@ const ITProducts = () => {
         <Loader />
       ) : (
         <Table
-        isLoading={isLoading}
-        data={data ? data : null}
-        btnLabel="Add Product"
-        tableName="IT Products"
-        columns={itProductsColumns}
-        hideActions
-      />
-        
+          isLoading={isLoading}
+          data={data ? data : null}
+          btnLabel="Add Product"
+          btnClick={onOpen}
+          tableName="IT Products"
+          columns={itProductsColumns}
+          hideActions
+        />
+
         // <ITProductsTable
         //   data={data?.ITProducts}
         //   isProducts={true}

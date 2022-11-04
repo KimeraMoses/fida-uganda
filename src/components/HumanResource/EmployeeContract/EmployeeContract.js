@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import SectionHeader from "../../common/SectionHeader";
 import Modal from "../../common/Modal";
 import { useDisclosure } from "@chakra-ui/react";
-// import EmployeeContractTable from "./EmployeeContractTable/EmployeeContractTable";
 import NewContract from "./NewContract/NewContract";
 import Loader from "./../../common/UI/Loader/Loader";
 import Table from "../../common/TableComponent/Table";

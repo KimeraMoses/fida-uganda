@@ -72,7 +72,7 @@ const SummaryDetails = (props) => {
               ? "Travel Order Summary"
               : `${
                   selectedType === "leave" ? "Leave" : "Advance"
-                } Aplication Form Summary`}
+                } Application Form Summary`}
           </h2>
 
           <div className={classes.user_details}>

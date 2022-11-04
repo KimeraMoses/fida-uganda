@@ -9,6 +9,10 @@
   white-space: nowrap;
   text-transform: uppercase;
 }
+.subheader_wrapper {
+  font-weight: 400;
+  font-size: 12px;
+}
 
 .table {
   width: 100%;
@@ -21,9 +25,14 @@
 .table_actions_icon_wrapper {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 5px;
 }
 .table_header tr th:last-of-type {
+  text-align: center;
+}
+
+.table tbody tr td:last-of-type {
   text-align: center;
 }
 .no_data_wrapper {

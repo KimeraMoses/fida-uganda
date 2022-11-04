@@ -7,25 +7,16 @@ import Loader from "./../../common/UI/Loader/Loader";
 import { projectInitialValues, projectSchema } from "./NewFidaProject/schema";
 import { fidaProjectsTableColumns } from "../../../lib/tableColumns";
 import Table from "../../common/TableComponent/Table";
-import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const FidaProjects = () => {
   const { isOpen, onClose } = useDisclosure();
+  const navigate = useNavigate();
+  const { data, isLoading } = useProjects();
 
-  const { data: projects, isLoading } = useProjects();
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    setData([]);
-    if (projects?.projects?.length) {
-      const dataToSet = projects?.projects?.map((b) => {
-        return {
-          ...b,
-        };
-      });
-      setData(dataToSet);
-    }
-  }, [projects]);
-
+  const handleOpenFolder = (name) => {
+    navigate(`/fida-projects/${name.name}/${name.id}`);
+  };
   return (
     <>
       <SectionHeader title="Fida Projects" />
@@ -34,12 +25,11 @@ const FidaProjects = () => {
       ) : (
         data && (
           <Table
-            onViewHandler
-            data={data ? data : null}
+            onViewHandler={handleOpenFolder}
+            data={data ? data?.projects : null}
             columns={fidaProjectsTableColumns}
             showBtn={false}
             loading={isLoading}
-            showActions={true}
           />
           // <FidaProjectTable
           //   data={data?.projects}

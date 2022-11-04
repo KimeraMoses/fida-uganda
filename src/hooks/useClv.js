@@ -1,5 +1,6 @@
 import produce from "immer";
 import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useSelector } from "react-redux";
 import { addClv, deleteClv, editClv, getClv, getClvs } from "../apis/clv";
 import { CLVS_KEY, CLVS_STATS } from "../lib/constants";
 
@@ -84,4 +85,8 @@ export const useDeleteClv = () => {
       queryClient.invalidateQueries(CLVS_KEY);
     },
   });
+};
+
+export const useCLVId = () => {
+  return useSelector((state) => state.CLV.CLV);
 };

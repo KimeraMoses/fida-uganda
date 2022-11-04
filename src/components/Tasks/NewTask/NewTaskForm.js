@@ -63,7 +63,7 @@ const NewTaskForm = ({ onSubmit, error, isError, isSubmitting }) => {
             <Heading fontSize="md" fontWeight="medium">
               Task Title
             </Heading>
-            <InputField name="title" placeholder="Task Title" fullwidth />
+            <InputField name="title" placeholder="Task Title" fullWidth />
           </div>
           <div>
             <Heading fontSize="md" fontWeight="medium" mt={5}>
@@ -73,7 +73,7 @@ const NewTaskForm = ({ onSubmit, error, isError, isSubmitting }) => {
               name="description"
               type="text"
               placeholder="Task Description"
-              fullwidth
+              fullWidth
             />
           </div>
           <SimpleGrid columns={2} spacingX="40px">
@@ -85,7 +85,7 @@ const NewTaskForm = ({ onSubmit, error, isError, isSubmitting }) => {
                 name="startDate"
                 placeholder="End Date"
                 type="date"
-                fullwidth
+                fullWidth
               />
             </div>
             <div>
@@ -96,7 +96,7 @@ const NewTaskForm = ({ onSubmit, error, isError, isSubmitting }) => {
                 name="endDate"
                 placeholder="End Date"
                 type="date"
-                fullwidth
+                fullWidth
               />
             </div>
           </SimpleGrid>
@@ -147,7 +147,7 @@ const NewTaskForm = ({ onSubmit, error, isError, isSubmitting }) => {
                 placeholder="Type outline and press enter or add button"
                 name="outline"
                 value={outline}
-                fullwidth={true}
+                fullWidth={true}
                 onChange={(e) => setOutLine(e.target.value)}
               />
               <div style={{ float: "right" }}>
