@@ -7,7 +7,6 @@ import Loader from "./../../common/UI/Loader/Loader";
 import { projectInitialValues, projectSchema } from "./NewFidaProject/schema";
 import { fidaProjectsTableColumns } from "../../../lib/tableColumns";
 import Table from "../../common/TableComponent/Table";
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const FidaProjects = () => {

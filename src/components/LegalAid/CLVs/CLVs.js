@@ -27,7 +27,7 @@ const CLVs = () => {
         return {
           ...b,
           name: {
-            name: b?.first_name + b?.last_name,
+            name: b?.first_name + " " + b?.last_name,
             profession: b?.profession,
           },
           contacts: {
@@ -36,13 +36,12 @@ const CLVs = () => {
           },
           idNumber: {
             idNumber: b?.fida_id,
-            date: b?.createdAt
+            date: b?.createdAt,
           },
           address: {
             address: b?.address,
-            city: b?.city
+            city: b?.city,
           },
-        
         };
       });
       // console.log('it data', dataToSet)
@@ -51,9 +50,7 @@ const CLVs = () => {
   }, [clvsData]);
 
   const onEditHandler = (CLV) => {
-    dispatch(
-      selectCLV(clvsData?.clvs?.find((el) => el?.id === CLV?.id))
-    );
+    dispatch(selectCLV(clvsData?.clvs?.find((el) => el?.id === CLV?.id)));
     onOpen();
   };
 
@@ -76,27 +73,27 @@ const CLVs = () => {
       {isLoading ? (
         <Loader />
       ) : (
-          <Table
+        <Table
           onEditHandler={onEditHandler}
-    onViewHandle={onOpen}
+          onViewHandle={onOpen}
+          btnClick={onOpen}
           isLoading={isLoading}
           data={data ? data : null}
           btnLabel="Add CLV"
           tableName="CLV"
           columns={CLVTableColumns}
         />
-          // <CLVTable
-          //   isLoading={isLoading}
-          //   data={data ? data.clvs : null}
-          //   btnLabel="Add CLV"
-          //   btnClick={onOpen}
-          //   tableName="CLV"
-          // />
-        
+        // <CLVTable
+        //   isLoading={isLoading}
+        //   data={data ? data.clvs : null}
+        //   btnLabel="Add CLV"
+        //   btnClick={onOpen}
+        //   tableName="CLV"
+        // />
       )}
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <NewClvForm
-          action={CLV?'editClv':"newClv"}
+          action={CLV ? "editClv" : "newClv"}
           validationSchema={clvSchema}
           onClose={onClose}
           initialValues={clvInitialValues}

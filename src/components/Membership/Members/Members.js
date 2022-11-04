@@ -1,29 +1,31 @@
-import React, { useEffect, useState } from 'react';
-import { useDisclosure } from '@chakra-ui/react';
-import Modal from '../../common/Modal';
-import SectionHeader from '../../common/SectionHeader';
-import NewMembersForm from './NewMemberForm/NewMembersForm';
-import { useMembers } from '../../../hooks/useMember';
-import Table from '../../common/TableComponent/Table';
-import { membersTableColumns } from '../../../lib/tableColumns';
-import { useDispatch } from 'react-redux';
-import { selectMember, resetMember } from "../../../store/memberReducer";
+import React, { useEffect, useState } from "react";
+import { useDisclosure } from "@chakra-ui/react";
+import Modal from "../../common/Modal";
+import SectionHeader from "../../common/SectionHeader";
+import NewMembersForm from "./NewMemberForm/NewMembersForm";
+import { useMembers } from "../../../hooks/useMember";
+import Table from "../../common/TableComponent/Table";
+import { membersTableColumns } from "../../../lib/tableColumns";
+import { useDispatch } from "react-redux";
+import { selectMember } from "../../../store/memberReducer";
 
 const Members = () => {
   const { data: membersData, isLoading } = useMembers();
   const { isOpen, onOpen, onClose } = useDisclosure();
-const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [data, setData] = useState([]);
   useEffect(() => {
     setData([]);
     if (membersData?.Members?.length) {
-      const dataToSet = membersData?.Members?.map((b) => {
+      const dataToSet = membersData?.Members?.map((b, idx) => {
         return {
           ...b,
           name: {
-            name: b?.first_name + b?.last_name,
-            membership_no: b?.membership_no,
+            name: b?.first_name + " " + b?.last_name,
+            membership_no: b?.membership_no
+              ? b?.membership_no
+              : `FDA00${idx + 1}`,
           },
           contacts: {
             phone: b?.phoneNumber,
@@ -31,11 +33,10 @@ const dispatch = useDispatch()
           },
           membership: {
             duration: b?.membership_duration,
-            feeStatus: b?.hasPaid
+            feeStatus: b?.hasPaid,
           },
         };
       });
-      // console.log('it data', dataToSet)
       setData(dataToSet);
     }
   }, [membersData]);
@@ -57,7 +58,6 @@ const dispatch = useDispatch()
         tableName="Members"
         columns={membersTableColumns}
         onEditHandler={onEditHandler}
-      
       />
       {/* <MemberTable
         isLoading={isLoading}
@@ -67,8 +67,8 @@ const dispatch = useDispatch()
         tableName="Members"
       /> */}
       <Modal
-         isOpen={isOpen}
-         onClose={onClose}
+        isOpen={isOpen}
+        onClose={onClose}
         title="Membership Form"
         size="3xl"
       >

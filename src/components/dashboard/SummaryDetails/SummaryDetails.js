@@ -28,7 +28,7 @@ import {
 import Loader from "../../common/UI/Loader/Loader";
 
 import { useSelector } from "react-redux";
-import {useProject} from "../../../hooks/useProjects";
+import { useProject } from "../../../hooks/useProjects";
 
 const SummaryDetails = (props) => {
   const { type } = props;
@@ -59,7 +59,7 @@ const SummaryDetails = (props) => {
   const { data: travelData, isLoading: loadingTravelOrders } =
     useTravelOrder(travelName);
 
-  const projectName = useProject( travelData?.travelOrder?.project);
+  const projectName = useProject(travelData?.travelOrder?.project);
   // console.log(projectName?.data?.project?.name)
 
   const { data: reqData, isLoading: loadingReqData } = useRequisition(reqName);

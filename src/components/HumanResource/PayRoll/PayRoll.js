@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import SectionHeader from "../../common/SectionHeader";
-import PayrollTable from "./PayRollTables/PayrollTable";
+// import PayrollTable from "./PayRollTables/PayrollTable";
 import Modal from "../../common/Modal";
 import { toast, useDisclosure } from "@chakra-ui/react";
 import NewNotes from "./NewNotes/NewNotes";
-import { usePayrolls } from "../../../hooks/usePayroll";
+// import { usePayrolls } from "../../../hooks/usePayroll";
 import {
   useAddPayrollNote,
   usePayrollNotes,
@@ -19,8 +19,8 @@ import Table from "../../common/TableComponent/Table";
 
 const PayRoll = () => {
   const { isOpen, onClose } = useDisclosure();
-  const { data } = usePayrollNotes();
-  const { data: payroll, isLoading } = usePayrolls();
+  const { data, isLoading } = usePayrollNotes();
+  // const { data: payroll, isLoading } = usePayrolls();
   const [file, setFile] = useState(null);
 
   const handleFileChange = (event) => {
@@ -31,7 +31,6 @@ const PayRoll = () => {
       setFile(theFile);
     }
   };
-
 
   return (
     <>
@@ -57,10 +56,10 @@ const PayRoll = () => {
             //   tableName="Payroll Notes"
             // />
           )}
-          <SectionHeader title="Payroll" />
+          {/* <SectionHeader title="Payroll" />
           {payroll?.payrolls && (
             <PayrollTable data={payroll?.payrolls} tableName="Payroll" />
-          )}
+          )} */}
         </>
       )}
       <Modal isOpen={isOpen} onClose={onClose} title="Add New Note">

@@ -12,7 +12,7 @@ import { notificationsTableColumns } from "../../../lib/tableColumns";
 import Table from "../../common/TableComponent/Table";
 
 const Notifications = () => {
-  const { isOpen,  onClose } = useDisclosure();
+  const { isOpen, onClose } = useDisclosure();
   const { data: membersData } = useMembers();
   const { data: notifications, isLoading } = useNotifications();
 
@@ -21,6 +21,7 @@ const Notifications = () => {
     message: "",
     subject: "",
   };
+  console.log("noti", notifications?.Notifications);
   const [data, setData] = useState([]);
   useEffect(() => {
     setData([]);
@@ -39,12 +40,11 @@ const Notifications = () => {
               }
               // eslint-disable-next-line array-callback-return
               return;
-            })
+            }),
           },
           date: {
-            date: b?.createdAt
-          }
-      
+            date: b?.createdAt,
+          },
         };
       });
       setData(dataToSet);
@@ -53,13 +53,13 @@ const Notifications = () => {
   return (
     <div>
       <SectionHeader title="Notifications" />
-      {/* <TableSearch btnLabel="Compose" btnClick={onOpen} /> */}
       <Table
-            data={data ? data : null}
-            columns={notificationsTableColumns}
+        data={data ? data : null}
+        columns={notificationsTableColumns}
         btnLabel="Compose"
-            loading={isLoading}
-          />
+        loading={isLoading}
+        hideActions
+      />
       {/* <NotificationsTable
         data={data ? data.Notifications : null}
         isLoading={isLoading}

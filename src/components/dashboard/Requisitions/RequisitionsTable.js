@@ -12,7 +12,7 @@ import { useUsers } from "../../../hooks/useUser";
 
 const RequisitionTable = ({ data, type }) => {
   const users = useUsers();
-  console.log('users', users)
+  console.log("users", users);
   const navigate = useNavigate();
   const handleViewSummary = (id) => {
     navigate(`/requisitions/${id}?status=${type}`);
@@ -47,7 +47,9 @@ const RequisitionTable = ({ data, type }) => {
                       {item?.registeredBy &&
                         users
                           .filter((user) => user.id === item.registeredBy.id)
-                          .map((user) => user.first_name + '' + user.last_name)}
+                          .map(
+                            (user) => user.first_name + " " + user.last_name
+                          )}
                     </Td>
                     <Td>{item?.project_name}</Td>
                     <Td>{item?.delivery_location}</Td>
