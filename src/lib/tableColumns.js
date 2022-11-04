@@ -682,3 +682,75 @@ export const CLVTableColumns = [
     ),
   },
 ];
+
+export const employeesColumns = [
+  {
+    Header: "name and role",
+    subHeader: "complainant id",
+    accessor: "name",
+    Cell: ({ cell: { value } }) => (
+      <>
+        <strong>{value.name}</strong>
+        <div>{value.role}</div>
+      </>
+    ),
+  },
+  {
+    Header: "phone number and email",
+    subHeader: "time",
+    accessor: "contacts",
+    Cell: ({ cell: { value } }) => (
+      <>
+        
+        <strong>{value.phoneNumber}</strong>
+        <div>{value.email}</div>
+     
+      </>
+    ),
+  },
+  {
+    Header: "sex and district",
+    subHeader: "body",
+    accessor: "sex",
+    Cell: ({ cell: { value } }) => (
+      <>
+        <strong>{value.sex}</strong>
+        <div>{value.district}</div>
+      </>
+    ),
+  },
+  {
+    Header: "date of birth and nin",
+    subHeader: "date received",
+    accessor: "dateOfBirth",
+    Cell: ({ cell: { value } }) => (
+      <>
+        <strong>{value.dateOfBirth}</strong>
+        <div>{value.nin}</div>
+      </>
+    ),
+  },
+  {
+    Header: "hiring date and termination date",
+    subHeader: "date received",
+    accessor: "hiringDate",
+    Cell: ({ cell: { value } }) => (
+      <>
+        <strong>{value.hiringDate}</strong>
+        <div>{value.terminationDate}</div>
+        <div>{formatDate(value.date_recieved)}</div>
+      </>
+    ),
+  },
+  {
+    Header: "working status and last login",
+    subHeader: "date received",
+    accessor: "workStatus",
+    Cell: ({ cell: { value } }) => (
+      <>
+        <strong>{value.workingStatus}</strong>
+        <div>{value.lastLogin}</div>
+      </>
+    ),
+  },
+];
