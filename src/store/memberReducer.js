@@ -7,6 +7,7 @@ const slice = createSlice({
   },
   reducers: {
     setMember: (state, action) => {
+      // console.log('action', action)
       if (!state.member) {
         state.member = action.payload;
       } else {

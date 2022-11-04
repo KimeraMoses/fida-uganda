@@ -6,17 +6,19 @@ import NewMembersForm from './NewMemberForm/NewMembersForm';
 import { useMembers } from '../../../hooks/useMember';
 import Table from '../../common/TableComponent/Table';
 import { membersTableColumns } from '../../../lib/tableColumns';
+import { useDispatch } from 'react-redux';
+import { selectMember, resetMember } from "../../../store/memberReducer";
 
 const Members = () => {
-  const { data: members, isLoading } = useMembers();
-  const { isOpen,  onClose } = useDisclosure();
-
+  const { data: membersData, isLoading } = useMembers();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+const dispatch = useDispatch()
 
   const [data, setData] = useState([]);
   useEffect(() => {
     setData([]);
-    if (members?.Members?.length) {
-      const dataToSet = members?.Members?.map((b) => {
+    if (membersData?.Members?.length) {
+      const dataToSet = membersData?.Members?.map((b) => {
         return {
           ...b,
           name: {
@@ -36,7 +38,14 @@ const Members = () => {
       // console.log('it data', dataToSet)
       setData(dataToSet);
     }
-  }, [members]);
+  }, [membersData]);
+
+  const onEditHandler = (member) => {
+    dispatch(
+      selectMember(membersData?.Members?.find((el) => el?.id === member?.id))
+    );
+    onOpen();
+  };
 
   return (
     <>
@@ -47,7 +56,8 @@ const Members = () => {
         btnLabel="Add Member"
         tableName="Members"
         columns={membersTableColumns}
-        onEditHandler
+        onEditHandler={onEditHandler}
+      
       />
       {/* <MemberTable
         isLoading={isLoading}
@@ -57,8 +67,8 @@ const Members = () => {
         tableName="Members"
       /> */}
       <Modal
-        isOpen={isOpen}
-        onClose={onClose}
+         isOpen={isOpen}
+         onClose={onClose}
         title="Membership Form"
         size="3xl"
       >

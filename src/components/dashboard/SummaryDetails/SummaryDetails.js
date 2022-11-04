@@ -205,12 +205,29 @@ const SummaryDetails = (props) => {
                   <h6>{reqData?.requisition?.budget_year}</h6>
                   <h6>Type: </h6>
                   <h6>{reqData?.requisition?.type}</h6>
-                  <h6>Unit Price:</h6>
-                  <h6>{reqData?.requisition?.unit_price}</h6>
-                  <h6>Number of Units:</h6>
-                  <h6>{reqData?.requisition?.num_units}</h6>
-                  <h6>Subject of Procurement:</h6>
-                  <h6>{reqData?.requisition?.subject_of_procurement}</h6>
+                  {reqData?.requisition?.type !== "Activity" ? (
+                    <>
+                      <h6>Unit Price:</h6>
+                      <h6>{reqData?.requisition?.unit_price}</h6>
+                      <h6>Number of Units:</h6>
+                      <h6>{reqData?.requisition?.num_units}</h6>
+                      <h6>Subject of Procurement:</h6>
+                      <h6>{reqData?.requisition?.subject_of_procurement}</h6>
+                    </>
+                  ) : (
+                    <>
+                      <h6>Activity items:</h6>
+                      <h6>
+                        {reqData?.requisition?.activities.map((item) => (
+                          <div key={item.id}>
+                            <h3>Item: {item.item}</h3>
+                            <p>Quantity: {item.qty}</p>
+                            <p>Unit: {item.unit}</p>
+                          </div>
+                        ))}
+                      </h6>
+                    </>
+                  )}
                   <h6>Date required:</h6>
                   <h6>
                     {new Date(

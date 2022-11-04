@@ -19,7 +19,7 @@ import Table from "../../common/TableComponent/Table";
 
 const PayRoll = () => {
   const { isOpen, onClose } = useDisclosure();
-  const { data: payrollNotes } = usePayrollNotes();
+  const { data } = usePayrollNotes();
   const { data: payroll, isLoading } = usePayrolls();
   const [file, setFile] = useState(null);
 
@@ -32,22 +32,6 @@ const PayRoll = () => {
     }
   };
 
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    setData([]);
-    if (payrollNotes?.PayrollNotes.length) {
-      const dataToSet = payrollNotes?.PayrollNotes.map((b) => {
-        return {
-          ...b,
-          date: {
-            date: b?.createdAt,
-          },
-        };
-      });
-      setData(dataToSet);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [payrollNotes]);
 
   return (
     <>
@@ -58,9 +42,9 @@ const PayRoll = () => {
         <>
           {/* <TableSearch btnLabel="Add Notes" btnClick={onOpen} /> */}
 
-          {payrollNotes?.PayrollNotes && (
+          {data?.PayrollNotes && (
             <Table
-              data={data ? data : null}
+              data={data ? data?.PayrollNotes : null}
               columns={payrollNotesTableColumns}
               showBtn={false}
               loading={isLoading}

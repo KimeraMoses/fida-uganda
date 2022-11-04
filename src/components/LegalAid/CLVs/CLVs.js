@@ -3,20 +3,23 @@ import SectionHeader from "../../common/SectionHeader";
 import { useDisclosure } from "@chakra-ui/react";
 import Modal from "../../common/Modal";
 import NewClvForm from "./CLVForms/NewClvForm";
-import { useClvs, useAddClv } from "../../../hooks/useClv";
+import { useClvs, useAddClv, useCLVId } from "../../../hooks/useClv";
 import { clvInitialValues, clvSchema } from "./CLVForms/schema";
 import Loader from "./../../common/UI/Loader/Loader";
 import Table from "../../common/TableComponent/Table";
 import { CLVTableColumns } from "../../../lib/tableColumns";
+import { useDispatch } from "react-redux";
+import { selectCLV } from "../../../store/CLVReducer";
 
 const CLVs = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data: clvsData, isLoading } = useClvs();
-
+  const CLV = useCLVId();
   const [avatar, setAvatar] = useState(null);
   const [url, setImageUrl] = useState("");
-
+  const dispatch = useDispatch();
   const [data, setData] = useState([]);
+
   useEffect(() => {
     setData([]);
     if (clvsData?.clvs?.length) {
@@ -47,6 +50,26 @@ const CLVs = () => {
     }
   }, [clvsData]);
 
+  const onEditHandler = (CLV) => {
+    dispatch(
+      selectCLV(clvsData?.clvs?.find((el) => el?.id === CLV?.id))
+    );
+    onOpen();
+  };
+
+  const addCLVId = (values) => {
+    dispatch(selectCLV(values));
+    return { ...values, id: CLVs?.id };
+  };
+
+  const mutateInitialValues = (initialValues) => {
+    if (CLV) {
+      let { registeredBy, ...newValues } = CLV;
+      return { ...initialValues, ...newValues };
+    }
+    return initialValues;
+  };
+
   return (
     <>
       <SectionHeader title="CLVs" />
@@ -54,7 +77,7 @@ const CLVs = () => {
         <Loader />
       ) : (
           <Table
-          onEditHandler={onOpen}
+          onEditHandler={onEditHandler}
     onViewHandle={onOpen}
           isLoading={isLoading}
           data={data ? data : null}
@@ -73,7 +96,7 @@ const CLVs = () => {
       )}
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <NewClvForm
-          action="newClv"
+          action={CLV?'editClv':"newClv"}
           validationSchema={clvSchema}
           onClose={onClose}
           initialValues={clvInitialValues}
@@ -86,6 +109,8 @@ const CLVs = () => {
           file={avatar}
           fileName="image"
           isFormData={true}
+          mutateData={addCLVId}
+          mutateInitialValues={mutateInitialValues}
         />
       </Modal>
     </>

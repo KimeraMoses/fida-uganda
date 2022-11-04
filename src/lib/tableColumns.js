@@ -318,8 +318,15 @@ export const itComplaintsColumns = [
 ];
 
 export const clientFilesColumns = [
-  { Header: "S/N", accessor: "S/N" },
-  { Header: "date of session", accessor: "date_of_first_session" },
+  {
+    Header: "S/N",
+    accessor: "S/N",
+  },
+  {
+    Header: "date of session",
+    accessor: "date_of_first_session",
+    Cell: ({ cell: { value } }) => <div>{formatDate(value)}</div>,
+  },
   { Header: "month", accessor: "month" },
   { Header: "staff/client", accessor: "patient_role" },
   { Header: "mode of communication", accessor: "mode_of_communication" },
@@ -330,11 +337,7 @@ export const fleetDatabaseColumns = [
   {
     Header: "S/n",
     accessor: "sn",
-    Cell: ({ cell: { value } }) => (
-      <div>
-        <div>{value.sn}</div>
-      </div>
-    ),
+    Cell: ({ cell: { value } }) => <div>{value.sn}</div>,
   },
   {
     Header: "Month & Year of consideration",
@@ -405,14 +408,22 @@ export const payrollNotesTableColumns = [
   { Header: "year", accessor: "year" },
   {
     Header: "date written",
-    accessor: "date",
+    accessor: "createdAt",
+    Cell: ({ cell: { value } }) => <div>{formatDate(value)}</div>,
+  },
+  {
+    Header: "status",
+    accessor: "status",
     Cell: ({ cell: { value } }) => (
-      <div>
-        <div>{formatDate(value)}</div>
+      <div
+        className={`${"data__secondary_text"} ${"notes_status"} ${
+          value === "unread" ? "unread" : "read"
+        }`}
+      >
+        <h6>{value === "unread" ? "Unread" : "Read"}</h6>
       </div>
     ),
   },
-  { Header: "status", accessor: "status" },
 ];
 export const fidaProjectsTableColumns = [
   {
@@ -425,7 +436,7 @@ export const fidaProjectsTableColumns = [
   },
   {
     Header: "last modified",
-    accessor: "updatedAt",
+    accessor: "updateAt",
     Cell: ({ cell: { value } }) => formatDate(value),
   },
   // { Header: "actions", accessor: "name" },
