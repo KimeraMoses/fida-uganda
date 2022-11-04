@@ -17,17 +17,11 @@ const Approvals = () => {
           isLoading={isLoading}
           data={data?data?.approvals : null}
           showBtn={false}
-          tableName="Fida Assets"
+          tableName="Approvals"
           columns={ procurementApprovalTableColumns}
           hideActions
         />
-        /* <NewRequestsTable
-          data={data ? data.approvals : null}
-          isLoading={isLoading}
-          showBtn={false}
-          subHeading={<SubHeading title="New Request" />}
-          tableName="New approval requests"
-        /> */
+
       )}
     </div>
   );
