@@ -46,14 +46,14 @@ const AddBeneficiariesForm = ({
               <InputField
                 placeholder="Name"
                 name="name"
-                fullwidth
+                fullWidth
                 type="text"
                 label="Name"
               />
               <InputField
                 placeholder="Age"
                 name="age"
-                fullwidth
+                fullWidth
                 type="number"
                 label="Age"
               />
@@ -68,14 +68,14 @@ const AddBeneficiariesForm = ({
               <InputField
                 placeholder="location"
                 name="location"
-                fullwidth
+                fullWidth
                 type="text"
                 label="Location"
               />
               <InputField
                 placeholder="+256759130054"
                 name="phoneNumber"
-                fullwidth
+                fullWidth
                 type="tel"
                 label="Phone Number"
                 maxLength={12}

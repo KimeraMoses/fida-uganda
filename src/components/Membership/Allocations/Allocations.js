@@ -12,7 +12,7 @@ import Table from "../../common/TableComponent/Table";
 import { membersAllocationsColumns } from "../../../lib/tableColumns";
 
 const Allocations = () => {
-  const { isOpen, onClose } = useDisclosure();
+  const { isOpen, onClose, onOpen } = useDisclosure();
   const initialValues = { subject: "", message: "", allocated_to: [] };
 
   const { data: membersData } = useMembers();
@@ -48,6 +48,7 @@ const Allocations = () => {
         isLoading={isLoading}
         data={data ? data : null}
         btnLabel="Add Activity"
+        btnClick={onOpen}
         tableName="Members Activities"
         columns={membersAllocationsColumns}
         hideActions

@@ -61,7 +61,7 @@ const Form = (props) => {
             />
           </div>
           <div className={classes.fida__email_subject}>
-            <InputField placeholder="Subject" name="subject" fullwidth />
+            <InputField placeholder="Subject" name="subject" fullWidth />
           </div>
         </div>
         <div className={classes.fida__body_wrapper}>

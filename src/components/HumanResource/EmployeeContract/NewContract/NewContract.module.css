@@ -40,6 +40,9 @@
   align-items: center;
   /* justify-content: space-between; */
 }
+.upload_name {
+  text-align: left;
+}
 .file_name {
   color: #242634;
   opacity: 0.5;

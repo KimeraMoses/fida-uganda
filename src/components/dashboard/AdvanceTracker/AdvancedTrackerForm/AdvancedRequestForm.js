@@ -9,7 +9,7 @@ import formatDate from "../../../../lib/formatDate";
 const AdvancedRequestForm = ({ isSubmitting, onClose }) => {
   return (
     <div className={classes.leave_appn_form_wrapper}>
-      <SimpleGrid columns={2} spacing={2}>
+      {/*<SimpleGrid columns={2} spacing={2}>*/}
         <InputField
           name="date_needed"
           type="date"
@@ -17,12 +17,12 @@ const AdvancedRequestForm = ({ isSubmitting, onClose }) => {
           placeholder="Date needed"
           min={formatDate(new Date())}
         />
-        <InputField
-          name="address_on_leave"
-          label="Address on leave"
-          type="text"
-        />
-      </SimpleGrid>
+        {/*<InputField*/}
+        {/*  name="address_on_leave"*/}
+        {/*  label="Address on leave"*/}
+        {/*  type="text"*/}
+        {/*/>*/}
+      {/*</SimpleGrid>*/}
       <SimpleGrid columns={2} spacing={4}>
         <InputField name="budget_year" label="Budget Year" type="number" />
         <InputField name="month" label="Month" placeholder="e.g March" />
@@ -47,7 +47,7 @@ const AdvancedRequestForm = ({ isSubmitting, onClose }) => {
       <SimpleGrid column={1}>
         <InputField
           name="tel_on_leave"
-          label="Telephone on leave"
+          label="Telephone"
           type="number"
           maxlength="12"
         />

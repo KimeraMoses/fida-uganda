@@ -1,6 +1,6 @@
-import React, { useCallback } from 'react';
-import classes from '../../PayRoll/NewNotes/NewNotes.module.css';
-import { useDropzone } from 'react-dropzone';
+import React, { useCallback, useEffect } from "react";
+import classes from "../../PayRoll/NewNotes/NewNotes.module.css";
+import { useDropzone } from "react-dropzone";
 import {
   Alert,
   AlertIcon,
@@ -15,11 +15,11 @@ import {
   PopoverHeader,
   PopoverTrigger,
   useToast,
-} from '@chakra-ui/react';
-import { MdDeleteOutline } from 'react-icons/md';
-import FormButton from '../../../common/UI/FormButton/FormButton';
-import { useAddContracts } from '../../../../hooks/useContract';
-import { toastError, toastSuccess } from '../../../../lib/toastDetails';
+} from "@chakra-ui/react";
+import { MdDeleteOutline } from "react-icons/md";
+import FormButton from "../../../common/UI/FormButton/FormButton";
+import { useAddContracts, useContracts } from "../../../../hooks/useContract";
+import { toastError, toastSuccess } from "../../../../lib/toastDetails";
 
 const fileSizeConverter = (SIZE_IN_BYTES) => {
   const SIZE_IN_MBS = 0.000001 * SIZE_IN_BYTES;
@@ -28,12 +28,12 @@ const fileSizeConverter = (SIZE_IN_BYTES) => {
 
 const FilePreview = ({ file, handleDelete }) => {
   const initRef = React.useRef();
-  const type = file.file.type.split('/');
+  const type = file.file.type.split("/");
   const fileType = type[type?.length - 1];
   return (
     <div className={classes.file_wrapper}>
       <div className={classes.file_wrapper_doc}>
-        {fileType === 'pdf' ? (
+        {fileType === "pdf" ? (
           <svg
             width="22"
             height="26"
@@ -54,7 +54,7 @@ const FilePreview = ({ file, handleDelete }) => {
             width="28"
             height="28"
             viewBox="0 0 48 48"
-            style={{ fill: '#000000' }}
+            style={{ fill: "#000000" }}
           >
             <path
               fill="#ddbaff"
@@ -105,7 +105,7 @@ const FilePreview = ({ file, handleDelete }) => {
                   Confirm Delete
                 </PopoverHeader>
                 <PopoverBody>
-                  Are you sure you wish to delete{' '}
+                  Are you sure you wish to delete{" "}
                   <strong>{file?.file?.name}</strong>? This action is permanent
                   and can not be undone
                 </PopoverBody>
@@ -142,6 +142,7 @@ const FilePreview = ({ file, handleDelete }) => {
 
 const NewUpload = ({ files, setFiles }) => {
   const { mutate, isLoading, isSuccess, isError } = useAddContracts();
+  const { data } = useContracts();
   const toast = useToast();
   const onDrop = useCallback(
     (acceptedFiles) => {
@@ -153,14 +154,39 @@ const NewUpload = ({ files, setFiles }) => {
     [setFiles]
   );
 
+  const duplicateNameValidator = (file) => {
+    // console.log('before', file.name)
+    for (const contract of files) {
+      // console.log('file', file.name, '=== contract:file', contract.file.name)
+      if (contract.file.name === file.name) {
+        // console.log('returning', file.name)
+        return {
+          code: "duplicate-file",
+          message: `File with name ${file.name} already exists`,
+        };
+      }
+    }
+    if (data?.contracts) {
+      for (const contract of data?.contracts) {
+        if (contract.filename === file.name) {
+          return {
+            code: "duplicate-file",
+            message: `File with name ${file.name} already exists`,
+          };
+        }
+      }
+    }
+  };
+
   const { getRootProps, getInputProps, isDragActive, fileRejections } =
     useDropzone({
       onDrop,
       accept: {
-        'application/pdf': ['.pdf'],
-        'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
-          ['.doc', '.docx'],
+        "application/pdf": [".pdf"],
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+          [".doc", ".docx"],
       },
+      validator: duplicateNameValidator,
     });
 
   const handleDelete = (id) => {
@@ -170,17 +196,16 @@ const NewUpload = ({ files, setFiles }) => {
   };
 
   const handleSubmit = async () => {
-    console.log(files);
     mutate(files);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isSuccess) {
-      toast(toastSuccess('Report added successfully'));
-      setFiles([])
+      toast(toastSuccess("Report added successfully"));
+      setFiles([]);
     }
     if (isError) {
-      toast(toastError('Failed to add contract'));
+      toast(toastError("Failed to add contract"));
     }
   }, [isSuccess, isError, toast, setFiles]);
 
@@ -189,19 +214,19 @@ const NewUpload = ({ files, setFiles }) => {
       {fileRejections?.length > 0 && (
         <Alert status="error">
           <AlertIcon />
-          File type not allowed, pdf and word documents accepted only
+          You cannot upload files with the same name
         </Alert>
       )}
       <div
         className={`${classes.upload_section_wrapper} ${
-          files.length > 0 ? classes.hasFiles : ''
+          files.length > 0 ? classes.hasFiles : ""
         }`}
       >
         <div
           {...getRootProps({
             className: `dropzone ${classes.upload_area} ${
-              isDragActive ? classes.active : ''
-            } ${files.length > 0 ? classes.hasFiles : ''}`,
+              isDragActive ? classes.active : ""
+            } ${files.length > 0 ? classes.hasFiles : ""}`,
           })}
         >
           <label id="label-file-upload" htmlFor="input-file-upload">

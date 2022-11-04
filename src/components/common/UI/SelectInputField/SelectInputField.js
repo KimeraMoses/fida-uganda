@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Field, useField } from "formik";
 
 //===ICONS IMPORTS===
@@ -9,7 +9,7 @@ import classes from "./SelectInputField.module.css";
 
 const SelectInputField = (props) => {
   const [selected, setSelected] = useState("");
-  const { data, placeholder, name, ...rest } = props;
+  const { data, placeholder, name, defaultValue, ...rest } = props;
   const [meta] = useField(name);
   const isInvalid = meta.touched && meta.error ? true : false;
 
@@ -19,6 +19,16 @@ const SelectInputField = (props) => {
     setIsActive(false);
     props?.setFieldValue(name, option?.value);
   };
+
+  useEffect(() => {
+    if (defaultValue) {
+      setSelected(data?.find((option) => option.value === defaultValue)?.label);
+      setIsActive(false);
+      props?.setFieldValue(name, defaultValue);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [defaultValue]);
 
   return (
     <div
@@ -50,7 +60,7 @@ const SelectInputField = (props) => {
               <div
                 key={option.label}
                 className={classes.fida__dropdown_item}
-                onClick={(e) => selectedItemHandler(option)}
+                onClick={() => selectedItemHandler(option)}
               >
                 {option.label}
               </div>

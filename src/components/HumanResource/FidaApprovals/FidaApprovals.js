@@ -30,8 +30,6 @@ const FidaApprovals = () => {
     }
   }, [approvalData]);
 
-  // console.log("data", approvalData);
-
   const onEditHandler = (user) => {
     setUser(user);
     onOpen();

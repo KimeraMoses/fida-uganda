@@ -75,7 +75,7 @@ const View = () => {
           path="project-files/documents/:folderName/:id"
           element={<ProjectFilesDocuments />}
         />
-        <Route path="project-files/documents/:id" element={<FileSummary/>}/>
+        <Route path="project-files/documents/:id" element={<FileSummary />} />
         <Route path="clv-case-files" element={<ClvCaseFiles />} />
         <Route path="clv-database" element={<ClvDatabase />} />
         <Route path="requisitions" element={<Requisitions />} />
@@ -119,10 +119,13 @@ const View = () => {
           element={<FidaProjectFiles />}
         />
         <Route
-            path="fida-project-files/documents/:folderName/:id"
-            element={<FidaProjectFilesDocuments />}
+          path="fida-project-files/documents/:folderName/:id"
+          element={<FidaProjectFilesDocuments />}
         />
-        <Route path="fida-project-files/documents/:id" element={<FidaDocumentSummary/>}/>
+        <Route
+          path="fida-project-files/documents/:id"
+          element={<FidaDocumentSummary />}
+        />
       </Route>
     </Routes>
   );
