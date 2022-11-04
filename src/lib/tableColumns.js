@@ -79,6 +79,34 @@ export const contractsTableColumn = [
   },
 ];
 
+export const travelOrdersTableColumns = [
+  {
+    Header: "Applicant's Name",
+    accessor: "full_name",
+  },
+  {
+    Header: "Project Activity",
+    accessor: "project_activity",
+  },
+  {
+    Header: "Purpose",
+    accessor: "purpose",
+  },
+  {
+    Header: "Stage",
+    accessor: "stage",
+  },
+  {
+    Header: "Status",
+    accessor: "status",
+  },
+  {
+    Header: "Date of Application",
+    accessor: "updateAt",
+    Cell: ({ cell: { value } }) => formatDate(value),
+  },
+];
+
 export const eventsAttendanceTableColumns = [
   {
     Header: "No:",
