@@ -686,7 +686,6 @@ export const CLVTableColumns = [
 export const employeesColumns = [
   {
     Header: "name and role",
-    subHeader: "complainant id",
     accessor: "name",
     Cell: ({ cell: { value } }) => (
       <>
@@ -696,8 +695,8 @@ export const employeesColumns = [
     ),
   },
   {
-    Header: "phone number and email",
-    subHeader: "time",
+    Header: "phone number",
+    subHeader: "email",
     accessor: "contacts",
     Cell: ({ cell: { value } }) => (
       <>
@@ -709,8 +708,8 @@ export const employeesColumns = [
     ),
   },
   {
-    Header: "sex and district",
-    subHeader: "body",
+    Header: "sex",
+    subHeader: "district",
     accessor: "sex",
     Cell: ({ cell: { value } }) => (
       <>
@@ -720,8 +719,8 @@ export const employeesColumns = [
     ),
   },
   {
-    Header: "date of birth and nin",
-    subHeader: "date received",
+    Header: "date of birth",
+    subHeader: "nin",
     accessor: "dateOfBirth",
     Cell: ({ cell: { value } }) => (
       <>
@@ -731,8 +730,8 @@ export const employeesColumns = [
     ),
   },
   {
-    Header: "hiring date and termination date",
-    subHeader: "date received",
+    Header: "hiring date",
+    subHeader: "termination date",
     accessor: "hiringDate",
     Cell: ({ cell: { value } }) => (
       <>
@@ -743,8 +742,8 @@ export const employeesColumns = [
     ),
   },
   {
-    Header: "working status and last login",
-    subHeader: "date received",
+    Header: "working status",
+    subHeader: " last login",
     accessor: "workingStatus",
     Cell: ({ cell: { value } }) => (
       <>
