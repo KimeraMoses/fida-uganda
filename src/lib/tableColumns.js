@@ -107,6 +107,35 @@ export const travelOrdersTableColumns = [
   },
 ];
 
+
+export const requisitionRequestsTableColumns = [
+  {
+    Header: "Applicant's Name",
+    accessor: "full_name",
+  },
+  {
+    Header: "Project",
+    accessor: "project_name",
+  },
+  {
+    Header: "Delivery Location",
+    accessor: "delivery_location",
+  },
+  {
+    Header: "Stage",
+    accessor: "stage",
+  },
+  {
+    Header: "Status",
+    accessor: "status",
+  },
+  {
+    Header: "Date of Application",
+    accessor: "updateAt",
+    Cell: ({ cell: { value } }) => formatDate(value),
+  },
+];
+
 export const eventsAttendanceTableColumns = [
   {
     Header: "No:",
