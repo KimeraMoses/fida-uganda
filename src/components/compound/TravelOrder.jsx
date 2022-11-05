@@ -15,15 +15,20 @@ import SubHeading from "./../Tasks/SubHeading/SubHeading";
 import Loader from "../common/UI/Loader/Loader";
 import { travelOrderInitialValues, travelOrderSchema } from "../forms/travelOrder/schemas/travelOrder";
 import {useSelector} from "react-redux";
+import Table from "../common/TableComponent/Table";
+import { travelOrdersTableColumns} from "../../lib/tableColumns";
+import {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 const TravelOrder = () => {
-
+    const navigate = useNavigate();
     //get user and designation
     const { user } = useSelector((state) => state.auth);
 
     const { isOpen, onOpen, onClose } = useDisclosure();
     // const {  isLoading } = useTravelOrders();
     const { data:myTravelOrders, isLoading } = useMyTravelOrders();
+    console.log(myTravelOrders)
 
     const {data: pendingDopTravelOrders} = usePendingDopTravelOrders();
     const {data: approvedDopTravelOrders} = useApprovedDopTravelOrders();
@@ -37,6 +42,52 @@ const TravelOrder = () => {
     const {data:approvedFleetManagerTravelOrders } = useApprovedFleetManagerTravelOrders();
     const {data:rejectedFleetManagerTravelOrders} = useRejectedFleetManagerTravelOrders();
 
+    //set table data for other users
+    const [userData, setUserData] = useState([]);
+    useEffect(() => {
+        setUserData([]);
+        if (myTravelOrders?.travelOrders?.length) {
+            const dataToSet = myTravelOrders?.travelOrders?.map((b) => {
+                return {
+                    ...b,
+                    full_name: b?.createdBy?.full_name
+                           ? b.createdBy.full_name
+                    : "N/A",
+                    stage: b?.approval_levels.length === 0
+                        ? "Dop"
+                        : b?.approval_levels.length === 1 && b?.DOPApprovalStatus === "rejected"
+                            ? "Dop"
+                            : b?.approval_levels.length === 1 && b?.DOPApprovalStatus === "approved"
+                                ? "Accountant"
+                                : b?.approval_levels.length === 2 && b?.accountantApprovalStatus === "rejected"
+                                    ? "Accountant"
+                                    : b?.approval_levels.length === 2 && b?.accountantApprovalStatus === "approved"
+                                        ? "Fleet  Manager"
+                                        : "Fleet  Manager",
+                    status: b?.approval_levels.length === 0
+                        ? b?.DOPApprovalStatus
+                        : b?.approval_levels.length === 1 && b?.DOPApprovalStatus === "rejected"
+                            ? b?.DOPApprovalStatus
+                            : b?.approval_levels.length === 1 && b?.DOPApprovalStatus === "approved"
+                                ? b?.accountantApprovalStatus
+                                : b?.approval_levels.length === 2 && b?.accountantApprovalStatus === "rejected"
+                                    ? b?.accountantApprovalStatus
+                                    : b?.approval_levels.length === 2 && b?.accountantApprovalStatus === "approved"
+                                        ? b?.fleetManagerApprovalStatus
+                                        : b?.approval_levels.length === 2 && b?.fleetManagerApprovalStatus === "rejected"
+                                            ? b?.fleetManagerApprovalStatus
+                                            : b?.fleetManagerApprovalStatus,
+
+                };
+            });
+            setUserData(dataToSet);
+        }
+    }, [myTravelOrders]);
+
+
+    const handleViewSummary = (id) => {
+        navigate(`/travel-order/${id.id}`);
+    };
 
     return (
         <>
@@ -47,7 +98,16 @@ const TravelOrder = () => {
                 user.designation === "dop" && (
                     <>
                         <SubHeading title="My Travel Requests" />
-                        <TravelOrderTable data={myTravelOrders?.travelOrders} type="MY" btnLabel="Travel Order" btnClick={onOpen}/>
+                        <Table
+                            data={userData}
+                            columns={travelOrdersTableColumns}
+                            loading={isLoading}
+                            btnLabel="Add Travel Order"
+                            btnClick={onOpen}
+                            showActions={true}
+                            onViewHandler={handleViewSummary}
+                        />
+                        {/*<TravelOrderTable data={myTravelOrders?.travelOrders} type="MY" btnLabel="Travel Order" btnClick={onOpen}/>*/}
                         <br/>
                         <SubHeading title="Unread Requests" />
                         <TravelOrderTable data={pendingDopTravelOrders?.TravelOrders} type="new" showBtn={false}/>
@@ -65,7 +125,16 @@ const TravelOrder = () => {
             {user.designation === "accountant" && (
                     <>
                         <SubHeading title="My Travel Requests" />
-                        <TravelOrderTable data={myTravelOrders?.travelOrders} type="MY" btnLabel="Travel Order" btnClick={onOpen}/>
+                        <Table
+                            data={userData}
+                            columns={travelOrdersTableColumns}
+                            loading={isLoading}
+                            btnLabel="Add Travel Order"
+                            btnClick={onOpen}
+                            showActions={true}
+                            onViewHandler={handleViewSummary}
+                        />
+                        {/*<TravelOrderTable data={myTravelOrders?.travelOrders} type="MY" btnLabel="Travel Order" btnClick={onOpen}/>*/}
                         <br/>
                         <SubHeading title="Unread Requests" />
                         <TravelOrderTable data={pendingAccountantTravelOrders?.TravelOrders} type="new" showBtn={false}/>
@@ -84,7 +153,16 @@ const TravelOrder = () => {
                 user.designation === "fleetManager" && (
                     <>
                         <SubHeading title="My Travel Requests" />
-                        <TravelOrderTable data={myTravelOrders?.travelOrders} type="MY" btnLabel="Travel Order" btnClick={onOpen}/>
+                        <Table
+                            data={userData}
+                            columns={travelOrdersTableColumns}
+                            loading={isLoading}
+                            btnLabel="Add Travel Order"
+                            btnClick={onOpen}
+                            showActions={true}
+                            onViewHandler={handleViewSummary}
+                        />
+                        {/*<TravelOrderTable data={myTravelOrders?.travelOrders} type="MY" btnLabel="Travel Order" btnClick={onOpen}/>*/}
                         <br/>
                         <SubHeading title="Unread Requests" />
                         <TravelOrderTable data={pendingFleetManagerTravelOrders?.TravelOrders} type="new"  showBtn={false}/>
@@ -104,7 +182,16 @@ const TravelOrder = () => {
                     user.designation !== "fleetManager") && (
                     <>
                         <SubHeading title="My Requests" />
-                        <TravelOrderTable data={myTravelOrders?.travelOrders} type="new" btnLabel="Travel Order" btnClick={onOpen}/>
+                        <Table
+                            data={userData}
+                            columns={travelOrdersTableColumns}
+                            loading={isLoading}
+                            btnLabel="Add Travel Order"
+                            btnClick={onOpen}
+                            showActions={true}
+                            onViewHandler={handleViewSummary}
+                        />
+                        {/*<TravelOrderTable data={myTravelOrders?.travelOrders} type="new" btnLabel="Travel Order" btnClick={onOpen}/>*/}
                     </>
                 )
             }
