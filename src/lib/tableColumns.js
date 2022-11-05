@@ -745,7 +745,7 @@ export const employeesColumns = [
   {
     Header: "working status and last login",
     subHeader: "date received",
-    accessor: "workStatus",
+    accessor: "workingStatus",
     Cell: ({ cell: { value } }) => (
       <>
         <strong>{value.workingStatus}</strong>

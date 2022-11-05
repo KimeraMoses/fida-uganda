@@ -56,7 +56,7 @@ console.log('activatedUsersData', activatedUsersData)
       {isLoading ? (
         <Loader />
       ) : (
-        data?.users && (
+        data && (
           <Table
           isLoading={isLoading}
           data={data ? data : null}
