@@ -153,6 +153,34 @@ export const leaveRequestsTableColumns = [
 
 ];
 
+export const reportFolderTableColumns = [
+  {
+    Header: "Name",
+    accessor: "name",
+  },
+  {
+    Header: "Date Created",
+    accessor: "updateAt",
+    Cell: ({ cell: { value } }) => formatDate(value),
+  },
+];
+
+export const reportFilesTableColumns = [
+  {
+    Header: "Report Title",
+    accessor: "report_title",
+  },
+  {
+    Header: "Type of report",
+    accessor: "type",
+  },
+  {
+    Header: "Date Uploaded",
+    accessor: "date",
+    Cell: ({ cell: { value } }) => formatDate(value),
+  },
+];
+
 export const advanceRequestsTableColumns = [
   {
     Header: "Advance request Details",
