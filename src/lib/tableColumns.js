@@ -136,6 +136,24 @@ export const requisitionRequestsTableColumns = [
   },
 ];
 
+export const leaveRequestsTableColumns = [
+  {
+    Header: "Leave request Details",
+    accessor: "leave_details",
+  },
+  {
+    Header: "Date of Application",
+    accessor: "updateAt",
+    Cell: ({ cell: { value } }) => formatDate(value),
+  },
+  {
+    Header: "Status",
+    accessor: "status",
+  },
+
+];
+
+
 export const eventsAttendanceTableColumns = [
   {
     Header: "No:",
