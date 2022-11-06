@@ -32,7 +32,7 @@ const LeaveTrackerTable = (props) => {
   };
   const navigate = useNavigate();
   const handleLeaveClick = (item) => {
-     console.log(item);
+     // console.log(item);
     navigate(
         `/application-summary?application-type=leave&id=${item.id}`);
   };

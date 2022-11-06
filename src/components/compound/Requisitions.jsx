@@ -21,11 +21,11 @@ import {
 } from "../../hooks/useRequisitions";
 
 import SubHeading from "./../Tasks/SubHeading/SubHeading";
-import RequisitionTable from "../dashboard/Requisitions/RequisitionsTable";
+// import RequisitionTable from "../dashboard/Requisitions/RequisitionsTable";
 import {
     requisitionInitialValues,
     requisitionSchema,
-} from "../../components/forms/requisition/schemas/requisitions";
+} from "../forms/requisition/schemas/requisitions";
 import Loader from "../common/UI/Loader/Loader";
 import {useSelector} from "react-redux";
 import Table from "../common/TableComponent/Table";
@@ -348,6 +348,591 @@ const Requisitions = () => {
             setRejectedDop(dataToSet);
         }
     }, [rejectedDopRequisitions]);
+
+    //set table data for approved DOp requests
+    useEffect(() => {
+        setRejectedDop([]);
+        if (approvedAccountantRequisitions?.Requisitions?.length) {
+            const dataToSet = approvedAccountantRequisitions?.Requisitions?.map((b) => {
+                return {
+                    ...b,
+                    full_name: b?.createdBy?.full_name
+                        ? b.createdBy.full_name
+                        : b?.registeredBy?.full_name
+                            ? b.registeredBy.full_name
+                            : "N/A",
+                    stage: b?.approval_levels.length === 0
+                        ? "Dop"
+                        : b?.approval_levels.length === 1 &&
+                        b?.DOPApprovalStatus === "rejected"
+                            ? "Dop"
+                            : b?.approval_levels.length === 1 &&
+                            b?.DOPApprovalStatus === "approved"
+                                ? "Accountant"
+                                : b?.approval_levels.length === 2 &&
+                                b?.accountantApprovalStatus === "rejected"
+                                    ? "Accountant"
+                                    : b?.approval_levels.length === 2 &&
+                                    b?.accountantApprovalStatus === "approved"
+                                        ? "Ceo"
+                                        : b?.approval_levels.length === 3 &&
+                                        b?.CEOApprovalStatus === "rejected"
+                                            ? "Ceo"
+                                            : b?.approval_levels.length === 3 &&
+                                            b?.CEOApprovalStatus === "approved"
+                                                ? "Procurement Officer"
+                                                : "Procurement Officer",
+                    status: b?.approval_levels.length === 0
+                        ? b?.DOPApprovalStatus
+                        : b?.approval_levels.length === 1 &&
+                        b?.DOPApprovalStatus === "rejected"
+                            ? b?.DOPApprovalStatus
+                            : b?.approval_levels.length === 1 &&
+                            b?.DOPApprovalStatus === "approved"
+                                ? b?.accountantApprovalStatus
+                                : b?.approval_levels.length === 2 &&
+                                b?.accountantApprovalStatus === "rejected"
+                                    ? b?.accountantApprovalStatus
+                                    : b?.approval_levels.length === 2 &&
+                                    b?.accountantApprovalStatus === "approved"
+                                        ? b?.CEOApprovalStatus
+                                        : b?.approval_levels.length === 3 &&
+                                        b?.CEOApprovalStatus === "rejected"
+                                            ? b?.CEOApprovalStatus
+                                            : b?.approval_levels.length === 3 &&
+                                            b?.CEOApprovalStatus === "approved"
+                                                ? b?.procurementApprovalStatus
+                                                : b?.approval_levels.length === 4 &&
+                                                b?.procurementApprovalStatus === "rejected"
+                                                    ? b?.procurementApprovalStatus
+                                                    : b?.procurementApprovalStatus
+
+
+                };
+            });
+            setApprovedAccountant(dataToSet);
+        }
+    }, [approvedAccountantRequisitions]);
+
+    //set table data for pending Accountant  requests
+    useEffect(() => {
+        setPendingAccountant([]);
+        if (pendingAccountantRequisitions?.Requisitions?.length) {
+            const dataToSet = pendingAccountantRequisitions?.Requisitions?.map((b) => {
+                return {
+                    ...b,
+                    full_name: b?.createdBy?.full_name
+                        ? b.createdBy.full_name
+                        : b?.registeredBy?.full_name
+                            ? b.registeredBy.full_name
+                            : "N/A",
+                    stage: b?.approval_levels.length === 0
+                        ? "Dop"
+                        : b?.approval_levels.length === 1 &&
+                        b?.DOPApprovalStatus === "rejected"
+                            ? "Dop"
+                            : b?.approval_levels.length === 1 &&
+                            b?.DOPApprovalStatus === "approved"
+                                ? "Accountant"
+                                : b?.approval_levels.length === 2 &&
+                                b?.accountantApprovalStatus === "rejected"
+                                    ? "Accountant"
+                                    : b?.approval_levels.length === 2 &&
+                                    b?.accountantApprovalStatus === "approved"
+                                        ? "Ceo"
+                                        : b?.approval_levels.length === 3 &&
+                                        b?.CEOApprovalStatus === "rejected"
+                                            ? "Ceo"
+                                            : b?.approval_levels.length === 3 &&
+                                            b?.CEOApprovalStatus === "approved"
+                                                ? "Procurement Officer"
+                                                : "Procurement Officer",
+                    status: b?.approval_levels.length === 0
+                        ? b?.DOPApprovalStatus
+                        : b?.approval_levels.length === 1 &&
+                        b?.DOPApprovalStatus === "rejected"
+                            ? b?.DOPApprovalStatus
+                            : b?.approval_levels.length === 1 &&
+                            b?.DOPApprovalStatus === "approved"
+                                ? b?.accountantApprovalStatus
+                                : b?.approval_levels.length === 2 &&
+                                b?.accountantApprovalStatus === "rejected"
+                                    ? b?.accountantApprovalStatus
+                                    : b?.approval_levels.length === 2 &&
+                                    b?.accountantApprovalStatus === "approved"
+                                        ? b?.CEOApprovalStatus
+                                        : b?.approval_levels.length === 3 &&
+                                        b?.CEOApprovalStatus === "rejected"
+                                            ? b?.CEOApprovalStatus
+                                            : b?.approval_levels.length === 3 &&
+                                            b?.CEOApprovalStatus === "approved"
+                                                ? b?.procurementApprovalStatus
+                                                : b?.approval_levels.length === 4 &&
+                                                b?.procurementApprovalStatus === "rejected"
+                                                    ? b?.procurementApprovalStatus
+                                                    : b?.procurementApprovalStatus
+
+
+                };
+            });
+            setPendingAccountant(dataToSet);
+        }
+    }, [pendingAccountantRequisitions]);
+
+    //set table data for rejected Accountant requests
+    useEffect(() => {
+        setRejectedAccountant([]);
+        if (rejectedAccountantRequisitions?.Requisitions?.length) {
+            const dataToSet = rejectedAccountantRequisitions?.Requisitions?.map((b) => {
+                return {
+                    ...b,
+                    full_name: b?.createdBy?.full_name
+                        ? b.createdBy.full_name
+                        : b?.registeredBy?.full_name
+                            ? b.registeredBy.full_name
+                            : "N/A",
+                    stage: b?.approval_levels.length === 0
+                        ? "Dop"
+                        : b?.approval_levels.length === 1 &&
+                        b?.DOPApprovalStatus === "rejected"
+                            ? "Dop"
+                            : b?.approval_levels.length === 1 &&
+                            b?.DOPApprovalStatus === "approved"
+                                ? "Accountant"
+                                : b?.approval_levels.length === 2 &&
+                                b?.accountantApprovalStatus === "rejected"
+                                    ? "Accountant"
+                                    : b?.approval_levels.length === 2 &&
+                                    b?.accountantApprovalStatus === "approved"
+                                        ? "Ceo"
+                                        : b?.approval_levels.length === 3 &&
+                                        b?.CEOApprovalStatus === "rejected"
+                                            ? "Ceo"
+                                            : b?.approval_levels.length === 3 &&
+                                            b?.CEOApprovalStatus === "approved"
+                                                ? "Procurement Officer"
+                                                : "Procurement Officer",
+                    status: b?.approval_levels.length === 0
+                        ? b?.DOPApprovalStatus
+                        : b?.approval_levels.length === 1 &&
+                        b?.DOPApprovalStatus === "rejected"
+                            ? b?.DOPApprovalStatus
+                            : b?.approval_levels.length === 1 &&
+                            b?.DOPApprovalStatus === "approved"
+                                ? b?.accountantApprovalStatus
+                                : b?.approval_levels.length === 2 &&
+                                b?.accountantApprovalStatus === "rejected"
+                                    ? b?.accountantApprovalStatus
+                                    : b?.approval_levels.length === 2 &&
+                                    b?.accountantApprovalStatus === "approved"
+                                        ? b?.CEOApprovalStatus
+                                        : b?.approval_levels.length === 3 &&
+                                        b?.CEOApprovalStatus === "rejected"
+                                            ? b?.CEOApprovalStatus
+                                            : b?.approval_levels.length === 3 &&
+                                            b?.CEOApprovalStatus === "approved"
+                                                ? b?.procurementApprovalStatus
+                                                : b?.approval_levels.length === 4 &&
+                                                b?.procurementApprovalStatus === "rejected"
+                                                    ? b?.procurementApprovalStatus
+                                                    : b?.procurementApprovalStatus
+
+
+                };
+            });
+            setRejectedAccountant(dataToSet);
+        }
+    }, [rejectedAccountantRequisitions]);
+
+    //set table data for pending Ceo requests
+    useEffect(() => {
+        setPendingCeo([]);
+        if (pendingCeoRequisitions?.Requisitions?.length) {
+            const dataToSet = pendingCeoRequisitions?.Requisitions?.map((b) => {
+                return {
+                    ...b,
+                    full_name: b?.createdBy?.full_name
+                        ? b.createdBy.full_name
+                        : b?.registeredBy?.full_name
+                            ? b.registeredBy.full_name
+                            : "N/A",
+                    stage: b?.approval_levels.length === 0
+                        ? "Dop"
+                        : b?.approval_levels.length === 1 &&
+                        b?.DOPApprovalStatus === "rejected"
+                            ? "Dop"
+                            : b?.approval_levels.length === 1 &&
+                            b?.DOPApprovalStatus === "approved"
+                                ? "Accountant"
+                                : b?.approval_levels.length === 2 &&
+                                b?.accountantApprovalStatus === "rejected"
+                                    ? "Accountant"
+                                    : b?.approval_levels.length === 2 &&
+                                    b?.accountantApprovalStatus === "approved"
+                                        ? "Ceo"
+                                        : b?.approval_levels.length === 3 &&
+                                        b?.CEOApprovalStatus === "rejected"
+                                            ? "Ceo"
+                                            : b?.approval_levels.length === 3 &&
+                                            b?.CEOApprovalStatus === "approved"
+                                                ? "Procurement Officer"
+                                                : "Procurement Officer",
+                    status: b?.approval_levels.length === 0
+                        ? b?.DOPApprovalStatus
+                        : b?.approval_levels.length === 1 &&
+                        b?.DOPApprovalStatus === "rejected"
+                            ? b?.DOPApprovalStatus
+                            : b?.approval_levels.length === 1 &&
+                            b?.DOPApprovalStatus === "approved"
+                                ? b?.accountantApprovalStatus
+                                : b?.approval_levels.length === 2 &&
+                                b?.accountantApprovalStatus === "rejected"
+                                    ? b?.accountantApprovalStatus
+                                    : b?.approval_levels.length === 2 &&
+                                    b?.accountantApprovalStatus === "approved"
+                                        ? b?.CEOApprovalStatus
+                                        : b?.approval_levels.length === 3 &&
+                                        b?.CEOApprovalStatus === "rejected"
+                                            ? b?.CEOApprovalStatus
+                                            : b?.approval_levels.length === 3 &&
+                                            b?.CEOApprovalStatus === "approved"
+                                                ? b?.procurementApprovalStatus
+                                                : b?.approval_levels.length === 4 &&
+                                                b?.procurementApprovalStatus === "rejected"
+                                                    ? b?.procurementApprovalStatus
+                                                    : b?.procurementApprovalStatus
+
+
+                };
+            });
+            setPendingCeo(dataToSet);
+        }
+    }, [pendingCeoRequisitions]);
+
+    //set table data for approved Ceo requests
+    useEffect(() => {
+        setApprovedCeo([]);
+        if (approvedCeoRequisitions?.Requisitions?.length) {
+            const dataToSet = approvedCeoRequisitions?.Requisitions?.map((b) => {
+                return {
+                    ...b,
+                    full_name: b?.createdBy?.full_name
+                        ? b.createdBy.full_name
+                        : b?.registeredBy?.full_name
+                            ? b.registeredBy.full_name
+                            : "N/A",
+                    stage: b?.approval_levels.length === 0
+                        ? "Dop"
+                        : b?.approval_levels.length === 1 &&
+                        b?.DOPApprovalStatus === "rejected"
+                            ? "Dop"
+                            : b?.approval_levels.length === 1 &&
+                            b?.DOPApprovalStatus === "approved"
+                                ? "Accountant"
+                                : b?.approval_levels.length === 2 &&
+                                b?.accountantApprovalStatus === "rejected"
+                                    ? "Accountant"
+                                    : b?.approval_levels.length === 2 &&
+                                    b?.accountantApprovalStatus === "approved"
+                                        ? "Ceo"
+                                        : b?.approval_levels.length === 3 &&
+                                        b?.CEOApprovalStatus === "rejected"
+                                            ? "Ceo"
+                                            : b?.approval_levels.length === 3 &&
+                                            b?.CEOApprovalStatus === "approved"
+                                                ? "Procurement Officer"
+                                                : "Procurement Officer",
+                    status: b?.approval_levels.length === 0
+                        ? b?.DOPApprovalStatus
+                        : b?.approval_levels.length === 1 &&
+                        b?.DOPApprovalStatus === "rejected"
+                            ? b?.DOPApprovalStatus
+                            : b?.approval_levels.length === 1 &&
+                            b?.DOPApprovalStatus === "approved"
+                                ? b?.accountantApprovalStatus
+                                : b?.approval_levels.length === 2 &&
+                                b?.accountantApprovalStatus === "rejected"
+                                    ? b?.accountantApprovalStatus
+                                    : b?.approval_levels.length === 2 &&
+                                    b?.accountantApprovalStatus === "approved"
+                                        ? b?.CEOApprovalStatus
+                                        : b?.approval_levels.length === 3 &&
+                                        b?.CEOApprovalStatus === "rejected"
+                                            ? b?.CEOApprovalStatus
+                                            : b?.approval_levels.length === 3 &&
+                                            b?.CEOApprovalStatus === "approved"
+                                                ? b?.procurementApprovalStatus
+                                                : b?.approval_levels.length === 4 &&
+                                                b?.procurementApprovalStatus === "rejected"
+                                                    ? b?.procurementApprovalStatus
+                                                    : b?.procurementApprovalStatus
+
+
+                };
+            });
+            setApprovedCeo(dataToSet);
+        }
+    }, [approvedCeoRequisitions]);
+
+    //set table data for rejected Ceo requests
+    useEffect(() => {
+        setRejectedCeo([]);
+        if (rejectedCeoRequisitions?.Requisitions?.length) {
+            const dataToSet = rejectedCeoRequisitions?.Requisitions?.map((b) => {
+                return {
+                    ...b,
+                    full_name: b?.createdBy?.full_name
+                        ? b.createdBy.full_name
+                        : b?.registeredBy?.full_name
+                            ? b.registeredBy.full_name
+                            : "N/A",
+                    stage: b?.approval_levels.length === 0
+                        ? "Dop"
+                        : b?.approval_levels.length === 1 &&
+                        b?.DOPApprovalStatus === "rejected"
+                            ? "Dop"
+                            : b?.approval_levels.length === 1 &&
+                            b?.DOPApprovalStatus === "approved"
+                                ? "Accountant"
+                                : b?.approval_levels.length === 2 &&
+                                b?.accountantApprovalStatus === "rejected"
+                                    ? "Accountant"
+                                    : b?.approval_levels.length === 2 &&
+                                    b?.accountantApprovalStatus === "approved"
+                                        ? "Ceo"
+                                        : b?.approval_levels.length === 3 &&
+                                        b?.CEOApprovalStatus === "rejected"
+                                            ? "Ceo"
+                                            : b?.approval_levels.length === 3 &&
+                                            b?.CEOApprovalStatus === "approved"
+                                                ? "Procurement Officer"
+                                                : "Procurement Officer",
+                    status: b?.approval_levels.length === 0
+                        ? b?.DOPApprovalStatus
+                        : b?.approval_levels.length === 1 &&
+                        b?.DOPApprovalStatus === "rejected"
+                            ? b?.DOPApprovalStatus
+                            : b?.approval_levels.length === 1 &&
+                            b?.DOPApprovalStatus === "approved"
+                                ? b?.accountantApprovalStatus
+                                : b?.approval_levels.length === 2 &&
+                                b?.accountantApprovalStatus === "rejected"
+                                    ? b?.accountantApprovalStatus
+                                    : b?.approval_levels.length === 2 &&
+                                    b?.accountantApprovalStatus === "approved"
+                                        ? b?.CEOApprovalStatus
+                                        : b?.approval_levels.length === 3 &&
+                                        b?.CEOApprovalStatus === "rejected"
+                                            ? b?.CEOApprovalStatus
+                                            : b?.approval_levels.length === 3 &&
+                                            b?.CEOApprovalStatus === "approved"
+                                                ? b?.procurementApprovalStatus
+                                                : b?.approval_levels.length === 4 &&
+                                                b?.procurementApprovalStatus === "rejected"
+                                                    ? b?.procurementApprovalStatus
+                                                    : b?.procurementApprovalStatus
+
+
+                };
+            });
+            setRejectedCeo(dataToSet);
+        }
+    }, [rejectedCeoRequisitions]);
+
+    //set table data for pending procurement requests
+    useEffect(() => {
+        setPendingProcurement([]);
+        if (pendingProcurementRequisitions?.Requisitions?.length) {
+            const dataToSet = pendingProcurementRequisitions?.Requisitions?.map((b) => {
+                return {
+                    ...b,
+                    full_name: b?.createdBy?.full_name
+                        ? b.createdBy.full_name
+                        : b?.registeredBy?.full_name
+                            ? b.registeredBy.full_name
+                            : "N/A",
+                    stage: b?.approval_levels.length === 0
+                        ? "Dop"
+                        : b?.approval_levels.length === 1 &&
+                        b?.DOPApprovalStatus === "rejected"
+                            ? "Dop"
+                            : b?.approval_levels.length === 1 &&
+                            b?.DOPApprovalStatus === "approved"
+                                ? "Accountant"
+                                : b?.approval_levels.length === 2 &&
+                                b?.accountantApprovalStatus === "rejected"
+                                    ? "Accountant"
+                                    : b?.approval_levels.length === 2 &&
+                                    b?.accountantApprovalStatus === "approved"
+                                        ? "Ceo"
+                                        : b?.approval_levels.length === 3 &&
+                                        b?.CEOApprovalStatus === "rejected"
+                                            ? "Ceo"
+                                            : b?.approval_levels.length === 3 &&
+                                            b?.CEOApprovalStatus === "approved"
+                                                ? "Procurement Officer"
+                                                : "Procurement Officer",
+                    status: b?.approval_levels.length === 0
+                        ? b?.DOPApprovalStatus
+                        : b?.approval_levels.length === 1 &&
+                        b?.DOPApprovalStatus === "rejected"
+                            ? b?.DOPApprovalStatus
+                            : b?.approval_levels.length === 1 &&
+                            b?.DOPApprovalStatus === "approved"
+                                ? b?.accountantApprovalStatus
+                                : b?.approval_levels.length === 2 &&
+                                b?.accountantApprovalStatus === "rejected"
+                                    ? b?.accountantApprovalStatus
+                                    : b?.approval_levels.length === 2 &&
+                                    b?.accountantApprovalStatus === "approved"
+                                        ? b?.CEOApprovalStatus
+                                        : b?.approval_levels.length === 3 &&
+                                        b?.CEOApprovalStatus === "rejected"
+                                            ? b?.CEOApprovalStatus
+                                            : b?.approval_levels.length === 3 &&
+                                            b?.CEOApprovalStatus === "approved"
+                                                ? b?.procurementApprovalStatus
+                                                : b?.approval_levels.length === 4 &&
+                                                b?.procurementApprovalStatus === "rejected"
+                                                    ? b?.procurementApprovalStatus
+                                                    : b?.procurementApprovalStatus
+
+
+                };
+            });
+            setPendingProcurement(dataToSet);
+        }
+    }, [pendingProcurementRequisitions]);
+
+    //set table data for approved procurement requests
+    useEffect(() => {
+        setApprovedProcurement([]);
+        if (approvedProcurementRequisitions?.Requisitions?.length) {
+            const dataToSet = approvedProcurementRequisitions?.Requisitions?.map((b) => {
+                return {
+                    ...b,
+                    full_name: b?.createdBy?.full_name
+                        ? b.createdBy.full_name
+                        : b?.registeredBy?.full_name
+                            ? b.registeredBy.full_name
+                            : "N/A",
+                    stage: b?.approval_levels.length === 0
+                        ? "Dop"
+                        : b?.approval_levels.length === 1 &&
+                        b?.DOPApprovalStatus === "rejected"
+                            ? "Dop"
+                            : b?.approval_levels.length === 1 &&
+                            b?.DOPApprovalStatus === "approved"
+                                ? "Accountant"
+                                : b?.approval_levels.length === 2 &&
+                                b?.accountantApprovalStatus === "rejected"
+                                    ? "Accountant"
+                                    : b?.approval_levels.length === 2 &&
+                                    b?.accountantApprovalStatus === "approved"
+                                        ? "Ceo"
+                                        : b?.approval_levels.length === 3 &&
+                                        b?.CEOApprovalStatus === "rejected"
+                                            ? "Ceo"
+                                            : b?.approval_levels.length === 3 &&
+                                            b?.CEOApprovalStatus === "approved"
+                                                ? "Procurement Officer"
+                                                : "Procurement Officer",
+                    status: b?.approval_levels.length === 0
+                        ? b?.DOPApprovalStatus
+                        : b?.approval_levels.length === 1 &&
+                        b?.DOPApprovalStatus === "rejected"
+                            ? b?.DOPApprovalStatus
+                            : b?.approval_levels.length === 1 &&
+                            b?.DOPApprovalStatus === "approved"
+                                ? b?.accountantApprovalStatus
+                                : b?.approval_levels.length === 2 &&
+                                b?.accountantApprovalStatus === "rejected"
+                                    ? b?.accountantApprovalStatus
+                                    : b?.approval_levels.length === 2 &&
+                                    b?.accountantApprovalStatus === "approved"
+                                        ? b?.CEOApprovalStatus
+                                        : b?.approval_levels.length === 3 &&
+                                        b?.CEOApprovalStatus === "rejected"
+                                            ? b?.CEOApprovalStatus
+                                            : b?.approval_levels.length === 3 &&
+                                            b?.CEOApprovalStatus === "approved"
+                                                ? b?.procurementApprovalStatus
+                                                : b?.approval_levels.length === 4 &&
+                                                b?.procurementApprovalStatus === "rejected"
+                                                    ? b?.procurementApprovalStatus
+                                                    : b?.procurementApprovalStatus
+
+
+                };
+            });
+            setApprovedProcurement(dataToSet);
+        }
+    }, [approvedProcurementRequisitions]);
+
+    //set table data for rejected procurement requests
+    useEffect(() => {
+        setRejectedProcurement([]);
+        if (rejectedProcurementRequisitions?.Requisitions?.length) {
+            const dataToSet = rejectedProcurementRequisitions?.Requisitions?.map((b) => {
+                return {
+                    ...b,
+                    full_name: b?.createdBy?.full_name
+                        ? b.createdBy.full_name
+                        : b?.registeredBy?.full_name
+                            ? b.registeredBy.full_name
+                            : "N/A",
+                    stage: b?.approval_levels.length === 0
+                        ? "Dop"
+                        : b?.approval_levels.length === 1 &&
+                        b?.DOPApprovalStatus === "rejected"
+                            ? "Dop"
+                            : b?.approval_levels.length === 1 &&
+                            b?.DOPApprovalStatus === "approved"
+                                ? "Accountant"
+                                : b?.approval_levels.length === 2 &&
+                                b?.accountantApprovalStatus === "rejected"
+                                    ? "Accountant"
+                                    : b?.approval_levels.length === 2 &&
+                                    b?.accountantApprovalStatus === "approved"
+                                        ? "Ceo"
+                                        : b?.approval_levels.length === 3 &&
+                                        b?.CEOApprovalStatus === "rejected"
+                                            ? "Ceo"
+                                            : b?.approval_levels.length === 3 &&
+                                            b?.CEOApprovalStatus === "approved"
+                                                ? "Procurement Officer"
+                                                : "Procurement Officer",
+                    status: b?.approval_levels.length === 0
+                        ? b?.DOPApprovalStatus
+                        : b?.approval_levels.length === 1 &&
+                        b?.DOPApprovalStatus === "rejected"
+                            ? b?.DOPApprovalStatus
+                            : b?.approval_levels.length === 1 &&
+                            b?.DOPApprovalStatus === "approved"
+                                ? b?.accountantApprovalStatus
+                                : b?.approval_levels.length === 2 &&
+                                b?.accountantApprovalStatus === "rejected"
+                                    ? b?.accountantApprovalStatus
+                                    : b?.approval_levels.length === 2 &&
+                                    b?.accountantApprovalStatus === "approved"
+                                        ? b?.CEOApprovalStatus
+                                        : b?.approval_levels.length === 3 &&
+                                        b?.CEOApprovalStatus === "rejected"
+                                            ? b?.CEOApprovalStatus
+                                            : b?.approval_levels.length === 3 &&
+                                            b?.CEOApprovalStatus === "approved"
+                                                ? b?.procurementApprovalStatus
+                                                : b?.approval_levels.length === 4 &&
+                                                b?.procurementApprovalStatus === "rejected"
+                                                    ? b?.procurementApprovalStatus
+                                                    : b?.procurementApprovalStatus
+
+
+                };
+            });
+            setRejectedProcurement(dataToSet);
+        }
+    }, [rejectedProcurementRequisitions]);
 
     return (
         <>
