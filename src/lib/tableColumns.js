@@ -153,6 +153,22 @@ export const leaveRequestsTableColumns = [
 
 ];
 
+export const advanceRequestsTableColumns = [
+  {
+    Header: "Advance request Details",
+    accessor: "advance_details",
+  },
+  {
+    Header: "Date of Application",
+    accessor: "createdAt",
+    Cell: ({ cell: { value } }) => formatDate(value),
+  },
+  {
+    Header: "Status",
+    accessor: "status",
+  },
+
+];
 
 export const eventsAttendanceTableColumns = [
   {
