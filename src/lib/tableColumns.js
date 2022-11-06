@@ -819,7 +819,8 @@ export const legalOfficeColumn = [
 
 export const employeesColumns = [
   {
-    Header: "name and role",
+    Header: "name",
+    subHeader: 'role',
     accessor: "name",
     Cell: ({ cell: { value } }) => (
       <>
