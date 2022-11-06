@@ -24,8 +24,7 @@ import Loader from "../../../common/UI/Loader/Loader";
 import classes from "./NewContract.module.css";
 
 export const RecentUploadCard = (props) => {
-  const { name, time, size, error, fileType, isTable, file } = props;
-  console.log(file)
+  const { name, time, size, error, fileType, isTable } = props;
   return (
     <div
       className={`${classes.recent_upload_card_wrapper} ${
@@ -122,7 +121,7 @@ export const RecentUploadCard = (props) => {
             <PopoverArrow />
             <PopoverCloseButton />
             <PopoverHeader>File Actions</PopoverHeader>
-            <PopoverBody>
+            <PopoverBody textAlign="left">
               <List spacing={3}>
                 <ListItem cursor="pointer">
                   <ListIcon as={MdDownload} color="green.500" />

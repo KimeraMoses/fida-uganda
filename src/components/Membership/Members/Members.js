@@ -55,6 +55,7 @@ const Members = () => {
         loading={isLoading}
         data={data ? data : null}
         btnLabel="Add Member"
+        btnClick={onOpen}
         tableName="Members"
         columns={membersTableColumns}
         onEditHandler={onEditHandler}

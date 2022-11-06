@@ -41,21 +41,21 @@ const ActivityForm = ({
               <InputField
                 placeholder="Item description"
                 name="item"
-                fullwidth
+                fullWidth
                 type="text"
                 label="Item Description"
               />
               <InputField
                 placeholder="Quantity"
                 name="qty"
-                fullwidth
+                fullWidth
                 type="number"
                 label="Qty"
               />
               <InputField
                 placeholder="1000"
                 name="unit"
-                fullwidth
+                fullWidth
                 type="number"
                 label="Unit Price(UGX)"
               />

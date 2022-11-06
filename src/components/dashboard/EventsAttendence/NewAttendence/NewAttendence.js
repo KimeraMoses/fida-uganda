@@ -1,21 +1,16 @@
-import {
-    Button, Flex,
-    SimpleGrid,
-} from "@chakra-ui/react";
+import { Button, Flex, SimpleGrid } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import withForm from "../../../../hoc/withForm";
 import classes from "./NewAttendence.module.css";
 import InputField from "../../../common/UI/InputField/InputField";
 import { useProjectOptions } from "../../../../hooks/useProjects";
-import SelectInput from "../../../Membership/Allocations/AllocationForm/SelectInput";
+// import SelectInput from "../../../Membership/Allocations/AllocationForm/SelectInput";
+import SelectInputField from "../../../common/UI/SelectInputField/SelectInputField";
 
-
-
-const NewAttendence = ({ onClose, isSubmitting, setFieldValue, values }) => {
+const NewAttendence = ({isSubmitting, setFieldValue, values }) => {
   const projectOptions = useProjectOptions();
 
-  const { num_female, num_male, age0_17, age18_30, age31_59, above59 } =
-    values;
+  const { num_female, num_male, age0_17, age18_30, age31_59, above59 } = values;
 
   useEffect(() => {
     values.total_num_participants =
@@ -31,20 +26,20 @@ const NewAttendence = ({ onClose, isSubmitting, setFieldValue, values }) => {
         (parseInt(above59) || 0));
   });
 
-  const GroupInput =(props)=>{
-    const {label, type, placeholder, name} = props
-    return(
+  const GroupInput = (props) => {
+    const { label, type, placeholder, name } = props;
+    return (
       <div className={classes.input_group_wrapper}>
-      <div className={classes.label_wrapper}>{label}</div>
-      <InputField
-        type={type}
-        placeholder={placeholder}
-        className={classes.input_field_group}
-        name={name}
-      />
-    </div>
-    )
-  }
+        <div className={classes.label_wrapper}>{label}</div>
+        <InputField
+          type={type}
+          placeholder={placeholder}
+          className={classes.input_field_group}
+          name={name}
+        />
+      </div>
+    );
+  };
 
   return (
     <div className={classes.attendence_form_wrapper}>
@@ -55,15 +50,22 @@ const NewAttendence = ({ onClose, isSubmitting, setFieldValue, values }) => {
         style={{ marginBottom: 10 }}
       >
         <div className={classes.field_row_label}>Project Name</div>
-        <SelectInput
-          placeholder="Select Project"
-          name="project"
-          fullwidth
-          options={projectOptions}
-          isMulti={false}
-          onChange={(option) => setFieldValue("project", option.label)}
-          required
-        />
+          <SelectInputField
+              data={projectOptions}
+              name="project"
+              placeholder="Choose a project"
+              setFieldValue={setFieldValue}
+              required
+          />
+        {/*<SelectInput*/}
+        {/*  placeholder="Select Project"*/}
+        {/*  name="project"*/}
+        {/*  fullwidth*/}
+        {/*  options={projectOptions}*/}
+        {/*  isMulti={false}*/}
+        {/*  onChange={(option) => setFieldValue("project", option.value)}*/}
+        {/*  required*/}
+        {/*/>*/}
       </SimpleGrid>
       <SimpleGrid
         columns={2}
@@ -71,7 +73,7 @@ const NewAttendence = ({ onClose, isSubmitting, setFieldValue, values }) => {
         className={classes.input_field_wrapperr}
       >
         <div className={classes.field_row_label}>Title of Event/Function</div>
-        <InputField placeholder="Type Here" name="title" fullwidth />
+        <InputField placeholder="Type Here" name="title" fullWidth />
       </SimpleGrid>
       <SimpleGrid
         columns={2}
@@ -79,7 +81,7 @@ const NewAttendence = ({ onClose, isSubmitting, setFieldValue, values }) => {
         className={classes.input_field_wrapperr}
       >
         <div className={classes.field_row_label}>Funder</div>
-        <InputField placeholder="Type Here" name="funder" fullwidth />
+        <InputField placeholder="Type Here" name="funder" fullWidth />
       </SimpleGrid>
       <SimpleGrid
         columns={2}
@@ -87,7 +89,7 @@ const NewAttendence = ({ onClose, isSubmitting, setFieldValue, values }) => {
         className={classes.input_field_wrapperr}
       >
         <div className={classes.field_row_label}>Date</div>
-        <InputField placeholder="Type Here" name="date" type="date" fullwidth />
+        <InputField placeholder="Type Here" name="date" type="date" fullWidth />
       </SimpleGrid>
       <SimpleGrid
         columns={2}
@@ -119,11 +121,36 @@ const NewAttendence = ({ onClose, isSubmitting, setFieldValue, values }) => {
         spacing={1}
         className={classes.input_field_wrapperr}
       >
-        <GroupInput type="number" label="0 - 17 years" name="age0_17" placeholder="Type here"/>
-        <GroupInput type="number" label="18 - 30 years" name="age18_30" placeholder="Type here"/>
-        <GroupInput type="number" label="31 - 59 years" name="age31_59" placeholder="Type here"/>
-        <GroupInput type="number" label="59 and above years" name="above59" placeholder="Type here"/>
-        <GroupInput type="number" label="Undisclosed" name="undisclosed" placeholder="Type here"/>
+        <GroupInput
+          type="number"
+          label="0 - 17 years"
+          name="age0_17"
+          placeholder="Type here"
+        />
+        <GroupInput
+          type="number"
+          label="18 - 30 years"
+          name="age18_30"
+          placeholder="Type here"
+        />
+        <GroupInput
+          type="number"
+          label="31 - 59 years"
+          name="age31_59"
+          placeholder="Type here"
+        />
+        <GroupInput
+          type="number"
+          label="59 and above years"
+          name="above59"
+          placeholder="Type here"
+        />
+        <GroupInput
+          type="number"
+          label="Undisclosed"
+          name="undisclosed"
+          placeholder="Type here"
+        />
       </SimpleGrid>
       {/*<div className={classes.attendence_upload_wrapper}>*/}
       {/*  <div className={classes.file_upload}>*/}
@@ -138,22 +165,21 @@ const NewAttendence = ({ onClose, isSubmitting, setFieldValue, values }) => {
       {/*  </div>*/}
       {/*</div>*/}
 
-
-        <Flex flexDir="row-reverse">
-          <Button
-              alignSelf="right"
-              mt={5}
-              type="submit"
-              borderRadius="full"
-              bgGradient="linear(to-r, purple.400, purple.700)"
-              _hover={{ bgGradient: "linear(to-r, purple.600, purple.900)" }}
-              size="lg"
-              color="white"
-              disabled={isSubmitting}
-          >
-              {isSubmitting ? "Saving" : "Submit"}
-          </Button>
-        </Flex>
+      <Flex flexDir="row-reverse">
+        <Button
+          alignSelf="right"
+          mt={5}
+          type="submit"
+          borderRadius="full"
+          bgGradient="linear(to-r, purple.400, purple.700)"
+          _hover={{ bgGradient: "linear(to-r, purple.600, purple.900)" }}
+          size="lg"
+          color="white"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? "Saving" : "Submit"}
+        </Button>
+      </Flex>
     </div>
   );
 };

@@ -60,7 +60,7 @@ const SelectInputField = (props) => {
               <div
                 key={option.label}
                 className={classes.fida__dropdown_item}
-                onClick={(e) => selectedItemHandler(option)}
+                onClick={() => selectedItemHandler(option)}
               >
                 {option.label}
               </div>
