@@ -10,7 +10,7 @@ import Table from "../common/TableComponent/Table";
 import { fleetDatabaseColumns } from "../../lib/tableColumns";
 
 const Requisitions = () => {
-    const { isOpen, onClose } = useDisclosure();
+    const { isOpen, onClose, onOpen } = useDisclosure();
     // const { data, isLoading } = useRequisitions();
 
     const {data: fleets, isLoading} =useFleets();
@@ -47,6 +47,7 @@ const Requisitions = () => {
                 btnLabel="Add Vehicle"
                 tableName="Fleet Database"
                 columns={ fleetDatabaseColumns}
+                btnClick={onOpen}
               />
                 // <FleetDatabaseTable
                 //     data={data?.fleets}
