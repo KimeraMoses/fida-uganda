@@ -63,8 +63,7 @@ const SummaryDetails = (props) => {
   // console.log(projectName?.data?.project?.name)
 
   const { data: reqData, isLoading: loadingReqData } = useRequisition(reqName);
-
-  console.log("req", reqData);
+  const reqProjectName = useProject(reqData?.requisition?.project_name);
 
   const [remarks, setRemarks] = useState("");
 
@@ -203,7 +202,7 @@ const SummaryDetails = (props) => {
               type === "requisition" && (
                 <SimpleGrid columns={2} spacing={1}>
                   <h6>Project Name:</h6>
-                  <h6>{reqData?.requisition?.project_name}</h6>
+                  <h6>{reqProjectName?.data?.project?.name}</h6>
                   <h6>Budget year </h6>
                   <h6>{reqData?.requisition?.budget_year}</h6>
                   <h6>Type: </h6>
