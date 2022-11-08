@@ -19,7 +19,7 @@ export const requisitionSchema = yup.object().shape({
   }),
   subject_of_procurement: yup.string().when("type", {
     is: (val) => val !== "Activity",
-    then: yup.number().required(`Subject ${IS_REQUIRED}`),
+    then: yup.string().required(`Subject ${IS_REQUIRED}`),
   }),
 
   //Fields required for type ==='Activity"
@@ -42,6 +42,6 @@ export const requisitionInitialValues = {
   subject_of_procurement: "",
   delivery_location: "",
   date_required: "",
-  activity_title: "" || null,
-  activities: [] || null,
+  activity_title: "",
+  activities: "",
 };

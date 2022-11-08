@@ -44,7 +44,7 @@ const Clients = () => {
   const onOpenModal = () => {
     onOpen();
     dispatch(resetClient());
-    setIsEdit(true);
+    setIsEdit(false);
   };
 
   const onEditHandler = (client) => {
