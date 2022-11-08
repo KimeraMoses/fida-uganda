@@ -907,3 +907,75 @@ export const legalOfficeColumn = [
     ),
   },
 ];
+
+export const employeesColumns = [
+  {
+    Header: "name",
+    subHeader: 'role',
+    accessor: "name",
+    Cell: ({ cell: { value } }) => (
+      <>
+        <strong>{value.name}</strong>
+        <div>{value.role}</div>
+      </>
+    ),
+  },
+  {
+    Header: "phone number",
+    subHeader: "email",
+    accessor: "contacts",
+    Cell: ({ cell: { value } }) => (
+      <>
+        
+        <strong>{value.phoneNumber}</strong>
+        <div>{value.email}</div>
+     
+      </>
+    ),
+  },
+  {
+    Header: "sex",
+    subHeader: "district",
+    accessor: "sex",
+    Cell: ({ cell: { value } }) => (
+      <>
+        <strong>{value.sex}</strong>
+        <div>{value.district}</div>
+      </>
+    ),
+  },
+  {
+    Header: "date of birth",
+    subHeader: "nin",
+    accessor: "dateOfBirth",
+    Cell: ({ cell: { value } }) => (
+      <>
+        <strong>{value.dateOfBirth}</strong>
+        <div>{value.nin}</div>
+      </>
+    ),
+  },
+  {
+    Header: "hiring date",
+    subHeader: "termination date",
+    accessor: "hiringDate",
+    Cell: ({ cell: { value } }) => (
+      <>
+        <strong>{value.hiringDate}</strong>
+        <div>{value.terminationDate}</div>
+        <div>{formatDate(value.date_recieved)}</div>
+      </>
+    ),
+  },
+  {
+    Header: "working status",
+    subHeader: " last login",
+    accessor: "workingStatus",
+    Cell: ({ cell: { value } }) => (
+      <>
+        <strong>{value.workingStatus}</strong>
+        <div>{value.lastLogin}</div>
+      </>
+    ),
+  },
+];
