@@ -85,12 +85,12 @@ export const travelOrdersTableColumns = [
     accessor: "full_name",
   },
   {
-    Header: "Project Activity",
-    accessor: "project_activity",
+    Header: "Project",
+    accessor: "project",
   },
   {
-    Header: "Purpose",
-    accessor: "purpose",
+    Header: "Project Activity",
+    accessor: "project_activity",
   },
   {
     Header: "Stage",

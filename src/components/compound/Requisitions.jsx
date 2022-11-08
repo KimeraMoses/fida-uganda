@@ -31,6 +31,7 @@ import {useSelector} from "react-redux";
 import Table from "../common/TableComponent/Table";
 import {requisitionRequestsTableColumns} from "../../lib/tableColumns";
 import {useNavigate} from "react-router-dom";
+import {useProjectOptions} from "../../hooks/useProjects";
 
 const Requisitions = () => {
     //get user and designation
@@ -88,6 +89,7 @@ const Requisitions = () => {
     const [approvedProcurement, setApprovedProcurement] = useState([]);
     const [rejectedProcurement, setRejectedProcurement] = useState([]);
 
+    const projectOptions = useProjectOptions();
 
     //set table data for other users
     useEffect(() => {
@@ -101,6 +103,7 @@ const Requisitions = () => {
                         : b?.registeredBy?.full_name
                             ? b.registeredBy.full_name
                             : "N/A",
+                    project_name: projectOptions.find(project=>project.value === b.project_name)?.label,
                     stage: b?.approval_levels.length === 0
                         ? "Dop"
                         : b?.approval_levels.length === 1 &&
@@ -166,6 +169,7 @@ const Requisitions = () => {
                         : b?.registeredBy?.full_name
                             ? b.registeredBy.full_name
                             : "N/A",
+                    project_name: projectOptions.find(project=>project.value === b.project_name)?.label,
                     stage: b?.approval_levels.length === 0
                         ? "Dop"
                         : b?.approval_levels.length === 1 &&
@@ -231,6 +235,7 @@ const Requisitions = () => {
                         : b?.registeredBy?.full_name
                             ? b.registeredBy.full_name
                             : "N/A",
+                    project_name: projectOptions.find(project=>project.value === b.project_name)?.label,
                     stage: b?.approval_levels.length === 0
                         ? "Dop"
                         : b?.approval_levels.length === 1 &&
@@ -296,6 +301,7 @@ const Requisitions = () => {
                         : b?.registeredBy?.full_name
                             ? b.registeredBy.full_name
                             : "N/A",
+                    project_name: projectOptions.find(project=>project.value === b.project_name)?.label,
                     stage: b?.approval_levels.length === 0
                         ? "Dop"
                         : b?.approval_levels.length === 1 &&
@@ -349,9 +355,9 @@ const Requisitions = () => {
         }
     }, [rejectedDopRequisitions]);
 
-    //set table data for approved DOp requests
+    //set table data for approved Accountant requests
     useEffect(() => {
-        setRejectedDop([]);
+        setApprovedAccountant([]);
         if (approvedAccountantRequisitions?.Requisitions?.length) {
             const dataToSet = approvedAccountantRequisitions?.Requisitions?.map((b) => {
                 return {
@@ -361,6 +367,7 @@ const Requisitions = () => {
                         : b?.registeredBy?.full_name
                             ? b.registeredBy.full_name
                             : "N/A",
+                    project_name: projectOptions.find(project=>project.value === b.project_name)?.label,
                     stage: b?.approval_levels.length === 0
                         ? "Dop"
                         : b?.approval_levels.length === 1 &&
@@ -426,6 +433,7 @@ const Requisitions = () => {
                         : b?.registeredBy?.full_name
                             ? b.registeredBy.full_name
                             : "N/A",
+                    project_name: projectOptions.find(project=>project.value === b.project_name)?.label,
                     stage: b?.approval_levels.length === 0
                         ? "Dop"
                         : b?.approval_levels.length === 1 &&
@@ -491,6 +499,7 @@ const Requisitions = () => {
                         : b?.registeredBy?.full_name
                             ? b.registeredBy.full_name
                             : "N/A",
+                    project_name: projectOptions.find(project=>project.value === b.project_name)?.label,
                     stage: b?.approval_levels.length === 0
                         ? "Dop"
                         : b?.approval_levels.length === 1 &&
@@ -556,6 +565,7 @@ const Requisitions = () => {
                         : b?.registeredBy?.full_name
                             ? b.registeredBy.full_name
                             : "N/A",
+                    project_name: projectOptions.find(project=>project.value === b.project_name)?.label,
                     stage: b?.approval_levels.length === 0
                         ? "Dop"
                         : b?.approval_levels.length === 1 &&
@@ -621,6 +631,7 @@ const Requisitions = () => {
                         : b?.registeredBy?.full_name
                             ? b.registeredBy.full_name
                             : "N/A",
+                    project_name: projectOptions.find(project=>project.value === b.project_name)?.label,
                     stage: b?.approval_levels.length === 0
                         ? "Dop"
                         : b?.approval_levels.length === 1 &&
@@ -686,6 +697,7 @@ const Requisitions = () => {
                         : b?.registeredBy?.full_name
                             ? b.registeredBy.full_name
                             : "N/A",
+                    project_name: projectOptions.find(project=>project.value === b.project_name)?.label,
                     stage: b?.approval_levels.length === 0
                         ? "Dop"
                         : b?.approval_levels.length === 1 &&
@@ -731,8 +743,6 @@ const Requisitions = () => {
                                                 b?.procurementApprovalStatus === "rejected"
                                                     ? b?.procurementApprovalStatus
                                                     : b?.procurementApprovalStatus
-
-
                 };
             });
             setRejectedCeo(dataToSet);
@@ -751,6 +761,7 @@ const Requisitions = () => {
                         : b?.registeredBy?.full_name
                             ? b.registeredBy.full_name
                             : "N/A",
+                    project_name: projectOptions.find(project=>project.value === b.project_name)?.label,
                     stage: b?.approval_levels.length === 0
                         ? "Dop"
                         : b?.approval_levels.length === 1 &&
@@ -816,6 +827,7 @@ const Requisitions = () => {
                         : b?.registeredBy?.full_name
                             ? b.registeredBy.full_name
                             : "N/A",
+                    project_name: projectOptions.find(project=>project.value === b.project_name)?.label,
                     stage: b?.approval_levels.length === 0
                         ? "Dop"
                         : b?.approval_levels.length === 1 &&
@@ -881,6 +893,7 @@ const Requisitions = () => {
                         : b?.registeredBy?.full_name
                             ? b.registeredBy.full_name
                             : "N/A",
+                    project_name: projectOptions.find(project=>project.value === b.project_name)?.label,
                     stage: b?.approval_levels.length === 0
                         ? "Dop"
                         : b?.approval_levels.length === 1 &&

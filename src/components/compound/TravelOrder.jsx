@@ -18,9 +18,11 @@ import Table from "../common/TableComponent/Table";
 import {travelOrdersTableColumns} from "../../lib/tableColumns";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import {useProjectOptions} from "../../hooks/useProjects";
 
 const TravelOrder = () => {
     const navigate = useNavigate();
+    const projectOptions = useProjectOptions();
     //get user and designation
     const {user} = useSelector((state) => state.auth);
 
@@ -64,6 +66,7 @@ const TravelOrder = () => {
                     full_name: b?.createdBy?.full_name
                         ? b.createdBy.full_name
                         : "N/A",
+                    project: projectOptions.find(project=>project.value === b.project)?.label,
                     stage: b?.approval_levels.length === 0
                         ? "Dop"
                         : b?.approval_levels.length === 1 && b?.DOPApprovalStatus === "rejected"
@@ -105,6 +108,7 @@ const TravelOrder = () => {
                     full_name: b?.createdBy?.full_name
                         ? b.createdBy.full_name
                         : "N/A",
+                    project: projectOptions.find(project=>project.value === b.project)?.label,
                     stage: b?.approval_levels.length === 0
                         ? "Dop"
                         : b?.approval_levels.length === 1 && b?.DOPApprovalStatus === "rejected"
@@ -146,6 +150,7 @@ const TravelOrder = () => {
                     full_name: b?.createdBy?.full_name
                         ? b.createdBy.full_name
                         : "N/A",
+                    project: projectOptions.find(project=>project.value === b.project)?.label,
                     stage: b?.approval_levels.length === 0
                         ? "Dop"
                         : b?.approval_levels.length === 1 && b?.DOPApprovalStatus === "rejected"
@@ -187,6 +192,7 @@ const TravelOrder = () => {
                     full_name: b?.createdBy?.full_name
                         ? b.createdBy.full_name
                         : "N/A",
+                    project: projectOptions.find(project=>project.value === b.project)?.label,
                     stage: b?.approval_levels.length === 0
                         ? "Dop"
                         : b?.approval_levels.length === 1 && b?.DOPApprovalStatus === "rejected"
@@ -228,6 +234,7 @@ const TravelOrder = () => {
                     full_name: b?.createdBy?.full_name
                         ? b.createdBy.full_name
                         : "N/A",
+                    project: projectOptions.find(project=>project.value === b.project)?.label,
                     stage: b?.approval_levels.length === 0
                         ? "Dop"
                         : b?.approval_levels.length === 1 && b?.DOPApprovalStatus === "rejected"
@@ -269,6 +276,7 @@ const TravelOrder = () => {
                     full_name: b?.createdBy?.full_name
                         ? b.createdBy.full_name
                         : "N/A",
+                    project: projectOptions.find(project=>project.value === b.project)?.label,
                     stage: b?.approval_levels.length === 0
                         ? "Dop"
                         : b?.approval_levels.length === 1 && b?.DOPApprovalStatus === "rejected"
@@ -310,6 +318,7 @@ const TravelOrder = () => {
                     full_name: b?.createdBy?.full_name
                         ? b.createdBy.full_name
                         : "N/A",
+                    project: projectOptions.find(project=>project.value === b.project)?.label,
                     stage: b?.approval_levels.length === 0
                         ? "Dop"
                         : b?.approval_levels.length === 1 && b?.DOPApprovalStatus === "rejected"
@@ -351,6 +360,7 @@ const TravelOrder = () => {
                     full_name: b?.createdBy?.full_name
                         ? b.createdBy.full_name
                         : "N/A",
+                    project: projectOptions.find(project=>project.value === b.project)?.label,
                     stage: b?.approval_levels.length === 0
                         ? "Dop"
                         : b?.approval_levels.length === 1 && b?.DOPApprovalStatus === "rejected"
@@ -392,6 +402,7 @@ const TravelOrder = () => {
                     full_name: b?.createdBy?.full_name
                         ? b.createdBy.full_name
                         : "N/A",
+                    project: projectOptions.find(project=>project.value === b.project)?.label,
                     stage: b?.approval_levels.length === 0
                         ? "Dop"
                         : b?.approval_levels.length === 1 && b?.DOPApprovalStatus === "rejected"
@@ -433,6 +444,7 @@ const TravelOrder = () => {
                     full_name: b?.createdBy?.full_name
                         ? b.createdBy.full_name
                         : "N/A",
+                    project: projectOptions.find(project=>project.value === b.project)?.label,
                     stage: b?.approval_levels.length === 0
                         ? "Dop"
                         : b?.approval_levels.length === 1 && b?.DOPApprovalStatus === "rejected"
