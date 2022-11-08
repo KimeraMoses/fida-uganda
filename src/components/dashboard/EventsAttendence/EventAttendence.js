@@ -10,10 +10,12 @@ import NewAttendence from "./NewAttendence/NewAttendence";
 import {attendanceInitialValues, attendanceSchema} from "./NewAttendence/schema";
 import Table from "../../common/TableComponent/Table";
 import {eventsAttendanceTableColumns} from "../../../lib/tableColumns";
+import {useProjectOptions} from "../../../hooks/useProjects";
 
 const EventAttendence = () => {
     const {isOpen, onOpen, onClose} = useDisclosure();
     const {data: eventsData, isLoading} = useEvents();
+    const projectOptions = useProjectOptions();
 
     const [data, setData] = useState([]);
     useEffect(() => {
@@ -30,9 +32,12 @@ const EventAttendence = () => {
                             : b?.createdBy?.full_name
                                 ? b.createdBy.full_name
                                 : "N/A",
+                    // project: projectOptions.find(project=>project.value === b.project)?.label,
                     project: b?.project?.name
                         ? b.project.name
-                        : "N/A",
+                        : b?.project_name
+                       ? projectOptions.find(project=>project.value === b.project_name)?.label
+                    :"N/A",
 
                 };
             });

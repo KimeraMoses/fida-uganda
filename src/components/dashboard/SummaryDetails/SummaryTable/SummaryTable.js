@@ -8,7 +8,7 @@ const travelOrderData1 = [
 
   {
     stage: "1",
-    userName: "Kityo Masanganzira",
+    userName: "DOP Department",
     designation: "Dop",
     status: "Pending",
     remarks: "No remarks",
@@ -16,7 +16,7 @@ const travelOrderData1 = [
   },
   {
     stage: "2",
-    userName: "Kityo Masanganzira",
+    userName: "Accountant Department",
     designation: "Accountant",
     status: "Pending",
     remarks: "No remarks",
@@ -24,7 +24,7 @@ const travelOrderData1 = [
   },
   {
     stage: "3",
-    userName: "Kityo Masanganzira",
+    userName: "Fleet Manager Department",
     designation: "Fleet manager",
     status: "Pending",
     remarks: "No remarks",
@@ -34,7 +34,7 @@ const travelOrderData1 = [
 const travelOrderData2 = [
   {
     stage: "2",
-    userName: "Kityo Masanganzira",
+    userName: "Accountant Department",
     designation: "Accountant",
     status: "Pending",
     remarks: "No remarks",
@@ -42,7 +42,7 @@ const travelOrderData2 = [
   },
   {
     stage: "3",
-    userName: "Kityo Masanganzira",
+    userName: "Fleet Manager Department",
     designation: "Fleet manager",
     status: "Pending",
     remarks: "No remarks",
@@ -52,7 +52,7 @@ const travelOrderData2 = [
 const travelOrderData3 = [
   {
     stage: "3",
-    userName: "Kityo Masanganzira",
+    userName: "Fleet Manager Department",
     designation: "Fleet manager",
     status: "Pending",
     remarks: "No remarks",
@@ -63,7 +63,7 @@ const travelOrderData3 = [
 const requisitionData1 = [
     {
         stage: "1",
-        userName: "David Balibali",
+        userName: "DOP Department",
         designation: "Dop",
         status: "Pending",
         remarks: "No remarks",
@@ -71,7 +71,7 @@ const requisitionData1 = [
     },
     {
         stage: "2",
-        userName: "Kityo Masanganzira",
+        userName: "Accountant Department",
         designation: "Accountant",
         status: "Pending",
         remarks: "No remarks",
@@ -79,7 +79,7 @@ const requisitionData1 = [
     },
   {
     stage: "3",
-    userName: "Kityo Masanganzira",
+    userName: "Ceo Department",
     designation: "Ceo",
     status: "Pending",
     remarks: "No remarks",
@@ -87,7 +87,7 @@ const requisitionData1 = [
   },
   {
     stage: "4",
-    userName: "Kityo Masanganzira",
+    userName: "Procurement Department",
     designation: "Procurement Officer",
     status: "Pending",
     remarks: "No remarks",
@@ -98,7 +98,7 @@ const requisitionData2 = [
 
   {
     stage: "2",
-    userName: "Kityo Masanganzira",
+    userName: "Accountant Department",
     designation: "Accountant",
     status: "Pending",
     remarks: "No remarks",
@@ -106,7 +106,7 @@ const requisitionData2 = [
   },
   {
     stage: "3",
-    userName: "Kityo Masanganzira",
+    userName: "Ceo Department",
     designation: "Ceo",
     status: "Pending",
     remarks: "No remarks",
@@ -114,7 +114,7 @@ const requisitionData2 = [
   },
   {
     stage: "4",
-    userName: "Kityo Masanganzira",
+    userName: "Procurement Department",
     designation: "Procurement Officer",
     status: "Pending",
     remarks: "No remarks",
@@ -124,7 +124,7 @@ const requisitionData2 = [
 const requisitionData3 = [
   {
     stage: "3",
-    userName: "Kityo Masanganzira",
+    userName: "Ceo Department",
     designation: "Ceo",
     status: "Pending",
     remarks: "No remarks",
@@ -132,7 +132,7 @@ const requisitionData3 = [
   },
   {
     stage: "4",
-    userName: "Kityo Masanganzira",
+    userName: "Procurement Department",
     designation: "Procurement Officer",
     status: "Pending",
     remarks: "No remarks",
@@ -142,7 +142,7 @@ const requisitionData3 = [
 const requisitionData4 = [
   {
     stage: "4",
-    userName: "Kityo Masanganzira",
+    userName: "Procurement Department",
     designation: "procurement Officer",
     status: "Pending",
     remarks: "No remarks",
@@ -154,7 +154,7 @@ const leaveData1 = [
 
   {
     stage: "1",
-    userName: "Kityo Masanganzira",
+    userName: "DOP Department",
     designation: "Dop",
     status: "Pending",
     remarks: "No remarks",
@@ -162,7 +162,7 @@ const leaveData1 = [
   },
   {
     stage: "2",
-    userName: "Kityo Masanganzira",
+    userName: "Human Resources Department",
     designation: "Human Resources",
     status: "Pending",
     remarks: "No remarks",
@@ -170,7 +170,7 @@ const leaveData1 = [
   },
   {
     stage: "3",
-    userName: "Kityo Masanganzira",
+    userName: "Ceo Department",
     designation: "Ceo",
     status: "Pending",
     remarks: "No remarks",
@@ -180,7 +180,7 @@ const leaveData1 = [
 const leaveData2 = [
   {
     stage: "2",
-    userName: "Kityo Masanganzira",
+    userName: "Human Resources Department",
     designation: "Human Resources",
     status: "Pending",
     remarks: "No remarks",
@@ -188,7 +188,7 @@ const leaveData2 = [
   },
   {
     stage: "3",
-    userName: "Kityo Masanganzira",
+    userName: "Ceo Department",
     designation: "Ceo",
     status: "Pending",
     remarks: "No remarks",
@@ -198,7 +198,7 @@ const leaveData2 = [
 const leaveData3 = [
   {
     stage: "3",
-    userName: "Kityo Masanganzira",
+    userName: "Ceo Department",
     designation: "Ceo",
     status: "Pending",
     remarks: "No remarks",
@@ -209,7 +209,7 @@ const leaveData3 = [
 const advanceData1 = [
   {
     stage: "1",
-    userName: "David Balibali",
+    userName: "DOP Department",
     designation: "Dop",
     status: "Pending",
     remarks: "No remarks",
@@ -217,7 +217,7 @@ const advanceData1 = [
   },
   {
     stage: "2",
-    userName: "Kityo Masanganzira",
+    userName: "Accountant Department",
     designation: "Accountant",
     status: "Pending",
     remarks: "No remarks",
@@ -225,7 +225,7 @@ const advanceData1 = [
   },
   {
     stage: "3",
-    userName: "Kityo Masanganzira",
+    userName: "Ceo Department",
     designation: "Ceo",
     status: "Pending",
     remarks: "No remarks",
@@ -233,7 +233,7 @@ const advanceData1 = [
   },
   {
     stage: "4",
-    userName: "Kityo Masanganzira",
+    userName: "Finance Department",
     designation: "Finance",
     status: "Pending",
     remarks: "No remarks",
@@ -244,7 +244,7 @@ const advanceData2 = [
 
   {
     stage: "2",
-    userName: "Kityo Masanganzira",
+    userName: "Accountant Department",
     designation: "Accountant",
     status: "Pending",
     remarks: "No remarks",
@@ -252,7 +252,7 @@ const advanceData2 = [
   },
   {
     stage: "3",
-    userName: "Kityo Masanganzira",
+    userName: "Ceo Department",
     designation: "Ceo",
     status: "Pending",
     remarks: "No remarks",
@@ -260,7 +260,7 @@ const advanceData2 = [
   },
   {
     stage: "4",
-    userName: "Kityo Masanganzira",
+    userName: "Finance Department",
     designation: "Finance",
     status: "Pending",
     remarks: "No remarks",
@@ -270,7 +270,7 @@ const advanceData2 = [
 const advanceData3 = [
   {
     stage: "3",
-    userName: "Kityo Masanganzira",
+    userName: "Ceo Department",
     designation: "Ceo",
     status: "Pending",
     remarks: "No remarks",
@@ -278,7 +278,7 @@ const advanceData3 = [
   },
   {
     stage: "4",
-    userName: "Kityo Masanganzira",
+    userName: "Finance Department",
     designation: "Finance",
     status: "Pending",
     remarks: "No remarks",
@@ -288,7 +288,7 @@ const advanceData3 = [
 const advanceData4 = [
   {
     stage: "4",
-    userName: "Kityo Masanganzira",
+    userName: "Finance Department",
     designation: "Finance",
     status: "Pending",
     remarks: "No remarks",
