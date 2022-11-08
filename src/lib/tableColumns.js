@@ -79,6 +79,153 @@ export const contractsTableColumn = [
   },
 ];
 
+export const travelOrdersTableColumns = [
+  {
+    Header: "Applicant's Name",
+    accessor: "full_name",
+  },
+  {
+    Header: "Project",
+    accessor: "project",
+  },
+  {
+    Header: "Project Activity",
+    accessor: "project_activity",
+  },
+  {
+    Header: "Stage",
+    accessor: "stage",
+  },
+  {
+    Header: "Status",
+    accessor: "status",
+  },
+  {
+    Header: "Date of Application",
+    accessor: "updateAt",
+    Cell: ({ cell: { value } }) => formatDate(value),
+  },
+];
+
+
+export const requisitionRequestsTableColumns = [
+  {
+    Header: "Applicant's Name",
+    accessor: "full_name",
+  },
+  {
+    Header: "Project",
+    accessor: "project_name",
+  },
+  {
+    Header: "Delivery Location",
+    accessor: "delivery_location",
+  },
+  {
+    Header: "Stage",
+    accessor: "stage",
+  },
+  {
+    Header: "Status",
+    accessor: "status",
+  },
+  {
+    Header: "Date of Application",
+    accessor: "updateAt",
+    Cell: ({ cell: { value } }) => formatDate(value),
+  },
+];
+
+export const leaveRequestsTableColumns = [
+  {
+    Header: "Leave request Details",
+    accessor: "leave_details",
+  },
+  {
+    Header: "Date of Application",
+    accessor: "updateAt",
+    Cell: ({ cell: { value } }) => formatDate(value),
+  },
+  {
+    Header: "Status",
+    accessor: "status",
+  },
+
+];
+
+export const reportFolderTableColumns = [
+  {
+    Header: "Name",
+    accessor: "name",
+  },
+  {
+    Header: "Date Created",
+    accessor: "updateAt",
+    Cell: ({ cell: { value } }) => formatDate(value),
+  },
+];
+
+export const reportFilesTableColumns = [
+  {
+    Header: "Report Title",
+    accessor: "report_title",
+  },
+  {
+    Header: "Type of report",
+    accessor: "type",
+  },
+  {
+    Header: "Date Uploaded",
+    accessor: "date",
+    Cell: ({ cell: { value } }) => formatDate(value),
+  },
+];
+
+export const advanceRequestsTableColumns = [
+  {
+    Header: "Advance request Details",
+    accessor: "advance_details",
+  },
+  {
+    Header: "Date of Application",
+    accessor: "createdAt",
+    Cell: ({ cell: { value } }) => formatDate(value),
+  },
+  {
+    Header: "Status",
+    accessor: "status",
+  },
+
+];
+
+export const eventsAttendanceTableColumns = [
+  {
+    Header: "No:",
+    accessor: "index",
+  },
+  {
+    Header: "Title of Event",
+    accessor: "title",
+  },
+  {
+    Header: "Project",
+    accessor: "project",
+  },
+  {
+    Header: "Funder",
+    accessor: "funder",
+  },
+  {
+    Header: "Date",
+    accessor: "date",
+    Cell: ({ cell: { value } }) => formatDate(value),
+  },
+  {
+    Header: "Recorded by",
+    accessor: "full_name",
+  },
+];
+
 export const allApprovalsTableColumns = [
   {
     Header: "Name",

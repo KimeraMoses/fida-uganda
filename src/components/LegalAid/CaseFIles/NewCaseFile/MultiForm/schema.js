@@ -73,7 +73,9 @@ export const caseFileSchema = Yup.object().shape({
   respondentAge: Yup.number()
     .max(150, 'Age can not be more than 150')
     .required('Age is required'),
-  respondentPhone: Yup.number().required('Phone Number is required'),
+  respondentPhone: Yup.string()
+    .required('Phone Number is required')
+    .matches('^[0-9]*$', 'Phone number can only contain numbers'),
   respondentNIN: Yup.string()
     .required('National ID is required')
     .matches(
@@ -132,7 +134,9 @@ export const clvCaseFileSchema = Yup.object().shape({
   respondentAge: Yup.number()
     .max(150, 'Age can not be more than 150')
     .required('Age is required'),
-  respondentPhoneNumber: Yup.number().required('Phone Number is required'),
+  respondentPhone: Yup.string()
+    .required('Phone Number is required')
+    .matches('^[0-9]*$', 'Phone number can only contain numbers'),
   respondentNIN: Yup.string()
     .required('National ID is required')
     .matches(

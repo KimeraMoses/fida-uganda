@@ -17,9 +17,9 @@ export const requisitionSchema = yup.object().shape({
     is: (val) => val !== "Activity",
     then: yup.number().required(`Quantity ${IS_REQUIRED}`),
   }),
-  subject_of_procurement: yup.number().when("type", {
+  subject_of_procurement: yup.string().when("type", {
     is: (val) => val !== "Activity",
-    then: yup.number().required(`uSubject ${IS_REQUIRED}`),
+    then: yup.number().required(`Subject ${IS_REQUIRED}`),
   }),
 
   //Fields required for type ==='Activity"
