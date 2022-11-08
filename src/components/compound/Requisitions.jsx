@@ -1012,7 +1012,7 @@ const Requisitions = () => {
           <>
             <SubHeading title="My Requisition Requests" />
             <Table
-              data={userData}
+              data={userData.slice().reverse()}
               columns={requisitionRequestsTableColumns}
               loading={isLoading}
               btnLabel="Add Requisition"
@@ -1139,7 +1139,7 @@ const Requisitions = () => {
         <>
           <SubHeading title="My Requisition Requests" />
           <Table
-            data={userData}
+            data={userData.slice().reverse()}
             columns={requisitionRequestsTableColumns}
             loading={isLoading}
             btnLabel="Add Requisition"
@@ -1203,7 +1203,7 @@ const Requisitions = () => {
         <>
           <SubHeading title="My Requisition Requests" />
           <Table
-            data={userData}
+            data={userData.slice().reverse()}
             columns={requisitionRequestsTableColumns}
             loading={isLoading}
             btnLabel="Add Requisition"
@@ -1276,7 +1276,7 @@ const Requisitions = () => {
           <>
             <SubHeading title="My Requisition Requests" />
             <Table
-              data={userData}
+              data={userData.slice().reverse()}
               columns={requisitionRequestsTableColumns}
               loading={isLoading}
               btnLabel="Add Requisition"

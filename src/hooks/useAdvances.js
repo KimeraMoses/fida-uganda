@@ -24,17 +24,18 @@ export const useAdvance = (id) => {
 
 export const useAddAdvance = () => {
   const queryClient = useQueryClient();
+  const key = [ADVANCES_KEY, "MY"];
   return useMutation(addAdvance, {
     onSuccess: (data) => {
-      const previousAdvances = queryClient.getQueryData(ADVANCES_KEY);
+      const previousAdvances = queryClient.getQueryData(key);
       if (previousAdvances) {
-        queryClient.setQueryData(ADVANCES_KEY, (previousAdvances) => {
+        queryClient.setQueryData(key, (previousAdvances) => {
           return produce(previousAdvances, (draft) => {
             draft.advances.push(data.advance);
           });
         });
       } else {
-        queryClient.setQueryData(ADVANCES_KEY, () => {
+        queryClient.setQueryData(key, () => {
           return { advances: [data.advance] };
         });
       }

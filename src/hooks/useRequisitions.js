@@ -92,18 +92,19 @@ export const useRejectedProcurementRequisitions = () => {
 
 export const useAddRequisition = () => {
   const queryClient = useQueryClient();
+  const key = [REQUISITIONS_KEY, "MY"];
   return useMutation(addRequisition, {
     onSuccess: (data) => {
-      const previousProjects = queryClient.getQueryData(REQUISITIONS_KEY);
+      const previousProjects = queryClient.getQueryData(key);
 
       if (previousProjects) {
-        queryClient.setQueryData(REQUISITIONS_KEY, () => {
+        queryClient.setQueryData(key, () => {
           return produce(previousProjects, (draft) => {
             draft.Requisitions.push(data?.requisition);
           });
         });
       } else {
-        queryClient.setQueryData(REQUISITIONS_KEY, () => {
+        queryClient.setQueryData(key, () => {
           return { Requisitions: [data?.requisition] };
         });
       }
