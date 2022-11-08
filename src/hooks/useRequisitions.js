@@ -94,17 +94,18 @@ export const useAddRequisition = () => {
   const queryClient = useQueryClient();
   return useMutation(addRequisition, {
     onSuccess: (data) => {
-      const previousProjects = queryClient.getQueryData(REQUISITIONS_KEY);
+      const key = [REQUISITIONS_KEY, "MY"];
+      const previousRequisitions = queryClient.getQueryData(key);
 
-      if (previousProjects) {
-        queryClient.setQueryData(REQUISITIONS_KEY, () => {
-          return produce(previousProjects, (draft) => {
-            draft.Requisitions.push(data?.requisition);
+      if (previousRequisitions) {
+        queryClient.setQueryData(key, () => {
+          return produce(previousRequisitions, (draft) => {
+            draft.requisitions.push(data?.requisition);
           });
         });
       } else {
-        queryClient.setQueryData(REQUISITIONS_KEY, () => {
-          return { Requisitions: [data?.requisition] };
+        queryClient.setQueryData(key, () => {
+          return { requisitions: [data?.requisition] };
         });
       }
     },
