@@ -1,24 +1,25 @@
-import { useEffect, useState } from "react";
-import SectionHeader from "../../common/SectionHeader";
-import { useDisclosure } from "@chakra-ui/react";
-import Modal from "../../common/Modal";
-import NewClvForm from "./CLVForms/NewClvForm";
-import { useClvs, useAddClv, useCLVId } from "../../../hooks/useClv";
-import { clvInitialValues, clvSchema } from "./CLVForms/schema";
-import Loader from "./../../common/UI/Loader/Loader";
-import Table from "../../common/TableComponent/Table";
-import { CLVTableColumns } from "../../../lib/tableColumns";
-import { useDispatch } from "react-redux";
-import { selectCLV } from "../../../store/CLVReducer";
+import { useEffect, useState } from 'react';
+import SectionHeader from '../../common/SectionHeader';
+import { useDisclosure } from '@chakra-ui/react';
+import Modal from '../../common/Modal';
+import NewClvForm from './CLVForms/NewClvForm';
+import { useClvs, useAddClv, useCLVId } from '../../../hooks/useClv';
+import { clvInitialValues, clvSchema } from './CLVForms/schema';
+import Loader from './../../common/UI/Loader/Loader';
+import Table from '../../common/TableComponent/Table';
+import { CLVTableColumns } from '../../../lib/tableColumns';
+import { useDispatch } from 'react-redux';
+import { resetCLV, selectCLV } from '../../../store/CLVReducer';
 
 const CLVs = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data: clvsData, isLoading } = useClvs();
   const CLV = useCLVId();
   const [avatar, setAvatar] = useState(null);
-  const [url, setImageUrl] = useState("");
+  const [url, setImageUrl] = useState('');
   const dispatch = useDispatch();
   const [data, setData] = useState([]);
+  const [isEdit, setIsEdit] = useState(false);
 
   useEffect(() => {
     setData([]);
@@ -27,11 +28,11 @@ const CLVs = () => {
         return {
           ...b,
           name: {
-            name: b?.first_name + " " + b?.last_name,
+            name: b?.first_name + ' ' + b?.last_name,
             profession: b?.profession,
           },
           contacts: {
-            phoneNumber: b?.phoneNumber ? b?.phoneNumber : "N/A",
+            phoneNumber: b?.phoneNumber ? b?.phoneNumber : 'N/A',
             email: b?.email,
           },
           idNumber: {
@@ -49,7 +50,14 @@ const CLVs = () => {
     }
   }, [clvsData]);
 
+  const onOpenModal = () => {
+    setIsEdit(false);
+    dispatch(resetCLV());
+    onOpen();
+  };
+
   const onEditHandler = (CLV) => {
+    setIsEdit(true);
     dispatch(selectCLV(clvsData?.clvs?.find((el) => el?.id === CLV?.id)));
     onOpen();
   };
@@ -76,7 +84,7 @@ const CLVs = () => {
         <Table
           onEditHandler={onEditHandler}
           onViewHandle={onOpen}
-          btnClick={onOpen}
+          btnClick={onOpenModal}
           isLoading={isLoading}
           data={data ? data : null}
           btnLabel="Add CLV"
@@ -93,13 +101,13 @@ const CLVs = () => {
       )}
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <NewClvForm
-          action={CLV ? "editClv" : "newClv"}
+          action={CLV ? 'editClv' : 'newClv'}
           validationSchema={clvSchema}
           onClose={onClose}
           initialValues={clvInitialValues}
           useMutate={useAddClv}
           onSuccess={onClose}
-          success={"CLV added successfully"}
+          success={'CLV added successfully'}
           setAvatar={setAvatar}
           setImageUrl={setImageUrl}
           url={url}
@@ -108,6 +116,7 @@ const CLVs = () => {
           isFormData={true}
           mutateData={addCLVId}
           mutateInitialValues={mutateInitialValues}
+          isEditing={isEdit}
         />
       </Modal>
     </>
