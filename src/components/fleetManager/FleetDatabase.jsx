@@ -45,9 +45,9 @@ const Requisitions = () => {
                 isLoading={isLoading}
                 data={data?data : null}
                 btnLabel="Add Vehicle"
+                btnClick={onOpen}
                 tableName="Fleet Database"
                 columns={ fleetDatabaseColumns}
-                btnClick={onOpen}
               />
                 // <FleetDatabaseTable
                 //     data={data?.fleets}
