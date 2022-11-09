@@ -111,7 +111,7 @@ function TableComponent({
             m={3}
             alignItems="center"
           >
-            {hideSearch && (
+            {hideSearch && data?.length>0 && (
               <Tooltip label="Download">
                 <IconButton
                   onClick={handleDownload}

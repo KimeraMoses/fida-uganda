@@ -59,7 +59,7 @@ const FidaApproved = () => {
             columns={approvalTableColumns}
             showBtn={false}
             loading={isLoading}
-            showActions={true}
+            hideActions
             onEditHandler={onEditHandler}
           />
         </>
@@ -69,6 +69,7 @@ const FidaApproved = () => {
           // isSubmitting={isLoading}
           onClose={onClose}
           user={user}
+          actionType='DEACTIVATE'
           // onSubmit={mutate}
           isError={isError}
           error={error}
