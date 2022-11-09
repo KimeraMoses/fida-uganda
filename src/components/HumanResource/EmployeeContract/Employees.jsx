@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import SectionHeader from "../../common/SectionHeader";
 import Modal from "../../common/Modal";
 import { useDisclosure } from "@chakra-ui/react";
-import EmployeeContractTable from "./EmployeeContractTable/EmployeeContractTable";
 import NewContract from "./NewContract/NewContract";
 import Loader from "./../../common/UI/Loader/Loader";
 import { useActivatedUsers } from "../../../hooks/useUser";
@@ -10,7 +9,7 @@ import { employeesColumns } from "../../../lib/tableColumns";
 import Table from "../../common/TableComponent/Table";
 
 const Employees = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onClose } = useDisclosure();
   const { data: activatedUsersData, isLoading } = useActivatedUsers();
 console.log('activatedUsersData', activatedUsersData)
   const [data, setData] = useState([]);
