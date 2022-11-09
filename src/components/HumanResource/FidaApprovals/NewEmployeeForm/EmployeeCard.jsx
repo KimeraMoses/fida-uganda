@@ -5,7 +5,7 @@ import TextField from "../../../common/TextField";
 import { toastError, toastSuccess } from "../../../../lib/toastDetails";
 import { useRequestPasswordLink } from "../../../../hooks/useUser";
 
-const EmployeeCard = ({ onClose, user, isReadOnly = true, actionType }) => {
+const EmployeeCard = ({ onClose, user, isReadOnly = true }) => {
   const toast = useToast();
   // const { mutate, isError, error, isSuccess, isLoading } = useActivateUser();
   const { mutate, isError, error, isSuccess, isLoading } =
