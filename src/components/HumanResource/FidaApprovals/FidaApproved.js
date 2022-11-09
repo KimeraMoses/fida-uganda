@@ -13,7 +13,6 @@ import { approvalTableColumns } from "../../../lib/tableColumns";
 
 // import CustomTable from ""
 
-
 const FidaApproved = () => {
   const { data: userData, isLoading } = useActivatedUsers();
   const { isOpen, onOpen, onClose } = useDisclosure();
