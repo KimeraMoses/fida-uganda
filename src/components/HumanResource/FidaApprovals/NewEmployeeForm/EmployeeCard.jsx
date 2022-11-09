@@ -1,31 +1,33 @@
+import React, { useEffect } from "react";
 import { SimpleGrid, Avatar, Flex, Button, useToast } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import TextField from "../../../common/TextField";
-import { useEffect } from "react";
-import { toastError } from "../../../../lib/toastDetails";
+import { toastError, toastSuccess } from "../../../../lib/toastDetails";
+import { useRequestPasswordLink } from "../../../../hooks/useUser";
 
-const EmployeeCard = ({
-  onClose,
-  isSubmitting,
-  user,
-  onSubmit,
-  isError,
-  error,
-  isReadOnly = true,
-}) => {
+const EmployeeCard = ({ onClose, user, isReadOnly = true, actionType }) => {
   const toast = useToast();
+  // const { mutate, isError, error, isSuccess, isLoading } = useActivateUser();
+  const { mutate, isError, error, isSuccess, isLoading } =
+    useRequestPasswordLink();
 
   useEffect(() => {
     if (isError) {
       toast(toastError(error));
     }
-  });
+    if (isSuccess) {
+      toast(toastSuccess("User approved successfuly"));
+      onClose();
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [toast, isError, error, isSuccess]);
 
   return (
     <Formik
       initialValues={{ ...user, project: user.project?.name }}
       onSubmit={(values) => {
-        onSubmit(values);
+        mutate({ id: values?.id });
       }}
     >
       <SimpleGrid p={5} as={Form} gap={5}>
@@ -53,7 +55,7 @@ const EmployeeCard = ({
           </Button>
           <Button
             type="submit"
-            isLoading={isSubmitting}
+            isLoading={isLoading}
             color="black"
             bgColor="white"
             borderWidth="1px"
