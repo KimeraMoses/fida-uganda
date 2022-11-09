@@ -626,7 +626,7 @@ const TravelOrder = () => {
           <>
             <SubHeading title="My Travel Requests" />
             <Table
-              data={userData}
+              data={userData.slice().reverse()}
               columns={travelOrdersTableColumns}
               loading={isLoading}
               btnLabel="Add Travel Order"
@@ -680,7 +680,7 @@ const TravelOrder = () => {
         <>
           <SubHeading title="My Travel Requests" />
           <Table
-            data={userData}
+            data={userData.slice().reverse()}
             columns={travelOrdersTableColumns}
             loading={isLoading}
             btnLabel="Add Travel Order"
@@ -734,7 +734,7 @@ const TravelOrder = () => {
         <>
           <SubHeading title="My Travel Requests" />
           <Table
-            data={userData}
+            data={userData.slice().reverse()}
             columns={travelOrdersTableColumns}
             loading={isLoading}
             btnLabel="Add Travel Order"
@@ -791,7 +791,7 @@ const TravelOrder = () => {
           <>
             <SubHeading title="My Requests" />
             <Table
-              data={userData}
+              data={userData.slice().reverse()}
               columns={travelOrdersTableColumns}
               loading={isLoading}
               btnLabel="Add Travel Order"

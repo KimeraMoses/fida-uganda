@@ -24,17 +24,18 @@ export const useMyLeaveRequests = () => {
 
 export const useAddLeaveRequest = () => {
   const queryClient = useQueryClient();
+  const key = [LEAVE_REQUESTS_KEY, "MY"];
   return useMutation(addLeaveRequests, {
     onSuccess: (data) => {
-      const previousLeaveRequests = queryClient.getQueryData(LEAVE_REQUESTS_KEY);
+      const previousLeaveRequests = queryClient.getQueryData(key);
       if (previousLeaveRequests) {
-        queryClient.setQueryData(LEAVE_REQUESTS_KEY, (previousLeaveRequests) => {
+        queryClient.setQueryData(key, (previousLeaveRequests) => {
           return produce(previousLeaveRequests, (draft) => {
             draft.leaves.push(data.leave);
           });
         });
       } else {
-        queryClient.setQueryData(LEAVE_REQUESTS_KEY, () => {
+        queryClient.setQueryData(key, () => {
           return { leaves: [data.leave] };
         });
       }
