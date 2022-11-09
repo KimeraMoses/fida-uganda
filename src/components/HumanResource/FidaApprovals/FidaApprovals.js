@@ -15,7 +15,6 @@ const FidaApprovals = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const [user, setUser] = useState({});
   const [data, setData] = useState([]);
-
   useEffect(() => {
     setData([]);
     if (approvalData?.users?.length) {
@@ -56,12 +55,13 @@ const FidaApprovals = () => {
       )}
       <Modal isOpen={isOpen} onClose={onClose}>
         <EmployeeCard
-          // isSubmitting={isLoading}
           onClose={onClose}
           user={user}
+          // actionType="ACTIVATE"
           // onSubmit={mutate}
           // isError={isError}
           // error={error}
+          onSuccess={onClose}
         />
       </Modal>
     </>

@@ -89,3 +89,6 @@ export const itComplaintInitialValues = {
   status: "",
   remarks: "",
 };
+
+export const approvalSchema = yup.object().shape({
+  id: yup.string().required("User id is required")})
