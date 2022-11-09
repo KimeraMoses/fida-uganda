@@ -11,7 +11,6 @@ import Table from "../../common/TableComponent/Table";
 const Employees = () => {
   const { isOpen, onClose } = useDisclosure();
   const { data: activatedUsersData, isLoading } = useActivatedUsers();
-console.log('activatedUsersData', activatedUsersData)
   const [data, setData] = useState([]);
   useEffect(() => {
     setData([]);
@@ -24,25 +23,25 @@ console.log('activatedUsersData', activatedUsersData)
             role: b?.role,
           },
           contacts: {
-            phoneNumber: b?.createdAt?b?.createdAt:'N/A',
+            phoneNumber: b?.createdAt ? b?.createdAt : "N/A",
             email: b?.email,
           },
           sex: {
             sex: b?.subject,
-            district: b?.email
+            district: b?.email,
           },
-            dateOfBirth:{
-              dateOfBirth:b?.status,
-              nin: b?.dueDate
-            },
-            hiringDate:{
-              hiringDate:b?.status,
-              terminationDate: b?.dueDate
-            },
-            workingStatus:{
-              workingStatus:b?.status,
-              lastLogin: b?.dueDate
-            }
+          dateOfBirth: {
+            dateOfBirth: b?.status,
+            nin: b?.dueDate,
+          },
+          hiringDate: {
+            hiringDate: b?.status,
+            terminationDate: b?.dueDate,
+          },
+          workingStatus: {
+            workingStatus: b?.status,
+            lastLogin: b?.dueDate,
+          },
         };
       });
       // console.log('it data', dataToSet)
@@ -57,13 +56,13 @@ console.log('activatedUsersData', activatedUsersData)
       ) : (
         data && (
           <Table
-          isLoading={isLoading}
-          data={data ? data : null}
-          btnLabel="Add Employee"
-          tableName="Employees"
-          columns={employeesColumns}
-          hideActions
-        />
+            isLoading={isLoading}
+            data={data ? data : null}
+            btnLabel="Add Employee"
+            tableName="Employees"
+            columns={employeesColumns}
+            hideActions
+          />
           // <EmployeeContractTable
           //   data={[]}
           //   btnLabel="Add Employee"
