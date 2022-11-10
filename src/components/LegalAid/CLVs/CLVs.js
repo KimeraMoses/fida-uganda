@@ -80,6 +80,12 @@ const CLVs = () => {
     return initialValues;
   };
 
+  const handleClose = () => {
+    setIsEdit(false);
+    dispatch(resetCLV());
+    onClose();
+  };
+
   return (
     <>
       <SectionHeader title="CLVs" />
@@ -101,11 +107,11 @@ const CLVs = () => {
         <NewClvForm
           action={CLV ? "editClv" : "newClv"}
           validationSchema={clvSchema}
-          onClose={onClose}
+          onClose={handleClose}
           initialValues={clvInitialValues}
-          useMutate={isEdit ? useEditClv : useAddClv}
-          onSuccess={onClose}
-          success={"CLV added successfully"}
+          useMutate={CLV ? useEditClv : useAddClv}
+          onSuccess={handleClose}
+          success={CLV ? "CLV updated successfully" : "CLV added successfully"}
           setAvatar={setAvatar}
           setImageUrl={setImageUrl}
           url={url}

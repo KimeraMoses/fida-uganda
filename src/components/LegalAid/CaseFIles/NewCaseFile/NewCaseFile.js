@@ -1,15 +1,15 @@
-import { useState } from 'react';
-import MultForm5 from './MultiForm/MultForm5';
-import MultForm3 from './MultiForm/MultForm3';
-import MultForm1 from './MultiForm/MultForm1';
-import MultForm6 from './MultiForm/MultForm6';
+import { useState } from "react";
+import MultForm5 from "./MultiForm/MultForm5";
+import MultForm3 from "./MultiForm/MultForm3";
+import MultForm1 from "./MultiForm/MultForm1";
+import MultForm6 from "./MultiForm/MultForm6";
 import {
   useAddCaseFiles,
   useUpdateCaseFile,
   useCaseFileTemp,
   useUpdateClvCaseFile,
   useAddClvCaseFile,
-} from '../../../../hooks/useCaseFiles';
+} from "../../../../hooks/useCaseFiles";
 import {
   caseFileFiveInitialValues,
   caseFileInitialValues,
@@ -17,19 +17,19 @@ import {
   caseFileSixInitialValues,
   caseFileThreeInitialValues,
   clvCaseFileSchema,
-} from './MultiForm/schema';
-import { useDispatch } from 'react-redux';
+} from "./MultiForm/schema";
+import { useDispatch } from "react-redux";
 import {
   resetCaseFile,
   selectCaseFile,
-} from '../../../../store/caseFileReducer';
-import { onSubmitAlert } from '../../../../lib/deleteInProd';
+} from "../../../../store/caseFileReducer";
+// import { onSubmitAlert } from '../../../../lib/deleteInProd';
 
 const NewCaseFile = ({ isClvCaseFile, onClose, isNewCaseFile = false }) => {
   const caseFile = useCaseFileTemp();
   const limit = 4;
-  const CASE_FILE_ADDED = 'Case File Added Successfully';
-  const CASE_FILE_UPDATED = 'Case File Updated Successfully';
+  const CASE_FILE_ADDED = "Case File Added Successfully";
+  const CASE_FILE_UPDATED = "Case File Updated Successfully";
   const [isNew, setIsNew] = useState(isNewCaseFile);
   const [page, setPage] = useState(1);
   const [selectedClient, setSelectedClient] = useState(
@@ -109,6 +109,11 @@ const NewCaseFile = ({ isClvCaseFile, onClose, isNewCaseFile = false }) => {
               ? useUpdateClvCaseFile
               : useUpdateCaseFile
           }
+          // useMutate={
+          //   !isClvCaseFile && isNewCaseFile
+          //     ? useAddCaseFiles
+          //     : !isClvCaseFile && !isNewCaseFile
+          // }
           success={isNew ? CASE_FILE_ADDED : CASE_FILE_UPDATED}
           onSuccess={isNew ? onSuccessfulAdd : nextStep}
           selectedClient={selectedClient}
@@ -126,7 +131,7 @@ const NewCaseFile = ({ isClvCaseFile, onClose, isNewCaseFile = false }) => {
       return (
         <MultForm3
           initialValues={caseFileThreeInitialValues}
-          useMutate={isClvCaseFile ? useUpdateCaseFile : useUpdateClvCaseFile}
+          useMutate={isClvCaseFile ? useUpdateClvCaseFile : useUpdateCaseFile}
           onSuccess={nextStep}
           success={CASE_FILE_UPDATED}
           onBack={prevStep}
@@ -141,7 +146,7 @@ const NewCaseFile = ({ isClvCaseFile, onClose, isNewCaseFile = false }) => {
       return (
         <MultForm5
           initialValues={caseFileFiveInitialValues}
-          useMutate={isClvCaseFile ? useUpdateCaseFile : useUpdateClvCaseFile}
+          useMutate={isClvCaseFile ? useUpdateClvCaseFile : useUpdateCaseFile}
           onSuccess={nextStep}
           success={CASE_FILE_UPDATED}
           onBack={prevStep}
@@ -156,7 +161,7 @@ const NewCaseFile = ({ isClvCaseFile, onClose, isNewCaseFile = false }) => {
       return (
         <MultForm6
           initialValues={caseFileSixInitialValues}
-          useMutate={isClvCaseFile ? onSubmitAlert : useUpdateClvCaseFile}
+          useMutate={isClvCaseFile ? useUpdateClvCaseFile : useUpdateCaseFile}
           onSuccess={onSubmit}
           success={CASE_FILE_UPDATED}
           onBack={prevStep}
