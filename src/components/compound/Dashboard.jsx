@@ -26,7 +26,6 @@ const Dashboard = () => {
   const { data: clientStats } = useClientStats();
   const { data: complaintsStats } = useComplaintsStats();
   const { data: taskStats } = useGetTaskStats();
-  console.log(events)
 
   const myRequisitions = requisition?.my_Requisitions || 0;
   const allRequisitions = requisition?.all_Requisitions || 0;
