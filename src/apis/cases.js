@@ -28,7 +28,7 @@ export const addCaseFile = async (caseFile) => {
 export const updateCaseFile = async (caseFile) => {
   return await axiosClient.patch(
     `${routes.cases.editCaseFile}/${caseFile.id}`,
-    caseFile
+    { ...caseFile, clv: caseFile.clv?.id }
   );
 };
 
