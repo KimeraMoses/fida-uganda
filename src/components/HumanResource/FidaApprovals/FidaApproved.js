@@ -11,9 +11,6 @@ import EmployeeCard from "./NewEmployeeForm/EmployeeCard";
 import { useDisclosure } from "@chakra-ui/react";
 import { approvalTableColumns } from "../../../lib/tableColumns";
 
-// import CustomTable from ""
-
-
 const FidaApproved = () => {
   const { data: userData, isLoading } = useActivatedUsers();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -66,11 +63,8 @@ const FidaApproved = () => {
       )}
       <Modal isOpen={isOpen} onClose={onClose}>
         <EmployeeCard
-          // isSubmitting={isLoading}
           onClose={onClose}
           user={user}
-          actionType='DEACTIVATE'
-          // onSubmit={mutate}
           isError={isError}
           error={error}
         />

@@ -1,46 +1,35 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useClients } from "../../../hooks/useClients";
 import { useLeaveRequests } from "../../../hooks/useLeaveRequest";
 import { useProjects } from "../../../hooks/useProjects";
 import TrackerTable from "../../dashboard/TrackerTable/TrackerTable";
 import ReportBreadCrumb from "../../HumanResource/Reports/BreadCrumb/ReportBreadCrumb";
-import ClientsTable from "../../LegalAid/Clients/ClientsTable/ClientsTable";
-import FidaProjectTable from "../FidaProjects/FidaProjectTable/FidaProjectTable";
 import Loader from "./../../common/UI/Loader/Loader";
 import { useAdvances } from "./../../../hooks/useAdvances";
 import FolderFilesTable from "../../HumanResource/Reports/ReportTable/FolderFilesTable";
 import { FolderFileData } from "./../../HumanResource/Reports/Reports";
-import { useCaseFiles, useClvCases } from "../../../hooks/useCaseFiles";
-import { useItProducts } from "../../../hooks/useItProduct";
-import ITProductsTable from "../../itDepartment/Products/ITProductsTable";
 import ITServicesTable from "../../itDepartment/Services/ITServicesTable";
 import { useItServices } from "../../../hooks/useItServices";
 import { useTasks } from "../../../hooks/useTasks";
 import AllTasks from "../../Tasks/AllTasks/AllTasks";
-import { useComplaints } from "../../../hooks/useComplaint";
-import ComplaintsTable from "../../itDepartment/Complaints/ComplaintTable/ComplaintTable";
 import { Box } from "@chakra-ui/react";
 import { Heading } from "@chakra-ui/react";
 import RequisitionTable from "./../../dashboard/Requisitions/RequisitionsTable";
 import { useRequisitions } from "../../../hooks/useRequisitions";
 import { useEvents } from "../../../hooks/useEvents";
 import AttendenceTable from "./../../dashboard/EventsAttendence/AttendenceTable/AttendenceTable";
-import TravelOrderTable from "../../dashboard/TravelOrder/TravelOrderTable";
-import { useTravelOrders } from "../../../hooks/useTravelOrders";
 import AllocationsTable from "../../Membership/Allocations/AllocationsTable/AllocationsTable";
 import { useNotifications } from "../../../hooks/useNotification";
 import { useAllocations } from "../../../hooks/useAllocations";
 import NotificationsTable from "../../Membership/Notifications/NotificationsTable/NotificationTable";
 import MemberTable from "../../Membership/Members/MemberTable/MemberTable";
 import { useMembers } from "../../../hooks/useMember";
-import FidaAssetsTable from "../../HumanResource/FidaAssets/FidaAssetsTable/FidaAssetsTable";
 import { useAssets } from "../../../hooks/useAsset";
 import ProjectTable from "../../LegalAid/ProjectFiles/ProjectFilesTable/ProjectTable";
-import FleetDatabaseTable from "../../fleetManager/FleetDatabaseTable/FleetDatabaseTable";
-import { useFleets } from "../../../hooks/useFleet";
 import Table from "../../common/TableComponent/Table";
-import { caseColumns } from "../../../lib/tableColumns";
+import { caseColumns, clientsTableColumns, CLVTableColumns, fidaAssetsColumns, fidaProjectsTableColumns, fleetDatabaseColumns, itComplaintsColumns, itProductsColumns, leaveRequestsTableColumns, travelOrdersTableColumns } from "../../../lib/tableColumns";
+import { useCasesData, useClientsData, useCLVData, useFleetData, useITComplaintsData, useItData, useTravleOrdersdata } from "../../../hooks/tableDataHooks/useTableData";
+
 
 const DatabaseOpen = () => {
   useEffect(() => {
@@ -48,24 +37,31 @@ const DatabaseOpen = () => {
   }, []);
 
   const { dbName } = useParams();
-  const { data, isLoading } = useClvCases();
-  const clientsData = useClients();
+  // const { data, isLoading } = useClvCases();
+  const {data, isLoading} = useCLVData()
+  const {data: complaintsData, isLoading: complaintsLoading} = useITComplaintsData()
+  const {data: casesData, isLoading: casesLoading} = useCasesData()
+  const {data: clientsData, isLoading: clientsLoading} = useClientsData()
+  const {data: itProductData, isLoading: itProductsLoading} = useItData()
+  const {approvedDopData: travelData, isLoading: travelOrdersDataLoading} = useTravleOrdersdata()
+  const {data:fleetsData, isLoading:fleetLoading} = useFleetData()
+  // const clientsData = useClients();
   const projectsData = useProjects();
   const leaveData = useLeaveRequests();
   const advanceData = useAdvances();
-  const caseData = useCaseFiles();
-  const itProductData = useItProducts();
+  // const caseData = useCaseFiles();
+  // const itProductData = useItProducts();
   const itServicesData = useItServices();
-  const itComplaintsData = useComplaints();
+  // const itComplaintsData = useComplaints();
   const requisitionsData = useRequisitions();
   const tasksData = useTasks();
   const eventsData = useEvents();
-  const travelData = useTravelOrders();
+  // const travelData = useTravelOrders();
   const allocationsData = useAllocations();
   const notificationsData = useNotifications();
   const membersData = useMembers();
   const assetsData = useAssets();
-  const fleetsData = useFleets();
+  // const fleetsData = useFleets();
   return (
     <>
       <ReportBreadCrumb
@@ -74,61 +70,82 @@ const DatabaseOpen = () => {
         folderName={dbName.replace(/-/g, " ")}
       />
       {isLoading |
-      clientsData.isLoading |
+      clientsLoading |
       projectsData.isLoading |
       advanceData.isLoading |
       leaveData.isLoading |
-      itProductData.isLoading |
+      itProductsLoading|
       itServicesData.isLoading |
       requisitionsData.isLoading |
       notificationsData.isLoading |
       allocationsData.isLoading |
       membersData.isLoading |
-      itComplaintsData.isLoading |
-      travelData.isLoading |
+      complaintsLoading |
+      travelOrdersDataLoading |
       assetsData.isLoading |
       eventsData.isLoading |
       tasksData.isLoading |
-      fleetsData.isLoading |
+      fleetLoading |
       tasksData.isLoading |
-      caseData.isLoading ? (
+      casesLoading ? (
         <Loader />
-      ) : dbName === "clvs" && data?.clv_cases ? (
+      ) : dbName === "clvs" && data? (
         <Table
-          columns={caseColumns}
+          columns={CLVTableColumns}
           showBtn={false}
-          data={data?.clv_cases}
+          data={data?data:null}
           hideActions
           tableName="CLV"
         />
-      ) : dbName === "clients" && clientsData.data?.clients ? (
-        <ClientsTable
-          showBtn={false}
-          data={clientsData.data ? clientsData.data.clients : null}
-          btnLabel="Add Client"
-          tableName="Clients"
-        />
+      ) : dbName === "clients" && clientsData? (
+        // <ClientsTable
+        //   showBtn={false}
+        //   data={clientsData.data ? clientsData.data.clients : null}
+        //   btnLabel="Add Client"
+        //   tableName="Clients"
+        // />
+
+        <Table
+        hideActions
+        data={clientsData? clientsData: null}
+        columns={clientsTableColumns}
+        showBtn={false}
+      />
       ) : dbName === "projects" && projectsData.data?.projects ? (
-        <FidaProjectTable
-          showBtn={false}
-          data={projectsData.data ? projectsData.data.projects : null}
-          tableName="Fida Projects"
-        />
-      ) : dbName === "cases" && caseData.data?.cases ? (
+        // <FidaProjectTable
+        //   showBtn={false}
+        //   data={projectsData.data ? projectsData.data.projects : null}
+        //   tableName="Fida Projects"
+        // />
+        <Table
+        hideActions
+        data={projectsData.data ? projectsData.data.projects : null}
+        columns={fidaProjectsTableColumns}
+        showBtn={false}
+      />
+      ) : dbName === "cases" && casesData? (
         <Table
           columns={caseColumns}
           showBtn={false}
-          data={caseData?.data?.cases}
+          data={casesData?casesData:null}
           tableName="Case Files"
           hideActions
         />
       ) : dbName === "leavetrackers" && leaveData.data.leaves ? (
-        <TrackerTable
-          type="leave"
-          showBtn={false}
-          data={leaveData.data ? leaveData.data.leaves : null}
-          tableName="Leave Tracker"
-        />
+        // <TrackerTable
+        //   type="leave"
+        //   showBtn={false}
+        //   data={leaveData.data ? leaveData.data.leaves : null}
+        //   tableName="Leave Tracker"
+        // />
+        <Table
+        columns={leaveRequestsTableColumns}
+        showBtn={false}
+        data={leaveData.data ? leaveData.data.leaves : null}
+        tableName="Leave Tracker"
+        hideActions
+      />
+
       ) : dbName === "advances" && advanceData.data.advances ? (
         <TrackerTable
           type="advance"
@@ -142,24 +159,40 @@ const DatabaseOpen = () => {
           data={FolderFileData}
           tableName="Reports"
         />
-      ) : dbName === "itproducts" && itProductData.data?.ITProducts ? (
-        <ITProductsTable
-          showBtn={false}
-          data={itProductData.data ? itProductData.data.ITProducts : null}
-          tableName="IT Products"
-        />
+      ) : dbName === "itproducts" && itProductData? (
+        // <ITProductsTable
+        //   showBtn={false}
+        //   data={itProductData.data ? itProductData.data.ITProducts : null}
+        //   tableName="IT Products"
+        // />
+
+        <Table
+        hideActions
+        data={itProductData? itProductData: null}
+        columns={itProductsColumns}
+        tableName="IT Products"
+        showBtn={false}
+      />
       ) : dbName === "services" && itServicesData.data?.services ? (
         <ITServicesTable
           showBtn={false}
           data={itServicesData.data ? itServicesData.data.services : null}
           tableName="IT Services"
         />
-      ) : dbName === "complaints" && itComplaintsData.data?.complaints ? (
-        <ComplaintsTable
-          showBtn={false}
-          data={itComplaintsData.data ? itComplaintsData.data.complaints : null}
-          tableName="IT Complaints"
-        />
+      ) : dbName === "complaints" && complaintsData? (
+        // <ComplaintsTable
+        //   showBtn={false}
+        //   data={itComplaintsData.data ? itComplaintsData.data.complaints : null}
+        //   tableName="IT Complaints"
+        // />
+
+        <Table
+        data={complaintsData ? complaintsData : null}
+        tableName="IT Complaints"
+        columns={itComplaintsColumns}
+        hideActions
+      />
+
       ) : dbName === "requisitions" && requisitionsData.data?.Requisitions ? (
         <RequisitionTable
           showBtn={false}
@@ -176,12 +209,19 @@ const DatabaseOpen = () => {
           data={eventsData.data ? eventsData.data.events : null}
           tableName="Events"
         />
-      ) : dbName === "travelorders" && travelData.data?.travelOrders ? (
-        <TravelOrderTable
-          showBtn={false}
-          data={travelData.data ? travelData.data.travelOrders : null}
-          tableName="Travel Order"
-        />
+      ) : dbName === "travelorders" && travelData ? (
+        // <TravelOrderTable
+        //   showBtn={false}
+        //   data={travelData.data ? travelData.data.travelOrders : null}
+        //   tableName="Travel Order"
+        // />
+
+        <Table
+        data={travelData? travelData : null}
+        tableName="Travel Order"
+        columns={travelOrdersTableColumns}
+        hideActions
+      />
       ) : dbName === "allocations" && allocationsData.data?.Allocations ? (
         <AllocationsTable
           showBtn={false}
@@ -204,22 +244,36 @@ const DatabaseOpen = () => {
           tableName="Members"
         />
       ) : dbName === "assets" && assetsData.data?.assets ? (
-        <FidaAssetsTable
-          showBtn={false}
-          data={assetsData.data ? assetsData.data.assets : null}
-          tableName="Fida Assets"
-        />
+        // <FidaAssetsTable
+        //   showBtn={false}
+        //   data={assetsData.data ? assetsData.data.assets : null}
+        //   tableName="Fida Assets"
+        // />
+
+        <Table
+        data={assetsData.data ? assetsData.data.assets : null}
+        tableName="Fida Assets"
+        columns={fidaAssetsColumns}
+        hideActions
+      />
       ) : dbName === "projectfiles" ? (
         <ProjectTable
           showBtn={false}
           // data={assetsData.data ? assetsData.data.assets : null}
         />
-      ) : dbName === "fleets" && fleetsData.data?.fleets ? (
-        <FleetDatabaseTable
-          showBtn={false}
-          data={fleetsData.data ? fleetsData.data.fleets : null}
-          tableName="Fleet Database"
-        />
+      ) : dbName === "fleets" && fleetsData ? (
+        // <FleetDatabaseTable
+        //   showBtn={false}
+        //   data={fleetsData.data ? fleetsData.data.fleets : null}
+        //   tableName="Fleet Database"
+        // />
+
+        <Table
+        data={fleetsData ? fleetsData : null}
+        tableName="Fleet Database"
+        columns={fleetDatabaseColumns}
+        hideActions
+      />
       ) : (
         <Box bgColor="purple.100" padding={20} textAlign="center">
           <Heading color="purple.400" textTransform="capitalize">

@@ -9,6 +9,10 @@ export const getEvent = async (eventId) => {
   return axiosClient.get(`${routes.events.base}/${eventId}`);
 };
 
+export const getEventsStats = async () => {
+  return await axiosClient.get(routes.events.getNumberOfAttendees);
+};
+
 export const deleteEvent = async (eventId) => {
   return axiosClient.delete(`${routes.events.base}/${eventId}`);
 };

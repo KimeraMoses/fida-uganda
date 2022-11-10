@@ -104,7 +104,7 @@ const LeaveTrackerTable = (props) => {
           )
           :(
               <Table
-                  data={userData.slice().reverse()}
+                  data={userData}
                   columns={leaveRequestsTableColumns}
                   loading={isLoading}
                   // btnLabel="New Leave request"

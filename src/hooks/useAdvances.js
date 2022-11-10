@@ -5,9 +5,9 @@ import {
   deleteAdvance,
   editAdvance,
   getAllAdvances,
-  getAdvance, approveAdvance, rejectAdvance, getMyAdvances,
+  getAdvance, approveAdvance, rejectAdvance, getMyAdvances, getAdvanceStats,
 } from "../apis/advances";
-import {ADVANCES_KEY} from "../lib/constants";
+import {ADVANCES_KEY, ADVANCES_REQUESTS_STATS} from "../lib/constants";
 import Tracker from "../components/compound/Tracker";
 
 export const useAdvances = () => {
@@ -18,23 +18,27 @@ export const useMyAdvances = () => {
   return useQuery([ADVANCES_KEY, "MY"], getMyAdvances);
 };
 
+export const useAdvanceStats = () => {
+  return useQuery(ADVANCES_REQUESTS_STATS, getAdvanceStats);
+};
 export const useAdvance = (id) => {
   return useQuery([ADVANCES_KEY, id], () => getAdvance(id));
 };
 
 export const useAddAdvance = () => {
   const queryClient = useQueryClient();
+  const key = [ADVANCES_KEY, "MY"];
   return useMutation(addAdvance, {
     onSuccess: (data) => {
-      const previousAdvances = queryClient.getQueryData(ADVANCES_KEY);
+      const previousAdvances = queryClient.getQueryData(key);
       if (previousAdvances) {
-        queryClient.setQueryData(ADVANCES_KEY, (previousAdvances) => {
+        queryClient.setQueryData(key, (previousAdvances) => {
           return produce(previousAdvances, (draft) => {
             draft.advances.push(data.advance);
           });
         });
       } else {
-        queryClient.setQueryData(ADVANCES_KEY, () => {
+        queryClient.setQueryData(key, () => {
           return { advances: [data.advance] };
         });
       }

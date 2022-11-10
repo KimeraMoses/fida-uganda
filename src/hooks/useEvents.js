@@ -4,10 +4,10 @@ import {
   addEvent,
   deleteEvent,
   getAllEvents,
-  getEvent,
+  getEvent, getEventsStats,
   updateEvent,
 } from "../apis/events";
-import { EVENTS_KEY } from "../lib/constants";
+import { EVENTS_KEY, EVENTS_STATS} from "../lib/constants";
 
 export const useEvent = (eventId) => {
   return useQuery([EVENTS_KEY, eventId], () => getEvent(eventId));
@@ -15,6 +15,10 @@ export const useEvent = (eventId) => {
 
 export const useEvents = () => {
   return useQuery(EVENTS_KEY, getAllEvents);
+};
+
+export const useEventsStats = () => {
+  return useQuery(EVENTS_STATS, getEventsStats);
 };
 
 export const useAddEvent = () => {

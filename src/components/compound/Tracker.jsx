@@ -109,7 +109,7 @@ const Tracker = () => {
                             <SectionHeader title="Advance Tracker"/>
                             <Box bgColor="white" borderRadius={10}>
                                 <Table
-                                    data={userData.slice().reverse()}
+                                    data={userData}
                                     columns={advanceRequestsTableColumns}
                                     loading={isLoading}
                                     // btnLabel="New Leave request"

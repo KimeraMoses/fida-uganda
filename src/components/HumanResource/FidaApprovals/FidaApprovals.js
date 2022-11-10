@@ -1,6 +1,6 @@
 import { useDisclosure } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import {  useDeactivatedUsers } from "../../../hooks/useUser";
+import { useDeactivatedUsers } from "../../../hooks/useUser";
 import Modal from "../../common/Modal";
 import SectionHeader from "../../common/SectionHeader";
 import SubHeading from "./../../Tasks/SubHeading/SubHeading";
@@ -57,7 +57,7 @@ const FidaApprovals = () => {
         <EmployeeCard
           onClose={onClose}
           user={user}
-          actionType="ACTIVATE"
+          // actionType="ACTIVATE"
           // onSubmit={mutate}
           // isError={isError}
           // error={error}

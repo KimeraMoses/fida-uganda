@@ -19,7 +19,7 @@ export const getRequisition = async (id) => {
 };
 
 export const getRequisitionsStats = async () => {
-  return await axiosClient.get(routes.requisitions.stats);
+  return await axiosClient.get(routes.requisitions.number);
 };
 
 export const addRequisition = async (values) => {

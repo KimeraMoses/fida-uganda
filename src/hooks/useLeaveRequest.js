@@ -4,9 +4,9 @@ import {
   getLeaveRequest,
   getLeaveRequests,
   addLeaveRequests,
-  approveLeaveRequest, rejectLeaveRequest, getMyLeaveRequests,
+  approveLeaveRequest, rejectLeaveRequest, getMyLeaveRequests, getLeaveStats,
 } from "../apis/leaveRequests";
-import {LEAVE_REQUESTS_KEY} from "../lib/constants";
+import {LEAVE_REQUESTS_KEY, LEAVE_REQUESTS_STATS} from "../lib/constants";
 import Tracker from "../components/compound/Tracker";
 
 
@@ -18,23 +18,28 @@ export const useLeaveRequests = () => {
   return useQuery(LEAVE_REQUESTS_KEY, getLeaveRequests);
 };
 
+export const useLeavesStats = () => {
+  return useQuery(LEAVE_REQUESTS_STATS, getLeaveStats);
+};
+
 export const useMyLeaveRequests = () => {
   return useQuery([LEAVE_REQUESTS_KEY, "MY"], getMyLeaveRequests);
 };
 
 export const useAddLeaveRequest = () => {
   const queryClient = useQueryClient();
+  const key = [LEAVE_REQUESTS_KEY, "MY"];
   return useMutation(addLeaveRequests, {
     onSuccess: (data) => {
-      const previousLeaveRequests = queryClient.getQueryData(LEAVE_REQUESTS_KEY);
+      const previousLeaveRequests = queryClient.getQueryData(key);
       if (previousLeaveRequests) {
-        queryClient.setQueryData(LEAVE_REQUESTS_KEY, (previousLeaveRequests) => {
+        queryClient.setQueryData(key, (previousLeaveRequests) => {
           return produce(previousLeaveRequests, (draft) => {
             draft.leaves.push(data.leave);
           });
         });
       } else {
-        queryClient.setQueryData(LEAVE_REQUESTS_KEY, () => {
+        queryClient.setQueryData(key, () => {
           return { leaves: [data.leave] };
         });
       }

@@ -14,6 +14,7 @@ export const routes = {
     approveLeaveRequest: `${BASE_URL}/leaveRequests/approve`,
     rejectLeaveRequest: `${BASE_URL}/leaveRequests/reject`,
     getMyLeaveRequests: `${BASE_URL}/leaveRequests/getMyLeaveDays`,
+    number: `${BASE_URL}/leaveRequests/getLeaveNumbers`,
   },
   membershipActivities: {
     getMembershipActivities: `${BASE_URL}/membershipActivities/getAll`,
@@ -279,5 +280,6 @@ export const routes = {
     approveAdvance: `${BASE_URL}/advances/approve`,
     rejectAdvance: `${BASE_URL}/advances/reject`,
     getMyAdvances: `${BASE_URL}/advances/getMyAdvances`,
+    number: `${BASE_URL}/advances/getAdvanceNumbers`,
   },
 };

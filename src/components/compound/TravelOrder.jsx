@@ -622,186 +622,171 @@ const TravelOrder = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        user.designation === "dop" && (
-          <>
-            <SubHeading title="My Travel Requests" />
-            <Table
-              data={userData}
-              columns={travelOrdersTableColumns}
-              loading={isLoading}
-              btnLabel="Add Travel Order"
-              btnClick={onOpen}
-              showActions={true}
-              onViewHandler={handleViewSummary}
-              tableName="My Travel Requests"
-            />
-            {/*<TravelOrderTable data={myTravelOrders?.travelOrders} type="MY" btnLabel="Travel Order" btnClick={onOpen}/>*/}
-            <br />
-            <SubHeading title="Unread Requests" />
-            <Table
-              data={pendingDopData}
-              columns={travelOrdersTableColumns}
-              loading={dopPending}
-              showBtn={false}
-              showActions={true}
-              onViewHandler={handleViewSummary}
-              tableName="Unread DOP travel requests"
-            />
-            {/*<TravelOrderTable data={pendingDopTravelOrders?.TravelOrders} type="new" showBtn={false}/>*/}
-            <br />
-            <SubHeading title="Approved Requests" />
-            <Table
-              data={approvedDopData}
-              columns={travelOrdersTableColumns}
-              loading={dopApproved}
-              showBtn={false}
-              showActions={true}
-              onViewHandler={handleViewSummary}
-              tableName="Approved DOP travel requests"
-            />
-            {/*<TravelOrderTable data={approvedDopTravelOrders?.TravelOrders} type="approved" showBtn={false}/>*/}
-            <br />
-            <SubHeading title="Rejected Requests" />
-            <Table
-              data={rejectedDopData}
-              columns={travelOrdersTableColumns}
-              loading={dopRejected}
-              showBtn={false}
-              showActions={true}
-              onViewHandler={handleViewSummary}
-              tableName="Rejected DOP travel requests"
-            />
-            {/*<TravelOrderTable data={rejectedDopTravelOrders?.TravelOrders} type="rejected" showBtn={false}/>*/}
-          </>
-        )
-      )}
-
-      {user.designation === "accountant" && (
         <>
-          <SubHeading title="My Travel Requests" />
-          <Table
-            data={userData}
-            columns={travelOrdersTableColumns}
-            loading={isLoading}
-            btnLabel="Add Travel Order"
-            btnClick={onOpen}
-            showActions={true}
-            onViewHandler={handleViewSummary}
-          />
-          {/*<TravelOrderTable data={myTravelOrders?.travelOrders} type="MY" btnLabel="Travel Order" btnClick={onOpen}/>*/}
-          <br />
-          <SubHeading title="Unread Requests" />
-          <Table
-            data={pendingAccountantData}
-            columns={travelOrdersTableColumns}
-            loading={accountsPending}
-            showBtn={false}
-            showActions={true}
-            onViewHandler={handleViewSummary}
-            tableName="Pending Accountant travel requests"
-          />
-          {/*<TravelOrderTable data={pendingAccountantTravelOrders?.TravelOrders} type="new" showBtn={false}/>*/}
-          <br />
-          <SubHeading title="Approved Request" />
-          <Table
-            data={approvedAccountantData}
-            columns={travelOrdersTableColumns}
-            loading={accountsApproved}
-            showBtn={false}
-            showActions={true}
-            onViewHandler={handleViewSummary}
-            tableName="Approved Accountant travel requests"
-          />
-          {/*<TravelOrderTable data={approvedAccountantTravelOrders?.TravelOrders} type="approved"*/}
-          {/*                  showBtn={false}/>*/}
-          <br />
-          <SubHeading title="Rejected Request" />
-          <Table
-            data={rejectedAccountantData}
-            columns={travelOrdersTableColumns}
-            loading={accountsRejected}
-            showBtn={false}
-            showActions={true}
-            onViewHandler={handleViewSummary}
-            tableName="Rejected Accountant travel requests"
-          />
-          {/*<TravelOrderTable data={rejectedAccountantTravelOrders?.TravelOrders} type="rejected"*/}
-          {/*                  showBtn={false}/>*/}
+          {user.designation === "dop" && (
+            <>
+              <SubHeading title="My Travel Requests" />
+              <Table
+                data={userData.slice().reverse()}
+                columns={travelOrdersTableColumns}
+                loading={isLoading}
+                btnLabel="Add Travel Order"
+                btnClick={onOpen}
+                showActions={true}
+                onViewHandler={handleViewSummary}
+                tableName="My Travel Requests"
+              />
+              <br />
+              <SubHeading title="Unread Requests" />
+              <Table
+                data={pendingDopData}
+                columns={travelOrdersTableColumns}
+                loading={dopPending}
+                showBtn={false}
+                showActions={true}
+                onViewHandler={handleViewSummary}
+                tableName="Unread DOP travel requests"
+              />
+              <br />
+              <SubHeading title="Approved Requests" />
+              <Table
+                data={approvedDopData}
+                columns={travelOrdersTableColumns}
+                loading={dopApproved}
+                showBtn={false}
+                showActions={true}
+                onViewHandler={handleViewSummary}
+                tableName="Approved DOP travel requests"
+              />
+              <br />
+              <SubHeading title="Rejected Requests" />
+              <Table
+                data={rejectedDopData}
+                columns={travelOrdersTableColumns}
+                loading={dopRejected}
+                showBtn={false}
+                showActions={true}
+                onViewHandler={handleViewSummary}
+                tableName="Rejected DOP travel requests"
+              />
+            </>
+          )}
+
+          {user.designation === "accountant" && (
+            <>
+              <SubHeading title="My Travel Requests" />
+              <Table
+                data={userData.slice().reverse()}
+                columns={travelOrdersTableColumns}
+                loading={isLoading}
+                btnLabel="Add Travel Order"
+                btnClick={onOpen}
+                showActions={true}
+                onViewHandler={handleViewSummary}
+              />
+              <br />
+              <SubHeading title="Unread Requests" />
+              <Table
+                data={pendingAccountantData}
+                columns={travelOrdersTableColumns}
+                loading={accountsPending}
+                showBtn={false}
+                showActions={true}
+                onViewHandler={handleViewSummary}
+                tableName="Pending Accountant travel requests"
+              />
+              <br />
+              <SubHeading title="Approved Request" />
+              <Table
+                data={approvedAccountantData}
+                columns={travelOrdersTableColumns}
+                loading={accountsApproved}
+                showBtn={false}
+                showActions={true}
+                onViewHandler={handleViewSummary}
+                tableName="Approved Accountant travel requests"
+              />
+              <br />
+              <SubHeading title="Rejected Request" />
+              <Table
+                data={rejectedAccountantData}
+                columns={travelOrdersTableColumns}
+                loading={accountsRejected}
+                showBtn={false}
+                showActions={true}
+                onViewHandler={handleViewSummary}
+                tableName="Rejected Accountant travel requests"
+              />
+            </>
+          )}
+
+          {user.designation === "fleetManager" && (
+            <>
+              <SubHeading title="My Travel Requests" />
+              <Table
+                data={userData.slice().reverse()}
+                columns={travelOrdersTableColumns}
+                loading={isLoading}
+                btnLabel="Add Travel Order"
+                btnClick={onOpen}
+                showActions={true}
+                onViewHandler={handleViewSummary}
+              />
+              <br />
+              <SubHeading title="Unread Requests" />
+              <Table
+                data={pendingFleetData}
+                columns={travelOrdersTableColumns}
+                loading={fleetPending}
+                showBtn={false}
+                showActions={true}
+                onViewHandler={handleViewSummary}
+                tableName="Pending Fleet Manager travel requests"
+              />
+              <br />
+              <SubHeading title="Approved Request" />
+              <Table
+                data={approvedFleetData}
+                columns={travelOrdersTableColumns}
+                loading={fleetApproved}
+                showBtn={false}
+                showActions={true}
+                onViewHandler={handleViewSummary}
+                tableName="Approved Fleet Manager travel requests"
+              />
+              <br />
+              <SubHeading title="Rejected Request" />
+              <Table
+                data={rejectedFleetData}
+                columns={travelOrdersTableColumns}
+                loading={fleetRejected}
+                showBtn={false}
+                showActions={true}
+                onViewHandler={handleViewSummary}
+                tableName="Rejected Fleet Manager travel requests"
+              />
+            </>
+          )}
+
+          {/*rest of the users*/}
+          {user.designation !== "dop" &&
+            user.designation !== "accountant" &&
+            user.designation !== "fleetManager" && (
+              <>
+                <SubHeading title="My Requests" />
+                <Table
+                  data={userData.slice().reverse()}
+                  columns={travelOrdersTableColumns}
+                  loading={isLoading}
+                  btnLabel="Add Travel Order"
+                  btnClick={onOpen}
+                  showActions={true}
+                  onViewHandler={handleViewSummary}
+                />
+              </>
+            )}
         </>
       )}
-
-      {user.designation === "fleetManager" && (
-        <>
-          <SubHeading title="My Travel Requests" />
-          <Table
-            data={userData}
-            columns={travelOrdersTableColumns}
-            loading={isLoading}
-            btnLabel="Add Travel Order"
-            btnClick={onOpen}
-            showActions={true}
-            onViewHandler={handleViewSummary}
-          />
-          {/*<TravelOrderTable data={myTravelOrders?.travelOrders} type="MY" btnLabel="Travel Order" btnClick={onOpen}/>*/}
-          <br />
-          <SubHeading title="Unread Requests" />
-          <Table
-            data={pendingFleetData}
-            columns={travelOrdersTableColumns}
-            loading={fleetPending}
-            showBtn={false}
-            showActions={true}
-            onViewHandler={handleViewSummary}
-            tableName="Pending Fleet Manager travel requests"
-          />
-          {/*<TravelOrderTable data={pendingFleetManagerTravelOrders?.TravelOrders} type="new" showBtn={false}/>*/}
-          <br />
-          <SubHeading title="Approved Request" />
-          <Table
-            data={approvedFleetData}
-            columns={travelOrdersTableColumns}
-            loading={fleetApproved}
-            showBtn={false}
-            showActions={true}
-            onViewHandler={handleViewSummary}
-            tableName="Approved Fleet Manager travel requests"
-          />
-          {/*<TravelOrderTable data={approvedFleetManagerTravelOrders?.TravelOrders} type="approved"*/}
-          {/*                  showBtn={false}/>*/}
-          <br />
-          <SubHeading title="Rejected Request" />
-          <Table
-            data={rejectedFleetData}
-            columns={travelOrdersTableColumns}
-            loading={fleetRejected}
-            showBtn={false}
-            showActions={true}
-            onViewHandler={handleViewSummary}
-            tableName="Rejected Fleet Manager travel requests"
-          />
-          {/*<TravelOrderTable data={rejectedFleetManagerTravelOrders?.TravelOrders} type="rejected"*/}
-          {/*                  showBtn={false}/>*/}
-        </>
-      )}
-
-      {/*rest of the users*/}
-      {user.designation !== "dop" &&
-        user.designation !== "accountant" &&
-        user.designation !== "fleetManager" && (
-          <>
-            <SubHeading title="My Requests" />
-            <Table
-              data={userData}
-              columns={travelOrdersTableColumns}
-              loading={isLoading}
-              btnLabel="Add Travel Order"
-              btnClick={onOpen}
-              showActions={true}
-              onViewHandler={handleViewSummary}
-            />
-            {/*<TravelOrderTable data={myTravelOrders?.travelOrders} type="new" btnLabel="Travel Order" btnClick={onOpen}/>*/}
-          </>
-        )}
 
       <Modal isOpen={isOpen} onClose={onClose} title="Travel Order" size="2xl">
         <TravelOrderForm

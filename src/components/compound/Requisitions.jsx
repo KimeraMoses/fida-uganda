@@ -1004,295 +1004,224 @@ const Requisitions = () => {
   return (
     <>
       <SectionHeader title="Requisitions" />
-
       {isLoading ? (
         <Loader />
       ) : (
-        user.designation === "dop" && (
-          <>
-            <SubHeading title="My Requisition Requests" />
-            <Table
-              data={userData}
-              columns={requisitionRequestsTableColumns}
-              loading={isLoading}
-              btnLabel="Add Requisition"
-              btnClick={onOpen}
-              showActions={true}
-              onViewHandler={handleViewSummary}
-              tableName="My Requisitions requests"
-            />
-            <br />
-            <SubHeading title="Unread Requests" />
-            <Table
-              data={pendingDop}
-              columns={requisitionRequestsTableColumns}
-              loading={isLoading}
-              showBtn={false}
-              showActions={true}
-              onViewHandler={handleViewSummary}
-              tableName="Unread DOP Requisitions requests"
-            />
-            {/*<RequisitionTable*/}
-            {/*    data={pendingDopRequisitions?.Requisitions}*/}
-            {/*    type="new"*/}
-            {/*    showBtn={false}*/}
-            {/*/>*/}
-            <br />
-            <SubHeading title="Approved Requisitions" />
-            <Table
-              data={approvedDop}
-              columns={requisitionRequestsTableColumns}
-              loading={isLoading}
-              showBtn={false}
-              showActions={true}
-              onViewHandler={handleViewSummary}
-              tableName="Approved Dop Requisitions requests"
-            />
-            {/*<RequisitionTable*/}
-            {/*    data={approvedDopRequisitions?.Requisitions}*/}
-            {/*    type="approved"*/}
-            {/*    showBtn={false}*/}
-            {/*/>*/}
-            <br />
-            <SubHeading title="Rejected Requisitions" />
-            <Table
-              data={rejectedDop}
-              columns={requisitionRequestsTableColumns}
-              loading={isLoading}
-              showBtn={false}
-              showActions={true}
-              onViewHandler={handleViewSummary}
-              tableName="Rejected  Dop Requisitions requests"
-            />
-            {/*<RequisitionTable*/}
-            {/*    data={rejectedDopRequisitions?.Requisitions}*/}
-            {/*    type="rejected"*/}
-            {/*    showBtn={false}*/}
-            {/*/>*/}
-          </>
-        )
-      )}
-      {user.designation === "accountant" && (
         <>
-          <SubHeading title="My Requisition Requests" />
-          <Table
-            data={userData}
-            columns={requisitionRequestsTableColumns}
-            loading={isLoading}
-            btnLabel="Add Requisition"
-            btnClick={onOpen}
-            showActions={true}
-            onViewHandler={handleViewSummary}
-            tableName="My Requisitions requests"
-          />
-          <br />
-          <SubHeading title="Unread Requests" />
-          <Table
-            data={pendingAccountant}
-            columns={requisitionRequestsTableColumns}
-            loading={isLoading}
-            showBtn={false}
-            showActions={true}
-            onViewHandler={handleViewSummary}
-            tableName="Unread Accountant Requisitions requests"
-          />
-          {/*<RequisitionTable*/}
-          {/*    data={pendingAccountantRequisitions?.Requisitions}*/}
-          {/*    type="new"*/}
-          {/*    showBtn={false}*/}
-          {/*/>*/}
-          <br />
-          <SubHeading title="Approved Requisitions" />
-          <Table
-            data={approvedAccountant}
-            columns={requisitionRequestsTableColumns}
-            loading={isLoading}
-            showBtn={false}
-            showActions={true}
-            onViewHandler={handleViewSummary}
-            tableName="Approved Accountant Requisitions requests"
-          />
-          {/*<RequisitionTable*/}
-          {/*    data={approvedAccountantRequisitions?.Requisitions}*/}
-          {/*    type="approved"*/}
-          {/*    showBtn={false}*/}
-          {/*/>*/}
-          <br />
-          <SubHeading title="Rejected Requisitions" />
-          <Table
-            data={rejectedAccountant}
-            columns={requisitionRequestsTableColumns}
-            loading={isLoading}
-            showBtn={false}
-            showActions={true}
-            onViewHandler={handleViewSummary}
-            tableName="Rejected Accountant Requisitions requests"
-          />
-          {/*<RequisitionTable*/}
-          {/*    data={rejectedAccountantRequisitions?.Requisitions}*/}
-          {/*    type="rejected"*/}
-          {/*    showBtn={false}*/}
-          {/*/>*/}
-        </>
-      )}
-      {user.designation === "ceo" && (
-        <>
-          <SubHeading title="My Requisition Requests" />
-          <Table
-            data={userData}
-            columns={requisitionRequestsTableColumns}
-            loading={isLoading}
-            btnLabel="Add Requisition"
-            btnClick={onOpen}
-            showActions={true}
-            onViewHandler={handleViewSummary}
-            tableName="My Requisitions requests"
-          />
-          <br />
-          <SubHeading title="Unread Requests" />
-          <Table
-            data={pendingCeo}
-            columns={requisitionRequestsTableColumns}
-            loading={isLoading}
-            showBtn={false}
-            showActions={true}
-            onViewHandler={handleViewSummary}
-            tableName="Unread Ceo Requisitions requests"
-          />
-          {/*<RequisitionTable*/}
-          {/*    data={pendingCeoRequisitions?.Requisitions}*/}
-          {/*    type="new"*/}
-          {/*    showBtn={false}*/}
-          {/*/>*/}
-          <br />
-          <SubHeading title="Approved Requisitions" />
-          <Table
-            data={approvedCeo}
-            columns={requisitionRequestsTableColumns}
-            loading={isLoading}
-            showBtn={false}
-            showActions={true}
-            onViewHandler={handleViewSummary}
-            tableName="Approved Ceo Requisitions requests"
-          />
-          {/*<RequisitionTable*/}
-          {/*    data={approvedCeoRequisitions?.Requisitions}*/}
-          {/*    type="approved"*/}
-          {/*    showBtn={false}*/}
-          {/*/>*/}
-          <br />
-          <SubHeading title="Rejected Requisitions" />
-          <Table
-            data={rejectedCeo}
-            columns={requisitionRequestsTableColumns}
-            loading={isLoading}
-            showBtn={false}
-            showActions={true}
-            onViewHandler={handleViewSummary}
-            tableName="Rejected Ceo Requisitions requests"
-          />
-          {/*<RequisitionTable*/}
-          {/*    data={rejectedCeoRequisitions?.Requisitions}*/}
-          {/*    type="rejected"*/}
-          {/*    showBtn={false}*/}
-          {/*/>*/}
-        </>
-      )}
+          {user.designation === "dop" && (
+            <>
+              <SubHeading title="My Requisition Requests" />
+              <Table
+                data={userData.slice().reverse()}
+                columns={requisitionRequestsTableColumns}
+                loading={isLoading}
+                btnLabel="Add Requisition"
+                btnClick={onOpen}
+                showActions={true}
+                onViewHandler={handleViewSummary}
+                tableName="My Requisitions requests"
+              />
+              <br />
+              <SubHeading title="Unread Requests" />
+              <Table
+                data={pendingDop}
+                columns={requisitionRequestsTableColumns}
+                loading={isLoading}
+                showBtn={false}
+                showActions={true}
+                onViewHandler={handleViewSummary}
+                tableName="Unread DOP Requisitions requests"
+              />
+              <br />
+              <SubHeading title="Approved Requisitions" />
+              <Table
+                data={approvedDop}
+                columns={requisitionRequestsTableColumns}
+                loading={isLoading}
+                showBtn={false}
+                showActions={true}
+                onViewHandler={handleViewSummary}
+                tableName="Approved Dop Requisitions requests"
+              />
+              <br />
+              <SubHeading title="Rejected Requisitions" />
+              <Table
+                data={rejectedDop}
+                columns={requisitionRequestsTableColumns}
+                loading={isLoading}
+                showBtn={false}
+                showActions={true}
+                onViewHandler={handleViewSummary}
+                tableName="Rejected  Dop Requisitions requests"
+              />
+            </>
+          )}
+          {user.designation === "accountant" && (
+            <>
+              <SubHeading title="My Requisition Requests" />
+              <Table
+                data={userData}
+                columns={requisitionRequestsTableColumns}
+                loading={isLoading}
+                btnLabel="Add Requisition"
+                btnClick={onOpen}
+                showActions={true}
+                onViewHandler={handleViewSummary}
+                tableName="My Requisitions requests"
+              />
+              <br />
+              <SubHeading title="Unread Requests" />
+              <Table
+                data={pendingAccountant}
+                columns={requisitionRequestsTableColumns}
+                loading={isLoading}
+                showBtn={false}
+                showActions={true}
+                onViewHandler={handleViewSummary}
+                tableName="Unread Accountant Requisitions requests"
+              />
+              <br />
+              <SubHeading title="Approved Requisitions" />
+              <Table
+                data={approvedAccountant}
+                columns={requisitionRequestsTableColumns}
+                loading={isLoading}
+                showBtn={false}
+                showActions={true}
+                onViewHandler={handleViewSummary}
+                tableName="Approved Accountant Requisitions requests"
+              />
+              <br />
+              <SubHeading title="Rejected Requisitions" />
+              <Table
+                data={rejectedAccountant}
+                columns={requisitionRequestsTableColumns}
+                loading={isLoading}
+                showBtn={false}
+                showActions={true}
+                onViewHandler={handleViewSummary}
+                tableName="Rejected Accountant Requisitions requests"
+              />
+            </>
+          )}
+          {user.designation === "ceo" && (
+            <>
+              <SubHeading title="My Requisition Requests" />
+              <Table
+                data={userData.slice().reverse()}
+                columns={requisitionRequestsTableColumns}
+                loading={isLoading}
+                btnLabel="Add Requisition"
+                btnClick={onOpen}
+                showActions={true}
+                onViewHandler={handleViewSummary}
+                tableName="My Requisitions requests"
+              />
+              <br />
+              <SubHeading title="Unread Requests" />
+              <Table
+                data={pendingCeo}
+                columns={requisitionRequestsTableColumns}
+                loading={isLoading}
+                showBtn={false}
+                showActions={true}
+                onViewHandler={handleViewSummary}
+                tableName="Unread Ceo Requisitions requests"
+              />
+              <br />
+              <SubHeading title="Approved Requisitions" />
+              <Table
+                data={approvedCeo}
+                columns={requisitionRequestsTableColumns}
+                loading={isLoading}
+                showBtn={false}
+                showActions={true}
+                onViewHandler={handleViewSummary}
+                tableName="Approved Ceo Requisitions requests"
+              />
+              <br />
+              <SubHeading title="Rejected Requisitions" />
+              <Table
+                data={rejectedCeo}
+                columns={requisitionRequestsTableColumns}
+                loading={isLoading}
+                showBtn={false}
+                showActions={true}
+                onViewHandler={handleViewSummary}
+                tableName="Rejected Ceo Requisitions requests"
+              />
+            </>
+          )}
 
-      {user.designation === "procurement" && (
-        <>
-          <SubHeading title="My Requisition Requests" />
-          <Table
-            data={userData}
-            columns={requisitionRequestsTableColumns}
-            loading={isLoading}
-            btnLabel="Add Requisition"
-            btnClick={onOpen}
-            showActions={true}
-            onViewHandler={handleViewSummary}
-            tableName="My Requisitions requests"
-          />
-          {/*<RequisitionTable*/}
-          {/*    data={myRequisitions?.requisitions}*/}
-          {/*    type="new"*/}
-          {/*    btnLabel="Add Requisition"*/}
-          {/*    btnClick={onOpen}*/}
-          {/*/>*/}
-          <br />
-          <SubHeading title="Unread Requests" />
-          <Table
-            data={pendingProcurement}
-            columns={requisitionRequestsTableColumns}
-            loading={isLoading}
-            showBtn={false}
-            showActions={true}
-            onViewHandler={handleViewSummary}
-            tableName="Unread Procurement Requisitions requests"
-          />
-          {/*<RequisitionTable*/}
-          {/*    data={pendingProcurementRequisitions?.Requisitions}*/}
-          {/*    type="new"*/}
-          {/*    showBtn={false}*/}
-          {/*/>*/}
-          <br />
-          <SubHeading title="Approved Requisitions" />
-          <Table
-            data={approvedProcurement}
-            columns={requisitionRequestsTableColumns}
-            loading={isLoading}
-            showBtn={false}
-            showActions={true}
-            onViewHandler={handleViewSummary}
-            tableName="Approved Procurement Requisitions requests"
-          />
-          {/*<RequisitionTable*/}
-          {/*    data={approvedProcurementRequisitions?.Requisitions}*/}
-          {/*    type="approved"*/}
-          {/*    showBtn={false}*/}
-          {/*/>*/}
-          <br />
-          <SubHeading title="Rejected Requisitions" />
-          <Table
-            data={rejectedProcurement}
-            columns={requisitionRequestsTableColumns}
-            loading={isLoading}
-            showBtn={false}
-            showActions={true}
-            onViewHandler={handleViewSummary}
-            tableName="Rejected Procurement Requisitions requests"
-          />
-          {/*<RequisitionTable*/}
-          {/*    data={rejectedProcurementRequisitions?.Requisitions}*/}
-          {/*    type="rejected"*/}
-          {/*    showBtn={false}*/}
-          {/*/>*/}
+          {user.designation === "procurement" && (
+            <>
+              <SubHeading title="My Requisition Requests" />
+              <Table
+                data={userData.slice().reverse()}
+                columns={requisitionRequestsTableColumns}
+                loading={isLoading}
+                btnLabel="Add Requisition"
+                btnClick={onOpen}
+                showActions={true}
+                onViewHandler={handleViewSummary}
+                tableName="My Requisitions requests"
+              />
+              <br />
+              <SubHeading title="Unread Requests" />
+              <Table
+                data={pendingProcurement}
+                columns={requisitionRequestsTableColumns}
+                loading={isLoading}
+                showBtn={false}
+                showActions={true}
+                onViewHandler={handleViewSummary}
+                tableName="Unread Procurement Requisitions requests"
+              />
+              <br />
+              <SubHeading title="Approved Requisitions" />
+              <Table
+                data={approvedProcurement}
+                columns={requisitionRequestsTableColumns}
+                loading={isLoading}
+                showBtn={false}
+                showActions={true}
+                onViewHandler={handleViewSummary}
+                tableName="Approved Procurement Requisitions requests"
+              />
+              <br />
+              <SubHeading title="Rejected Requisitions" />
+              <Table
+                data={rejectedProcurement}
+                columns={requisitionRequestsTableColumns}
+                loading={isLoading}
+                showBtn={false}
+                showActions={true}
+                onViewHandler={handleViewSummary}
+                tableName="Rejected Procurement Requisitions requests"
+              />
+            </>
+          )}
+
+          {user.designation !== "dop" &&
+            user.designation !== "accountant" &&
+            user.designation !== "ceo" &&
+            user.designation !== "procurement" && (
+              <>
+                <SubHeading title="My Requisition Requests" />
+                <Table
+                  data={userData.slice().reverse()}
+                  columns={requisitionRequestsTableColumns}
+                  loading={isLoading}
+                  btnLabel="Add Requisition"
+                  btnClick={onOpen}
+                  showActions={true}
+                  onViewHandler={handleViewSummary}
+                  tableName="My Requisitions requests"
+                />
+              </>
+            )}
         </>
       )}
-
-      {user.designation !== "dop" &&
-        user.designation !== "accountant" &&
-        user.designation !== "ceo" &&
-        user.designation !== "procurement" && (
-          <>
-            <SubHeading title="My Requisition Requests" />
-            <Table
-              data={userData}
-              columns={requisitionRequestsTableColumns}
-              loading={isLoading}
-              btnLabel="Add Requisition"
-              btnClick={onOpen}
-              showActions={true}
-              onViewHandler={handleViewSummary}
-              tableName="My Requisitions requests"
-            />
-            {/*<RequisitionTable*/}
-            {/*  data={myRequisitions?.requisitions}*/}
-            {/*  type="new"*/}
-            {/*  btnLabel="Add Requisition"*/}
-            {/*  btnClick={onOpen}*/}
-            {/*/>*/}
-          </>
-        )}
 
       <Modal isOpen={isOpen} onClose={onClose} title="Requisition" size="xl">
         <RequisitionForm
