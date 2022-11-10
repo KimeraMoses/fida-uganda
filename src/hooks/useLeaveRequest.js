@@ -4,9 +4,9 @@ import {
   getLeaveRequest,
   getLeaveRequests,
   addLeaveRequests,
-  approveLeaveRequest, rejectLeaveRequest, getMyLeaveRequests,
+  approveLeaveRequest, rejectLeaveRequest, getMyLeaveRequests, getLeaveStats,
 } from "../apis/leaveRequests";
-import {LEAVE_REQUESTS_KEY} from "../lib/constants";
+import {LEAVE_REQUESTS_KEY, LEAVE_REQUESTS_STATS} from "../lib/constants";
 import Tracker from "../components/compound/Tracker";
 
 
@@ -16,6 +16,10 @@ export const useLeaveRequest = (leaveRequestId) => {
 
 export const useLeaveRequests = () => {
   return useQuery(LEAVE_REQUESTS_KEY, getLeaveRequests);
+};
+
+export const useLeavesStats = () => {
+  return useQuery(LEAVE_REQUESTS_STATS, getLeaveStats);
 };
 
 export const useMyLeaveRequests = () => {

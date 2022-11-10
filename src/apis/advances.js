@@ -8,6 +8,10 @@ export const getMyAdvances = async () => {
   return await axiosClient.get(routes.advances.getMyAdvances);
 };
 
+export const getAdvanceStats = async () => {
+  return await axiosClient.get(routes.advances.number);
+};
+
 export const getAdvance = async (id) => {
   return await axiosClient.get(routes.advances.base + id);
 };
