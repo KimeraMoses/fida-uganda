@@ -23,7 +23,7 @@ import {
   resetCaseFile,
   selectCaseFile,
 } from '../../../../store/caseFileReducer';
-import { onSubmitAlert } from '../../../../lib/deleteInProd';
+// import { onSubmitAlert } from '../../../../lib/deleteInProd';
 
 const NewCaseFile = ({ isClvCaseFile, onClose, isNewCaseFile = false }) => {
   const caseFile = useCaseFileTemp();
@@ -126,7 +126,7 @@ const NewCaseFile = ({ isClvCaseFile, onClose, isNewCaseFile = false }) => {
       return (
         <MultForm3
           initialValues={caseFileThreeInitialValues}
-          useMutate={isClvCaseFile ? useUpdateCaseFile : useUpdateClvCaseFile}
+          useMutate={isClvCaseFile ? useUpdateClvCaseFile : useUpdateCaseFile}
           onSuccess={nextStep}
           success={CASE_FILE_UPDATED}
           onBack={prevStep}
@@ -141,7 +141,7 @@ const NewCaseFile = ({ isClvCaseFile, onClose, isNewCaseFile = false }) => {
       return (
         <MultForm5
           initialValues={caseFileFiveInitialValues}
-          useMutate={isClvCaseFile ? useUpdateCaseFile : useUpdateClvCaseFile}
+          useMutate={isClvCaseFile ? useUpdateClvCaseFile : useUpdateCaseFile}
           onSuccess={nextStep}
           success={CASE_FILE_UPDATED}
           onBack={prevStep}
@@ -156,7 +156,7 @@ const NewCaseFile = ({ isClvCaseFile, onClose, isNewCaseFile = false }) => {
       return (
         <MultForm6
           initialValues={caseFileSixInitialValues}
-          useMutate={isClvCaseFile ? onSubmitAlert : useUpdateClvCaseFile}
+          useMutate={isClvCaseFile ? useUpdateClvCaseFile : useUpdateCaseFile}
           onSuccess={onSubmit}
           success={CASE_FILE_UPDATED}
           onBack={prevStep}

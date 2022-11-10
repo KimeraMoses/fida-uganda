@@ -3,7 +3,12 @@ import SectionHeader from '../../common/SectionHeader';
 import { useDisclosure } from '@chakra-ui/react';
 import Modal from '../../common/Modal';
 import NewClvForm from './CLVForms/NewClvForm';
-import { useClvs, useAddClv, useCLVId } from '../../../hooks/useClv';
+import {
+  useClvs,
+  useAddClv,
+  useCLVId,
+  useEditClv,
+} from '../../../hooks/useClv';
 import { clvInitialValues, clvSchema } from './CLVForms/schema';
 import Loader from './../../common/UI/Loader/Loader';
 import Table from '../../common/TableComponent/Table';
@@ -75,6 +80,12 @@ const CLVs = () => {
     return initialValues;
   };
 
+  const handleClose = () => {
+    setIsEdit(false);
+    dispatch(resetCLV());
+    onClose();
+  };
+
   return (
     <>
       <SectionHeader title="CLVs" />
@@ -103,11 +114,11 @@ const CLVs = () => {
         <NewClvForm
           action={CLV ? 'editClv' : 'newClv'}
           validationSchema={clvSchema}
-          onClose={onClose}
+          onClose={handleClose}
           initialValues={clvInitialValues}
-          useMutate={useAddClv}
-          onSuccess={onClose}
-          success={'CLV added successfully'}
+          useMutate={CLV ? useEditClv : useAddClv}
+          onSuccess={handleClose}
+          success={CLV ? 'CLV updated successfully' : 'CLV added successfully'}
           setAvatar={setAvatar}
           setImageUrl={setImageUrl}
           url={url}

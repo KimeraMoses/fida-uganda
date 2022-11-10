@@ -16,10 +16,10 @@ const CaseFiles = () => {
   const [isEdit, setIsEdit] = useState(false);
   const dispatch = useDispatch();
 
-  const onCloseModal = () => {
-    onClose();
-    dispatch(resetCaseFile());
-  };
+  // const onCloseModal = () => {
+  //   onClose();
+  //   dispatch(resetCaseFile());
+  // };
 
   const onOpenModal = () => {
     onOpen();
@@ -90,13 +90,13 @@ const CaseFiles = () => {
       )}
       <Modal
         isOpen={isOpen}
-        onClose={onCloseModal}
+        onClose={onClose}
         title="Case Registration Form"
         size="4xl"
       >
         <NewCaseFile
           isClvCaseFile={false}
-          onClose={onCloseModal}
+          onClose={onClose}
           isNewCaseFile={isEdit ? false : true}
         />
       </Modal>
